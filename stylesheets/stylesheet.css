@@ -1,3 +1,135 @@
 * {
   box-sizing: border-box; 
 }
+
+html {
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background-image: url("../images/Cabin_Night.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+div.navbar {
+  background-color: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+a.navbar_link {
+  text-decoration: none;
+}
+
+span.navbar_item {
+  color: #FFF;
+  float:right;
+  height: 100%;
+  display: block;
+  padding: 10px;
+}
+
+span.navbar_item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+div.section_header {
+  text-align: center;
+  font-size: 2em;
+  color: #FFF;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 1em;
+}
+
+div.section_text {
+  color:#FFF;
+  margin-bottom: 5em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+div.header {
+  text-align: center;
+  font-size: 3em;
+  color: #FFF;
+
+  padding: 3em;
+}
+
+div.body {
+  overflow: hidden;
+  padding-bottom: 142px;
+}
+
+div.panel {
+  float: left;
+  padding: 2em;
+  color: #FFF;
+}
+
+@media (max-width: 800px) {
+  #left_panel.panel {
+    display: none;
+  }
+
+  #center_panel.panel {
+    width: 100%;
+  }
+
+  #right_panel.panel {
+    width: 100%;
+    float: left;
+  }
+}
+
+@media (min-width: 800px)  and (max-width: 1200px) {
+  #left_panel.panel {
+    display: none;
+  }
+
+  #center_panel.panel {
+    width: 70%;
+  }
+
+  #right_panel.panel {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #left_panel.panel {
+    width: 20%;
+  }
+
+  #center_panel.panel {
+    width: 60%;
+  }
+
+  #right_panel.panel {
+    width: 20%;
+  }
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
+
+.footer {
+  box-sizing: border-box;
+
+  position: relative;
+  margin-top: -142px; 
+  height: 142px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #FFF;
+  clear:both;
+
+  padding: 2em;
+} 
