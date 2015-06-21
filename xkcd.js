@@ -17,16 +17,18 @@ $(document).ready(function() {
 
 //xkcd
 function loadCurrentXKCD(){
+
 	$.ajax({
-		url: "https://dynamic.xkcd.com/api-0/jsonp/comic?callback=?",
+		url: "xkcd.php",
 		dataType: "json",
-		jsonpCallback: "xkcddata",
 		success: function(data) {
+
 			mostRecentXKCD = data.num;
 			XKCDindex = data.num;
 			//alert(mostRecentXKCD);
+			$("#xkcdtitle").empty();
 			$("#xkcdtitle").append(
-				$("<h1/>").text(data.num + " " + data.title)
+				data.num + ": " + data.title
 			);
 			$("#xkcdcontent").append(
 				$("<a>").attr({
@@ -36,8 +38,11 @@ function loadCurrentXKCD(){
 						src: data.img,
 						title: data.alt,
 						alt: data.title,
-						style : "max-width:100%"
-					})
+						class: "xkcdImage"
+					}),
+					$("<div>").append(
+						data.alt
+					)
 				)
 			);
 		}
@@ -55,14 +60,13 @@ function isValidComicIndex(n){
 function loadXKCD(n){  
 	XKCDindex = n; 		
 	$.ajax({	
-		url: "https://dynamic.xkcd.com/api-0/jsonp/comic/" + n + "?callback=?",
+		url: "xkcd.php?comic=" + n,
 		dataType: "json",
-		jsonpCallback: "xkcddata",
 		success: function(data) {
 			$("#xkcdcontent").empty();
 			$("#xkcdtitle").empty();
 			$("#xkcdtitle").append(
-				$("<h1/>").text(data.num + " " + data.title)
+				data.num + ": " + data.title
 			);
 
 			$("#xkcdcontent").append(
@@ -73,8 +77,11 @@ function loadXKCD(n){
 						src: data.img,
 						title: data.alt,
 						alt: data.title,
-						style : "max-width:100%"
-					})
+						class: "xkcdImage"
+					}),
+					$("<div>").append(
+						data.alt
+					)
 				)
 			);
 		}
@@ -83,8 +90,12 @@ function loadXKCD(n){
 }
 
 function xkcdMove(n){
-	if(XKCDindex + n >= 0 && XKCDindex + n <= mostRecentXKCD){
+	if(XKCDindex + n >= 1 && XKCDindex + n <= mostRecentXKCD){
 		loadXKCD(XKCDindex+n);
+	} else if(n == 'first'){
+		loadXKCD(1);
+	} else if(n=='last'){
+		loadXKCD(mostRecentXKCD);
 	}
 }
 
