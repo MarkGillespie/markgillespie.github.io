@@ -1,22 +1,20 @@
 .slideshow_title {
   width: 100%;
-  text-decoration: none;
-  color: #FFF;
   text-align: center;
   display: block;
   padding: 10px;
-  font-size: 1.5em;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 1em;
+  margin-bottom: -1em;
 }
 
 .slideshow_title:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  text-decoration: underline;
 }
 
 .image_container {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 1em;
 
   position: relative;
   max-width: 950px;
@@ -27,7 +25,7 @@
 .slideshow_nav_bar {
   overflow: hidden; 
   position:absolute; 
-  z-index: 100;
+  z-index: 1;
   width: 100%;
   height: 100%;
 }
