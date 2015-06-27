@@ -12,7 +12,7 @@
     <script type = "text/javascript" src = "scripts/processing_buttons.js"></script>
   </head>
 
-  <body onload = "initialize_imgur()">
+  <body onload = "initialize_imgur(); initializeProcessingCanvas()">
     <div class = "wrapper">
       <div class = "navbar">
         <div class = "navbar_buttons">
@@ -75,6 +75,18 @@
 
         <div class = "section_header" id = "Processing"> Quick Projects </div>
           <div class = "section_text"> 
+            <div id = "processing_title"> </div>
+            <canvas id = "processing_canvas"></canvas>
+
+            <button onclick = "loadProcessingSketch('Boids', ['Boids.pde', 'Boid.pde'])"> Fish </button>
+            <button onclick = "loadProcessingSketch('Fern', ['Fern.pde'])"> Fern </button>
+            <button onclick = "loadProcessingSketch('Pascal', ['PascalTheorem.pde'])"> Pascal's Theorem </button>
+            <button onclick = "loadProcessingSketch('Planets', ['GravityNoUnitsManyPlanets.pde', 'Planet.pde'])"> Planets </button>
+            <button onclick = "loadProcessingSketch('Conway', ['GameOfLife.pde'])"> Conway's Game of Life </button>
+            <button onclick = "loadProcessingSketch('Fourier', ['Fourier.pde'])"> Sin[2x] + Cos[x] </button>
+            <div id = "processing_description"> </div>
+            <div id = "processing_source"> </div>
+          
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum turpis magna, hendrerit gravida sapien vel, porttitor gravida purus. Proin sapien turpis, egestas eget commodo id, varius a diam. Ut ornare eros eget facilisis suscipit. Fusce mattis, nunc eu lobortis porta, orci lorem vehicula lorem, nec posuere orci est auctor libero. Praesent vitae est ultricies, tempor sem a, vestibulum odio. Quisque convallis magna nec ultricies consectetur. Vestibulum vitae orci sem. Ut pretium tortor faucibus, blandit quam at, viverra mi.</p>
             <p>Suspendisse facilisis lorem sodales sapien aliquet, vitae volutpat ante vulputate. Vivamus laoreet tortor eget velit rhoncus hendrerit. Donec ut congue lacus, sed facilisis leo. Mauris quis risus feugiat, semper ante in, ultricies ipsum. Nam tincidunt urna ac turpis eleifend, a pharetra sapien auctor. Proin varius feugiat sollicitudin. Morbi fringilla et nunc non pretium. Nulla convallis metus sed arcu feugiat, quis dictum est condimentum. Nulla facilisi. Nunc velit mi, suscipit in leo eget, malesuada convallis dui. Nunc lectus est, imperdiet eu ipsum ac, accumsan convallis arcu. Nulla malesuada pretium tortor, et dignissim massa fermentum ut. Etiam quis tristique odio. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
             <hr />
