@@ -20,14 +20,16 @@ p {
 }
 
 a {
-  color: #55B;
+  color: #393;
 }
 
 a:hover {
-  color: #55B;
-  text-shadow: 0 0 3px #6FF;
+  color: #393;
+  text-shadow: 0 0 3px #6F6;
   text-decoration: underline;
 }
+
+
 
 @media (max-width: 550px) {
   div.navbar {
@@ -75,7 +77,7 @@ span.navbar_item {
 }
 
 span.navbar_item:hover {
-  color: #55F;
+  color: #494;
 }
 
 div.section_header {
@@ -169,6 +171,27 @@ div.panel {
   #right_panel.panel {
     width: 20%;
   }
+}
+
+div.processing_button_tray {
+  overflow: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.processing_button {
+  font-family: Arial;
+  color: #FFF;
+  font-size: 20px;
+  background-color: #393;
+  padding: 10px 20px 10px 20px;
+  display: inline-block;
+  margin: 5px;
+}
+
+div.processing_button:hover{
+  background-color: #4A4;
+  cursor: pointer;
 }
 
 .wrapper {

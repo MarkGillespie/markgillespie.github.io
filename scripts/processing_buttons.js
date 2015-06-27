@@ -44,8 +44,7 @@ var p;
               href : "Processing_files/" + value
             }).append(
               value
-            ),
-            " "
+            )
           );
         });
       }
