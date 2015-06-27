@@ -6,11 +6,9 @@ var album_length = 0;
 var isAnimating = false;
 
 function secure(s) {
-  alert(s);
   if (s.substring(0,  6) === "https") {
     return s;
   } else {
-    alert("https:" + s.substring(5));
     return "https:" + s.substring(5);
   }
 }
