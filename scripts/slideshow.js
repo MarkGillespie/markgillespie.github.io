@@ -5,6 +5,16 @@ var album_url = "https://api.imgur.com/3/album/8fx1I/images";
 var album_length = 0;
 var isAnimating = false;
 
+function secure(s) {
+  alert(s);
+  if (s.substring(0,  6) === "https") {
+    return s;
+  } else {
+    alert("https:" + s.substring(5));
+    return "https:" + s.substring(5);
+  }
+}
+
 function initialize_imgur() {
   $.ajax({
     type: "GET",
@@ -30,7 +40,7 @@ function initialize_imgur() {
       );
 
       var newDiv = $("<div>").attr({
-        style: "background-image: url(" + data.data[index].link + ");  display: none",
+        style: "background-image: url(" + secure(data.data[index].link) + ");  display: none",
         class: "slideshow_image",
         id: "image_box_2"
       });
