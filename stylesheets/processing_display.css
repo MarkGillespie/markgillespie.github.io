@@ -9,12 +9,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    overflow: none;
   }
 
-  span.processing_button_tray {
-    width: 100%;
+  div.processing_button_tray {
     text-align: center;
-    float:left;
   }
 
   span.processing_button {
@@ -46,7 +45,7 @@
     margin-right: auto;
   }
 
-  span.processing_button_tray {
+  div.processing_button_tray {
     width: 200px;
     float: right;
   }
