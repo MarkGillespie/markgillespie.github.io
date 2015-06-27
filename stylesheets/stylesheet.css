@@ -173,6 +173,12 @@ div.panel {
   }
 }
 
+#processing_title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5em;
+}
+
 div.processing_button_tray {
   overflow: none;
   margin-left: auto;
