@@ -78,6 +78,10 @@ span.navbar_item:hover {
   color: #494;
 }
 
+div.section_link_spot {
+  min-height: 30px;
+}
+
 div.section_header {
   text-align: center;
   font-size: 2em;
