@@ -225,20 +225,17 @@ div.panel {
   span.processing_button {
     width: 80%;
     font-family: Arial;
-    color: #FFF;
+    color: #000;
     font-size: 20px;
-    background-color: #393;
     padding: 10px 20px 10px 20px;
-    display: inline-block;
     float:right;
     margin: 5px;
     position: relative;
     height: 60px;
+    color: #555;
   }
 
   span.processing_button:hover {
-    background-color: #4A4;
-    color: #FFF;
     cursor: pointer;
   }
 
@@ -252,53 +249,29 @@ div.panel {
     position: absolute;
     pointer-events: none;
     border-color: rgba(136, 183, 213, 0);
-    border-right-color: #393;
-    border-width: 30px;
-    margin-top: -30px;
-  }
-
-  span.processing_button:before {
-    right: 0;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    z-index: 1;
-    border-color: rgba(194, 225, 245, 0);
-    border-right-color: #5B5;
-    border-width: 0 60px 60px 0;
-    margin-top: -30px;
+    border-right-color: #DDD;
+    border-width: 20px;
+    margin-top: -20px;
   }
 
   span.processing_button:hover:after {
     border-color: rgba(136, 183, 213, 0);
-    border-right-color: #4A4;
-    border-width: -30px;
-    margin-top: -30px;
-  }
-
-  span.processing_button:hover:before {
-    border-color: rgba(194, 225, 245, 0);
-    border-right-color: #5B5;
-    border-width: 0 60px 60px 0;
-    margin-top: -30px;
+    border-right-color: #8C8;
+    border-width: -20px;
+    margin-top: -20px;
   }
 
   span.selected_processing_button {
-    width: 90%;
+    width: 80%;
     font-family: Arial;
-    color: #FFF;
+    color: #000;
     font-size: 20px;
-    background-color: #4A4;
     padding: 10px 20px 10px 20px;
-    display: inline-block;
+    float:right;
     margin: 5px;
-    cursor: pointer;
     position: relative;
     height: 60px;
+    color: #555;
   }
 
   span.selected_processing_button:after {
@@ -312,29 +285,10 @@ div.panel {
     pointer-events: none;
   }
 
- span.selected_processing_button:before {
-    right: 0;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    z-index: 2;
-  }
-
   span.selected_processing_button:after {
     border-color: rgba(136, 183, 213, 0);
-    border-right-color: #4A4;
+    border-right-color: #9D9;
     border-width: 30px;
-    margin-top: -30px;
-  }
-
-  span.selected_processing_button:before {
-    border-color: rgba(194, 225, 245, 0);
-    border-right-color: #6C6;
-    border-width: 0 60px 60px 0;
     margin-top: -30px;
   }
 
