@@ -327,8 +327,8 @@ div.panel {
   span.selected_processing_button:after {
     border-color: rgba(136, 183, 213, 0);
     border-right-color: #4A4;
-    border-width: 28px;
-    margin-top: -28px;
+    border-width: 30px;
+    margin-top: -30px;
   }
 
   span.selected_processing_button:before {
