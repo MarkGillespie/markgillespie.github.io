@@ -24,6 +24,7 @@ function initialize_imgur() {
     },
     dataType: "json",
     success: function(data) {
+      console.log(data.data);
       album_length = data.data.length;
 
       $("#slideshow_title_link").attr({
@@ -38,7 +39,7 @@ function initialize_imgur() {
       );
 
       var newDiv = $("<div>").attr({
-        style: "background-image: url(" + secure(data.data[index].link) + ");  display: none",
+        style: "background-image: url(" + secure(data.data[index].link) + "l);  display: none",
         class: "slideshow_image",
         id: "image_box_2"
       });
@@ -91,7 +92,7 @@ function changeImage() {
         );
 
         var newDiv = $("<div>").attr({
-          style: "background-image: url(" + data.data[index].link + ");  display: none",
+          style: "background-image: url(" + data.data[index].link + "l);  display: none",
           class: "slideshow_image",
           id: "image_box_2"
         });
