@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Processing</title>
+    <script type = "text/javascript" src = "scripts/processing.js"></script>
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type = "text/javascript">
+      var p;
+
+      function initializeProcessingCanvas() {
+        loadProcessingSketch('Boids', ['Boids.pde', 'Boid.pde'])
+      }
+
+      function loadProcessingSketch(name, args) {
+        if (Processing.getInstanceById("processing_canvas")) {
+          Processing.getInstanceById("processing_canvas").exit();
+        }
+
+        filenames = [];
+
+        $.each(args, function(index, value) {
+          filenames[index] = "Processing_files/" + args[index];
+        });
+
+        var p = new Processing.loadSketchFromSources('processing_canvas', filenames);
+        $("#processing_title").empty();
+        $("#processing_title").append(
+          name
+        );
+
+        $.ajax({
+          type: "GET",
+          url: "Processing_files/ProgramDescriptions.xml",
+          dataType: "xml",
+          success: function(xml) {
+            $("#processing_description").empty();
+            $("#processing_description").append(
+                $(xml).find(name).text()
+            );
+          }
+        });
+
+        $("#processing_source").empty();
+        $("#processing_source").append(
+          "Source: "          
+        );
+
+        $.each(args, function(index, value) {
+          $("#processing_source").append (
+            $("<a>").attr({
+              href : "Processing_files/" + value
+            }).append(
+              value
+            ),
+            " "
+          );
+        });
+      }
+    </script>
+  </head>
+
+  <body onload = "initializeProcessingCanvas()">
+    <div id = "processing_title"> </div>
+    <canvas id = "processing_canvas"></canvas>
+
+    <button onclick = "loadProcessingSketch('Boids', ['Boids.pde', 'Boid.pde'])"> Fish </button>
+    <button onclick = "loadProcessingSketch('Fern', ['Fern.pde'])"> Fern </button>
+    <button onclick = "loadProcessingSketch('Pascal', ['PascalTheorem.pde'])"> Pascal's Theorem </button>
+    <button onclick = "loadProcessingSketch('Planets', ['GravityNoUnitsManyPlanets.pde', 'Planet.pde'])"> Planets </button>
+    <button onclick = "loadProcessingSketch('Conway', ['GameOfLife.pde'])"> Conway's Game of Life </button>
+    <button onclick = "loadProcessingSketch('Fourier', ['Fourier.pde'])"> Sin[2x] + Cos[x] </button>
+    <div id = "processing_description"> </div>
+    <div id = "processing_source"> </div>
+  </body>
+
+</html>
