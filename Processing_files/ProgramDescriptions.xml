@@ -1,31 +1,49 @@
 <xml>
 
   <Boids>
-    &lt;p&gt; This is a program that simulates fish swimming. The fish are are controlled by four goals: they want to swim in the same direction as fish near them, they want to be near fish, they want to have some personal space, and they want to be the same color as the other fish around them. Everything they do is simply the result of trying to fulfill these goals.&lt;/p&gt;
-    &lt;p&gt; If you left click the mouse, the fish will swim away from it. If you right click the mouse, you will add 10 new fish to the tank. A lot more information can be found &lt;a href = "http://www.red3d.com/cwr/boids/"&gt; here &lt;/a&gt; &lt;/p&gt;
+    <h3> Fish Simulator</h3>
+    <div>
+      <p class="read_p"> This is a program that simulates fish swimming. The fish are are controlled by four goals: they want to swim in the same direction as fish near them, they want to be near fish, they want to have some personal space, and they want to be the same color as the other fish around them. Everything they do is simply the result of trying to fulfill these goals.</p>
+      <p class="read_p"> If you left click the mouse, the fish will swim away from it. If you right click the mouse, you will add 10 new fish to the tank. A lot more information can be found <a href="http://www.red3d.com/cwr/boids/"> here </a> </p>
+  </div>
   </Boids>
   <Fern>
-    &lt;p&gt; This draws a fractal fern using a method called a &lt;a href="http://webserv.jcu.edu/math//vignettes/chaosgame.htm"&gt; chaos game &lt;/a&gt;. The algorithm starts by taking a point at the bottom of the screen. It then randomly applies on of four transformations to the point and draws the new point on the screen. This process continues, adding thousands of points per second until the result begins to resemble a fern. For more information, you can look &lt;a href="http://math.bu.edu/DYSYS/arcadia/sect4.html"&gt; here &lt;/a&gt; &lt;/p&gt;
+    <h3> Fern Constructor </h3>
+    <div>
+      <p class="read_p"> This draws a fractal fern using a method called a <a href="http://webserv.jcu.edu/math//vignettes/chaosgame.htm"> chaos game </a>. The algorithm starts by taking a point at the bottom of the screen. It then randomly applies on of four transformations to the point and draws the new point on the screen. This process continues, adding thousands of points per second until the result begins to resemble a fern. For more information, you can look <a href="http://math.bu.edu/DYSYS/arcadia/sect4.html"> here </a> </p>
+    </div>
   </Fern>
   <Pascal>
-    &lt;p&gt; By Pascal's theorem, any five points determine a conic section. This program draws the appropriate conic section between the five small blue points. The lines between these points intersect in three collinear large blue points which are used to calculate a sixth point that traces out the curve. Click and drag the small blue points to see the curve change. For more information, look &lt;a href="https://en.wikipedia.org/wiki/Pascal's_theorem"&gt;here&lt;/a&gt;&lt;/p&gt;
+    <h3> Pascal's Theorem </h3>
+    <div>
+      <p class="read_p"> By Pascal's theorem, any five points determine a conic section. This program draws the appropriate conic section between the five small blue points. The lines between these points intersect in three collinear large blue points which are used to calculate a sixth point that traces out the curve. Click and drag the small blue points to see the curve change. For more information, look <a href="https://en.wikipedia.org/wiki/Pascal's_theorem">here</a></p>
+    </div>
   </Pascal>
   <Planets>
-    &lt;p&gt; This simulates the motion of planets under Newton's laws of motion. It uses simple step integration.&lt;/p&gt;
+    <h3>  Planet Simulator </h3>
+    <div>
+      <p class="read_p"> This simulates the motion of planets under Newton's laws of motion. It uses simple step integration.</p>
+    </div>
   </Planets>
   <Conway>
-    &lt;p&gt; This is an implementation of John Conway's &lt;i&gt;Game of Life&lt;/i&gt;, a two dimensional cellular automaton. Each cell is either alive(green) or dead(white). Each generation, a live cell dies if it is too alone (fewer than two neighbors) or overcrowded (more than two neighbors). In addition, a dead cell is brought back to life via reproduction if it has exactly three neighbors.
-    &lt;/p&gt;
-    &lt;p&gt; To pause the simulation, press the spacebar. To change a cell from alive to dead or vice versa, click on the cell. This works better when the simulation is paused as you have more time to click.&lt;/p&gt;
-    &lt;p&gt; To randomize the board, press shift. To randomize with horizontal symmetry, press enter or return&lt;/p&gt;
-    &lt;p&gt; For more information, you can look &lt;a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life"&gt; here &lt;/a&gt;&lt;/p&gt;
+    <h3> Conway's Game of Life </h3>
+    <div>
+      <p class="read_p"> This is an implementation of John Conway's <i>Game of Life</i>, a two dimensional cellular automaton. Each cell is either alive(green) or dead(white). Each generation, a live cell dies if it is too alone (fewer than two neighbors) or overcrowded (more than two neighbors). In addition, a dead cell is brought back to life via reproduction if it has exactly three neighbors.
+      </p>
+      <p class="read_p"> To pause the simulation, press the spacebar. To change a cell from alive to dead or vice versa, click on the cell. This works better when the simulation is paused as you have more time to click.</p>
+      <p class="read_p"> To randomize the board, press shift. To randomize with horizontal symmetry, press enter or return</p>
+      <p class="read_p"> For more information, you can look <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life"> here </a></p>
+    </div>
   </Conway>
   <Fourier>
-    &lt;p&gt; This program traces out the graph of Sin[2x] + Cos[x]. There's not much more to say. I think it looks pretty. The code is inspired by the sample code found &lt;a href="https://processing.org/examples/sinewave.html"&gt;here&lt;/a&gt; &lt;/p&gt;
+    <h3> Sin[2x] + Cos[x] </h3>
+    <div>
+      <p class="read_p"> This program traces out the graph of Sin[2x] + Cos[x]. There's not much more to say. I think it looks pretty. The code is inspired by the sample code found <a href="https://processing.org/examples/sinewave.html">here</a> </p>
+    </div>
   </Fourier>
 
   <Arc>
-    &lt;p&gt; This is just a design I think looks cool. The arcs grow and shrink sinusoidally. Press space to make it rotate. It's inspired by pictures from &lt;a href="https://imgur.com/a/pvBFi"&gt;here&lt;/a&gt; &lt;/p&gt;
+    <p class="read_p"> This is just a design I think looks cool. The arcs grow and shrink sinusoidally. Press space to make it rotate. It's inspired by pictures from <a href="https://imgur.com/a/pvBFi">here</a> </p>
   </Arc>
 
 
