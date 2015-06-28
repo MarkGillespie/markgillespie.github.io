@@ -27,19 +27,21 @@ function loadProcessingSketch(name, args) {
   });
 
   var p = new Processing.loadSketchFromSources('processing_canvas', filenames);
-  $("#processing_title").empty();
-  $("#processing_title").append(
-    name
-  );
 
   $.ajax({
     type: "GET",
-    url: "Processing_files/ProgramDescriptions.xml",
-    dataType: "xml",
-    success: function(xml) {
+    url: "Processing_files/ProgramDescriptions.html",
+    dataType: "html",
+    success: function(html) {
+      // console.log(html.getElementsByTagName(name)[0].textContent);
       $("#processing_description").empty();
       $("#processing_description").append(
-          $(xml).find(name).text()
+        $(html).find("#" + name).children()[1]
+      );
+
+      $("#processing_title").empty();
+      $("#processing_title").append(
+        $(html).find("#" + name).children()[0]
       );
     }
   });
