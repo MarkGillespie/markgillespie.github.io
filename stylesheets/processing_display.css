@@ -3,6 +3,10 @@
   font-size: 1.5em;
 }
 
+/*@media (max-width: 1000px) and (min-width: 800px) {
+
+}*/
+
 @media (max-width: 1000px) {
   div.processing_window {
     max-width: 500px;
@@ -10,6 +14,7 @@
     margin-left: auto;
     margin-right: auto;
     overflow: none;
+    margin-bottom: 1em;
   }
 
   div.processing_button_tray {
@@ -19,17 +24,17 @@
   span.processing_button {
     cursor: pointer;
     margin-left: 1em;
-    color: #262;
+    color: #407C00;
     display: inline-block;
   }
 
   span.processing_button:hover{
-    color: #262;
+    color: #407C00;
     text-shadow: 0 0 3px #6F6;
   }
 
   span.selected_processing_button{
-    color: #4A4;
+    color: #407C00;
     text-shadow: 0 0 3px #6F6;
     cursor: pointer;
     margin-left: 1em;
@@ -39,14 +44,14 @@
 
 @media (min-width: 1000px) {
   div.processing_window {
-    width: 700px;
+    width: 660px;
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
 
   div.processing_button_tray {
-    width: 200px;
+    width: 150px;
     float: right;
   }
 
@@ -65,7 +70,7 @@
 
   span.processing_button:hover {
     cursor: pointer;
-    color: #393;
+    color: #407C00;
   }
 
   span.processing_button:after {
@@ -78,14 +83,14 @@
     position: absolute;
     pointer-events: none;
     border-color: rgba(136, 183, 213, 0);
-    border-right-color: #DDD;
+    border-right-color: #BBB;
     border-width: 20px;
     margin-top: -20px;
   }
 
   span.processing_button:hover:after {
     border-color: rgba(136, 183, 213, 0);
-    border-right-color: #8C8;
+    border-right-color: #4F9900;
     border-width: -20px;
     margin-top: -20px;
   }
@@ -100,12 +105,12 @@
     margin: 5px;
     position: relative;
     height: 60px;
-    color: #555;
+    color: #407C00;
   }
 
   span.selected_processing_button:hover {
     cursor: pointer;
-    color: #393;
+    color: #4F9900;
   }
 
   span.selected_processing_button:after {
@@ -121,9 +126,12 @@
 
   span.selected_processing_button:after {
     border-color: rgba(136, 183, 213, 0);
-    border-right-color: #9D9;
+    border-right-color: #4F9900;
     border-width: 30px;
     margin-top: -30px;
   }
+}
 
+#processing_description {
+  margin-bottom: 2em;
 }
