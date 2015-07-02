@@ -1,0 +1,31 @@
+<span class="keyword">int</span> numPlanets <span class="operator">=</span> <span class="integer">0</span>;
+<span class="entity class">ArrayList</span><span class="operator">&lt;</span>planet<span class="operator">&gt;</span> planets <span class="operator">=</span> <span class="keyword">new</span> <span class="entity function">ArrayList&lt;planet&gt;</span>(<span class="integer">0</span>);
+
+<span class="entity class">Planet</span>[] plan <span class="operator">=</span> <span class="keyword">new</span> <span class="entity class">Planet</span>[<span class="integer">2</span>];
+
+<span class="keyword">void</span> <span class="entity function">setup</span>(){
+  <span class="entity function">size</span>(<span class="integer">500</span>, <span class="integer">500</span>);
+  <span class="entity function">background</span>(<span class="integer">200</span>);
+  planets<span class="operator">.</span><span class="entity function">add</span>(<span class="keyword">new</span> <span class="entity function">Planet</span>(<span class="keyword">new</span> <span class="entity function">PVector</span>(width<span class="operator">/</span><span class="integer">2</span>, height<span class="operator">/</span><span class="integer">2</span>), <span class="keyword">new</span> <span class="entity function">PVector</span>(<span class="integer">0</span>,<span class="integer">0</span>), <span class="integer">100</span>, <span class="integer">80</span>, <span class="integer">0</span>));
+  planets<span class="operator">.</span><span class="entity function">add</span>(<span class="keyword">new</span> <span class="entity function">Planet</span>(<span class="keyword">new</span> <span class="entity function">PVector</span>(width<span class="operator">/</span><span class="integer">2</span>, height<span class="operator">/</span><span class="integer">2</span> <span class="operator">+</span> <span class="integer">200</span>), <span class="keyword">new</span> <span class="entity function">PVector</span>(<span class="operator">-</span><span class="integer">2</span>,<span class="integer">0</span>), <span class="integer">1</span>, <span class="integer">10</span>, <span class="integer">0</span>));
+}
+
+<span class="keyword">void</span> <span class="entity function">draw</span>(){
+  <span class="entity function">background</span>(<span class="integer">200</span>);
+  <span class="entity function">for</span>(<span class="keyword">int</span> i <span class="operator">=</span> <span class="integer">0</span>; i <span class="operator">&lt;</span> planets<span class="operator">.</span><span class="entity function">size</span>() ; i<span class="operator">++</span>){
+    <span class="entity function">if</span>(planets<span class="operator">.</span><span class="entity function">get</span>(i)<span class="operator">.</span><span class="entity function">update</span>(planets)){
+      planets<span class="operator">.</span><span class="entity function">get</span>(i)<span class="operator">.</span><span class="entity function">render</span>();
+    } <span class="keyword">else</span> {
+     <span class="entity function">println</span>(i);
+     planets<span class="operator">.</span><span class="entity function">remove</span>(i);
+     i<span class="operator">--</span>; 
+    }
+  }
+
+}
+
+<span class="keyword">void</span> <span class="entity function">mouseClicked</span>(){
+  <span class="entity class">PVector</span> vel <span class="operator">=</span> <span class="entity class">PVector</span><span class="operator">.</span><span class="entity function">random2D</span>();
+  vel<span class="operator">.</span><span class="entity function">setMag</span>(<span class="integer">2</span>);
+  planets<span class="operator">.</span><span class="entity function">add</span>(<span class="keyword">new</span> <span class="entity function">Planet</span>(<span class="keyword">new</span> <span class="entity function">PVector</span>(mouseX, mouseY), vel, <span class="integer">1</span>, <span class="integer">10</span>, <span class="integer">0</span>)); 
+}

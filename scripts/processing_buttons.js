@@ -76,13 +76,11 @@ function loadProcessingSketch(name, args) {
 
 function loadSource(s) {
   $.ajax({
-    url : "Processing_files/" + s,
+    url : "Processing_files_highlighted/" + stripEnding(s) + ".html",
     dataType: "text",
     success : function (data) {
       document.getElementById("processing_source").className="";
-      $("#processing_source").html(escapeForHTML(data));
-      Rainbow.color(document.getElementById("processing_source_wrapper"));
-      // console.log
+      $("#processing_source").html(data);
       $("#processing_source_file_list").children().each(function() {
         $(this).attr({
           class: "processing_source_file_option"

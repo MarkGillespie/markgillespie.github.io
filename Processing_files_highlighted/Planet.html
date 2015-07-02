@@ -1,0 +1,57 @@
+<span class="keyword">class</span> <span class="entity class">Planet</span>{
+ <span class="entity class">PVector</span> position, velocity, acceleration;
+ <span class="keyword">float</span> mass, radius, omega;
+  
+ <span class="keyword">public</span> <span class="entity function">Planet</span>(<span class="entity class">PVector</span> position_, <span class="entity class">PVector</span> velocity_, <span class="keyword">float</span> mass_, <span class="keyword">float</span> radius_, <span class="keyword">float</span> omega_){
+   position <span class="operator">=</span> <span class="keyword">new</span> <span class="entity function">PVector</span>(position_<span class="operator">.</span>x, position_<span class="operator">.</span>y);
+   velocity <span class="operator">=</span> <span class="keyword">new</span> <span class="entity function">PVector</span>(velocity_<span class="operator">.</span>x, velocity_<span class="operator">.</span>y);
+   acceleration <span class="operator">=</span> <span class="keyword">new</span> <span class="entity function">PVector</span>(<span class="integer">0</span>,<span class="integer">0</span>);
+   mass <span class="operator">=</span> mass_;
+   radius <span class="operator">=</span> radius_;
+   omega <span class="operator">=</span> omega_;
+ } 
+ 
+ <span class="keyword">void</span> <span class="entity function">render</span>(){
+   <span class="entity function">noStroke</span>();
+   <span class="entity function">ellipse</span>(position<span class="operator">.</span>x, position<span class="operator">.</span>y, radius, radius); 
+ }
+
+ 
+ <span class="keyword">boolean</span> <span class="entity function">update</span>(<span class="entity class">ArrayList</span><span class="operator">&lt;</span>planet<span class="operator">&gt;</span> planets){
+   acceleration <span class="operator">=</span> <span class="keyword">new</span> <span class="entity function">PVector</span>(<span class="integer">0</span>,<span class="integer">0</span>);
+  
+   <span class="entity function">for</span>(<span class="entity class">Planet</span> p <span class="operator">:</span> planets){
+     <span class="entity function">if</span>(<span class="operator">!</span>p<span class="operator">.</span><span class="entity function">equals</span>(<span class="keyword">this</span>)){
+       <span class="entity class">PVector</span> dist <span class="operator">=</span> <span class="entity class">PVector</span><span class="operator">.</span><span class="entity function">sub</span>(position, p<span class="operator">.</span>position);
+       <span class="entity function">if</span>(dist<span class="operator">.</span><span class="entity function">mag</span>() <span class="operator">&lt;</span> (radius <span class="operator">+</span> p<span class="operator">.</span>radius)<span class="operator">/</span><span class="integer">4</span>){
+        
+         <span class="comment">//p.mass += mass;</span>
+         <span class="comment">//p.radius += radius;       </span>
+         <span class="comment">//return false;</span>
+       } <span class="keyword">else</span> {
+         <span class="entity function">applyForce(getForce</span>(p));
+       }
+     }
+   }
+   velocity<span class="operator">.</span><span class="entity function">add</span>(acceleration);
+   position<span class="operator">.</span><span class="entity function">add</span>(velocity);
+   <span class="keyword">return</span> <span class="truth">true</span>;   
+ }
+ 
+ <span class="keyword">void</span> <span class="entity function">applyForce</span>(<span class="entity class">PVector</span> force){
+   force <span class="operator">=</span> <span class="keyword">new</span> <span class="entity function">PVector</span>(force<span class="operator">.</span>x<span class="operator">/</span>mass, force<span class="operator">.</span>y<span class="operator">/</span>mass);
+   acceleration<span class="operator">.</span><span class="entity function">add</span>(force);
+ }
+ 
+ <span class="entity class">PVector</span> <span class="entity function">getForce</span>(<span class="entity class">Planet</span> p){
+   <span class="keyword">float</span> <span class="static">G</span> <span class="operator">=</span> <span class="integer">15</span>;
+   <span class="entity class">PVector</span> distance <span class="operator">=</span> <span class="entity class">PVector</span><span class="operator">.</span><span class="entity function">sub</span>(p<span class="operator">.</span>position, position);
+   <span class="keyword">double</span> forceMag <span class="operator">=</span> <span class="static">G</span> <span class="operator">*</span> mass <span class="operator">*</span> p<span class="operator">.</span>mass <span class="operator">/</span>  (distance<span class="operator">.</span><span class="entity function">mag</span>() <span class="operator">*</span> distance<span class="operator">.</span><span class="entity function">mag</span>());
+   <span class="entity function">if</span>(distance<span class="operator">.</span><span class="entity function">mag</span>() <span class="operator">!</span><span class="operator">=</span> <span class="integer">0</span>){
+     distance<span class="operator">.</span><span class="entity function">setMag(</span>(<span class="keyword">float</span>)forceMag);
+   }
+   <span class="keyword">return</span> distance;
+ }
+  
+}
+
