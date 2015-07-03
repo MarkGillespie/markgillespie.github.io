@@ -1,40 +1,44 @@
-<span class="keyword">float</span> amplitude, middle, ballRadius, ballGap, numBalls, theta, thetaStep, thetaGap;
+<span class="keyword">float</span> amplitude, middle, ballRadius, ballGap, numBalls,
+  theta, thetaStep, thetaGap;
+
+<span class="keyword">int</span> n <span class="operator">=</span> <span class="integer">3</span>;
 
 <span class="keyword">void</span> <span class="entity function">setup</span>(){
- <span class="entity function">background</span>(<span class="integer">180</span>);
- <span class="entity function">size</span>(<span class="integer">500</span>, <span class="integer">500</span>);
- amplitude <span class="operator">=</span> height<span class="operator">/</span><span class="integer">2</span>;<span class="comment">//distance from vertical center of graph to farthest point</span>
- middle <span class="operator">=</span> height<span class="operator">/</span><span class="integer">2</span>;<span class="comment">//vertical center of graph</span>
- ballRadius <span class="operator">=</span> <span class="integer">5</span>;<span class="comment">//radius of a circle</span>
- ballGap <span class="operator">=</span> <span class="integer">10</span>;<span class="comment">//distance between circles</span>
- numBalls <span class="operator">=</span> <span class="entity function">width/</span>(ballRadius <span class="operator">+</span> ballGap);<span class="comment">//number of circles</span>
- theta <span class="operator">=</span> <span class="integer">0</span>;<span class="comment">//initial angle</span>
- thetaStep <span class="operator">=</span> <span class="operator">.</span><span class="integer">01</span>;<span class="comment">//angle increment each frame</span>
- thetaGap <span class="operator">=</span> <span class="operator">.</span><span class="integer">1</span>;<span class="comment">//angle increment between balls</span>
+  <span class="entity function">background</span>(<span class="integer">180</span>);
+  <span class="entity function">size</span>(<span class="integer">500</span>, <span class="integer">500</span>);
+  amplitude <span class="operator">=</span> height<span class="operator">/</span><span class="integer">2</span> <span class="operator">-</span> <span class="integer">30</span>; <span class="comment">// distance from vertical center of</span>
+                             <span class="comment">// graph to farthest point</span>
+  middle <span class="operator">=</span> height<span class="operator">/</span><span class="integer">2</span>; <span class="comment">// vertical center of graph</span>
+  ballRadius <span class="operator">=</span> <span class="integer">5</span>; <span class="comment">// radius of a circle</span>
+  ballGap <span class="operator">=</span> <span class="integer">10</span>; <span class="comment">// distance between circles</span>
+  numBalls <span class="operator">=</span> <span class="entity function">width/</span>(ballRadius <span class="operator">+</span> ballGap); <span class="comment">// number of circles</span>
+  theta <span class="operator">=</span> <span class="integer">0</span>; <span class="comment">// initial angle</span>
+  thetaStep <span class="operator">=</span> <span class="operator">.</span><span class="integer">01</span>; <span class="comment">// angle increment each frame</span>
+  thetaGap <span class="operator">=</span> <span class="operator">.</span><span class="integer">1</span>; <span class="comment">// angle increment between balls</span>
+  <span class="entity function">textSize</span>(<span class="integer">32</span>);
 }
 
 <span class="keyword">void</span> <span class="entity function">draw</span>(){
   <span class="entity function">colorMode</span>(<span class="static">RGB</span>, <span class="integer">255</span>);
   <span class="entity function">background</span>(<span class="integer">50</span>);
   <span class="entity function">noStroke</span>();
-  <span class="comment">//colorMode(HSB, 360, 100, 100);</span>
   <span class="entity function">for</span>(<span class="keyword">int</span> i <span class="operator">=</span> <span class="integer">0</span>; i <span class="operator">&lt;</span> numBalls; i<span class="operator">++</span>){
   <span class="keyword">float</span> y <span class="operator">=</span> i <span class="operator">*</span> thetaGap <span class="operator">+</span> theta;
   <span class="entity function">pushMatrix</span>();
     <span class="entity function">translate</span>(<span class="integer">0</span>, middle);
-   <span class="comment">// fill((fnc(y)*amplitude+middle)/height * 360, 15, 100);</span>
     <span class="entity function">fill</span>(<span class="integer">255</span>);
-    <span class="entity function">ellipse</span>(ballGap<span class="operator">/</span><span class="integer">2</span> <span class="operator">+</span> i <span class="operator">*</span> (ballRadius <span class="operator">+</span> ballGap), <span class="entity function">fnc</span>(y)<span class="operator">*</span>amplitude, <span class="integer">2</span><span class="operator">*</span>ballRadius, <span class="integer">2</span><span class="operator">*</span>ballRadius);
+    <span class="entity function">ellipse</span>(
+      ballGap<span class="operator">/</span><span class="integer">2</span> <span class="operator">+</span> i <span class="operator">*</span> (ballRadius <span class="operator">+</span> ballGap),
+      <span class="entity function">square</span>(y, n)<span class="operator">*</span>amplitude,
+      <span class="integer">2</span><span class="operator">*</span>ballRadius,
+      <span class="integer">2</span><span class="operator">*</span>ballRadius
+    );
   <span class="entity function">popMatrix</span>();
  } 
  theta <span class="operator">+</span><span class="operator">=</span> thetaStep;
-}
 
-<span class="keyword">float</span> <span class="entity function">fnc</span>(<span class="keyword">float</span> x){
-  <span class="keyword">float</span> fnMax <span class="operator">=</span> <span class="integer">2</span>;
-  <span class="comment">//return square(x, 4)/fnMax;</span>
-  <span class="keyword">return</span> <span class="entity function">(sin</span>(x<span class="operator">*</span><span class="integer">2</span>) <span class="operator">+</span> <span class="entity function">cos</span>(x))<span class="operator">/</span>fnMax;
-  <span class="comment">//return (sin(1000*x) + cos(1001*x))/fnMax;</span>
+ <span class="entity function">fill</span>(<span class="integer">255</span>);
+ <span class="entity function">text</span>(<span class="string">"n: "</span> <span class="operator">+</span> n, width<span class="operator">-</span><span class="integer">100</span>, <span class="integer">25</span>);
 }
 
 <span class="keyword">float</span> <span class="entity function">square</span>(<span class="keyword">float</span> x, <span class="keyword">int</span> n) {
@@ -44,3 +48,15 @@
   }
   <span class="keyword">return</span> sum;
 }
+
+<span class="keyword">void</span> <span class="entity function">keyPressed</span>() {
+  <span class="keyword">if</span> (key <span class="operator">==</span> '<span class="operator">&gt;</span>' <span class="operator">||</span> key <span class="operator">==</span> <span class="char">'.'</span>) {
+    n<span class="operator">++</span>;
+  }
+  <span class="keyword">if</span> (key <span class="operator">==</span> '<span class="operator">&lt;</span>' <span class="operator">||</span> key <span class="operator">==</span> <span class="char">','</span>) {
+    <span class="keyword">if</span> (n <span class="operator">&gt;</span> <span class="integer">0</span>) {
+      n <span class="operator">-</span><span class="operator">=</span> <span class="integer">1</span>;
+    }
+  }
+}
+
