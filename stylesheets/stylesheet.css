@@ -10,9 +10,14 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  background-color: #FFF;
-  color: #000;
-  font-family: sans-serif;
+
+  font-family: 'Roboto Slab', sans-serif;
+  background-image: url("../images/random_walk.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+
+  background-color: #EAE3EA;
 }
 
 p {
@@ -20,37 +25,69 @@ p {
 }
 
 a {
-  color: #407C00;
+  color: #4783A5;
   /*text-decoration: none;*/
   font-weight: 500;
 }
 
 a:hover {
-  color: #407C00;
-  text-shadow: 0 0 3px #6F6;
+  color: #456395;
+  /*text-shadow: 0 0 3px #6F6;*/
   text-decoration: underline;
 }
 
 /*location of link for navbar to go to*/
 div.section_link_spot {
-  min-height: 30px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 
 /*title of a section*/
 div.section_header {
   text-align: center;
   font-size: 2em;
-  font-family: sans-serif;
-  color: #407C00;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bold;
+  background-color: #A7B3A5;
+  color: #FFF;
   padding: 1em;
-  margin-bottom: -1em;
 }
 
-/*text ofa section*/
+/*text of a section*/
 div.section_text {
   margin-bottom: 5em;
   padding-left: 1em;
   padding-right: 1em;
+  padding-bottom: 1em;
+}
+
+/*text of a section*/
+div.section_panel {
+  margin-bottom: 5em;
+  background-color: #FFF;
+}
+
+div.accent_header {
+  text-align: center;
+  font-size: 2em;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bold;
+  background-color: #B56357;
+  color: #FFF;
+  padding: 1em;
+}
+
+/*text of a section*/
+div.accent_text {
+  margin-bottom: 5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  color: #DEE;
+}
+
+div.accent {
+  background-color: #B56357
 }
 
 /*horizontal line*/
@@ -68,20 +105,13 @@ div.header {
   padding-bottom: 6em;
   margin-left: -1px;
   text-align: center;
-
-  background-image: url("../images/Tree_Green.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-
-  color: #FFF;
 }
 
 div.body {
   overflow: hidden;
   padding-bottom: 142px;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 0em;
+  padding-right: 0em;
 }
 
 div.panel {
@@ -91,10 +121,6 @@ div.panel {
 }
 
 @media (max-width: 800px) {
-  #left_panel.panel {
-    display: none;
-  }
-
   #center_panel.panel {
     width: 100%;
   }
@@ -103,33 +129,26 @@ div.panel {
     width: 100%;
     float: left;
   }
-}
 
-@media (min-width: 800px)  and (max-width: 1200px) {
-  #left_panel.panel {
-    display: none;
+  div.header {
+    padding-top: 0em;
+    padding-bottom: 2em;
+    margin-left: -1px;
+    text-align: center;
   }
 
+  body {
+    background-image: none;
+  }
+}
+
+@media (min-width: 800px) {
   #center_panel.panel {
     width: 70%;
   }
 
   #right_panel.panel {
     width: 30%;
-  }
-}
-
-@media (min-width: 1200px) {
-  #left_panel.panel {
-    width: 20%;
-  }
-
-  #center_panel.panel {
-    width: 60%;
-  }
-
-  #right_panel.panel {
-    width: 20%;
   }
 }
 
@@ -141,7 +160,7 @@ div.panel {
 }
 
 h3 {
-  color: #407C00;
+  color: #87A3A5;
   font-size: 1.3em;
   margin-bottom: 5px;
 }
@@ -155,7 +174,7 @@ ul {
 }
 
 dl dt {
-  color: #407C00;
+  color: #87A3A5;
   font-size: 1.2em;
 }
 
@@ -170,10 +189,7 @@ dl dd {
   margin-top: -142px; 
   height: 142px;
 
-  background-image: url("../images/Tree_Green.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  background-color: #354040;
 
   text-align: center;;
   color: #FFF;

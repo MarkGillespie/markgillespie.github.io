@@ -7,195 +7,129 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/navbar.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/slideshow.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/processing_display.css" media="screen">
-    <link href="stylesheets/syntax_highlighting.css" rel="stylesheet" type="text/css" media="screen">
     <script type="text/javascript" src="scripts/slideshow.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="scripts/processing.js"></script>
-    <script type="text/javascript" src="scripts/processing_buttons.js"></script>
-    <script src="scripts/rainbow.js"></script>
-    <script src="scripts/generic.js"></script>
-    <script src="scripts/java.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700|Roboto+Slab" rel="stylesheet">
   </head>
 
-  <body onload="initialize_imgur(); initializeProcessingCanvas()">
+  <body onload="initialize_imgur()">
     <div class="wrapper" id="home">
       <div class="navbar">
+        <div class="navbar_name">
+          Mark Gillespie
+        </div>
         <div class="navbar_buttons">
-          <a href="#home" class="navbar_link_vanishing"> <span class="navbar_item"> Home </span> </a>
-          <a href="#Processing" class="navbar_link_vanishing"> <span class="navbar_item"> Small Projects</span> </a>
-          <a href="#experience" class="navbar_link"> <span class="navbar_item"> Programming Experience</span> </a>
-          <a href="#blender" class="navbar_link_vanishing"> <span class="navbar_item"> 3D Animation</span> </a>
+          <!--<a href="#home" class="navbar_link_vanishing"> <span class="navbar_item"> Home </span> </a>-->
+          <a href="#experience" class="navbar_link"> <span class="navbar_item"> Programming</span> </a>
+          <!--<a href="#blender" class="navbar_link_vanishing"> <span class="navbar_item"> 3D Animation</span> </a>-->
           <a href="#work" class="navbar_link"> <span class="navbar_item"> Work Experience</span> </a>
           <a href="#education" class="navbar_link"> <span class="navbar_item"> Education</span> </a>
-          <a href="#about" class="navbar_link"> <span class="navbar_item"> About Me</span> </a>
+          <a href="#about" class="navbar_link_vanishing"> <span class="navbar_item"> About Me</span> </a>
         </div>
-      </div> 
-      <div class="header"> 
-        Mark Gillespie
+      </div>
+      <div class="header">
+        <!--Mark Gillespie-->
       </div>
       <div class="body">
-        <div id="left_panel" class="panel">
-          <div id="Title" class="section_link_spot"></div>
-          <div class="section_header"> Title </div>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum turpis magna, hendrerit gravida sapien vel, porttitor gravida purus. Proin sapien turpis, egestas eget commodo id, varius a diam. Ut ornare eros eget facilisis suscipit. Fusce mattis, nunc eu lobortis porta, orci lorem vehicula lorem, nec posuere orci est auctor libero. Praesent vitae est ultricies, tempor sem a, vestibulum odio. Quisque convallis magna nec ultricies consectetur. Vestibulum vitae orci sem. Ut pretium tortor faucibus, blandit quam at, viverra mi.</p>
-
-          <p>Suspendisse facilisis lorem sodales sapien aliquet, vitae volutpat ante vulputate. Vivamus laoreet tortor eget velit rhoncus hendrerit. Donec ut congue lacus, sed facilisis leo. Mauris quis risus feugiat, semper ante in, ultricies ipsum. Nam tincidunt urna ac turpis eleifend, a pharetra sapien auctor. Proin varius feugiat sollicitudin. Morbi fringilla et nunc non pretium. Nulla convallis metus sed arcu feugiat, quis dictum est condimentum. Nulla facilisi. Nunc velit mi, suscipit in leo eget, malesuada convallis dui. Nunc lectus est, imperdiet eu ipsum ac, accumsan convallis arcu. Nulla malesuada pretium tortor, et dignissim massa fermentum ut. Etiam quis tristique odio. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <hr />
-        </div>
 
         <div id="center_panel" class="panel">
-<!--           <div class="section_header">Code</div>
-          <div class="section_text">
-<pre>
-<code data-language="javascript">window.Rainbow = {
-    whatever: function(param) {
-
-    },
-
-    another: function(param) {
-
-    }
-};</code>
-</pre>
-          </div>-->
-
-          <div id="Processing" class="section_link_spot"></div>
-          <div class="section_header"> Small Projects </div>
-          <div class="section_text"> 
-            <div id="processing_title"> Title </div>
-            <div class="processing_window">
-              <canvas id="processing_canvas" width="500px" height="500px" style="background-color : black;"></canvas>
-              <div class="processing_button_tray">
-                <span id="Boids_button" class="processing_button" onclick="loadProcessingSketch('Boids', ['Boids.pde', 'Boid.pde'])"> Fish Simulator </span>
-                <span id="Fern_button" class="processing_button" onclick="loadProcessingSketch('Fern', ['Fern.pde'])"> Fern Constructor</span>
-                <span id="Pascal_button" class="processing_button" onclick="loadProcessingSketch('Pascal', ['PascalTheorem.pde'])"> Pascal's Theorem </span>
-                <span id="Planets_button" class="processing_button" onclick="loadProcessingSketch('Planets', ['Orbits.pde', 'Planet.pde'])"> Planet Simulator </span>
-                <span id="Conway_button" class="processing_button" onclick="loadProcessingSketch('Conway', ['GameOfLife.pde'])"> Game of Life </span>
-                <span id="Fourier_button" class="processing_button" onclick="loadProcessingSketch('Fourier', ['Fourier.pde'])"> Sin[2x] + Cos[x] </span>
-              </div>
-            </div>
-            <span id="processing_source_hider" onclick="toggleSource()">View Source</span>
-            <div id="processing_source_container">
-              <div id="processing_source_file_list"> </div>
-              <pre  style="width: 100%"  id="processing_source_wrapper">
-              <code data-language="java" id="processing_source">
-              </code>
-              </pre>
-            </div>
-            <div id="processing_description"> Suspendisse facilisis lorem sodales sapien aliquet, vitae volutpat ante vulputate. Vivamus laoreet tortor eget velit rhoncus hendrerit. Donec ut congue lacus, sed facilisis leo. Mauris quis risus feugiat, semper ante in, ultricies ipsum. Nam tincidunt urna ac turpis eleifend, a pharetra sapien auctor. Proin varius feugiat sollicitudin. Morbi fringilla et nunc non pretium. Nulla convallis metus sed arcu f</div>
-            <hr />
-          </div>
 
           <div id="experience" class="section_link_spot"></div>
-          <div class="section_header"> Programming Experience </div>
-          <div class="section_text"> 
-            <h3> Languages: </h3>
-            <ul>
-              <li> C++ </li>
-              <li> Java </li>
-              <li> Python </li>
-              <li> Sage </li>
-              <li> Javascript (including jQuery and Ajax) </li>
-            </ul>
+          <div class="section_panel">
+            <div class="section_header"> Programming Experience </div>
+            <div class="section_text">
+              <h3> Languages: </h3>
+              <ul>
+                <li> C, C++ </li>
+                <li> Haskell </li>
+                <li> Mathematica </li>
+                <li> Matlab </li>
+                <li> Java </li>
+                <li> Python </li>
+              </ul>
 
-            <h3> Projects</h3>
-              <dl>
-                <dt> HackDFW</dt>
-                <dd> In spring 2015, a group of friends and I won HackDFW, a student hackathon in Dallas. We created a virtual ecosystem of dinosaurs whose behavior evolved over time. There is some information about the project on ChallengePost <a href="http://challengepost.com/software/dino-world"> here </a></dd>
+              <h3> Projects</h3>
+                <dl>
+                  <dt> Discrete Differential Geometry </dt>
+                  <dd>
+                  </dd>
 
-                <dt> Java tree storage </dt>
-                <dd> Over the summer of 2014, I wrote a Java program to organize data for a mentorship program in my school district. About 100 students were organized into trees where each student had at least one mentor and was a mentor to at least one student. My program drew out the trees of mentors and allowed the user to retrieve information about the students (such as contact information to give to the student’s mentor). </dd>  
+                  <dt> HackDFW</dt>
+                  <dd> In spring 2015, a group of friends and I won HackDFW, a student hackathon in Dallas. We created a virtual ecosystem of dinosaurs whose behavior evolved over time. There is some information about the project on ChallengePost <a href="http://challengepost.com/software/dino-world"> here </a></dd>
 
-                <dt> Android Apps </dt>
-                <dd>  I used Processing, a language based on Java, to write two Android apps that can be found on the <a href="https://play.google.com/store/apps/developer?id=MGillespie">Google Play Store</a>.
-                <ol>
-                  <li> <a href="https://play.google.com/store/apps/details?id=processing.test.fish_tank">Boids Tank</a>: This implements the flocking algorithm ‘boids’ developed by Craig Reynolds to simulate schooling fish. The fish follow each other around the screen and change color based on the colors of the fish around them </li>
-                  <li> <a href="https://play.google.com/store/apps/details?id=processing.test.drop_nine_pretty_neat">Drop Nine</a> : I wrote a version of a game where the player has to clear the screen of small balls. It is similar to tetris </li>
-                </ol>
-                </dd> 
-
-                <dt> Pirate Game </dt>
-                <dd> In 2014, my senior year of high school, I went to HackBCA, a high school hackathon in New Jersey, and made a platformer called Yarr! with my team. After the hackathon, I rewrote the majority of the code and remade the graphics. It can be found <a href="http://googledrive.com/host/0B7acmzGRi4xmVU4tdG85M1ZXbW8/Yarr.html">here</a></dd>
-              </dl>
-            <hr />
-          </div>
-
-          <div id="blender" class="section_link_spot"></div>
-          <div class="section_header" class="section_link_spot"> 3D Modeling </div>
-          <div id="image_container" class="image_container">
-            <div id="image_box" class="slideshow_image"></div>
-
-            <div id="controls" class="slideshow_nav_bar">
-              <div class="slideshow_nav_button" onclick="prevImage()" style="float: left;">
-                <div class="arrow_left"> </div>
-              </div>
-              <div class="slideshow_nav_button" onclick="nextImage()" style="float: right;">
-                <div class="arrow_right"> </div>
-              </div>
+              <hr />
             </div>
           </div>
-          <a id="slideshow_title_link"> </a>
-          <div class="section_text"> 
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum turpis magna, hendrerit gravida sapien vel, porttitor gravida purus. Proin sapien turpis, egestas eget commodo id, varius a diam. Ut ornare eros eget facilisis suscipit. Fusce mattis, nunc eu lobortis porta, orci lorem vehicula lorem, nec posuere orci est auctor libero. Praesent vitae est ultricies, tempor sem a, vestibulum odio. Quisque convallis magna nec ultricies consectetur. Vestibulum vitae orci sem. Ut pretium tortor faucibus, blandit quam at, viverra mi.</p>
-            <p>Suspendisse facilisis lorem sodales sapien aliquet, vitae volutpat ante vulputate. Vivamus laoreet tortor eget velit rhoncus hendrerit. Donec ut congue lacus, sed facilisis leo. Mauris quis risus feugiat, semper ante in, ultricies ipsum. Nam tincidunt urna ac turpis eleifend, a pharetra sapien auctor. Proin varius feugiat sollicitudin. Morbi fringilla et nunc non pretium. Nulla convallis metus sed arcu feugiat, quis dictum est condimentum. Nulla facilisi. Nunc velit mi, suscipit in leo eget, malesuada convallis dui. Nunc lectus est, imperdiet eu ipsum ac, accumsan convallis arcu. Nulla malesuada pretium tortor, et dignissim massa fermentum ut. Etiam quis tristique odio. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <hr />
-          </div>
+
+          <!--<div id="blender" class="section_link_spot"></div>-->
+          <!--<div class="section_panel">-->
+            <!--<div class="section_header" class="section_link_spot"> 3D Modeling </div>-->
+            <!--<div id="image_container" class="image_container">-->
+              <!--<div id="image_box" class="slideshow_image"></div>-->
+
+              <!--<div id="controls" class="slideshow_nav_bar">-->
+                <!--<div class="slideshow_nav_button" onclick="prevImage()" style="float: left;">-->
+                  <!--<div class="arrow_left"> </div>-->
+                <!--</div>-->
+                <!--<div class="slideshow_nav_button" onclick="nextImage()" style="float: right;">-->
+                  <!--<div class="arrow_right"> </div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<a id="slideshow_title_link"> </a>-->
+            <!--<div class="section_text">-->
+              <!--<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum turpis magna, hendrerit gravida sapien vel, porttitor gravida purus. Proin sapien turpis, egestas eget commodo id, varius a diam. Ut ornare eros eget facilisis suscipit. Fusce mattis, nunc eu lobortis porta, orci lorem vehicula lorem, nec posuere orci est auctor libero. Praesent vitae est ultricies, tempor sem a, vestibulum odio. Quisque convallis magna nec ultricies consectetur. Vestibulum vitae orci sem. Ut pretium tortor faucibus, blandit quam at, viverra mi.</p>-->
+              <!--<hr />-->
+            <!--</div>-->
+          <!--</div>-->
 
           <div id="work" class="section_link_spot"></div>
-          <div class="section_header"> Work Experience </div>
-          <div class="section_text"> 
-            <dl>
-              <dt> MORE After School (2011-2014)</dt>
-              <dd>
-                Volunteered for MORE After School, an enrichment program at McKinley Elementary School in Westfield, New Jersey
-                <ul>
-                  <li style="margin-bottom:10px;margin-top: 10px;"><i>2011-2012</i>: Mentor; assisted in teaching various classes in calligraphy, computer animation and painting</li>
-                  <li><i>2013-2014</i>: Instructor; designed the curriculum for various classes in like origami and knitting</li>
-                </ul>
-              </dd>
-
-              <dt> Teacher for home-schooled student (2012-2014)</dt>
-              <dd>
-                Taught weekly lessons in physics and math to a home-schooled 7th grade boy; adapted a curriculum from my Honors Physics class and created experiments to demonstrate and test concepts; continued to teach him geometry and physics after he entered public school; taught him to program in Java over summer of 2014
-              </dd>
-
-            </dl>
+          <div class="section_panel">
+            <div class="section_header"> Work Experience </div>
+            <div class="section_text">
+              <dl>
+                <dt> Arthur R. Adams SURF Fellow (Caltech)</dt>
+                <dd>
+                  Under Professor Mathieu Desbrun, I studied applications of dimensional reduction techniques to polymer conformation. I created a new algorithm based on Landmark Multidimensional Scaling and implemented it in C++.
+                </dd>
+                <dt> Software Engineeering Intern (Google)</dt>
+                <dd>
+                  I prototyped a new credit card information input interface for an Android library. I wrote code in Java.
+                </dd>
+              </dl>
+            </div>
           </div>
 
           <div id="education" class="section_link_spot"></div>
-          <div class="section_header"> Education </div>
-          <div class="section_text"> 
-            <dl>
-              <dt> California Institute of Technology </dt>
-              <dd> 2014-present
-                <ul>
-                  <li> 2014-present </li>
-                  <li> Major: Computer Science </li>
-                  <li> GPA: 4.0</li>
-                </ul>
-              </dd>
-
-              <dt> Westfield High School, Westfield, NJ</dt>
-              <dd> 2010-2014 
-                <ul>
-                  <li> GPA: 4.4 </li>
-                  <li> National Merit Scholar </li>
-                </ul>
-              </dd>
-
-            </dl>
+          <div class="section_panel">
+            <div class="section_header"> Education </div>
+            <div class="section_text">
+              <dl>
+                <dt> California Institute of Technology </dt>
+                <dd> 2014-present
+                  <ul>
+                    <li> 2014-present </li>
+                    <li> Majors: Computer Science, Mathematics </li>
+                    <li> GPA: 4.0</li>
+                  </ul>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
 
         <div id="right_panel" class="panel">
           <div id="about" class="section_link_spot"></div>
-          <div class="section_header"> About Me </div>
-          <div class="section_text"> 
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum turpis magna, hendrerit gravida sapien vel, porttitor gravida purus. Proin sapien turpis, egestas eget commodo id, varius a diam. Ut ornare eros eget facilisis suscipit. Fusce mattis, nunc eu lobortis porta, orci lorem vehicula lorem, nec posuere orci est auctor libero. Praesent vitae est ultricies, tempor sem a, vestibulum odio. Quisque convallis magna nec ultricies consectetur. Vestibulum vitae orci sem. Ut pretium tortor faucibus, blandit quam at, viverra mi.</p>
-            <p>Suspendisse facilisis lorem sodales sapien aliquet, vitae volutpat ante vulputate. Vivamus laoreet tortor eget velit rhoncus hendrerit. Donec ut congue lacus, sed facilisis leo. Mauris quis risus feugiat, semper ante in, ultricies ipsum. Nam tincidunt urna ac turpis eleifend, a pharetra sapien auctor. Proin varius feugiat sollicitudin. Morbi fringilla et nunc non pretium. Nulla convallis metus sed arcu feugiat, quis dictum est condimentum. Nulla facilisi. Nunc velit mi, suscipit in leo eget, malesuada convallis dui. Nunc lectus est, imperdiet eu ipsum ac, accumsan convallis arcu. Nulla malesuada pretium tortor, et dignissim massa fermentum ut. Etiam quis tristique odio. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <hr />
+          <div class="section_panel">
+            <div class="accent_header"> About Me </div>
+            <div class="section_text">
+              <p> I am a junior undergrad in math and computer science at Caltech. My research interests are in computer graphics and physical simulation. Right now, I am interested in variational integrators and the use of Discrete Exterior Calculus to discretize dynamical systems.
+              </p>
+              <p> Here is my <a href="http://www.positivesemidefinitely.com/">a blog</a> that I write with some friends.
+              </p>
+              <p> Email: <a href="mailto:mgillesp@caltech.edu" target="_top">mgillesp@caltech.edu</a> </p>
+              <hr />
+            </div>
           </div>
         </div>
 
@@ -205,7 +139,7 @@
     <div class="footer">
       <a href="mailto:mgillesp@caltech.edu" target="_top" class="footer_email">mgillesp@caltech.edu</a>
       <hr />
-      Made by Mark Gillespie 2015
+      Made by Mark Gillespie 2017
   </body>
 </html>
 
