@@ -142,9 +142,25 @@ div.panel {
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 800px) and (max-width: 1000px){
+
   #center_panel.panel {
     width: 70%;
+  }
+
+  #right_panel.panel {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1000px) {
+  #left_panel_spacer.panel{
+    width:10%;
+    height: 1em;
+  }
+
+  #center_panel.panel {
+    width: 50%;
   }
 
   #right_panel.panel {
