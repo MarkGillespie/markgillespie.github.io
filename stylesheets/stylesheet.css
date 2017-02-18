@@ -223,3 +223,70 @@ a.footer_email {
 a.footer_email:hover {
   text-shadow: 0 0 0 #000;
 }
+
+input {
+  display: none;
+  visibility: hidden;
+}
+
+label {
+  color: #87A3A5;
+  font-size: 1.2em;
+
+  display: block;
+  padding: 0.5em;
+  padding-bottom: 1em;
+  text-align: left;
+  border-bottom: 1px solid #CCC;
+}
+
+label:hover {
+  color: #3783A5;
+}
+
+label::before {
+  font-family: Consolas, monaco, monospace;
+  font-weight: bold;
+  font-size: 15px;
+  content: "+";
+  vertical-align: text-middle;
+  text-align: center;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+  background: radial-gradient(ellipse at center, #CCC 50%, transparent 50%);
+}
+
+#expand_DDG {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+
+#toggle_DDG:checked ~ #expand_DDG {
+  height: 2753px;
+}
+
+#toggle_DDG:checked ~ label::before {
+  content: "-";
+}
+
+#expand_int {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+
+#toggle_int:checked ~ #expand_int {
+  height: 250px;
+}
+
+#toggle_int:checked ~ label::before {
+  content: "-";
+}
+
+img {
+  box-shadow: 0px 0px 5px 5px gray;
+  margin: 9px;
+}

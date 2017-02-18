@@ -49,39 +49,43 @@
               </ul>
 
               <h3> Projects</h3>
-                <dl>
-                  <dt> Discrete Differential Geometry </dt>
-                  <dd>
-                  </dd>
+                <input id="toggle_DDG" type="checkbox" unchecked>
+                  <label for="toggle_DDG">Discrete Differential Geometry</label>
+                  <div id="expand_DDG">
+                    <p> Here are some interesting assignments that I implemented for adiscrete differential geometry class in the Fall of 2016.</p>
+                    <p> I computed the normal modes of the discrete Laplacian on the Stanford bunny. Here are the first 4.</p>
+                    <center>
+                      <img src="images/DDG/eigenfunction0.png" width="200px"/>
+                      <img src="images/DDG/eigenfunction1.png" width="200px"/><br/>
+                      <img src="images/DDG/eigenfunction2.png" width="200px"/>
+                      <img src="images/DDG/eigenfunction3.png" width="200px"/><br/>
+                    </center>
+                    <p> Using these normal modes, I numerically solved a Poisson equation to find the electric field induced by charges on the bunny's surface.</p>
+                    <center>
+                      <img src="images/DDG/poisson_solution.png" width="400px"/>
+                    </center>
 
-                  <dt> HackDFW</dt>
-                  <dd> In spring 2015, a group of friends and I won HackDFW, a student hackathon in Dallas. We created a virtual ecosystem of dinosaurs whose behavior evolved over time. There is some information about the project on ChallengePost <a href="http://challengepost.com/software/dino-world"> here </a></dd>
+                    I also used the cotan Laplacian to perform mean curvature flow on surfaces. This creates surfaces with minimal surface area.
+                    <center>
+                      <img src="images/DDG/Soap_Film.png" width="400px"/>
+                    </center>
 
+                    The largest project that I did in the class was computing smooth vector fields on surfaces using parallel transport via a trivial connection. I computed generators of the surface's homology using the tree-cotree algorithm. Then, I input the desired singularities and computed the Gaussian curvature on the surface. Using the Guassian curvature, I computed a trivial connection and then used the connection to transport the vector field across the surface.
+                    <center>
+                      <img src="images/DDG/bunny.png" width="400px"/>
+                      <img src="images/DDG/triple_torus.png" width="400px"/>
+                      <img src="images/DDG/furry_cat.png" width="400px"/>
+                    </center>
+
+                  </div>
+                  <input id="toggle_int" type="checkbox" unchecked>
+                  <label for="toggle_int">Interval Analysis</label>
+                  <div id="expand_int">
+                    <p>Recently, I've been working with Professor Alan Barr on using Interval Analysis to solve root-finding and minimization problems. Interval analysis is the technique of doing computations with intervals representing uncertainty instead of regular real numbers. This provided guaranteed bounds on the accuracy of your results. Our code is available on <a href="https://github.com/AlBarrCMS/interval-haskell">GitHub</a>.</p>
+                  </div>
               <hr />
             </div>
           </div>
-
-          <!--<div id="blender" class="section_link_spot"></div>-->
-          <!--<div class="section_panel">-->
-            <!--<div class="section_header" class="section_link_spot"> 3D Modeling </div>-->
-            <!--<div id="image_container" class="image_container">-->
-              <!--<div id="image_box" class="slideshow_image"></div>-->
-
-              <!--<div id="controls" class="slideshow_nav_bar">-->
-                <!--<div class="slideshow_nav_button" onclick="prevImage()" style="float: left;">-->
-                  <!--<div class="arrow_left"> </div>-->
-                <!--</div>-->
-                <!--<div class="slideshow_nav_button" onclick="nextImage()" style="float: right;">-->
-                  <!--<div class="arrow_right"> </div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<a id="slideshow_title_link"> </a>-->
-            <!--<div class="section_text">-->
-              <!--<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum turpis magna, hendrerit gravida sapien vel, porttitor gravida purus. Proin sapien turpis, egestas eget commodo id, varius a diam. Ut ornare eros eget facilisis suscipit. Fusce mattis, nunc eu lobortis porta, orci lorem vehicula lorem, nec posuere orci est auctor libero. Praesent vitae est ultricies, tempor sem a, vestibulum odio. Quisque convallis magna nec ultricies consectetur. Vestibulum vitae orci sem. Ut pretium tortor faucibus, blandit quam at, viverra mi.</p>-->
-              <!--<hr />-->
-            <!--</div>-->
-          <!--</div>-->
 
           <div id="work" class="section_link_spot"></div>
           <div class="section_panel">
@@ -91,6 +95,10 @@
                 <dt> Arthur R. Adams SURF Fellow (Caltech)</dt>
                 <dd>
                   Under Professor Mathieu Desbrun, I studied applications of dimensional reduction techniques to polymer conformation. I created a new algorithm based on Landmark Multidimensional Scaling and implemented it in C++.
+                </dd>
+                <dt> Teaching Assistant for CS 38: Algorithms </dt>
+                <dd>
+                  I graded problem sets every few weeks and held weekly office hours.
                 </dd>
                 <dt> Software Engineeering Intern (Google)</dt>
                 <dd>
