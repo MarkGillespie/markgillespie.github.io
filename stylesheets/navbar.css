@@ -1,3 +1,12 @@
+div.navbar {
+  background-color: #FFF;
+  /*background-color: rgba(255, 255, 255, 0.9);*/
+  box-shadow: 0px 0px 8px 2px gray;
+  /*background: linear-gradient(white, rgba(255, 255, 255, 0.5));*/
+  /*height: 200px;*/
+}
+
+
 @media (max-width: 550px) {
   div.navbar {
     display: none;
@@ -6,7 +15,6 @@
 
 @media (min-width: 550px) and (max-width: 1000px) {
   div.navbar {
-    background-color: white; /*rgba(0, 0, 0, 0.2);*/
     overflow: hidden;
     position: fixed;
     z-index: 2;
@@ -17,7 +25,6 @@
 
 @media (min-width: 1000px) {
   div.navbar {
-    background-color: white; /*rgba(0, 0, 0, 0.2);*/
     overflow: hidden;
     position: fixed;
     z-index: 2;
@@ -78,7 +85,7 @@ span.navbar_item {
   padding-right: 10px;
   
   /*text-transform: uppercase;*/
-  color: #888;
+  color: #999;
 }
 
 span.navbar_item:hover {
