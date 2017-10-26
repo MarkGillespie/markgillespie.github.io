@@ -11,7 +11,7 @@ body {
   margin: 0;
   height: 100%;
 
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-image: url("../images/random_walk.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -46,7 +46,7 @@ div.section_link_spot {
 div.section_header {
   text-align: center;
   font-size: 2em;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   background-color: #A7B3A5;
   color: #FFF;
@@ -64,7 +64,9 @@ div.section_text {
 /*text of a section*/
 div.section_panel {
   margin-bottom: 5em;
+  margin-top:1em;
   background-color: #FFF;
+  box-shadow: 0px 0px 8px 1px #999;
 }
 
 div.accent_header {
@@ -273,35 +275,11 @@ label::before {
   background: radial-gradient(ellipse at center, #CCC 50%, transparent 50%);
 }
 
-#expand_DDG {
-  height: 0px;
-  overflow: hidden;
-  transition: height 0.5s;
-}
-
-#toggle_DDG:checked ~ #expand_DDG {
-  height: 2753px;
-}
-
-#toggle_DDG:checked ~ label::before {
-  content: "-";
-}
-
-#expand_int {
-  height: 0px;
-  overflow: hidden;
-  transition: height 0.5s;
-}
-
-#toggle_int:checked ~ #expand_int {
-  height: 250px;
-}
-
-#toggle_int:checked ~ label::before {
-  content: "-";
+details {
+  margin-bottom: 1em;
 }
 
 img {
-  box-shadow: 0px 0px 5px 5px gray;
+  box-shadow: 0px 0px 8px 2px #BBB;
   margin: 9px;
 }

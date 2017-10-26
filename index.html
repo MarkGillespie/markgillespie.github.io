@@ -7,12 +7,10 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/navbar.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/slideshow.css" media="screen">
-    <script type="text/javascript" src="scripts/slideshow.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
 
-  <body onload="initialize_imgur()">
+  <body>
     <div class="wrapper" id="home">
       <div class="navbar">
         <div class="navbar_name">
@@ -24,6 +22,7 @@
           <!--<a href="#blender" class="navbar_link_vanishing"> <span class="navbar_item"> 3D Animation</span> </a>-->
           <a href="#work" class="navbar_link"> <span class="navbar_item"> Work Experience</span> </a>
           <a href="#education" class="navbar_link"> <span class="navbar_item"> Education</span> </a>
+          <a href="#talks" class="navbar_link_vanishing"> <span class="navbar_item"> Selected Talks Given</span> </a>
           <a href="Mark_Gillespie_CV.pdf" class="navbar_link"> <span class="navbar_item"> Resume</span> </a>
           <a href="#about" class="navbar_link_vanishing"> <span class="navbar_item"> About Me</span> </a>
         </div>
@@ -50,40 +49,59 @@
               </ul>
 
               <h3> Projects</h3>
-                <input id="toggle_DDG" type="checkbox" unchecked>
-                  <label for="toggle_DDG">Discrete Differential Geometry</label>
-                  <div id="expand_DDG">
-                    <p> Here are some interesting assignments that I implemented for a discrete differential geometry class in the fall of 2016.</p>
-                    <p> I computed the normal modes of the discrete Laplacian on the Stanford bunny. Here are the first 4.</p>
-                    <center>
-                      <img src="images/DDG/eigenfunction0.png" width="200px"/>
-                      <img src="images/DDG/eigenfunction1.png" width="200px"/><br/>
-                      <img src="images/DDG/eigenfunction2.png" width="200px"/>
-                      <img src="images/DDG/eigenfunction3.png" width="200px"/><br/>
-                    </center>
-                    <p> Using these normal modes, I numerically solved a Poisson equation to find the electric field induced by charges on the bunny's surface.</p>
-                    <center>
-                      <img src="images/DDG/poisson_solution.png" width="400px"/>
-                    </center>
+                <summary><h4>Magnetohydrodynamics (MHD) Simulation</h4></summar>
+                <details>
+                  <p>Over the summer of 2017, I worked on simulating MHD using discrete exterior calculus. Following <a href="https://arxiv.org/abs/1707.03227">this</a> paper by Kraus and Maj, I implemented a 2D MHD simulation in periodic domains. I then proved that the method conserves energy and cross-helicity, and I extended the method to domains with boundaries.</p>
+                  <p>Below are some results of the simulation. The magnetic field strength is visualized by a glowing effect. You can see the fluid carrying the magnetic field upwards, where it collides with the container's boundary and starts to flow sideways.</p>
+                  <center>
+                    <img src="images/MHD/plume10.jpg" width="20%"/>
+                    <img src="images/MHD/plume20.jpg" width="20%"/>
+                    <img src="images/MHD/plume30.jpg" width="20%"/>
+                  </center>
+                  <p>I implemented the algorithm in HoudiniFX, and used Houdini to render these images.</p>
+                </details>
 
-                    I also used the cotan Laplacian to perform mean curvature flow on surfaces. This creates surfaces with minimal surface area.
-                    <center>
-                      <img src="images/DDG/Soap_Film.png" width="400px"/>
-                    </center>
+                <summary><h4>Variational Integrators for Pendula</h4></summar>
+                <details>
+                  <p>In the winter of 2016, I implemented a variational integrator for multiple pendula as a final project for a graphics class. I used the method of Marsden and West described <a href="https://www.cambridge.org/core/journals/acta-numerica/article/discrete-mechanics-and-variational-integrators/C8F45478A9290DEC24E63BB7FBE3CEB5">here</a> (also available <a href="http://www.cds.caltech.edu/~marsden/bib/2001/09-MaWe2001/MaWe2001.pdf">here</a>) to simulate a physical system with constraints.</p>
+                  <center>
+                    <img src="images/pendulum.gif" max-width="80%"/>
+                  </center>
+                  Most of the work for this project was spent understanding the mathematical machinery that Marsden and West used to discretize classical mechanics. The algorithm was implemented in Mathematica.
+                </details>
 
-                    The largest project that I did in the class was computing smooth vector fields on surfaces using parallel transport via a trivial connection. I computed generators of the surface's homology using the tree-cotree algorithm. Then, I input the desired singularities and computed the Gaussian curvature on the surface. Using the Guassian curvature, I computed a trivial connection and then used the connection to transport the vector field across the surface.
-                    <center>
-                      <img src="images/DDG/bunny.png" width="400px"/>
-                      <img src="images/DDG/triple_torus.png" width="400px"/>
-                      <img src="images/DDG/furry_cat.png" width="400px"/>
-                    </center>
+                <summary><h4>Discrete Differential Geometry</h4></summary>
+                <details>
+                  <p> Here are some interesting assignments that I implemented for a discrete differential geometry class in the fall of 2016.</p>
+                  <p> I computed the normal modes of the discrete Laplacian on the Stanford bunny. Here are the first 4.</p>
+                  <center>
+                    <img src="images/DDG/eigenfunction0.png" width="200px"/>
+                    <img src="images/DDG/eigenfunction1.png" width="200px"/><br/>
+                    <img src="images/DDG/eigenfunction2.png" width="200px"/>
+                    <img src="images/DDG/eigenfunction3.png" width="200px"/><br/>
+                  </center>
+                  <p> Using these normal modes, I numerically solved a Poisson equation to find the electric field induced by charges on the bunny's surface.</p>
+                  <center>
+                    <img src="images/DDG/poisson_solution.png" width="400px"/>
+                  </center>
 
-                  </div>
-                  <input id="toggle_int" type="checkbox" unchecked>
-                  <label for="toggle_int">Interval Analysis</label>
-                  <div id="expand_int">
-                    <p>Recently, I've been working with Professor Alan Barr on using Interval Analysis to solve root-finding and minimization problems. Interval analysis is the technique of doing computations with intervals representing uncertainty instead of regular real numbers. This provided guaranteed bounds on the accuracy of your results. Our code is available on <a href="https://github.com/AlBarrCMS/interval-haskell">GitHub</a>.</p>
-                  </div>
+                  I also used the cotan Laplacian to perform mean curvature flow on surfaces. This creates surfaces with minimal surface area.
+                  <center>
+                    <img src="images/DDG/Soap_Film.png" width="400px"/>
+                  </center>
+
+                  The largest project that I did in the class was computing smooth vector fields on surfaces using parallel transport via a trivial connection. I computed generators of the surface's homology using the tree-cotree algorithm. Then, I input the desired singularities and computed the Gaussian curvature on the surface. Using the Guassian curvature, I computed a trivial connection and then used the connection to transport the vector field across the surface.
+                  <center>
+                    <img src="images/DDG/bunny.png" width="400px"/>
+                    <img src="images/DDG/triple_torus.png" width="400px"/>
+                    <img src="images/DDG/furry_cat.png" width="400px"/>
+                  </center>
+                </details>
+
+                <summary><h4>Interval Analysis</h4></summary>
+                <details>
+                  <p>Recently, I've been working with Professor Alan Barr on using Interval Analysis to solve root-finding and minimization problems. Interval analysis is the technique of doing computations with intervals representing uncertainty instead of regular real numbers. This provided guaranteed bounds on the accuracy of your results. Our code is available on <a href="https://github.com/AlBarrCMS/interval-haskell">GitHub</a>.</p>
+                </details>
               <hr />
             </div>
           </div>
@@ -263,6 +281,61 @@
               </table>
 
               <hr />
+            </div>
+          </div>
+
+          <div id="talks" class="section_link_spot"></div>
+          <div class="section_panel">
+            <div class="section_header"> Selected Talks Given </div>
+            <div class="section_text">
+              <table>
+                <tr>
+                  <td rowspan="3">Oct. 2017</td>
+                  <td><h4>2D Plasma Simulation via Discrete Exterior Calculus</h4></td>
+                  </tr>
+                <tr>
+                  <td>
+                    <em>Caltech Summer Research Seminar Day</em>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    15 minute presentation on the results of my summer research. Slides available <a href="Talks/2017_SURF_slides.pdf">here</a>.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td rowspan="3">Sept. 2017</td>
+                  <td><h4>Combinatorics and the Probabilistic Method</h4></td>
+                  </tr>
+                <tr>
+                  <td>
+                    <em>Westfield High School Seminar in College Mathematics</em>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    30 minute presentation to a high school math class. Gave an introduction to elementary combinatorics and presented some simple applications of the probabilistic method. Notes available <a href="Talks/Probabilistic_Method_Talk.pdf">here</a>.
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <td rowspan="3">Mar. 2017</td>
+                  <td><h4>Continuous and Discrete Mechanics for Variational Integrators</h4></td>
+                  </tr>
+                <tr>
+                  <td>
+                    <em>Caltech CS 177b</em>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    1.5 hour final presentation for a computer graphics class. Gave an overview of Hamiltonian/Lagrangian mechanics and how to discretize them to produce variational time integrators. Extended notes available <a href="Talks/Variational_Integrators.pdf">here</a>.
+                  </td>
+                </tr>
+              </table>
+
             </div>
           </div>
         </div>
