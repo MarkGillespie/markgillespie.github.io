@@ -138,14 +138,21 @@ div.panel {
   padding-right: 1em;
 }
 
+@media (max-width: 550px) {
+
+  body {
+    background-image: none;
+  }
+}
+
 @media (max-width: 800px) {
   #center_panel.panel {
     width: 100%;
+    float: right;
   }
 
   #right_panel.panel {
     width: 100%;
-    float: left;
   }
 
   div.header {
@@ -153,10 +160,6 @@ div.panel {
     padding-bottom: 2em;
     margin-left: -1px;
     text-align: center;
-  }
-
-  body {
-    background-image: none;
   }
 }
 
@@ -168,6 +171,7 @@ div.panel {
 
   #right_panel.panel {
     width: 30%;
+    float: right;
   }
 }
 
@@ -177,12 +181,19 @@ div.panel {
     height: 1em;
   }
 
+  #right_panel_spacer.panel{
+    width:10%;
+    height: 1em;
+    float: right;
+  }
+
   #center_panel.panel {
     width: 50%;
   }
 
   #right_panel.panel {
     width: 30%;
+    float: right;
   }
 }
 
