@@ -120,7 +120,7 @@ div.name_box {
 
 @media (max-width: 550px) {
   div.name_box {
-    margin-top: ;
+    margin-top: 1em;
     margin-bottom: 0; 
   }
 }
