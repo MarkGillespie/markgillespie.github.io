@@ -16,10 +16,13 @@ div.navbar_name {
 
   font-size: 1.8em;
   font-family: 'Roboto', sans-serif;
-  background-color: #354040;
   color: white;
 
   box-shadow: 0px 0px 2px 1px #999;
+
+  background-color: #ff9800;
+  padding-bottom: 0.2em;
+  border-bottom: solid 0.3em #ffab40;
 }
 
 @media (max-width: 550px) {
@@ -38,7 +41,7 @@ div.navbar_name {
   }
 
   div.navbar_name {
-    display:none; 
+    display:none;
   }
 }
 
@@ -85,12 +88,14 @@ span.navbar_item {
   padding-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  
+
   /*text-transform: uppercase;*/
   color: #777;
 }
 
 span.navbar_item:hover {
   color: #FFF;
-  background-color: #A7B3A5;
+  background-color: #ff9800;
+  padding-bottom: 0.6em;
+  border-bottom: solid 0.3em #ffab40;
 }

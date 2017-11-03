@@ -17,7 +17,7 @@ body {
   background-attachment: fixed;
   background-size: 100%;
 
-  background-color: #EAE3EA;
+  background-color: #EEF;
 }
 
 p {
@@ -48,9 +48,11 @@ div.section_header {
   font-size: 2em;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  background-color: #A7B3A5;
+  background-color: #673ab7;
   color: #FFF;
   padding: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: solid 0.5em #7c4dff;
 }
 
 /*text of a section*/
@@ -74,9 +76,11 @@ div.accent_header {
   font-size: 2em;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  background-color: #B56357;
+  background-color: #9c27b0;
   color: #FFF;
   padding: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: solid 0.5em #e040fb;
 }
 
 /*text of a section*/
@@ -112,10 +116,13 @@ div.name_box {
   text-align: center;
   font-size: 3em;
   font-family: 'Roboto', sans-serif;
-  background-color: #354040;
   color: white;
   display: inline-block;
   box-shadow: 0px 0px 8px 1px #999;
+
+  background-color: #e91e63;
+  padding-bottom: 0.2em;
+  border-bottom: solid 0.3em #ff4081;
 }
 
 @media (max-width: 550px) {
@@ -205,13 +212,13 @@ div.panel {
 }
 
 h3 {
-  color: #87A3A5;
+  color: #5680E9;
   font-size: 1.3em;
   margin-bottom: 5px;
 }
 
 h4 {
-  color: #87A3A5;
+  color: #5680E9;
   font-size: 1.1em;
   margin-top: 0;
   margin-bottom: 0;
