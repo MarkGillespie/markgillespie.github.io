@@ -9,13 +9,14 @@ div.navbar {
 div.navbar_name {
   height: 100%;
   float: left;
-  padding-top:    15px;
-  padding-bottom: 15px;
+  padding-top:    20px;
+  padding-bottom: 20px;
   padding-left:   10px;
   padding-right:  10px;
 
   font-size: 1.8em;
   font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
   color: white;
 
   box-shadow: 0px 0px 2px 1px #999;
@@ -75,7 +76,7 @@ div.navbar_buttons {
   text-align: center;
   overflow: none;
   float: right;
-  font-family: 'Roboto';
+  font-family: 'Nunito';
 }
 
 span.navbar_item {
@@ -90,12 +91,17 @@ span.navbar_item {
   padding-right: 10px;
 
   /*text-transform: uppercase;*/
-  color: #777;
+  color: #555;
 }
 
-span.navbar_item:hover {
-  color: #FFF;
-  background-color: #ff9800;
-  padding-bottom: 0.6em;
-  border-bottom: solid 0.3em #ffab40;
+/* Only apply hover effect when the user is using a mouse-like controller. Eliminate 
+ * sticky hover on mobile.
+ * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
+@media (hover:hover) {
+  span.navbar_item:hover {
+    color: #FFF;
+    background-color: #ff9800;
+    padding-bottom: 0.6em;
+    border-bottom: solid 0.3em #ffab40;
+  }
 }
