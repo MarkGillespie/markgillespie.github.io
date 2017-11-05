@@ -133,11 +133,6 @@ div.name_box {
     margin-top: 1em;
     margin-bottom: 1em; 
   }
-
-  div.header {
-    background-image: url("../images/random_walk.png");
-    background-size: 100%;
-  }
 }
 
 div.body {
