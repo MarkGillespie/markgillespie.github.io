@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 html {
@@ -130,13 +130,8 @@ div.name_box {
 
 @media (max-width: 550px) {
   div.name_box {
-    margin-top: 1em;
-    margin-bottom: 1em; 
-  }
-
-  div.header {
-    background-image: url("../images/random_walk.png");
-    background-size: 100%;
+    margin-top: 0.2em;
+    margin-bottom: 1em;
   }
 }
 
@@ -260,7 +255,7 @@ td {
   box-sizing: border-box;
 
   position: relative;
-  margin-top: -142px; 
+  margin-top: -142px;
   height: 142px;
 
   background-color: #354040;
@@ -271,7 +266,7 @@ td {
   clear:both;
 
   padding: 2em;
-} 
+}
 
 a.footer_email {
   color: #FFF;
