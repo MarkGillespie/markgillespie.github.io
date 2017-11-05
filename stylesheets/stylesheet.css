@@ -7,15 +7,18 @@ html {
 }
 
 body {
+  font-family: 'Nunito', sans-serif;
   padding: 0;
   margin: 0;
   height: 100%;
+}
 
-  font-family: 'Nunito', sans-serif;
+div.wrapper {
   background-image: url("../images/random_walk.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100%;
+  background-position-y: 4em;
 
   background-color: #EEF;
 }
@@ -66,7 +69,6 @@ div.section_text {
 /*text of a section*/
 div.section_panel {
   margin-bottom: 5em;
-  margin-top:1em;
   background-color: #FFF;
   box-shadow: 0px 0px 8px 1px #999;
 }
@@ -128,8 +130,13 @@ div.name_box {
 
 @media (max-width: 550px) {
   div.name_box {
-    margin-top: 0.25em;
-    margin-bottom: 0; 
+    margin-top: 1em;
+    margin-bottom: 1em; 
+  }
+
+  div.header {
+    background-image: url("../images/random_walk.png");
+    background-size: 100%;
   }
 }
 
@@ -147,8 +154,7 @@ div.panel {
 }
 
 @media (max-width: 550px) {
-
-  body {
+  div.wrapper {
     background-image: none;
   }
 }
@@ -164,8 +170,6 @@ div.panel {
   }
 
   div.header {
-    padding-top: 0em;
-    padding-bottom: 2em;
     margin-left: -1px;
     text-align: center;
   }
