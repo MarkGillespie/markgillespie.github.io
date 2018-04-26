@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<script src="drawing_tools.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+</head>
+
+<body>
+<div style="text-align:center;">
+<div class="canvas_container" style="position: relative; display: inline-block; width: 50%; box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);">
+<canvas id="canvas" style="overflow: hidden; display: block;"></canvas>
+</div>
+</div>
+
+<script type="text/javascript">
+let canvas = document.getElementById('canvas');
+let context = canvas.getContext('2d');
+
+
+// Start listening to resize events and
+// draw canvas.
+initialize();
+
+let big_font = 0.05;
+let small_font = 0.04;
+
+let ker_a   = new Node(1/4, 1/5, "ker a", big_font);
+let ker_b   = new Node(2/4, 1/5, "ker b", big_font);
+let ker_c   = new Node(3/4, 1/5, "ker c", big_font);
+
+let Otl = new Node(1/14,  2/5, "0", big_font);
+let A   = new Node(1/4,   2/5, "A", big_font);
+let B   = new Node(2/4,   2/5, "B", big_font);
+let C   = new Node(3/4,   2/5, "C", big_font);
+let Otr = new Node(13/14, 2/5, "0", big_font);
+let Obl = new Node(1/14,  3/5, "0", big_font);
+let Aa  = new Node(1/4,   3/5, "A'", big_font);
+let Bb  = new Node(2/4,   3/5, "B'", big_font);
+let Cc  = new Node(3/4,   3/5, "C'", big_font);
+let Obr = new Node(13/14, 3/5, "0", big_font);
+
+let coker_a   = new Node(1/4, 4/5, "coker a", big_font);
+let coker_b   = new Node(2/4, 4/5, "coker b", big_font);
+let coker_c   = new Node(3/4, 4/5, "coker c", big_font);
+
+let nodes = [ker_a, ker_b, ker_c, Otl, A, B, C, Otr, Obl, Aa, Bb, Cc, Obr, coker_a, coker_b, coker_c];
+
+let f  = new Arrow(A, B, "f");
+let g  = new Arrow(B, C, "g");
+let ff = new Arrow(Aa, Bb, "f'");
+let gg = new Arrow(Bb, Cc, "g'");
+let a  = new Arrow(A, Aa, "a");
+let b  = new Arrow(B, Bb, "b");
+let c  = new Arrow(C, Cc, "c");
+
+let ker_a_map = new Arrow(ker_a, A, "");
+let ker_b_map = new Arrow(ker_b, B, "");
+let ker_c_map = new Arrow(ker_c, C, "");
+
+let coker_a_map = new Arrow(Aa, coker_a, "");
+let coker_b_map = new Arrow(Bb, coker_b, "");
+let coker_c_map = new Arrow(Cc, coker_c, "");
+
+let ker_a_ker_b_map = new Arrow(ker_a, ker_b, "");
+let ker_b_ker_c_map = new Arrow(ker_b, ker_c, "");
+let coker_a_coker_b_map = new Arrow(coker_a, coker_b, "");
+let coker_b_coker_c_map = new Arrow(coker_b, coker_c, "");
+
+let arrows = [f, g, ff, gg, a, b, c, ker_a_map, ker_b_map, ker_c_map, coker_a_map, coker_b_map, coker_c_map];
+let snake_arrows = [ker_a_ker_b_map, ker_b_ker_c_map, coker_a_coker_b_map, coker_b_coker_c_map];
+
+let ker_a_path1 = new Path([ker_a, A, Aa, Bb], ["\u03B1", "\u03B1", "0"], new Color(0, 191, 255, 0.9));
+let ker_a_path2 = new Path([ker_a, A, B, Bb], ["\u03B1", "\u03B1", "f(\u03B1)"], new Color(0, 191, 255, 0.9));
+let paths = [ker_a_path1, ker_a_path2];
+
+let offset = 0.03;
+let radius = 0.02;
+
+let thin_line = 0.004;
+let thick_line = 0.015;
+
+let animated_arrows = [];
+let animated_paths = [ker_a_path1, ker_a_path2];
+let time = 0;
+
+function draw() {
+  time += 1;
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.textBaseline="middle";
+  context.textAlign="center";
+
+  for (let path of paths) {
+    path.render(canvas, context, thick_line);
+  }
+
+
+  for (let node of nodes) {
+    node.render(canvas, context, "#000", big_font);
+  }
+
+  render_arrow(canvas, context, Otl, A,   "", "#000", thin_line, small_font);
+  render_arrow(canvas, context, C,   Otr, "", "#000", thin_line, small_font);
+  render_arrow(canvas, context, Obl, Aa,  "", "#000", thin_line, small_font);
+  render_arrow(canvas, context, Cc,  Obr, "", "#000", thin_line, small_font);
+
+  for (let arrow of arrows) {
+    arrow.render(canvas, context, "#000", thin_line, small_font);
+  }
+
+  for (let arrow of snake_arrows) {
+    arrow.render(canvas, context, "#FF8C00" , thin_line, small_font);
+  }
+
+  // Animate arrows
+  for (let arrow of animated_arrows) {
+    arrow.render_animation(canvas, context, time, "rgba(255, 140, 0, 0.8)");
+  }
+
+  for (let path of animated_paths) {
+    path.render_animation(canvas, context, time, small_font);
+  }
+
+  window.requestAnimationFrame(draw);
+}
+
+window.requestAnimationFrame(draw);
+</script>
+
+
+<script>
+    let options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>
