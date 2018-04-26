@@ -9,14 +9,24 @@
 
 <body>
 <div style="text-align:center;">
-<div class="canvas_container" style="position: relative; display: inline-block; width: 50%; box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);">
+<div class="canvas_container" style="position: relative; display: inline-block; width: 80%; box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);">
 <canvas id="canvas" style="overflow: hidden; display: block;"></canvas>
+</div>
+<br/>
+<div style="width: 70%; box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); display: inline-block; margin: 1em; padding: 1em;" id="explanation">
+  An animated proof of the snake lemma. Click on orange arrow to see where it comes from, or click a module between orange arrows to see why our sequence is exact there.
 </div>
 </div>
 
 <script type="text/javascript">
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
+let explanation = document.getElementById('explanation');
+
+let path_color = new Color(0, 191, 255, 1);
+let alt_path_color = new Color(85, 26, 139, 1);
+let snake_arrow_color = new Color(255, 140, 0, 1);
+let selected_arrow_color = new Color(255, 166, 2, 1);
 
 
 // Start listening to resize events and
@@ -59,21 +69,45 @@ let ker_a_map = new Arrow(ker_a, A, "");
 let ker_b_map = new Arrow(ker_b, B, "");
 let ker_c_map = new Arrow(ker_c, C, "");
 
-let coker_a_map = new Arrow(Aa, coker_a, "");
-let coker_b_map = new Arrow(Bb, coker_b, "");
-let coker_c_map = new Arrow(Cc, coker_c, "");
+let coker_a_map = new Arrow(Aa, coker_a, "\u03C0");
+let coker_b_map = new Arrow(Bb, coker_b, "\u03C0");
+let coker_c_map = new Arrow(Cc, coker_c, "\u03C0");
 
-let ker_a_ker_b_map = new Arrow(ker_a, ker_b, "");
-let ker_b_ker_c_map = new Arrow(ker_b, ker_c, "");
-let coker_a_coker_b_map = new Arrow(coker_a, coker_b, "");
-let coker_b_coker_c_map = new Arrow(coker_b, coker_c, "");
+
+// Derivation of the map ker a -> ker b
+let ker_a_path1 = new Path([ker_a, A, Aa, Bb], ["\u03B1", "\u03B1", "0"], path_color);
+let ker_a_path2 = new Path([ker_a, A, B, Bb],  ["\u03B1", "\u03B1", "f(\u03B1)"], alt_path_color);
+
+let ker_a_ker_b_derivation = new Derivation([ker_a_path1, ker_a_path2], "Since $\\ker a$ is a submodule of A, we can apply $f$ to elements of $\\ker a$, sending them to $B$. We want to show that these elements actually wind up in $\\ker b$. To do so, we note that the diagram is commutative, so the two highlighted paths are equal as functions $\\ker a \\to B'$. Since $a$ is $0$ on all elements of $\\ker a$ by definition, we conclude that $b(f(\\alpha)) = 0$ for any $\\alpha \\in \\ker a$. This means that $f$ sends $\\ker a$ to $\\ker b$.");
+
+let ker_a_ker_b_map = new Arrow(ker_a, ker_b, "", ker_a_ker_b_derivation);
+
+
+// Derivation of the map ker b -> ker c
+let ker_b_path1 = new Path([ker_b, B, Bb, Cc], ["\u03B2", "\u03B2", "0"], path_color);
+let ker_b_path2 = new Path([ker_b, B, C, Cc],  ["\u03B2", "\u03B2", "g(\u03B2)"], alt_path_color);
+
+let ker_b_ker_c_derivation = new Derivation([ker_b_path1, ker_b_path2], "This is the same as the argument that $f$ induces a map $\\ker a \\to \\ker b$. Again, we see that because $\\ker b$ is a submodule of B, we can apply $g$ to elements of $\\ker b$, sending them to $C$. We want to show that these elements actually wind up in $\\ker c$. Again, we use commutativity of the diagram, noting that the two highlighted paths are equal as functions $\\ker b \\to C'$. Since $b$ is $0$ on all elements of $\\ker b$ by definition, we conclude that $c(g(\\beta)) = 0$ for any $\\beta \\in \\ker b$. This means that $g$ sends $\\ker b$ to $\\ker c$.");
+
+let ker_b_ker_c_map = new Arrow(ker_b, ker_c, "", ker_b_ker_c_derivation);
+
+
+// Derivation of the map coker a -> coker b
+let coker_a_path_1 = new Path([A, B,  Bb, coker_b], ["\u03B1", "f(\u03B1)", "b (f(\u03B1))"], path_color);
+let coker_a_path_2 = new Path([A, Aa, Bb, coker_b], ["\u03B1", "a(\u03B1)", ""], alt_path_color);
+let coker_a_coker_b_derivation = new Derivation([coker_a_path_1, coker_a_path_2], "Recall that $\\coker a$ is the quotient space $A' / \\im a$. We want to use $f'$ to find a map $\\coker a \\to \\coker b$. We have a natural projection $\\pi : B' \\to \\coker b$, so we can easily find a map $A' \\to \\coker b$ by taking $\\pi \\circ f'$. Now, we have to show that this descends to a map $\\coker a \\to \\coker b$. To do so, we need to show that $\\pi \\circ f'$ is $0$ on the image of $a$. As usual, we show this using commutativity of the diagram. The blue and purple paths must be equal, and the blue path is 0 because $\\pi \\circ b = 0$. Therefore, $\\pi \\circ f'$ is $0$ on the image of $a$, so we get an induced map $\\coker a \\to \\coker b$.");
+let coker_a_coker_b_map = new Arrow(coker_a, coker_b, "", coker_a_coker_b_derivation);
+
+
+// Derivation of the map coker b -> coker c
+let coker_b_path_1 = new Path([B,  C, Cc, coker_c], ["\u03B2", "g(\u03B2)", "c (g(\u03B2))"], path_color);
+let coker_b_path_2 = new Path([B, Bb, Cc, coker_c], ["\u03B2", "b(\u03B2)", ""], alt_path_color);
+let coker_b_coker_c_derivation = new Derivation([coker_b_path_1, coker_b_path_2], "This construction is essentially the same as the construction of the map $\\coker a \\to \\coker b$. We want to use $g'$ to find a map $\\coker b \\to \\coker c$. We have a natural projection $\\pi : C' \\to \\coker c$, so we can easily find a map $B' \\to \\coker c$ by taking $\\pi \\circ g'$. Now, we have to show that this descends to a map $\\coker b \\to \\coker c$. To do so, we need to show that $\\pi \\circ g'$ is $0$ on the image of $b$. As usual, we show this using commutativity of the diagram. The blue and purple paths must be equal, and the blue path is 0 because $\\pi \\circ b = c$. Therefore, $\\pi \\circ g'$ is $0$ on the image of $b$, so we get an induced map $\\coker b \\to \\coker c$.");
+let coker_b_coker_c_map = new Arrow(coker_b, coker_c, "", coker_b_coker_c_derivation);
 
 let arrows = [f, g, ff, gg, a, b, c, ker_a_map, ker_b_map, ker_c_map, coker_a_map, coker_b_map, coker_c_map];
 let snake_arrows = [ker_a_ker_b_map, ker_b_ker_c_map, coker_a_coker_b_map, coker_b_coker_c_map];
-
-let ker_a_path1 = new Path([ker_a, A, Aa, Bb], ["\u03B1", "\u03B1", "0"], new Color(0, 191, 255, 0.9));
-let ker_a_path2 = new Path([ker_a, A, B, Bb], ["\u03B1", "\u03B1", "f(\u03B1)"], new Color(0, 191, 255, 0.9));
-let paths = [ker_a_path1, ker_a_path2];
+let selected_arrow = null;
 
 let offset = 0.03;
 let radius = 0.02;
@@ -81,8 +115,6 @@ let radius = 0.02;
 let thin_line = 0.004;
 let thick_line = 0.015;
 
-let animated_arrows = [];
-let animated_paths = [ker_a_path1, ker_a_path2];
 let time = 0;
 
 function draw() {
@@ -91,13 +123,16 @@ function draw() {
   context.textBaseline="middle";
   context.textAlign="center";
 
-  for (let path of paths) {
-    path.render(canvas, context, thick_line);
-  }
-
-
   for (let node of nodes) {
     node.render(canvas, context, "#000", big_font);
+  }
+
+  if (selected_arrow) {
+    selected_arrow.derivation.paths.forEach(path => {
+      path.render(canvas, context);
+      path.render_animation(canvas, context, time, small_font);
+    });
+    selected_arrow.render(canvas, context, selected_arrow_color.color_string() , thick_line, small_font);
   }
 
   render_arrow(canvas, context, Otl, A,   "", "#000", thin_line, small_font);
@@ -105,42 +140,54 @@ function draw() {
   render_arrow(canvas, context, Obl, Aa,  "", "#000", thin_line, small_font);
   render_arrow(canvas, context, Cc,  Obr, "", "#000", thin_line, small_font);
 
-  for (let arrow of arrows) {
+  arrows.forEach(arrow => {
     arrow.render(canvas, context, "#000", thin_line, small_font);
-  }
+  });
 
-  for (let arrow of snake_arrows) {
-    arrow.render(canvas, context, "#FF8C00" , thin_line, small_font);
-  }
-
-  // Animate arrows
-  for (let arrow of animated_arrows) {
-    arrow.render_animation(canvas, context, time, "rgba(255, 140, 0, 0.8)");
-  }
-
-  for (let path of animated_paths) {
-    path.render_animation(canvas, context, time, small_font);
-  }
+  snake_arrows.forEach(arrow => {
+    arrow.render(canvas, context, snake_arrow_color.color_string() , thin_line, small_font);
+  });
 
   window.requestAnimationFrame(draw);
 }
 
+canvas.addEventListener('click', (e) => {
+  point = rel_mouse_coords(e, canvas);
+  let found_arrow = false;
+  snake_arrows.forEach(arrow => {
+    if (arrow.contains_point(point.x / canvas.width, point.y / canvas.height)) {
+      selected_arrow = arrow;
+      explanation.innerHTML = selected_arrow.derivation.text;
+      found_arrow = true;
+      time = 0;
+      renderMathInElement(explanation, options);
+    }
+  });
+
+  if (!found_arrow) {
+    selected_arrow = null;
+    explanation.innerHTML = "An animated proof of the snake lemma. Click on orange arrow to see where it comes from, or click a module between orange arrows to see why our sequence is exact there"
+
+  }
+});
+
 window.requestAnimationFrame(draw);
-</script>
 
+let options = new Object();
+options.delimiters =  [
+{left: "$", right: "$", display: false},
+{left: "$$", right: "$$", display: true},
+{left: "\\[", right: "\\]", display: true},
+{left: "\\(", right: "\\)", display: false}
+];
+options.macros = {
+"\\ket": "\\left| #1 \\right\\rangle",
+"\\ker": "\\text{ker}\\;",
+"\\coker": "\\text{coker}\\;",
+"\\im": "\\text{im}\\;"
+};
+renderMathInElement(document.body, options);
 
-<script>
-    let options = new Object();
-    options.delimiters =  [
-      {left: "$", right: "$", display: false},
-      {left: "$$", right: "$$", display: true},
-      {left: "\\[", right: "\\]", display: true},
-      {left: "\\(", right: "\\)", display: false}
-    ];
-    options.macros = {
-      "\\ket": "\\left| #1 \\right\\rangle"
-    };
-    renderMathInElement(document.body, options);
 </script>
 
 </body>

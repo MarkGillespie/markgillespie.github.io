@@ -38,13 +38,21 @@ class Node {
     context.font="italic " + Math.floor(this.font_size * canvas.width) + "px Serif";
     return(context.measureText('M').width / canvas.width);
   }
+
+  contains_point(canvas, context, x, y) {
+    let my_width = this.width(canvas, context);
+    let my_height = this.height(canvas, context);
+    return (Math.abs(x - this.x) <= 0.6 * my_width && Math.abs(y - this.y) <= 0.6 * my_height) 
+  }
 }
 
 class Arrow {
-  constructor(from, to, name) {
+  // Derivation is an optional parameter giving an explanation of where this arrow comes from
+  constructor(from, to, name, derivation) {
     this.from = from;
     this.to = to;
     this.name = name; 
+    this.derivation = derivation;
   }
 
   render(canvas, context, color, line_weight, font) {
@@ -81,8 +89,36 @@ class Arrow {
     context.fillStyle=grd;
     context.arc(canvas.width * pos_x, canvas.height * pos_y, r, 0, 2 * Math.PI);
     context.fill();
+  }
 
-    //console.log(Math.floor(canvas.width * pos_x))
+  contains_point(x, y) {
+    let my_center_x = 0.5 * (this.from.x + this.to.x);
+    let my_center_y = 0.5 * (this.from.y + this.to.y);
+
+    // Change to work in center-of-mass coordinates
+    x -= my_center_x;
+    y -= my_center_y;
+
+    // To check if the point is on our vector, we take the component of the point parallel to the vector
+    // the component perpendicular to our vector. If the parallel component is less than
+    // half the vector length, and the perpendicular component is pretty small,
+    // we say the point is on the vector
+
+    let my_sq_length = (this.to.x - this.from.x)**2 + (this.to.y - this.from.y)**2;
+
+    let dot_product = (this.to.x - this.from.x) * x + (this.to.y - this.from.y) * y;
+
+    // Projection of the point <x,y> onto the vector (to - from)
+    let parallel_projection_x = dot_product / my_sq_length * (this.to.x - this.from.x);
+    let parallel_projection_y = dot_product / my_sq_length * (this.to.y - this.from.y);
+
+    let perpendicular_projection_x = x - parallel_projection_x;
+    let perpendicular_projection_y = y - parallel_projection_y;
+
+    let parallel_sq_distance = (parallel_projection_x)**2 + (parallel_projection_y)**2;
+    let perpendicular_sq_distance = (perpendicular_projection_x)**2 + (perpendicular_projection_y)**2;
+
+    return (parallel_sq_distance <= 0.25 * my_sq_length && perpendicular_sq_distance <= 0.0015);
   }
 }
 
@@ -122,8 +158,8 @@ class Path {
     context.fillStyle = this.color.color_string();
     let label_width =  context.measureText(this.labels[index]).width / canvas.width;
     let label_height = context.measureText('M').width / canvas.width;
-    let text_pos_x = pos_x + (label_width + 0.5 * label_height)  * Math.cos(angle + Math.PI/2);
-    let text_pos_y = pos_y + 1.5 * label_height * Math.sin(angle + Math.PI/2);
+    let text_pos_x = pos_x + (0.5 * label_width + 0.75 * label_height)  * Math.cos(angle + Math.PI/2);
+    let text_pos_y = pos_y + 1.25 * label_height * Math.sin(angle + Math.PI/2);
     context.fillText(this.labels[index], canvas.width * text_pos_x, canvas.height * text_pos_y);
 
     let r = 0.03 * canvas.height;
@@ -144,6 +180,15 @@ class Path {
   }
 }
 
+// Represents the derivation of an arrow in the diagram. A Derivation consists of some paths in the
+// diagram, and explanatory text
+class Derivation {
+  constructor(paths, text) {
+    this.paths = paths;
+    this.text = text; 
+  }
+}
+
 function render_arrow(canvas, context, from, to, label, color, line_weight, font_size) {
   let angle = Math.atan2(to.y - from.y, to.x - from.x);
 
@@ -157,6 +202,7 @@ function render_arrow(canvas, context, from, to, label, color, line_weight, font
   context.font =  "italic " + Math.floor(small_font * canvas.width) + "px Serif";
   context.lineWidth = Math.max(Math.floor(line_weight * canvas.width), 1);
   context.strokeStyle = color;
+  context.fillStyle = color;
   context.moveTo(canvas.width * offset_from_x, canvas.height * offset_from_y);
   context.lineTo(canvas.width * offset_to_x,   canvas.height * offset_to_y);
 
@@ -199,4 +245,24 @@ function resize_canvas() {
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.width;
   redraw();
+}
+
+// Returns the coordinates of a mouse event in canvas space
+// https://stackoverflow.com/questions/55677/how-do-i-get-the-coordinates-of-a-mouse-click-on-a-canvas-element
+function rel_mouse_coords(event, canvas){
+    var total_offset_x = 0;
+    var total_offset_y = 0;
+    var canvas_x = 0;
+    var canvas_y = 0;
+    var current_element = canvas;
+
+    do {
+        total_offset_x += current_element.offsetLeft - current_element.scrollLeft;
+        total_offset_y += current_element.offsetTop  - current_element.scrollTop;
+    } while(current_element = current_element.offsetParent)
+
+    canvas_x = event.pageX - total_offset_x;
+    canvas_y = event.pageY - total_offset_y;
+
+    return {x:canvas_x, y:canvas_y}
 }
