@@ -16,26 +16,29 @@ class Color {
 }
 
 class Node {
-  constructor(x, y, name, font_size) {
+  // Derivation is an optional parameter giving an explanation of why
+  // our sequence is exact at this node 
+  constructor(x, y, name, font_size, derivation) {
     this.x = x;
     this.y = y;
     this.name = name;
-    this.font_size = font_size
+    this.font_size = font_size;
+    this.derivation = derivation;
   }
 
   render(canvas, context, color) {
     context.fillStyle = color;
-    context.font="italic " + Math.floor(this.font_size * canvas.width) + "px Serif";
+    context.font = "italic " + Math.floor(this.font_size * canvas.width) + "px Serif";
     context.fillText(this.name, canvas.width * this.x, canvas.height * this.y);
   }
 
   width(canvas, context) {
-    context.font="italic " + Math.floor(this.font_size * canvas.width) + "px Serif";
+    context.font = "italic " + Math.floor(this.font_size * canvas.width) + "px Serif";
     return(context.measureText(this.name).width / canvas.width);
   }
 
   height(canvas, context) {
-    context.font="italic " + Math.floor(this.font_size * canvas.width) + "px Serif";
+    context.font = "italic " + Math.floor(this.font_size * canvas.width) + "px Serif";
     return(context.measureText('M').width / canvas.width);
   }
 
@@ -44,6 +47,7 @@ class Node {
     let my_height = this.height(canvas, context);
     return (Math.abs(x - this.x) <= 0.6 * my_width && Math.abs(y - this.y) <= 0.6 * my_height) 
   }
+
 }
 
 class Arrow {
@@ -118,7 +122,12 @@ class Arrow {
     let parallel_sq_distance = (parallel_projection_x)**2 + (parallel_projection_y)**2;
     let perpendicular_sq_distance = (perpendicular_projection_x)**2 + (perpendicular_projection_y)**2;
 
-    return (parallel_sq_distance <= 0.25 * my_sq_length && perpendicular_sq_distance <= 0.0015);
+    // Note on magic numbers: 0.0625 is 1/16 = (1/4)^2. my_sq_length is the squared length from the node 'from' to
+    // the node 'to'. That's longer than the actual arrow, since the arrow has padding on the sides. So I just
+    // made the arrow target take up half this space. Since we measure distances from the center of the arrow,
+    // that means the constant should be (1/4)^2.
+    // The second number is just made up. It seems to behave nicely. 
+    return (parallel_sq_distance <= 0.0625 * my_sq_length && perpendicular_sq_distance <= 0.0015);
   }
 }
 
