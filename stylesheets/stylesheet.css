@@ -22,7 +22,8 @@ body {
   top: 0;
   z-index: -1;
 
-  background-image: url("../images/random_walk-fs8.png");
+  /*background-image: url("../images/random_walk-fs8.png");*/
+  background-image: url("../images/triangulated_torus.svg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position-y: 4em;
@@ -124,8 +125,8 @@ div.header {
 }
 
 div.name_box {
-  margin-top: 4em;
-  margin-bottom: 2em;
+  margin-top: 30vw;
+  margin-bottom: 10vw;
   padding: 0.5em;
   text-align: center;
   font-size: 3em;
@@ -161,8 +162,8 @@ div.panel {
 }
 
 @media (max-width: 550px) {
-  div.wrapper {
-    background-image: none;
+  #background_image {
+    opacity: 0 !important;
   }
 }
 

@@ -5,7 +5,7 @@
     <title>Mark Gillespie</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,500|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
     <link href="lambda.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
     <script type="text/javascript">
       window.onload = function() {
@@ -31,7 +31,7 @@
       </div>
       <div class="navbar_buttons">
         <!--<a href="#home" class="navbar_link_vanishing"> <span class="navbar_item"> Home </span> </a>-->
-        <a href="#programming" class="navbar_link"> <span class="navbar_item"> Programming</span> </a>
+        <a href="#research" class="navbar_link"> <span class="navbar_item"> Research</span> </a>
         <!--<a href="#blender" class="navbar_link_vanishing"> <span class="navbar_item"> 3D Animation</span> </a>-->
         <a href="#work" class="navbar_link"> <span class="navbar_item"> Work Experience</span> </a>
         <a href="#education" class="navbar_link"> <span class="navbar_item"> Education</span> </a>
@@ -53,14 +53,14 @@
           <div class="section_panel">
             <div class="accent_header"> About Me </div>
             <div class="section_text">
-              <p> Hi, I'm Mark. I'm a senior undergrad in math and computer science at Caltech. My research interests are in computer graphics and physical simulation. Right now, I am interested in variational integrators and the use of Discrete Exterior Calculus to discretize dynamical systems.
+              <p> Hi, I'm Mark. I'm a first year Computer Science PhD student at Carnegie Mellon University, advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. My research interests are in computer graphics and physical simulation. At the moment, I'm exploring connections between <a href="PennerCoordinates">hyperbolic geometry</a> and <a href="https://arxiv.org/abs/1707.06848">discrete conformal maps</a>. In the past, I have looked at in variational integrators and the use of Discrete Exterior Calculus to discretize dynamical systems.
               </p>
               <p> Here is <a href="http://www.positivesemidefinitely.com/">a blog</a> that I write with some friends. And here is <a href="Mark_Gillespie_CV.pdf">my CV</a>.
               </p>
               <p>
                 In my spare time, I like to fold origami. You can find some of my models <a href="Origami">here</a>.
               </p>
-              <p> Email: <a href="mailto:mgillesp@caltech.edu" target="_top">mgillesp@caltech.edu</a> </p>
+              Email: <a href="mailto:mgillesp@andrew.cmu.edu" target="_top">mgillesp@andrew.cmu.edu</a>
               <hr />
             </div>
           </div>
@@ -69,23 +69,23 @@
 
         <div id="center_panel" class="panel">
 
-          <div id="programming" class="section_link_spot"></div>
+          <div id="research" class="section_link_spot"></div>
           <div class="section_panel">
-            <div class="section_header"> Programming Experience </div>
+            <div class="section_header"> Research Experience </div>
             <div class="section_text">
-              <h3> Languages: </h3>
-              <ul class="pointless">
-                <li> C, C++ </li>
-                <li> Haskell </li>
-                <li> Mathematica </li>
-                <li> Matlab </li>
-                <li> Java </li>
-                <li> Python </li>
-              </ul>
+              <!--<h3> Languages: </h3>-->
+              <!--<ul class="pointless">-->
+                <!--<li> C, C++ </li>-->
+                <!--<li> Haskell </li>-->
+                <!--<li> Mathematica </li>-->
+                <!--<li> Matlab </li>-->
+                <!--<li> Java </li>-->
+                <!--<li> Python </li>-->
+              <!--</ul>-->
 
-              <h3> Projects</h3>
-                <summary><h4>Magnetohydrodynamics (MHD) Simulation</h4></summar>
-                <details>
+              <!--<h3> Projects</h3>-->
+                <summary><h3>Magnetohydrodynamics (MHD) Simulation</h3></summary>
+                <details open>
                   <p>Over the summer of 2017, I worked on simulating MHD using discrete exterior calculus. Following <a href="https://arxiv.org/abs/1707.03227">this</a> paper by Kraus and Maj, I implemented a 2D MHD simulation in periodic domains. I then proved that the method conserves energy and cross-helicity, and I extended the method to domains with boundaries.</p>
                   <p>Below are some results of the simulation. The magnetic field strength is visualized by a glowing effect. You can see the fluid carrying the magnetic field upwards, where it collides with the container's boundary and starts to flow sideways.</p>
                   <center>
@@ -96,7 +96,7 @@
                   <p>I implemented the algorithm in HoudiniFX, and used Houdini to render these images.</p>
                 </details>
 
-                <summary><h4>Variational Integrators for Pendula</h4></summar>
+                <summary><h3>Variational Integrators for Pendula</h3></summary>
                 <details>
                   <p>In the winter of 2016, I implemented a variational integrator for multiple pendula as a final project for a graphics class. I used the method of Marsden and West described <a href="https://www.cambridge.org/core/journals/acta-numerica/article/discrete-mechanics-and-variational-integrators/C8F45478A9290DEC24E63BB7FBE3CEB5">here</a> (also available <a href="http://www.cds.caltech.edu/~marsden/bib/2001/09-MaWe2001/MaWe2001.pdf">here</a>) to simulate a physical system with constraints.</p>
                   <center>
@@ -105,7 +105,7 @@
                   Most of the work for this project was spent understanding the mathematical machinery that Marsden and West used to discretize classical mechanics. The algorithm was implemented in Mathematica.
                 </details>
 
-                <summary><h4>Discrete Differential Geometry</h4></summary>
+                <summary><h3>Discrete Differential Geometry</h3></summary>
                 <details>
                   <p> Here are some interesting assignments that I implemented for a discrete differential geometry class in the fall of 2016.</p>
                   <p> I computed the normal modes of the discrete Laplacian on the Stanford bunny. Here are the first 4.</p>
@@ -133,7 +133,7 @@
                   </center>
                 </details>
 
-                <summary><h4>Interval Analysis</h4></summary>
+                <summary><h3>Interval Analysis</h3></summary>
                 <details>
                   <p>Recently, I've been working with Professor Alan Barr on using Interval Analysis to solve root-finding and minimization problems. Interval analysis is the technique of doing computations with intervals representing uncertainty instead of regular real numbers. This provided guaranteed bounds on the accuracy of your results. Our code is available on <a href="https://github.com/AlBarrCMS/interval-haskell">GitHub</a>.</p>
                 </details>
@@ -222,6 +222,12 @@
             <div class="section_text">
             <h3>Schools</h3>
               <dl>
+                <dt><h4>Carnegie Mellon University</h4></dt>
+                <dd> 2018-present
+                  <ul class="pointless">
+                    <li> PhD student in the Computer Science Department </li>
+                  </ul>
+                </dd>
                 <dt><h4>California Institute of Technology</h4></dt>
                 <dd> 2014-2018
                   <ul class="pointless">
@@ -381,7 +387,7 @@
     <div class="footer">
       <a href="mailto:mgillesp@caltech.edu" target="_top" class="footer_email">mgillesp@caltech.edu</a>
       <hr />
-      Made by Mark Gillespie 2018
+      Made by Mark Gillespie 2019
     </div>
   </body>
 </html>
