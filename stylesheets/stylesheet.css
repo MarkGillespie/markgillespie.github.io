@@ -8,6 +8,7 @@ html {
 
 body {
   font-family: 'Nunito', sans-serif;
+  text-align: justify;
   padding: 0;
   margin: 0;
   height: 100%;
@@ -268,12 +269,7 @@ table {
  */
 td {
   vertical-align:top;
-  text-align: left;
-}
-
-#classes td:first-child {
-  text-align: right;
-  white-space: nowrap;
+  text-align: justify;
 }
 
 .footer {
