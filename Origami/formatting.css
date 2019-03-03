@@ -59,6 +59,7 @@ div.show_all_models {
 	background: #F4F4F4;
         display: flex;
         flex-direction: row;
+        align-items: baseline;
 
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
 }
