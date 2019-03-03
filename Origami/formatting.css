@@ -48,9 +48,19 @@ div.footer {
 div.content_wrapper {
 	min-height: 100%;
 	margin: 0;
-	padding-bottom: 2.5em; /* make space for footer */
 	position: relative;
         display: flex;
+}
+
+div.show_all_models {
+	max-width: 1500px;
+	margin: auto; /* centers div */
+	min-height: 100vh;
+	background: #F4F4F4;
+        display: flex;
+        flex-direction: row;
+
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
 }
 
 div.main_area {
@@ -110,15 +120,15 @@ div.model_details {
 	font-weight: 400;
 }
 
-div.main_area div.model_display {
-	width: 30%;
-	margin: 1.4%;
+div.show_all_models div.model_display {
+	width: 30vh;
+        margin: 5px;
 	display: inline-block;
 	vertical-align: bottom;
 }
 
 @media only screen and (max-width: 500px) {
-	div.main_area div.model_display {
+	div.show_all_models div.model_display {
 		width: 45%;
 		margin: 2%;
 		display: inline-block;
@@ -127,7 +137,7 @@ div.main_area div.model_display {
 }
 
 @media only screen and (max-width: 400px) {
-	div.main_area div.model_display {
+	div. div.model_display {
 		width: 95%;
 		margin: 2.5%;
 		display: inline-block;
