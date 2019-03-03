@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
-    <link href="lambda.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
     <script type="text/javascript">
       window.onload = function() {
         document.getElementById("background_image").style.opacity = 1.0;
@@ -26,18 +26,17 @@
   <body>
     <div id="background_image"></div>
     <div class="navbar">
-      <div class="navbar_name">
-        Mark Gillespie
+      <div class="navbar_icon">
+          <img src="images/plain_hyperboloid_model.svg" alt="">
       </div>
       <div class="navbar_buttons">
-        <!--<a href="#home" class="navbar_link_vanishing"> <span class="navbar_item"> Home </span> </a>-->
-        <a href="#research" class="navbar_link"> <span class="navbar_item"> Research</span> </a>
-        <!--<a href="#blender" class="navbar_link_vanishing"> <span class="navbar_item"> 3D Animation</span> </a>-->
-        <a href="#work" class="navbar_link"> <span class="navbar_item"> Work Experience</span> </a>
-        <a href="#education" class="navbar_link"> <span class="navbar_item"> Education</span> </a>
-        <a href="#talks" class="navbar_link_vanishing"> <span class="navbar_item"> Selected Talks Given</span> </a>
-        <a href="Mark_Gillespie_CV.pdf" class="navbar_link"> <span class="navbar_item">CV</span> </a>
-        <a href="#about" class="navbar_link_vanishing"> <span class="navbar_item"> About Me</span> </a>
+        <a href="#research" class="navbar_link"><span class="navbar_item">Research</span></a>
+        <a href="#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a>
+        <a href="#awards" class="navbar_link_vanishing"><span class="navbar_item">Awards</span></a>
+        <a href="#education" class="navbar_link"><span class="navbar_item">Education</span></a>
+        <a href="#talks" class="navbar_link_vanishing"><span class="navbar_item">Selected Talks Given</span></a>
+        <a href="Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
+        <a href="#about" class="navbar_link_vanishing"><span class="navbar_item">About Me</span></a>
       </div>
     </div>
 
@@ -110,26 +109,26 @@
                   <p> Here are some interesting assignments that I implemented for a discrete differential geometry class in the fall of 2016.</p>
                   <p> I computed the normal modes of the discrete Laplacian on the Stanford bunny. Here are the first 4.</p>
                   <center>
-                    <img data-src="images/DDG/eigenfunction0.png" width="200px"/>
-                    <img data-src="images/DDG/eigenfunction1.png" width="200px"/><br/>
-                    <img data-src="images/DDG/eigenfunction2.png" width="200px"/>
-                    <img data-src="images/DDG/eigenfunction3.png" width="200px"/><br/>
+                    <img data-src="images/DDG/eigenfunction0.png" width="200"/>
+                    <img data-src="images/DDG/eigenfunction1.png" width="200"/><br/>
+                    <img data-src="images/DDG/eigenfunction2.png" width="200"/>
+                    <img data-src="images/DDG/eigenfunction3.png" width="200"/><br/>
                   </center>
                   <p> Using these normal modes, I numerically solved a Poisson equation to find the electric field induced by charges on the bunny's surface.</p>
                   <center>
-                    <img data-src="images/DDG/poisson_solution.png" width="400px"/>
+                    <img data-src="images/DDG/poisson_solution.png" width="400"/>
                   </center>
 
                   I also used the cotan Laplacian to perform mean curvature flow on surfaces. This creates surfaces with minimal surface area.
                   <center>
-                    <img data-src="images/DDG/Soap_Film.png" width="400px"/>
+                    <img data-src="images/DDG/Soap_Film.png" width="400"/>
                   </center>
 
                   The largest project that I did in the class was computing smooth vector fields on surfaces using parallel transport via a trivial connection. I computed generators of the surface's homology using the tree-cotree algorithm. Then, I input the desired singularities and computed the Gaussian curvature on the surface. Using the Guassian curvature, I computed a trivial connection and then used the connection to transport the vector field across the surface.
                   <center>
-                    <img data-src="images/DDG/bunny.png" width="400px"/>
-                    <img data-src="images/DDG/triple_torus.png" width="400px"/>
-                    <img data-src="images/DDG/furry_cat.png" width="400px"/>
+                    <img data-src="images/DDG/bunny.png" width="400"/>
+                    <img data-src="images/DDG/triple_torus.png" width="400"/>
+                    <img data-src="images/DDG/furry_cat.png" width="400"/>
                   </center>
                 </details>
 
@@ -141,14 +140,14 @@
             </div>
           </div>
 
-          <div id="work" class="section_link_spot"></div>
+          <div id="teaching" class="section_link_spot"></div>
           <div class="section_panel">
-            <div class="section_header"> Work Experience </div>
+            <div class="section_header">Teaching Experience </div>
             <div class="section_text">
               <table>
                 <tr>
-                  <td rowspan="2">Fall 2017</td>
-                  <td><h4>Teaching Assistant for CS 171, Introduction to Computer Graphics (Caltech)</h4></td>
+                  <td rowspan="2">Spring 2019</td>
+                  <td><h4>Teaching Assistant for CS 15-458/858: Discrete Differential Geometry</h4></td>
                 </tr>
                 <tr>
                   <td>
@@ -156,41 +155,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td rowspan="2">Summer 2017</td>
-                  <td><h4>Arthur R. Adams Undergraduate Researcher (Caltech)</h4></td>
+                  <td rowspan="2">Fall 2017</td>
+                  <td><h4>Teaching Assistant for CS 171: Introduction to Computer Graphics (Caltech)</h4></td>
                 </tr>
                 <tr>
                   <td>
-                    Under Professor Peter Schroeder, implemented an energy-preserving integrator for 2D MHD on grids and proved its conservation properties
-                    <ul>
-                      <li>Analyzed conservation behavior of the algorithm using discrete differential geometry</li>
-                      <li>Implemented algorithm in Houdini</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td rowspan="2">Summer 2016</td>
-                  <td><h4>Arthur R. Adams Undergraduate Researcher (Caltech)</h4></td>
-                </tr>
-                <tr>
-                  <td>
-                    Under Professor Mathieu Desbrun, developed a new algorithm for computing polymer conformation using dimensionality reduction techniques.
-                    <ul>
-                      <li>Implemented algorithm in C++</li>
-                      <li>Experimented with applying the algorithm to point cloud denoising</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td rowspan="2">Jan. 2016 - 2017</td>
-                  <td><h4>Undergraduate Researcher (Caltech)</h4></td>
-                </tr>
-                <tr>
-                  <td>Under Professor Alan Barr, explored applications of interval analysis to root-finding and solving differential equations
-                    <ul>
-                      <li>Implemented interval analysis library in Haskell</li>
-                      <li>Implemented graphical viewer for interval root-finding and minimization algorithms</li>
-                    </ul>
+                    Under Professor Alan Barr, graded problem sets, held weekly office hours, delivered recitation lectures<br/><br/>
                   </td>
                 </tr>
                 <tr>
@@ -202,18 +172,41 @@
                     I graded problem sets every few weeks and held weekly office hours.<br/><br/>
                   </td>
                 </tr>
-                <tr>
-                  <td rowspan="2">Summer 2015 </td>
-                  <td><h4>Software Engineering Intern (Google)</h4></td>
-                </tr>
-                <tr>
-                  <td>
-                    I prototyped a new credit card information input interface for an Android library. I wrote code in Java.
-                  </td>
-                </tr>
               </table>
               <hr />
             </div>
+          </div>
+
+          <div id="awards" class="section_link_spot"></div>
+          <div class="section_panel">
+            <div class="section_header">Awards </div>
+            <div class="section_text">
+              <table>
+                <tr>
+                  <td rowspan="2">2017</td>
+                  <td><h4>SIGGRAPH ACM Turing Award Celebration Grant</h4></td>
+                </tr>
+                <tr><td>
+                        I was one of 10 students sponsored by SIGGRAPH toattend the ACM Turing Award Celebration.
+                </td></tr>
+
+                <tr>
+                  <td rowspan="2">2017, 2016</td>
+                  <td><h4>Arthur R. Adams SURF Fellowship</h4></td>
+                </tr>
+                <tr><td>
+                        Fellowship to fund my summer research.
+                </td></tr>
+
+                <tr>
+                  <td rowspan="2">2016</td>
+                  <td><h4>William Lowell Putnam Mathematics Competition</h4></td>
+                </tr>
+                <tr><td>
+                        31 points (rank: 365/3214)
+                </td></tr>
+            </table>
+          </div>
           </div>
 
           <div id="education" class="section_link_spot"></div>
@@ -222,13 +215,13 @@
             <div class="section_text">
             <h3>Schools</h3>
               <dl>
-                <dt><h4>Carnegie Mellon University</h4></dt>
+              <dt>Carnegie Mellon University</dt>
                 <dd> 2018-present
                   <ul class="pointless">
                     <li> PhD student in the Computer Science Department </li>
                   </ul>
                 </dd>
-                <dt><h4>California Institute of Technology</h4></dt>
+                <dt>California Institute of Technology</dt>
                 <dd> 2014-2018
                   <ul class="pointless">
                     <li> Majors: Computer Science, Mathematics </li>
@@ -236,90 +229,6 @@
                   </ul>
                 </dd>
               </dl>
-            <h3>Selected Classes Taken</h3>
-              <table id="classes">
-                <tr>
-                  <td>CS 177ab</td>
-                  <td><h4>Discrete Differential Geometry</h4></td>
-                  </tr>
-                <tr>
-                  <td />
-                    <td>discrete study of: differential forms, deRham cohomology, Poisson problems, variational mechanics</td>
-                </tr>
-
-                <tr>
-                  <td>CS 176</td>
-                  <td><h4>Introduction to Computer Graphics Research</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>geometry processing, data visualization, vector fields and flows</td>
-                </tr>
-
-                <tr>
-                  <td>CS 171</td>
-                  <td><h4>Introduction to Computer Graphics Laboratory</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>shaders, geometry processing, physical simulation, ray tracing</td>
-                </tr>
-
-                <tr>
-                  <td>Ma 109bc</td>
-                  <td><h4>Introduction to Geometry and Topology</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>manifolds, vector fields, Gauss-Bonnet theorem, geodesics, differential forms</td>
-                </tr>
-
-                <tr>
-                  <td>Ma 151a</td>
-                  <td><h4>Algebraic Topology</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>fundamental groups, covering spaces, homology</td>
-                </tr>
-
-                <tr>
-                  <td>CS 150</td>
-                  <td><h4>Probability and Algorithms</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>analysis of probabilistic algorithms, the probabilistic method</td>
-                </tr>
-
-                <tr>
-                  <td>CS 139</td>
-                  <td><h4>Analysis and Design of Algorithms</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>streaming algorithms, experts algorithm, SDPs, spectral graph theory</td>
-                </tr>
-
-                <tr>
-                  <td>CS 151</td>
-                  <td><h4>Complexity Theory</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>nondeterminism, nonuniform circuits, randomized algorithms, polynomial hierarchy, interactive proofs, approximation</td>
-                </tr>
-
-                <tr>
-                  <td>Ma 120a</td>
-                  <td><h4>Abstract Algebra</h4></td>
-                </tr>
-                <tr>
-                  <td/>
-                  <td>graduate course in commutative algebra</td>
-                </tr>
-              </table>
-
               <hr />
             </div>
           </div>
@@ -385,7 +294,7 @@
 
     </div>
     <div class="footer">
-      <a href="mailto:mgillesp@caltech.edu" target="_top" class="footer_email">mgillesp@caltech.edu</a>
+      <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
       <hr />
       Made by Mark Gillespie 2019
     </div>
