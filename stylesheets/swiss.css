@@ -194,6 +194,7 @@ h3 {
     line-height: 1;
     margin-top: 0;
     margin-bottom: 0;
+    text-align: left;
 }
 
 h4 {
@@ -383,6 +384,12 @@ div.navbar_buttons {
   overflow: hidden;
 }
 
+.name {
+  display: inline-block;
+  max-width: 5em;
+  margin-left: 0.25em;
+}
+
 @media (max-width: 970px) {
   .name_box {
       font-size: 6em;
@@ -397,10 +404,24 @@ div.navbar_buttons {
   }
 }
 
-.name {
-  display: inline-block;
-  max-width: 5em;
-  margin-left: 0.25em;
+@media (max-width: 450px) {
+    .header {
+        width: 100vw;
+        overflow: hidden; 
+    }
+        
+    .name_box {
+        font-size: 3em;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .body {
+        width: 100vw; 
+    }
+
+    h3 {
+        font-size: 2em; 
+    }
 }
 
 .wrapper {
