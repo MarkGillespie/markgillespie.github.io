@@ -265,27 +265,6 @@ div.navbar {
     display: none;
 }
 
-@media (max-width: 550px) {
-  div.navbar {
-    display: none;
-  }
-}
-
-@media (min-width: 550px) and (max-width: 1100px) {
-  div.navbar {
-    overflow: hidden;
-    z-index: 2;
-    font-size: 0.9em;
-  }
-}
-
-@media (min-width: 1100px) {
-  div.navbar {
-    overflow: hidden;
-    z-index: 2;
-  }
-}
-
 
 a.navbar_link, a.navbar_link_vanishing {
   text-decoration: none;
@@ -326,6 +305,32 @@ div.navbar_buttons {
   color: #333;
 }
 
+@media (max-width: 450px) {
+    .navbar_item {
+        padding-left:  5px;
+        padding-right: 5px;
+        overflow: hidden;
+        z-index: 2;
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 450px) and (max-width: 1100px) {
+  div.navbar {
+    overflow: hidden;
+    z-index: 2;
+    font-size: 0.9em;
+  }
+}
+
+@media (min-width: 1100px) {
+  div.navbar {
+    overflow: hidden;
+    z-index: 2;
+  }
+}
+
+
 /* Only apply hover effect when the user is using a mouse-like controller. Eliminate
  * sticky hover on mobile.
  * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
@@ -353,8 +358,8 @@ div.navbar_buttons {
 }
 
 #header_img {
-  width:  1.5em;
-  height: 1.5em;
+  width:  2em;
+  height: 2em;
   border-radius: 1em;
   float: left;
 
@@ -373,7 +378,6 @@ div.navbar_buttons {
 }
 
 .name_box {
-  text-align: center;
   font-size: 8em;
   font-family: 'Helvetica', sans-serif;
   font-weight: 800;
@@ -382,12 +386,14 @@ div.navbar_buttons {
   text-align: left;
   line-height: 0.85;
   overflow: hidden;
+  margin-bottom: 15px;
 }
 
 .name {
-  display: inline-block;
-  max-width: 5em;
-  margin-left: 0.25em;
+    margin-top: 0.25em;
+    display: inline-block;
+    max-width: 5em;
+    margin-left: 0.25em;
 }
 
 @media (max-width: 970px) {
@@ -397,23 +403,38 @@ div.navbar_buttons {
 }
 
 @media (max-width: 660px) {
-  .name_box {
-      font-size: 4em;
-      padding-top: 15px;
-      padding-bottom: 15px;
-  }
-}
-
-@media (max-width: 450px) {
+    .name_box {
+        font-size: 4em;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+    }
+    #header_img {
+        width:  60vw;
+        height: 60vw;
+        max-width: 250px;
+        max-height: 250px;
+        border-radius: 30vw;
+        display: inline-block;
+        float: none;
+    }
     .header {
         width: 100vw;
         overflow: hidden;
     }
 
+    .name {
+        margin-top: 0;
+        max-width: 100vw;
+        font-weight: 300;
+        padding-top: 0.5em;
+    }
+
+}
+
+@media (max-width: 450px) {
     .name_box {
         font-size: 3em;
-        padding-top: 15px;
-        padding-bottom: 15px;
     }
     .body {
         width: 100vw;
@@ -421,10 +442,12 @@ div.navbar_buttons {
 
     h3 {
         font-size: 2em;
+        font-weight: 400;
     }
 
     h4 {
         text-align: left;
+        font-weight: 400;
     }
 }
 
