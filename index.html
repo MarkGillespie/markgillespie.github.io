@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Mark Gillespie</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/swiss.css" media="screen">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
     <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
     <script type="text/javascript">
@@ -25,6 +25,7 @@
 
   <body>
     <div id="background_image"></div>
+    <div class="page-content">
     <div class="navbar">
       <div class="navbar_icon">
           <img src="images/plain_hyperboloid_model.svg" alt="">
@@ -43,7 +44,12 @@
     <div class="wrapper" id="home">
 
       <div class="header">
-        <div class="name_box">Mark Gillespie</div>
+        <div class="name_box">
+            <div id="header_img" style="opacity: 1;"></div>
+            <div class="name">
+                Mark Gillespie
+            </div>
+        </div>
       </div>
 
       <div class="body">
@@ -99,7 +105,7 @@
                 <details>
                   <p>In the winter of 2016, I implemented a variational integrator for multiple pendula as a final project for a graphics class. I used the method of Marsden and West described <a href="https://www.cambridge.org/core/journals/acta-numerica/article/discrete-mechanics-and-variational-integrators/C8F45478A9290DEC24E63BB7FBE3CEB5">here</a> (also available <a href="http://www.cds.caltech.edu/~marsden/bib/2001/09-MaWe2001/MaWe2001.pdf">here</a>) to simulate a physical system with constraints.</p>
                   <center>
-                    <img class="animated-gif" data-src="images/pendulum.gif" max-width="80%"/>
+                    <img class="animated-gif" data-src="images/pendulum.gif" width="80%" style="max-width:500px;"/>
                   </center>
                   Most of the work for this project was spent understanding the mathematical machinery that Marsden and West used to discretize classical mechanics. The algorithm was implemented in Mathematica.
                 </details>
@@ -150,7 +156,7 @@
                   <td><h4>Teaching Assistant for CS 15-458/858: Discrete Differential Geometry (CMU)</h4></td>
                 </tr>
                 <tr>
-                  <td>
+                  <td class="space_under">
                       Under Professor Keenan Crane, graded problem sets, held weekly office hours, delivered recitation lectures. Course website available <a href="http://brickisland.net/DDGSpring2019/">here</a>
                   </td>
                 </tr>
@@ -159,7 +165,7 @@
                   <td><h4>Teaching Assistant for CS 171: Introduction to Computer Graphics (Caltech)</h4></td>
                 </tr>
                 <tr>
-                  <td>
+                  <td class="space_under">
                     Under Professor Alan Barr, graded problem sets, held weekly office hours, delivered recitation lectures
                   </td>
                 </tr>
@@ -168,7 +174,7 @@
                   <td><h4>Teaching Assistant for CS 38: Algorithms (Caltech)</h4></td>
                 </tr>
                 <tr>
-                  <td>
+                  <td class="space_under">
                     I graded problem sets every few weeks and held weekly office hours
                   </td>
                 </tr>
@@ -183,10 +189,16 @@
             <div class="section_text">
               <table>
                 <tr>
+                  <td rowspan="2">2019</td>
+                  <td><h4>NSF Graduate Research Fellowship</h4></td>
+                </tr>
+                <tr><td class="space_under">
+                </td></tr>
+                <tr>
                   <td rowspan="2">2017</td>
                   <td><h4>SIGGRAPH ACM Turing Award Celebration Grant</h4></td>
                 </tr>
-                <tr><td>
+                <tr><td class="space_under">
                         I was one of 10 students sponsored by SIGGRAPH toattend the ACM Turing Award Celebration.
                 </td></tr>
 
@@ -194,7 +206,7 @@
                   <td rowspan="2">2017, 2016</td>
                   <td><h4>Arthur R. Adams SURF Fellowship</h4></td>
                 </tr>
-                <tr><td>
+                <tr><td class="space_under">
                         Fellowship to fund my summer research.
                 </td></tr>
 
@@ -202,7 +214,7 @@
                   <td rowspan="2">2016</td>
                   <td><h4>William Lowell Putnam Mathematics Competition</h4></td>
                 </tr>
-                <tr><td>
+                <tr><td class="space_under">
                         31 points (rank: 365/3214)
                 </td></tr>
             </table>
@@ -248,8 +260,8 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    15 minute presentation on the results of my summer research. Slides available <a href="Talks/2017_SURF_slides.pdf">here</a>.
+                  <td class="space_under">
+                      15 minute presentation on the results of my summer research. Slides available <a href="Talks/2017_SURF_slides.pdf">here</a>.
                   </td>
                 </tr>
 
@@ -263,7 +275,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td class="space_under">
                     30 minute presentation to a high school math class. Gave an introduction to elementary combinatorics and presented some simple applications of the probabilistic method. Notes available <a href="Talks/Probabilistic_Method_Talk.pdf">here</a>.
                   </td>
                 </tr>
@@ -279,7 +291,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td class="space_under">
                     1.5 hour final presentation for a computer graphics class. Gave an overview of Hamiltonian/Lagrangian mechanics and how to discretize them to produce variational time integrators. Extended notes available <a href="Talks/Variational_Integrators.pdf">here</a>.
                   </td>
                 </tr>
@@ -297,6 +309,7 @@
       <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
       <hr />
       Made by Mark Gillespie 2019
+    </div>
     </div>
   </body>
 </html>
