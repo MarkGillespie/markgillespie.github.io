@@ -307,7 +307,7 @@ div.navbar_buttons {
   text-align: center;
   overflow: none;
   float: right;
-  font-family: 'Nunito';
+  font-family: 'Helvetica', sans-serif;
 }
 
 .navbar_item {
