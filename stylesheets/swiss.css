@@ -7,6 +7,23 @@ body {
     text-align: center;
 }
 
+.body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.section_panel {
+    max-width: 480px;
+    padding-right: 1em;
+    margin-top: 4em;
+    background-color: #1b1f8a11;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+    box-sizing: border-box;
+}
+
 .nav {
     list-style-type: none;
     margin: 0;
@@ -47,6 +64,7 @@ body {
 }
 
 .title h4 {
+    text-align: left;
     margin-bottom: 0;
     padding-bottom: 1em;
 }
@@ -144,6 +162,7 @@ h1 {
 }
 
 h2, .accent_header, .section_header {
+    box-sizing: border-box;
     font-family: 'Helvetica';
     font-weight: 400;
     font-size: 60px;
@@ -160,6 +179,7 @@ h2, .accent_header, .section_header {
     display: inline-block;
     background-color: #de3d83;
     color: #e4e4e4;
+    margin-top: -0.5em;
     margin-left: -10px;
     padding: 15px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, .3);
@@ -284,6 +304,16 @@ a.navbar_link:hover, a.navbar_link_vanishing:hover {
   a.navbar_link_vanishing {
     display: none;
   }
+
+
+  .section_panel {
+    max-width: 100%;
+    width: 100vw;
+  }
+
+  .body {
+    justify-content: left;
+  }
 }
 
 div.navbar_buttons {
@@ -369,6 +399,7 @@ div.navbar_buttons {
   background-image: url("../images/me.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
   /*background-position-y: 4em;*/
   /*opacity: 0.0;*/
 
