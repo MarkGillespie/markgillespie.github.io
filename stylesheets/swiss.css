@@ -7,6 +7,49 @@ body {
     text-align: center;
 }
 
+#background_image {
+    max-width: 1300px;
+    width:  1040px;
+    height: 520px;
+    position: fixed;
+    background-repeat: no-repeat;
+    background-position: right;
+    content: "";
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: auto;
+    z-index: 1;
+    background-image: url('../images/triangulated_torus.svg');
+
+    opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+
+@media (max-width: 1300px) {
+    #background_image {
+        max-width: 1300px;
+        width:  80vw;
+        height: 40vw;
+
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+        -moz-transition: opacity .25s ease-in-out;
+        -webkit-transition: opacity .25s ease-in-out;
+    }
+}
+
+@media (max-width: 970px) {
+    #background_image {
+        opacity: 0; 
+        transition: opacity .5s ease-in-out;
+        -moz-transition: opacity .5s ease-in-out;
+        -webkit-transition: opacity .5s ease-in-out;
+    }
+}
+
 .body {
     display: flex;
     flex-direction: row;
@@ -19,7 +62,7 @@ body {
     max-width: 480px;
     padding-right: 1em;
     margin-top: 4em;
-    background-color: #1b1f8a11;
+    background-color: #CDE6F7f2;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
     box-sizing: border-box;
 }
@@ -96,12 +139,13 @@ body {
     background-color: #dbf4ff;
     margin: auto;
     display: inline-block;
+    position: relative;
+    z-index: 2;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, .3);
 }
 
 .section {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
-    background-color: #01A1DF44;
     flex-direction: column;
 }
 
@@ -476,7 +520,7 @@ div.navbar_buttons {
 }
 
 .wrapper {
-    z-index: 2;
+    z-index: 10;
     position: relative;
 }
 
@@ -508,6 +552,9 @@ details {
   color: #FFF;
 
   padding: 2em;
+  margin-top: 50vh;
+  position: relative;
+  z-index: 200;
 }
 
 .footer a {
