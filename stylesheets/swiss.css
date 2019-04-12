@@ -43,7 +43,7 @@ body {
 
 @media (max-width: 970px) {
     #background_image {
-        opacity: 0; 
+        opacity: 0;
         transition: opacity .5s ease-in-out;
         -moz-transition: opacity .5s ease-in-out;
         -webkit-transition: opacity .5s ease-in-out;
@@ -555,6 +555,12 @@ details {
   margin-top: 50vh;
   position: relative;
   z-index: 200;
+}
+
+@media (max-width: 970px) {
+    .footer {
+        margin-top: 2em;
+    }
 }
 
 .footer a {
