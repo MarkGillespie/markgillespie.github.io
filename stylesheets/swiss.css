@@ -396,19 +396,7 @@ div.navbar_buttons {
   border-radius: 1em;
   float: left;
 
-  background-image: url("../images/me.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
-  /*background-position-y: 4em;*/
-  /*opacity: 0.0;*/
-
-  /*-webkit-transition: opacity 1s ease-out;*/
-  /*-moz-transition:    opacity 1s ease-out;*/
-  /*-o-transition:      opacity 1s ease-out;*/
-  /*-ms-transition:     opacity 1s ease-out;*/
-  /*transition:         opacity 1s ease-out;*/
-
 }
 
 .name_box {
