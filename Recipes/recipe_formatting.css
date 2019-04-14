@@ -76,6 +76,7 @@ ol, ul {
     counter-reset: instruction-counter;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     margin: 0;
     padding: 0;
 }
