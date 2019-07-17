@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Tartan Shader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/swiss.css" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
+    <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <script type="text/javascript">
+      window.onload = function() {
+        document.getElementById("background_image").style.opacity = 1.0;
+
+        // Deferred image loading
+        // https://varvy.com/pagespeed/defer-images.html
+        let images = document.getElementsByTagName("img");
+        for (let i = 0; i < images.length; i++) {
+          if (images[i].getAttribute("data-src")) {
+            images[i].setAttribute("src", images[i].getAttribute("data-src"));
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="page-content" style="width: 100vw; max-width: 100vw;">
+
+    <div class="wrapper" id="home">
+
+      <div class="header">
+        <div class="name_box">
+            <div class="name" style="max-width: 100vw;">
+                Tartan Shader
+            </div>
+        </div>
+      </div>
+
+      <div class="body">
+          <img src="Bunny.png" style="max-width: 50vw;">
+          <img src="Spot.png" style="max-width: 50vw;">
+          <img src="Blub.png" style="max-width: 50vw;">
+
+          <div class="section_panel" style="max-width: 100%; margin-left: 2em;">
+              <a name="about"><div class="accent_header"> Blender </div></a>
+              <div class="section_text" style="text-align: left;">
+                  <p>You can find an <tt>.osl</tt> file for the shader <a href="tartan.osl" >here</a>. You can use this file in Blender's node editor with a script node. Unfortunately, Eevee doesn't support custom shaders yet, so you have to render with Cycles to use this shader.</p>
+
+                  <img src="blenderNode.png" style="max-width: 1000px; width: 100%;">
+
+                  <p>In order to render with a custom shader, you have to check the <strong>Open Shading Language</strong> option in the <strong>Render</strong> menu.</p>
+                  <img src="blenderSetting.png"  style="max-width: 600px; width: 100%;" >
+            </div>
+          </div>
+
+          <div class="section_panel" style="max-width: 100%; margin-left: 2em;">
+              <a name="about"><div class="accent_header"> Polyscope </div></a>
+              <div class="section_text" style="text-align: left;">
+              </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
+      <hr />
+      Made by Mark Gillespie 2019
+    </div>
+    </div>
+  </body>
+</html>
+
