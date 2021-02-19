@@ -1,0 +1,137 @@
+/* Two column layout */
+@mixin navbar($map, $parent: "body") {
+    /******************************/
+    /*         NAVBAR             */
+    /******************************/
+    #{$parent} div.navbar {
+        font-family: 'Helvetica', sans-serif;
+        padding-right: 1em;
+        margin-bottom: 1em;
+        overflow: visible;
+        display: inline-block;
+        width: 100%;
+    }
+
+    #{$parent} .navbar_icon {
+        display: none;
+    }
+
+
+    #{$parent} a.navbar_link{
+    text-decoration: none;
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    z-index: 20;
+    }
+
+    #{$parent} a.navbar_link:hover{
+    text-decoration: none;
+    text-shadow: none;
+    margin: 0;
+    }
+
+    @media (max-width: 1150px) {
+        #{$parent} .vanishing_early {
+            display: none !important;
+        }
+    }
+
+    @media (max-width: 970px) {
+    #{$parent} .vanishing {
+        display: none !important;
+    }
+
+
+    #{$parent} .section_panel {
+        max-width: 100%;
+        width: 100vw;
+    }
+
+    #{$parent} .body {
+        justify-content: left;
+    }
+    }
+
+    #{$parent} div.navbar_buttons {
+        text-align: center;
+        overflow: visible;
+        float: right;
+        font-family: 'Helvetica', sans-serif;
+    }
+
+    #{$parent} .navbar_item, #style-menu > button {
+        float: none;
+        height: 100%;
+        font-weight: 400;
+        display: inline-block;
+        font-size: 1.8em;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    @media (max-width: 450px) {
+        #{$parent} .navbar_item {
+            padding-left:  5px;
+            padding-right: 5px;
+            overflow: visible;
+            z-index: 200;
+            font-size: 1.2em !important;
+        }
+    }
+
+    @media (min-width: 450px) and (max-width: 1100px) {
+        #{$parent} div.navbar {
+            overflow: visible;
+            z-index: 2;
+            font-size: 0.9em;
+        }
+    }
+
+    @media (min-width: 1100px) {
+        #{$parent} div.navbar {
+            overflow: visible;
+            z-index: 2;
+        }
+    }
+
+    #{$parent} #style-menu {
+        display: inline-block;
+        position: relative;
+        // z-index: 300;
+    }
+
+    #{$parent} #style-menu ul {
+        z-index: 300;
+        display: none;
+        position: absolute;
+        right: 0;
+        list-style-type: none; /* Remove bullets */
+        margin: 0; /* Remove margins */
+        padding: 0;
+    }
+
+    #{$parent} #style-menu li {
+        margin: 0.25em;
+    }
+
+    #{$parent} #style-menu ul a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    #{$parent} button.dropbtn{
+        font-weight: 700;
+        background:none;
+        border:none;
+        padding:0;
+    }
+
+    #{$parent} .dropdown a:hover {background-color: #ddd;}
+    #{$parent} #style-menu.show ul {display: block;}
+}

@@ -1,0 +1,416 @@
+/* one column layout */
+@mixin layout($map, $parent: "body") {
+    #{$parent} {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica';
+        line-height: 1.4;
+        text-align: center;
+    }
+    #{$parent} #background_image {
+        max-width: 1300px;
+        width:  1040px;
+        height: 520px;
+        position: fixed;
+        background-repeat: no-repeat;
+        background-position: right;
+        content: "";
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin: auto;
+        z-index: 1;
+        background-image: none;
+
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+        -moz-transition: opacity .25s ease-in-out;
+        -webkit-transition: opacity .25s ease-in-out;
+    }
+
+    @media (max-width: 1300px) {
+        #{$parent} #background_image {
+            max-width: 1300px;
+            width:  80vw;
+            height: 40vw;
+
+            opacity: 1;
+            transition: opacity .25s ease-in-out;
+            -moz-transition: opacity .25s ease-in-out;
+            -webkit-transition: opacity .25s ease-in-out;
+        }
+    }
+
+    @media (max-width: 970px) {
+        #{$parent} #background_image {
+            opacity: 0;
+            transition: opacity .5s ease-in-out;
+            -moz-transition: opacity .5s ease-in-out;
+            -webkit-transition: opacity .5s ease-in-out;
+        }
+    }
+
+    #{$parent} .body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    #{$parent} .section_panel {
+        max-width: 80%;
+        width: 80%;
+        padding-right: 1em;
+        margin-top: 4em;
+        box-sizing: border-box;
+    }
+
+    #{$parent} .section_text {
+        padding: 1em;
+        padding-top: 4em;
+        margin-top: -3em;
+    }
+
+    #{$parent} .noise {
+        position: fixed;
+        background-repeat: repeat;
+        background-position: right;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .05;
+        z-index: -1;
+        /*background-image: url('stolen-noise.jpg');*/
+    }
+
+    #{$parent} .title h1 {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    #{$parent} .title h4 {
+        text-align: left;
+        margin-bottom: 0;
+        padding-bottom: 1em;
+    }
+
+    #{$parent} .title {
+        padding-top:  3em;
+        padding-left: 3em;
+        position: relative;
+        z-index: 1;
+    }
+
+    #{$parent} .title-img {
+        background-repeat: no-repeat;
+        background-size: 400px;
+        background-position: bottom right;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .25;
+        z-index: -1;
+    }
+
+    #{$parent} .page-content {
+        text-align: justify;
+        max-width: 1200px;
+        margin: auto;
+        display: inline-block;
+        position: relative;
+        z-index: 2;
+    }
+
+    #{$parent} .section {
+        flex-direction: column;
+    }
+
+    #{$parent} .subsection {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        width: 100%;
+    }
+
+    #{$parent} .section-content {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding-bottom: 2em;
+    }
+
+    #{$parent} .section-content > div {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    #{$parent} .section-content > :first-child {
+        margin-left: 30px;
+    }
+
+    #{$parent} .section-content > :last-child {
+        margin-right: 30px;
+    }
+
+    #{$parent} .section-content {
+        text-align: justify;
+    }
+
+    #{$parent} .subsection-content {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    #{$parent} .section-text {
+        width: 80%;
+        max-width: 400px;
+        margin-bottom: 1em;
+    }
+
+    #{$parent} h1 {
+        font-family: 'Helvetica';
+        font-weight: 600;
+        font-size: 150px;
+        line-height: 1;
+        max-width: 800px;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    #{$parent} h2, #{$parent} .section_header {
+        box-sizing: border-box;
+        font-family: 'Helvetica';
+        font-weight: 400;
+        font-size: 60px;
+        text-align: left;
+        line-height: 1;
+
+        z-index: 10;
+        position: relative;
+        padding-top: 5px;
+        padding-right: 5px;
+        padding-left: 20px;
+        position: relative;
+        display: inline-block;
+        margin-left: -10px;
+        padding: 15px;
+    }
+
+    @media (max-width: 650px) {
+        #{$parent} h1 {
+            font-size: 75px;
+        }
+
+        #{$parent} .title {
+            padding: 8px;
+        }
+
+    }
+
+    #{$parent} h3 {
+        font-family: 'Helvetica';
+        font-weight: 200;
+        font-size: 40px;
+        line-height: 1;
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    #{$parent} h4 {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-family: 'Helvetica';
+        font-weight: 200;
+        font-size: 22px;
+        line-height: 1.3;
+        text-align: left;
+    }
+
+    #{$parent} div.warning {
+        position: relative;
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    #{$parent} .fancy_list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        font-size: 24px;
+        justify-content: space-around;
+    }
+
+    #{$parent} .fancy_list li {
+        margin-right: 15px;
+    }
+
+    #{$parent} .fancy_list a {
+        padding: 5px;
+        padding-top: 8px;
+        text-decoration: none;
+    }
+
+    #{$parent} .fancy_list a:hover {
+        padding: 5px;
+        padding-top: 8px;
+        text-decoration: none;
+    }
+    .section-content img {
+        display: block;
+        max-width: 300px;
+        height: auto;
+    }
+
+
+
+    /*picture at top of page (behind my name)*/
+    #{$parent} .header {
+        text-align: center;
+        position: relative;
+        top: 0;
+        z-index: 5;
+    }
+
+    #{$parent} #header_img {
+        width:  2em;
+        height: 2em;
+        border-radius: 1em;
+        float: left;
+    }
+
+    #{$parent} .name_box {
+        font-size: 8em;
+        font-family: 'Helvetica', sans-serif;
+        font-weight: 800;
+        display: inline-block;
+        text-align: left;
+        line-height: 0.85;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    #{$parent} .name {
+        margin-top: 0.25em;
+        display: inline-block;
+        max-width: 5em;
+        margin-left: 0.25em;
+    }
+
+    @media (max-width: 970px) {
+        #{$parent} .name_box {
+            font-size: 6em;
+        }
+    }
+
+    @media (max-width: 694px) {
+        #{$parent} .name_box {
+            font-size: 4em;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        #{$parent} #header_img {
+            width:  60vw;
+            height: 60vw;
+            max-width: 250px;
+            max-height: 250px;
+            border-radius: 30vw;
+            display: inline-block;
+            float: none;
+        }
+        #{$parent} .header {
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        #{$parent} .name {
+            margin-top: 0;
+            max-width: 100vw;
+            font-weight: 300;
+            padding-top: 0.5em;
+            display: block;
+        }
+
+    }
+
+    @media (max-width: 450px) {
+        #{$parent} .name_box {
+            font-size: 3em;
+        }
+        #{$parent} .body {
+            width: 100vw;
+        }
+
+        #{$parent} h3 {
+            font-size: 2em;
+            font-weight: 400;
+        }
+
+        #{$parent} h4 {
+            text-align: left;
+            font-weight: 400;
+        }
+    }
+
+    #{$parent} .wrapper {
+        z-index: 10;
+        position: relative;
+    }
+
+    #{$parent} .space_under {
+        padding-bottom: 1em;
+    }
+
+    #{$parent} table {
+        border-spacing:10px 0;
+    }
+
+    /* Align first column right and other columns left
+    * https://stackoverflow.com/questions/11984767/how-to-apply-text-align-left-in-the-first-column-and-text-align-right-in-the-oth
+    */
+    #{$parent} td {
+        vertical-align:top;
+    }
+
+    #{$parent} details {
+        margin-bottom: 1em;
+    }
+
+    #{$parent} .footer {
+        box-sizing: border-box;
+
+
+        text-align: center;
+
+        padding: 2em;
+        margin-top: 50vh;
+        position: relative;
+        z-index: 200;
+    }
+
+    @media (max-width: 970px) {
+        #{$parent} .footer {
+            margin-top: 2em;
+        }
+    }
+
+    #{$parent} a {
+        /*text-decoration: none;*/
+        font-weight: 500;
+        display: inline-block;
+    }
+}

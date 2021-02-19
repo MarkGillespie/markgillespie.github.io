@@ -1,4 +1,3 @@
-
 @use 'setcolors' as sc;
 
 @mixin darkmode($parent:"body") {
@@ -6,7 +5,7 @@
     accent : #558,
     blank-space : #111,
     background-color: #222,
-    foreground-color: #334,
+    foreground-color: #334e,
     shadow-color: #777,
 
     note-section-color:#338,
@@ -17,6 +16,18 @@
     link-color: #bdf,
     menu-font-color: #bbb
 ), $parent);
+
+@include sc.setTorusColors((
+    body-color: #a7eb,
+    shell-color: #bbf,
+    stroke-color: #000,
+    body-opacity:0.8,
+    shell-opacity:0.8,
+), $parent);
+
+#{$parent} #background_image svg {
+    opacity: 0.75;
+}
 }
 
 @mixin lightmode($parent:"body") {
@@ -34,6 +45,14 @@
     accent-font-color: #f4f4f4,
     link-color: #4783A5,
     menu-font-color: #333
+), $parent);
+
+@include sc.setTorusColors((
+    body-color: #F15A24,
+    shell-color: #662D91,
+    stroke-color: #000,
+    body-opacity:0.4,
+    shell-opacity:0.4,
 ), $parent);
 }
 
