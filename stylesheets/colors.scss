@@ -1,12 +1,13 @@
 
 @use 'setcolors' as sc;
 
-@media (prefers-color-scheme: dark) {
+@mixin darkmode($parent:"body") {
 @include sc.setcolors((
     accent : #558,
     blank-space : #111,
     background-color: #222,
     foreground-color: #334,
+    shadow-color: #777,
 
     note-section-color:#338,
 
@@ -15,23 +16,34 @@
     accent-font-color: #bbb,
     link-color: #bdf,
     menu-font-color: #bbb
-));
+), $parent);
 }
 
-@media (prefers-color-scheme: light) {
+@mixin lightmode($parent:"body") {
 @include sc.setcolors((
     accent : #de3d83,
     blank-space : #fef9f7,
     background-color: #dbf4ff,
     foreground-color: #cde6f7f2,
+    shadow-color: #000,
 
     note-section-color:#01a1df,
 
     name-color: #000,
     ordinary-font-color: #000,
-    accent-font-color: #222,
+    accent-font-color: #f4f4f4,
     link-color: #4783A5,
     menu-font-color: #333
-));
-
+), $parent);
 }
+
+@media (prefers-color-scheme: dark) {
+    @include darkmode();
+}
+
+@media (prefers-color-scheme: light) {
+    @include lightmode();
+}
+
+@include darkmode("body.darkmode");
+@include lightmode("body.lightmode");

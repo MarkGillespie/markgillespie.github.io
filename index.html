@@ -19,11 +19,35 @@
             images[i].setAttribute("src", images[i].getAttribute("data-src"));
           }
         }
+        document.body.classList.remove("nojs");
       }
+
+
+     /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+     function doDropdown() {
+         document.getElementById("style-menu").classList.toggle("show");
+         document.getElementById("style-menu").classList.toggle("selected");
+     }
+
+     function setStyle(style) {
+         console.log(style);
+         document.body.className=style;
+     }
+
+     // Close the dropdown if the user clicks outside of it
+     window.onclick = function(event) {
+         console.log(event.target);
+         if (!event.target.matches('.dropbtn') && !event.target.matches('#style-menu button')) {
+             document.getElementById('style-menu').classList.remove('show');
+             document.getElementById('style-menu').classList.remove('selected');
+         }
+     }
     </script>
   </head>
 
-  <body>
+  <body class="nojs">
+    <div class="mega-container">
     <div id="background_image"></div>
     <div class="page-content">
     <div id="background_image"></div>
@@ -34,11 +58,18 @@
       <div class="navbar_buttons">
         <a href="#projects" class="navbar_link"><span class="navbar_item">Projects</span></a>
         <a href="#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a>
-        <a href="#awards" class="navbar_link_vanishing"><span class="navbar_item">Awards</span></a>
-        <a href="#education" class="navbar_link"><span class="navbar_item">Education</span></a>
-        <a href="#talks" class="navbar_link_vanishing"><span class="navbar_item">Selected Talks Given</span></a>
+        <a href="#awards" class="navbar_link vanishing"><span class="navbar_item">Awards</span></a>
+        <a href="#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a>
+        <a href="#talks" class="navbar_link vanishing"><span class="navbar_item">Selected Talks Given</span></a>
         <a href="Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
-        <a href="#about" class="navbar_link_vanishing"><span class="navbar_item">About Me</span></a>
+        <a href="#about" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+        <div id="style-menu" class="jsonly">
+            <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
+            <ul>
+                <li><button onclick="setStyle('lightmode');">Light Mode</button></li>
+                <li><button onclick="setStyle('darkmode');">Dark Mode</button></li>
+            </ul>
+        </div>
       </div>
     </div>
 
@@ -355,6 +386,7 @@
       <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
       <hr />
       Made by Mark Gillespie 2019
+    </div>
     </div>
     </div>
   </body>

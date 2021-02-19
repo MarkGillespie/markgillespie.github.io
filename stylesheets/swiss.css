@@ -4,115 +4,134 @@
     color: #ddd;
   }
 
-  .section_text {
+  body .section_text {
     background-color: #334;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
   }
 
-  .nav a {
+  body .nav a {
     color: #444;
   }
-  .nav a:hover {
+  body .nav a:hover {
     background-color: #558;
+    color: #bbb;
   }
 
-  .navbar_item {
+  body .navbar_item {
     color: #bbb;
+  }
+
+  body #style-menu ul button {
+    border: none;
+    font-size: 1.25em;
+    color: #bbb;
+    background-color: #558;
+    border-radius: 0.75em;
   }
 
   /* Only apply hover effect when the user is using a mouse-like controller. Eliminate
-  * sticky hover on mobile.
-  * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
+   * sticky hover on mobile.
+   * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
 }
 @media (prefers-color-scheme: dark) and (hover: hover) {
-  span.navbar_item:hover {
+  body .navbar_item:hover, body .selected > .navbar_item {
     color: #bbb;
     background-color: #558;
   }
 }
 @media (prefers-color-scheme: dark) {
-  .page-content {
+  parent #header_img {
+    box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body .page-content {
     background-color: #222;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
 }
 @media (prefers-color-scheme: dark) {
-  .section {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  body .section {
+    box-shadow: 1px 1px 5px rgba(119, 119, 119, 0.1);
   }
 }
 @media (prefers-color-scheme: dark) {
-  .section:nth-child(4n+1) {
+  body .section:nth-child(4n+1) {
     background-color: rgba(51, 51, 136, 0.125);
   }
 }
 @media (prefers-color-scheme: dark) {
-  .section:nth-child(4n+2) {
+  body .section:nth-child(4n+2) {
     background-color: rgba(51, 51, 136, 0.25);
   }
 }
 @media (prefers-color-scheme: dark) {
-  .section:nth-child(4n+3) {
+  body .section:nth-child(4n+3) {
     background-color: rgba(51, 51, 136, 0.375);
   }
 }
 @media (prefers-color-scheme: dark) {
-  .section:nth-child(4n+0) {
+  body .section:nth-child(4n+0) {
     background-color: rgba(51, 51, 136, 0.5);
   }
 }
 @media (prefers-color-scheme: dark) {
-  h1 {
+  body h1 {
     color: #bbb;
   }
 }
 @media (prefers-color-scheme: dark) {
-  h2, .section_header {
+  body h2, body .section_header {
     background-color: #558;
-    color: #e4e4e4;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
-  }
-}
-@media (prefers-color-scheme: dark) {
-  h3 {
     color: #bbb;
+    box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
 }
 @media (prefers-color-scheme: dark) {
-  h4 {
-    color: #bbb;
+  body h3 {
+    color: #ddd;
   }
 }
 @media (prefers-color-scheme: dark) {
-  div.warning {
+  body h4 {
+    color: #ddd;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body div.warning {
     border-top: 3px solid #558;
   }
 }
 @media (prefers-color-scheme: dark) {
-  .fancy_list a {
+  body .fancy_list a {
     color: #333;
   }
-  .fancy_list a:hover {
+  body .fancy_list a:hover {
     background-color: #558;
     color: #eee;
   }
 }
 @media (prefers-color-scheme: dark) {
-  .name_box {
+  body .name_box {
     color: #c1c1d8;
   }
 }
 @media (prefers-color-scheme: dark) {
-  .footer {
+  parent .fancy-image {
+    box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body .footer {
     background-color: #354040;
     color: #FFF;
   }
-  .footer a {
+  body .footer a {
     color: #fff;
   }
 }
 @media (prefers-color-scheme: dark) {
-  a {
+  body a {
     color: #bdf;
   }
 }
@@ -122,118 +141,373 @@
     color: #000;
   }
 
-  .section_text {
+  body .section_text {
     background-color: #cde6f7f2;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
 
-  .nav a {
+  body .nav a {
     color: #444;
   }
-  .nav a:hover {
+  body .nav a:hover {
     background-color: #de3d83;
+    color: #f4f4f4;
   }
 
-  .navbar_item {
+  body .navbar_item {
     color: #333;
   }
 
+  body #style-menu ul button {
+    border: none;
+    font-size: 1.25em;
+    color: #f4f4f4;
+    background-color: #de3d83;
+    border-radius: 0.75em;
+  }
+
   /* Only apply hover effect when the user is using a mouse-like controller. Eliminate
-  * sticky hover on mobile.
-  * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
+   * sticky hover on mobile.
+   * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
 }
 @media (prefers-color-scheme: light) and (hover: hover) {
-  span.navbar_item:hover {
-    color: #222;
+  body .navbar_item:hover, body .selected > .navbar_item {
+    color: #f4f4f4;
     background-color: #de3d83;
   }
 }
 @media (prefers-color-scheme: light) {
-  .page-content {
+  parent #header_img {
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+@media (prefers-color-scheme: light) {
+  body .page-content {
     background-color: #dbf4ff;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
 }
 @media (prefers-color-scheme: light) {
-  .section {
+  body .section {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   }
 }
 @media (prefers-color-scheme: light) {
-  .section:nth-child(4n+1) {
+  body .section:nth-child(4n+1) {
     background-color: rgba(1, 161, 223, 0.125);
   }
 }
 @media (prefers-color-scheme: light) {
-  .section:nth-child(4n+2) {
+  body .section:nth-child(4n+2) {
     background-color: rgba(1, 161, 223, 0.25);
   }
 }
 @media (prefers-color-scheme: light) {
-  .section:nth-child(4n+3) {
+  body .section:nth-child(4n+3) {
     background-color: rgba(1, 161, 223, 0.375);
   }
 }
 @media (prefers-color-scheme: light) {
-  .section:nth-child(4n+0) {
+  body .section:nth-child(4n+0) {
     background-color: rgba(1, 161, 223, 0.5);
   }
 }
 @media (prefers-color-scheme: light) {
-  h1 {
-    color: #222;
+  body h1 {
+    color: #f4f4f4;
   }
 }
 @media (prefers-color-scheme: light) {
-  h2, .section_header {
+  body h2, body .section_header {
     background-color: #de3d83;
-    color: #e4e4e4;
+    color: #f4f4f4;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
 }
 @media (prefers-color-scheme: light) {
-  h3 {
-    color: #222;
+  body h3 {
+    color: #000;
   }
 }
 @media (prefers-color-scheme: light) {
-  h4 {
-    color: #222;
+  body h4 {
+    color: #000;
   }
 }
 @media (prefers-color-scheme: light) {
-  div.warning {
+  body div.warning {
     border-top: 3px solid #de3d83;
   }
 }
 @media (prefers-color-scheme: light) {
-  .fancy_list a {
+  body .fancy_list a {
     color: #333;
   }
-  .fancy_list a:hover {
+  body .fancy_list a:hover {
     background-color: #de3d83;
     color: #eee;
   }
 }
 @media (prefers-color-scheme: light) {
-  .name_box {
+  body .name_box {
     color: #000;
   }
 }
 @media (prefers-color-scheme: light) {
-  .footer {
+  parent .fancy-image {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+@media (prefers-color-scheme: light) {
+  body .footer {
     background-color: #354040;
     color: #FFF;
   }
-  .footer a {
+  body .footer a {
     color: #fff;
   }
 }
 @media (prefers-color-scheme: light) {
-  a {
+  body a {
     color: #4783A5;
   }
 }
+body.darkmode {
+  background-color: #111;
+  color: #ddd;
+}
+
+body.darkmode .section_text {
+  background-color: #334;
+  box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
+}
+
+body.darkmode .nav a {
+  color: #444;
+}
+body.darkmode .nav a:hover {
+  background-color: #558;
+  color: #bbb;
+}
+
+body.darkmode .navbar_item {
+  color: #bbb;
+}
+
+body.darkmode #style-menu ul button {
+  border: none;
+  font-size: 1.25em;
+  color: #bbb;
+  background-color: #558;
+  border-radius: 0.75em;
+}
+
+/* Only apply hover effect when the user is using a mouse-like controller. Eliminate
+ * sticky hover on mobile.
+ * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
+@media (hover: hover) {
+  body.darkmode .navbar_item:hover, body.darkmode .selected > .navbar_item {
+    color: #bbb;
+    background-color: #558;
+  }
+}
+parent #header_img {
+  box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
+}
+
+body.darkmode .page-content {
+  background-color: #222;
+  box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
+}
+
+body.darkmode .section {
+  box-shadow: 1px 1px 5px rgba(119, 119, 119, 0.1);
+}
+
+body.darkmode .section:nth-child(4n+1) {
+  background-color: rgba(51, 51, 136, 0.125);
+}
+
+body.darkmode .section:nth-child(4n+2) {
+  background-color: rgba(51, 51, 136, 0.25);
+}
+
+body.darkmode .section:nth-child(4n+3) {
+  background-color: rgba(51, 51, 136, 0.375);
+}
+
+body.darkmode .section:nth-child(4n+0) {
+  background-color: rgba(51, 51, 136, 0.5);
+}
+
+body.darkmode h1 {
+  color: #bbb;
+}
+
+body.darkmode h2, body.darkmode .section_header {
+  background-color: #558;
+  color: #bbb;
+  box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
+}
+
+body.darkmode h3 {
+  color: #ddd;
+}
+
+body.darkmode h4 {
+  color: #ddd;
+}
+
+body.darkmode div.warning {
+  border-top: 3px solid #558;
+}
+
+body.darkmode .fancy_list a {
+  color: #333;
+}
+body.darkmode .fancy_list a:hover {
+  background-color: #558;
+  color: #eee;
+}
+
+body.darkmode .name_box {
+  color: #c1c1d8;
+}
+
+parent .fancy-image {
+  box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
+}
+
+body.darkmode .footer {
+  background-color: #354040;
+  color: #FFF;
+}
+body.darkmode .footer a {
+  color: #fff;
+}
+
+body.darkmode a {
+  color: #bdf;
+}
+
+body.lightmode {
+  background-color: #fef9f7;
+  color: #000;
+}
+
+body.lightmode .section_text {
+  background-color: #cde6f7f2;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+body.lightmode .nav a {
+  color: #444;
+}
+body.lightmode .nav a:hover {
+  background-color: #de3d83;
+  color: #f4f4f4;
+}
+
+body.lightmode .navbar_item {
+  color: #333;
+}
+
+body.lightmode #style-menu ul button {
+  border: none;
+  font-size: 1.25em;
+  color: #f4f4f4;
+  background-color: #de3d83;
+  border-radius: 0.75em;
+}
+
+/* Only apply hover effect when the user is using a mouse-like controller. Eliminate
+ * sticky hover on mobile.
+ * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
+@media (hover: hover) {
+  body.lightmode .navbar_item:hover, body.lightmode .selected > .navbar_item {
+    color: #f4f4f4;
+    background-color: #de3d83;
+  }
+}
+parent #header_img {
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+body.lightmode .page-content {
+  background-color: #dbf4ff;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.lightmode .section {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.lightmode .section:nth-child(4n+1) {
+  background-color: rgba(1, 161, 223, 0.125);
+}
+
+body.lightmode .section:nth-child(4n+2) {
+  background-color: rgba(1, 161, 223, 0.25);
+}
+
+body.lightmode .section:nth-child(4n+3) {
+  background-color: rgba(1, 161, 223, 0.375);
+}
+
+body.lightmode .section:nth-child(4n+0) {
+  background-color: rgba(1, 161, 223, 0.5);
+}
+
+body.lightmode h1 {
+  color: #f4f4f4;
+}
+
+body.lightmode h2, body.lightmode .section_header {
+  background-color: #de3d83;
+  color: #f4f4f4;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.lightmode h3 {
+  color: #000;
+}
+
+body.lightmode h4 {
+  color: #000;
+}
+
+body.lightmode div.warning {
+  border-top: 3px solid #de3d83;
+}
+
+body.lightmode .fancy_list a {
+  color: #333;
+}
+body.lightmode .fancy_list a:hover {
+  background-color: #de3d83;
+  color: #eee;
+}
+
+body.lightmode .name_box {
+  color: #000;
+}
+
+parent .fancy-image {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.lightmode .footer {
+  background-color: #354040;
+  color: #FFF;
+}
+body.lightmode .footer a {
+  color: #fff;
+}
+
+body.lightmode a {
+  color: #4783A5;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -524,10 +798,6 @@ div.warning {
   text-decoration: none;
 }
 
-.fancy-image {
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
-}
-
 .section-content img {
   display: block;
   max-width: 300px;
@@ -541,13 +811,16 @@ div.navbar {
   font-family: "Helvetica", sans-serif;
   padding-right: 1em;
   margin-bottom: 1em;
+  overflow: auto;
+  display: inline-block;
+  width: 100%;
 }
 
 .navbar_icon {
   display: none;
 }
 
-a.navbar_link, a.navbar_link_vanishing {
+a.navbar_link {
   text-decoration: none;
   margin: 0;
   display: inline-block;
@@ -555,15 +828,20 @@ a.navbar_link, a.navbar_link_vanishing {
   z-index: 20;
 }
 
-a.navbar_link:hover, a.navbar_link_vanishing:hover {
+a.navbar_link:hover {
   text-decoration: none;
   text-shadow: none;
   margin: 0;
 }
 
+@media (max-width: 1150px) {
+  .vanishing_early {
+    display: none !important;
+  }
+}
 @media (max-width: 970px) {
-  a.navbar_link_vanishing {
-    display: none;
+  .vanishing {
+    display: none !important;
   }
 
   .section_panel {
@@ -577,12 +855,12 @@ a.navbar_link:hover, a.navbar_link_vanishing:hover {
 }
 div.navbar_buttons {
   text-align: center;
-  overflow: none;
+  overflow: visible;
   float: right;
   font-family: "Helvetica", sans-serif;
 }
 
-.navbar_item {
+.navbar_item, #style-menu > button {
   float: none;
   height: 100%;
   font-weight: 400;
@@ -598,30 +876,26 @@ div.navbar_buttons {
   .navbar_item {
     padding-left: 5px;
     padding-right: 5px;
-    overflow: hidden;
+    overflow: visible;
     z-index: 200;
-    font-size: 1.2em;
+    font-size: 1.2em !important;
   }
 }
 @media (min-width: 450px) and (max-width: 1100px) {
   div.navbar {
-    overflow: hidden;
+    overflow: visible;
     z-index: 2;
     font-size: 0.9em;
   }
 }
 @media (min-width: 1100px) {
   div.navbar {
-    overflow: hidden;
+    overflow: visible;
     z-index: 2;
   }
 }
 /*picture at top of page (behind my name)*/
 .header {
-  overflow: auto;
-  /* Forces this div to contain its child's margins.
-   * This is useful because I want margins around my name,
-   * and I want my name to be totally contained in this box */
   text-align: center;
   position: relative;
   top: 0;
@@ -633,7 +907,6 @@ div.navbar_buttons {
   height: 2em;
   border-radius: 1em;
   float: left;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .name_box {
@@ -751,6 +1024,53 @@ a {
   /*text-decoration: none;*/
   font-weight: 500;
   display: inline-block;
+}
+
+.nojs .jsonly {
+  display: none;
+}
+
+#style-menu {
+  display: inline-block;
+  position: relative;
+}
+
+#style-menu ul {
+  z-index: 300;
+  display: none;
+  position: absolute;
+  right: 0;
+  list-style-type: none;
+  /* Remove bullets */
+  margin: 0;
+  /* Remove margins */
+  padding: 0;
+}
+
+#style-menu li {
+  margin: 0.25em;
+}
+
+#style-menu ul a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+button.dropbtn {
+  font-weight: 700;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+#style-menu.show ul {
+  display: block;
 }
 
 /*# sourceMappingURL=swiss.css.map */
