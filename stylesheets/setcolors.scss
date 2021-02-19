@@ -1,0 +1,122 @@
+@mixin setcolors($map) {
+    $accent : map-get($map, 'accent');
+    $blank-space : map-get($map, 'blank-space');
+    $background-color: map-get($map, 'background-color');
+    $foreground-color: map-get($map, 'foreground-color');
+
+    $note-section-color: map-get($map, 'note-section-color');
+    $note-section-color-1: rgba($note-section-color, 0.125);
+    $note-section-color-2: rgba($note-section-color, 0.25);
+    $note-section-color-3: rgba($note-section-color, 0.375);
+    $note-section-color-4: rgba($note-section-color, 0.5);
+
+    $name-color: map-get($map, 'name-color');
+    $ordinary-font-color: map-get($map, 'ordinary-font-color');
+    $accent-font-color: map-get($map, 'accent-font-color');
+    $link-color: map-get($map, 'link-color');
+    $menu-font-color: map-get($map, 'menu-font-color');
+
+    body {
+        background-color: $blank-space;
+        color: $ordinary-font-color;
+    }
+
+    .section_text {
+        background-color: $foreground-color;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+    }
+
+    .nav a {
+        color: #444;
+        &:hover {
+            background-color: $accent;
+        }
+    }
+
+    .navbar_item {
+        color: $menu-font-color;
+    }
+
+    /* Only apply hover effect when the user is using a mouse-like controller. Eliminate
+    * sticky hover on mobile.
+    * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
+    @media (hover:hover) {
+        span.navbar_item:hover {
+            color: $accent-font-color;
+            background-color: $accent;
+        }
+    }
+
+
+    .page-content {
+        background-color: $background-color;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, .3);
+    }
+
+    .section {
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+    }
+
+    .section:nth-child(4n+1) {
+        background-color: $note-section-color-1;
+    }
+
+    .section:nth-child(4n+2) {
+        background-color: $note-section-color-2;
+    }
+
+    .section:nth-child(4n+3) {
+        background-color: $note-section-color-3;
+    }
+
+    .section:nth-child(4n+0) {
+        background-color: $note-section-color-4;
+    }
+
+    h1 {
+        color: $accent-font-color;
+    }
+
+    h2, .section_header {
+        background-color: $accent;
+        color: #e4e4e4;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, .3);
+    }
+
+    h3 {
+        color: $accent-font-color;
+    }
+
+    h4 {
+        color: $accent-font-color;
+    }
+
+    div.warning {
+        border-top: 3px solid $accent;
+    }
+
+    .fancy_list a {
+        color: #333;
+        &:hover {
+            background-color: $accent;
+            color: #eee;
+        }
+    }
+
+    .name_box {
+        color: $name-color;
+    }
+
+    .footer {
+        background-color: #354040;
+        color: #FFF;
+
+        & a {
+            color: #fff;
+        }
+    }
+
+    a {
+        color: $link-color;
+    }
+}

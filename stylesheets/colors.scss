@@ -1,0 +1,37 @@
+
+@use 'setcolors' as sc;
+
+@media (prefers-color-scheme: dark) {
+@include sc.setcolors((
+    accent : #558,
+    blank-space : #111,
+    background-color: #222,
+    foreground-color: #334,
+
+    note-section-color:#338,
+
+    name-color: #c1c1d8,
+    ordinary-font-color: #ddd,
+    accent-font-color: #bbb,
+    link-color: #bdf,
+    menu-font-color: #bbb
+));
+}
+
+@media (prefers-color-scheme: light) {
+@include sc.setcolors((
+    accent : #de3d83,
+    blank-space : #fef9f7,
+    background-color: #dbf4ff,
+    foreground-color: #cde6f7f2,
+
+    note-section-color:#01a1df,
+
+    name-color: #000,
+    ordinary-font-color: #000,
+    accent-font-color: #222,
+    link-color: #4783A5,
+    menu-font-color: #333
+));
+
+}
