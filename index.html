@@ -56,7 +56,7 @@
           <img src="images/plain_hyperboloid_model.svg" alt="">
       </div>
       <div class="navbar_buttons">
-        <a href="#projects" class="navbar_link"><span class="navbar_item">Projects</span></a>
+        <a href="#research" class="navbar_link"><span class="navbar_item">Research</span></a>
         <a href="#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a>
         <a href="#awards" class="navbar_link vanishing"><span class="navbar_item">Awards</span></a>
         <a href="#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a>
@@ -85,95 +85,24 @@
       </div>
 
       <div class="body">
-        <!--<div id="right_panel" class="panel">-->
-          <div class="section_panel">
-              <a name="about"><div class="section_header"> About Me </div></a>
-            <div class="section_text">
-              <p> Hi, I'm Mark. I'm a third year Computer Science PhD student at Carnegie Mellon University, advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. My research interests are in computer graphics and physical simulation. At the moment, I'm exploring connections between <a href="http://cs.cmu.edu/~mgillesp/PennerCoordinates">hyperbolic geometry</a> and <a href="https://arxiv.org/abs/1707.06848">discrete conformal maps</a>. In the past, I have looked at in variational integrators and the use of Discrete Exterior Calculus to discretize dynamical systems.
-              </p>
-              <p> Here is <a href="http://www.positivesemidefinitely.com/">a blog</a> that I write with some friends. And here is <a href="Mark_Gillespie_CV.pdf">my CV</a>.
-              </p>
-              <p>
-                In my spare time, I like to fold origami and knit. You can find more <a href="hobbies.html">here</a>.
-              </p>
-              Email: <a href="mailto:mgillesp@andrew.cmu.edu" target="_top">mgillesp@andrew.cmu.edu</a>
-              <hr />
-            </div>
-          </div>
-        <!--</div>-->
-
-
-        <!--<div id="center_panel" class="panel">-->
 
           <div class="section_panel">
-              <a name="projects"><div class="section_header"> Projects </div></a>
+              <a name="research"><div class="section_header"> Research </div></a>
             <div class="section_text">
-              <!--<h3> Languages: </h3>-->
-              <!--<ul class="pointless">-->
-                <!--<li> C, C++ </li>-->
-                <!--<li> Haskell </li>-->
-                <!--<li> Mathematica </li>-->
-                <!--<li> Matlab </li>-->
-                <!--<li> Java </li>-->
-                <!--<li> Python </li>-->
-              <!--</ul>-->
-
-              <!--<h3> Projects</h3>-->
-                <summary><h3>Magnetohydrodynamics (MHD) Simulation</h3></summary>
-                <details open>
-                  <p>Over the summer of 2017, I worked on simulating MHD using discrete exterior calculus. Following <a href="https://arxiv.org/abs/1707.03227">this</a> paper by Kraus and Maj, I implemented a 2D MHD simulation in periodic domains. I then proved that the method conserves energy and cross-helicity, and I extended the method to domains with boundaries.</p>
-                  <p>Below are some results of the simulation. The magnetic field strength is visualized by a glowing effect. You can see the fluid carrying the magnetic field upwards, where it collides with the container's boundary and starts to flow sideways.</p>
-                  <center>
-                    <img data-src="images/MHD/plume10.jpg" width="20%"/>
-                    <img data-src="images/MHD/plume20.jpg" width="20%"/>
-                    <img data-src="images/MHD/plume30.jpg" width="20%"/>
-                  </center>
-                  <p>I implemented the algorithm in HoudiniFX, and used Houdini to render these images.</p>
-                </details>
-
-                <summary><h3>Variational Integrators for Pendula</h3></summary>
-                <details>
-                  <p>In the winter of 2016, I implemented a variational integrator for multiple pendula as a final project for a graphics class. I used the method of Marsden and West described <a href="https://www.cambridge.org/core/journals/acta-numerica/article/discrete-mechanics-and-variational-integrators/C8F45478A9290DEC24E63BB7FBE3CEB5">here</a> (also available <a href="http://www.cds.caltech.edu/~marsden/bib/2001/09-MaWe2001/MaWe2001.pdf">here</a>) to simulate a physical system with constraints.</p>
-                  <center>
-                    <img class="animated-gif" data-src="images/pendulum.gif" style="width:400px; max-width: 80%;"/>
-                  </center>
-                  Most of the work for this project was spent understanding the mathematical machinery that Marsden and West used to discretize classical mechanics. The algorithm was implemented in Mathematica.
-                </details>
-
-                <summary><h3>Discrete Differential Geometry</h3></summary>
-                <details>
-                  <p> Here are some interesting assignments that I implemented for a discrete differential geometry class in the fall of 2016.</p>
-                  <p> I computed the normal modes of the discrete Laplacian on the Stanford bunny. Here are the first 4.</p>
-                  <center>
-                      <div style="image_stack">
-                        <img data-src="images/DDG/eigenfunction0.png" width="200"/>
-                        <img data-src="images/DDG/eigenfunction1.png" width="200"/>
-                        <img data-src="images/DDG/eigenfunction2.png" width="200"/>
-                        <img data-src="images/DDG/eigenfunction3.png" width="200"/>
-                      </div>
-                  </center>
-                  <p> Using these normal modes, I numerically solved a Poisson equation to find the electric field induced by charges on the bunny's surface.</p>
-                  <center>
-                    <img data-src="images/DDG/poisson_solution.png" style="width: 400px; max-width: 80%"/>
-                  </center>
-
-                  I also used the cotan Laplacian to perform mean curvature flow on surfaces. This creates surfaces with minimal surface area.
-                  <center>
-                    <img data-src="images/DDG/Soap_Film.png" style="width: 400px; max-with: 80%;"/>
-                  </center>
-
-                  The largest project that I did in the class was computing smooth vector fields on surfaces using parallel transport via a trivial connection. I computed generators of the surface's homology using the tree-cotree algorithm. Then, I input the desired singularities and computed the Gaussian curvature on the surface. Using the Guassian curvature, I computed a trivial connection and then used the connection to transport the vector field across the surface.
-                  <center>
-                    <img data-src="images/DDG/bunny.png"        style="width: 400px; max-width: 80%;"/>
-                    <img data-src="images/DDG/triple_torus.png" style="width: 400px; max-width: 80%;"/>
-                    <img data-src="images/DDG/furry_cat.png"    style="width: 400px; max-width: 80%;"/>
-                  </center>
-                </details>
-
-                <summary><h3>Interval Analysis</h3></summary>
-                <details>
-                  <p>Recently, I've been working with Professor Alan Barr on using Interval Analysis to solve root-finding and minimization problems. Interval analysis is the technique of doing computations with intervals representing uncertainty instead of regular real numbers. This provided guaranteed bounds on the accuracy of your results. Our code is available on <a href="https://github.com/AlBarrCMS/interval-haskell">GitHub</a>.</p>
-                </details>
+                <div class="project_header">
+                    <div class="image"><img src="Research/CEPS/SmallRepresentativeImage.png"></div>
+                    <div class="text">
+                        <div class="project_title">Discrete Conformal Equivalence of Polyhedral Surfaces</div>
+                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH 2021) </div>
+                        <div class="mini_abstract">
+                            We present a numerical method for surface parameterization, leveraging <em>hyperbolic geometry</em> to yield maps that are locally injective and discretely conformal in an exact sense. Stress tests involving difficult cone configurations and near-degenerate triangulations indicate that the method is extremely robust in practice, and provides high-quality interpolation even on meshes with poor elements.
+                        </div>
+                    </div>
+                </div>
+                <div class="project_links">
+                    <a href="Research/CEPS/Paper.pdf" <span class="project_link">pdf (16 mb)</span></a>
+                    <a href="Research/CEPS/bib.txt" <span class="project_link">bibtex</span></a>
+                </div>
               <hr />
             </div>
           </div>
@@ -210,6 +139,21 @@
                   </td>
                 </tr>
               </table>
+              <hr />
+            </div>
+          </div>
+
+          <div class="section_panel">
+              <a name="about"><div class="section_header"> About Me </div></a>
+            <div class="section_text">
+              <p> I'm a third year Computer Science PhD student at Carnegie Mellon University, advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. My research interests are in computer graphics and physical simulation. At the moment, I'm exploring connections between <a href="http://cs.cmu.edu/~mgillesp/PennerCoordinates">hyperbolic geometry</a> and <a href="https://arxiv.org/abs/1707.06848">discrete conformal maps</a>. In the past, I have looked at in variational integrators and the use of Discrete Exterior Calculus to discretize dynamical systems.
+              </p>
+              <p> Here is <a href="http://www.positivesemidefinitely.com/">a blog</a> that I write with some friends. And here is <a href="Mark_Gillespie_CV.pdf">my CV</a>.
+              </p>
+              <p>
+                In my spare time, I like to fold origami and knit. You can find more <a href="hobbies.html">here</a>.
+              </p>
+              Email: <a href="mailto:mgillesp@andrew.cmu.edu" target="_top">mgillesp@andrew.cmu.edu</a>
               <hr />
             </div>
           </div>

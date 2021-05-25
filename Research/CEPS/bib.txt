@@ -1,0 +1,10 @@
+@article{Gillespie:2021:DCE,
+  author = {Gillespie, Mark and Springborn, Boris and Crane, Keenan},
+  title = {Discrete Conformal Equivalence of Polyhedral Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {4},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+}

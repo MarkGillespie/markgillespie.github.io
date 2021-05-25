@@ -40,6 +40,11 @@
   }
 }
 @media (prefers-color-scheme: dark) {
+  body .project_header .text .venue {
+    color: #bdf;
+  }
+}
+@media (prefers-color-scheme: dark) {
   parent #header_img {
     box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
   }
@@ -434,6 +439,11 @@
   }
 }
 @media (prefers-color-scheme: light) {
+  body .project_header .text .venue {
+    color: #4783A5;
+  }
+}
+@media (prefers-color-scheme: light) {
   parent #header_img {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
@@ -820,6 +830,10 @@ body.darkmode #style-menu ul button {
     background-color: #558;
   }
 }
+body.darkmode .project_header .text .venue {
+  color: #bdf;
+}
+
 parent #header_img {
   box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
 }
@@ -1193,6 +1207,10 @@ body.lightmode #style-menu ul button {
     background-color: #de3d83;
   }
 }
+body.lightmode .project_header .text .venue {
+  color: #4783A5;
+}
+
 parent #header_img {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
@@ -2286,6 +2304,56 @@ body.singlecolumn .section_text {
   padding: 1em;
   padding-top: 4em;
   margin-top: -3em;
+}
+
+body.singlecolumn .project_header {
+  display: flex;
+  /* equal child height */
+}
+
+body.singlecolumn .project_header .image {
+  flex: 0 0 30%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+
+body.singlecolumn .project_header .image img {
+  width: 100%;
+}
+
+body.singlecolumn .project_header .text {
+  flex: 1 1 70%;
+}
+
+body.singlecolumn .project_header .text .project_title {
+  font-family: "Helvetica";
+  font-weight: 200;
+  font-size: 40px;
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+body.singlecolumn .project_header .text .venue {
+  line-height: 1.4;
+  padding-left: 1em;
+}
+
+body.singlecolumn .project_header .text .mini_abstract {
+  line-height: 1.4;
+  padding-left: 1em;
+}
+
+body.singlecolumn .section_panel .project_links {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+body.singlecolumn .section_panel .project_links a {
+  margin-left: 1em;
 }
 
 body.singlecolumn .noise {

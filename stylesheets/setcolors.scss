@@ -64,6 +64,10 @@
         }
     }
 
+    #{$parent} .project_header .text .venue {
+        color: $link-color;
+    }
+
     #{parent} #header_img {
         box-shadow: 1px 1px 3px rgba($shadow-color, .3);
     }
@@ -111,7 +115,7 @@
     #{$parent} h4 {
         color: $ordinary-font-color;
     }
-    
+
     #{$parent} div.warning {
         border-top: 3px solid $accent;
     }
@@ -150,8 +154,8 @@
     $body-color: map-get($map, 'body-color');
     $shell-color: map-get($map, 'shell-color');
     $stroke-color: map-get($map, 'stroke-color');
-    $shell-medium-shadow: color.adjust($shell-color, $saturation: -0.2, $lightness: -0.2);
-    $shell-shadow-color: color.adjust($shell-color, $saturation: -0.5, $lightness: -0.5);
+    $shell-medium-shadow: color.adjust($shell-color, $saturation: -0.2 * 1%, $lightness: -0.2 * 1%);
+    $shell-shadow-color: color.adjust($shell-color, $saturation: -0.5 * 1%, $lightness: -0.5 * 1%);
     $body-opacity: map-get($map, 'body-opacity');
     $body-opacity-light: $body-opacity * 0.5;
     $shell-opacity: map-get($map, 'shell-opacity');
