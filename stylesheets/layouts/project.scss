@@ -1,0 +1,164 @@
+/* Project page layout */
+@mixin layout($map, $parent: "html") {
+    #{$parent} body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica';
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    #{$parent} .body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    #{$parent} .page-content {
+        text-align: justify;
+        max-width: 1200px;
+        margin: auto;
+        display: inline-block;
+        position: relative;
+        z-index: 2;
+    }
+
+    /*picture at top of page (behind my name)*/
+    #{$parent} .header {
+        text-align: center;
+        position: relative;
+        top: 0;
+        z-index: 5;
+    }
+
+    #{$parent} .paper_teaser {
+        max-width: 80%;
+        display: inline-block;
+        padding: 0.25em;
+        margin-bottom: 1em;
+        overflow: hidden;
+    }
+
+    #{$parent} .paper_teaser > img {
+        width: 100%;
+        display: inline-block;
+        margin: 0;
+        margin-bottom: -7px;
+    }
+
+    #{$parent} .name_box {
+        font-family: 'Helvetica', sans-serif;
+        display: inline-block;
+        text-align: center;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    #{$parent} .name_box > .title {
+        font-size: 2em;
+    }
+
+    #{$parent} .name_box > .venue {
+        font-size: 1.25em;
+    }
+
+    #{$parent} .name_box > .authors {
+        display: flex;
+        justify-content: center;
+    }
+
+    #{$parent} .name_box > .authors > .author > .name {
+        font-weight: 600;
+        display: block;
+    }
+
+    #{$parent} .name_box > .authors > .author > .affiliation {
+        display: block;
+        margin-top: -0.25em;
+    }
+
+    #{$parent} .abstract::before {
+        content: "Abstract: ";
+        font-weight: 600;
+    }
+
+    #{$parent} .abstract {
+        text-align: justify;
+        width: 95%;
+        padding-left: auto;
+        display: inline-block; /* center */
+    }
+
+    #{$parent} .section_header {
+        box-sizing: border-box;
+        font-family: 'Helvetica';
+        font-weight: 400;
+        font-size: 1.5em;
+        text-align: left;
+        line-height: 1;
+
+        z-index: 10;
+        position: relative;
+        padding-top: 5px;
+        padding-right: 5px;
+        padding-left: 20px;
+        position: relative;
+        display: inline-block;
+        margin-left: -10px;
+        padding: 15px;
+    }
+
+
+    #{$parent} .section_panel {
+        max-width: 30%;
+        width: 30%;
+        padding-right: 1em;
+        margin-top: 2em;
+        box-sizing: border-box;
+    }
+
+    #{$parent} .section_text {
+        padding: 1em;
+        padding-top: 3em;
+        margin-top: -2.25em;
+    }
+
+    #{$parent} .section_text > .paper-preview {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+
+    #{$parent} .section_text > .paper-preview > img {
+        width: 128px;
+        display: inline-block;
+    }
+
+    #{$parent} .bibEntry {
+        font-family: monospace;
+        word-wrap: break-word;
+        text-align: justify;
+        white-space: pre-wrap;
+    }
+
+    #{$parent} .footer {
+        box-sizing: border-box;
+
+        text-align: center;
+
+        padding: 2em;
+        margin-top: 15vh;
+        position: relative;
+        z-index: 200;
+    }
+
+    @media (max-width: 970px) {
+        #{$parent} .footer {
+            margin-top: 2em;
+        }
+    }
+
+
+}

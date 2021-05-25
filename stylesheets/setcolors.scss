@@ -132,8 +132,16 @@
         color: $name-color;
     }
 
-    #{parent} .fancy-image {
+    #{$parent} .fancy-image {
         box-shadow: 1px 1px 10px rgba($shadow-color, .3);
+    }
+
+    #{$parent} .paper-preview > img {
+        box-shadow: 1px 1px 10px rgba($shadow-color, .3);
+    }
+
+    #{$parent} .name_box .venue {
+        color: $link-color;
     }
 
     #{$parent} .footer {
