@@ -112,22 +112,17 @@
 
 
     #{$parent} .section_panel {
+        width: auto; /* undo a width: 100% from somewhere else */
         max-width: 400px;
-        padding-right: 3em;
-        margin-top: 2em;
+        margin: 1em;
         box-sizing: border-box;
+        display: inline-block;
     }
 
     #{$parent} .section_text {
         padding: 1em;
         padding-top: 3em;
         margin-top: -2.25em;
-    }
-
-    #{$parent} .section_text > .paper-preview {
-        display: inline-block;
-        width: 100%;
-        text-align: center;
     }
 
     #{$parent} .section_text > .paper-preview > img {
@@ -159,5 +154,10 @@
         }
     }
 
+    @media (max-width: 710px) {
+        #{$parent} .abstract {
+            text-align: left;
+        }
+    }
 
 }
