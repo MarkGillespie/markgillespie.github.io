@@ -8,18 +8,34 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
     <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
     <script type="text/javascript">
-      window.onload = function() {
-        document.getElementById("background_image").style.opacity = 1.0;
+      // === Cookie stuff for saving style (Maybe I should switch to select/options 
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + d.toUTCString();
+        const cookieString =
+          cname +
+          "=" +
+          encodeURIComponent(cvalue) +
+          ";" +
+          expires +
+          ";path=/;SameSite=Strict";
+        document.cookie = cookieString;
+      }
 
-        // Deferred image loading
-        // https://varvy.com/pagespeed/defer-images.html
-        let images = document.getElementsByTagName("img");
-        for (let i = 0; i < images.length; i++) {
-          if (images[i].getAttribute("data-src")) {
-            images[i].setAttribute("src", images[i].getAttribute("data-src"));
+      function getCookie(cname) {
+        const name = cname + "=";
+        const ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return decodeURIComponent(c.substring(name.length, c.length));
           }
         }
-        document.body.classList.remove("nojs");
+        return "";
       }
 
 
@@ -31,7 +47,7 @@
      }
 
      function setStyle(style) {
-         console.log(style);
+         setCookie("style", style);
          document.body.classList.remove("lightmode");
          document.body.classList.remove("darkmode");
          document.body.classList.add(style);
@@ -39,12 +55,30 @@
 
      // Close the dropdown if the user clicks outside of it
      window.onclick = function(event) {
-         console.log(event.target);
          if (!event.target.matches('.dropbtn') && !event.target.matches('#style-menu button')) {
              document.getElementById('style-menu').classList.remove('show');
              document.getElementById('style-menu').classList.remove('selected');
          }
      }
+
+     window.onload = function() {
+         document.getElementById("background_image").style.opacity = 1.0;
+
+         // Deferred image loading
+         // https://varvy.com/pagespeed/defer-images.html
+         let images = document.getElementsByTagName("img");
+         for (let i = 0; i < images.length; i++) {
+             if (images[i].getAttribute("data-src")) {
+                 images[i].setAttribute("src", images[i].getAttribute("data-src"));
+             }
+         }
+         document.body.classList.remove("nojs");
+
+         // Load saved style
+         const currentStyle=getCookie("style");
+         if (currentStyle) setStyle(currentStyle);
+     }
+
     </script>
   </head>
 
