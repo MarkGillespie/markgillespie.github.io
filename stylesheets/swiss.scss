@@ -7,7 +7,7 @@
 @use 'layouts/navbar.scss' as Navbar;
 
 @include Navbar.navbar(());
-@include TwoColumn.layout(());
+/* @include TwoColumn.layout(()); */
 @include OneColumn.layout((), "html.singlecolumn");
 
 .nojs .jsonly {

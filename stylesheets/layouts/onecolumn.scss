@@ -1,6 +1,6 @@
-/* one column layout */
-@mixin layout($map, $parent: "body") {
-    #{$parent} {
+/* One column layout */
+@mixin layout($map, $parent: "html") {
+    #{$parent} body {
         margin: 0;
         padding: 0;
         font-family: 'Helvetica';
