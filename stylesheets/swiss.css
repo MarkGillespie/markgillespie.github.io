@@ -1,27 +1,27 @@
 @media (prefers-color-scheme: dark) {
-  body {
+  html {
     background-color: #111;
     color: #ddd;
   }
 
-  body .section_text {
+  html .section_text {
     background-color: #334e;
     box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
   }
 
-  body .nav a {
+  html .nav a {
     color: #444;
   }
-  body .nav a:hover {
+  html .nav a:hover {
     background-color: #558;
     color: #bbb;
   }
 
-  body .navbar_item {
+  html .navbar_item {
     color: #bbb;
   }
 
-  body #style-menu ul button {
+  html #style-menu ul button {
     border: none;
     font-size: 1.25em;
     color: #bbb;
@@ -34,13 +34,13 @@
    * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
 }
 @media (prefers-color-scheme: dark) and (hover: hover) {
-  body .navbar_item:hover, body .selected > .navbar_item {
+  html .navbar_item:hover, html .selected > .navbar_item {
     color: #bbb;
     background-color: #558;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .project_header .text .venue {
+  html .project_header .text .venue {
     color: #bdf;
   }
 }
@@ -50,74 +50,74 @@
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .page-content {
+  html .page-content {
     background-color: #222;
     box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .section {
+  html .section {
     box-shadow: 1px 1px 5px rgba(119, 119, 119, 0.1);
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .section:nth-child(4n+1) {
+  html .section:nth-child(4n+1) {
     background-color: rgba(51, 51, 136, 0.125);
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .section:nth-child(4n+2) {
+  html .section:nth-child(4n+2) {
     background-color: rgba(51, 51, 136, 0.25);
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .section:nth-child(4n+3) {
+  html .section:nth-child(4n+3) {
     background-color: rgba(51, 51, 136, 0.375);
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .section:nth-child(4n+0) {
+  html .section:nth-child(4n+0) {
     background-color: rgba(51, 51, 136, 0.5);
   }
 }
 @media (prefers-color-scheme: dark) {
-  body h1 {
+  html h1 {
     color: #bbb;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body h2, body .section_header {
+  html h2, html .section_header {
     background-color: #558;
     color: #bbb;
     box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
 }
 @media (prefers-color-scheme: dark) {
-  body h3 {
+  html h3 {
     color: #ddd;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body h4 {
+  html h4 {
     color: #ddd;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body div.warning {
+  html div.warning {
     border-top: 3px solid #558;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .fancy_list a {
+  html .fancy_list a {
     color: #333;
   }
-  body .fancy_list a:hover {
+  html .fancy_list a:hover {
     background-color: #558;
     color: #eee;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .name_box {
+  html .name_box {
     color: #c1c1d8;
   }
 }
@@ -127,196 +127,196 @@
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .footer {
+  html .footer {
     background-color: #354040;
     color: #FFF;
   }
-  body .footer a {
+  html .footer a {
     color: #fff;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body a {
+  html a {
     color: #bdf;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body .st1 {
+  html .st1 {
     display: inline;
     fill: none;
     stroke: #b9b9ff;
     stroke-miterlimit: 10;
   }
-  body .st2 {
+  html .st2 {
     opacity: 0.4;
     fill: #babaff;
   }
-  body .st3 {
+  html .st3 {
     fill: none;
     stroke: #000;
     stroke-miterlimit: 10;
   }
-  body .st4 {
+  html .st4 {
     opacity: 0.47;
     fill: #babaff;
   }
-  body .st5 {
+  html .st5 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
   }
-  body .st7 {
+  html .st7 {
     fill: #FFFFFF;
   }
-  body .st8 {
+  html .st8 {
     opacity: 0.15;
     fill: url(#SVGID_1_);
   }
-  body .st9 {
+  html .st9 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
   }
-  body .st10 {
+  html .st10 {
     opacity: 0.4;
     fill: #a7eb;
   }
-  body .st11 {
+  html .st11 {
     opacity: 0.8;
     fill: #a7eb;
   }
-  body .st12 {
+  html .st12 {
     opacity: 0.4;
     fill: #a7eb;
   }
-  body .st13 {
+  html .st13 {
     opacity: 0.25;
   }
-  body .st14 {
+  html .st14 {
     opacity: 0.5;
   }
-  body .st15 {
+  html .st15 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.004, 2.002;
   }
-  body .st16 {
+  html .st16 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0254, 2.0127;
   }
-  body .st17 {
+  html .st17 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9756, 1.9878;
   }
-  body .st18 {
+  html .st18 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0017, 2.0009;
   }
-  body .st19 {
+  html .st19 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9496, 1.9748;
   }
-  body .st20 {
+  html .st20 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9971, 1.9985;
   }
-  body .st21 {
+  html .st21 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9753, 1.9877;
   }
-  body .st22 {
+  html .st22 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9482, 1.9741;
   }
-  body .st23 {
+  html .st23 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0047, 2.0023;
   }
-  body .st24 {
+  html .st24 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9284, 1.9642;
   }
-  body .st25 {
+  html .st25 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.007, 2.0035;
   }
-  body .st26 {
+  html .st26 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9236, 1.9618;
   }
-  body .st27 {
+  html .st27 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9244, 1.9622;
   }
-  body .st28 {
+  html .st28 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9258, 1.9629;
   }
-  body .st29 {
+  html .st29 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0023, 2.0012;
   }
-  body .st30 {
+  html .st30 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0473, 2.0236;
   }
-  body .st31 {
+  html .st31 {
     fill: none;
     stroke: #000;
     stroke-width: 2;
     stroke-miterlimit: 10;
   }
-  body .st32 {
+  html .st32 {
     fill: #FFFFFF;
     stroke: #000;
     stroke-width: 0.5;
@@ -324,103 +324,103 @@
     stroke-linejoin: round;
     stroke-miterlimit: 10;
   }
-  body .st33 {
+  html .st33 {
     fill: #FFFFFF;
     stroke: #000;
     stroke-width: 0.5;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
   }
-  body .st34 {
+  html .st34 {
     opacity: 0.8;
     fill: #bbf;
   }
-  body .st35 {
+  html .st35 {
     opacity: 0.75;
     fill: #bbf;
   }
-  body .st36 {
+  html .st36 {
     opacity: 0.9;
     fill: #bbf;
   }
-  body .st37 {
+  html .st37 {
     opacity: 0.65;
     fill: #bbf;
   }
-  body .st38 {
+  html .st38 {
     opacity: 0.7;
     fill: #bbf;
   }
-  body .st39 {
+  html .st39 {
     opacity: 0.6;
     fill: #bbf;
   }
-  body .st40 {
+  html .st40 {
     opacity: 0.65;
     fill: #bbf;
   }
-  body .st41 {
+  html .st41 {
     opacity: 0.7;
     fill: #bbf;
   }
-  body .st42 {
+  html .st42 {
     opacity: 0.75;
     fill: #bbf;
   }
-  body .st43 {
+  html .st43 {
     fill: #a7eb;
   }
-  body .st44 {
+  html .st44 {
     opacity: 0.4;
   }
-  body .st45 {
+  html .st45 {
     fill: #FFFFFF;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
   }
-  body .st46 {
+  html .st46 {
     opacity: 0.6;
     fill: #bbf;
   }
-  body .st47 {
+  html .st47 {
     opacity: 0.55;
     fill: #bbf;
   }
-  body .st48 {
+  html .st48 {
     opacity: 0.55;
     fill: #bbf;
   }
 }
 @media (prefers-color-scheme: dark) {
-  body #background_image svg {
+  html #background_image svg {
     opacity: 0.75;
   }
 }
 @media (prefers-color-scheme: light) {
-  body {
+  html {
     background-color: #fef9f7;
     color: #000;
   }
 
-  body .section_text {
+  html .section_text {
     background-color: #cde6f7f2;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
 
-  body .nav a {
+  html .nav a {
     color: #444;
   }
-  body .nav a:hover {
+  html .nav a:hover {
     background-color: #de3d83;
     color: #f4f4f4;
   }
 
-  body .navbar_item {
+  html .navbar_item {
     color: #333;
   }
 
-  body #style-menu ul button {
+  html #style-menu ul button {
     border: none;
     font-size: 1.25em;
     color: #f4f4f4;
@@ -433,13 +433,13 @@
    * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
 }
 @media (prefers-color-scheme: light) and (hover: hover) {
-  body .navbar_item:hover, body .selected > .navbar_item {
+  html .navbar_item:hover, html .selected > .navbar_item {
     color: #f4f4f4;
     background-color: #de3d83;
   }
 }
 @media (prefers-color-scheme: light) {
-  body .project_header .text .venue {
+  html .project_header .text .venue {
     color: #4783A5;
   }
 }
@@ -449,74 +449,74 @@
   }
 }
 @media (prefers-color-scheme: light) {
-  body .page-content {
+  html .page-content {
     background-color: #dbf4ff;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
 }
 @media (prefers-color-scheme: light) {
-  body .section {
+  html .section {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   }
 }
 @media (prefers-color-scheme: light) {
-  body .section:nth-child(4n+1) {
+  html .section:nth-child(4n+1) {
     background-color: rgba(1, 161, 223, 0.125);
   }
 }
 @media (prefers-color-scheme: light) {
-  body .section:nth-child(4n+2) {
+  html .section:nth-child(4n+2) {
     background-color: rgba(1, 161, 223, 0.25);
   }
 }
 @media (prefers-color-scheme: light) {
-  body .section:nth-child(4n+3) {
+  html .section:nth-child(4n+3) {
     background-color: rgba(1, 161, 223, 0.375);
   }
 }
 @media (prefers-color-scheme: light) {
-  body .section:nth-child(4n+0) {
+  html .section:nth-child(4n+0) {
     background-color: rgba(1, 161, 223, 0.5);
   }
 }
 @media (prefers-color-scheme: light) {
-  body h1 {
+  html h1 {
     color: #f4f4f4;
   }
 }
 @media (prefers-color-scheme: light) {
-  body h2, body .section_header {
+  html h2, html .section_header {
     background-color: #de3d83;
     color: #f4f4f4;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
 }
 @media (prefers-color-scheme: light) {
-  body h3 {
+  html h3 {
     color: #000;
   }
 }
 @media (prefers-color-scheme: light) {
-  body h4 {
+  html h4 {
     color: #000;
   }
 }
 @media (prefers-color-scheme: light) {
-  body div.warning {
+  html div.warning {
     border-top: 3px solid #de3d83;
   }
 }
 @media (prefers-color-scheme: light) {
-  body .fancy_list a {
+  html .fancy_list a {
     color: #333;
   }
-  body .fancy_list a:hover {
+  html .fancy_list a:hover {
     background-color: #de3d83;
     color: #eee;
   }
 }
 @media (prefers-color-scheme: light) {
-  body .name_box {
+  html .name_box {
     color: #000;
   }
 }
@@ -526,196 +526,196 @@
   }
 }
 @media (prefers-color-scheme: light) {
-  body .footer {
+  html .footer {
     background-color: #354040;
     color: #FFF;
   }
-  body .footer a {
+  html .footer a {
     color: #fff;
   }
 }
 @media (prefers-color-scheme: light) {
-  body a {
+  html a {
     color: #4783A5;
   }
 }
 @media (prefers-color-scheme: light) {
-  body .st1 {
+  html .st1 {
     display: inline;
     fill: none;
     stroke: #652d8f;
     stroke-miterlimit: 10;
   }
-  body .st2 {
+  html .st2 {
     opacity: 0.4;
     fill: #652d90;
   }
-  body .st3 {
+  html .st3 {
     fill: none;
     stroke: #000;
     stroke-miterlimit: 10;
   }
-  body .st4 {
+  html .st4 {
     opacity: 0.47;
     fill: #652d90;
   }
-  body .st5 {
+  html .st5 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
   }
-  body .st7 {
+  html .st7 {
     fill: #FFFFFF;
   }
-  body .st8 {
+  html .st8 {
     opacity: 0.15;
     fill: url(#SVGID_1_);
   }
-  body .st9 {
+  html .st9 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
   }
-  body .st10 {
+  html .st10 {
     opacity: 0.2;
     fill: #F15A24;
   }
-  body .st11 {
+  html .st11 {
     opacity: 0.4;
     fill: #F15A24;
   }
-  body .st12 {
+  html .st12 {
     opacity: 0.2;
     fill: #F15A24;
   }
-  body .st13 {
+  html .st13 {
     opacity: 0.25;
   }
-  body .st14 {
+  html .st14 {
     opacity: 0.5;
   }
-  body .st15 {
+  html .st15 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.004, 2.002;
   }
-  body .st16 {
+  html .st16 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0254, 2.0127;
   }
-  body .st17 {
+  html .st17 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9756, 1.9878;
   }
-  body .st18 {
+  html .st18 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0017, 2.0009;
   }
-  body .st19 {
+  html .st19 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9496, 1.9748;
   }
-  body .st20 {
+  html .st20 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9971, 1.9985;
   }
-  body .st21 {
+  html .st21 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9753, 1.9877;
   }
-  body .st22 {
+  html .st22 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9482, 1.9741;
   }
-  body .st23 {
+  html .st23 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0047, 2.0023;
   }
-  body .st24 {
+  html .st24 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9284, 1.9642;
   }
-  body .st25 {
+  html .st25 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.007, 2.0035;
   }
-  body .st26 {
+  html .st26 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9236, 1.9618;
   }
-  body .st27 {
+  html .st27 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9244, 1.9622;
   }
-  body .st28 {
+  html .st28 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 3.9258, 1.9629;
   }
-  body .st29 {
+  html .st29 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0023, 2.0012;
   }
-  body .st30 {
+  html .st30 {
     fill: none;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
     stroke-dasharray: 4.0473, 2.0236;
   }
-  body .st31 {
+  html .st31 {
     fill: none;
     stroke: #000;
     stroke-width: 2;
     stroke-miterlimit: 10;
   }
-  body .st32 {
+  html .st32 {
     fill: #FFFFFF;
     stroke: #000;
     stroke-width: 0.5;
@@ -723,97 +723,97 @@
     stroke-linejoin: round;
     stroke-miterlimit: 10;
   }
-  body .st33 {
+  html .st33 {
     fill: #FFFFFF;
     stroke: #000;
     stroke-width: 0.5;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
   }
-  body .st34 {
+  html .st34 {
     opacity: 0.4;
     fill: #662D91;
   }
-  body .st35 {
+  html .st35 {
     opacity: 0.35;
     fill: #662D91;
   }
-  body .st36 {
+  html .st36 {
     opacity: 0.5;
     fill: #662D91;
   }
-  body .st37 {
+  html .st37 {
     opacity: 0.25;
     fill: #662D91;
   }
-  body .st38 {
+  html .st38 {
     opacity: 0.3;
     fill: #662D91;
   }
-  body .st39 {
+  html .st39 {
     opacity: 0.2;
     fill: #662D91;
   }
-  body .st40 {
+  html .st40 {
     opacity: 0.25;
     fill: #662D91;
   }
-  body .st41 {
+  html .st41 {
     opacity: 0.3;
     fill: #662D91;
   }
-  body .st42 {
+  html .st42 {
     opacity: 0.35;
     fill: #662D91;
   }
-  body .st43 {
+  html .st43 {
     fill: #F15A24;
   }
-  body .st44 {
+  html .st44 {
     opacity: 0.4;
   }
-  body .st45 {
+  html .st45 {
     fill: #FFFFFF;
     stroke: #000;
     stroke-width: 0.5;
     stroke-miterlimit: 10;
   }
-  body .st46 {
+  html .st46 {
     opacity: 0.2;
     fill: #662D91;
   }
-  body .st47 {
+  html .st47 {
     opacity: 0.15;
     fill: #662D91;
   }
-  body .st48 {
+  html .st48 {
     opacity: 0.15;
     fill: #662D91;
   }
 }
-body.darkmode {
+html.darkmode {
   background-color: #111;
   color: #ddd;
 }
 
-body.darkmode .section_text {
+html.darkmode .section_text {
   background-color: #334e;
   box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
 }
 
-body.darkmode .nav a {
+html.darkmode .nav a {
   color: #444;
 }
-body.darkmode .nav a:hover {
+html.darkmode .nav a:hover {
   background-color: #558;
   color: #bbb;
 }
 
-body.darkmode .navbar_item {
+html.darkmode .navbar_item {
   color: #bbb;
 }
 
-body.darkmode #style-menu ul button {
+html.darkmode #style-menu ul button {
   border: none;
   font-size: 1.25em;
   color: #bbb;
@@ -825,12 +825,12 @@ body.darkmode #style-menu ul button {
  * sticky hover on mobile.
  * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
 @media (hover: hover) {
-  body.darkmode .navbar_item:hover, body.darkmode .selected > .navbar_item {
+  html.darkmode .navbar_item:hover, html.darkmode .selected > .navbar_item {
     color: #bbb;
     background-color: #558;
   }
 }
-body.darkmode .project_header .text .venue {
+html.darkmode .project_header .text .venue {
   color: #bdf;
 }
 
@@ -838,62 +838,62 @@ parent #header_img {
   box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
 }
 
-body.darkmode .page-content {
+html.darkmode .page-content {
   background-color: #222;
   box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
 }
 
-body.darkmode .section {
+html.darkmode .section {
   box-shadow: 1px 1px 5px rgba(119, 119, 119, 0.1);
 }
 
-body.darkmode .section:nth-child(4n+1) {
+html.darkmode .section:nth-child(4n+1) {
   background-color: rgba(51, 51, 136, 0.125);
 }
 
-body.darkmode .section:nth-child(4n+2) {
+html.darkmode .section:nth-child(4n+2) {
   background-color: rgba(51, 51, 136, 0.25);
 }
 
-body.darkmode .section:nth-child(4n+3) {
+html.darkmode .section:nth-child(4n+3) {
   background-color: rgba(51, 51, 136, 0.375);
 }
 
-body.darkmode .section:nth-child(4n+0) {
+html.darkmode .section:nth-child(4n+0) {
   background-color: rgba(51, 51, 136, 0.5);
 }
 
-body.darkmode h1 {
+html.darkmode h1 {
   color: #bbb;
 }
 
-body.darkmode h2, body.darkmode .section_header {
+html.darkmode h2, html.darkmode .section_header {
   background-color: #558;
   color: #bbb;
   box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
 }
 
-body.darkmode h3 {
+html.darkmode h3 {
   color: #ddd;
 }
 
-body.darkmode h4 {
+html.darkmode h4 {
   color: #ddd;
 }
 
-body.darkmode div.warning {
+html.darkmode div.warning {
   border-top: 3px solid #558;
 }
 
-body.darkmode .fancy_list a {
+html.darkmode .fancy_list a {
   color: #333;
 }
-body.darkmode .fancy_list a:hover {
+html.darkmode .fancy_list a:hover {
   background-color: #558;
   color: #eee;
 }
 
-body.darkmode .name_box {
+html.darkmode .name_box {
   color: #c1c1d8;
 }
 
@@ -901,194 +901,194 @@ parent .fancy-image {
   box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
 }
 
-body.darkmode .footer {
+html.darkmode .footer {
   background-color: #354040;
   color: #FFF;
 }
-body.darkmode .footer a {
+html.darkmode .footer a {
   color: #fff;
 }
 
-body.darkmode a {
+html.darkmode a {
   color: #bdf;
 }
 
-body.darkmode .st1 {
+html.darkmode .st1 {
   display: inline;
   fill: none;
   stroke: #b9b9ff;
   stroke-miterlimit: 10;
 }
-body.darkmode .st2 {
+html.darkmode .st2 {
   opacity: 0.4;
   fill: #babaff;
 }
-body.darkmode .st3 {
+html.darkmode .st3 {
   fill: none;
   stroke: #000;
   stroke-miterlimit: 10;
 }
-body.darkmode .st4 {
+html.darkmode .st4 {
   opacity: 0.47;
   fill: #babaff;
 }
-body.darkmode .st5 {
+html.darkmode .st5 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
 }
-body.darkmode .st7 {
+html.darkmode .st7 {
   fill: #FFFFFF;
 }
-body.darkmode .st8 {
+html.darkmode .st8 {
   opacity: 0.15;
   fill: url(#SVGID_1_);
 }
-body.darkmode .st9 {
+html.darkmode .st9 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
 }
-body.darkmode .st10 {
+html.darkmode .st10 {
   opacity: 0.4;
   fill: #a7eb;
 }
-body.darkmode .st11 {
+html.darkmode .st11 {
   opacity: 0.8;
   fill: #a7eb;
 }
-body.darkmode .st12 {
+html.darkmode .st12 {
   opacity: 0.4;
   fill: #a7eb;
 }
-body.darkmode .st13 {
+html.darkmode .st13 {
   opacity: 0.25;
 }
-body.darkmode .st14 {
+html.darkmode .st14 {
   opacity: 0.5;
 }
-body.darkmode .st15 {
+html.darkmode .st15 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.004, 2.002;
 }
-body.darkmode .st16 {
+html.darkmode .st16 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0254, 2.0127;
 }
-body.darkmode .st17 {
+html.darkmode .st17 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9756, 1.9878;
 }
-body.darkmode .st18 {
+html.darkmode .st18 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0017, 2.0009;
 }
-body.darkmode .st19 {
+html.darkmode .st19 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9496, 1.9748;
 }
-body.darkmode .st20 {
+html.darkmode .st20 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9971, 1.9985;
 }
-body.darkmode .st21 {
+html.darkmode .st21 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9753, 1.9877;
 }
-body.darkmode .st22 {
+html.darkmode .st22 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9482, 1.9741;
 }
-body.darkmode .st23 {
+html.darkmode .st23 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0047, 2.0023;
 }
-body.darkmode .st24 {
+html.darkmode .st24 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9284, 1.9642;
 }
-body.darkmode .st25 {
+html.darkmode .st25 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.007, 2.0035;
 }
-body.darkmode .st26 {
+html.darkmode .st26 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9236, 1.9618;
 }
-body.darkmode .st27 {
+html.darkmode .st27 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9244, 1.9622;
 }
-body.darkmode .st28 {
+html.darkmode .st28 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9258, 1.9629;
 }
-body.darkmode .st29 {
+html.darkmode .st29 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0023, 2.0012;
 }
-body.darkmode .st30 {
+html.darkmode .st30 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0473, 2.0236;
 }
-body.darkmode .st31 {
+html.darkmode .st31 {
   fill: none;
   stroke: #000;
   stroke-width: 2;
   stroke-miterlimit: 10;
 }
-body.darkmode .st32 {
+html.darkmode .st32 {
   fill: #FFFFFF;
   stroke: #000;
   stroke-width: 0.5;
@@ -1096,101 +1096,101 @@ body.darkmode .st32 {
   stroke-linejoin: round;
   stroke-miterlimit: 10;
 }
-body.darkmode .st33 {
+html.darkmode .st33 {
   fill: #FFFFFF;
   stroke: #000;
   stroke-width: 0.5;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
 }
-body.darkmode .st34 {
+html.darkmode .st34 {
   opacity: 0.8;
   fill: #bbf;
 }
-body.darkmode .st35 {
+html.darkmode .st35 {
   opacity: 0.75;
   fill: #bbf;
 }
-body.darkmode .st36 {
+html.darkmode .st36 {
   opacity: 0.9;
   fill: #bbf;
 }
-body.darkmode .st37 {
+html.darkmode .st37 {
   opacity: 0.65;
   fill: #bbf;
 }
-body.darkmode .st38 {
+html.darkmode .st38 {
   opacity: 0.7;
   fill: #bbf;
 }
-body.darkmode .st39 {
+html.darkmode .st39 {
   opacity: 0.6;
   fill: #bbf;
 }
-body.darkmode .st40 {
+html.darkmode .st40 {
   opacity: 0.65;
   fill: #bbf;
 }
-body.darkmode .st41 {
+html.darkmode .st41 {
   opacity: 0.7;
   fill: #bbf;
 }
-body.darkmode .st42 {
+html.darkmode .st42 {
   opacity: 0.75;
   fill: #bbf;
 }
-body.darkmode .st43 {
+html.darkmode .st43 {
   fill: #a7eb;
 }
-body.darkmode .st44 {
+html.darkmode .st44 {
   opacity: 0.4;
 }
-body.darkmode .st45 {
+html.darkmode .st45 {
   fill: #FFFFFF;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
 }
-body.darkmode .st46 {
+html.darkmode .st46 {
   opacity: 0.6;
   fill: #bbf;
 }
-body.darkmode .st47 {
+html.darkmode .st47 {
   opacity: 0.55;
   fill: #bbf;
 }
-body.darkmode .st48 {
+html.darkmode .st48 {
   opacity: 0.55;
   fill: #bbf;
 }
 
-body.darkmode #background_image svg {
+html.darkmode #background_image svg {
   opacity: 0.75;
 }
 
-body.lightmode {
+html.lightmode {
   background-color: #fef9f7;
   color: #000;
 }
 
-body.lightmode .section_text {
+html.lightmode .section_text {
   background-color: #cde6f7f2;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-body.lightmode .nav a {
+html.lightmode .nav a {
   color: #444;
 }
-body.lightmode .nav a:hover {
+html.lightmode .nav a:hover {
   background-color: #de3d83;
   color: #f4f4f4;
 }
 
-body.lightmode .navbar_item {
+html.lightmode .navbar_item {
   color: #333;
 }
 
-body.lightmode #style-menu ul button {
+html.lightmode #style-menu ul button {
   border: none;
   font-size: 1.25em;
   color: #f4f4f4;
@@ -1202,12 +1202,12 @@ body.lightmode #style-menu ul button {
  * sticky hover on mobile.
  * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
 @media (hover: hover) {
-  body.lightmode .navbar_item:hover, body.lightmode .selected > .navbar_item {
+  html.lightmode .navbar_item:hover, html.lightmode .selected > .navbar_item {
     color: #f4f4f4;
     background-color: #de3d83;
   }
 }
-body.lightmode .project_header .text .venue {
+html.lightmode .project_header .text .venue {
   color: #4783A5;
 }
 
@@ -1215,62 +1215,62 @@ parent #header_img {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-body.lightmode .page-content {
+html.lightmode .page-content {
   background-color: #dbf4ff;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
-body.lightmode .section {
+html.lightmode .section {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-body.lightmode .section:nth-child(4n+1) {
+html.lightmode .section:nth-child(4n+1) {
   background-color: rgba(1, 161, 223, 0.125);
 }
 
-body.lightmode .section:nth-child(4n+2) {
+html.lightmode .section:nth-child(4n+2) {
   background-color: rgba(1, 161, 223, 0.25);
 }
 
-body.lightmode .section:nth-child(4n+3) {
+html.lightmode .section:nth-child(4n+3) {
   background-color: rgba(1, 161, 223, 0.375);
 }
 
-body.lightmode .section:nth-child(4n+0) {
+html.lightmode .section:nth-child(4n+0) {
   background-color: rgba(1, 161, 223, 0.5);
 }
 
-body.lightmode h1 {
+html.lightmode h1 {
   color: #f4f4f4;
 }
 
-body.lightmode h2, body.lightmode .section_header {
+html.lightmode h2, html.lightmode .section_header {
   background-color: #de3d83;
   color: #f4f4f4;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
-body.lightmode h3 {
+html.lightmode h3 {
   color: #000;
 }
 
-body.lightmode h4 {
+html.lightmode h4 {
   color: #000;
 }
 
-body.lightmode div.warning {
+html.lightmode div.warning {
   border-top: 3px solid #de3d83;
 }
 
-body.lightmode .fancy_list a {
+html.lightmode .fancy_list a {
   color: #333;
 }
-body.lightmode .fancy_list a:hover {
+html.lightmode .fancy_list a:hover {
   background-color: #de3d83;
   color: #eee;
 }
 
-body.lightmode .name_box {
+html.lightmode .name_box {
   color: #000;
 }
 
@@ -1278,194 +1278,194 @@ parent .fancy-image {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
-body.lightmode .footer {
+html.lightmode .footer {
   background-color: #354040;
   color: #FFF;
 }
-body.lightmode .footer a {
+html.lightmode .footer a {
   color: #fff;
 }
 
-body.lightmode a {
+html.lightmode a {
   color: #4783A5;
 }
 
-body.lightmode .st1 {
+html.lightmode .st1 {
   display: inline;
   fill: none;
   stroke: #652d8f;
   stroke-miterlimit: 10;
 }
-body.lightmode .st2 {
+html.lightmode .st2 {
   opacity: 0.4;
   fill: #652d90;
 }
-body.lightmode .st3 {
+html.lightmode .st3 {
   fill: none;
   stroke: #000;
   stroke-miterlimit: 10;
 }
-body.lightmode .st4 {
+html.lightmode .st4 {
   opacity: 0.47;
   fill: #652d90;
 }
-body.lightmode .st5 {
+html.lightmode .st5 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
 }
-body.lightmode .st7 {
+html.lightmode .st7 {
   fill: #FFFFFF;
 }
-body.lightmode .st8 {
+html.lightmode .st8 {
   opacity: 0.15;
   fill: url(#SVGID_1_);
 }
-body.lightmode .st9 {
+html.lightmode .st9 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
 }
-body.lightmode .st10 {
+html.lightmode .st10 {
   opacity: 0.2;
   fill: #F15A24;
 }
-body.lightmode .st11 {
+html.lightmode .st11 {
   opacity: 0.4;
   fill: #F15A24;
 }
-body.lightmode .st12 {
+html.lightmode .st12 {
   opacity: 0.2;
   fill: #F15A24;
 }
-body.lightmode .st13 {
+html.lightmode .st13 {
   opacity: 0.25;
 }
-body.lightmode .st14 {
+html.lightmode .st14 {
   opacity: 0.5;
 }
-body.lightmode .st15 {
+html.lightmode .st15 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.004, 2.002;
 }
-body.lightmode .st16 {
+html.lightmode .st16 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0254, 2.0127;
 }
-body.lightmode .st17 {
+html.lightmode .st17 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9756, 1.9878;
 }
-body.lightmode .st18 {
+html.lightmode .st18 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0017, 2.0009;
 }
-body.lightmode .st19 {
+html.lightmode .st19 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9496, 1.9748;
 }
-body.lightmode .st20 {
+html.lightmode .st20 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9971, 1.9985;
 }
-body.lightmode .st21 {
+html.lightmode .st21 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9753, 1.9877;
 }
-body.lightmode .st22 {
+html.lightmode .st22 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9482, 1.9741;
 }
-body.lightmode .st23 {
+html.lightmode .st23 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0047, 2.0023;
 }
-body.lightmode .st24 {
+html.lightmode .st24 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9284, 1.9642;
 }
-body.lightmode .st25 {
+html.lightmode .st25 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.007, 2.0035;
 }
-body.lightmode .st26 {
+html.lightmode .st26 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9236, 1.9618;
 }
-body.lightmode .st27 {
+html.lightmode .st27 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9244, 1.9622;
 }
-body.lightmode .st28 {
+html.lightmode .st28 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 3.9258, 1.9629;
 }
-body.lightmode .st29 {
+html.lightmode .st29 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0023, 2.0012;
 }
-body.lightmode .st30 {
+html.lightmode .st30 {
   fill: none;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
   stroke-dasharray: 4.0473, 2.0236;
 }
-body.lightmode .st31 {
+html.lightmode .st31 {
   fill: none;
   stroke: #000;
   stroke-width: 2;
   stroke-miterlimit: 10;
 }
-body.lightmode .st32 {
+html.lightmode .st32 {
   fill: #FFFFFF;
   stroke: #000;
   stroke-width: 0.5;
@@ -1473,70 +1473,70 @@ body.lightmode .st32 {
   stroke-linejoin: round;
   stroke-miterlimit: 10;
 }
-body.lightmode .st33 {
+html.lightmode .st33 {
   fill: #FFFFFF;
   stroke: #000;
   stroke-width: 0.5;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
 }
-body.lightmode .st34 {
+html.lightmode .st34 {
   opacity: 0.4;
   fill: #662D91;
 }
-body.lightmode .st35 {
+html.lightmode .st35 {
   opacity: 0.35;
   fill: #662D91;
 }
-body.lightmode .st36 {
+html.lightmode .st36 {
   opacity: 0.5;
   fill: #662D91;
 }
-body.lightmode .st37 {
+html.lightmode .st37 {
   opacity: 0.25;
   fill: #662D91;
 }
-body.lightmode .st38 {
+html.lightmode .st38 {
   opacity: 0.3;
   fill: #662D91;
 }
-body.lightmode .st39 {
+html.lightmode .st39 {
   opacity: 0.2;
   fill: #662D91;
 }
-body.lightmode .st40 {
+html.lightmode .st40 {
   opacity: 0.25;
   fill: #662D91;
 }
-body.lightmode .st41 {
+html.lightmode .st41 {
   opacity: 0.3;
   fill: #662D91;
 }
-body.lightmode .st42 {
+html.lightmode .st42 {
   opacity: 0.35;
   fill: #662D91;
 }
-body.lightmode .st43 {
+html.lightmode .st43 {
   fill: #F15A24;
 }
-body.lightmode .st44 {
+html.lightmode .st44 {
   opacity: 0.4;
 }
-body.lightmode .st45 {
+html.lightmode .st45 {
   fill: #FFFFFF;
   stroke: #000;
   stroke-width: 0.5;
   stroke-miterlimit: 10;
 }
-body.lightmode .st46 {
+html.lightmode .st46 {
   opacity: 0.2;
   fill: #662D91;
 }
-body.lightmode .st47 {
+html.lightmode .st47 {
   opacity: 0.15;
   fill: #662D91;
 }
-body.lightmode .st48 {
+html.lightmode .st48 {
   opacity: 0.15;
   fill: #662D91;
 }
@@ -2237,7 +2237,7 @@ body #style-menu.show ul {
   display: block;
 }
 
-body.singlecolumn {
+html.singlecolumn {
   margin: 0;
   padding: 0;
   font-family: "Helvetica";
@@ -2245,7 +2245,7 @@ body.singlecolumn {
   text-align: center;
 }
 
-body.singlecolumn #background_image {
+html.singlecolumn #background_image {
   max-width: 1300px;
   width: 1040px;
   height: 520px;
@@ -2266,7 +2266,7 @@ body.singlecolumn #background_image {
 }
 
 @media (max-width: 1300px) {
-  body.singlecolumn #background_image {
+  html.singlecolumn #background_image {
     max-width: 1300px;
     width: 80vw;
     height: 40vw;
@@ -2277,14 +2277,14 @@ body.singlecolumn #background_image {
   }
 }
 @media (max-width: 970px) {
-  body.singlecolumn #background_image {
+  html.singlecolumn #background_image {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
     -webkit-transition: opacity 0.5s ease-in-out;
   }
 }
-body.singlecolumn .body {
+html.singlecolumn .body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -2292,7 +2292,7 @@ body.singlecolumn .body {
   align-items: flex-start;
 }
 
-body.singlecolumn .section_panel {
+html.singlecolumn .section_panel {
   max-width: 80%;
   width: 80%;
   padding-right: 1em;
@@ -2300,33 +2300,33 @@ body.singlecolumn .section_panel {
   box-sizing: border-box;
 }
 
-body.singlecolumn .section_text {
+html.singlecolumn .section_text {
   padding: 1em;
   padding-top: 4em;
   margin-top: -3em;
 }
 
-body.singlecolumn .project_header {
+html.singlecolumn .project_header {
   display: flex;
   /* equal child height */
 }
 
-body.singlecolumn .project_header .image {
+html.singlecolumn .project_header .image {
   flex: 0 0 30%;
   width: 30%;
   display: flex;
   align-items: center;
 }
 
-body.singlecolumn .project_header .image img {
+html.singlecolumn .project_header .image img {
   width: 100%;
 }
 
-body.singlecolumn .project_header .text {
+html.singlecolumn .project_header .text {
   flex: 1 1 70%;
 }
 
-body.singlecolumn .project_header .text .project_title {
+html.singlecolumn .project_header .text .project_title {
   font-family: "Helvetica";
   font-weight: 200;
   font-size: 40px;
@@ -2336,27 +2336,27 @@ body.singlecolumn .project_header .text .project_title {
   text-align: left;
 }
 
-body.singlecolumn .project_header .text .venue {
+html.singlecolumn .project_header .text .venue {
   line-height: 1.4;
   padding-left: 1em;
 }
 
-body.singlecolumn .project_header .text .mini_abstract {
+html.singlecolumn .project_header .text .mini_abstract {
   line-height: 1.4;
   padding-left: 1em;
 }
 
-body.singlecolumn .section_panel .project_links {
+html.singlecolumn .section_panel .project_links {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
-body.singlecolumn .section_panel .project_links a {
+html.singlecolumn .section_panel .project_links a {
   margin-left: 1em;
 }
 
-body.singlecolumn .noise {
+html.singlecolumn .noise {
   position: fixed;
   background-repeat: repeat;
   background-position: right;
@@ -2370,25 +2370,25 @@ body.singlecolumn .noise {
   /*background-image: url('stolen-noise.jpg');*/
 }
 
-body.singlecolumn .title h1 {
+html.singlecolumn .title h1 {
   padding-bottom: 0;
   margin-bottom: 0;
 }
 
-body.singlecolumn .title h4 {
+html.singlecolumn .title h4 {
   text-align: left;
   margin-bottom: 0;
   padding-bottom: 1em;
 }
 
-body.singlecolumn .title {
+html.singlecolumn .title {
   padding-top: 3em;
   padding-left: 3em;
   position: relative;
   z-index: 1;
 }
 
-body.singlecolumn .title-img {
+html.singlecolumn .title-img {
   background-repeat: no-repeat;
   background-size: 400px;
   background-position: bottom right;
@@ -2402,7 +2402,7 @@ body.singlecolumn .title-img {
   z-index: -1;
 }
 
-body.singlecolumn .page-content {
+html.singlecolumn .page-content {
   text-align: justify;
   max-width: 1200px;
   margin: auto;
@@ -2411,18 +2411,18 @@ body.singlecolumn .page-content {
   z-index: 2;
 }
 
-body.singlecolumn .section {
+html.singlecolumn .section {
   flex-direction: column;
 }
 
-body.singlecolumn .subsection {
+html.singlecolumn .subsection {
   display: flex;
   flex-direction: column;
   min-width: 0;
   width: 100%;
 }
 
-body.singlecolumn .section-content {
+html.singlecolumn .section-content {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -2430,37 +2430,37 @@ body.singlecolumn .section-content {
   padding-bottom: 2em;
 }
 
-body.singlecolumn .section-content > div {
+html.singlecolumn .section-content > div {
   margin-left: 15px;
   margin-right: 15px;
 }
 
-body.singlecolumn .section-content > :first-child {
+html.singlecolumn .section-content > :first-child {
   margin-left: 30px;
 }
 
-body.singlecolumn .section-content > :last-child {
+html.singlecolumn .section-content > :last-child {
   margin-right: 30px;
 }
 
-body.singlecolumn .section-content {
+html.singlecolumn .section-content {
   text-align: justify;
 }
 
-body.singlecolumn .subsection-content {
+html.singlecolumn .subsection-content {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
 }
 
-body.singlecolumn .section-text {
+html.singlecolumn .section-text {
   width: 80%;
   max-width: 400px;
   margin-bottom: 1em;
 }
 
-body.singlecolumn h1 {
+html.singlecolumn h1 {
   font-family: "Helvetica";
   font-weight: 600;
   font-size: 150px;
@@ -2470,7 +2470,7 @@ body.singlecolumn h1 {
   margin-bottom: 5px;
 }
 
-body.singlecolumn h2, body.singlecolumn .section_header {
+html.singlecolumn h2, html.singlecolumn .section_header {
   box-sizing: border-box;
   font-family: "Helvetica";
   font-weight: 400;
@@ -2489,15 +2489,15 @@ body.singlecolumn h2, body.singlecolumn .section_header {
 }
 
 @media (max-width: 650px) {
-  body.singlecolumn h1 {
+  html.singlecolumn h1 {
     font-size: 75px;
   }
 
-  body.singlecolumn .title {
+  html.singlecolumn .title {
     padding: 8px;
   }
 }
-body.singlecolumn h3 {
+html.singlecolumn h3 {
   font-family: "Helvetica";
   font-weight: 200;
   font-size: 40px;
@@ -2507,7 +2507,7 @@ body.singlecolumn h3 {
   text-align: left;
 }
 
-body.singlecolumn h4 {
+html.singlecolumn h4 {
   display: inline-block;
   margin-top: 0;
   margin-bottom: 0;
@@ -2518,13 +2518,13 @@ body.singlecolumn h4 {
   text-align: left;
 }
 
-body.singlecolumn div.warning {
+html.singlecolumn div.warning {
   position: relative;
   display: inline-block;
   margin-left: 20px;
 }
 
-body.singlecolumn .fancy_list {
+html.singlecolumn .fancy_list {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -2535,17 +2535,17 @@ body.singlecolumn .fancy_list {
   justify-content: space-around;
 }
 
-body.singlecolumn .fancy_list li {
+html.singlecolumn .fancy_list li {
   margin-right: 15px;
 }
 
-body.singlecolumn .fancy_list a {
+html.singlecolumn .fancy_list a {
   padding: 5px;
   padding-top: 8px;
   text-decoration: none;
 }
 
-body.singlecolumn .fancy_list a:hover {
+html.singlecolumn .fancy_list a:hover {
   padding: 5px;
   padding-top: 8px;
   text-decoration: none;
@@ -2558,21 +2558,21 @@ body.singlecolumn .fancy_list a:hover {
 }
 
 /*picture at top of page (behind my name)*/
-body.singlecolumn .header {
+html.singlecolumn .header {
   text-align: center;
   position: relative;
   top: 0;
   z-index: 5;
 }
 
-body.singlecolumn #header_img {
+html.singlecolumn #header_img {
   width: 2em;
   height: 2em;
   border-radius: 1em;
   float: left;
 }
 
-body.singlecolumn .name_box {
+html.singlecolumn .name_box {
   font-size: 8em;
   font-family: "Helvetica", sans-serif;
   font-weight: 800;
@@ -2583,7 +2583,7 @@ body.singlecolumn .name_box {
   margin-bottom: 15px;
 }
 
-body.singlecolumn .name {
+html.singlecolumn .name {
   margin-top: 0.25em;
   display: inline-block;
   max-width: 5em;
@@ -2591,19 +2591,19 @@ body.singlecolumn .name {
 }
 
 @media (max-width: 970px) {
-  body.singlecolumn .name_box {
+  html.singlecolumn .name_box {
     font-size: 6em;
   }
 }
 @media (max-width: 694px) {
-  body.singlecolumn .name_box {
+  html.singlecolumn .name_box {
     font-size: 4em;
     padding-top: 15px;
     padding-bottom: 15px;
     text-align: center;
   }
 
-  body.singlecolumn #header_img {
+  html.singlecolumn #header_img {
     width: 60vw;
     height: 60vw;
     max-width: 250px;
@@ -2613,12 +2613,12 @@ body.singlecolumn .name {
     float: none;
   }
 
-  body.singlecolumn .header {
+  html.singlecolumn .header {
     width: 100vw;
     overflow: hidden;
   }
 
-  body.singlecolumn .name {
+  html.singlecolumn .name {
     margin-top: 0;
     max-width: 100vw;
     font-weight: 300;
@@ -2627,49 +2627,49 @@ body.singlecolumn .name {
   }
 }
 @media (max-width: 450px) {
-  body.singlecolumn .name_box {
+  html.singlecolumn .name_box {
     font-size: 3em;
   }
 
-  body.singlecolumn .body {
+  html.singlecolumn .body {
     width: 100vw;
   }
 
-  body.singlecolumn h3 {
+  html.singlecolumn h3 {
     font-size: 2em;
     font-weight: 400;
   }
 
-  body.singlecolumn h4 {
+  html.singlecolumn h4 {
     text-align: left;
     font-weight: 400;
   }
 }
-body.singlecolumn .wrapper {
+html.singlecolumn .wrapper {
   z-index: 10;
   position: relative;
 }
 
-body.singlecolumn .space_under {
+html.singlecolumn .space_under {
   padding-bottom: 1em;
 }
 
-body.singlecolumn table {
+html.singlecolumn table {
   border-spacing: 10px 0;
 }
 
 /* Align first column right and other columns left
 * https://stackoverflow.com/questions/11984767/how-to-apply-text-align-left-in-the-first-column-and-text-align-right-in-the-oth
 */
-body.singlecolumn td {
+html.singlecolumn td {
   vertical-align: top;
 }
 
-body.singlecolumn details {
+html.singlecolumn details {
   margin-bottom: 1em;
 }
 
-body.singlecolumn .footer {
+html.singlecolumn .footer {
   box-sizing: border-box;
   text-align: center;
   padding: 2em;
@@ -2679,11 +2679,11 @@ body.singlecolumn .footer {
 }
 
 @media (max-width: 970px) {
-  body.singlecolumn .footer {
+  html.singlecolumn .footer {
     margin-top: 2em;
   }
 }
-body.singlecolumn a {
+html.singlecolumn a {
   /*text-decoration: none;*/
   font-weight: 500;
   display: inline-block;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" class="nojs singlecolumn">
   <head>
     <meta charset="UTF-8">
     <title>Mark Gillespie</title>
@@ -48,9 +48,10 @@
 
      function setStyle(style) {
          setCookie("style", style);
-         document.body.classList.remove("lightmode");
-         document.body.classList.remove("darkmode");
-         document.body.classList.add(style);
+         const html = document.getElementsByTagName('html')[0];
+         html.classList.remove("lightmode");
+         html.classList.remove("darkmode");
+         html.classList.add(style);
      }
 
      // Close the dropdown if the user clicks outside of it
@@ -72,7 +73,8 @@
                  images[i].setAttribute("src", images[i].getAttribute("data-src"));
              }
          }
-         document.body.classList.remove("nojs");
+
+         document.getElementsByTagName('html')[0].classList.remove("nojs");
 
          // Load saved style
          const currentStyle=getCookie("style");

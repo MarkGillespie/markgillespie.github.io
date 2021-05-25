@@ -1,6 +1,6 @@
 @use "sass:color";
 
-@mixin setcolors($map, $parent:"body") {
+@mixin setcolors($map, $parent:"html") {
     $accent : map-get($map, 'accent');
     $blank-space : map-get($map, 'blank-space');
     $background-color: map-get($map, 'background-color');

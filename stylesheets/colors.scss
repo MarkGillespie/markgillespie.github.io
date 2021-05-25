@@ -1,6 +1,6 @@
 @use 'setcolors' as sc;
 
-@mixin darkmode($parent:"body") {
+@mixin darkmode($parent:"html") {
 @include sc.setcolors((
     accent : #558,
     blank-space : #111,
@@ -30,7 +30,7 @@
 }
 }
 
-@mixin lightmode($parent:"body") {
+@mixin lightmode($parent:"html") {
 @include sc.setcolors((
     accent : #de3d83,
     blank-space : #fef9f7,
@@ -64,5 +64,5 @@
     @include lightmode();
 }
 
-@include darkmode("body.darkmode");
-@include lightmode("body.lightmode");
+@include darkmode("html.darkmode");
+@include lightmode("html.lightmode");

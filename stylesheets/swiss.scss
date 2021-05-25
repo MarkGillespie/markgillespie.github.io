@@ -8,7 +8,7 @@
 
 @include Navbar.navbar(());
 @include TwoColumn.layout(());
-@include OneColumn.layout((), "body.singlecolumn");
+@include OneColumn.layout((), "html.singlecolumn");
 
 .nojs .jsonly {
     display: none;
