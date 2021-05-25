@@ -174,14 +174,80 @@
     publisher = {ACM},
     address = {New York, NY, USA}
 }<hr /><div></div></div>
-    </div>
+          </div>
+
+          <div class="section_panel figures">
+              <div class="section_header"> Selected Figures </div>
+              <div class="section_text">
+                  <img src="images/figures/figure28.jpg">
+                  <div class="caption">
+                      Our method robustly handles extremely poor triangulations (left), including almost all models from Thingi10k, as well as extreme configurations of cone singularities (center). It also guarantees global injectivity for discrete conformal maps to the sphere—a case not handled by previous algorithms.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure6.jpg">
+                  <div class="caption">
+                      We adopt a notion of conformal equivalence that yields the same discrete conformal map, no matter how the input polyhedral surface is triangulated. Here a mesh with planar faces is triangulated two different ways, yielding identical results.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure2.jpg">
+                  <div class="caption">
+                      Beyond just flattening the mesh, we also show how to perform high-quality projective interpolation across intersecting triangulations—providing a high-quality parameterization even for meshes with very low-quality elements.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure16.jpg">
+                  <div class="caption">
+                      We can also prescribe boundary lengths or angles (while ensuring local injectivity), or compute a globally injective discrete conformal map to the unit disk.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure14.jpg">
+                  <div class="caption"> A key idea in our formulation is that an ordinary triangle mesh (left) can always be viewed as an ideal hyperbolic polyhedron (right), i.e., surface made from triangles of constant negative curvature and all three vertices at infinity.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure8.jpg">
+                  <div class="caption"> The reason the hyperbolic perspective is useful is that Euclidean edge lengths that violate the triangle inequality (top) still describe a perfectly valid ideal hyperbolic polyhedra. So, we can scale edge lengths arbitrarily and still apply a well-defined edge flip operation, called a Ptolemy flip, at any moment in the flow (rather than, say, stopping at the first moment where triangles degenerate).
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure24.jpg">
+                  <div class="caption"> Even when CETM succeeds, the quality of the map may be lower since it effectively considers a different notion of conformal equivalence (based on the input rather than Delaunay triangulation).
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure27.jpg">
+                  <div class="caption"> Left: The signpost data structure fails to be numerically robust in extreme situations, such as when tracing the “peacock triangulation.” Right: our integer-based encoding ensures we get the right connectivity.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure30.jpg">
+                  <div class="caption"> Since we allow edge flips, we need not worry how coarse the mesh is near large cones. Here we set all but one angle defect to almost 2&pi;—the remaining vertex has an angle defect of −1032.79.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure32.jpg">
+                  <div class="caption"> In the genus-0 case, our method guarantees a bijective discrete conformal map to a convex polyhedron with vertices on the sphere.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/figure33.jpg">
+                  <div class="caption"> We can handle multiply-connected domains by simply triangulating holes prior to flattening, then removing these triangles after flattening.
+                  </div>
+                  <hr/>
+
+              </div>
+          </div>
+
       </div>
 
       <!--</div>-->
       <div class="footer">
           <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
           <hr />
-          Made by Mark Gillespie 2021
+          Mark Gillespie 2021
       </div>
     </div>
   </body>

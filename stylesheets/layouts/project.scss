@@ -119,6 +119,30 @@
         display: inline-block;
     }
 
+    #{$parent} .figures {
+        max-width: 600px;
+    }
+
+    #{$parent} .figures .section_text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #{$parent} .figures .section_text hr {
+        width: 100%;
+    }
+
+    #{$parent} .figures img{
+        max-width: 80%;
+    }
+
+    #{$parent} .figures .caption {
+        margin-top: 0.5em;
+        margin-bottom: 1.5em;
+    }
+
+
     #{$parent} .section_text {
         padding: 1em;
         padding-top: 3em;

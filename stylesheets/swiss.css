@@ -132,6 +132,11 @@
   }
 }
 @media (prefers-color-scheme: dark) {
+  html .figures img {
+    box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
+  }
+}
+@media (prefers-color-scheme: dark) {
   html .name_box .venue {
     color: #bdf;
   }
@@ -541,6 +546,11 @@
   }
 }
 @media (prefers-color-scheme: light) {
+  html .figures img {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+@media (prefers-color-scheme: light) {
   html .name_box .venue {
     color: #4783A5;
   }
@@ -922,6 +932,10 @@ html.darkmode .fancy-image {
 }
 
 html.darkmode .paper-preview > img {
+  box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
+}
+
+html.darkmode .figures img {
   box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
 }
 
@@ -1307,6 +1321,10 @@ html.lightmode .fancy-image {
 }
 
 html.lightmode .paper-preview > img {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+html.lightmode .figures img {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -2296,6 +2314,29 @@ html.project .section_panel {
   margin: 1em;
   box-sizing: border-box;
   display: inline-block;
+}
+
+html.project .figures {
+  max-width: 600px;
+}
+
+html.project .figures .section_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+html.project .figures .section_text hr {
+  width: 100%;
+}
+
+html.project .figures img {
+  max-width: 80%;
+}
+
+html.project .figures .caption {
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
 }
 
 html.project .section_text {

@@ -140,6 +140,10 @@
         box-shadow: 1px 1px 10px rgba($shadow-color, .3);
     }
 
+    #{$parent} .figures img {
+        box-shadow: 1px 1px 10px rgba($shadow-color, .3);
+    }
+
     #{$parent} .name_box .venue {
         color: $link-color;
     }
