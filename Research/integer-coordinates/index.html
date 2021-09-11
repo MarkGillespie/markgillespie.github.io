@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us" class="nojs project">
+  <head>
+    <meta charset="UTF-8">
+    <title>Integer Coordinates for Intrinsic Geometry Processing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
+    <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <script type="text/javascript">
+      // === Cookie stuff for saving style (Maybe I should switch to select/options)
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + d.toUTCString();
+        const cookieString =
+          cname +
+          "=" +
+          encodeURIComponent(cvalue) +
+          ";" +
+          expires +
+          ";path=/;SameSite=Strict";
+        document.cookie = cookieString;
+      }
+
+      function getCookie(cname) {
+        const name = cname + "=";
+        const ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return decodeURIComponent(c.substring(name.length, c.length));
+          }
+        }
+        return "";
+      }
+
+
+     /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+     function doDropdown() {
+         document.getElementById("style-menu").classList.toggle("show");
+         document.getElementById("style-menu").classList.toggle("selected");
+     }
+
+     function setStyle(style) {
+         setCookie("style", style);
+         const html = document.getElementsByTagName('html')[0];
+         html.classList.remove("lightmode");
+         html.classList.remove("darkmode");
+         html.classList.add(style);
+     }
+
+     // Close the dropdown if the user clicks outside of it
+     window.onclick = function(event) {
+         if (!event.target.matches('.dropbtn') && !event.target.matches('#style-menu button')) {
+             document.getElementById('style-menu').classList.remove('show');
+             document.getElementById('style-menu').classList.remove('selected');
+         }
+     }
+
+     window.onload = function() {
+         document.getElementById("background_image").style.opacity = 1.0;
+
+         // Deferred image loading
+         // https://varvy.com/pagespeed/defer-images.html
+         let images = document.getElementsByTagName("img");
+         for (let i = 0; i < images.length; i++) {
+             if (images[i].getAttribute("data-src")) {
+                 images[i].setAttribute("src", images[i].getAttribute("data-src"));
+             }
+         }
+
+         document.getElementsByTagName('html')[0].classList.remove("nojs");
+     }
+
+     // Load saved style
+     const currentStyle=getCookie("style");
+     if (currentStyle) setStyle(currentStyle);
+
+    </script>
+    <!-- tweak figure background color -->
+    <style>
+     html.darkmode .paper_teaser {
+         background: #557;
+     }
+    </style>
+  </head>
+
+  <body class="nojs singlecolumn">
+    <div class="mega-container">
+    <div class="page-content">
+    <div class="navbar">
+      <div class="navbar_icon">
+          <img src="images/plain_hyperboloid_model.svg" alt="">
+      </div>
+      <div class="navbar_buttons">
+        <a href="../../index.html#research" class="navbar_link"><span class="navbar_item">Research</span></a>
+        <a href="../../index.html#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a>
+        <a href="../../index.html#awards" class="navbar_link vanishing"><span class="navbar_item">Awards</span></a>
+        <a href="../../index.html#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a>
+        <a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Selected Talks Given</span></a>
+        <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
+        <a href="../../index.html#about" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+        <div id="style-menu" class="jsonly">
+            <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
+            <ul>
+                <li><button onclick="setStyle('lightmode');">Light Mode</button></li>
+                <li><button onclick="setStyle('darkmode');">Dark Mode</button></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper" id="home">
+        <div class="name_box">
+            <div class="title"> Integer Coordinates for Intrinsic Geometry Processing</div>
+            <div class="venue"> ACM Transactions on Graphics (SIGGRAPH Asia 2021)</div>
+            <div class="authors">
+                <div class="author">
+                    <span class="name">Mark Gillespie</span>
+                    <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+                <div class="author">
+                    <span class="name">Nicholas Sharp</span>
+                    <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+                <div class="author">
+                    <span class="name">Keenan Crane</span>
+                    <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+            </div>
+            <div class="paper_teaser" style="background: none;">
+                <img src="images/teaser.png" style="max-height: 25em;">
+            </div>
+
+            <div class="abstract">
+                This paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Many applications demand a correspondence between the intrinsic triangulation and the input surface, but existing data structures either rely on floating point values to encode correspondence, or do not support remeshing operations beyond basic edge flips.  We instead provide an integer-based data structure that guarantees valid correspondence, even for meshes with near-degenerate elements.  Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to the broader set of operations needed for mesh processing (vertex insertion, edge splits, <em>etc</em>.).  The resulting data structure can be used as a drop-in replacement for earlier schemes, automatically improving reliability across a wide variety of applications.  As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.  In turn, we can compute reliable and highly accurate solutions to partial differential equations even on extremely low-quality meshes.
+            </div>
+    </div>
+
+      <div class="body">
+          <div class="section_panel">
+            <div class="section_header"> Paper </div>
+            <div class="section_text">
+                <a href="integer_coordinates.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"><br/>
+                    <span> pdf (7.6 mb)</span>
+                </a>
+                <hr />
+            </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Acknowledgements </div>
+              <div class="section_text">
+                  This work was supported by a Packard Fellowship, NSF Award 1717320, DFG TRR 109, an NSF Graduate Research Fellowship, and gifts from Autodesk, Adobe, and Facebook.
+                  <hr />
+              </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Bibtex </div>
+              <div class="section_text bibEntry">@article{Gillespie:2021:ICI,
+    author = {Gillespie, Mark and Sharp, Nicholas and Crane, Keenan},
+    title = {Integer Coordinates for Intrinsic Geometry Processing},
+    journal = {ACM Trans. Graph.},
+    volume = {40},
+    number = {6},
+    year = {2021},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+}<hr /><div></div></div>
+          </div>
+
+          <div class="section_panel figures">
+              <div class="section_header"> Selected Figures </div>
+              <!-- <div class="section_text">
+                   <img src="images/figures/figure28.jpg">
+                   <div class="caption">
+                   Our method robustly handles extremely poor triangulations (left), including almost all models from Thingi10k, as well as extreme configurations of cone singularities (center). It also guarantees global injectivity for discrete conformal maps to the sphere—a case not handled by previous algorithms.
+                   </div>
+                   <hr/>
+                   </div> -->
+          </div>
+
+      </div>
+
+      <!--</div>-->
+      <div class="footer">
+          <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
+          <hr />
+          Mark Gillespie 2021
+      </div>
+    </div>
+  </body>
+</html>

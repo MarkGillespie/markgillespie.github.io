@@ -1820,6 +1820,7 @@ html.singlecolumn .project_header .image img {
 
 html.singlecolumn .project_header .text {
   flex: 1 1 70%;
+  margin-left: 1em;
 }
 
 html.singlecolumn .project_header .text .project_title {
@@ -1846,6 +1847,7 @@ html.singlecolumn .section_panel .project_links {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 3em;
 }
 
 html.singlecolumn .section_panel .project_links a {
@@ -2264,6 +2266,11 @@ html.project .name_box > .venue {
 html.project .name_box > .authors {
   display: flex;
   justify-content: center;
+}
+
+html.project .name_box > .authors > .author {
+  margin-left: 0.25em;
+  margin-right: 0.25em;
 }
 
 html.project .name_box > .authors > .author > .name {

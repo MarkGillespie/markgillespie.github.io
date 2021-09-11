@@ -69,6 +69,11 @@
         justify-content: center;
     }
 
+    #{$parent} .name_box > .authors > .author {
+        margin-left: 0.25em;
+        margin-right: 0.25em;
+    }
+
     #{$parent} .name_box > .authors > .author > .name {
         font-weight: 600;
         display: block;

@@ -92,6 +92,7 @@
         flex: 1 1 70%;
         // display: flex;
         // align-items: center;
+        margin-left: 1em;
     }
 
     #{$parent} .project_header .text .project_title {
@@ -118,6 +119,7 @@
         width: 100%;
         display: flex;
         justify-content: flex-end;
+        margin-bottom: 3em;
     }
 
     #{$parent} .section_panel .project_links a {
