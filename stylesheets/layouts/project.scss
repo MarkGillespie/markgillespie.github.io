@@ -37,7 +37,7 @@
         max-width: 80%;
         display: inline-block;
         padding: 0.25em;
-        margin-bottom: 1em;
+        margin-bottom: 0.5em;
         overflow: hidden;
     }
 
@@ -82,6 +82,13 @@
     #{$parent} .name_box > .authors > .author > .affiliation {
         display: block;
         margin-top: -0.25em;
+    }
+
+    #{$parent} .quick_links {
+        display: flex;
+        justify-content: center;
+        gap: 1em;
+        margin-bottom: 0.5em;
     }
 
     #{$parent} .abstract::before {

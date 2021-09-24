@@ -2236,7 +2236,7 @@ html.project .paper_teaser {
   max-width: 80%;
   display: inline-block;
   padding: 0.25em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   overflow: hidden;
 }
 
@@ -2281,6 +2281,13 @@ html.project .name_box > .authors > .author > .name {
 html.project .name_box > .authors > .author > .affiliation {
   display: block;
   margin-top: -0.25em;
+}
+
+html.project .quick_links {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 0.5em;
 }
 
 html.project .abstract::before {
