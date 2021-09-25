@@ -2130,7 +2130,7 @@ html.singlecolumn .name {
   html.singlecolumn .name {
     margin-top: 0;
     max-width: 100vw;
-    font-weight: 300;
+    font-weight: lighter;
     padding-top: 0.5em;
     display: block;
   }
