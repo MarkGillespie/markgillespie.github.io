@@ -1835,7 +1835,7 @@ html.singlecolumn .project_header .text {
 
 html.singlecolumn .project_header .text .project_title {
   font-family: "Helvetica";
-  font-weight: 200;
+  font-weight: lighter;
   font-size: 40px;
   line-height: 1;
   margin-top: 0;
