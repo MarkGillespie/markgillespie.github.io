@@ -41,9 +41,9 @@
         }
     }
 
-    @media (max-width: 970px) {
+    @media (max-width: 970px), (max-height: 800px) {
         #{$parent} #background_image {
-            opacity: 0;
+            opacity: 0 !important;
             transition: opacity .5s ease-in-out;
             -moz-transition: opacity .5s ease-in-out;
             -webkit-transition: opacity .5s ease-in-out;

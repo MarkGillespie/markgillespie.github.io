@@ -1772,9 +1772,9 @@ html.singlecolumn #background_image {
     -webkit-transition: opacity 0.25s ease-in-out;
   }
 }
-@media (max-width: 970px) {
+@media (max-width: 970px), (max-height: 800px) {
   html.singlecolumn #background_image {
-    opacity: 0;
+    opacity: 0 !important;
     transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
     -webkit-transition: opacity 0.5s ease-in-out;
