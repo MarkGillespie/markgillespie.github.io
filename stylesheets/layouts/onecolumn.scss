@@ -66,6 +66,18 @@
         box-sizing: border-box;
     }
 
+    @media (max-width: 970px) {
+        #{$parent} .section_panel {
+            width: 100%;
+            max-width: 100%;
+            padding-right: 0;
+        }
+
+        #{$parent} .project_title {
+            font-size: 20pt !important;
+        }
+    }
+
     #{$parent} .section_text {
         padding: 1em;
         padding-top: 4em;
@@ -119,6 +131,7 @@
         width: 100%;
         display: flex;
         justify-content: flex-end;
+        flex-wrap: wrap;
         margin-bottom: 3em;
     }
 

@@ -1796,6 +1796,17 @@ html.singlecolumn .section_panel {
   box-sizing: border-box;
 }
 
+@media (max-width: 970px) {
+  html.singlecolumn .section_panel {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  html.singlecolumn .project_title {
+    font-size: 20pt !important;
+  }
+}
 html.singlecolumn .section_text {
   padding: 1em;
   padding-top: 4em;
@@ -1847,6 +1858,7 @@ html.singlecolumn .section_panel .project_links {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
   margin-bottom: 3em;
 }
 
@@ -2286,7 +2298,8 @@ html.project .name_box > .authors > .author > .affiliation {
 html.project .quick_links {
   display: flex;
   justify-content: center;
-  gap: 1em;
+  flex-wrap: wrap;
+  gap: 0 1em;
   margin-bottom: 0.5em;
 }
 

@@ -87,7 +87,8 @@
     #{$parent} .quick_links {
         display: flex;
         justify-content: center;
-        gap: 1em;
+        flex-wrap: wrap;
+        gap: 0 1em;
         margin-bottom: 0.5em;
     }
 
