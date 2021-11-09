@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en-us" class="nojs singlecolumn">
   <head>
     <base href="https://www.markjgillespie.com/">
@@ -9,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
     <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
     <script type="text/javascript">
-      // === Cookie stuff for saving style (Maybe I should switch to select/options 
+      // === Cookie stuff for saving style (Maybe I should switch to select/options)
       function setCookie(cname, cvalue, exdays) {
         const d = new Date();
         d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -125,12 +124,52 @@
 
           <div class="section_panel">
               <a name="research"><div class="section_header"> Research </div></a>
-            <div class="section_text">
+              <div class="section_text">
+
+                <div class="project_header">
+                    <div class="image"><img src="Research/integer-coordinates/SmallRepresentativeImage.svg"></div>
+                    <div class="text">
+                        <div class="project_title">Integer Coordinates for Intrinsic Geometry Processing</div>
+                        <div class="venue">  ACM TOG (SIGGRAPH Asia 2021) </div>
+                        <div class="mini_abstract">
+                            This paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to a broader set of operations needed for mesh processing. As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.
+                        </div>
+                    </div>
+                </div>
+                <div class="project_links">
+                    <a href="Research/integer-coordinates/index.html" <span class="project_link">project</span></a>
+                    <a href="Research/integer-coordinates/integer_coordinates.pdf" <span class="project_link">pdf (7.6 mb)</span></a>
+                    <a href="https://youtu.be/3czWJxSmCuc" <span class="project_link">video (20 min)</span></a>
+                    <a href="https://youtu.be/a4sgxoZRSCk" <span class="project_link">video (5 min)</span></a>
+                    <a href="https://youtu.be/0ZN79VqGMaI" <span class="project_link">video (45 s)</span></a>
+                    <a href="https://github.com/MarkGillespie/intrinsic-triangulations-demo" <span class="project_link" >code (C++ demo app)</span></a>
+                    <a href="https://geometry-central.net/surface/intrinsic_triangulations/basics/" <span class="project_link" >code (C++ library)</span></a>
+                    <a href="Research/integer-coordinates/bib.txt" <span class="project_link">bibtex</span></a>
+                </div>
+
+                <div class="project_header">
+                    <div class="image"><img src="Research/int-tri-course/SmallRepresentativeImage.svg"></div>
+                    <div class="text">
+                        <div class="project_title">Geometry Processing with Intrinsic Triangulations</div>
+                        <div class="venue"> ACM SIGGRAPH Courses (2021), IMR 2021 Courses </div>
+                        <div class="mini_abstract">
+                            Intrinsic triangulations de-couple the mesh used to encode geometry from the one used for computation. The basic shift in perspective is to encode the geometry of a mesh not in terms of ordinary vertex positions, but instead only in terms of edge lengths. This course provides a first introduction to intrinsic triangulations and their use in mesh processing algorithms, covering the theory, practical details, and some cutting-edge research in the area.
+
+                        </div>
+                    </div>
+                </div>
+                <div class="project_links">
+                    <a href="https://nmwsharp.com/media/papers/int-tri-course/int_tri_course.pdf" <span class="project_link">pdf (25 mb)</span></a>
+                    <a href="https://www.youtube.com/watch?v=gcRDdYrgOhg" <span class="project_link">video (3 hour) </span></a>
+                    <a href="https://github.com/nmwsharp/intrinsic-triangulations-tutorial" <span class="project_link">coding tutorial</span></a>
+                    <a href="Research/int-tri-course/bib.txt" <span class="project_link">bibtex</span></a>
+                </div>
+
                 <div class="project_header">
                     <div class="image"><img src="Research/CEPS/SmallRepresentativeImage.png"></div>
                     <div class="text">
                         <div class="project_title">Discrete Conformal Equivalence of Polyhedral Surfaces</div>
-                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH 2021) </div>
+                        <div class="venue">  ACM TOG (SIGGRAPH 2021) </div>
                         <div class="mini_abstract">
                             We present a numerical method for surface parameterization, leveraging <em>hyperbolic geometry</em> to yield maps that are locally injective and discretely conformal in an exact sense. Stress tests involving difficult cone configurations and near-degenerate triangulations indicate that the method is extremely robust in practice, and provides high-quality interpolation even on meshes with poor elements.
                         </div>
@@ -139,8 +178,12 @@
                 <div class="project_links">
                     <a href="Research/CEPS/index.html" <span class="project_link">project</span></a>
                     <a href="Research/CEPS/Paper.pdf" <span class="project_link">pdf (16 mb)</span></a>
+                    <a href="https://www.youtube.com/watch?v=W0iBHF5-r-M" <span class="project_link">video (5 min)</span></a>
+                    <a href="https://www.youtube.com/watch?v=wwuHFUQLlWA" <span class="project_link">video (20 min)</span></a>
+                    <a href="https://github.com/MarkGillespie/CEPS/" <span class="project_link" >code (C++ demo app)</span></a>
                     <a href="Research/CEPS/bib.txt" <span class="project_link">bibtex</span></a>
                 </div>
+
               <hr />
             </div>
           </div>
@@ -148,7 +191,7 @@
           <div class="section_panel">
               <a name="about"><div class="section_header"> About Me </div></a>
             <div class="section_text">
-              <p> I'm a third year Computer Science PhD student at Carnegie Mellon University, advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. My research interests are in computer graphics and physical simulation. At the moment, I'm exploring connections between <a href="http://cs.cmu.edu/~mgillesp/PennerCoordinates">hyperbolic geometry</a> and <a href="https://arxiv.org/abs/1707.06848">discrete conformal maps</a>. In the past, I have looked at in variational integrators and the use of Discrete Exterior Calculus to discretize dynamical systems.
+                <p> I'm a fourth year Computer Science PhD student at Carnegie Mellon University, advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. My research interests are in computer graphics and differential geometry. Recently, I have worked on computing discrete conformal maps and data structures for intrinsic triangulations.
               </p>
               <p> Here is <a href="http://www.positivesemidefinitely.com/">a blog</a> that I write with some friends. And here is <a href="Mark_Gillespie_CV.pdf">my CV</a>.
               </p>
@@ -262,6 +305,21 @@
             <div class="section_text">
               <table>
                 <tr>
+                    <td rowspan="3">Aug. 2021</td>
+                    <td><h4>Discrete Conformal Equivalence of Polyhedral Surfaces</h4></td>
+                </tr>
+                <tr>
+                    <td>
+                        <em>Siggraph Talk</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="space_under">
+                        20 minute talk about my <a href="Research/CEPS/index.html">paper of the same name</a>. The full talk is available on YouTube <a href="https://www.youtube.com/watch?v=wwuHFUQLlWA">here</a>, and a 5-minute version is available <a href="https://www.youtube.com/watch?v=W0iBHF5-r-M">here</a>.
+                    </td>
+                </tr>
+
+                <tr>
                   <td rowspan="3">Oct. 2019</td>
                   <td><h4>Origami and Geometry</h4></td>
                   </tr>
@@ -367,7 +425,7 @@
     <div class="footer">
       <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
       <hr />
-      Made by Mark Gillespie 2021
+      Mark Gillespie 2021
     </div>
 
     <div id="background_image"><svg viewbox="25 20 500 250">
