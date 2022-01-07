@@ -1,82 +1,102 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" class="nojs singlecolumn">
   <head>
     <meta charset="UTF-8">
     <title>Hobbies</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/swiss.css" media="screen">
     <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+     /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+     function doDropdown() {
+         document.getElementById("style-menu").classList.toggle("show");
+         document.getElementById("style-menu").classList.toggle("selected");
+     }
+
+     function setStyle(style) {
+         const html = document.getElementsByTagName('html')[0];
+         html.classList.remove("lightmode");
+         html.classList.remove("darkmode");
+         html.classList.add(style);
+     }
+
+     // Close the dropdown if the user clicks outside of it
+     window.onclick = function(event) {
+         if (!event.target.matches('.dropbtn') && !event.target.matches('#style-menu button')) {
+             document.getElementById('style-menu').classList.remove('show');
+             document.getElementById('style-menu').classList.remove('selected');
+         }
+     }
+    </script>
   </head>
 
-  <body>
-
-<div class="noise"></div>
-    <div class="page-content">
-        <div class="title">
-            <!--<div class="title-img" style="background-image: url('images/hyperbolic_triangle.svg')"></div>-->
-            <h1>Hobbies</h1>
-            <ul class="nav">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#origami">Origami</a></li>
-                <li><a href="#knitting">Knitting</a></li>
-                <li><a href="#cooking">Cooking</a></li>
-                <li><a href="#juggling">Juggling</a></li>
-            </ul>
+<body class="nojs singlecolumn">
+<div class="mega-container">
+<div class="page-content">
+    <div class="navbar">
+        <div class="navbar_icon">
+            <img src="images/plain_hyperboloid_model.svg" alt="">
         </div>
-
-    <div class="section">
-    <h2><a id="origami"></a>Origami</h2>
-    <div class="section-content">
-        <div class="section-text">
-            I enjoy folding origami and designing origami models. You can find some of my designs <a href="Origami/index.html">here</a>.
-        </div>
-        <div>
-        <img src="Origami/flying_pig.png" alt="Origami flying pig.">
+        <div class="navbar_buttons">
+            <a class="navbar_link" href="index.html"> <span class="navbar_item"> Home </span></a>
+            <a class="navbar_link" href="#origami">   <span class="navbar_item"> Origami </span></a>
+            <a class="navbar_link" href="#knitting">  <span class="navbar_item"> Knitting </span></a>
+            <a class="navbar_link" href="#cooking">   <span class="navbar_item"> Cooking </span></a>
+            <a class="navbar_link" href="#juggling">  <span class="navbar_item"> Juggling </span></a>
+            <div id="style-menu" class="jsonly">
+                <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
+                <ul>
+                    <li><button onclick="setStyle('lightmode');">Light Mode</button></li>
+                    <li><button onclick="setStyle('darkmode');">Dark Mode</button></li>
+                </ul>
+            </div>
         </div>
     </div>
-    </div>
+
+    <div class="wrapper" id="home">
+
+    <div class="body">
 
 
-    <div class="section">
-    <h2><a id="knitting"></a>Knitting</h2>
-    <div class="section-content">
-        <div class="section-text">
-            Recently, I've been exploring computer controlled knitting with Carnegie Mellon's <a href="https://textiles-lab.github.io/" >textiles lab</a>. You can find my code on <a href="https://github.com/MarkGillespie/alg-textiles">GitHub</a>. I also knit and crochet by hand. You can see pictures of my projects, both hand made and machine made, on my Ravelry page <a href="https://www.ravelry.com/projects/markgillespie">here</a>.
+    <div class="section_panel">
+        <a name="origami">
+            <div class="section_header">Origami</div></a>
+        <div class="section_text">
+            I enjoy folding origami and designing origami models. You can find some of my designs <a href="Origami/index.html">here</a>.<br/>
+        <img src="Origami/flying_pig.png" alt="Origami flying pig." style="max-width: 25%;">
         </div>
-        <div>
-        <img src="images/cables.jpg" class="fancy-image" alt="Machine knit cables.">
-        </div>
-    </div>
     </div>
 
-    <div class="section">
-    <h2><a id="cooking"></a>Cooking</h2>
-    <div class="section-content">
-        <div class="section-text">
+
+    <div class="section_panel">
+    <div class="section_header"><a id="knitting"></a>Knitting</div>
+        <div class="section_text">
+            Recently, I've been exploring computer controlled knitting with Carnegie Mellon's <a href="https://textiles-lab.github.io/" >textiles lab</a>. You can find my code on <a href="https://github.com/MarkGillespie/alg-textiles">GitHub</a>. I also knit and crochet by hand. You can see pictures of my projects, both hand made and machine made, on my Ravelry page <a href="https://www.ravelry.com/projects/markgillespie">here</a>. <br/>
+        <img src="images/cables.jpg" class="fancy-image" alt="Machine knit cables." style="max-width: 25%">
+        </div>
+    </div>
+
+    <div class="section_panel">
+    <div class="section_header"><a id="cooking"></a>Cooking</div>
+        <div class="section_text">
         I like cooking, but I don't like scrolling through tons of flavortext to get to recipes on the internet. Also, I always forget my favorite modifications to recipes. So I've collected some of my favorite recipes here.
+            <div class="project_links">
+                <a href="Recipes/PorkBelly/index.html">Pork Belly</a>
+                <a href="Recipes/Chili/index.html">Chili</a>
+                <a href="Recipes/VeggiePotPie/index.html">Veggie Pot Pie</a>
+                <a href="Recipes/Sourdough/index.html">Sourdough</a>
+            </div>
         </div>
-        <div>
-            <ul class="fancy_list dark">
-                <li><a href="Recipes/PorkBelly/index.html">Pork Belly</a></li>
-                <li><a href="Recipes/Chili/index.html">Chili</a></li>
-                <li><a href="Recipes/VeggiePotPie/index.html">Veggie Pot Pie</a></li>
-                <li><a href="Recipes/Sourdough/index.html">Sourdough</a></li>
-            </ul>
-        </div>
-    </div>
     </div>
 
-    <div class="section">
-    <h2><a id="juggling"></a>Juggling</h2>
-    <div class="section-content">
-        <div class="section-text">
-            I've been juggling for several years. This photo is from a performance I did with <a href="https://danielanderson.net/">Dan Anderson</a> at CMU's SCS day talent show. I also spin poi and contact juggle.
+    <div class="section_panel">
+    <div class="section_header"><a id="juggling"></a>Juggling</div>
+        <div class="section_text">
+            I've been juggling for several years. This photo is from a performance I did with <a href="https://danielanderson.net/">Dan Anderson</a> at CMU's SCS day talent show. I also spin poi and contact juggle.<br/>
+        <img src="images/juggle.jpg" class="fancy-image" alt="Mark and Dan juggling." style="max-width: 50%">
         </div>
-        <div>
-        <img src="images/juggle.jpg" class="fancy-image" alt="Mark and Dan juggling.">
-        </div>
-    </div>
     </div>
 </div>
 
