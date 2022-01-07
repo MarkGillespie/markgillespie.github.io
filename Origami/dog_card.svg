@@ -7,11 +7,10 @@
 	.st1{fill:#9F509F;stroke:#3A3A3A;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 	.st2{opacity:0.2;}
 	.st3{fill:#EBF3FA;stroke:#3A3A3A;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st4{fill:#9EC8EA;stroke:#3A3A3A;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
 <polygon class="st0" points="4.2,178.1 135.6,177.1 135.1,4.8 4.4,4.8 "/>
 <polygon class="st1" points="57.2,179.1 135.6,177.7 135.6,4.1 57.3,5.7 "/>
-<polygon class="st2" points="52.7,179 59.8,179.1 60.2,5.8 53.9,4.8 "/>
+<polygon class="st2" points="52.7,179 59.8,179.1 60.2,10.3 53.9,9.3 "/>
 <polygon class="st2" points="74.1,91.5 120.9,133.6 94.5,154.9 55,150.4 55,91.5 "/>
 <path class="st1" d="M83,150.4l15.5-31.2l29.6-2.8c0,0-1.9,4.7-11.8,16.9c-4.5,5.5-23.6,17.4-23.6,17.4L83,150.4z"/>
 <polygon class="st1" points="92.7,150.7 72.1,143.7 100.1,117.4 116.9,129.6 "/>
@@ -20,15 +19,16 @@
 <polygon class="st0" points="74.1,91.5 111.6,128.9 91.5,148.3 55,148.3 55,91.5 "/>
 <polygon class="st0" points="84,148.3 100.1,117.4 128.2,116.4 91.5,148.3 "/>
 <polygon class="st0" points="20.5,100.6 21.8,69 52.6,71.5 "/>
-<polygon class="st1" points="56.4,179.1 4.2,177.7 4.2,4.1 56.3,5.7 "/>
-<polygon class="st2" points="39.4,48.1 73.8,48.3 98.6,61.8 74.7,90.2 40.2,90.5 14.2,61.6 "/>
-<polygon class="st0" points="39.4,48.1 73.8,48.3 98.6,61.8 72.9,89 41,89 14.2,61.6 "/>
-<polygon class="st2" points="73.8,48.3 98.9,61.6 92.7,79.5 "/>
-<polygon class="st2" points="39.4,48.1 14.3,61.4 19.8,81.4 "/>
-<line class="st3" x1="56.6" y1="53.3" x2="56.6" y2="73.1"/>
-<polygon class="st4" points="72.9,89 41,89 52.6,77.5 61.7,77.5 "/>
-<polygon class="st1" points="72.9,89 41,89 52.6,77.5 61.7,77.5 "/>
-<polygon class="st0" points="61.7,77.5 52.6,77.5 57.2,82.2 "/>
-<polygon class="st0" points="39.4,48.1 14.3,61.4 18.4,79.5 "/>
-<polygon class="st0" points="73.8,48.3 98.9,61.6 94.8,79.6 "/>
+<polygon class="st1" points="56.4,183 4.2,177.7 4.2,4.1 56.3,9.6 "/>
+<g>
+	<polygon class="st2" points="39.4,52 73.8,52.1 98.6,65.6 74.7,94 40.2,94.3 14.2,65.4 	"/>
+	<polygon class="st0" points="39.4,52 73.8,52.1 98.6,65.6 72.9,92.9 41,92.9 14.2,65.4 	"/>
+	<polygon class="st2" points="73.8,52.1 98.9,65.4 92.7,83.3 	"/>
+	<polygon class="st2" points="39.4,52 14.3,65.3 19.8,85.2 	"/>
+	<line class="st3" x1="56.6" y1="57.1" x2="56.6" y2="76.9"/>
+	<polygon class="st1" points="72.9,92.9 41,92.9 52.6,81.3 61.7,81.3 	"/>
+	<polygon class="st0" points="61.7,81.3 52.6,81.3 57.2,86 	"/>
+	<polygon class="st0" points="39.4,52 14.3,65.3 18.4,83.3 	"/>
+	<polygon class="st0" points="73.8,52.1 98.9,65.4 94.8,83.4 	"/>
+</g>
 </svg>
