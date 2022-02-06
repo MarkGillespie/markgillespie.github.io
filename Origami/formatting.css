@@ -102,7 +102,7 @@ div.model_title {
 }
 
 img.header_image {
-  width: 40%;
+  max-width: 40%;
   margin-top: -90px;
   float: right;
   z-index: 2;
