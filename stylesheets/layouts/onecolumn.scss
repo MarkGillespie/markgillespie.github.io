@@ -116,9 +116,13 @@
         text-align: left;
     }
 
-    #{$parent} .project_header .text .venue {
+    #{$parent} .project_header .text .venue, .project_author_list {
         line-height: 1.4;
         padding-left: 1em;
+    }
+
+    #{$parent} .project_author_list a {
+        text-decoration: none;
     }
 
     #{$parent} .project_header .text .mini_abstract {

@@ -68,6 +68,14 @@
         color: $link-color;
     }
 
+    #{$parent} .project_author_list a, .author .name a {
+        color: $ordinary-font-color;
+    }
+
+    #{$parent} .project_author_list a:hover, .author .name a:hover {
+        color: $link-color;
+    }
+
     #{parent} #header_img {
         box-shadow: 1px 1px 3px rgba($shadow-color, .3);
     }

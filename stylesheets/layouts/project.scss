@@ -79,6 +79,10 @@
         display: block;
     }
 
+    #{$parent} .name_box > .authors > .author > .name > a {
+        text-decoration: none;
+    }
+
     #{$parent} .name_box > .authors > .author > .affiliation {
         display: block;
         margin-top: -0.25em;

@@ -3,12 +3,10 @@
     background-color: #111;
     color: #ddd;
   }
-
   html .section_text {
-    background-color: #334e;
+    background-color: rgba(51, 51, 68, 0.9333333333);
     box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
   }
-
   html .nav a {
     color: #444;
   }
@@ -16,11 +14,9 @@
     background-color: #558;
     color: #bbb;
   }
-
   html .navbar_item {
     color: #bbb;
   }
-
   html #style-menu ul button {
     border: none;
     font-size: 1.25em;
@@ -28,7 +24,6 @@
     background-color: #558;
     border-radius: 0.75em;
   }
-
   /* Only apply hover effect when the user is using a mouse-like controller. Eliminate
    * sticky hover on mobile.
    * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
@@ -43,71 +38,51 @@
   html .project_header .text .venue {
     color: #bdf;
   }
-}
-@media (prefers-color-scheme: dark) {
+  html .project_author_list a, .author .name a {
+    color: #ddd;
+  }
+  html .project_author_list a:hover, .author .name a:hover {
+    color: #bdf;
+  }
   parent #header_img {
     box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .page-content {
     background-color: #222;
     box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .section {
     box-shadow: 1px 1px 5px rgba(119, 119, 119, 0.1);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .section:nth-child(4n+1) {
     background-color: rgba(51, 51, 136, 0.125);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .section:nth-child(4n+2) {
     background-color: rgba(51, 51, 136, 0.25);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .section:nth-child(4n+3) {
     background-color: rgba(51, 51, 136, 0.375);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .section:nth-child(4n+0) {
     background-color: rgba(51, 51, 136, 0.5);
   }
-}
-@media (prefers-color-scheme: dark) {
   html h1 {
     color: #bbb;
   }
-}
-@media (prefers-color-scheme: dark) {
   html h2, html .section_header {
     background-color: #558;
     color: #bbb;
     box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
-}
-@media (prefers-color-scheme: dark) {
   html h3 {
     color: #ddd;
   }
-}
-@media (prefers-color-scheme: dark) {
   html h4 {
     color: #ddd;
   }
-}
-@media (prefers-color-scheme: dark) {
   html div.warning {
     border-top: 3px solid #558;
   }
-}
-@media (prefers-color-scheme: dark) {
   html .fancy_list a {
     color: #333;
   }
@@ -115,33 +90,21 @@
     background-color: #558;
     color: #eee;
   }
-}
-@media (prefers-color-scheme: dark) {
   html .name_box {
     color: #c1c1d8;
   }
-}
-@media (prefers-color-scheme: dark) {
   html .fancy-image {
     box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .paper-preview > img {
     box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .figures img {
     box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
   }
-}
-@media (prefers-color-scheme: dark) {
   html .name_box .venue {
     color: #bdf;
   }
-}
-@media (prefers-color-scheme: dark) {
   html .footer {
     background-color: #354040;
     color: #FFF;
@@ -149,13 +112,9 @@
   html .footer a {
     color: #fff;
   }
-}
-@media (prefers-color-scheme: dark) {
   html a {
     color: #bdf;
   }
-}
-@media (prefers-color-scheme: dark) {
   html .st1 {
     display: inline;
     fill: none;
@@ -197,15 +156,15 @@
   }
   html .st10 {
     opacity: 0.4;
-    fill: #a7eb;
+    fill: rgba(170, 119, 238, 0.7333333333);
   }
   html .st11 {
     opacity: 0.8;
-    fill: #a7eb;
+    fill: rgba(170, 119, 238, 0.7333333333);
   }
   html .st12 {
     opacity: 0.4;
-    fill: #a7eb;
+    fill: rgba(170, 119, 238, 0.7333333333);
   }
   html .st13 {
     opacity: 0.25;
@@ -383,7 +342,7 @@
     fill: #bbf;
   }
   html .st43 {
-    fill: #a7eb;
+    fill: rgba(170, 119, 238, 0.7333333333);
   }
   html .st44 {
     opacity: 0.4;
@@ -406,8 +365,6 @@
     opacity: 0.55;
     fill: #bbf;
   }
-}
-@media (prefers-color-scheme: dark) {
   html #background_image svg {
     opacity: 0.75;
   }
@@ -417,12 +374,10 @@
     background-color: #fef9f7;
     color: #000;
   }
-
   html .section_text {
-    background-color: #cde6f7f2;
+    background-color: rgba(205, 230, 247, 0.9490196078);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
-
   html .nav a {
     color: #444;
   }
@@ -430,11 +385,9 @@
     background-color: #de3d83;
     color: #f4f4f4;
   }
-
   html .navbar_item {
     color: #333;
   }
-
   html #style-menu ul button {
     border: none;
     font-size: 1.25em;
@@ -442,7 +395,6 @@
     background-color: #de3d83;
     border-radius: 0.75em;
   }
-
   /* Only apply hover effect when the user is using a mouse-like controller. Eliminate
    * sticky hover on mobile.
    * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
@@ -457,71 +409,51 @@
   html .project_header .text .venue {
     color: #4783A5;
   }
-}
-@media (prefers-color-scheme: light) {
+  html .project_author_list a, .author .name a {
+    color: #000;
+  }
+  html .project_author_list a:hover, .author .name a:hover {
+    color: #4783A5;
+  }
   parent #header_img {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
-}
-@media (prefers-color-scheme: light) {
   html .page-content {
     background-color: #dbf4ff;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
-}
-@media (prefers-color-scheme: light) {
   html .section {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   }
-}
-@media (prefers-color-scheme: light) {
   html .section:nth-child(4n+1) {
     background-color: rgba(1, 161, 223, 0.125);
   }
-}
-@media (prefers-color-scheme: light) {
   html .section:nth-child(4n+2) {
     background-color: rgba(1, 161, 223, 0.25);
   }
-}
-@media (prefers-color-scheme: light) {
   html .section:nth-child(4n+3) {
     background-color: rgba(1, 161, 223, 0.375);
   }
-}
-@media (prefers-color-scheme: light) {
   html .section:nth-child(4n+0) {
     background-color: rgba(1, 161, 223, 0.5);
   }
-}
-@media (prefers-color-scheme: light) {
   html h1 {
     color: #f4f4f4;
   }
-}
-@media (prefers-color-scheme: light) {
   html h2, html .section_header {
     background-color: #de3d83;
     color: #f4f4f4;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
-}
-@media (prefers-color-scheme: light) {
   html h3 {
     color: #000;
   }
-}
-@media (prefers-color-scheme: light) {
   html h4 {
     color: #000;
   }
-}
-@media (prefers-color-scheme: light) {
   html div.warning {
     border-top: 3px solid #de3d83;
   }
-}
-@media (prefers-color-scheme: light) {
   html .fancy_list a {
     color: #333;
   }
@@ -529,33 +461,21 @@
     background-color: #de3d83;
     color: #eee;
   }
-}
-@media (prefers-color-scheme: light) {
   html .name_box {
     color: #000;
   }
-}
-@media (prefers-color-scheme: light) {
   html .fancy-image {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
-}
-@media (prefers-color-scheme: light) {
   html .paper-preview > img {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
-}
-@media (prefers-color-scheme: light) {
   html .figures img {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   }
-}
-@media (prefers-color-scheme: light) {
   html .name_box .venue {
     color: #4783A5;
   }
-}
-@media (prefers-color-scheme: light) {
   html .footer {
     background-color: #354040;
     color: #FFF;
@@ -563,13 +483,9 @@
   html .footer a {
     color: #fff;
   }
-}
-@media (prefers-color-scheme: light) {
   html a {
     color: #4783A5;
   }
-}
-@media (prefers-color-scheme: light) {
   html .st1 {
     display: inline;
     fill: none;
@@ -827,7 +743,7 @@ html.darkmode {
 }
 
 html.darkmode .section_text {
-  background-color: #334e;
+  background-color: rgba(51, 51, 68, 0.9333333333);
   box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
 }
 
@@ -861,6 +777,14 @@ html.darkmode #style-menu ul button {
   }
 }
 html.darkmode .project_header .text .venue {
+  color: #bdf;
+}
+
+html.darkmode .project_author_list a, .author .name a {
+  color: #ddd;
+}
+
+html.darkmode .project_author_list a:hover, .author .name a:hover {
   color: #bdf;
 }
 
@@ -996,15 +920,15 @@ html.darkmode .st9 {
 }
 html.darkmode .st10 {
   opacity: 0.4;
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st11 {
   opacity: 0.8;
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st12 {
   opacity: 0.4;
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st13 {
   opacity: 0.25;
@@ -1182,7 +1106,7 @@ html.darkmode .st42 {
   fill: #bbf;
 }
 html.darkmode .st43 {
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st44 {
   opacity: 0.4;
@@ -1216,7 +1140,7 @@ html.lightmode {
 }
 
 html.lightmode .section_text {
-  background-color: #cde6f7f2;
+  background-color: rgba(205, 230, 247, 0.9490196078);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -1250,6 +1174,14 @@ html.lightmode #style-menu ul button {
   }
 }
 html.lightmode .project_header .text .venue {
+  color: #4783A5;
+}
+
+html.lightmode .project_author_list a, .author .name a {
+  color: #000;
+}
+
+html.lightmode .project_author_list a:hover, .author .name a:hover {
   color: #4783A5;
 }
 
@@ -1595,10 +1527,7 @@ html.lightmode .st48 {
   fill: #662D91;
 }
 
-/* One column layout */
-/* Two column layout */
-/* Project page layout */
-/* Two column layout */
+/* One column layout */ /* Two column layout */ /* Project page layout */ /* Two column layout */
 /******************************/
 /*         NAVBAR             */
 /******************************/
@@ -1638,12 +1567,10 @@ body a.navbar_link:hover {
   body .vanishing {
     display: none !important;
   }
-
   body .section_panel {
     max-width: 100%;
     width: 100vw;
   }
-
   body .body {
     justify-content: left;
   }
@@ -1699,10 +1626,8 @@ body #style-menu ul {
   display: none;
   position: absolute;
   right: 0;
-  list-style-type: none;
-  /* Remove bullets */
-  margin: 0;
-  /* Remove margins */
+  list-style-type: none; /* Remove bullets */
+  margin: 0; /* Remove margins */
   padding: 0;
 }
 
@@ -1801,7 +1726,6 @@ html.singlecolumn .section_panel {
     width: 100%;
     max-width: 100%;
   }
-
   html.singlecolumn .project_title {
     font-size: 20pt !important;
   }
@@ -1813,8 +1737,7 @@ html.singlecolumn .section_text {
 }
 
 html.singlecolumn .project_header {
-  display: flex;
-  /* equal child height */
+  display: flex; /* equal child height */
 }
 
 html.singlecolumn .project_header .image {
@@ -1843,9 +1766,13 @@ html.singlecolumn .project_header .text .project_title {
   text-align: left;
 }
 
-html.singlecolumn .project_header .text .venue {
+html.singlecolumn .project_header .text .venue, .project_author_list {
   line-height: 1.4;
   padding-left: 1em;
+}
+
+html.singlecolumn .project_author_list a {
+  text-decoration: none;
 }
 
 html.singlecolumn .project_header .text .mini_abstract {
@@ -2001,7 +1928,6 @@ html.singlecolumn h2, html.singlecolumn .section_header {
   html.singlecolumn h1 {
     font-size: 75px;
   }
-
   html.singlecolumn .title {
     padding: 8px;
   }
@@ -2111,7 +2037,6 @@ html.singlecolumn .name {
     padding-bottom: 15px;
     text-align: center;
   }
-
   html.singlecolumn #header_img {
     width: 60vw;
     height: 60vw;
@@ -2121,12 +2046,10 @@ html.singlecolumn .name {
     display: inline-block;
     float: none;
   }
-
   html.singlecolumn .header {
     width: 100vw;
     overflow: hidden;
   }
-
   html.singlecolumn .name {
     margin-top: 0;
     max-width: 100vw;
@@ -2134,13 +2057,11 @@ html.singlecolumn .name {
     padding-top: 0.5em;
     display: block;
   }
-
   html.singlecolumn .project_header {
     flex-direction: column;
     align-items: center;
     text-align: left;
   }
-
   html.singlecolumn .project_header .image {
     display: inline-block;
     width: 100%;
@@ -2151,16 +2072,13 @@ html.singlecolumn .name {
   html.singlecolumn .name_box {
     font-size: 3em;
   }
-
   html.singlecolumn .body {
     width: 100vw;
   }
-
   html.singlecolumn h3 {
     font-size: 2em;
     font-weight: 400;
   }
-
   html.singlecolumn h4 {
     text-align: left;
     font-weight: 400;
@@ -2289,6 +2207,10 @@ html.project .name_box > .authors > .author > .name {
   display: block;
 }
 
+html.project .name_box > .authors > .author > .name > a {
+  text-decoration: none;
+}
+
 html.project .name_box > .authors > .author > .affiliation {
   display: block;
   margin-top: -0.25em;
@@ -2311,8 +2233,7 @@ html.project .abstract {
   text-align: justify;
   width: 95%;
   padding-left: auto;
-  display: inline-block;
-  /* center */
+  display: inline-block; /* center */
 }
 
 html.project .section_header {
@@ -2334,8 +2255,7 @@ html.project .section_header {
 }
 
 html.project .section_panel {
-  width: auto;
-  /* undo a width: 100% from somewhere else */
+  width: auto; /* undo a width: 100% from somewhere else */
   max-width: 400px;
   margin: 1em;
   box-sizing: border-box;

@@ -127,9 +127,63 @@
               <div class="section_text">
 
                 <div class="project_header">
+                    <div class="image"><img src="Research/WNoDS/RepresentativeImage.jpg"></div>
+                    <div class="text">
+                        <div class="project_title">Winding Numbers on Discrete Surfaces</div>
+                        <div class="project_author_list">
+                            <a href="https://nzfeng.github.io/">Nicole Feng</a>,
+                            Mark Gillespie,
+                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a>
+                        </div>
+                        <div class="venue">  ACM TOG (SIGGRAPH 2023) </div>
+                        <div class="mini_abstract">
+                            Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven invaluable in robust geometry processing. However, standard definitions do not immediately apply on surfaces, where not all curves bound regions. We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions. Ultimately, our algorithm yields (i) a closed completion the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region.
+                        </div>
+                    </div>
+                </div>
+                <div class="project_links">
+                    <a href="Research/WNoDS/index.html" <span class="project_link">project</span></a>
+                    <a href="Research/WNoDS/WindingNumbersOnSurfaces.pdf" <span class="project_link">pdf (16.5 mb)</span></a>
+                    <!-- <a href="https://youtu.be/3czWJxSmCuc" <span class="project_link">video (20 min)</span></a> -->
+                    <!-- <a href="https://github.com/MarkGillespie/intrinsic-triangulations-demo" <span class="project_link" >code (C++ demo app)</span></a> -->
+                    <a href="Research/WNoDS/bib.txt" <span class="project_link">bibtex</span></a>
+                </div>
+
+                <div class="project_header">
+                    <div class="image"><img src="Research/intrinsic-coarsening/RepresentativeImage.png"></div>
+                    <div class="text">
+                        <div class="project_title">Surface Simplification using Intrinsic Error Metrics</div>
+                        <div class="project_author_list">
+                            <a href="https://www.dgp.toronto.edu/~hsuehtil/">Hsueh-Ti Derek Liu</a>,
+                            Mark Gillespie,
+                            <a href="https://www.gitshowcase.com/benchislett">Benjamin Chislett</a>,
+                            <a href="https://nmwsharp.com/">Nicholas Sharp</a>,
+                            <a href="https://www.cs.toronto.edu/~jacobson/">Alec Jacobson</a>,
+                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a>
+                        </div>
+                        <div class="venue">  ACM TOG (SIGGRAPH 2023) </div>
+                        <div class="mini_abstract">
+                            This paper describes a method for fast simplification of surface meshes. Rather than approximate the extrinsic geometry, we construct a coarse intrinsic triangulation of the input domain. In the spirit of the quadric error metric (QEM), we perform greedy decimation while agglomerating global information about approximation error. In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature “drifts” during simplification. The overall payoff is a “black box” approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.
+                        </div>
+                    </div>
+                </div>
+                <div class="project_links">
+                    <a href="Research/intrinsic-coarsening/index.html" <span class="project_link">project</span></a>
+                    <a href="Research/intrinsic-coarsening/IntrinsicErrorMetric.pdf" <span class="project_link">pdf (12.1 mb)</span></a>
+                    <!-- <a href="https://youtu.be/3czWJxSmCuc" <span class="project_link">video (20 min)</span></a> -->
+                    <!-- <a href="https://github.com/MarkGillespie/intrinsic-triangulations-demo" <span class="project_link" >code (C++ demo app)</span></a> -->
+                    <a href="Research/intrinsic-coarsening/bib.txt" <span class="project_link">bibtex</span></a>
+                </div>
+
+                <div class="project_header">
                     <div class="image"><img src="Research/integer-coordinates/SmallRepresentativeImage.svg"></div>
                     <div class="text">
                         <div class="project_title">Integer Coordinates for Intrinsic Geometry Processing</div>
+                        <div class="project_author_list">
+                            Mark Gillespie,
+                            <a href="https://nmwsharp.com/">Nicholas Sharp</a>,
+                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a>
+                        </div>
                         <div class="venue">  ACM TOG (SIGGRAPH Asia 2021) </div>
                         <div class="mini_abstract">
                             This paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to a broader set of operations needed for mesh processing. As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.
@@ -151,6 +205,11 @@
                     <div class="image"><img src="Research/int-tri-course/SmallRepresentativeImage.svg"></div>
                     <div class="text">
                         <div class="project_title">Geometry Processing with Intrinsic Triangulations</div>
+                        <div class="project_author_list">
+                            <a href="https://nmwsharp.com/">Nicholas Sharp</a>,
+                            Mark Gillespie,
+                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a>
+                        </div>
                         <div class="venue"> ACM SIGGRAPH Courses (2021), IMR 2021 Courses </div>
                         <div class="mini_abstract">
                             Intrinsic triangulations de-couple the mesh used to encode geometry from the one used for computation. The basic shift in perspective is to encode the geometry of a mesh not in terms of ordinary vertex positions, but instead only in terms of edge lengths. This course provides a first introduction to intrinsic triangulations and their use in mesh processing algorithms, covering the theory, practical details, and some cutting-edge research in the area.
@@ -169,6 +228,11 @@
                     <div class="image"><img src="Research/CEPS/SmallRepresentativeImage.png"></div>
                     <div class="text">
                         <div class="project_title">Discrete Conformal Equivalence of Polyhedral Surfaces</div>
+                        <div class="project_author_list">
+                            Mark Gillespie,
+                            <a href="https://page.math.tu-berlin.de/~springb/">Boris Springborn</a>,
+                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a>
+                        </div>
                         <div class="venue">  ACM TOG (SIGGRAPH 2021) </div>
                         <div class="mini_abstract">
                             We present a numerical method for surface parameterization, leveraging <em>hyperbolic geometry</em> to yield maps that are locally injective and discretely conformal in an exact sense. Stress tests involving difficult cone configurations and near-degenerate triangulations indicate that the method is extremely robust in practice, and provides high-quality interpolation even on meshes with poor elements.
@@ -198,7 +262,7 @@
               <p>
                 In my spare time, I like to fold origami and knit. You can find more <a href="hobbies.html">here</a>.
               </p>
-              Email: <a href="mailto:mgillesp@andrew.cmu.edu" target="_top">mgillesp@andrew.cmu.edu</a>
+              Email: <a href="mailto:mgillesp@cs.cmu.edu" target="_top">mgillesp@cs.cmu.edu</a>
               <hr />
             </div>
           </div>
@@ -423,9 +487,9 @@
 
     <!--</div>-->
     <div class="footer">
-      <a href="mailto:mgillesp@andrew.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
+      <a href="mailto:mgillesp@cs.cmu.edu" target="_top" class="footer_email">mgillesp@cs.cmu.edu</a>
       <hr />
-      Mark Gillespie 2021
+      Mark Gillespie 2023
     </div>
 
     <div id="background_image"><svg viewbox="25 20 500 250">

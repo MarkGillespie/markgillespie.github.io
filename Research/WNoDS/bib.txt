@@ -1,0 +1,10 @@
+@article{Feng:2023:WND,
+  author = {Feng, Nicole and Gillespie, Mark and Crane, Keenan},
+  title = {Winding Numbers on Discrete Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {XX},
+  number = {X},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+}

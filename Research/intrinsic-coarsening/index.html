@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-us" class="nojs project">
+  <head>
+    <meta charset="UTF-8">
+    <title>Surface Simplification using Intrinsic Error Metrics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
+    <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <script type="text/javascript">
+      // === Cookie stuff for saving style (Maybe I should switch to select/options)
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + d.toUTCString();
+        const cookieString =
+          cname +
+          "=" +
+          encodeURIComponent(cvalue) +
+          ";" +
+          expires +
+          ";path=/;SameSite=Strict";
+        document.cookie = cookieString;
+      }
+
+      function getCookie(cname) {
+        const name = cname + "=";
+        const ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return decodeURIComponent(c.substring(name.length, c.length));
+          }
+        }
+        return "";
+      }
+
+
+     /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+     function doDropdown() {
+         document.getElementById("style-menu").classList.toggle("show");
+         document.getElementById("style-menu").classList.toggle("selected");
+     }
+
+     function setStyle(style) {
+         setCookie("style", style);
+         const html = document.getElementsByTagName('html')[0];
+         html.classList.remove("lightmode");
+         html.classList.remove("darkmode");
+         html.classList.add(style);
+     }
+
+     // Close the dropdown if the user clicks outside of it
+     window.onclick = function(event) {
+         if (!event.target.matches('.dropbtn') && !event.target.matches('#style-menu button')) {
+             document.getElementById('style-menu').classList.remove('show');
+             document.getElementById('style-menu').classList.remove('selected');
+         }
+     }
+
+     window.onload = function() {
+         document.getElementById("background_image").style.opacity = 1.0;
+
+         // Deferred image loading
+         // https://varvy.com/pagespeed/defer-images.html
+         let images = document.getElementsByTagName("img");
+         for (let i = 0; i < images.length; i++) {
+             if (images[i].getAttribute("data-src")) {
+                 images[i].setAttribute("src", images[i].getAttribute("data-src"));
+             }
+         }
+
+         document.getElementsByTagName('html')[0].classList.remove("nojs");
+     }
+
+     // Load saved style
+     const currentStyle=getCookie("style");
+     if (currentStyle) setStyle(currentStyle);
+
+    </script>
+    <!-- tweak figure background color -->
+    <style>
+     html.darkmode .paper_teaser {
+         background: #557;
+     }
+    </style>
+  </head>
+
+  <body class="nojs singlecolumn">
+    <div class="mega-container">
+    <div class="page-content">
+    <div class="navbar">
+      <div class="navbar_icon">
+          <img src="images/plain_hyperboloid_model.svg" alt="">
+      </div>
+      <div class="navbar_buttons">
+        <a href="../../index.html#research" class="navbar_link"><span class="navbar_item">Research</span></a>
+        <a href="../../index.html#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a>
+        <a href="../../index.html#awards" class="navbar_link vanishing"><span class="navbar_item">Awards</span></a>
+        <a href="../../index.html#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a>
+        <a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Selected Talks Given</span></a>
+        <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
+        <a href="../../index.html#about" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+        <div id="style-menu" class="jsonly">
+            <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
+            <ul>
+                <li><button onclick="setStyle('lightmode');">Light Mode</button></li>
+                <li><button onclick="setStyle('darkmode');">Dark Mode</button></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper" id="home">
+        <div class="name_box">
+            <div class="title">Surface Simplification using Intrinsic Error Metrics</div>
+            <div class="venue">ACM Transactions on Graphics (SIGGRAPH 2023)</div>
+            <div class="authors">
+
+                <div class="author">
+                    <span class="name"><a href="https://www.dgp.toronto.edu/~hsuehtil/">Hsueh-Ti Derek Liu</a></span>
+                    <span class="affiliation">University of Toronto & Roblox</span>
+                </div>
+                <div class="author">
+                    <span class="name">Mark Gillespie</span>
+                    <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+                <div class="author">
+                    <span class="name"><a href="https://www.gitshowcase.com/benchislett">Benjamin Chislett</a></span>
+                    <span class="affiliation">University of Toronto</span>
+                </div>
+                <div class="author">
+                    <span class="name"><a href="https://nmwsharp.com/">Nicholas Sharp</a></span>
+                    <span class="affiliation">University of Toronto & NVIDIA</span>
+                </div>
+                <div class="author">
+                    <span class="name"><a href="https://www.cs.toronto.edu/~jacobson/">Alec Jacobson</a></span>
+                    <span class="affiliation">University of Toronto & Adobe Research</span>
+                </div>
+                <div class="author">
+                    <span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a></span>
+                    <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+            </div>
+            <div class="paper_teaser">
+                <img src="images/teaser.png">
+            </div>
+
+            <div class="quick_links">
+                <a href="IntrinsicErrorMetric.pdf" <span class="project_link">pdf (12.1 mb)</span></a>
+                <!-- <a href="https://youtu.be/3czWJxSmCuc" <span class="project_link">video (20 min)</span></a> -->
+                <!-- <a href="https://github.com/MarkGillespie/intrinsic-triangulations-demo" <span class="project_link" >code (C++ demo app)</span></a> -->
+                <a href="bib.txt" <span class="project_link">bibtex</span></a>
+            </div>
+
+            <div class="abstract">
+                This paper describes a numerical method for surface parameterization, yielding maps that are locally injective and discretely conformal in an exact sense. Unlike previous methods for discrete conformal parameterization, the method is guaranteed to work for any manifold triangle mesh, with no restrictions on triangulation quality or cone singularities. In particular we consider maps from surfaces of any genus (with or without boundary) to the plane, or globally bijective maps from genus zero surfaces to the sphere. Recent theoretical developments show that each task can be formulated as a convex problem where the triangulation is allowed to change—we complete the picture by introducing the machinery needed to actually construct a discrete conformal map.  In particular, we introduce a new scheme for tracking correspondence between triangulations based on <em>normal coordinates</em>, and a new interpolation procedure based on layout in the <em>light cone</em>.  Stress tests involving difficult cone configurations and near-degenerate triangulations indicate that the method is extremely robust in practice, and provides high-quality interpolation even on meshes with poor elements.
+            </div>
+    </div>
+
+      <div class="body">
+          <div class="section_panel">
+            <div class="section_header"> Paper </div>
+            <div class="section_text">
+                <a href="IntrinsicErrorMetric.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"><br/>
+                    <span> pdf (12.1 mb)</span>
+                </a>
+                <hr />
+            </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Acknowledgements </div>
+              <div class="section_text">
+                  This work was funded in part by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship, NSERC Discovery (RGPIN–2022–04680), the Ontario Early Research Award program, the Canada Research Chairs Program, a Sloan Research Fellowship, the DSI Catalyst Grant program, the Fields Institute for Mathematics, the Vector Institute for AI, and gifts from Adobe Inc., Facebook Reality Labs, and Google, Inc.
+                  <hr />
+              </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Bibtex </div>
+              <div class="section_text bibEntry">@article{Liu:2023:SSI,
+    author = {Liu, Derek and Gillespie, Mark and Chislett, Benjamin and Sharp, Nicholas and Jacobson, Alec and Crane, Keenan},
+    title = {Surface Simplification using Intrinsic Error Metrics},
+    journal = {ACM Trans. Graph.},
+    volume = {XX},
+    number = {X},
+    year = {2023},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+}<hr /><div></div></div>
+          </div>
+
+          <!-- <div class="section_panel figures">
+               <div class="section_header"> Selected Figures </div>
+               <div class="section_text">
+               <img src="images/figures/figure28.jpg">
+               <div class="caption">
+               Our method robustly handles extremely poor triangulations (left), including almost all models from Thingi10k, as well as extreme configurations of cone singularities (center). It also guarantees global injectivity for discrete conformal maps to the sphere—a case not handled by previous algorithms.
+               </div>
+               <hr/>
+
+               </div>
+               </div> -->
+
+      </div>
+
+      <!--</div>-->
+      <div class="footer">
+          <a href="mailto:mgillesp@cs.cmu.edu" target="_top" class="footer_email">mgillesp@cs.cmu.edu</a>
+          <hr />
+          Mark Gillespie 2023
+      </div>
+    </div>
+  </body>
+</html>

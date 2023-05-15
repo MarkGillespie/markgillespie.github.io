@@ -1,0 +1,10 @@
+@article{Liu:2023:SSI,
+  author = {Liu, Derek and Gillespie, Mark and Chislett, Benjamin and Sharp, Nicholas and Jacobson, Alec and Crane, Keenan},
+  title = {Surface Simplification using Intrinsic Error Metrics},
+  journal = {ACM Trans. Graph.},
+  volume = {XX},
+  number = {X},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+}
