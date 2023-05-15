@@ -2200,11 +2200,13 @@ html.project .name_box > .authors {
 html.project .name_box > .authors > .author {
   margin-left: 0.25em;
   margin-right: 0.25em;
+  line-height: 1;
 }
 
 html.project .name_box > .authors > .author > .name {
   font-weight: 600;
   display: block;
+  margin-bottom: 0.5em;
 }
 
 html.project .name_box > .authors > .author > .name > a {
