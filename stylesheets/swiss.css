@@ -45,8 +45,8 @@
   }
 }
 @media (prefers-color-scheme: dark) {
-  html .project_author_list a, html .author .name a {
-    color: #ddd;
+  html .project_author_list, html .project_author_list a, html .author .name a {
+    color: #c1c1d8;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -469,7 +469,7 @@
   }
 }
 @media (prefers-color-scheme: light) {
-  html .project_author_list a, html .author .name a {
+  html .project_author_list, html .project_author_list a, html .author .name a {
     color: #000;
   }
 }
@@ -884,8 +884,8 @@ html.darkmode .project_header .text .venue {
   color: #bdf;
 }
 
-html.darkmode .project_author_list a, html.darkmode .author .name a {
-  color: #ddd;
+html.darkmode .project_author_list, html.darkmode .project_author_list a, html.darkmode .author .name a {
+  color: #c1c1d8;
 }
 
 html.darkmode .project_author_list a:hover, html.darkmode .author .name a:hover {
@@ -1281,7 +1281,7 @@ html.lightmode .project_header .text .venue {
   color: #4783A5;
 }
 
-html.lightmode .project_author_list a, html.lightmode .author .name a {
+html.lightmode .project_author_list, html.lightmode .project_author_list a, html.lightmode .author .name a {
   color: #000;
 }
 

@@ -68,8 +68,8 @@
         color: $link-color;
     }
 
-    #{$parent} .project_author_list a, #{$parent} .author .name a {
-        color: $ordinary-font-color;
+    #{$parent} .project_author_list, #{$parent} .project_author_list a, #{$parent} .author .name a {
+        color: $name-color;
     }
 
     #{$parent} .project_author_list a:hover, #{$parent} .author .name a:hover {
