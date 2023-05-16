@@ -1,0 +1,264 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,letterpaper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\usepackage[sorting=none,        % show refs in text order
+            style=trad-abbrv,    % apparently this is similar to ACM formatting
+            bibstyle=authoryear, % don't number refs
+            firstinits=false     % print full author names
+           ]{biblatex}
+\bibliography{publications}                        % 'publications' is the name of a BibTeX file
+
+% moderncv themes
+\moderncvstyle{casual}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% character encoding
+\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+%\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+% adjust the page margins
+\usepackage[margin=1in]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+% personal data
+\name{Mark}{Gillespie}
+\title{Curriculum Vitae}                               % optional, remove / comment the line if not wanted
+%\address{street and number}{postcode city}{country}% optional, remove / comment the line if not wanted; the "postcode city" and and "country" arguments can be omitted or provided empty
+\phone[mobile]{+1~(908)~477~1822}                   % optional, remove / comment the line if not wanted
+%\phone[fixed]{+2~(345)~678~901}                    % optional, remove / comment the line if not wanted
+%\phone[fax]{+3~(456)~789~012}                      % optional, remove / comment the line if not wanted
+\email{mgillesp@cs.cmu.edu.edu}                 % optional, remove / comment the line if not wanted
+\homepage{www.markjgillespie.com}                   % optional, remove / comment the line if not wanted
+%\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+%\photo[64pt][0.4pt]{card_image}                    % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+%\quote{Some quote}                                 % optional, remove / comment the line if not wanted
+
+% to show numerical labels in the bibliography (default is to show no labels); only useful if you make citations in your resume
+%\makeatletter
+%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+%\makeatother
+%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}% CONSIDER REPLACING THE ABOVE BY THIS
+
+% bibliography with mutiple entries
+% \usepackage{multibib}
+% \newcites{book,misc}{{Books},{Others}}
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+\section{Education}
+\cventry{2018-present}{PhD Computer Science}{Carnegie Mellon University}{Pittsburgh}{}{Advisor: Keenan Crane. Topics: geometry processing, computer graphics}
+\cventry{2014--2018}{B.S. Computer Science, Mathematics}{California Institute of Technology}{Pasadena}{Double major. GPA: 4.1}{}
+% {The computer science degree involves courses in systems, algorithms, functional programming, and complexity theory. I supplemented these courses with electives in computer graphics and advanced algorithms.
+% The math degree involves courses in abstract algebra, differential geometry, and analysis. I supplemented these courses with electives in algebraic topology and Riemannian geometry.}  % arguments 3 to 6 can be left empty
+
+%----------------------------------
+\section{Work and Research Experience}
+
+\cventry{August 2018-Present}{Graduate Researcher}{Carnegie Mellon University}{}{}
+{Advisor: Keenan Crane}
+
+% \cventry{Fall 2017}{Teaching Assistant for CS 171, Introduction to Computer Graphics}{California Institute of Technology}{}{}{Under Professor Alan Barr, graded problem sets, held weekly office hours, delivered recitation lectures}
+
+\cventry{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}{}
+{Mentor: Peter Schr\"oder. Implemented an energy-preserving integrator for 2D MHD on grids and proved its conservation properties
+% \begin{itemize}%
+% \item Analyzed conservation behavior of the algorithm using discrete differential geometry
+% \item Implemented algorithm in Houdini
+% \end{itemize}
+}
+
+\cventry{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}{}
+{Mentor: Mathieu Desbrun. Developed an algorithm for computing polymer conformation using dimensionality reduction techniques.
+% \begin{itemize}%
+% \item Implemented algorithm in C++
+% \item Experimented with applying the algorithm to point cloud denoising
+% \end{itemize}
+}
+
+\cventry{Jan. 2016 -- 2017}{Undergraduate Researcher}{California Institute of Technology}{}{}
+{Mentor: Alan Barr. Explored applications of interval analysis to root-finding and solving differential equations
+% \begin{itemize}%
+% \item Implemented interval analysis library in Haskell
+% \item Implemented graphical viewer for interval root-finding and minimization algorithms
+% \end{itemize}
+}
+
+% \cventry{Spring 2017, Spring 2016}{Teaching Assistant for CS 38, Introduction to Algorithms}{California Institute of Technology}{}{}{Under Professor Leonard Schulman, graded problem sets and held weekly office hours}
+
+\cventry{Summer 2015}{Software Engineering Intern}{Google}{}{}
+{Prototyped new credit card entry interface for Android library. Developed in Java}
+
+% ----------------------------------
+
+\nocite{Feng:2023:WND}
+\nocite{Liu:2023:SSI}
+\nocite{Gillespie:2021:ICI}
+\nocite{Sharp:2021:GPI}
+\nocite{Gillespie:2021:DCE}
+\printbibliography[title={Publications}]
+%% \bibliographystyle{plain}
+
+%----------------------------------
+\section{Talks}
+\cventry
+{Nov. 2021}
+{Integer Coordinates for Intrinsic Geometry Processing}
+{ACM SIGGRAPH Asia 2021}{}{}
+{}
+\cventry
+{Aug. 2021}
+{Discrete Conformal Equivalence of Polyhedral Surfaces}
+{ACM SIGGRAPH 2021}{}{}
+{}
+\cventry
+{Aug. 2021}
+{Geometry Processing with Intrinsic Triangulations}
+{ACM SIGGRAPH Courses (SIGGRAPH 2021)}{}{}
+{}
+\cventry
+{June 2021}
+{Geometry Processing with Intrinsic Triangulations}
+{International Meshing Roundtable Courses (IMR 2021)}{}{}
+{}
+
+
+% \cventry
+%   {Oct. 2017}
+%   {2D Plasma Simulation via Discrete Exterior Calculus}
+%   {California Institute of Technology Summer Research Seminar Day}{}{}
+%   {15 minute presentation on the results of my summer research}
+
+% \cventry
+%   {Sept. 2017}
+%   {Combinatorics and the Probabilistic Method}
+%   {Westfield High School Seminar in College Mathematics}{}{}
+%   {30 minute presentation to a high school math class. Gave an introduction to elementary combinatorics and presented some simple applications of the probabilistic method}
+
+% \cventry
+%   {Mar. 2017}
+%   {Continuous and Discrete Mechanics for Variational Integrators}
+%   {California Institute of Technology CS 177b}{}{}
+%   {1.5 hour final presentation for a computer graphics class. Gave an overview of Hamiltonian/Lagrangian mechanics and how to discretize them to produce variational time integrators}
+
+% \cventry
+%   {Dec. 2016}
+%   {Measurement in Quantum Mechanics}
+%   {Westfield High School Seminar in College Mathematics}{}{}
+%   {30 minute presentation to a high school math class. Gave an introduction to projective measurements in Quantum Mechanics, working through the example of the Stern-Gerlach device}
+
+% \cventry
+%   {Oct. 2016}
+%   {Computing Chromosome Embedding from Contact Frequencies}
+%   {California Institute of Technology Summer Research Seminar Day}{}{}
+%   {15 minute presentation on the results of my summer research}
+
+%----------------------------------
+% \section{Selected Classes Taken}
+
+% \cvitemwithcomment
+%   {CS 177ab}
+%   {Discrete Differential Geometry}
+%   {discrete study of: differential forms, deRham cohomology, Poisson problems, variational mechanics}
+
+% \cvitemwithcomment
+%   {CS 176}
+%   {Introduction to Computer Graphics Research}
+%   {geometry processing, data visualization, vector fields and flows}
+
+% \cvitemwithcomment
+%   {CS 171}
+%   {Introduction to Computer Graphics Laboratory}
+%   {shaders, geometry processing, physical simulation, ray tracing}
+
+% \cvitemwithcomment
+%   {Ma 151abc}
+%   {Algebraic Topology}
+%   {fundamental groups, covering spaces, homology, cohomology, spectral sequences, characteristic classes}
+
+% \cvitemwithcomment
+%   {Ma 157ab}
+%   {Riemannian Geometry}
+%   {Riemannian metrics, geodesics, vector fields, Riemannian curvature, Representation theory of Lie groups}
+
+% \cvitemwithcomment
+%   {CS 150}
+%   {Probability and Algorithms}
+%   {analysis of probabilistic algorithms, the probabilistic method}
+
+% \cvitemwithcomment
+%   {CS 139}
+%   {Analysis and Design of Algorithms}
+%   {streaming algorithms, experts algorithm, SDPs, spectral graph theory}
+
+
+% \cvitemwithcomment
+%   {PS 172}
+%   {Bayesian Statistics}
+%   {Bayesian updates, Markov Chain Monte Carlo}
+
+%----------------------------------
+%\section{Publications}
+%\cventry{ongoing}{Smooth Embeddings from Pairwise Distances}{}{}{}
+%{I am currently working with Professor Mathieu Desbrun to write up the work we did together to submit for publication}
+
+  \section{Awards/Fellowships}
+  \cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{}
+  \cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
+  \cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
+  \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31
+    points (rank: 365/3214)}
+  
+  \section{Service}
+  \cvitemwithcomment{Reviewer}{SIGGRAPH (2019, 2022), SIGGRAPH Asia (2022)}{}
+  \cvitemwithcomment{Departmental}{Organizer, Graphics Seminar (2020-2021);
+    Organizer, Graphics Reading Group(2022)}{}
+  
+  % ----------------------------------
+  \section{Programming Languages}
+  \cvitem{}{C/C++, Python, Java, Mathematica, Matlab, Haskell, Ocaml, \LaTeX}
+
+
+%\section{References}
+%\begin{cvcolumns}
+  %\cvcolumn{Category 1}{\begin{itemize}\item Person 1\item Person 2\item Person 3\end{itemize}}
+  %\cvcolumn{Category 2}{Amongst others:\begin{itemize}\item Person 1, and\item Person 2\end{itemize}(more upon request)}
+  %\cvcolumn[0.5]{All the rest \& some more}{\textit{That} person, and \textbf{those} also (all available upon request).}
+%\end{cvcolumns}
+
+% Publications from a BibTeX file without multibib
+%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
+%  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
+%\nocite{*}
+%\bibliographystyle{plain}
+%\bibliography{publications}                        % 'publications' is the name of a BibTeX file
+
+% Publications from a BibTeX file using the multibib package
+%\section{Publications}
+%\nocitebook{book1,book2}
+%\bibliographystylebook{plain}
+%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
+%\nocitemisc{misc1,misc2,misc3}
+%\bibliographystylemisc{plain}
+%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
+
+
+%\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
+\end{document}
+
+
+%% end of file `template.tex'.
