@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en_us">
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Material Derivatives</title>
+</head>
+
+<body>
+    <h1>What is the Material Derivative?</h1>
+    <p>The <em>material derivative</em>, \(\tfrac{D}{Dt}\), is a really useful type of derivative that shows up all over the place in fluid dynamics. Today we'll explore what it means.</p>
+
+    <h2>Warm Up: Directional Derivatives</h2>
+    <p> The directional derivative, \(\nabla_{\vec v} f(\vec x)\), answers the question <em>"if I start at position \(\vec x\) and move a little bit in the \(\vec v\) direction, how much does the value of function \(f\) that I see change?"</em>.</p>
+    <p> Imagine you are ice skating on a frozen lake. The lake's depth is a function \(h(\vec p)\) of your position \(\vec p\). If you glide in some direction, then we can plot the depth of the lake underneath you as a function of time. Let's call this new function \(z(t)\). It describes the depth of the lake that you see at time \(t\). The directional derivative of \(h\) tells you how quickly this depth \(z(t)\) changes as you glide. It is defined as the derivative of the depth underneath you, \(\frac{dz}{dt}\).</p>
+    <div id="directional-derivative-example" style="display:inline-block;"></div>
+    <canvas id="directional-derivative-plot" style="display:inline-block;"></canvas>
+    <br/>
+    <br/>
+    <details>
+        <summary><strong>Computing the Directional Derivative</strong></summary>
+    <p> To find the directional derivative, we compute the derivative of \(z\) at \(t=0\).
+        Say you start at position \(\vec p\) and move in direction \(\vec v\). Then your position at after gliding for time \(t\) is \(\vec p + t \vec v\). Let's write this position as \(\vec q(t) = \vec p + t \vec v\). We said that \(z(t)\) is the depth you see at time \(t\), so \(z(t) = h(\vec q(t))\). Now, applying the chain rule, we see that
+        \[\frac{dz(t)}{dt} = \frac{\partial h(\vec q(t))}{\partial x} \frac{d q_x(t)}{dt} + \frac{\partial h(\vec q(t))}{\partial y} \frac{d q_y(t)}{dt}.\]
+        Since \(q_x(t) = p_x + t v_x\), the derivative \(\tfrac{dq_x}{dt}\) is simply \(v_x\), and \(\tfrac{dq_y}{dt}\) is \(v_y\). Plugging this in to the equation above, we find that
+        \[\frac{dz(t)}{dt} = \frac{\partial h(\vec q(t))}{\partial x}v_x + \frac{\partial h(\vec q(t))}{\partial y}v_y.\]
+        This can be written more succinctly as
+        \[\frac{dz(t)}{dt} = \nabla h(\vec q(t)) \cdot \vec v.\]
+        Finally, we evaluate this derivative at \(t=0\) to find the directional derivative. This tells us that
+        \[\nabla_{\vec v}h(\vec p) = \nabla h(\vec p) \cdot \vec v.\]
+    </p>
+    </details>
+
+    <h2>The Material Derivative</h2>
+    <p>The material derivative, \(\tfrac{D f}{Dt}(\vec x)\) occurs in the context of fluid dynamics. Like the directional derivative, it measures how quickly the function \(f\) changes as you move. But this time, it answers the question <em>"If I start at position \(x\) and flow along with the fluid for a short time, how much does the value of function \(f\) that I see change?"</em>. This time, instead of choosing a direction to walk in, you just go with the flow and see where you wind up.</p>
+    <p>We can think about material derivatives with a similar analogy to the ice skating analogy above. Now, imagine that it is spring, and you are conoeing on the now-liquid lake. But you are lazy, so you don't paddle your canoe. You just flow along with the water. Again, the lake's depth is a function \(h(\vec p)\) of your position \(\vec p\). And as you flow along the surface of the water, you watch the depth of the lake change beneath you. Again, we get a function \(z(t)\) that describes the depth of the lake that you see at time \(t\). And in this case, the material derivative is \(\tfrac{dz}{dt}\).</p>
+    <div id="lie-derivative-example" style="display:inline-block;"></div>
+    <canvas id="lie-derivative-plot" style="display:inline-block;"></canvas>
+    <br/>
+    <br/>
+    <details>
+        <summary><strong>Computing the Material Derivative</strong></summary>
+        <p>This description of the material derivative makes it sound very hard to compute, but it's actually not too bad. The key idea is that when we flow along the fluid for a very short amount of time, it looks like we're moving in a straight line. Even though the path eventually curves, it looks straight if you zoom in close enough.</p>
+        <p>Now, let's do a bit of algebra. Let \(\vec q(t)\) denote your position after flowing along for time \(t\). Unlike last time, we don't have a nice formula for \(\vec q(t)\), but that's okay. Just like last time, we can compute that
+            \[\frac{dz(t)}{dt} = \nabla h(\vec q(t)) \cdot \frac{d\vec q(t)}{dt}.\]
+            Here, \(\tfrac{d\vec q(t)}{dt}\) is your velocity at time \(t\). Since you're flowing along with the fluid, this is just the velocity of the fluid at position \(\vec q(t)\). Let's call this fluid velocity \(v(\vec q(t))\). When we evaluate \(\tfrac{dz(t)}{dt}\) at \(t=0\), using the fact that \(\vec q(0) = \vec p\), we find that
+            \[\frac{Dh(\vec p)}{Dt} = \nabla h(\vec p) \cdot v(\vec p).\]
+            This is sometimes written
+            \[\frac {Dh}{Dt} = (v \cdot \nabla) h.\]
+        </p>
+    </details>
+
+    <h3>The Material Derivative for Time-Varying Functions</h3>
+    <p>The material derivative is actually slightly more complicated than what I presented above. </p>
+
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.min.js"></script>
+    <script src="js/directional_derivative.js"></script>
+    <script src="js/lie_derivatives.js"></script>
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle",
+      "\\S": "\\mathbb{S}",
+      "\\C": "\\mathbb{C}",
+      "\\R": "\\mathbb{R}",
+      "\\vvec": "\\begin{pmatrix} #1\\\\#2\\end{pmatrix}",
+      "\\mmat": "\\begin{pmatrix} #1 & #2 \\\\ #3 & #4\\end{pmatrix}",
+      "\\pd": "\\frac{\\partial #1}{\\partial #2}",
+      "\\pdo": "\\pd{}{#1}"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>
+</html>

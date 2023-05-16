@@ -1,0 +1,29 @@
+.hyperbolic_model {
+    display: inline-block;
+    padding: 1em;
+}
+
+.panel {
+    margin: 2em;
+}
+
+.panel > h3 {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+    margin-left:  20px;
+    margin-right: 20px;
+    border-bottom: 2px solid black;
+}
+
+.panel > .text {
+    /*padding: 2em;*/
+    margin-left:  20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    /*background-color: #01A1DF99;*/
+}
+
+.panel > .text > span {
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../swiss-formatting.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delaunay Rescaling</title>
+</head>
+
+<body>
+<div class="noise"></div>
+    <div class="page-content">
+        <div class="title">
+            <h1>Delaunay Rescaling</h1>
+        </div>
+
+    <div class="section">
+        <h2><a id="idea"></a>Idea</h2>
+        <div class="section-content">
+            <div class="section-text">
+                Often, we try to improve mesh quality by transforming our mesh into a Delaunay mesh. We understand how to perform edge flips to go from an input mesh to a conformally-equivalent Delaunay mesh. But we can also (sometimes) use conformal rescaling to make our mesh Delaunay.
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><a id="constraints"></a>Delaunay Constraints</h2>
+        <div class="section-content">
+            <img src="../images/hyperbolic_delaunay_flip.svg" style="max-width: 300px">
+            <div class="section-text" style="max-width: 600px;">
+                <p>
+                We want constraints on our scale factors to force our mesh to be Delaunay. The normal Delaunay condition in terms of interior angles seeems like it would lead to a horrible nonconvex problem. However, the problem looks a lot nicer if we use the hyperbolic Delaunay condition (which is equivalent to the Euclidean one).
+                </p>
+                <p>
+                The hyperbolic Delaunay is simply $\beta + \beta' + \gamma + \gamma' - \alpha - \alpha' \geq 0$, where the Greek letters are the lengths of the horocycles indicated in the figure. Under a conformal scaling by log scale factors $u_i$, the length of the horocycle at vertex $i$ is multiplied by $e^{-u_i}$. So the Delaunay condition is actually linear in 1 over the exponentiated scale factors!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><a id="equilateral"></a>Equilateral Triangles</h2>
+        <div class="section-content">
+            <img src="../images/horocyclic_arcs.svg" style="max-width: 300px">
+            <div class="section-text" style="max-width: 600px;">
+                <p>
+                If we just enforce the Delaunay constraint and then try to optimize some objective measuring how much we have scaled the mesh, then we scale the triangles so that they are just barely Delaunay. Instead, it would be nice to find <em>the most regular</em> Delaunay triangulation in some sense. One way to do this would be to optimize an energy that measures how far from equilateral the triangles are.
+                </p>
+                <p>
+                Recall that the length of horocyclic arc $\alpha$ is $\frac{\ell_1}{\ell_2 \ell_3}$. Thus, if the triangle is equilateral with side length $s$, then $\alpha = \frac 1s$. In particular, if the triangle is equilateral with side length 1, then $\alpha = 1$ for each horocyclic arc. So to encourage our mesh to be equilateral, we can just optimize $\sum_\alpha (\alpha - 1)^2$. The problem of finding the most equilateral conformally equivalent Delaunay mesh is just a quadratic program!
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

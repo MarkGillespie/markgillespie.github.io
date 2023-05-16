@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Lora:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+ <meta charset="UTF-8">
+ <title>Houdini</title>
+</head>
+
+<body>
+    <h2>Deleting old license files</h2>
+    <blockquote>
+        I got a reply from Side FX that works. Seems like my licenses list was pretty backlogged and was confusing the server. All I had to do was delete the <tt>licenses.local</tt> file under <tt>/Library/Preferences/sesi</tt> (please do not confuse this with path with <tt>/users/username/Library</tt>).
+    </blockquote>
+    <a href="https://www.sidefx.com/forum/topic/26594/?page=1#post-122766">Source.</a>
+
+  <center>
+    <img src="triangles.png" style="width: 40%;"></img>
+  </center>
+  To display vertex numbers, press d in the 3d window
+  <br/>
+  To collapse to a subnet, use shift-c
+  <br/>
+  To use a solver node each frame, hook "Input 1" up to the "Previous Frame" node
+  <br/>
+  Vertices on faces go clockwise when viewed from the outside
+
+  <h2>Combining Stills into Video</h2>
+    <div class="explanation">
+      <div class="example">
+        ffmpeg -r 60 -f image2 -s 1024x724 -i flattening_torus%d.png -vcodec libx264 -crf 25 -pix_fmt yuv420p flat.mp4
+      </div>
+      If you need to pad the frame number, use e.g. <code>pic%04d.png</code>.
+      <ul>
+        <li>
+          <code>-r</code> is the framerate (fps)
+        </li>
+        <li>
+          <code>-crf</code> is the quality, lower means better quality, 15-25 is usually good
+        </li>
+        <li>
+          <code>-s</code> is the resolution
+        </li>
+        <li>
+          <code>-pix_fmt yuv420p</code> specifies the pixel format, change this as needed
+        </li>
+      </ul>
+
+      the file will be output (in this case) to: flat.mp4
+    </div>
+
+  <h2>Half Edges</h2>
+  <details class="function_block">
+    <summary class="function_name">
+      int hedge_dstpoint(int geo, int hedge)
+    </summary>
+    <div class="explanation">
+      Returns the point this half edge points to.
+    </div>
+  </details>
+  <details class="function_block">
+    <summary class="function_name">
+      int hedge_dstvertex(int geo, int hedge)
+    </summary>
+    <div class="explanation">
+      Returns the vertex this half edge points to.
+    </div>
+  </details>
+  <details class="function_block">
+    <summary class="function_name">
+      int hedge_next(int geo, int hedge)
+    </summary>
+    <div class="explanation">
+      Returns the half edge that this one points to.
+    </div>
+  </details>
+  <details class="function_block">
+    <summary class="function_name">
+      int hedge_nextequiv(int geo, int hedge)
+    </summary>
+    <div class="explanation">
+      Returns the next half edge associated to this edge (i.e. flip for manifold meshes).
+    </div>
+  </details>
+  <details class="function_block">
+    <summary class="function_name">
+      int hedge_postdstpoint(int geo, int hedge)
+    </summary>
+    <div class="explanation">
+      Return the point that the next half edge points to.
+    </div>
+  </details>
+
+
+  <h2>Vertices</h2>
+  <details class="function_block">
+    <summary class="function_name">
+      int  setvertexattrib(int geo, string name, int prim_num, int vertex_num, &lt;type&gt; value)
+    </summary>
+    <div class="explanation">
+      Sets a vertex attribute.<br/>
+      To use a linear vertex index, set the prim_num to the linear vertex number and set vertex_num to -1. Note that this is different from how most other vertex functions work.<br/>
+      Returns the value of geo on success or -1 on failure.
+      <div class="example">
+        setvertexattrib(0, "angle", @vtxnum, -1, 0.76);
+      </div>
+    </div>
+  </details>
+
+  <details class="function_block">
+    <summary class="function_name">
+      &lt;type&gt; vertex(int geo, string attribute_name, int linear_vertex_index)<br/>
+      &lt;type&gt; vertex(int geo, string attribute_name, int prim_num, int vertex_num)
+    </summary>
+    <div class="explanation">
+      Accesses a vertex attribute. Can use a linear vertex index or a prim.
+      <div class="example">
+        vertex(0, "angle", opp_vertex);
+      </div>
+    </div>
+  </details>
+
+  <details class="function_block">
+    <summary class="function_name">
+      int vertexindex(int geo, int primnum, int vertex)
+    </summary>
+    <div class="explanation">
+      Gets a vertex's linear index from its prim and its index in the prim
+      <div class="example">
+        int my_index = vertexindex(0, my_prim, 2);
+      </div>
+    </div>
+  </details>
+
+  <details class="function_block">
+    <summary class="function_name">
+      int vertexpoint(int geo, int linear_vertex_number)
+    </summary>
+    <div class="explanation">
+      Gets the point a vertex is associated to.
+      <div class="example">
+        int my_point = vertexpoint(0, @vtxnum);
+      </div>
+      <div class="example">
+        int my_point = vertexpoint(0, 7);
+      </div>
+    </div>
+  </details>
+
+  <details class="function_block">
+    <summary class="function_name">
+      float ch(string path)
+    </summary>
+    <div class="explanation">
+      Return the parameter value from the node specified by <code>path</code>.<br/>
+      The following example returns the <code>ptolemy</code> parameter from its parent node
+      <div class="example">
+        chf("../ptolemy")
+      </div>
+    </div>
+  </details>
+
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

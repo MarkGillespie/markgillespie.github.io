@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../swiss-formatting.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Normal Coordinates</title>
+</head>
+
+<body>
+<div class="noise"></div>
+<div class="page-content">
+    <div class="title">
+        <h1>Normal Coordinates</h1>
+        <h4>A Compressed Description of Curves on a Surface</h4>
+    </div>
+
+    <div class="section">
+        <h2><a id="idea"></a>Main Idea</h2>
+        <div class="section-content">
+            <div>
+                <img src="../images/NormalCoordinates.svg" alt="figure of normal coordinates" style="width: 400px; max-width: 100%;">
+            </div>
+            <div class="section-text">
+                Suppose we have a collection of closed curves on a triangle mesh. Furthermore, suppose that the curves do not intersect, and suppose that on each triangle, no curve enters and exits along the same edge. Then we can represent this system of curves using <em>normal coordinates</em>, which just means counting the number of intersections along each edge of our mesh. I will try to refer to the overlay lines as "curves" and the edges of the supporting triangulation as "edges", but I might get mixed up sometimes.
+            </div>
+
+            <div>
+                <img src="../images/NormalCoordinateTile.svg" alt="normal coordinates on a single triangle" style="width:200px; max-width: 100%; margin-left: 100px; margin-right: 100px;">
+            </div>
+            <div class="section-text">
+                <p>Note that on a single triangle, the three numbers on the edges uniquely determine a set of curves. Let $a, b, c$ denote the number of intersections along the edges and $A, B, C$ be the vertices. The number of curves around vertex $a$ is given by $\frac{b+c-a}2$.</p>
+                <p>Since every curve which enters the triangle must exit along a different edge, we see that $a, b, c$ must obey the triangle inequality.</p>
+                <p>By performing this construction on each face of our mesh, we can reconstruct the network of curves from the normal coordinates. Well, we can reconstruct the curves up to isotopy. Clearly the curves can be deformed inside of the triangles, and we don't know where the curves intersect the edges. But the normal coordinates define the topology of the curves.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><a id="flips"></a>Edge Flips</h2>
+        <div class="section-content">
+            <div>
+                <img src="../images/NormalCoordinateFlip.svg" alt="figure of normal coordinates" style="width: 800px; max-width: 100%;">
+            </div>
+            <div class="section-text">
+                What happens to normal coordinates if we perform an edge flip on the supporting mesh? It turns out there is a really nice formula.
+                \[ e + f = \max(a+c, b+d).\]
+                Note that there are 6 possible types of edges in the pair of triangles - 4 types which just loop around a vertex, and two diagonals. An edge which loops around a vertex adds 1 $e+f$ and adds 1 to $a+c$ and $b+d$. A diagonal edge adds 2 to $e+f$, and adds 2 to one of $a+c$ or $b+d$. But only one type of diagonal edge can be present, since edges are not allowed to cross. Thus, each diagonal edge must add 2 to $\max(a+c, b+d)$. Since each edge contributes the same amount to $e+f$ and $\max(a+c, b+d)$, they must be equal.
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><a id="vertexEdges"></a>Edges From Vertices</h2>
+        <div class="section-content">
+            <div>
+                <img src="../images/NormalCoordinateVertexTile.svg" alt="normal coordinates on a single triangle. This time two edges start at vertex A and end on edge a" style="width:200px; max-width: 100%; margin-left: 100px; margin-right: 100px;">
+            </div>
+            <div class="section-text">
+                <p>Our setting is slightly more complicated because we want to store an intrinsic triangulation on the surface, rather than a collection of closed curves. In particular, we need to allow curves to start and end at vertices. This complicates the picture slightly.</p>
+                <p>If we force edges that start at a vertex to exit on the opposite edge, then we still get a unique pattern of curves on each triangle (ignoring some weirdness which happens when curves coincide with edges of our triangulation). Thus, our normal coordinates still determine a unique set of curves up to isotopy. And we can detect when a triangle contains curves coming out of a vertex - this causes a violation of the triangle inequality. Note that in the figure $a > b + c$.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><a id="geodesicTriangulations"></a>Ambiguity</h2>
+        <div class="section-content">
+            <div>
+                <img src="../images/NormalCoordinateVertexTileAmbiguous.svg" alt="normal coordinates on a single triangle. This time two edges start at vertex A and end on edge a" style="width:400px; max-width: 100%">
+            </div>
+            <div class="section-text">
+                <p>There's also a problem where curves contained in a triangle that go from $B$ to $C$ don't really show up in the normal coordinates. This isn't a huge problem because we only care about geodesic triangulations of the vertices, which have special properties.
+                </p>
+                <p>Every edge in the supporting mesh either appears in the overlay triangulation or intersects at least one edge of the overlay triangulation (and vice versa). This means that we can just interpret a normal coordinate of 0 as meaning "this edge appears in the collection of curves".</p>
+                <p>Proof sketch: We will show that every edge in the overlay triangulation either crosses an edge in the supporting triangulation or lies in the supporting triangulation. Suppose not: then we have an edge between vertices contained in a triangle, but it is not one of the triangle's edges. That's bad.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><a id="vertexEdgeFlips"></a>Edge Flips v2.0</h2>
+        <div class="section-content">
+            <div>
+                <img src="../images/NormalCoordinateComplicatedFlipSetup.svg" alt="" style="width:300px; max-width: 100%;">
+            </div>
+            <div class="section-text">
+                Deriving a modified edge flip formula isn't too bad - we just have to tweak the original formula for a few cases. First, note that if both triangles satisfy the triangle inequality, then we can just use the old formula since none of the curves start at vertices. We will label the edges of our quad $a, b, c, d$, the vertices $x, y, z, w$, and the diagonals $e$ and $f$.
+            </div>
+
+            <div class="subsection">
+                <h3><a id="case1"></a>Case 1: Edges Emanating From $w$ And $y$</h3>
+                <div>
+                    <img src="../images/NormalCoordinateComplicatedFlipYW.svg" alt="" style="width:600px; max-width: 100%;">
+                </div>
+                <div class="section-text">
+                    <p>First, consider the case where edges exit from both vertices $w$ and $y$. There are really two options here - the edges might just run off to different sides, in which case there could also be diagonal edges crossing through the quad. Or there might be an edge connecting $y$ to $w$, in which case there can be no diagonal edges. Either way, $f$ can only cross the diagonal edges. So our flip formula in this case just needs to count diagonal edges.</p>
+                    <p>Note that in the case with diagonal edges, the diagonal edges add 2 to $b+d$, whereas all other edges add 1. Since all edges cross $e$ once, the number of diagonal edges is given by $b+d-e$. If there are no diagonal edges, then $b+d-e \leq 0$, since every edge crosses $e$ exactly once, while every edge croses $b$ or $d$ at most once. Furthermore, note that when there are diagonals running from $b$ to $d$, $a+c-e \leq 0$ as well. Thus, the number of diagonals is given by $\max(b+d-e, a+c-e)$. Since $f$ crosses exactly the diagonal edges, our flip formula is
+                    \[f = \max(b+d-e, a+c-e, 0).\]</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3><a id="case2"></a>Case 2: Edges Emanating From $w$ Xor $y$</h3>
+                <div>
+                    <img src="../images/NormalCoordinateComplicatedFlipW.svg" alt="" style="width:600px; max-width: 100%;">
+                </div>
+                <div class="section-text">
+                    <p>By symmetry, it suffices to consider the case of edges emanating from $w$. Again, there are two instructive sub-cases to consider - either edges go from $w$ to edges $b$ and $a$, or they just go from $w$ to one of the edges. Let $k_a$ denote the number of edges from $w$ to $a$, and $k_b$ denote the number of edges from $w$ to $b$. If we remove these edges emanating from $w$, then we are left with an ordinary network of curves to which we can apply the ordinary flip formula. Therefore,
+                    \[(e - k_a - k_b) + f = \max((a-k_a) + c, (b-k_b) + d).\]
+                    Adding $k_a + k_b$ to both sides, we find that
+                    \[e + f = \max(a + c + k_b, b + d + k_a).\]
+                    So we just need an expression for $k_a$ and $k_b$.</p>
+                    <p>Observe that when we have no diagonal lines, we can find $k_a$ using
+                    \[k_a = \frac{a+e-b-2d}2.\]
+                    Essentially, the edges in $k_a$ cross both $a$ and $e$. So we want $\frac{a+e}2$. We just have to cancel out the other edges that cross $a$ and $e$. Each of these edges either crosses $b$ once and one of $a$ or $e$ once, or if crosses both $a$ and $e$ once, and crosses $d$ once. So we can cancel out these crossings by subtracting $b$ once and $d$ twice.</p>
+                    <p>If there are diagonals, then the formula $\frac{a + e - b - 2d}2$ really gives $k_a$ plus the number of diagonal lines. But we can detect that we are in this case $k_a$ is just the number of extra edges emanating from $w$, <em>i.e.</em> $e - c - d$. So in the presence of diagonals, $k_a$ is given by
+                    \[k_a = \min\left(\frac{a+e-b-2d}2, e-c-d\right),\]
+                    as long as there are edges from $w$ to $a$.
+                    </p>
+                    <p>Finally, we note that $\frac{a+e-b-2d}2$ can be negative if there are no edges from $w$ to $a$. But it will never be positive in this case, so we settle on our final formula
+                    \[k_a = \max\left(\min\left(\frac{a+e-b-2d}2, e-c-d\right), 0\right).\] Taking a max with 0 ensures that our answer is never negative. With this, and the analogous expression for $k_b$, we have flip formula
+                    \[e + f = \max(a + c + k_b, b + d + k_a).\]
+                    </p>
+                    <p>Note: setting $k_a = \min(\frac{a+e-b-2d}2, e-c-d)$ is unnecessary, it's actually okay just to set $k_a \;''\!='' \max(\frac{a+e-b-2d}2, 0)$. In the case with no diagonal edges, $\frac{a+e-b-2d}2 < e - c - d$, since $k_a$ does not contain all of the edges emanating from $w$, so taking the minimum always sets $k_a = \frac{a+e-b-2d}2$. In the case with diagonal edges, we can only have $k_a > 0$ and diagonal edges going from $a$ to $c$, or $k_b > 0$ and diagonal edges going from $b$ to $d$. Let's just consider the first case. Then $a+c$ equals $b+d$ plus the number of diagonal edges. So $a + c + k_b= a+c$ which equals $b+d$ plus the number of diagonal edges, and $b+d+\frac{a+e-b-2d}2$ equals $b+d$ plus the number of diagonal edges plus $k_a$, which is $a+c+k_a$. This is exactly the quantity we want. So we can use the flip rule</p>
+                    \[e + f = \max\left(a + c + \frac{b+e-a-2c}2, b + d + \frac{a+e-b-2d}2\right).\]
+                    <!-- TODO: argue this. I need it for the next case -->
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3><a id="case3"></a>Case 3: Edges Emanating From $x$ Or $z$</h3>
+                <div>
+                    <img src="../images/NormalCoordinateComplicatedFlipXZ.svg" alt="" style="width:100%;">
+                </div>
+                <div class="section-text">
+                    <p>There are something like 9 subcases here. We will consider three representative ones. There is probably a symmetry argument which shows that these are all of the cases that you need to consider.</p>
+                    <p>We will show that in each subcase, the flip formula is given by
+                    \[e+f = \max(a+c, b+d, a+d-e, b+c-e).\]
+                    </p>
+                    <p>Suppose that $k_b > 0$ and $k_d > 0$. We have $k_b = b - a - e$, and $k_d = d - c - e$. If we subtract out $k_b$ and $k_d$ we are left with an ordinary quad, and we can use the flip rule. So we see that
+                    \[e + (f - k_b - k_d) = \max\big(a + c, (b-k_b) + (d-k_d)\big).\]
+                    Adding $k_b + k_d$ to both sides, we find that
+                    \[e + f = \max(a+c + k_b + k_d, b+d).\]
+                    Since $k_b = b - a - e$ and $k_d = d - e - c$, this is equivalent to
+                    \[e + f = \max(b+d -2e, b+d) = b+d.\]
+                    Note that in this case, $\max(a+c, b+d, a+d-e, b+c-e) = b+d$. Observe that $b+d > a+c$ since every curve ending at $a$ or $c$ starts at $b$ or $d$, while $a+d - e < b+d$ since $b > a+e$, and $b+d > b+c-e$ since $d > c+e$.
+                    </p>
+                    <p>Next, suppose that $b > a+c$ and $c > e+d$. An analogous computation reveals that
+                    \[e+f = \max(a+c+k_b, b+d+k_c).\]
+                    Substituting in the values of $k_b$ and $k_c$, we find that
+                    \[e+f = \max(b+c-e, b+c-e) = b+c-e.\] Again, one can check that in this case, $\max(a+c, b+d, a+d-e, b+c-e) = b+c-e$.</p>
+                    <p>Finally, suppose that $b > a+e$, but the lower triangle obeys the triangle inequality. In this case, we have
+                    \[e+f = \max(a+c+k_b, b+d).\]
+                    Plugging in $k_b = b - a - e$, we find that
+                    \[e+f = \max(b+c-e, b+d).\]
+                    Once more, once can check that the this equals $\max(a+c, b+d, a+d-e, b+c-e)$.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

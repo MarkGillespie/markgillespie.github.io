@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../swiss-formatting.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git Submodules</title>
+</head>
+
+<body>
+<div class="noise"></div>
+    <div class="page-content">
+        <div class="title">
+            <h1>Git Submodules</h1>
+            <h4>Maybe it'll work right next time.</h4>
+        </div>
+
+    <div class="section">
+    <h2><a id="standard_setup"></a>Geometry Central and Polyscope</h2>
+    <div class="section-content">
+    <div>
+        <img src="spot.png" alt="3D model of a cow.">
+    </div>
+    <div class="section-text">
+        <p>
+            The master branch of <tt>polyscope</tt> includes <tt>geometry-central</tt> as a dependency. Often, it's more convenient to keep <tt>geometry-central</tt> on its own. To do so, you can use branch <tt>v02</tt> of <tt>polyscope</tt>. To add this branch as a submodule, use
+        </p>
+        <code>git submodule add -b v02 https://github.com/nmwsharp/polyscope.git</code>
+        <p>
+        If you're working with intrinsic geometry, then the <tt>intrinsic</tt> branch of <tt>geometry-central</tt> is probably the one you want. You can add that branch as a submodule using
+        </p>
+        <code>git submodule add -b intrinsic https://github.com/nmwsharp/geometry-central.git</code>
+        <p>
+        Upon cloning a repository which uses submodules, you have to initialize the submodules. You do this using
+        </p>
+        <code>git submodule update --init --recursive</code>
+    </div>
+    </div>
+
+    </div>
+    </div>
+
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

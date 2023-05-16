@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>
+      M&ouml;bius Transformations
+</title>
+</head>
+
+<body>
+  <h2>M&ouml;bius Transformations</h2>
+  <p>
+    M&ouml;bius transformations, also called fractional linear transformations, are complex functions of the form
+    \[\varphi:z \mapsto \frac{az + b}{cz + d}\]
+    where $a,b,c,d$ are complex numbers and $\det \mmat a b c d \neq 0$.
+  </p>
+  <p>
+     If we use projective coordinates on $\C$ (i.e. think of $z \in \C$ as the set of all $[u,v] \in \C^2$ with $z = \frac uv$), then the M&ouml;bius transformations become matrices
+     \[\phi: \vvec z 1 \mapsto \mmat a b c d \vvec z 1 = \vvec {az + b}{cz + d} \sim \frac{az + b}{cz + d}\]
+     You can check that multiplying together these matices gives the composition of the corresponding M&ouml;bius transformations. Using this perspective, we see that the nonzero determinant condition tells us that M&ouml;bius transformations are invertible.
+  </p>
+  <p>
+    If we multiply $a,b,c,d$ by the same nonzero complex number, then the M&ouml;bius transformation does not change. So M&ouml;bius transformations can be identified with the projective general linear group $PGL(2,\C)$. Since we are allowed to rescale the matrix entries, we can use the projective special linear group $PSL(2,\C)$ instead. $PSL(2,\C)$ is simple, so it must precisely capture the M&ouml;bius transformations.
+  </p>
+
+  <p>
+    Now, the projective coordinates don't just describe the complex plane. They add one point to the plane, $[1, 0]$, which turns the complex plane $\C$ into the Riemann sphere $\hat \C$. So a M&ouml;bius transformation maps the complex plane onto the sphere, applies some sort of transformation to the sphere, and maps the sphere back onto the plane. Two natural questions are: "What is the map between the plane and the sphere?" and "What maps do we apply to the sphere?".
+  </p>
+  <h3>What is the map between the plane and the sphere?</h3>
+    <p>We can break this map from the plane to the sphere into multiple parts. First, we have a map
+      \[
+        \begin{aligned}
+          f & : \C \to \C^2 \cong \R^4\\
+          f & : z \mapsto \vvec z 1
+        \end{aligned}
+        \]
+        Next, we project from $\R^4$ to $\S^3$ by identifying positive scalar multiples of each other (since the image of $f$ does not include $0$, this is okay). This corresponds to identifying vectors in $\C^2$ which are positive real scalar multiples of each other.
+    </p>
+    <p>
+      Finally, we project from $\S^3$ to $\S^2$ with the Hopf fibration. This corresponds to identifying vectors in $\C^2$ which differ in phase (i.e. a complex number of unit norm).
+    </p>
+
+    <p>
+      Alternatively, we can think of this map as stereographic projection. If we first quotient $\C^2$ by phase, we can identify the image of the complex plane under $f$ with the plane of height-1 in $\C \times \R \cong \R^3$. Then, quotienting out by positive scalar multiplication is precisely stereographic projection onto the unit sphere.
+    </p>
+
+  <h3>What maps do we apply to the sphere?</h3>
+  <p>
+    We apply a linear map of determinant 1 to $\C^2$.
+    TODO
+  </p>
+
+  <a name="conformal"></a>
+  <h2>Conformal Maps</h2>
+  <div class="definition">
+    A function between Riemannian manifolds $f:(M_1, g_1) \to (M_2, g_2)$ is called <span class="defined">conformal</span> if it only distorts the metric by a scalar multiple. That is to say, $f$ is conformal iff there exists a scalar function $h: M_1 \to \R$ such that $f^*g_2 = h \cdot g_1$. Since metrics are positive definite, $h$ must be positive. So it is often convenient to use the <span class="defined">conformal scale factor</span> $u: M_1 \to \R$ where $f^* g_2 = e^{2u} g_1$.
+  </div>
+  <p>
+    Conformal maps have many nice properties. Directly from the definition, we can see that conformal maps preserve angles. I don't currently understand the more complicated nice properties.
+  </p>
+
+  <a name="holomorphic"></a>
+  <h2>Holomorphic Functions</h2>
+  <div class="definition">
+    A function $f: \C \to \C$ is <span class="defined">holomorphic</span> if it is complex-differentiable.
+  </div>
+  <p>
+    The <a href="https://en.wikipedia.org/wiki/Cauchy–Riemann_equations">Cauchy-Riemnann equations</a> give a necessary and sufficient condition for a function to be holomorphic. Let $f(x + iy) = u(x,y) + i v(x,y)$ where $u, v : \R^2 \to \R$. Then $f$ is holomorphic if and only if
+    \[\begin{aligned}
+      \pd u x &= \pd v y\\
+      \pd u y &= -\pd v x
+    \end{aligned}\]
+  </p>
+  <p>
+    We can express the Cauchy-Riemnann equations nicely using the <a href="https://en.wikipedia.org/wiki/Wirtinger_derivatives">Wirtinger derivative</a>. Let
+    \[\pdo{\bar z} := \frac 12 \left(\pdo x + i \pdo y\right)\]
+    Then the Cauchy-Riemann equations are simply the statment
+    \[\pd f {\bar z} = 0\]
+  </p>
+  <div class="aside">
+    This explains why holomorphic functions are smooth - $\pdo {\bar z}$ is elliptic, and kernels of elliptic operators are smooth. Thus, holomorphic functions must be smooth.
+  </div>
+  <p>
+    Now, let's look at $\C$ as a 2-dimensional real manifold with the standard metric using the identification $\C \sim \R^2$. The differential of $f = u+iv: \C \to \C$ is given by the jacobian
+    \[f_* = \mmat {\pd ux} {\pd vx} {\pd uy} {\pd vy}\]
+    By the Cauchy-Riemann equations, this must have the structure
+    \[f_* = \mmat a {-b} b a\]
+    where $a = \pd u x, b = \pd u y$ are real.
+  </p>
+  <p>
+    Now, we can compute the pullback of the Euclidean metric on $\C$.
+    \[\begin{aligned}
+      f^*g(v_1, v_2) &= g(f_*v_1, f_*v_2)\\
+        &= (f_*v_1)^T (f_*v_2)\\
+        &= v_1^T f_*^T f_* v_2
+    \end{aligned}\]
+    So the pullback of the standard metric on $\C$ is given by $f_*^T f_*$. Using our expression for $f_*$, we see that
+    \[\begin{aligned}
+      f_*^Tf_* &= \mmat a b {-b} a \mmat a {-b} b a\\
+        &= \mmat{a^2 + b^2} 0 0 {a^2 + b^2}\\
+        &= (a^2 + b^2)\mathbb{I}
+    \end{aligned}\]
+    So the pullback of the metric is a scalar multiple of the metric. Thus, the Cauchy-Rimann equations tell us that holomorphic maps are confomal!
+  </p>
+  <p>
+    Conversely, suppose $f : \C \to \C$ is conformal. Let
+    \[f_* = \mmat a b c d\]
+    Again, the pullback of the metric is
+    \[\begin{aligned}
+      f_*^Tf_* &= \mmat a c b d \mmat a b c d\\
+      &= \mmat {a^2 + c^2} {ab+cd} {ab+cd} {b^2+d^2}
+    \end{aligned}\]
+    Since $f$ is conformal, we know that this is a scalar multiple of the identity. So $ab+cd = 0$, and $a^2 + c^2 = b^2 + d^2$.
+  </p>
+  <p>
+    You can solve this to find two solutions: $a=d, b=-c$ (in which case $f$ is holomorphic), or $a=-d, b=c$ (in which case $f$ is antiholomorphic).
+  </p>
+  <div class="aside">
+  <details>
+    Since $ab+cd=0$, we have that $a = -\frac{cd}{b}$. Thus,
+    \[\frac{c^2d^2}{b^2} + c^2 = b^2 + d^2\]
+    Multiplying through by $b^2$, we find that
+    \[c^2(b^2+d^2) = b^2(b^2+d^2)\]
+    If $b^2+d^2 = 0$, then $b=d=0$, in which case $a^2+c^2 = 0$, so $f$ is constant. Otherwise, we can divide through by $b^2+d^2$ to find the $b=\pm c$. These two cases give us our two answers.
+  </details>
+  </div>
+  <p>
+    So the only conformal maps $\C \to \C$ are holomorphic and antiholomorphic functions. In particular, the only orientation-preserving conformal maps are holomorphic functions.
+  </p>
+
+<h2>Automorphisms of the Disk</h2>
+<p>
+  This machinery of holomorphic functions allows us to nicely characterize the conformal automorphisms of the open unit disk (i.e. invertible conformal maps $D \to D$). As we saw above, it suffices to characterize holomorphic automorphisms of the disk.
+</p>
+
+<div class="lemma">
+  (Schwarz) Let $f: D \to D$ be a holomorphic function which fixes the origin. Then $|f(z)| \leq |z|$ for all $z \in D$ and $|f'(0)| \leq 1$. Furthermore, if there exists some nonzero $z$ such that $|f(z)| = |z|$, or if $|f'(0)| = 1$, then $f$ is a rotation.
+</div>
+<div class="proof">
+  <p>
+ Since $f$ is holomorphic, we can expand it in a Taylor expansion $f(z) = \sum_{n \geq 0} a_n z^n$. Since $f$ fixes the origin, $a_0 = 0$. So we can define $g(z) = \frac{f(z)}{z}$ by dividing the series expansion by $z$ term by term. This yields the holomorphic function
+  \[g(z) := \begin{cases} \frac{f(z)}z & z \neq 0\\ f'(0)&z = 0\end{cases}\]
+  Consider the closed disk $D_r = \{z \;:\; |z| \leq r\}$ for $r < 1$. By the maximum modulus principle, $g$ achieves its maximum on $D_r$ on $\partial D_r$. Let $z_r \in \partial D_r$. Note that
+     \[\begin{aligned}
+        |g(z_r)| &= \left|\frac{f(z_r)}{z_r}\right|\\
+          &\leq \frac 1 r
+     \end{aligned}\]
+   </p>
+   <p>
+    Taking a limit as $r \to 1$, we see that on the open unit disk, $|g|$ is bounded by 1. And again by the maximum modulus principle, if it achieves its maximum anywhere on the disk, then it is constant.
+   </p>
+</div>
+
+<div class="cor">
+  Any automorphism of the disk which fixes the origin is a rotation.
+</div>
+<div class="proof">
+  <p>
+    Let $f$ be an automorphism of the disk. Note that $f^{-1}$ is also an automorphism. So the Schwarz lemma applies to both. Thus,
+  </p>
+    \[\begin{aligned}
+      |f(z)| &\leq |z|\\
+        &= |f^{-1}(f(z))|\\
+        &\leq |f(z)|
+    \end{aligned}\]
+    Therefore, $|f(z)| = |z|$ on the disk, so $f$ is a rotation.
+</div>
+
+Finally, we can classify holomorphic automorphisms of the disk.
+<div class="theorem">
+  Any conformal automorphism of the disk has the form
+  \[z \mapsto \lambda \frac{z-a}{\overline a z - 1}\]
+  where $\lambda$ is a complex number of unit norm (i.e. a rotation).
+</div>
+<div class="proof">
+  Let $f$ be an automorphism of the disk. If $f$ fixes the origin, then by our corollary $f$ must be a rotation. So suppose $f$ does not fix the origin. Suppose $f(0) = a$. Note that the M&ouml;bius transformation $z \mapsto \frac{z-a}{\overline a z - 1}$ maps $a$ to the origin. Furthermore, it maps to disk to itself (TODO: show this). Thus, the composition of this map with $f$ is an automorphism of the disk which fixes the origin. Thus it is a rotation. So $f$ is a rotation composed with the inverse of that M&ouml;bius transformation (which is another M&ouml;bius transformation of the same form).
+</div>
+We can conclude that all orientation-preserving conformal maps of the unit disk to itself are given by these transformations.
+
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle",
+      "\\S": "\\mathbb{S}",
+      "\\C": "\\mathbb{C}",
+      "\\R": "\\mathbb{R}",
+      "\\vvec": "\\begin{pmatrix} #1\\\\#2\\end{pmatrix}",
+      "\\mmat": "\\begin{pmatrix} #1 & #2 \\\\ #3 & #4\\end{pmatrix}",
+      "\\pd": "\\frac{\\partial #1}{\\partial #2}",
+      "\\pdo": "\\pd{}{#1}"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

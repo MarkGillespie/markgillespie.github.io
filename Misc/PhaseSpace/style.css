@@ -1,0 +1,84 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 300;
+    margin: 0.25em;
+    margin-right: 260px;
+    font-size: 64px;
+    display: inline-block;
+}
+
+#texture-canvas {
+    position: absolute;
+    z-index: 20;
+    bottom: 1em;
+    left: 1em;
+    width:  300px;
+    height: 300px;
+    display: inline-block;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, .3);
+}
+
+#render-canvas {
+    position: absolute;
+    z-index: -1;
+    width:  100vw;
+    height: 100vh;
+    display: inline-block;
+}
+
+#controls {
+    position: absolute;
+    z-index: 200;
+    top: 1em;
+    right: 1em;
+    width: 220px;
+    padding: 1em;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, .3);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+#controls > * {
+    margin-bottom: 1em;
+}
+
+
+.valign {
+    display: flex;
+    flex-direction: row;
+}
+
+.valign > * {
+    margin-right: 1em;
+}
+
+@media only screen and (max-width: 600px) {
+    .title {
+        display: none; 
+    }
+    #texture-canvas {
+        width: 150px;
+        height: 150px; 
+    }
+
+    #controls input {
+        width: 80px; 
+    }
+
+    #controls {
+        width: 150px; 
+        top: 0px;
+        right: 0px;
+    }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Lora:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Milnor's Lobachevsky Function</title>
+ <meta charset="UTF-8">
+</head>
+
+<body>
+  <h2>Milnor's Lobachevsky Function ($\text{&#1051;}$)</h2>
+  <div class="definition">
+    \[\text{&#1051;}(x) := -\int_0^x \log \left| 2 \sin t\right|\;dt\]
+  </div>
+  <p>
+    Note that
+    \[\begin{aligned}
+      \text{&#1051;}'(x) &amp;= - \log |2 \sin x| \\
+      \text{&#1051;}''(x) &amp;= -\cot x
+    \end{aligned}\]
+  </p>
+  <p>
+    The definition looks very strange. It's probably easiest to think of &#1051; as being <em>defined</em> by the differential equation
+    \[
+      \text{&#1051;}''(x) = -\cot x
+    \]
+    subject to the initial conditions
+    \[\begin{aligned}
+      \text{&#1051;}(0) &amp;= 0\\
+      \text{&#1051;}'\left(\frac \pi 2\right) &amp;= 0\\
+    \end{aligned}\]
+  </p>
+
+  <h2>Useful Facts</h2>
+  <h3>A Circumradius Forumla</h3>
+  <p>
+    We begin with a seemingly-unrelated formula about the circumcircle of a triangle.
+  </p>
+  Let $t_{ijk}$ be a triangle with edge lengths $\ell_{ij}, \ell_{jk}, \ell_{ki}$ and angles $\alpha_{ij}^k, \alpha_{jk}^i, \alpha_{ki}^j$.
+  <center>
+    <img src="angle_triangle.png" style="width: 50%;max-width: 400px;";/>
+  </center>
+  <div class="prop">
+    The radius of the circumcircle of $t_{ijk}$ is given by $R = \frac{\ell_{jk}}{2 \sin \alpha_{jk}^i}$.
+  </div>
+  <div class="aside">
+    <details>
+      <summary>Proof</summary>
+      <p>
+        We place our triangle inside of its circumcircle.
+      </p>
+      <center>
+        <img src="circumcircle.png" style="width: 50%;max-width: 400px;";/>
+      </center>
+      <p>
+        $c$ is the center of the circle. We draw a diagonal passing though $k$, and name the opposite point $r$. Note that angle $k-j-r$ must be a right angle, since the line $\overline{kr}$ is a diameter of the circle. We also place a point $s$ such that the angle $k-s-j$ is a right angle.
+      </p>
+      <p>
+      Note that angle $k-r-j$ must equal angle  $\alpha_{jk}^i$ since both subtend the same arc between $k$ and $j$. Therefore, triangle $t_{isk}$ is similar to triangle $t_{rjk}$. In particular, this means that
+      \[\frac {\ell_{kr}}{\ell_{kj}} = \frac {\ell_{ik}}{\ell_{sk}}\]
+      Note that $\ell_{sk} = \ell_{ik} \sin \alpha_{jk}^i$. Furthermore, $\ell_{rk} = 2R$. Thus, we see that
+      \[\frac {2R}{\ell_{kj}} = \frac {\ell_{ik}}{\ell_{ik} \sin \alpha_{jk}^i}\]
+      Simplifying, we conclude that
+      \[R = \frac{\ell_{jk}}{2\sin\alpha_{jk}^i}\]
+      </p>
+    </details>
+  </div>
+
+  <h3>Energy Derivative</h3>
+  Futhermore, let $\lambda_{mn} = 2 \log \ell_{mn}$. We define a function
+ \[
+  f( \lambda_{ij},  \lambda_{jk},  \lambda_{ki}) = \frac 12 \big( \alpha_{jk}^i  \lambda_{jk} +  \alpha_{ki}^j  \lambda_{ki} +  \alpha_{ij}^k  \lambda_{ij}\big)
+  + \text{&#1051;}( \alpha_{jk}^i)
+  + \text{&#1051;}( \alpha_{ki}^j)
+  + \text{&#1051;}( \alpha_{ij}^k)
+  \]
+  <div class="prop">
+    \[\pd f {\lambda_{jk}} = \frac 12 \alpha_{jk}^i\]
+  </div>
+  <div class="aside">
+    <details>
+      <summary>Proof</summary>
+      <p>
+        Using the circumradius formula, this becomes a straightforward computation.
+      </p>
+      \[\begin{aligned}
+      \pd f {\lambda_{jk}}
+      &= \frac 12 \alpha_{jk}^i
+      + \left(\frac 12\lambda_{jk} - \log |2 \sin \alpha_{jk}^i| \right) \pd {\alpha_{jk}^i}{\lambda_{jk}}\\
+      &\quad+ \left(\frac 12\lambda_{ki} - \log |2 \sin \alpha_{ki}^j| \right) \pd {\alpha_{ki}^j}{\lambda_{jk}}
+        + \left(\frac 12 \lambda_{ij} - \log |2 \sin \alpha_{ij}^k| \right) \pd {\alpha_{ij}^k}{\lambda_{jk}}\\
+      &= \frac 12 \alpha_{jk}^i
+      + \log\left(\frac {\ell_{jk}}{2 \sin \alpha_{jk}^i}\right) \pd {\alpha_{jk}^i}{\lambda_{jk}}
+      + \log\left(\frac {\ell_{ki}}{2 \sin \alpha_{ki}^j}\right) \pd {\alpha_{ki}^j}{\lambda_{jk}}
+      + \log\left(\frac {\ell_{ij}}{2 \sin \alpha_{ij}^k}\right) \pd {\alpha_{ij}^k}{\lambda_{jk}}
+      \end{aligned}\]
+      By the circumradius formula, each of those log terms is just $\log R$. (Equivalently, we could just use the law of sines here to observe that all of the terms are equal. It is not actually important what they are equal to). Thus, we have
+      \[\begin{aligned}
+      \pd f {\lambda_{jk}}
+      &= \frac 12 \alpha_{jk}^i + \log R \pd{}{\lambda_{jk}} \left(\alpha_{jk}^i + \alpha_{ki}^j + \alpha_{ij}^k\right)
+      \end{aligned}\]
+      Since the sum of the angles in a triangle is always $\pi$, the derivative on the right vanishes. Thus, we obtain the desired equality
+      \[\begin{aligned}
+      \pd f {\lambda_{jk}}
+      &= \frac 12 \alpha_{jk}^i
+      \end{aligned}\]
+    </details>
+  </div>
+
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle",
+      "\\pd": "\\frac{\\partial #1}{\\partial #2}"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

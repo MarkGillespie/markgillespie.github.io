@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../stylesheets/blog_formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Lora:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h2>Twisted Differential Forms</h2>
+    <blockquote>
+    The new concepts are better for unarguable reasons: they correctly represent a larger symmetry group, and therefore correctly represent more features of the real world. We have an intuitive appreciation of symmetry, even before we have formalized the concept. A representation that violates the symmetry leaves a bad taste in your mouth. I would argue that mechanics, for example, is unnecessarily difficult precisely because the basic symmetries are not properly represented.
+    <footer style="text-align:right;">
+        <cite>
+            William Burke
+        </cite>
+    </footer>
+    </blockquote>
+    <center>
+        <img src="images/types_of_vectors.svg" alt="picture of vectors" style="max-width: 800px;">
+    </center>
+
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+</body>

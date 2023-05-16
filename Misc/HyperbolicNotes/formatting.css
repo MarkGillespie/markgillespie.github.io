@@ -1,0 +1,278 @@
+body {
+  color: #222;
+  font-family: Lora;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+canvas {
+  overflow: hidden;
+  display: block;
+}
+
+div.canvas_container {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+}
+
+div.wrapper {
+  max-width: l
+}
+
+.function_block {
+  margin: 1em;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+}
+
+.function_name {
+  padding: 1em;
+  padding-bottom: 0.5em;
+
+  font-family: monospace;
+  font-size: 14pt;
+  color: #46146b;
+  background-color: #eee;
+
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, .3);
+}
+
+details > summary:first-of-type {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.explanation {
+  padding: 1em;
+  padding-top: 0.5em;
+}
+
+.example {
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6em;
+
+  background-color:#f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #b287d1;
+  color: #444;
+  padding: 0.1em;
+  padding-left: 0.5em;
+  margin-top: 1em;
+}
+
+code {
+  font-family: monospace;
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+
+  background-color:#f4f4f4;
+  border: 1px solid #ddd;
+  color: #444;
+}
+
+
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px 0.5em;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+
+h1 {
+  font-family: 'Josefin Sans';
+  font-size: 40px;
+  color: #333;
+}
+
+h2 {
+  font-family: 'Josefin Sans';
+  font-size: 35px;
+  color: #333;
+}
+
+h3 {
+  font-family: 'Josefin Sans';
+  font-size: 25px;
+  color: #333;
+}
+
+h4 {
+  font-family: 'Josefin Sans';
+  font-size: 20px;
+  color: #333;
+}
+
+/* https://stackoverflow.com/questions/19443013/how-to-center-an-unordered-list */
+ol.centered-list {
+  display: table;
+  margin: 0 auto;
+}
+
+.fancy {
+  margin:10px;
+  padding:10px;
+  display: inline-block;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+}
+
+div.aside {
+  background-color: #EEE;
+  margin: 1em;
+  padding: 1em;
+}
+
+div.summary_details {
+  background-color: #CCC;
+  padding:1em;
+  margin:1em;
+}
+
+div.warning:before {
+  content: "Warning: ";
+  font-weight: bold;
+  padding-right: 0.5em;
+}
+
+div.definition, div.theorem, div.cor, div.lemma, div.fact, div.remark, div.prop, div.warning {
+  border-style: solid;
+  border-width: thin;
+  border-radius: 0.5em;
+  padding: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  page-break-inside: avoid;
+}
+
+div.warning {
+  background-color: #f48989;
+  border-color: #d62b0c;
+}
+
+
+div.definition:before, div.theorem:before, div.cor:before, div.lemma:before, div.fact:before, div.prop:before {
+  font-weight: bold;
+  padding-right: 0.5em;
+}
+
+div.definition:before {
+  content: "Definition: ";
+}
+
+div.definition {
+  background-color: #F0E0F0;
+  border-color: #C8C;
+}
+
+div.definition > span.defined {
+  font-style: italic;
+}
+
+div.theorem:before {
+  content: "Theorem: ";
+}
+
+div.lemma:before {
+  content: "Lemma: ";
+}
+
+div.cor:before {
+  content: "Corollary: ";
+}
+
+div.prop:before {
+  content: "Proposition: ";
+}
+
+div.theorem, div.lemma, div.cor, div.prop {
+  background-color: #E8E8FF;
+  border-color: #AAF;
+}
+
+div.collapsible_proof_wrapper {
+  border-style: solid;
+  border-width: medium;
+  border-radius: 0.5em;
+  border-color: #ccc;
+  margin: 1em;
+  padding: 1em;
+}
+
+details.proof {
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 2em;
+}
+
+div.proof:before {
+  content: "Proof: ";
+  font-style: italic;
+}
+
+div.proof {
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 2em;
+}
+
+div.proof:after {
+  content: "\2610";
+  float: right;
+}
+
+div.fact:before {
+  content: "Fact: ";
+  margin-top: 0;
+}
+
+div.fact {
+  background-color: #EEE;
+  border-color: #AAA;
+}
+
+div.remark:before {
+  content: "Remark: ";
+  font-style: italic;
+}
+
+div.remark {
+  background-color: #F2F2F2;
+  margin-left: 3em;
+  border-color: #AAA;
+}
+
+/* Delete padding and margins above a first paragraph in a proof.
+ * This makes is look better.*/
+div.proof>p:first-child, div.remark>p:first-child, 
+div.proof>ol:first-child,div.remark>ol:first-child,
+div.proof>ul:first-child,div.remark>ul:first-child {
+  padding-top:0;
+  margin-top:0;
+}
+
+
+/* https://github.com/Khan/KaTeX/issues/327 */
+.katex-display > .katex {
+    max-width: 100%;
+}
+.katex-display > .katex > .katex-html {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-left: 2px;
+    padding-right: 2px;
+}

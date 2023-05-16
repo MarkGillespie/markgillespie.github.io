@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Lora:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+ <meta charset="UTF-8">
+</head>
+
+<body>
+    <h2><a id="questions"></a>Questions</h2>
+<ul>
+    <li>Why does this work on non-spherical meshes?</li>
+    <li>How do I do this signpost algorithm?</li>
+    <li>What exactly is the correspondence between scale factors and horocycles?</li>
+    <li>What do I do with boundaries?</li>
+    <li>What is the correspondence between ideal triangles and ideal tetrahedra?</li>
+    <li>Why are $\lambda$ and $\ell$ related by exponentiation?</li>
+    <li>Why is this flip procedure okay when I don't use the ptolemy length anywhere?</li>
+</ul>
+<h2><a id="projective"></a>Circumcircle-Preserving Projective Maps</h2>
+  <p>Here's a little demo to see what projective transformations of a triangle to itself look like (and what they do to its circumcircle). $\alpha$ is the scale factor on the rightmost vertex, $\beta$ is the scale factor on the top-left vertex and $\gamma$ is the scale factor on the bottom-right vertex.</p>
+  <center>
+    <canvas id="projective_linear" width="600" height="600"></canvas>
+    $\log \alpha = $ <span id="aVal" style="display: inline-block; width: 50px; text-align: left;">0.0</span>
+    <input type="range" min="-50" max="50" value="0" id="aSlider"/><br/>
+    $\log \beta = $  <span id="bVal" style="display: inline-block; width: 50px; text-align: left;">0.0</span>
+    <input type="range" min="-50" max="50" value="0" id="bSlider"/><br/>
+    $\log \gamma = $ <span id="cVal" style="display: inline-block; width: 50px; text-align: left;">0.0</span>
+    <input type="range" min="-50" max="50" value="0" id="cSlider"/>
+
+  </center>
+
+<h2><a id="metric"></a>Hyperbolic Metrics on Triangle Meshes</h2>
+<p>
+    Let $(T, \ell)$ be a triangle mesh with a discrete metric. We can equip this mesh with a canonical hyperbolic metric with cusps as follows:
+</p>
+
+<blockquote cite="https://arxiv.org/pdf/1707.06848.pdf">
+Consider a euclidean triangle with its circumcircle. If we interpret the interior of the circumcircle as a hyperbolic plane in the Klein model, then the euclidean triangle becomes an ideal hyperbolic triangle, that is, a hyperbolic triangle with vertices at infinity.  This construction equips any euclidean triangle (minus its vertices) with a hyperbolic metric. If it is performed on all triangles of a euclidean triangulation $(T, \ell)$ then the hyperbolic metrics induced on the individual triangles fit together so $T \setminus V$ is equipped with a hyperbolic metric with cusps at the vertices. Thus, $T$ becomes an ideal triangulation of a hyperbolic surface with cusps
+</blockquote>
+<small style="float:right;">Bobenko et al.</small>
+<br/>
+
+<div class="prop">
+    The hyperbolic metrics on our triangles fit together along the mesh's edges.
+</div>
+<p>
+    To prove this proposition, we start with a useful lemma.
+</p>
+<div class="lemma">
+    Given two Euclidean triangles, there exists a unique circumcircle-preserving projective map between them.
+</div>
+<div class="aside">
+<details>
+<summary>Proof (click to expand)</summary>
+  <p>
+    We will work in homogeneous coordinates.
+    The circumcircle is a squished cone in $\R^3$, so we can represent it as the 0-set of a quadratic form. A circle in $\R^2$ is determined by the equation
+    \[(x+c)^2 + (y+d)^2 - r^2 = 0\]
+    Multiplying this out, we obtain
+    \[x^2 + y^2 + 2cx + 2dy + c^2 + d^2 - r^2 = 0\]
+    When we pass to $\R^3$, we want the polynomial to be homogeneous (since it must be invariant under scaling). So on $\R^3$, we have
+    \[x^2 + y^2 + 2cxz + 2dyz + (c^2 + d^2 - r^2)z^2 = 0\]
+    If we let $e := c^2 + d^2 - r^2$, we can just write this as
+    \[x^2 + y^2 + 2cxz + 2dyz + ez^2 = 0\]
+    This is linear in $c,d$ and $e$, so we can use the fact that our cone passes through the 3 points of our triangle to determine $c$, $d$, and $e$ uniquely.
+  </p>
+  <p>
+  Let $w_1, w_2, w_3$ be the (homogeneous) coordinates for the verticles of the original triangle and $\tilde w_1, \tilde w_2, \tilde w_3$ be the (homogeneous) coordinates of the updated triangle. Since we want a projective map identifying the first triangle with the second, we have to send $w_i \mapsto a_i \tilde w_i$, but we have the freedom to choose the scale factors $a_i$. Note that since our vertices are linearly independent, the choice of the $a_i$ determines our projective map.
+  <!--Let $w$ be the quadratic form defining the circumcone of triangle $t_{ijk}$ and $\tilde w$ be the quadratic form defining the circumcone of triangle $\tilde t_{ijk}$.-->
+  </p>
+  <p>
+    We will show that there is a unique choice of the $a_i$ such that our map preserves the triangle's circumcircle. Let $q$ be the quadratic form representing the original triangle's circumcircle, and $\tilde q$ be the quadratic form representing the updated triangle's circumcircle. It will be convenient to consider the bilinear forms $b, \tilde b$ associated with the quadratic forms $q, \tilde q$. A map $f:\R^3 \to \R^3$ preserves circumcircles if $q(x)$ equals $\tilde q(f(x))$ up to a scale factor, i.e.
+    \[q(x) = \mu \; \tilde q(f(x))\]
+    In terms of the bilinear form, this means that
+    \[b(x, y) = \mu\;\tilde b(f(x), f(y))\]
+    Since the $w_i$ form a basis of $\R^3$, this is true if and only if it holds on the basis vectors
+    \[b(w_i, w_j) = \mu\;\tilde b(a_i \tilde w_i, a_j\tilde w_j) = \mu a_i a_j \; \tilde b(\tilde w_i, \tilde w_j)\]
+    Furthermore, note that the $z$-component of $w_i-w_j$ is 0. Thus,
+    \[q(w_i-w_j) = \ell_{ij}^2\]
+    Using the fact that $b(w_i, w_i) = 0$, we find that
+    \[\begin{aligned}
+      \ell_{ij}^2 &amp;= q(w_i-w_j)\\
+        &amp;= b(w_i-w_j, w_i-w_j)\\
+        &amp;= -2b(w_i, w_j)
+    \end{aligned}\]
+    Thus, we conclude that our map preserves circumcircles if and only if
+    \[\ell_{ij}^2 = \mu a_i a_j \tilde \ell_{ij}^2\]
+    So the circumcircle-preserving projective map determined by the $a_i$ is equivalent to having conformal scale factors
+    \[e^{u_i} = \mu^{-1/2}a_i^{-1}\]
+  </p>
+</details>
+</div>
+
+<div class="fact">
+    Circumcircle-preserving projective maps are isometries with respect to the hyperbolic metrics on our triangles.
+</div>
+
+<div class="fact">
+    A pair of circumcircle-preserving projective maps on adjacent triangles agree on the shared edge if and only if they preserve the length cross-ratio.
+</div>
+
+<div class="lemma">
+    Given two adjacent Euclidean triangles, there exist a pair of circumcircle-preserving projective maps which send the triangles to a pair of cocircular triangles.
+</div>
+<div class="aside">
+<details>
+<summary>Proof (click to expand)</summary>
+    We map one triangle to itself by the identity. This determines two points of the second triangle. As we vary the third point along the first triangle's circumcircle, the length cross ratio takes on all possible values. In particular, there must be some point which preserves the length cross ratio. This determines our desired circumcircle-preserving projective map.
+</details>
+</div>
+<p>Here is a demonstration of this proof.</p>
+<center>
+<canvas id="cross_ratio_original"   width="400" height="400" style="display: inline;"></canvas>
+<canvas id="cross_ratio_cocircular" width="400" height="400" style="display: inline;"></canvas>
+<br/>
+Original cross ratio: <span id="old_cr" style="display: inline-block; width: 50px; text-align: left;"></span>
+Cross ratio: <span id="cr" style="display: inline-block; width: 50px; text-align: left;"></span>
+<br/>
+<input type="range" min="0" max="500" value="0" id="cr_theta_slider"/><br/>
+</center>
+
+<p>Now we can prove the proposition</p>
+
+<div class="aside">
+<details>
+<summary>Proof of Proposition (click to expand)</summary>
+Consider two adjacent triangles. By the previous lemma, we have a pair of circumcircle-preserving projective maps sending these to a pair of cocircular triangles which preserve the cross ratio. By the facts, we conclude that these maps are isometries, and agree on the shared edge. Thus, the metrics along the shared edge must agree.
+</details>
+</div>
+
+<div class="definition">
+    Two triangle meshes are <span class="defined">discretely conformally equivalent</span> if they are isometric Riemannian manifolds when equipped with hyperbolic metrics.
+</div>
+
+<div class="cor">
+    Two triangle meshes $(T, \ell)$ and $(T, \tilde \ell)$ with the same combinatorics are <span class="defined">discretely conformally equivalent</span> if there exists a scalar function $u:V \to \R$ such that
+        \[\tilde \ell_{ij} = e^{\frac 12 (u_i + u_j)}\ell_{ij}\]
+</div>
+<div class="aside">
+<details>
+<summary>Proof (click to expand)</summary>
+We can define a projective map on each triangle using the scale factors. By the same argument as earlier, this preserves circumcircles. And a quick computation verifies that this map preserves cross ratios of adjacent triangles, which means that these maps are compatible along the triangles' edges.
+</details>
+</div>
+<div class="fact">
+    Two triangle meshes $(T, \ell)$ and $(T, \tilde \ell)$ are discretely conformally equivalent if and only if there exist a sequence of triangle meshes
+    \[(T_0, \ell_0), \ldots, (T_m, \ell_m)\]
+    such that for all $i$, $(T_i, \ell_i)$ is Delaunay, and one of the following conditions holds
+    <ol>
+        <li>$(T_i, \ell_i)$ and $(T_{i+1}, \ell_{i+1})$ have the same combinatorics and are related by a rescaling of the vertices</li>
+        <li>$(T_i, \ell_i)$ and $(T_{i+1}, \ell_{i+1})$ have different combinatorics, but both are Delaunay triangluations
+    </ol>
+</div>
+
+
+<h2><a id="ptolemy"></a>Ptolemy Flips and Subdivision</h2>
+<div class="lemma">
+    Ptolemy flips commute with conformal rescaling.
+</div>
+<p>
+    The proof is a quick computation which is probably easier to do than read.
+</p>
+<p>
+    This means that we can push all of the rescaling to the beginning (or end). Then we just have to do the flips in order.
+</p>
+
+<center>
+    <canvas id="flip_a" width="300" height="300" style="display:inline;"></canvas>
+    <canvas id="flip_b" width="300" height="300" style="display:inline;"></canvas>
+    <canvas id="flip_c" width="300" height="300" style="display:inline;"></canvas>
+    <canvas id="flip_d" width="300" height="300" style="display:inline;"></canvas>
+    <br/>
+    <input type="range" min="0" max="500" value="0" id="flip_theta_slider"/><br/>
+</center>
+
+<script type="text/javascript" src="projective.js"></script>
+<script type="text/javascript" src="geo.js"></script>
+<script type="text/javascript" src="map.js"></script>
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+        "\\R": "\\mathbb{R}"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us" class="lightmode">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tartan Shader</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
+        <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+        <script type="text/javascript">
+         window.onload = function() {
+             document.getElementById("background_image").style.opacity = 1.0;
+
+             // Deferred image loading
+             // https://varvy.com/pagespeed/defer-images.html
+             let images = document.getElementsByTagName("img");
+             for (let i = 0; i < images.length; i++) {
+                 if (images[i].getAttribute("data-src")) {
+                     images[i].setAttribute("src", images[i].getAttribute("data-src"));
+                 }
+             }
+         }
+        </script>
+    </head>
+
+    <body>
+    <div class="page-content" style="width: 100vw; max-width: 100vw;">
+
+    <div class="wrapper" id="home">
+
+      <div class="header">
+        <div class="name_box">
+            <div class="name" style="max-width: 100vw;">
+                Tartan Shader
+            </div>
+        </div>
+      </div>
+
+      <div class="body">
+          People often visualize parameterizations using checkerboards, but you can also use tartan!
+          <br/>
+          <img src="Bunny.png" style="max-width: 50vw;">
+          <img src="Spot.png" style="max-width: 50vw;">
+          <img src="Blub.png" style="max-width: 50vw;">
+
+          <div class="section_panel" style="max-width: 100%; margin-left: 2em;">
+              <a name="about"><div class="accent_header"> Blender </div></a>
+              <div class="section_text" style="text-align: left;">
+                  <p>You can find an <tt>.osl</tt> file for the shader <a href="tartan.osl" >here</a>. You can use this file in Blender's node editor with a script node. Unfortunately, Eevee doesn't support custom shaders yet, so you have to render with Cycles to use this shader.</p>
+
+                  <img src="blenderNode.png" style="max-width: 1000px; width: 100%;">
+
+                  <p>In order to render with a custom shader, you have to check the <strong>Open Shading Language</strong> option in the <strong>Render</strong> menu.</p>
+                  <img src="blenderSetting.png"  style="max-width: 600px; width: 100%;" >
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+        Here's a GLSL version, used <a href="https://www.shadertoy.com/view/ddGXzG">here</a> on ShaderToy, and <a href="https://github.com/MarkGillespie/geoptic.js/blob/main/src/shaders.js">here</a> in WebGL.
+        <pre>
+    //==== tartan shader
+    void STRIPE(vec2 Coord, float x, float y, float center, float width, inout float bumpHeight,
+                inout vec3 oldcolor, vec3 newcolor, bool shift) {
+        float sWidth = 0.05;
+        float stripe_coord = mod(x - y + sWidth*0.25, sWidth);
+        float slopeWidthPix = 5.;
+        vec2 fw = fwidth(Coord);
+        float scale = .1*max(fw.x, fw.y);
+        float pWidth = slopeWidthPix * scale;
+        float stripeD = abs(stripe_coord - 0.5*sWidth);
+        float t = smoothstep(0.25*sWidth-pWidth, 0.25*sWidth+pWidth, stripeD);
+        if (shift) t = 1.-t;
+        float minDx = min(abs(x-center), abs(x-(1.-center)));
+        float sx = min(width / pWidth, 1.)*(1.-smoothstep(width-pWidth, width + pWidth, minDx));
+        vec3 newcolorx = (1.-sx)*oldcolor + (sx)* newcolor;
+        float bumpHeightx = sqrt(1.-(1.-sx)*pow(abs(minDx / width), 0.5));
+        float minDy = min(abs(y-center), abs(y-(1.-center)));
+        float sy = min(width / pWidth, 1.)*(1.-smoothstep(width-pWidth, width + pWidth, minDy));
+        vec3 newcolory = (1.-sy)*oldcolor + (sy)* newcolor;
+        float bumpHeighty = sqrt(1.-(1.-sy)*pow(abs(minDy / width), 0.5));
+        bumpHeight *= (t * bumpHeightx + (1.-t)*bumpHeighty);
+        oldcolor = t * newcolorx + (1.-t) * newcolory;
+    }
+    void base_stripe_bumps(float x, float y, inout float bumpHeight) {
+        float sWidth = 0.05;
+        float stripe_coord = mod(x - y, sWidth) / sWidth;
+        float minD = min(abs(stripe_coord), min(abs(1.-stripe_coord), abs(stripe_coord-0.5)));
+        bumpHeight *= sqrt(1. - pow(abs(minD/0.23) , 0.5));
+    }
+    vec3 tartan(vec2 Coord) {
+        float paramScale = .25;
+        // Apply the checkerboard effect
+        float mX = mod(Coord.x, 2.*paramScale) / (2.*paramScale); // in [0, 1]
+        float mY = mod(Coord.y, 2.*paramScale) / (2.*paramScale);
+        vec3 blue = vec3(18.0 / 255., 18.0 / 255., 80.0 / 255.);
+        vec3 green = vec3(0.00, 0.40, 0.20);
+        vec3 dark_green = vec3(0.00, 0.10, 0.10);
+        vec3 dark = vec3(0.00, 0.02, 0.13);
+        vec3 red = vec3(0.80, 0.00, 0.00);
+        vec3 yellow = vec3(1.00, 0.70, 0.00);
+        vec3 outColor = dark_green;
+        float bumpHeight = 1.;
+        // base_stripe_bumps(mX, mY, bumpHeight);
+        STRIPE(Coord, mX, mY, 0.000, 1.000, bumpHeight, outColor, blue, true);
+        STRIPE(Coord, mX, mY, 0.000, 0.225, bumpHeight, outColor, dark_green, false);
+        STRIPE(Coord, mX, mY, 0.000, 0.225, bumpHeight, outColor, green, true);
+        STRIPE(Coord, mX, mY, 0.275, 0.050, bumpHeight, outColor, dark, false);
+        STRIPE(Coord, mX, mY, 0.150, 0.020, bumpHeight, outColor, red, true);
+        STRIPE(Coord, mX, mY, 0.110, 0.004, bumpHeight, outColor, red, true);
+        STRIPE(Coord, mX, mY, 0.325, 0.004, bumpHeight, outColor, red, true);
+        STRIPE(Coord, mX, mY, 0.420, 0.020, bumpHeight, outColor, red, true);
+        STRIPE(Coord, mX, mY, 0.460, 0.004, bumpHeight, outColor, red, true);
+        STRIPE(Coord, mX, mY, 0.000, 0.010, bumpHeight, outColor, yellow, true);
+
+        return outColor;
+    }
+        </pre>
+        </div>
+    </div>
+
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mgillesp@cs.cmu.edu" target="_top" class="footer_email">mgillesp@andrew.cmu.edu</a>
+      <hr />
+      Made by Mark Gillespie 2019
+    </div>
+    </div>
+  </body>
+</html>
+

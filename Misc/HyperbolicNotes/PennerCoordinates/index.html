@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../stylesheets/blog_formatting.css"/>
+<link rel="stylesheet" href="triangle_formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Lora:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Penner Coordinates</title>
+</head>
+
+<body>
+<h2>The Hyperbolic Plane</h2>
+<p>
+The hyperbolic plane is a weird place. It's so big, that <a href="https://en.wikipedia.org/wiki/Hilbert's_theorem_(differential_geometry)">we can't fit the whole thing into 3D Euclidean space.</a> The best we can do is draw weird, distorted pictures of it. But although each picture is distorted, we can combine different pictures which faithfully represent different aspects of the hyperbolic plane to build some intuition about what is going on. Three standard pictures are <a href="https://en.wikipedia.org/wiki/Poincare_half-plane_model">the halfspace model</a>, <a href="https://en.wikipedia.org/wiki/Poincare_disk_model">the Poincare disk model</a>, and <a href="https://en.wikipedia.org/wiki/Beltrami-Klein_model">the Klein model</a>.
+</p>
+
+<p>
+One strange feature of the hyperbolic plane, is that there are interesting triangles with infinitely long sides.
+</p>
+
+<h2><a id="ideal-triangles"></a>Ideal Triangles</h2>
+<center>
+    <div class="hyperbolic_model">
+        <canvas id="halfspace_horocycle" width="300" height="300"></canvas>
+        Halfspace
+    </div>
+    <div class="hyperbolic_model">
+        <canvas id="poincare_horocycle" width="300" height="300"></canvas>
+        Poincar&eacute; Disk
+    </div>
+    <div class="hyperbolic_model">
+        <canvas id="klein_horocycle" width="300" height="300"></canvas>
+        Klein Disk
+    </div>
+    <div class="hyperbolic_model">
+        <canvas id="control_triangle" width="300" height="300"></canvas>
+        $\ell_1$: <span id="l1"></span>&nbsp;
+        $\ell_2$: <span id="l2"></span>&nbsp;
+        $\ell_3$: <span id="l3"></span>
+    </div>
+</center>
+
+<h2><a id="horocycle-distance"></a>Horocycle Distances</h2>
+<center>
+    <div class="hyperbolic_model">
+        <canvas id="horocycle_distance" width="300" height="300"></canvas>
+    </div>
+    <div class="hyperbolic_model">
+        <canvas id="horocycle_distance_halfplane" width="300" height="300"></canvas>
+    </div>
+    <div class="hyperbolic_model">
+        <canvas id="hd_control_poly" width="300" height="300"></canvas>
+    </div>
+    <br/>
+    <input type="range" min="0" max="1000" value="0" style="width:500px;" id="distance_slider"/>
+</center>
+
+<script type="text/javascript" src="canvas.js"></script>
+<script type="text/javascript" src="geo.js"></script>
+<script type="text/javascript" src="hyperbolic_models.js"></script>
+<script type="text/javascript" src="cocircular.js"></script>
+<script type="text/javascript" src="demo.js"></script>
+<script>
+var options = new Object();
+options.delimiters =  [
+  {left: "$", right: "$", display: false},
+  {left: "$$", right: "$$", display: true},
+  {left: "\\[", right: "\\]", display: true},
+  {left: "\\(", right: "\\)", display: false}
+];
+options.macros = {
+  "\\ket": "\\left| #1 \\right\\rangle"
+};
+renderMathInElement(document.body, options);
+</script>
+
+</body>

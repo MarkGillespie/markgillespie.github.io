@@ -1,0 +1,35 @@
+.hyperbolic_model {
+    display: inline-block;
+    padding: 1em;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flex-container > .panel {
+    margin: 2em;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+}
+
+.panel > h2 {
+    padding: 0.25em;
+    font-size: 1.5em;
+    background-color: #efe;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+}
+
+.panel > .text {
+    padding: 2em;
+}
+
+.panel > .text > span {
+    display: inline-block;
+    min-width: 100px;
+}

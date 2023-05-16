@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../swiss-formatting.css"/>
+<link rel="stylesheet" href="triangle_formatting.css"/>
+<link href='https://fonts.googleapis.com/css?family=Lora:400,500,700|Josefin+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet'/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hyperbolic Triangles</title>
+</head>
+
+<body>
+<div class="noise"></div>
+    <div class="page-content">
+        <div class="section">
+        <div class="title">
+            <div class="title-img" style="background-image: url('../images/hyperbolic_triangle.svg')"></div>
+            <h1>Hyperbolic Triangles</h1>
+            <h4>Useful Facts for Implementing Intrinsic Hyperbolic Edge Flips</h4>
+        </div>
+        </div>
+
+    <div class="section">
+    <h2 class="halfStyle" data-content="Horocycle Distances"><a id="horocycle-distance"></a>Horocycle Distances</h2>
+    <div class="section-content">
+    <center>
+        <div class="hyperbolic_model">
+            <canvas id="horocycle_distance" width="300" height="300"></canvas>
+        </div>
+        <div class="hyperbolic_model">
+            <canvas id="horocycle_distance_halfplane" width="300" height="300"></canvas>
+        </div>
+        <div class="hyperbolic_model">
+            <canvas id="hd_control_poly" width="300" height="300"></canvas>
+        </div>
+        <br/>
+        <input type="range" min="0" max="1000" value="0" style="width:500px;" id="distance_slider"/>
+    </center>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle" data-content="Ideal Triangles"><a id="ideal-triangles"></a>Ideal Triangles</h2>
+    <div class="section-content">
+    <center>
+        <div class="hyperbolic_model">
+            <canvas id="halfspace_horocycle" width="300" height="300"></canvas>
+            <br/>
+            <h4>Halfspace</h4>
+        </div>
+        <div class="hyperbolic_model">
+            <canvas id="poincare_horocycle" width="300" height="300"></canvas>
+            <br/>
+            <h4>Poincar&eacute; Disk</h4>
+        </div>
+        <div class="hyperbolic_model">
+            <canvas id="klein_horocycle" width="300" height="300"></canvas>
+            <br/>
+            <h4>Klein Disk</h4>
+        </div>
+        <div class="hyperbolic_model">
+            <canvas id="control_triangle" width="300" height="300"></canvas>
+            <br/>
+            <div style="display: inline-block;">
+                $\ell_1$: <span id="l1"></span>&nbsp;
+                $\ell_2$: <span id="l2"></span>&nbsp;
+                $\ell_3$: <span id="l3"></span>
+            </div>
+        </div>
+    </center>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle" data-content="Coordinate Transformations"><a id="transitions"></a>Coordinate Transformations</h2>
+    <div class="section-content">
+        <div class="panel">
+        <h3><a id="halfspace-transformations"></a>Halfspace</h3>
+        <div class="text">
+            <small>
+            <span>To Poincar&eacute;:</span> $(x, y) \mapsto \left(\displaystyle\frac{2x}{x^2 + (1+y)^2}, \displaystyle\frac{x^2+y^2-1}{x^2 + (1+y)^2}\right)$
+            <br/>
+            <span>To Klein:</span> $(x, y) \mapsto \left(\displaystyle\frac{2x}{1 + x^2 + y^2}, \displaystyle\frac{x^2 + y^2 - 1}{x^2 + y^2 + 1}\right)$
+            </small>
+        </div>
+        </div>
+
+        <div class="panel">
+        <h3><a id="poincare-transformations"></a>Poincar&eacute;</h3>
+        <div class="text">
+            <small>
+            <span>To Halfspace:</span> $(x, y) \mapsto \left(\displaystyle\frac{2x}{x^2 + (1-y)^2}, \displaystyle\frac{1 - x^2 - y^2}{x^2 + (1-y)^2}\right)$
+            <br/>
+            <span>To Klein:</span> $(x, y) \mapsto \left(\displaystyle\frac {2x}{1 + x^2 + y^2}, \displaystyle\frac {2y}{1 + x^2 + y^2}\right)$
+            </small>
+        </div>
+        </div>
+
+        <div class="panel">
+        <h3><a id="klein-transformations"></a>Klein</h3>
+        <div class="text">
+            <small>
+            <span>To Halfspace:</span> $(x, y) \mapsto \left(\displaystyle\frac{x}{1-y}, \displaystyle\frac{\sqrt{1-x^2-y^2}}{1 - y}\right)$
+            <br/>
+            <span>To Poincar&eacute;:</span> $(x, y) \mapsto \left(\displaystyle\frac {x}{1 + \sqrt{ 1 - x^2 - y^2}}, \displaystyle\frac {y}{1 + \sqrt{1 - x^2 - y^2}}\right)$
+            </small>
+        </div>
+        </div>
+        <div class="section-text">
+        Poincar&eacute; <-> Halfspace maps are standardized to fix $(\pm1, 0)$ and send the north pole to $\infty$ (also sends $(0, 0)$ to $(0, 1)$)
+        </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle" data-content="Horocycles"><a id="horocycles"></a>Horocycles</h2>
+    <div class="section-content">
+        <div class="panel">
+        <h3><a id="halfspace-horocycles"></a>Halfspace</h3>
+        \[h = \text{base distance} \tfrac{\ell_2 \ell_3}{\ell_1}.\]
+        <div class="text">
+            The (Euclidean) horocycle height $h$ is given by the above equation since the length, $\alpha$, along the horocycle satisfies equations $\alpha := e^{\frac 12 (\lambda_1 - \lambda_2 - \lambda_3)}$ and $\frac{\text{base distance}} h = \alpha$.
+        </div>
+        </div>
+
+        <div class="subsection">
+            <h3><a id="horocycles-line-up"></a>Why do the horocycles line up?</h3>
+            <div class="subsection-content">
+            <img src="../images/HorocyclesLineUp.svg" alt="Two adjacent ideal hyperbolic triangles in the halfspace model." style="max-width: 500px;">
+            <div class="section-text" style="max-width: 550px;">
+                <p>For convenience, we'll continue working in the halfspace model. Consider these two ideal triangles. We assign horocycles to the vertices of each triangle so that the triangles have the desired edge lengths. But <em>a priori</em>, there's no reason that the triangles have to pick the <em>same</em> horocycle for their shared vertices. One could imagine a scenario like the one pictured, where we pick different horocycles for the shared vertices.</p>
+                <p>It turns out that the two triangles <em>must</em> agree on the horocycles picked for their shared vertices. First, we can always standardize the triangles so that one has vertices at $0$, $1$, and $\infty$. We will call the position of the final vertex of the second triangle $w$.</p>
+                <p>From earlier, we know that the horocycles must have lengths $\alpha = e^{\frac 12 (\lambda_a - \lambda_b - \lambda_c)}$ and $\beta = e^{\frac 12 (\lambda_d - \lambda_b - \lambda_e)}$. Since we can also write $\alpha$ as $\int_0^1 \frac 1y dx$, this means that the right horocycle must be at height $e^{-\frac12(\lambda_a - \lambda_b - \lambda_c)}$. Similarly, the left hococyle must be at height $|w| e^{-\frac 12(\lambda_d - \lambda_b - \lambda_e)}$.</p>
+                <p>What would have to be true for these heights to be equal? We would need
+                    \[e^{-\frac 12(\lambda_a - \lambda_b - \lambda_c)} = |w| e^{-\frac 12(\lambda_d - \lambda_b - \lambda_e)}.\]
+                    Separating terms, this is equivalent to requiring that
+                    \[|w|= e^{\frac 12(\lambda_d - \lambda_e + \lambda_b - \lambda_a)} = \text{length cross ratio}.\]
+                    Recall that the complex cross ratio of four points is precisely where the fourth one goes when the first 3 are sent to $0$, $1$, and $\infty$. Thus $|w|$ is precisely our length cross ratio!
+                </p>
+            </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2><a id="delauany"></a>Hyperbolic Delaunay Triangulations</h2>
+
+    <div class="subsection">
+    <h3>Horocyclic Arcs</h3>
+    <div class="subsection-content">
+    <img src="../images/horocyclic_arcs.svg" alt="A horocyclic arc &alpha; opposite edge l1 and adjacent to edges l2 and l3." style="max-width: 250px;">
+    <div class="section-text">
+        The horocyclic arc has hyperbolic length
+        \[\alpha = \frac{\ell_1}{\ell_2 \ell_3},\]
+        where $\ell_i$ are the <em>euclidean</em> lengths of the triangle's edges.
+    </div>
+    </div>
+    </div>
+
+    <div class="subsection">
+    <h3>Hyperbolic Delaunay Condition</h3>
+    <div class="subsection-content">
+    <img src="../images/hyperbolic_delaunay_flip.svg" alt="Two adjacent triangles with shared horocyclic arcs &beta;, &beta;', &gamma;, &gamma;', and opposite holocyclic arcs &alpha; and &alpha;'." style="max-width: 500px;">
+    <div class="section-text">
+        <p>
+            The hyperbolic local Delaunay condition is
+            \[\alpha + \alpha' \leq \beta + \beta' + \gamma + \gamma'.\]
+            We flip if this is not true.
+        </p>
+        <p>
+            Equivalently, we can require that
+            \[\beta + \beta' + \gamma + \gamma' - \alpha - \alpha' \geq 0.\]
+        </p>
+    </div>
+    </div>
+    </div>
+
+    <div class="subsection">
+    <h3>Hyperbolic Delaunay Flips</h3>
+    <div class="subsection-content">
+    <img src="../images/C++Diagrams/PtolemyFlip.svg" alt="Two adjacent triangles with shared horocyclic arcs &beta;, &beta;', &gamma;, &gamma;', and opposite holocyclic arcs &alpha; and &alpha;'." style="max-width: 400px;">
+    <div class="section-text">
+        <p>
+            The Ptolemy flip formula is
+            \[\ell_f = \frac{\ell_a \ell_c + \ell_b \ell_d}{\ell_e} \]
+        </p>
+    </div>
+    </div>
+    </div>
+
+    <div class="subsection">
+    <h3>Iterating Around Vertices</h3>
+    <div class="subsection-content">
+    <img src="../images/C++Diagrams/vertex_star_iteration.svg" alt="Two adjacent triangles with shared horocyclic arcs &beta;, &beta;', &gamma;, &gamma;', and opposite holocyclic arcs &alpha; and &alpha;'." style="max-width: 500px;">
+    </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle" data-content="Random Formulas"><a id="formulas"></a>Random Formulas</h2>
+    <div class="warning">Houdini halfedges are oriented clockwise, but geometry-central halfedges are oriented counterclockwise</div>
+
+    <div class="subsection">
+    <h3>Cross-Ratio preserving point</h3>
+    <div class="subsection-content">
+    <img src="../images/C++Diagrams/cocircular.svg" alt="cocircular triangle diagram" style="max-width: 500px;">
+    <div class="section-text">
+        <p>
+    Suppose we are given triangle $B$ and we want to find $v_3$ so that the two triangles have a desired cross-ratio $\mathfrak c$. By some theorem, we know that $\delta = \pi - \gamma$, so $\delta$ is fixed. Now, the law of cosines tells us that $x^2 + y^2 - 2xy \cos \delta = d^2$. Combining this with the constraint that $\frac {xv}{yu} = \mathfrak c$, we can solve in Mathematica to find that the (positive) solution is given by
+    \[\begin{aligned}
+        x &amp;= \frac{\mathfrak c d u}{\sqrt{\mathfrak c ^2 u^2 + v^2 - 2 \mathfrak c u v \cos\delta}} \\
+        y &amp;= \frac{d v}{\sqrt{\mathfrak c ^2 u^2 + v^2 - 2 \mathfrak c u v \cos\delta}}
+        \end{aligned}\]
+        The other solution is given by negating both $x$ and $y$.
+        </p>
+        <p>Initially, I was concerned that I might find the edge lengths corresponding to placing the new vertex in the wrong half of the circle. But it turns out that I won't. The angle between the two edges on the side I want is $\delta$, whereas the angle between the two edges on the other side is $\gamma$. So as long as $\gamma \neq \delta$ (i.e. $\gamma \neq \frac\pi2$), I'm fine. But if $\gamma = \frac\pi2$, then I have a slight problem. But it's not too bad.</p>
+    <p>Now, the law of sines tells us that $\frac{\sin \delta}d = \frac{\sin \phi} y$. Now we know $\phi, \alpha$ and $x$, so we can compute the position $v_3$. Note that in this picture, it looks like the angle between the line $\overline{v_2v_3}$ and the horizontal is $-(\alpha - \phi)$, but in some orientations we need to add $\phi$ instead. We solve this in the code by trying both and picking the one that works. Also, in the code $\alpha$ is a signed angle, so the expressions that we try are actually $\alpha \pm \phi$. This also helps resolve the ambiguity of the $\gamma = \frac \pi2$ case. In this case, the $\pm$ ambiguity corresponds exactly to the two choices of where to place our point. So if both choices are valid, then we just pick the choice which is farther from the base point.</p>
+    </div>
+    </div>
+    </div>
+
+    <div class="subsection">
+    <h3>Scale Factors</h3>
+    <div class="subsection-content">
+    <img src="../images/C++Diagrams/scale_factors.svg" alt="cocircular triangle diagram" style="min-height: 300px; max-height: 400px; max-width: 100%;">
+    <div class="section-text">
+    We want to find scale factors $\varphi_i$ such that $\ell_{de} = \varphi_1\varphi_2 \ell_{ab}$ etc. Note that $\varphi_1\varphi_2 = \frac{\ell_{de}}{\ell_{ab}}$, etc. Let $c_{12} := \varphi_1\varphi_2 = \frac{\ell_{de}}{\ell_{ab}}$. Then
+    \[\varphi_1 = \frac{c_{12} c_{31}} {c_{23}}\]
+    </div>
+    </div>
+    </div>
+
+    <div class="subsection">
+    <h3>Ptolemy Flips</h3>
+    <center>
+    <img src="../images/C++Diagrams/ptolemy_flips.svg" alt="cocircular triangle diagram" style="height: 500px; max-width: 100%;">
+    </center>
+    </div>
+
+    <div class="subsection">
+    <h3>Tracing across faces</h3>
+    <div class="subsection-content">
+    <img src="../images/C++Diagrams/houdini_faces_tracing.svg" alt="cocircular triangle diagram" style="height: 500px; max-width: 100%;">
+    </div>
+
+    <div class="subsection">
+    <h3>Barycentric Coordinate Convention</h3>
+    <div class="subsection-content">
+    <div class="section-text">
+        On a halfedge $ab$, the barycentric coordinate $t$ indicates the point $ta + (1-t)b$.
+    </div>
+    </div>
+    </div>
+
+    <div class="spacer"  style="min-height: 75vh;"></div>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="canvas.js"></script>
+<script type="text/javascript" src="geo.js"></script>
+<script type="text/javascript" src="hyperbolic_models.js"></script>
+<script type="text/javascript" src="cocircular.js"></script>
+<script type="text/javascript" src="demo.js"></script>
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>

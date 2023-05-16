@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css"/>
+<link rel="stylesheet" href="../swiss-formatting.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hyperboloid Model</title>
+<script src="poincare_image/Complex.js"></script>
+<script src="poincare_image/Drawing.js"></script>
+<script src="poincare_image/Octagon.js"></script>
+<script src="poincare_image/Poincare.js"></script>
+</head>
+
+<body onLoad="init_texture_canvas();">
+<div class="noise"></div>
+    <div class="page-content">
+        <div class="title">
+            <div class="title-img" style="background-image: url('../images/plain_hyperboloid_model.svg')"></div>
+            <h1>The Hyperboloid Model</h1>
+            <h4>A Hyperbolic Subset of Minkowski Space</h4>
+        </div>
+
+    <div class="section">
+    <h2 class="halfStyle"><a id="hyperbola"></a>The Hyperbola</h2>
+    <div class="section-content">
+    <div>
+        <canvas id="hyperbola_canvas" width="300" height="300"></canvas>
+        <br/>
+        <center>
+        $s$ = <span id="hyperbola_s" style="width: 3em;display: inline-block;text-align: left;">0</span>
+        </center>
+        <br/>
+        <input type="range" min="0" max="1000" value="500" style="width:300px;" id="hyperbola_time_slider"/>
+    </div>
+    <div class="section-text">
+    Once we equip the plane with the Lorentz metric, we can define the hyperbola as the set of points where $\|v\|^2 = -1$. The hyperbola behaves much like a sphere with imaginary radius.
+    <br/>
+    <br/>
+    We can parameterize the hyperbola using the hyperbolic trig functions.
+
+    \[\begin{pmatrix} t \\ x \end{pmatrix} = \begin{pmatrix} \cosh s \\ \sinh s\end{pmatrix}\]
+    </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle"><a id="boost"></a>Lorentz Boosts</h2>
+    <div class="section-content">
+    <div>
+        <canvas id="boost_canvas" width="300" height="300"></canvas>
+        <br/>
+        <center>$s$ = <span id="boost_s" style="width: 3em;display: inline-block;text-align: left;">0</span></center>
+        <br/>
+        <input type="range" min="0" max="1000" value="500" style="width:300px;" id="boost_angle_slider"/>
+    </div>
+    <div class="section-text">
+        The isometries of the Lorentz metric are known as <em>Lorentz transformations</em>. These include translations and rotations of the space coordinates (well, only translations in the pictures I'm drawing with only one space dimension). The stranger Lorentz transformations are known as <em>boosts</em>. These are the transformations which mix space and time coordinates. In 2D, we can write all boosts in the following form.
+        \[\begin{pmatrix} t' \\ x' \end{pmatrix} = \begin{pmatrix} \cosh s &amp; \sinh s \\ \sinh s &amp; \cosh s \end{pmatrix} \begin{pmatrix} t \\ x \end{pmatrix}\]
+        Note that by applying a boost to the point $(1, 0)$ we can get any point on the unit hyperbola. Applying these boosts to $(1,0)$ traces out the same parameterization of the hyperbola that we considered above.
+    </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle"><a id="boost_plane"></a>Boosts of Affine Planes</h2>
+    <div class="section-content">
+    <div>
+        <canvas id="boost_plane_canvas" width="300" height="300"></canvas>
+        <br/>
+        <center>$s$ = <span id="boost_plane_s" style="width: 3em;display: inline-block;text-align: left;">0</span></center>
+        <br/>
+        <input type="range" min="0" max="1000" value="500" style="width:300px;" id="boost_plane_angle_slider"/>
+    </div>
+    <div class="section-text">
+        Since the Lorentz transformations are linear, they map affine planes to affine planes. If we start from a horizontal plane (or line) and boost it, its slope approaches 1 from below as $s \to \infty$. This will become important when we talk about horocycles later.
+    </div>
+    </div>
+    </div>
+
+
+    <div class="section">
+    <h2 class="halfStyle"><a id="hyperboloid_model"></a>The Hyperboloid Model</h2>
+    <div class="section-content">
+    <div>
+    <img src="../images/hyperboloid_model.svg" style="width: 800px; max-width: 100%" alt="Image of a hyperboloid.">
+    </div>
+    <div class="section-text">
+        <p>
+        The Lorentz metric is not a Riemannian metric because it is not positive definite. Many vectors have zero length according the the Lorentz metric - these vectors form the <em>light cone</em>. Perhaps surprisingly, the restriction of the Lorentz metric to the positive hyperboloid <em>is</em> a Riemannian metric. The proof is pretty easy. First, note that the bottom tip of the positive hyperboloid is tangent to a horizontal plane. The restriction of the Lorentz metric to a horizontal plane is a Euclidean metric, and thus positive definite.
+        </p>
+
+        <p>
+        But we observed earlier that Lorentz transformations can take the tip of the hyperboloid to any other point on the positive hyperboloid. Since the Lorentz transformations preserve the Lorentz metric, this means that the restriction of the Lorentz metric to the hyperboloid is positive definite everywhere!
+        </p>
+
+        <p>
+        The hyperboloid equipped with the restriction of the Lorentz metric is known as the <em>hyperboloid model</em> of hyperbolic space.
+        </p>
+    </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle"><a id="hyperboloid_model_horocycles"></a>Horocycles</h2>
+    <div class="section-content">
+    <div>
+    <img src="../images/hyperboloid_model_horocycle.svg" style="width: 800px;max-width: 100%;" alt="Image of a horocycle on the hyperboloid and Poincare models.">
+    </div>
+    <div class="section-text">
+        <p>
+        Horocycles in the hyperboloid model are given by intersections of the hyperboloid with planes which are orthogonal to some light-like vector. In the figure, I have drawn the intersection of such a plane with the hyperboloid, as well as the projection of the intersection in the Poincar&eacute; model.
+        </p>
+
+        <p>
+        Why is this the case? Recall that a horocycle is a "circle of infinite radius". That is to say, consider a family of circles passing through a fixed point with a fixed tangent direction. As we let the radius of the circles go to infinity, the circles approach a horocycle. This definition is easy to think about in the Poincar&eacute; model, but takes a bit more effort in the hyperboloid model.
+        </p>
+
+        <p>
+            First, let's start with an easy observation - the intersection of the hyperboloid with a horizontal plane is a circle centered around the bottom tip of the hyperboloid. This must be true because the Lorentz metric is rotationally symmetric. And the higher up the plane is, the larger the radius of the circle. Now, to draw a circle of a given radius through a given point, we can apply a boost so that the point is at the right height, intersect the hyperboloid with a plane at that height, and boost back so that the point comes back to its original position.
+        </p>
+
+        <p>
+            This boost back at the end has the effect of tilting the plane up. As our radius approaches infinity, we tilt the plane closer and closer to a 45 degree angle. The limiting curve is the intersection of the hyperboloid with one of the 45 degree angled planes that I mentioned earlier.
+        </p>
+    </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle"><a id="decorated_ideal_vertices"></a>Decorated Ideal Vertices</h2>
+    <div class="section-content">
+    <div>
+        <canvas id="decorated_ideal_vertex_canvas" width="300" height="300"></canvas>
+        <br/>
+        <center>
+        "length" = <span id="decorated_ideal_vertex_length" style="width: 3em;display: inline-block;text-align: left;">0</span>
+        </center>
+        <br/>
+        <input type="range" min="0" max="1000" value="500" style="width:300px;" id="decorated_ideal_vertex_slider"/>
+    </div>
+    <div class="section-text">
+        <p>
+            When I described the affine planes which give us horocycle above, I said that they were planes at 45 degree angles. That's an awfully Euclidean description. It turns out that there's also a natural description of these planes using the Lorentz metric. Consider a light-like vector $v$. The set
+            \[\{w \;:\; \langle v, w\rangle = -1\}\]
+            (where $\langle, \rangle$ is the Lorentz inner product) is an affine plane. And in fact, it is one of these "45 degree" planes. To see this, observe that because $v$ is light-like, $\langle v, v\rangle = 0$. So this affine subspace containes a translated copy of the space spanned by $v$. This hints that the subspace is a 45 degree plane.
+        </p>
+    </div>
+    </div>
+    </div>
+
+    <div class="section">
+    <h2 class="halfStyle"><a id="ideal_edge_lengths"></a>Ideal Edge Lengths</h2>
+    <div class="section-content">
+    <div class="section-text">
+        <p>
+            Let $v_i, v_j$ be light-like vectors which represent decorated ideal vertices. Then the distance between these two vertices (i.e. the length of the shortest geodesic between their horocycles) is given by
+            \[\ell_{ij}^2 = -\frac 12 \langle v_i, v_j\rangle\]
+            where as usual $\langle, \rangle$ represents the Lorentz inner product.
+        </p>
+        <p>
+            As a corollary, we note that
+            \[\|v_i-v_j\|^2 = -2\langle v_i, v_j\rangle = 4\ell_{ij}^2\]
+            where we have used the face that $v_i, v_j$ are light-like (i.e. $\|v_i\|^2 = \|v_j\|^2 = 0$).
+        </p>
+    </div>
+    </div>
+    </div>
+
+
+    <div class="section">
+    <h2><a id="light_cone"></a>The Klein Model</h2>
+    <div class="section-content">
+        <div class="section-content">
+            <div id="render-canvas" style="display: inline-block;width: 500px; height: 500px;margin:0;max-width: 100%;"></div>
+            <canvas id="texture-canvas" height="500" width="500" style="max-width: 100%;"></canvas>
+
+            <script src="../js/three.min.js"></script>
+
+            <script src="../js/WebGL.js"></script>
+            <!--<script src="js/trackball_controls.js"></script>-->
+            <script src="../js/orbit_controls.js"></script>
+
+            <script src="klein.js"></script>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="geo.js"></script>
+<script type="text/javascript" src="demo.js"></script>
+<script>
+    var options = new Object();
+    options.delimiters =  [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ];
+    options.macros = {
+      "\\ket": "\\left| #1 \\right\\rangle"
+    };
+    renderMathInElement(document.body, options);
+</script>
+
+</body>
