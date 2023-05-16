@@ -1,2 +1,13 @@
 .DS_Store
 *.map
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+main.pdf
+*.swp
