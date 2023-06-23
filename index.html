@@ -98,7 +98,7 @@
         <a href="#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a>
         <a href="#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
         <a href="Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
-        <a href="#about" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+        <a href="" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
         <div id="style-menu" class="jsonly">
             <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
             <ul>
@@ -111,16 +111,27 @@
 
     <div class="wrapper" id="home">
 
-      <div class="header">
-        <div class="name_box">
-            <img id="header_img" src="images/me.jpg" alt="A picture of me">
-            <div class="name">
-                Mark Gillespie
-            </div>
-        </div>
-      </div>
+      
 
       <div class="body">
+
+        <div class="header">
+            <img id="header_img" src="images/me.jpg" alt="A picture of me">
+            <div class="info">
+                <div class="name">Mark Gillespie</div>
+                <div class="email"><a href="mailto:mgillesp@cs.cmu.edu" target="_top">mgillesp@cs.cmu.edu</a></div>
+            </div>
+                
+            <div class="section_text">
+                <p> I'm a fifth year Computer Science PhD student at Carnegie Mellon University, advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. I work on algorithms for reliably and efficiently processing geometric data, drawing inspiration from classical topology and differential geometry. Previously I was an undergraduate at Caltech, where I worked on plasma simulation with <a href="http://users.cms.caltech.edu/~ps/">Peter Schr&ouml;der</a>, chromosomal shape embeddings with <a href="https://pages.saclay.inria.fr/mathieu.desbrun/">Mathieu Desbrun</a>, and interval analysis root finding techniques with <a href="http://www.gg.caltech.edu/~barr/">Alan Barr</a>.
+              </p>
+              <p>
+                In my spare time, I like to fold origami and knit. You can find more <a href="hobbies.html">here</a>.
+              </p>
+              <hr />
+            </div>
+
+        </div>
 
           <div class="section_panel">
               <a name="research"><div class="section_header"> Research </div></a>
@@ -255,21 +266,7 @@
             </div>
           </div>
 
-          <div class="section_panel">
-              <a name="about"><div class="section_header"> About Me </div></a>
-            <div class="section_text">
-                <p> I'm a fifth year Computer Science PhD student at Carnegie Mellon University, advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. My research interests are in computer graphics and differential geometry. Recently, I have worked on computing discrete conformal maps and data structures for intrinsic triangulations.
-              </p>
-              <p> Here is <a href="http://www.positivesemidefinitely.com/">a blog</a> that I write with some friends. And here is <a href="Mark_Gillespie_CV.pdf">my CV</a>.
-              </p>
-              <p>
-                In my spare time, I like to fold origami and knit. You can find more <a href="hobbies.html">here</a>.
-              </p>
-              Email: <a href="mailto:mgillesp@cs.cmu.edu" target="_top">mgillesp@cs.cmu.edu</a>
-              <hr />
-            </div>
-          </div>
-
+          
           <div class="section_panel">
               <a name="awards"><div class="section_header">Awards </div></a>
             <div class="section_text">
@@ -506,7 +503,7 @@
                   <div class="project_header">
                       <div class="image"><img style="max-height: 10em; width: auto; margin: auto;" src="images/GeodesicWalker.png"></div>
                       <div class="text">
-                          <div class="project_title"><h4><a href="Demos/GeodesicWalker/html/">Geodesic Walker</a></h4></div>
+                          <div class="project_title"><h4><a href="Demos/GeodesicWalker/html/">Geodesic walker</a></h4></div>
                           <div class="mini_abstract">
                               Web demo which traces out geodesics on a mesh. The code is available <a href="https://github.com/MarkGillespie/GeodesicWalker">here</a>.
                           </div>
@@ -516,7 +513,7 @@
                 <div class="project_header">
                     <div class="image"><img src="Misc/HyperbolicNotes/images/hyperboloid_model_horocycle.svg"></div>
                     <div class="text">
-                        <div class="project_title"><h4><a href="Misc/HyperbolicNotes/">Hyperbolic Notes</a></h4></div>
+                        <div class="project_title"><h4><a href="Misc/HyperbolicNotes/">Hyperbolic notes</a></h4></div>
                         <div class="mini_abstract">
                             Notes on hyperbolic geometry and discrete conformal maps.
                         </div>
@@ -526,9 +523,29 @@
                 <div class="project_header">
                     <div class="image"><img src="Misc/TartanShader/Bunny.png"></div>
                     <div class="text">
-                        <div class="project_title"><h4><a href="Misc/TartanShader/">Tartan Shader</a></h4></div>
+                        <div class="project_title"><h4><a href="Misc/TartanShader/">Tartan shader</a></h4></div>
                         <div class="mini_abstract">
                             A shader to make meshes tartan.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project_header">
+                    <div class="image"><img src="images/double_cover.png"></div>
+                    <div class="text">
+                        <div class="project_title"><h4><a href="https://github.com/MarkGillespie/OrientingMeshes">Computing orientable double covers</a></h4></div>
+                        <div class="mini_abstract">
+                            Takes any triangle mesh and turn it into an orientable manifold mesh by constructing the orientable double cover.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project_header">
+                    <div class="image"><img src="images/split_delaunay_bunny.png" style="max-width: 10em; max-height: 10em; margin: auto;"></div>
+                    <div class="text">
+                        <div class="project_title"><h4><a href="https://github.com/MarkGillespie/SplitToDelaunay">Split to Delaunay</a></h4></div>
+                        <div class="mini_abstract">
+                            This is a rough implementation of the Delaunay edge split algorithm presented in <a href="https://dl.acm.org/doi/10.1145/2816795.2818076">Efficient construction and simplification of Delaunay meshes</a> by Yong-Jin Liu, Chunxu  Xu, Dian  Fan, and Ying He. It takes in a triangle mesh and then performs edge splits to make the mesh Delaunay.
                         </div>
                     </div>
                 </div>
@@ -546,7 +563,7 @@
                 <div class="project_header">
                     <div class="image"><img style="max-height: 10em; width: auto; margin: auto;" src="Misc/PhaseSpace/phase_space.png"></div>
                     <div class="text">
-                        <div class="project_title"><h4><a href="Misc/PhaseSpace/">Pendulum Phase Space</a></h4></div>
+                        <div class="project_title"><h4><a href="Misc/PhaseSpace/">Pendulum phase space</a></h4></div>
                         <div class="mini_abstract">
                             Visualization of the phase space of a pendulum as a cylinder.
                         </div>
@@ -564,9 +581,19 @@
                 </div>
 
                 <div class="project_header">
+                    <!-- <div class="image"><img src="images/split_delaunay_bunny.png" style="max-width: 10em; max-height: 10em; margin: auto;"></div> -->
+                    <div class="text">
+                        <div class="project_title"><h4><a href="https://github.com/MarkGillespie/GC-CombinatorialMaps/">Combinatorial maps</a></h4></div>
+                        <div class="mini_abstract">
+                            Demo of an implementation of the <a href="https://doc.cgal.org/latest/Combinatorial_map/index.html">combinatorial map</a> data structure for <em>n</em>-dimensional simplicial complexes that I experimented with in <tt>geometry-central</tt>. It has not yet made its way into the library itself, but the implementation can be found <a href="https://github.com/MarkGillespie/geometry-central/tree/CombinatorialMaps/include/geometrycentral/combinatorial-maps">here</a>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project_header">
                     <!-- <div class="image"><img style="max-height: 10em; width: auto; margin: auto;" src="Misc/integrators/Pendulum.png"></div> -->
                     <div class="text">
-                        <div class="project_title"><h4><a href="WordValidator/#/">Word Validator</a></h4></div>
+                        <div class="project_title"><h4><a href="WordValidator/#/">Word validator</a></h4></div>
                         <div class="mini_abstract">
                             Online tool to check if a word is in the dictionary.
                         </div>
