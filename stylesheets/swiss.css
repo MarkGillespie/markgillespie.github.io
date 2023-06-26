@@ -2039,7 +2039,7 @@ html.singlecolumn .header .section_text {
   grid-row: 1/span 2;
   margin: 0;
   padding-top: 1em;
-  text-align: justify;
+  text-align: left;
 }
 
 @media (max-width: 970px) {
