@@ -14,6 +14,7 @@
     ordinary-font-color: #ddd,
     accent-font-color: #bbb,
     link-color: #bdf,
+    link-hover-color: #c9f,
     menu-font-color: #bbb
 ), $parent);
 
@@ -44,6 +45,7 @@
     ordinary-font-color: #000,
     accent-font-color: #f4f4f4,
     link-color: #4783D5,
+    link-hover-color: #ee4d93,
     menu-font-color: #333
 ), $parent);
 
@@ -66,3 +68,17 @@
 
 @include darkmode("html.darkmode");
 @include lightmode("html.lightmode");
+
+#darkmode-checkbox {
+	  width: 0;
+	  height: 0;
+    margin: 0;
+	  visibility: hidden;
+}
+html.darkmode #darkmode-checkbox-label::after {
+	  content: "\263C";
+}
+html.lightmode #darkmode-checkbox-label::after {
+	  content: "\263D";
+}
+

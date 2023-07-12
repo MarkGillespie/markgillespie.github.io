@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/swiss.css" media="screen">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
     <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript">
       // === Cookie stuff for saving style (Maybe I should switch to select/options)
       function setCookie(cname, cvalue, exdays) {
@@ -100,13 +101,10 @@
         <a href="#misc" class="navbar_link vanishing"><span class="navbar_item">Misc</span></a>
         <a href="Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
         <a href="" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-        <div id="style-menu" class="jsonly">
-            <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
-            <ul>
-                <li><button onclick="setStyle('lightmode');">Light Mode</button></li>
-                <li><button onclick="setStyle('darkmode');">Dark Mode</button></li>
-            </ul>
-        </div>
+		    <form id="darkmode-toggle"> <!-- toggle lightmode -->
+			      <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
+            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
+		    </form>
       </div>
     </div>
 
@@ -120,7 +118,14 @@
             <img id="header_img" src="images/me.jpg" alt="A picture of me">
             <div class="info">
                 <div class="name">Mark Gillespie</div>
-                <div class="email"><a href="mailto:mgillesp@cs.cmu.edu" target="_top">mgillesp@cs.cmu.edu</a></div>
+                <div class="email">
+                    <a href="mailto:mgillesp@cs.cmu.edu" target="_top">mgillesp@cs.cmu.edu</a>
+                </div>
+                <div class="links">
+                    <a href="https://github.com/MarkGillespie/"> <i class="fa fa-github"></i></a>
+                    <a href="https://www.youtube.com/channel/UC7MQjPEmpKJ_7Lk_AY9icbQ"> <i class="fa fa-youtube"></i></a>
+                    <a href="https://scholar.google.com/citations?user=o_OqGM0AAAAJ"> <i class="fa fa-graduation-cap"></i></a>
+                </div>
             </div>
                 
             <div class="section_text">
@@ -509,16 +514,17 @@
                 </tr>
               </table>
 
+              <hr />
             </div>
           </div>
 
 
-          <div class="section_panel">
+          <div class="section_panel" id="misc">
               <a name="misc"><div class="section_header"> Miscellanea </div></a>
               <div class="section_text">
 
                 <div class="project_header">
-                    <div class="image"><img style="max-height: 10em; width: auto; margin: auto;" src="images/GeodesicWalker.png"></div>
+                    <div class="image"><img src="images/GeodesicWalker.png"></div>
                     <div class="text">
                         <div class="project_title"><h4><a href="Demos/GeodesicWalker/html/">Geodesic walker</a></h4></div>
                         <div class="mini_abstract">
@@ -996,5 +1002,9 @@
     </div>
     </div>
   </body>
+
+  <script>
+   document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(this.checked ? "lightmode" : "darkmode");});
+  </script>
 </html>
 

@@ -106,13 +106,10 @@
         <a href="../../index.html#misc" class="navbar_link vanishing"><span class="navbar_item">Misc</span></a>
         <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
         <a href="../../index.html" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-        <div id="style-menu" class="jsonly">
-            <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
-            <ul>
-                <li><button onclick="setStyle('lightmode');">Light Mode</button></li>
-                <li><button onclick="setStyle('darkmode');">Dark Mode</button></li>
-            </ul>
-        </div>
+		    <form id="darkmode-toggle"> <!-- toggle lightmode -->
+			      <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
+            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
+		    </form>
       </div>
     </div>
 
@@ -209,4 +206,7 @@
       </div>
     </div>
   </body>
+  <script>
+   document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(this.checked ? "lightmode" : "darkmode");});
+  </script>
 </html>

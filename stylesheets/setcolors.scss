@@ -17,6 +17,7 @@
     $ordinary-font-color: map-get($map, 'ordinary-font-color');
     $accent-font-color: map-get($map, 'accent-font-color');
     $link-color: map-get($map, 'link-color');
+    $link-hover-color: map-get($map, 'link-hover-color');
     $menu-font-color: map-get($map, 'menu-font-color');
 
     #{$parent} {
@@ -73,7 +74,7 @@
     }
 
     #{$parent} .project_author_list a:hover, #{$parent} .author .name a:hover {
-        color: $link-color;
+        color: $link-hover-color;
     }
 
     #{parent} #header_img {
@@ -167,6 +168,10 @@
 
     #{$parent} a {
         color: $link-color;
+    }
+
+    #{$parent} a:hover {
+        color: $link-hover-color;
     }
 }
 

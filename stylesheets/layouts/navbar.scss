@@ -17,18 +17,18 @@
     }
 
 
-    #{$parent} a.navbar_link{
-    text-decoration: none;
-    margin: 0;
-    display: inline-block;
-    position: relative;
-    z-index: 20;
+    #{$parent} a.navbar_link, #{$parent} .navbar_buttons form {
+        text-decoration: none;
+        margin: 0;
+        display: inline-block;
+        position: relative;
+        z-index: 20;
     }
 
-    #{$parent} a.navbar_link:hover{
-    text-decoration: none;
-    text-shadow: none;
-    margin: 0;
+    #{$parent} a.navbar_link:hover {
+        text-decoration: none;
+        text-shadow: none;
+        margin: 0;
     }
 
     @media (max-width: 1150px) {
@@ -38,19 +38,19 @@
     }
 
     @media (max-width: 970px) {
-    #{$parent} .vanishing {
-        display: none !important;
-    }
+        #{$parent} .vanishing {
+            display: none !important;
+        }
 
 
-    #{$parent} .section_panel {
-        max-width: 100%;
-        width: 100vw;
-    }
+        #{$parent} .section_panel {
+            max-width: 100%;
+            width: 100vw;
+        }
 
-    #{$parent} .body {
-        justify-content: left;
-    }
+        #{$parent} .body {
+            justify-content: left;
+        }
     }
 
     #{$parent} div.navbar_buttons {
@@ -58,9 +58,10 @@
         overflow: visible;
         float: right;
         font-family: 'Helvetica', sans-serif;
+        margin-right: 1em;
     }
 
-    #{$parent} .navbar_item, #style-menu > button {
+    #{$parent} .navbar_item, #{$parent} #style-menu > button {
         float: none;
         height: 100%;
         font-weight: 400;

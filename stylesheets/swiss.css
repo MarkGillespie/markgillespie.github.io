@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @media (prefers-color-scheme: dark) {
   html {
     background-color: #111;
@@ -42,7 +43,7 @@
     color: #c1c1d8;
   }
   html .project_author_list a:hover, html .author .name a:hover {
-    color: #bdf;
+    color: #c9f;
   }
   parent #header_img {
     box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
@@ -114,6 +115,9 @@
   }
   html a {
     color: #bdf;
+  }
+  html a:hover {
+    color: #c9f;
   }
   html .st1 {
     display: inline;
@@ -413,7 +417,7 @@
     color: #000;
   }
   html .project_author_list a:hover, html .author .name a:hover {
-    color: #4783D5;
+    color: #ee4d93;
   }
   parent #header_img {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
@@ -485,6 +489,9 @@
   }
   html a {
     color: #4783D5;
+  }
+  html a:hover {
+    color: #ee4d93;
   }
   html .st1 {
     display: inline;
@@ -785,7 +792,7 @@ html.darkmode .project_author_list, html.darkmode .project_author_list a, html.d
 }
 
 html.darkmode .project_author_list a:hover, html.darkmode .author .name a:hover {
-  color: #bdf;
+  color: #c9f;
 }
 
 parent #header_img {
@@ -877,6 +884,10 @@ html.darkmode .footer a {
 
 html.darkmode a {
   color: #bdf;
+}
+
+html.darkmode a:hover {
+  color: #c9f;
 }
 
 html.darkmode .st1 {
@@ -1182,7 +1193,7 @@ html.lightmode .project_author_list, html.lightmode .project_author_list a, html
 }
 
 html.lightmode .project_author_list a:hover, html.lightmode .author .name a:hover {
-  color: #4783D5;
+  color: #ee4d93;
 }
 
 parent #header_img {
@@ -1274,6 +1285,10 @@ html.lightmode .footer a {
 
 html.lightmode a {
   color: #4783D5;
+}
+
+html.lightmode a:hover {
+  color: #ee4d93;
 }
 
 html.lightmode .st1 {
@@ -1527,6 +1542,21 @@ html.lightmode .st48 {
   fill: #662D91;
 }
 
+#darkmode-checkbox {
+  width: 0;
+  height: 0;
+  margin: 0;
+  visibility: hidden;
+}
+
+html.darkmode #darkmode-checkbox-label::after {
+  content: "☼";
+}
+
+html.lightmode #darkmode-checkbox-label::after {
+  content: "☽";
+}
+
 /* One column layout */ /* Two column layout */ /* Project page layout */ /* Two column layout */
 /******************************/
 /*         NAVBAR             */
@@ -1544,7 +1574,7 @@ body .navbar_icon {
   display: none;
 }
 
-body a.navbar_link {
+body a.navbar_link, body .navbar_buttons form {
   text-decoration: none;
   margin: 0;
   display: inline-block;
@@ -1580,9 +1610,10 @@ body div.navbar_buttons {
   overflow: visible;
   float: right;
   font-family: "Helvetica", sans-serif;
+  margin-right: 1em;
 }
 
-body .navbar_item, #style-menu > button {
+body .navbar_item, body #style-menu > button {
   float: none;
   height: 100%;
   font-weight: 400;
@@ -1740,6 +1771,10 @@ html.singlecolumn .project_header {
   display: flex; /* equal child height */
 }
 
+html.singlecolumn #misc .project_header {
+  margin-bottom: 2em;
+}
+
 html.singlecolumn .project_header .image {
   flex: 0 0 30%;
   width: 30%;
@@ -1748,12 +1783,15 @@ html.singlecolumn .project_header .image {
 }
 
 html.singlecolumn .project_header .image img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 12em;
+  margin: auto;
 }
 
 html.singlecolumn .project_header .text {
   flex: 1 1 70%;
   margin-left: 1em;
+  width: 100%;
 }
 
 html.singlecolumn .project_header .text .project_title {
@@ -2040,6 +2078,10 @@ html.singlecolumn .header .section_text {
   margin: 0;
   padding-top: 1em;
   text-align: left;
+}
+
+html.singlecolumn .header .fa {
+  font-size: 1.75em;
 }
 
 @media (max-width: 970px) {

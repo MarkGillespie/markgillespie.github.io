@@ -87,6 +87,10 @@
         display: flex; /* equal child height */
     }
 
+    #{$parent} #misc .project_header {
+        margin-bottom: 2em;
+    }
+
     #{$parent} .project_header .image {
         flex: 0 0 30%;
         width: 30%;
@@ -96,7 +100,9 @@
     }
 
     #{$parent} .project_header .image img {
-        width: 100%;
+        max-width: 100%;
+        max-height: 12em;
+        margin: auto;
     }
 
     #{$parent} .project_header .text {
@@ -104,6 +110,7 @@
         // display: flex;
         // align-items: center;
         margin-left: 1em;
+        width: 100%;
     }
 
     #{$parent} .project_header .text .project_title {
@@ -396,6 +403,10 @@
         margin: 0;
         padding-top: 1em;
         text-align: left;
+    }
+
+    #{$parent} .header .fa {
+        font-size: 1.75em;
     }
 
     @media (max-width: 970px) {
