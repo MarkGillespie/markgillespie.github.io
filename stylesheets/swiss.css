@@ -1311,12 +1311,13 @@ html.singlecolumn #header_img {
   margin: auto;
 }
 
-html.singlecolumn .info {
+html.singlecolumn .header .info {
   grid-column: 1/span 1;
   grid-row: 2/2;
   display: inline-block;
   margin: 0.25em auto 0 auto;
   padding-top: 0.1em;
+  line-height: 2.5;
 }
 
 html.singlecolumn .name {
