@@ -58,14 +58,6 @@
 ), $parent);
 }
 
-@media (prefers-color-scheme: dark) {
-    @include darkmode();
-}
-
-@media (prefers-color-scheme: light) {
-    @include lightmode();
-}
-
 @include darkmode("html.darkmode");
 @include lightmode("html.lightmode");
 
