@@ -198,31 +198,35 @@
         #{$parent} .footer {
             margin-top: 2em;
         }
-
-
-        #{$parent} .name_box > .authors {
-            flex-direction: column;
-            max-width: 80%;
-            margin: auto;
-        }
-
-        #{$parent} .name_box > .authors > .author {
-            text-align: left;
-        }
-
-        #{$parent} .name_box > .authors > .author > .name {
-            display: inline;
-        }
-
-        #{$parent} .name_box > .authors > .author > .affiliation {
-            display: inline-block;
-            margin-left: 1em;
-        }
     }
 
     @media (max-width: 710px) {
         #{$parent} .abstract {
             text-align: left;
+        }
+
+        #{$parent} .name_box > .authors {
+            flex-direction: column;
+            max-width: 80%;
+            margin: auto;
+            display: block;
+            text-align: left;
+        }
+
+        #{$parent} .name_box > .authors > .author {
+            display: flex;
+            align-items: start;
+            margin-bottom: 0.3em;
+        }
+
+        #{$parent} .name_box > .authors > .author > .name {
+            margin-bottom: 0;
+            margin-right: 0.5em;
+            flex: 0 0 auto;
+        }
+
+        #{$parent} .name_box > .authors > .author > .affiliation {
+            margin: 0;
         }
     }
 

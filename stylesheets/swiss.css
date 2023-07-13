@@ -1631,25 +1631,30 @@ html.project .footer {
   html.project .footer {
     margin-top: 2em;
   }
-  html.project .name_box > .authors {
-    flex-direction: column;
-    max-width: 80%;
-    margin: auto;
-  }
-  html.project .name_box > .authors > .author {
-    text-align: left;
-  }
-  html.project .name_box > .authors > .author > .name {
-    display: inline;
-  }
-  html.project .name_box > .authors > .author > .affiliation {
-    display: inline-block;
-    margin-left: 1em;
-  }
 }
 @media (max-width: 710px) {
   html.project .abstract {
     text-align: left;
+  }
+  html.project .name_box > .authors {
+    flex-direction: column;
+    max-width: 80%;
+    margin: auto;
+    display: block;
+    text-align: left;
+  }
+  html.project .name_box > .authors > .author {
+    display: flex;
+    align-items: start;
+    margin-bottom: 0.3em;
+  }
+  html.project .name_box > .authors > .author > .name {
+    margin-bottom: 0;
+    margin-right: 0.5em;
+    flex: 0 0 auto;
+  }
+  html.project .name_box > .authors > .author > .affiliation {
+    margin: 0;
   }
 }
 .nojs .jsonly {
