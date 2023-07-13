@@ -126,10 +126,12 @@
     #{$parent} .project_header .text .venue, .project_author_list {
         line-height: 1.4;
         padding-left: 1em;
+        font-weight: normal;
     }
 
     #{$parent} .project_author_list a {
         text-decoration: none;
+        font-weight: normal;
     }
 
     #{$parent} .project_header .text .mini_abstract {
