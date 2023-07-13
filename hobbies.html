@@ -8,13 +8,35 @@
     <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
-     /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-     function doDropdown() {
-         document.getElementById("style-menu").classList.toggle("show");
-         document.getElementById("style-menu").classList.toggle("selected");
+     // === Cookie stuff for saving style (Maybe I should switch to select/options)
+     function setCookie(cname, cvalue, exdays) {
+         const d = new Date();
+         d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+         const expires = "expires=" + d.toUTCString();
+         const cookieString =
+             cname +
+             "=" +
+             encodeURIComponent(cvalue) +
+             ";" +
+             expires +
+             ";path=/;SameSite=Strict";
+         document.cookie = cookieString;
      }
 
+     function getCookie(cname) {
+         const name = cname + "=";
+         const ca = document.cookie.split(";");
+         for (let i = 0; i < ca.length; i++) {
+             let c = ca[i];
+             while (c.charAt(0) == " ") {
+                 c = c.substring(1);
+             }
+             if (c.indexOf(name) == 0) {
+                 return decodeURIComponent(c.substring(name.length, c.length));
+             }
+         }
+         return "";
+     }
      function setStyle(style) {
          const html = document.getElementsByTagName('html')[0];
          html.classList.remove("lightmode");
@@ -22,12 +44,13 @@
          html.classList.add(style);
      }
 
-     // Close the dropdown if the user clicks outside of it
-     window.onclick = function(event) {
-         if (!event.target.matches('.dropbtn') && !event.target.matches('#style-menu button')) {
-             document.getElementById('style-menu').classList.remove('show');
-             document.getElementById('style-menu').classList.remove('selected');
-         }
+     // Load saved style
+     const currentStyle=getCookie("style");
+     if (currentStyle) {
+         setStyle(currentStyle);
+     } else {
+         const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+         setStyle( isDarkMode ? "darkmode" : "lightmode" );
      }
     </script>
   </head>
@@ -45,13 +68,10 @@
             <a class="navbar_link" href="#knitting">  <span class="navbar_item"> Knitting </span></a>
             <a class="navbar_link" href="#cooking">   <span class="navbar_item"> Cooking </span></a>
             <a class="navbar_link" href="#juggling">  <span class="navbar_item"> Juggling </span></a>
-            <div id="style-menu" class="jsonly">
-                <button class="dropbtn navbar_item" onclick="doDropdown()">Style</button>
-                <ul>
-                    <li><button onclick="setStyle('lightmode');">Light Mode</button></li>
-                    <li><button onclick="setStyle('darkmode');">Dark Mode</button></li>
-                </ul>
-            </div>
+		        <form id="darkmode-toggle"> <!-- toggle lightmode -->
+			          <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
+                <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
+		        </form>
         </div>
     </div>
 
@@ -100,6 +120,9 @@
         </div>
     </div>
 </div>
+<script>
+ document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(document.getElementsByTagName("html")[0].classList.contains("darkmode") ? "lightmode" : "darkmode");});
+</script>
 
   </body>
 </html>
