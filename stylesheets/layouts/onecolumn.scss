@@ -74,6 +74,7 @@
 
         #{$parent} .project_title {
             font-size: 20pt !important;
+            font-weight: normal !important;
         }
     }
 
@@ -312,7 +313,7 @@
         font-family: 'Helvetica';
         font-weight: 200;
         font-size: 22px;
-        line-height: 1.3;
+        line-height: 1.1;
         text-align: left;
     }
 
@@ -416,6 +417,17 @@
         #{$parent} .name_box {
             /* font-size: 6em; */
         }
+
+        #{$parent} h3 {
+            font-size: 2em;
+            font-weight: normal;
+        }
+
+        #{$parent} h4 {
+            text-align: left;
+            font-weight: normal;
+        }
+
     }
 
     @media (max-width: 710px) {
@@ -453,7 +465,6 @@
             width: 100%;
             max-width: 300px;
         }
-
     }
 
     @media (max-width: 450px) {
@@ -462,16 +473,6 @@
         }
         #{$parent} .body {
             width: 100vw;
-        }
-
-        #{$parent} h3 {
-            font-size: 2em;
-            font-weight: 400;
-        }
-
-        #{$parent} h4 {
-            text-align: left;
-            font-weight: 400;
         }
     }
 

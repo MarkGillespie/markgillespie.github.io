@@ -228,6 +228,10 @@
         #{$parent} .name_box > .authors > .author > .affiliation {
             margin: 0;
         }
+
+        #{$parent} .paper_teaser {
+            max-width: 100%;
+        }
     }
 
 }
