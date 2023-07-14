@@ -42,7 +42,6 @@
             display: none !important;
         }
 
-
         #{$parent} .section_panel {
             max-width: 100%;
             width: 100vw;
@@ -66,7 +65,7 @@
         height: 100%;
         font-weight: 400;
         display: inline-block;
-        font-size: 1.8em;
+        font-size: 1.3em;
 
         padding-top: 20px;
         padding-bottom: 20px;
@@ -80,7 +79,6 @@
             padding-right: 5px;
             overflow: visible;
             z-index: 200;
-            font-size: 1.2em !important;
         }
     }
 
