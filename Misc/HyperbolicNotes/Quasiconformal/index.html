@@ -45,7 +45,7 @@
     <div class="section-text">
        <p>
            If we have two triangles, we can always map between them using an affine map. If the first triangle has edge lengths $\ell_i$ and the second has edge lengths $\tilde \ell_i$, then the distortion is given by:
-           \[\text{distortion} = \frac{\left(\ell^2\right)^T \!\!\! A \tilde \ell^2}{\sqrt{\left(\ell^2\right)^T \!\!\! A\, \ell^2}\sqrt{\left(\tilde \ell^2\right)^T \!\!\! A \tilde \ell^2}}, \quad A = \frac 12 \begin{pmatrix}-1 & 1 & 1 \\ 1 & -1 & 1\\ 1 & 1 & -1\end{pmatrix},
+           \[ \text{distortion} = \frac{\left(\ell^2\right)^T \!\!\! A \tilde \ell^2}{\sqrt{\left(\ell^2\right)^T \!\!\! A\, \ell^2}\sqrt{\left(\tilde \ell^2\right)^T \!\!\! A \tilde \ell^2}} \] \[ A = \frac 12 \begin{pmatrix}-1 & 1 & 1 \\ 1 & -1 & 1\\ 1 & 1 & -1\end{pmatrix},
            \]
            where $\ell^2$ denotes the vector $(\ell_0^2, \ell_1^2, \ell_2^2)^T$.
        </p>
@@ -57,8 +57,7 @@
            \[
            \begin{pmatrix} \cot \alpha_0 \\ \cot \alpha_1 \\ \cot\alpha_2 \end{pmatrix} =
            \frac {A^{-1}\ell^2} {\sqrt{\left(\tilde \ell^2\right)^T \!\!\! A \tilde \ell^2}},
-           \quad A^{-1} = \begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix},
-           \]
+           \] \[ A^{-1} = \begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix}, \]
            (which can be derived using the law of cosines, the sine formula for area, and the definition that $\cot \alpha = \tfrac{\cos\alpha}{\sin\alpha}$.)
        </p>
        <p>
@@ -122,10 +121,10 @@
            \[ \mathcal{E}_{\text{edge}}(u) := \max_{\text{edge}\;\ij} |\tilde\lambda_{\ij} - \lambda_{\ij} - u_i - u_j|. \]
        </p>
        <p>
-           Similarly, in a discrete conformal equivalence the vertex scale factors are given by
-           \[ u_i = \tilde\lambda_{\ij} + \tilde\lambda_{ki} - \tilde\lambda_{jk} - \lambda_{\ij} - \lambda_{ki} + \lambda_{jk}, \]
-           and so we can also measure the failure of our piecewise-projective map to be a discrete conformal equivalence as
-           \[ \mathcal{E}_{\text{vertex}}(u) := \max_{\text{corner}\;ijk} | u_i - \tilde\lambda_{\ij} + \tilde\lambda_{ki} - \tilde\lambda_{jk} - \lambda_{\ij} - \lambda_{ki} + \lambda_{jk} |. \]
+           Similarly, in a discrete conformal equivalence the logarithmic scale factor at a vertex $i$ is given by the value
+           \[ \hat u_i^{jk} = \tilde\lambda_{\ij} + \tilde\lambda_{ki} - \tilde\lambda_{jk} - \lambda_{\ij} - \lambda_{ki} + \lambda_{jk} \]
+           evaluated at any corner incident on $i$, and so we can also measure the failure of our piecewise-projective map to be a discrete conformal equivalence as
+           \[ \mathcal{E}_{\text{vertex}}(u) := \max_{\text{corner}\;ijk} | u_i - \hat u_i^{jk} |. \]
            This vertex-based distortion measurement ends up being entirely local: the log lengths determine a target $u$ value at each corner, and then each vertex just tries to minimize the maximum deviation from any of its incident corner values. Unfortunately, it does not even necessarily yield affine maps (<em>i.e.</em> constant $u$ values) when squashing rectangles.
        </p>
        <p>
