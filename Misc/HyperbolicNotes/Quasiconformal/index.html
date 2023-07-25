@@ -129,7 +129,10 @@
        </p>
        <p>
            On the other hand, optimizing the edge-based distortion measurement requires solving a global problem. We can formulate this optimization as a linear program:
-           \[ \min_{m, u_i}\; m \quad \text{ s.t. } \; -m \leq |\tilde\lambda_{\ij} - \lambda_{\ij} - u_i - u_j| \leq m \; \forall\; \text{edges}\;\ij. \]
+           \[ \begin{aligned}
+                 \min_{m, u_i}\; &m \quad \text{ s.t. } \\
+           &-m \leq |\tilde\lambda_{\ij} - \lambda_{\ij} - u_i - u_j| \leq m \; \forall\; \text{edges}\;\ij.
+           \end{aligned} \]
            Interestingly, this linear program generally seems to have many optimal solutions. We can try to pick out a good one by minimizing $\max_{\ij} |u_i - u_j|$ over this optimal face. This can be done efficiently by adding constraints
            \[ a \leq u_i \leq b \; \forall \; i,\]
            and minimizing $b-a$ as a <a href="https://www.gurobi.com/documentation/current/refman/working_with_multiple_obje.html">secondary objective</a>.
