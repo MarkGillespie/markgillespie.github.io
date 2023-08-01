@@ -812,6 +812,10 @@ html.lightmode #darkmode-checkbox-label::after {
   content: "☽";
 }
 
+html.nojs #darkmode-toggle {
+  display: none;
+}
+
 /* One column layout */ /* Two column layout */ /* Project page layout */ /* Two column layout */
 /******************************/
 /*         NAVBAR             */

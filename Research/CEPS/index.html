@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" class="nojs project">
+<html lang="en-us" class="nojs project lightmode">
   <head>
     <meta charset="UTF-8">
     <title>DCEPS</title>
@@ -47,17 +47,7 @@
      }
 
      window.onload = function() {
-         document.getElementById("background_image").style.opacity = 1.0;
-
-         // Deferred image loading
-         // https://varvy.com/pagespeed/defer-images.html
-         let images = document.getElementsByTagName("img");
-         for (let i = 0; i < images.length; i++) {
-             if (images[i].getAttribute("data-src")) {
-                 images[i].setAttribute("src", images[i].getAttribute("data-src"));
-             }
-         }
-
+         /* document.getElementById("background_image").style.opacity = 1.0; */
          document.getElementsByTagName('html')[0].classList.remove("nojs");
      }
 

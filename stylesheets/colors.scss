@@ -67,10 +67,15 @@
     margin: 0;
 	  visibility: hidden;
 }
+
 html.darkmode #darkmode-checkbox-label::after {
 	  content: "\263C";
 }
+
 html.lightmode #darkmode-checkbox-label::after {
 	  content: "\263D";
 }
 
+html.nojs #darkmode-toggle {
+    display: none;
+}
