@@ -64,12 +64,18 @@
         padding-right: 1em;
         margin-bottom: 4em;
         box-sizing: border-box;
+        margin-top: 1.5em;
+    }
+
+    #{$parent} .section_panel > a {
+        margin-top: -3em;
     }
 
     @media (max-width: 970px) {
         #{$parent} .section_panel {
             width: 100%;
             max-width: 100%;
+            padding-right: 0em;
         }
 
         #{$parent} .project_title {
@@ -80,8 +86,7 @@
 
     #{$parent} .section_text {
         padding: 1em;
-        padding-top: 4em;
-        margin-top: -3em;
+        padding-top: 2em;
     }
 
     #{$parent} .project_header {
@@ -371,7 +376,7 @@
         grid-column-gap: 1em;
         max-width: 80%;
         width: 80%;
-        margin-bottom: 1em;
+        margin-bottom: 2em;
     }
 
     #{$parent} #header_img {

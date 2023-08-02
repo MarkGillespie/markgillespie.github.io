@@ -25,7 +25,7 @@
         color: $ordinary-font-color;
     }
 
-    #{$parent} .section_text {
+    #{$parent} .section_panel, #{$parent} .panel {
         background-color: $foreground-color;
         box-shadow: 1px 1px 3px rgba($shadow-color, .3);
     }

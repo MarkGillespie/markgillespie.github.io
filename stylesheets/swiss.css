@@ -4,7 +4,7 @@ html.darkmode {
   color: #ddd;
 }
 
-html.darkmode .section_text {
+html.darkmode .section_panel, html.darkmode .panel {
   background-color: rgba(51, 51, 68, 0.9333333333);
   box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
 }
@@ -405,7 +405,7 @@ html.lightmode {
   color: #000;
 }
 
-html.lightmode .section_text {
+html.lightmode .section_panel, html.lightmode .panel {
   background-color: rgba(205, 230, 247, 0.9490196078);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
@@ -1008,12 +1008,18 @@ html.singlecolumn .section_panel {
   padding-right: 1em;
   margin-bottom: 4em;
   box-sizing: border-box;
+  margin-top: 1.5em;
+}
+
+html.singlecolumn .section_panel > a {
+  margin-top: -3em;
 }
 
 @media (max-width: 970px) {
   html.singlecolumn .section_panel {
     width: 100%;
     max-width: 100%;
+    padding-right: 0em;
   }
   html.singlecolumn .project_title {
     font-size: 20pt !important;
@@ -1022,8 +1028,7 @@ html.singlecolumn .section_panel {
 }
 html.singlecolumn .section_text {
   padding: 1em;
-  padding-top: 4em;
-  margin-top: -3em;
+  padding-top: 2em;
 }
 
 html.singlecolumn .project_header {
@@ -1305,7 +1310,7 @@ html.singlecolumn .header {
   grid-column-gap: 1em;
   max-width: 80%;
   width: 80%;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 html.singlecolumn #header_img {
@@ -1570,6 +1575,7 @@ html.project .section_header {
   position: relative;
   display: inline-block;
   margin-left: -10px;
+  margin-top: -1.5em;
   padding: 15px;
 }
 
