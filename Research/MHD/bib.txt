@@ -1,0 +1,7 @@
+@mastersthesis{Gillespie:2018:MHD,
+  author = {Gillespie, Mark},
+  title = {Magnetohydrodynamics Simulation via Discrete Exterior Calculus},
+  type = {Bachelor's Thesis},
+  school = {California Institute of Technology},
+  year = {2018}
+}
