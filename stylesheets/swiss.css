@@ -1624,7 +1624,7 @@ html.project .section_text > .paper-preview > img {
 html.project .bibEntry {
   font-family: monospace;
   word-wrap: break-word;
-  text-align: justify;
+  text-align: left;
   white-space: pre-wrap;
 }
 
