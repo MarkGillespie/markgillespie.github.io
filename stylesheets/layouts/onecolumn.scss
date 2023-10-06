@@ -398,6 +398,10 @@
         line-height: 2.5;
     }
 
+    #{$parent} .header .info .links .fa, #{$parent} .header .info .links .fa-brands  {
+        font-size: 1.5em;
+    }
+
     #{$parent} .name {
         font-size: 2em;
         font-family: 'Helvetica', sans-serif;

@@ -1331,6 +1331,10 @@ html.singlecolumn .header .info {
   line-height: 2.5;
 }
 
+html.singlecolumn .header .info .links .fa, html.singlecolumn .header .info .links .fa-brands {
+  font-size: 1.5em;
+}
+
 html.singlecolumn .name {
   font-size: 2em;
   font-family: "Helvetica", sans-serif;
