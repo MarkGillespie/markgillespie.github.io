@@ -1106,6 +1106,7 @@ html.singlecolumn .section_panel .project_links a {
   margin-left: 1em;
 }
 
+/* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
 html.singlecolumn .bibBox {
   display: inline-block;
   position: relative;
@@ -1113,6 +1114,7 @@ html.singlecolumn .bibBox {
   height: 10pt;
 }
 
+/* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
 html.singlecolumn .bibBox .bibliography {
   font-family: monospace;
   word-wrap: break-word;
@@ -1136,6 +1138,7 @@ html.singlecolumn .bibBox .bibliography {
   -webkit-transition: 0.5s;
 }
 
+/* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
 html.singlecolumn .bibBox:hover .bibliography {
   visibility: visible;
   opacity: 1;

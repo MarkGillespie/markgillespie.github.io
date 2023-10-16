@@ -157,6 +157,7 @@
         margin-left: 1em;
     }
 
+    /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
     #{$parent} .bibBox
     {
         display: inline-block;
@@ -165,6 +166,7 @@
         height: 10pt;
     }
 
+    /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
     #{$parent} .bibBox .bibliography
     {
         font-family: monospace;
@@ -191,6 +193,7 @@
         -webkit-transition: .5s;
     }
 
+    /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
     #{$parent} .bibBox:hover .bibliography
     {
         visibility: visible;
