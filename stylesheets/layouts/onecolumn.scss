@@ -157,6 +157,52 @@
         margin-left: 1em;
     }
 
+    #{$parent} .bibBox
+    {
+        display: inline-block;
+        position: relative;
+        width: 50px;
+        height: 10pt;
+    }
+
+    #{$parent} .bibBox .bibliography
+    {
+        font-family: monospace;
+        word-wrap: break-word;
+        text-align: left;
+        white-space: pre-wrap;
+
+        position: absolute;
+        top:2em;
+        right:-1em;
+        padding: 1em .75em 1em 1em;
+        margin: 0;
+        width: 30em;
+        height: auto;
+        border-radius: 0.25em;
+
+        z-index: 200;
+        visibility: hidden;
+        opacity: .0001;
+        transition: .5s;
+        -o-transition: .5s;
+        -ms-transition: .5s;
+        -moz-transition: .5s;
+        -webkit-transition: .5s;
+    }
+
+    #{$parent} .bibBox:hover .bibliography
+    {
+        visibility: visible;
+        opacity: 1.0;
+        transition: .5s;
+        -o-transition: .5s;
+        -ms-transition: .5s;
+        -moz-transition: .5s;
+        -webkit-transition: .5s;
+    }
+
+
     #{$parent} .noise {
         position: fixed;
         background-repeat: repeat;

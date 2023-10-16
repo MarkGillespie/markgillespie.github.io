@@ -145,6 +145,11 @@ html.darkmode a:hover {
   color: #c9f;
 }
 
+html.darkmode .bibBox .bibliography {
+  background-color: #22222b;
+  box-shadow: 0.2em 0.2em 0.3em rgba(221, 221, 221, 0.7);
+}
+
 html.darkmode .st1 {
   display: inline;
   fill: none;
@@ -544,6 +549,11 @@ html.lightmode a {
 
 html.lightmode a:hover {
   color: #ee4d93;
+}
+
+html.lightmode .bibBox .bibliography {
+  background-color: #e6f0f7;
+  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.7);
 }
 
 html.lightmode .st1 {
@@ -1094,6 +1104,46 @@ html.singlecolumn .section_panel .project_links {
 
 html.singlecolumn .section_panel .project_links a {
   margin-left: 1em;
+}
+
+html.singlecolumn .bibBox {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 10pt;
+}
+
+html.singlecolumn .bibBox .bibliography {
+  font-family: monospace;
+  word-wrap: break-word;
+  text-align: left;
+  white-space: pre-wrap;
+  position: absolute;
+  top: 2em;
+  right: -1em;
+  padding: 1em 0.75em 1em 1em;
+  margin: 0;
+  width: 30em;
+  height: auto;
+  border-radius: 0.25em;
+  z-index: 200;
+  visibility: hidden;
+  opacity: 0.0001;
+  transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+html.singlecolumn .bibBox:hover .bibliography {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
 }
 
 html.singlecolumn .noise {
