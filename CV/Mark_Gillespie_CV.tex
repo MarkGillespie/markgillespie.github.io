@@ -6,11 +6,20 @@
 % available at http://www.latex-project.org/lppl/.
 
 
-\documentclass[11pt,letterpaper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\documentclass[11pt,letterpaper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+
+% use linux libertine as the serif font / linux biolinum as the sans serif font
+\usepackage[tt=false, type1=true]{libertine}
+\usepackage[varqu]{zi4}
+\usepackage[libertine]{newtxmath}
+
+
 \usepackage[sorting=none,        % show refs in text order
             style=trad-abbrv,    % apparently this is similar to ACM formatting
             bibstyle=authoryear, % don't number refs
-            firstinits=false     % print full author names
+            firstinits=false,    % print full author names
+            maxbibnames=99       % list all author names
            ]{biblatex}
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
 
@@ -61,7 +70,7 @@
 \makecvtitle
 
 \section{Education}
-\cventry{2018-present}{PhD Computer Science}{Carnegie Mellon University}{Pittsburgh}{}{Advisor: Keenan Crane. Topics: geometry processing, computer graphics}
+\cventry{2018--Present}{PhD Computer Science}{Carnegie Mellon University}{Pittsburgh}{}{Advisor: Keenan Crane. Topics: geometry processing, computer graphics}
 \cventry{2014--2018}{B.S. Computer Science, Mathematics}{California Institute of Technology}{Pasadena}{Double major. GPA: 4.1}{}
 % {The computer science degree involves courses in systems, algorithms, functional programming, and complexity theory. I supplemented these courses with electives in computer graphics and advanced algorithms.
 % The math degree involves courses in abstract algebra, differential geometry, and analysis. I supplemented these courses with electives in algebraic topology and Riemannian geometry.}  % arguments 3 to 6 can be left empty
@@ -78,74 +87,90 @@
 %% \bibliographystyle{plain}
 
 %----------------------------------
-\section{Work and Research Experience}
+\section{Experience}
 
-\cventry{August 2018-Present}{Graduate Researcher}{Carnegie Mellon University}{}{}
-{Advisor: Keenan Crane}
+\cventry{2018--Present}{Graduate Researcher}{Carnegie Mellon University}{}
+{Advisor: Keenan Crane}{}
+
+\cventry{July 2023}{Visiting Researcher}{Technische Universit\"at Berlin, Berlin}{}
+        {Host: Boris Springborn}{}
+
+\cventry{Summer 2022}{Visiting Graduate}{University of California, San Diego}{}
+        {Host: Albert Chern}{}
 
 % \cventry{Fall 2017}{Teaching Assistant for CS 171, Introduction to Computer Graphics}{California Institute of Technology}{}{}{Under Professor Alan Barr, graded problem sets, held weekly office hours, delivered recitation lectures}
 
-\cventry{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}{}
-{Mentor: Peter Schr\"oder. Implemented an energy-preserving integrator for 2D MHD on grids and proved its conservation properties
+\cventry{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{Caltech}{}
+{Mentor: Peter Schr\"oder}
+{} % Implemented an energy-preserving integrator for 2D MHD on grids and proved its conservation properties
 % \begin{itemize}%
 % \item Analyzed conservation behavior of the algorithm using discrete differential geometry
 % \item Implemented algorithm in Houdini
 % \end{itemize}
-}
 
-\cventry{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}{}
-{Mentor: Mathieu Desbrun. Developed an algorithm for computing polymer conformation using dimensionality reduction techniques.
+\cventry{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{Caltech}{}
+{Mentor: Mathieu Desbrun}
+{} % Developed an algorithm for computing polymer conformation using dimensionality reduction techniques.
 % \begin{itemize}%
 % \item Implemented algorithm in C++
 % \item Experimented with applying the algorithm to point cloud denoising
 % \end{itemize}
-}
 
-\cventry{Jan. 2016 -- 2017}{Undergraduate Researcher}{California Institute of Technology}{}{}
-{Mentor: Alan Barr. Explored applications of interval analysis to root-finding and solving differential equations
+\cventry{2016--2017}{Undergraduate Researcher}{Caltech}{}
+{Mentor: Alan Barr}
+{}% Explored applications of interval analysis to root-finding and solving differential equations
 % \begin{itemize}%
 % \item Implemented interval analysis library in Haskell
 % \item Implemented graphical viewer for interval root-finding and minimization algorithms
 % \end{itemize}
-}
 
 % \cventry{Spring 2017, Spring 2016}{Teaching Assistant for CS 38, Introduction to Algorithms}{California Institute of Technology}{}{}{Under Professor Leonard Schulman, graded problem sets and held weekly office hours}
 
-\cventry{Summer 2015}{Software Engineering Intern}{Google}{}{}
-{Prototyped new credit card entry interface for Android library. Developed in Java}
+\cventry{Summer 2015}{Software Engineering Intern}{Google}{}{}{}
+% Prototyped new credit card entry interface for Android library. Developed in Java}
 
 %----------------------------------
 \section{Talks}
 \cventry
-{Jul. 2023}
-{Intrinsic Triangulations in Geometry Processing}
-{TU Berlin SFB TRR 109 Colloquium}{}{}
-{}
+    {Sept. 2023}
+    {Intrinsic Triangulations in Geometry Processing}
+    {IST Austria}{}{}
+    {}
 \cventry
-{Apr. 2022}
-{Discrete Conformal Equivalence of Polyhedral Surfaces}
-{UCSD Pixel Cafe}{}{}
-{}
+    {Aug. 2023}
+    {Intrinsic Triangulations in Geometry Processing}
+    {Geometry Workshop in Obergurgl}{}{}
+    {}
 \cventry
-{Nov. 2021}
-{Integer Coordinates for Intrinsic Geometry Processing}
-{ACM SIGGRAPH Asia 2021}{}{}
-{}
+    {Jul. 2023}
+    {Intrinsic Triangulations in Geometry Processing}
+    {TU Berlin SFB TRR 109 Colloquium}{}{}
+    {}
 \cventry
-{Aug. 2021}
-{Discrete Conformal Equivalence of Polyhedral Surfaces}
-{ACM SIGGRAPH 2021}{}{}
-{}
+    {Apr. 2022}
+    {Discrete Conformal Equivalence of Polyhedral Surfaces}
+    {UCSD Pixel Cafe}{}{}
+    {}
 \cventry
-{Aug. 2021}
-{Geometry Processing with Intrinsic Triangulations}
-{ACM SIGGRAPH Courses (SIGGRAPH 2021)}{}{}
-{}
+    {Nov. 2021}
+    {Integer Coordinates for Intrinsic Geometry Processing}
+    {ACM SIGGRAPH Asia 2021}{}{}
+    {}
 \cventry
-{June 2021}
-{Geometry Processing with Intrinsic Triangulations}
-{International Meshing Roundtable Courses (IMR 2021)}{}{}
-{}
+    {Aug. 2021}
+    {Discrete Conformal Equivalence of Polyhedral Surfaces}
+    {ACM SIGGRAPH 2021}{}{}
+    {}
+\cventry
+    {Aug. 2021}
+    {Geometry Processing with Intrinsic Triangulations}
+    {ACM SIGGRAPH Courses (SIGGRAPH 2021)}{}{}
+    {}
+\cventry
+    {June 2021}
+    {Geometry Processing with Intrinsic Triangulations}
+    {International Meshing Roundtable Courses (IMR 2021)}{}{}
+    {}
 
 
 % \cventry
@@ -232,12 +257,12 @@
   \cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
   \cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
   \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31 points (rank: 365/3214)}
-  
+
   \section{Service}
-  \cvitem{Reviewer}{SIGGRAPH (2019, 2022, 2023), SIGGRAPH Asia (2022), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023), Computers \& Graphics (2021)}
+  \cvitem{Reviewer}{SIGGRAPH (2019, 2022, 2023), SIGGRAPH Asia (2022, 2023), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023), Computers \& Graphics (2021)}
   \cvitem{Departmental}{Organizer, Graphics Seminar (2020-2021);
     Organizer, Graphics Reading Group (2022-2023)}
-  
+
   % ----------------------------------
   \section{Programming Languages}
   \cvitem{}{C/C++, Python, Java, Mathematica, Matlab, Haskell, Ocaml, \LaTeX}

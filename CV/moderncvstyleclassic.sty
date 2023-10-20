@@ -43,7 +43,7 @@
 \renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
 \renewcommand*{\addressfont}{\small\mdseries\slshape}
 \renewcommand*{\quotefont}{\large\slshape}
-\renewcommand*{\sectionfont}{\Large\mdseries\upshape}
+\renewcommand*{\sectionfont}{\Large\mdseries\upshape\bfseries\sffamily}
 \renewcommand*{\subsectionfont}{\large\mdseries\upshape}
 \renewcommand*{\hintfont}{}
 
@@ -190,7 +190,7 @@
 
 \renewcommand*{\cventry}[7][.25em]{%
   \cvitem[#1]{#2}{%
-    {\bfseries#3}%
+    {\bfseries\sffamily#3}%
     \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
     \ifthenelse{\equal{#5}{}}{}{, #5}%
     \ifthenelse{\equal{#6}{}}{}{, #6}%

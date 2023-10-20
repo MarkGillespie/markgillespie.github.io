@@ -110,7 +110,7 @@
     {}
 %\fi
 
-% hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
+% hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJKb)
 \newcommand*\pdfpagemode{UseNone}% do not show thumbnails or bookmarks on opening (on supporting browsers); set \pdfpagemode to "UseOutlines" to show bookmarks
 \RequirePackage{url}
 \urlstyle{tt}
@@ -119,6 +119,9 @@
   \RequirePackage[unicode]{hyperref}% unicode is required for unicode pdf metadata
   \hypersetup{
     breaklinks,
+    colorlinks,
+    linkcolor = {color1},
+    urlcolor = {color1},
     baseurl       = http://,
     pdfborder     = 0 0 0,
     pdfpagemode   = \pdfpagemode,
