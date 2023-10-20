@@ -13,7 +13,6 @@
 \usepackage[varqu]{zi4}
 \usepackage[libertine]{newtxmath}
 
-
 \usepackage[sorting=none,        % show refs in text order
             style=trad-abbrv,    % apparently this is similar to ACM formatting
             bibstyle=authoryear, % don't number refs
@@ -40,6 +39,25 @@
 %\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
 %\setlength{\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
 
+% draw orcid logo https://tex.stackexchange.com/a/445583
+\usepackage{scalerel}
+\usepackage{tikz}
+\usetikzlibrary{svg.path}
+\tikzset{
+  orcidlogo/.pic={
+    \fill[color2] svg{M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z};
+    \fill[white] svg{M86.3,186.2H70.9V79.1h15.4v48.4V186.2z}
+    svg{M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z}
+    svg{M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z};
+  }
+}
+
+\newcommand\orcidicon{\mbox{\scalerel*{
+        \begin{tikzpicture}[yscale=-1,transform shape]
+          \pic{orcidlogo};
+        \end{tikzpicture}
+      }{|}}}
+
 % personal data
 \name{Mark}{Gillespie}
 \title{Curriculum Vitae}                               % optional, remove / comment the line if not wanted
@@ -49,7 +67,7 @@
 %\phone[fax]{+3~(456)~789~012}                      % optional, remove / comment the line if not wanted
 \email{mgillesp@cs.cmu.edu.edu}                 % optional, remove / comment the line if not wanted
 \homepage{www.markjgillespie.com}                   % optional, remove / comment the line if not wanted
-%\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+\extrainfo{\orcidicon{}: \href{https://orcid.org/0009-0000-5645-9636}{0009-0000-5645-9636}}                 % optional, remove / comment the line if not wanted
 %\photo[64pt][0.4pt]{card_image}                    % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
 %\quote{Some quote}                                 % optional, remove / comment the line if not wanted
 
