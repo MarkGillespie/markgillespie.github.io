@@ -7,15 +7,15 @@
 
 \documentclass[11pt,letterpaper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
-
 % use linux libertine as the serif font / linux biolinum as the sans serif font
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage[varqu]{zi4}
 \usepackage[libertine]{newtxmath}
 
+%=== bibliography stuff
 \usepackage[sorting=none,        % show refs in text order
             style=trad-abbrv,    % apparently this is similar to ACM formatting
-            bibstyle=authoryear, % don't number refs
+            bibstyle=numeric,    % number refs
             giveninits=false,    % print full author names
             maxbibnames=99       % list all author names
            ]{biblatex}
@@ -24,7 +24,19 @@
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
 \newcommand{\me}[1]{\textbf{\sffamily #1}}
 
-% moderncv themes
+%=== number refs in reverse order https://tex.stackexchange.com/a/22770
+% Count total number of entries in each refsection
+\AtDataInput{%
+  \csnumgdef{entrycount:\therefsection}{%
+    \csuse{entrycount:\therefsection}+1}}
+
+% Print the labelnumber as the total number of entries in the
+% current refsection, minus the actual labelnumber, plus one
+\DeclareFieldFormat{labelnumber}{\mkbibdesc{#1}}    
+\newrobustcmd*{\mkbibdesc}[1]{%
+  \number\numexpr\csuse{entrycount:\therefsection}+1-#1\relax}
+
+%==== moderncv themes
 \moderncvstyle{casual}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
 \moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
 %\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
@@ -184,12 +196,12 @@
 \cventry
     {Aug. 2021}
     {Geometry Processing with Intrinsic Triangulations}
-    {ACM SIGGRAPH Courses (SIGGRAPH 2021)}{}{}
+    {ACM SIGGRAPH 2021 Courses}{}{}
     {}
 \cventry
     {June 2021}
     {Geometry Processing with Intrinsic Triangulations}
-    {International Meshing Roundtable Courses (IMR 2021)}{}{}
+    {SIAM International Meshing Roundtable Courses (IMR 2021)}{}{}
     {}
 
 
@@ -279,10 +291,12 @@
   \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31 points (rank: 365/3214)}
 
   \section{Service}
-  \cvitem{Departmental}{Graphics seminar organizer (2020-2021),
-          Graphics reading group organizer (2022-2023),
-          Student panel speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022)}
+  \cvitem{Departmental}{
+          Organizer, Graphics Reading Group (2022-2023);
+          Organizer, Graphics Seminar (2020-2021);
+          Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022)}
   \cvitem{Reviewing}{SIGGRAPH (2019, 2022, 2023), SIGGRAPH Asia (2022, 2023), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023), Computers \& Graphics (2021)}
+  \cvitem{Mentorship}{Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
 
   % ----------------------------------
   \section{Programming Languages}
