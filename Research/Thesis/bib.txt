@@ -1,0 +1,7 @@
+@phdthesis{Gillespie:2024:EIT,
+	author = {Mark Gillespie},
+	title = {Evolving Intrinsic Triangulations},
+	school = {Carnegie Mellon University},
+	month = {April},
+	year = {2024}
+}
