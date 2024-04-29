@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-us" class="nojs project lightmode">
+  <head>
+    <meta charset="UTF-8">
+    <title>Solid Knitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
+    <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <script type="text/javascript">
+      // === Cookie stuff for saving style (Maybe I should switch to select/options)
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + d.toUTCString();
+        const cookieString =
+          cname +
+          "=" +
+          encodeURIComponent(cvalue) +
+          ";" +
+          expires +
+          ";path=/;SameSite=Strict";
+        document.cookie = cookieString;
+      }
+
+      function getCookie(cname) {
+        const name = cname + "=";
+        const ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return decodeURIComponent(c.substring(name.length, c.length));
+          }
+        }
+        return "";
+      }
+
+     function setStyle(style) {
+         setCookie("style", style);
+         const html = document.getElementsByTagName('html')[0];
+         html.classList.remove("lightmode");
+         html.classList.remove("darkmode");
+         html.classList.add(style);
+     }
+
+     window.onload = function() {
+         /* document.getElementById("background_image").style.opacity = 1.0; */
+         document.getElementsByTagName('html')[0].classList.remove("nojs");
+     }
+
+     // Load saved style
+     const currentStyle=getCookie("style");
+     if (currentStyle) {
+         setStyle(currentStyle);
+     } else {
+         const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+         setStyle( isDarkMode ? "darkmode" : "lightmode" );
+     }
+
+    </script>
+    <!-- tweak figure background color -->
+    <style>
+     html.darkmode .paper_teaser {
+         background: #557;
+     }
+    </style>
+  </head>
+
+  <body class="nojs singlecolumn">
+    <div class="mega-container">
+    <div class="page-content">
+    <div class="navbar">
+      <div class="navbar_buttons">
+        <a href="../../index.html#research" class="navbar_link"><span class="navbar_item">Research</span></a>
+        <!-- <a href="../../index.html#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a> -->
+        <a href="../../index.html#awards" class="navbar_link vanishing"><span class="navbar_item">Awards</span></a>
+        <a href="../../index.html#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a>
+        <a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
+        <a href="../../index.html#misc" class="navbar_link vanishing"><span class="navbar_item">Misc</span></a>
+        <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
+        <a href="../../index.html" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+		    <form id="darkmode-toggle"> <!-- toggle lightmode -->
+			      <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
+            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
+		    </form>
+      </div>
+    </div>
+
+    <div class="wrapper" id="home">
+        <div class="name_box">
+            <div class="title">Solid Knitting</div>
+            <div class="venue">ACM Transactions on Graphics (SIGGRAPH 2024)</div>
+            <div class="authors">
+                <div class="author">
+                  <span class="name"><a href="https://hirose-yuichi.github.io/">Yuichi Hirose</a></span>
+                  <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+                <div class="author">
+                  <span class="name"><a href="../../">Mark Gillespie</a></span>
+                  <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+                <div class="author">
+                  <span class="name"><a href="https://abfominaya.com/">Angelica M. Bonilla Fominaya</a></span>
+                  <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+                <div class="author">
+                  <span class="name"><a href="https://www.cs.cmu.edu/~jmccann/">James McCann</a></span>
+                  <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+            </div>
+            <div class="paper_teaser">
+                <img src="images/teaser.png">
+            </div>
+
+            <div class="quick_links">
+                <a href="SolidKnitting.pdf"><span class="project_link">pdf (19.5 mb)</span></a>
+                <a href="SolidKnittingHandInstructions.pdf"><span class="project_link">supplement (10 mb)</span></a>
+                <!-- <a href="https://youtu.be/3undxB8rcvE"><span class="project_link">video (20 s)</span></a> -->
+                <!-- <a href="https://youtu.be/3czWJxSmCuc"><span class="project_link">video (20 min)</span></a> -->
+                <a href="https://github.com/textiles-lab/solid-knitting-ui"><span class="project_link">code</span></a>
+                <!-- <a href="https://doi.org/10.1145/3592401"> <span class="project_link">doi</span></a> -->
+                <a href="bib.txt"><span class="project_link">bibtex</span></a>
+            </div>
+
+            <div class="abstract">
+                We introduce solid knitting, a new fabrication technique that combines the layer-by-layer volumetric approach of 3D printing with the topologically-entwined stitch structure of knitting to produce solid 3D objects. We define the basic building blocks of solid knitting and demonstrate a working prototype of a solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns. Solid knitting uses a course-wale-layer structure, where every loop in a solid-knit object passes through both a loop from the previous layer and a loop from the previous course. Our machine uses two beds of latch needles to create stitches like a conventional V-bed knitting machine, but augments these needles with a pair of rotating hook arrays to provide storage locations for all of the loops in one layer of the object. It can autonomously produce solid-knit prisms of arbitrary length, although it requires manual intervention to cast on the first layer and bind off the final row. Our design tool allows users to create solid knitting patterns by connecting elementary stitches; objects designed in our interface can—after basic topological checks and constraint propagation—be exported as a sequence of instructions for fabrication on the solid knitting machine. We validate our solid knitting hardware and software on prism examples, detail the mechanical errors which we have encountered, and discuss potential extensions to the capability of our solid knitting machine.
+            </div>
+    </div>
+
+      <div class="body">
+          <div class="section_panel">
+            <div class="section_header"> Paper </div>
+            <div class="section_text">
+                <a href="SolidKnitting.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"><br/>
+                    <span> pdf (19.5 mb)</span>
+                </a>
+                <hr />
+            </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Acknowledgements </div>
+              <div class="section_text">
+                  Part of this work was supported by the INNO-vation Program of the Ministry of Internal Affairs and Communications, Japan, the 100BANCH GARAGE Program of Panasonic Holdings Corporation, and the MITOU Advanced Program of the Information-technology Promotion Agency, Japan.  This material is partially based upon work supported by the National Science Foundation under Award No. 1955444, and upon the master's thesis and patent of our first author [Hirose 2014, 2022].
+                  <hr />
+              </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Bibtex </div>
+              <div class="section_text bibEntry">@article{Hirose:2024:SK,
+    author = {Hirose, Yuichi and Gillespie, Mark and Bonilla Fominaya, Angelica M. and McCann, James},
+    title = {Solid Knitting},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {88},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA}
+}<hr /><div></div></div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header" style="max-width: 10em;"> Supplement: Solid Knitting by Hand </div>
+              <div class="section_text">
+                  <a href="SolidKnittingHandInstructions.pdf" class="paper-preview">
+                      <img src="images/hand-preview.png" alt="preview"><br/>
+                      <span> pdf (10 mb)</span>
+                  </a>
+                  <hr />
+              </div>
+          </div>
+
+      </div>
+
+      <!--</div>-->
+      <div class="footer">
+          <a href="mailto:mgillesp@cs.cmu.edu" target="_top" class="footer_email">mgillesp@cs.cmu.edu</a>
+          <hr />
+          Mark Gillespie 2024
+      </div>
+    </div>
+  </body>
+  <script>
+   document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(document.getElementsByTagName("html")[0].classList.contains("darkmode") ? "lightmode" : "darkmode");});
+  </script>
+</html>

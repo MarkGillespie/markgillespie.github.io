@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-us" class="nojs project lightmode">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ray Tracing Harmonic Functions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Nunito" rel="stylesheet">
+    <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <script type="text/javascript">
+      // === Cookie stuff for saving style (Maybe I should switch to select/options)
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + d.toUTCString();
+        const cookieString =
+          cname +
+          "=" +
+          encodeURIComponent(cvalue) +
+          ";" +
+          expires +
+          ";path=/;SameSite=Strict";
+        document.cookie = cookieString;
+      }
+
+      function getCookie(cname) {
+        const name = cname + "=";
+        const ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return decodeURIComponent(c.substring(name.length, c.length));
+          }
+        }
+        return "";
+      }
+
+     function setStyle(style) {
+         setCookie("style", style);
+         const html = document.getElementsByTagName('html')[0];
+         html.classList.remove("lightmode");
+         html.classList.remove("darkmode");
+         html.classList.add(style);
+     }
+
+     window.onload = function() {
+         /* document.getElementById("background_image").style.opacity = 1.0; */
+         document.getElementsByTagName('html')[0].classList.remove("nojs");
+     }
+
+     // Load saved style
+     const currentStyle=getCookie("style");
+     if (currentStyle) {
+         setStyle(currentStyle);
+     } else {
+         const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+         setStyle( isDarkMode ? "darkmode" : "lightmode" );
+     }
+
+    </script>
+    <!-- tweak figure background color -->
+    <style>
+     html.darkmode .paper_teaser {
+         background: #557;
+     }
+    </style>
+  </head>
+
+  <body class="nojs singlecolumn">
+    <div class="mega-container">
+    <div class="page-content">
+    <div class="navbar">
+      <div class="navbar_buttons">
+        <a href="../../index.html#research" class="navbar_link"><span class="navbar_item">Research</span></a>
+        <!-- <a href="../../index.html#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a> -->
+        <a href="../../index.html#awards" class="navbar_link vanishing"><span class="navbar_item">Awards</span></a>
+        <a href="../../index.html#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a>
+        <a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
+        <a href="../../index.html#misc" class="navbar_link vanishing"><span class="navbar_item">Misc</span></a>
+        <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
+        <a href="../../index.html" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+		    <form id="darkmode-toggle"> <!-- toggle lightmode -->
+			      <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
+            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
+		    </form>
+      </div>
+    </div>
+
+    <div class="wrapper" id="home">
+        <div class="name_box">
+            <div class="title">Ray Tracing Harmonic Functions</div>
+            <div class="venue">ACM Transactions on Graphics (SIGGRAPH 2024)</div>
+            <div class="authors">
+                <div class="author">
+                  <span class="name"><a href="../../">Mark Gillespie</a></span>
+                  <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+                <div class="author">
+                  <span class="name">Denise Yang</span>
+                  <span class="affiliation">Carnegie Mellon University<br/>&amp; Pixar Animation Studios</span>
+                </div>
+                <div class="author">
+                    <span class="name"><a href="https://cg.cs.tu-dortmund.de/people/botsch_mario.html">Mario Botsch</a></span>
+                    <span class="affiliation">TU Dortmund University</span>
+                </div>
+                <div class="author">
+                    <span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a></span>
+                    <span class="affiliation">Carnegie Mellon University</span>
+                </div>
+            </div>
+            <div class="paper_teaser">
+                <img style="max-width: 50%;" src="images/teaser.png">
+            </div>
+
+            <div class="quick_links">
+                <a href="HarnackTracing.pdf"><span class="project_link">pdf (11.2 mb)</span></a>
+                <a href="HarnackTracingSupplement.pdf"><span class="project_link">supplement (350 kb)</span></a>
+                <!-- <a href="https://youtu.be/3undxB8rcvE"><span class="project_link">video (20 s)</span></a> -->
+                <!-- <a href="https://youtu.be/3czWJxSmCuc"><span class="project_link">video (20 min)</span></a> -->
+                <a href="https://www.shadertoy.com/view/4cfXWs"><span class="project_link">code (ShaderToy)</span></a>
+                <a href="https://github.com/MarkGillespie/harnack-blender"><span class="project_link">code (C++)</span></a>
+                <!-- <a href="https://doi.org/10.1145/3592401"> <span class="project_link">doi</span></a> -->
+                <a href="bib.txt"><span class="project_link">bibtex</span></a>
+            </div>
+
+            <div class="abstract">
+              The sphere tracing algorithm provides a fast and high-quality strategy for visualizing surfaces encoded by signed distance functions (SDFs), which have become a centerpiece in a wide range of visual computing algorithms. In this paper we introduce a sphere tracing algorithm for a completely different class of functions, harmonic functions, opening up a whole new set of possibilities. Harmonic functions are found throughout geometric and visual computing, where they arise naturally as the solution to interpolation problems, and in the physical sciences, where they appear as solutions to the Laplace equation. Our algorithm for harmonic functions is similar in spirit to the sphere tracing algorithm for SDFs: by using a conservative lower bound on the distance to the level set, we can take much larger steps than with naïve ray marching. Our key observation is that for harmonic functions such a bound is given by Harnack's inequality. Unlike Lipschitz bounds used in traditional sphere tracing, this Harnack bound requires only the value of the function at a point—we use this bound to develop a sphere tracing algorithm that can also handle jump discontinuities arising in angle-based harmonic functions. We show how this algorithm can be used to directly visualize smooth surfaces reconstructed from point clouds (via Poisson surface reconstruction) or polygon soup (via generalized winding numbers) without performing linear solves or mesh extraction. We also show how it can be used to render nonplanar polygons (including those with holes), and to visualize key objects from mathematics, including knots, links, spherical harmonics, and Riemann surfaces.
+            </div>
+    </div>
+
+      <div class="body">
+          <div class="section_panel">
+            <div class="section_header"> Paper </div>
+            <div class="section_text">
+                <a href="HarnackTracing.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"><br/>
+                    <span> pdf (11.2 mb)</span>
+                </a>
+                <hr />
+            </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Acknowledgements </div>
+              <div class="section_text">
+                Thanks to Nicole Feng for help with Biot-Savart-based expressions for our surface normals, to Albert Chern for helpful discussion of the Biot-Savart law and random projections of curves, and to Andrea Tagliasacchi and Google Brain for supporting this work.  Figure 2 is based on an illustration by the last author. This work was funded by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship and a gift from Google Brain. 
+                  <hr />
+              </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Bibtex </div>
+              <div class="section_text bibEntry">@article{Gillespie:2024:RTH,
+    author = {Gillespie, Mark and Yang, Denise and Botsch, Mario and Crane, Keenan},
+    title = {Ray Tracing Harmonic Functions},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {99},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658201}
+}<hr /><div></div></div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header"> Supplement</div>
+              <div class="section_text">
+                  <a href="HarnackTracingSupplement.pdf" class="paper-preview">
+                      <img src="images/supplement-preview.png" alt="preview"><br/>
+                      <span> pdf (350 kb)</span>
+                  </a>
+                  <hr />
+              </div>
+          </div>
+
+      </div>
+
+      <!--</div>-->
+      <div class="footer">
+          <a href="mailto:mgillesp@cs.cmu.edu" target="_top" class="footer_email">mgillesp@cs.cmu.edu</a>
+          <hr />
+          Mark Gillespie 2024
+      </div>
+    </div>
+  </body>
+  <script>
+   document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(document.getElementsByTagName("html")[0].classList.contains("darkmode") ? "lightmode" : "darkmode");});
+  </script>
+</html>

@@ -1,0 +1,11 @@
+@article{Gillespie:2024:RTH,
+    author = {Gillespie, Mark and Yang, Denise and Botsch, Mario and Crane, Keenan},
+    title = {Ray Tracing Harmonic Functions},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {99},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658201}
+}

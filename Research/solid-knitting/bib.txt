@@ -1,0 +1,10 @@
+@article{Hirose:2024:SK,
+    author = {Hirose, Yuichi and Gillespie, Mark and Bonilla Fominaya, Angelica M. and McCann, James},
+    title = {Solid Knitting},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {88},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA}
+}
