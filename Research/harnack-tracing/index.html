@@ -144,9 +144,76 @@
           </div>
 
           <div class="section_panel">
-              <div class="section_header"> Acknowledgements </div>
+              <div class="section_header"> Supplement</div>
               <div class="section_text">
-                Thanks to Nicole Feng for help with Biot-Savart-based expressions for our surface normals, to Albert Chern for helpful discussion of the Biot-Savart law and random projections of curves, and to Andrea Tagliasacchi and Google Brain for supporting this work.  Figure 2 is based on an illustration by the last author. This work was funded by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship and a gift from Google Brain. 
+                  <a href="HarnackTracingSupplement.pdf" class="paper-preview">
+                      <img src="images/supplement-preview.png" alt="preview"><br/>
+                      <span> pdf (350 kb)</span>
+                  </a>
+                  <hr />
+              </div>
+          </div>
+
+          <div class="section_panel">
+              <div class="section_header">GLSL Examples</div>
+              <div class="section_text" style="text-align: left;">
+                  Several examples in the paper were implemented as GLSL shaders in <a href="https://www.shadertoy.com/">ShaderToy</a>:
+
+                  <a href="https://www.shadertoy.com/view/DlSfWd">
+                  <img src="images/RiemannSurfaces.png" style="width: 100%;">
+                  </a>
+                  <div class="caption">
+                    <h4 style="margin: 0;">Riemann Surfaces</h4>
+                    <a href="https://www.shadertoy.com/view/DlSfWd">https://www.shadertoy.com/view/DlSfWd</a><br/>
+                    <em>Riemann surfaces are central objects of study in complex analysis. Much of their interesting behavior occurs at singular points, which pose problems for standard techniques, but are accurately resolved by Harnack tracing </em>
+                  </div>
+
+                  <div style="width: 100%; text-align: center;">
+                  <a href="https://www.shadertoy.com/view/4cfXWs">
+                  <img src="images/NonplanarPolygon.png" style="width: 50%; margin: auto;">
+                  </a>
+                  </div>
+                  <div class="caption">
+                    <h4 style="margin: 0;">Nonplanar Polygons</h4>
+                    <a href="https://www.shadertoy.com/view/4cfXWs">https://www.shadertoy.com/view/DlSfWd</a><br/>
+                    <em>A perennial question in computer graphics is how to interpret polygons whose vertices do not sit in a common plane. The ability to ray trace harmonic functions provides an elegant answer: we can visualize a nonplanar polygon as a level set of a harmonic function naturally associated to the polygon, namely, its (signed) solid angle</em>
+                  </div>
+
+                  <div style="width: 100%; text-align: center;">
+                  <a href="https://www.shadertoy.com/view/mtcBDl">
+                  <img src="images/PointCloud.png" style="width: 75%; margin: auto;">
+                  </a>
+                  </div>
+                  <div class="caption">
+                    <h4 style="margin: 0;">Point Cloud Reconstruction</h4>
+                    <a href="https://www.shadertoy.com/view/mtcBDl">https://www.shadertoy.com/view/DlSfWd</a><br/>
+                    <em>Given an oriented point cloud (left), we can directly visualize an interpolating surface (right). This procedure effectively shows the result of running the Poisson surface reconstruction algorithm of Kazhdan et al. [2006], without requiring any volumetric meshing or linear solves.</em>
+                  </div>
+
+                  <div style="width: 100%; text-align: center;">
+                  <a href="https://www.shadertoy.com/view/MffGzS">
+                  <img src="images/Gyroid.png" style="width: 50%; margin: auto; margin-bottom: -2em;">
+                  </a>
+                  </div>
+                  <div class="caption">
+                    <h4 style="margin: 0;">Gyroid</h4>
+                    <a href="https://www.shadertoy.com/view/MffGzS">https://www.shadertoy.com/view/DlSfWd</a><br/>
+                    <em>The gyroid is described by the zero level set of the function f(x, y, z) = sin(x) cos(y) + sin(y) cos(z) + sin(z) cos(x). Although this function is not harmonic, we can still ray trace its level sets by constructing a harmonic extension in four dimensions.</em>
+                  </div>
+
+                  <div style="width: 100%; text-align: center;">
+                  <a href="https://www.shadertoy.com/view/DdXyRj">
+                  <img src="images/HypersphericalHarmonics.jpg" style="width: 75%; margin: auto;">
+                  </a>
+                  </div>
+                  <div class="caption">
+                    <h4 style="margin: 0;">Hyperspherical Harmonics</h4>
+                    <a href="https://www.shadertoy.com/view/DdXyRj">https://www.shadertoy.com/view/DlSfWd</a><br/>
+                    <em>We can also visualize “hyperspherical” harmonics: 4D harmonic polynomials restricted to the 3-sphere and mapped into R³ via stereographic projection.</em>
+                  </div>
+
+
+
                   <hr />
               </div>
           </div>
@@ -167,12 +234,9 @@
           </div>
 
           <div class="section_panel">
-              <div class="section_header"> Supplement</div>
+              <div class="section_header"> Acknowledgements </div>
               <div class="section_text">
-                  <a href="HarnackTracingSupplement.pdf" class="paper-preview">
-                      <img src="images/supplement-preview.png" alt="preview"><br/>
-                      <span> pdf (350 kb)</span>
-                  </a>
+                Thanks to Nicole Feng for help with Biot-Savart-based expressions for our surface normals, to Albert Chern for helpful discussion of the Biot-Savart law and random projections of curves, and to Andrea Tagliasacchi and Google Brain for supporting this work.  Figure 2 is based on an illustration by the last author. This work was funded by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship and a gift from Google Brain. 
                   <hr />
               </div>
           </div>
