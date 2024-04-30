@@ -63,6 +63,7 @@
 
     #{$parent} .name_box > .venue {
         font-size: 1.25em;
+        margin-bottom: .25em;
     }
 
     #{$parent} .name_box > .authors {
@@ -232,6 +233,17 @@
         #{$parent} .paper_teaser {
             max-width: 100%;
         }
+    }
+
+    @media (max-width: 450px) {
+        /* line break between "ACM Transactions on Graphics" and "SIGGRAPH" */
+        #{$parent} .name_box > .venue {
+            max-width: 15em;
+            margin: auto;
+            margin-bottom: .25em;
+            line-height: 1;
+        }
+
     }
 
 }

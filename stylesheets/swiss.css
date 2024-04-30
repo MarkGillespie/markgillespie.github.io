@@ -1582,6 +1582,7 @@ html.project .name_box > .title {
 
 html.project .name_box > .venue {
   font-size: 1.25em;
+  margin-bottom: 0.25em;
 }
 
 html.project .name_box > .authors {
@@ -1739,6 +1740,15 @@ html.project .footer {
   }
   html.project .paper_teaser {
     max-width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  /* line break between "ACM Transactions on Graphics" and "SIGGRAPH" */
+  html.project .name_box > .venue {
+    max-width: 15em;
+    margin: auto;
+    margin-bottom: 0.25em;
+    line-height: 1;
   }
 }
 .nojs .jsonly {
