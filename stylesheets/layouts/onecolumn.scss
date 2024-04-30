@@ -1,11 +1,16 @@
 /* One column layout */
 @mixin layout($map, $parent: "html") {
+    #{$parent} div {
+        box-sizing: border-box;
+    }
+
     #{$parent} body {
         margin: 0;
         padding: 0;
         font-family: 'Palatino', 'Garamond', serif;
         line-height: 1.4;
         text-align: center;
+        box-sizing: border-box;
     }
     #{$parent} #background_image {
         max-width: 1300px;
@@ -63,7 +68,6 @@
         width: 80%;
         padding-right: 1em;
         margin-bottom: 4em;
-        box-sizing: border-box;
         margin-top: 1.5em;
     }
 
@@ -91,6 +95,7 @@
 
     #{$parent} .project_header {
         display: flex; /* equal child height */
+        column-gap: 1em;
     }
 
     #{$parent} #misc .project_header {
@@ -115,8 +120,10 @@
         flex: 1 1 70%;
         // display: flex;
         // align-items: center;
-        margin-left: 1em;
         width: 100%;
+        box-sizing: border-box;
+        padding-left: 15pt;
+        padding-right: 15pt;
     }
 
     #{$parent} .project_header .text .project_title {
@@ -127,11 +134,11 @@
         margin-top: 0;
         margin-bottom: 0;
         text-align: left;
+        margin-left: -15pt;
     }
 
     #{$parent} .project_header .text .venue, .project_author_list {
         line-height: 1.4;
-        padding-left: 1em;
         font-weight: normal;
     }
 
@@ -142,7 +149,7 @@
 
     #{$parent} .project_header .text .mini_abstract {
         line-height: 1.4;
-        padding-left: 1em;
+        box-sizing: border-box;
     }
 
     #{$parent} .section_panel .project_links {
@@ -151,6 +158,8 @@
         justify-content: flex-end;
         flex-wrap: wrap;
         margin-bottom: 3em;
+        padding-left: 15pt;
+        padding-right: 15pt;
     }
 
     #{$parent} .section_panel .project_links a {
@@ -163,7 +172,7 @@
         display: inline-block;
         position: relative;
         width: 50px;
-        height: 10pt;
+        height: 15pt;
     }
 
     /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
@@ -346,6 +355,14 @@
 
         #{$parent} .title {
             padding: 8px;
+        }
+
+    }
+
+    @media (max-width: 425px) {
+        /* line break between "ACM Transactions on Graphics" and "SIGGRAPH" */
+        #{$parent} .venue {
+            max-width: 15em;
         }
 
     }
