@@ -3,9 +3,12 @@
     title = {Solid Knitting},
     journal = {ACM Trans. Graph.},
     volume = {43},
-    number = {88},
+    number = {4},
     year = {2024},
     publisher = {ACM},
     address = {New York, NY, USA},
-    doi = {10.1145/3658123}
+    doi = {10.1145/3658123},
+    month = jul,
+    articleno = {88},
+    pages = {1--15}
 }

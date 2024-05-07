@@ -13,9 +13,11 @@
 \usepackage[libertine]{newtxmath}
 
 %=== bibliography stuff
-\usepackage[sorting=none,        % show refs in text order
-            style=trad-abbrv,    % apparently this is similar to ACM formatting
-            bibstyle=numeric,    % number refs
+\usepackage[
+            datamodel=acmdatamodel, % acm stuff
+            sorting=none,        % show refs in text order
+            style=acmnumeric,
+            % bibstyle=numeric,    % number refs
             giveninits=false,    % print full author names
             maxbibnames=99       % list all author names
            ]{biblatex}
@@ -110,6 +112,8 @@
 
 % PUBLICATIONS ----------------------------------
 
+\nocite{Gillespie:2024:RTH}
+\nocite{Hirose:2024:SK}
 \nocite{Feng:2023:WND}
 \nocite{Liu:2023:SSI}
 \nocite{Gillespie:2021:ICI}

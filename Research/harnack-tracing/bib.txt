@@ -3,9 +3,12 @@
     title = {Ray Tracing Harmonic Functions},
     journal = {ACM Trans. Graph.},
     volume = {43},
-    number = {99},
+    number = {4},
     year = {2024},
     publisher = {ACM},
     address = {New York, NY, USA},
-    doi = {10.1145/3658201}
+    doi = {10.1145/3658201},
+    month = jul,
+    articleno = {99},
+    pages = {1--18}
 }
