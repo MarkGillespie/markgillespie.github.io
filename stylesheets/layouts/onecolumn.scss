@@ -142,6 +142,19 @@
         font-weight: normal;
     }
 
+    #{$parent} .project_header .text .award {
+        display: inline-block;
+        line-height: 1.4;
+        font-weight: normal;
+        border-radius: .75em;
+        padding: .15em .5em;
+        margin: .25em 0em .25em -.75em ;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
     #{$parent} .project_author_list a {
         text-decoration: none;
         font-weight: normal;

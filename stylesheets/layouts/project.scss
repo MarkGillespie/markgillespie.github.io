@@ -66,6 +66,18 @@
         margin-bottom: .25em;
     }
 
+    #{$parent} .name_box > .award {
+        display: inline-block;
+        font-size: 1.1em;
+        border-radius: .75em;
+        padding: .15em .5em;
+        margin: 0em 0em .75em 0em ;
+    }
+
+    #{$parent} .name_box > .award > a {
+        text-decoration: none;
+    }
+
     #{$parent} .name_box > .authors {
         display: flex;
         flex-direction: row;

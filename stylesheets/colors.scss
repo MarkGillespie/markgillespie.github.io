@@ -12,10 +12,14 @@
 
     name-color: #c1c1d8,
     ordinary-font-color: #ddd,
-    accent-font-color: #bbb,
+    accent-font-color: #ddd,
     link-color: #bdf,
     link-hover-color: #c9f,
-    menu-font-color: #bbb
+    menu-font-color: #bbb,
+
+    award-background-color : #db6334,
+    award-font-color: #f4f4f4,
+    award-border-color: #e18f6f,
 ), $parent);
 
 @include sc.setTorusColors((
@@ -46,7 +50,11 @@
     accent-font-color: #f4f4f4,
     link-color: #4783D5,
     link-hover-color: #ee4d93,
-    menu-font-color: #333
+    menu-font-color: #333,
+
+    award-background-color : #de3d83,
+    award-font-color: #f4f4f4,
+    award-border-color : #ae0d53,
 ), $parent);
 
 @include sc.setTorusColors((

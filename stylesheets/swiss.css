@@ -14,7 +14,7 @@ html.darkmode .nav a {
 }
 html.darkmode .nav a:hover {
   background-color: #558;
-  color: #bbb;
+  color: #ddd;
 }
 
 html.darkmode .navbar_item {
@@ -24,7 +24,7 @@ html.darkmode .navbar_item {
 html.darkmode #style-menu ul button {
   border: none;
   font-size: 1.25em;
-  color: #bbb;
+  color: #ddd;
   background-color: #558;
   border-radius: 0.75em;
 }
@@ -34,12 +34,21 @@ html.darkmode #style-menu ul button {
  * http://www.javascriptkit.com/dhtmltutors/sticky-hover-issue-solutions.shtml */
 @media (hover: hover) {
   html.darkmode .navbar_item:hover, html.darkmode .selected > .navbar_item {
-    color: #bbb;
+    color: #ddd;
     background-color: #558;
   }
 }
 html.darkmode .project_header .text .venue {
   color: #bdf;
+}
+
+html.darkmode .award {
+  background-color: #db6334;
+  border: 2px solid #e18f6f;
+  color: #f4f4f4;
+}
+html.darkmode .award a, html.darkmode .award a:hover {
+  color: #f4f4f4;
 }
 
 html.darkmode .project_author_list, html.darkmode .project_author_list a, html.darkmode .author .name a {
@@ -80,12 +89,12 @@ html.darkmode .section:nth-child(4n+0) {
 }
 
 html.darkmode h1 {
-  color: #bbb;
+  color: #ddd;
 }
 
 html.darkmode h2, html.darkmode .section_header {
   background-color: #558;
-  color: #bbb;
+  color: #ddd;
   box-shadow: 1px 1px 10px rgba(119, 119, 119, 0.3);
 }
 
@@ -446,6 +455,15 @@ html.lightmode #style-menu ul button {
 }
 html.lightmode .project_header .text .venue {
   color: #4783D5;
+}
+
+html.lightmode .award {
+  background-color: #de3d83;
+  border: 2px solid #ae0d53;
+  color: #f4f4f4;
+}
+html.lightmode .award a, html.lightmode .award a:hover {
+  color: #f4f4f4;
 }
 
 html.lightmode .project_author_list, html.lightmode .project_author_list a, html.lightmode .author .name a {
@@ -1091,6 +1109,18 @@ html.singlecolumn .project_header .text .venue, .project_author_list {
   font-weight: normal;
 }
 
+html.singlecolumn .project_header .text .award {
+  display: inline-block;
+  line-height: 1.4;
+  font-weight: normal;
+  border-radius: 0.75em;
+  padding: 0.15em 0.5em;
+  margin: 0.25em 0em 0.25em -0.75em;
+}
+html.singlecolumn .project_header .text .award a {
+  text-decoration: none;
+}
+
 html.singlecolumn .project_author_list a {
   text-decoration: none;
   font-weight: normal;
@@ -1583,6 +1613,18 @@ html.project .name_box > .title {
 html.project .name_box > .venue {
   font-size: 1.25em;
   margin-bottom: 0.25em;
+}
+
+html.project .name_box > .award {
+  display: inline-block;
+  font-size: 1.1em;
+  border-radius: 0.75em;
+  padding: 0.15em 0.5em;
+  margin: 0em 0em 0.75em 0em;
+}
+
+html.project .name_box > .award > a {
+  text-decoration: none;
 }
 
 html.project .name_box > .authors {
