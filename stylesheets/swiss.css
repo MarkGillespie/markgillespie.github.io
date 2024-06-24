@@ -1783,6 +1783,9 @@ html.project .footer {
   html.project .paper_teaser {
     max-width: 100%;
   }
+  html.project .figures img {
+    max-width: 100%;
+  }
 }
 @media (max-width: 450px) {
   /* line break between "ACM Transactions on Graphics" and "SIGGRAPH" */

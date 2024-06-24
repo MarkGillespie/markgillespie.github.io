@@ -245,6 +245,10 @@
         #{$parent} .paper_teaser {
             max-width: 100%;
         }
+
+        #{$parent} .figures img{
+            max-width: 100%;
+        }
     }
 
     @media (max-width: 450px) {
