@@ -246,6 +246,36 @@
               </div>
           </div>
 
+          <div class="section_panel figures">
+              <div class="section_header"> Selected Figures </div>
+              <div class="section_text">
+                  <img src="images/figures/WeirdNonplanarPolygons.svg">
+                  <div class="caption">
+                      Our nonplanar polygon definition automatically applies to difficult cases like polygons with holes <em>(left)</em>, or knotted boundaries <em>(right)</em>
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/Exoskeleton.svg">
+                  <div class="caption">
+                      Given a sparse "exoskeleton" approximating a surface <em>(top left)</em> we can directly ray trace an interpolating surface <em>(top right)</em>.  The resulting image is both higher-quality than the simple triangulation used by most mesh viewers <em>(bottom left)</em>, and much simpler to compute than optimizing a mesh-based minimal surface, as originally proposed by de Goes <em>et al.</em> <a href="https://doi.org/10.1016/j.cag.2010.11.012">[2011]</a>.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/GWN.svg" style="box-shadow: none;">
+                  <div class="caption">
+                      Given a surface mesh with imperfections such as holes <em>(left)</em>, we can directly visualize the repaired surface defined via the <em>generalized winding number</em> <em>(right)</em>, reproducing the example from Jacobson <em>et al.</em> <a href="https://doi.org/10.1145/2461912.2461916">[2013, Figure 1]</a>.
+                  </div>
+                  <hr/>
+
+                  <img src="images/figures/Architecture.jpg">
+                  <div class="caption">
+                      Here we use Harnack tracing to directly visualize a special class of <em>grid shells</em> used in architecture, reproducing examples from Adiels <a href="https://arxiv.org/pdf/2212.05913.pdf">[2022]</a> figures 11, 12, and 22 (<em>resp.</em>).  To do so, we extend our algorithm to handle circular holes in addition to polygons.
+                  </div>
+                  <hr/>
+                  
+                </div>
+          </div>
+
       </div>
 
       <!--</div>-->
