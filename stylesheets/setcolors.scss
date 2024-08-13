@@ -90,6 +90,19 @@
         color: $link-hover-color;
     }
 
+
+    #{$parent} .headline, #{$parent} .headline a {
+        color: $name-color;
+    }
+
+    #{$parent} .headline a:hover {
+        color: $link-hover-color;
+    }
+
+    #{$parent} .child_lines div {
+        border-bottom: 1px solid rgba($link-color, .3);
+    }
+
     #{parent} #header_img {
         box-shadow: 1px 1px 3px rgba($shadow-color, .3);
     }

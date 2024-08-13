@@ -59,6 +59,18 @@ html.darkmode .project_author_list a:hover, html.darkmode .author .name a:hover 
   color: #c9f;
 }
 
+html.darkmode .headline, html.darkmode .headline a {
+  color: #c1c1d8;
+}
+
+html.darkmode .headline a:hover {
+  color: #c9f;
+}
+
+html.darkmode .child_lines div {
+  border-bottom: 1px solid rgba(187, 221, 255, 0.3);
+}
+
 parent #header_img {
   box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
 }
@@ -472,6 +484,18 @@ html.lightmode .project_author_list, html.lightmode .project_author_list a, html
 
 html.lightmode .project_author_list a:hover, html.lightmode .author .name a:hover {
   color: #ee4d93;
+}
+
+html.lightmode .headline, html.lightmode .headline a {
+  color: #000;
+}
+
+html.lightmode .headline a:hover {
+  color: #ee4d93;
+}
+
+html.lightmode .child_lines div {
+  border-bottom: 1px solid rgba(71, 131, 213, 0.3);
 }
 
 parent #header_img {
@@ -1740,6 +1764,20 @@ html.project .bibEntry {
   word-wrap: break-word;
   text-align: left;
   white-space: pre-wrap;
+}
+
+html.project .headline {
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+html.project .headline a {
+  font-style: italic;
+  text-decoration: none;
+}
+
+html.project .headline .source {
+  text-align: right;
 }
 
 html.project .footer {

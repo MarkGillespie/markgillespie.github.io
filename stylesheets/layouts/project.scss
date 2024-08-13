@@ -196,6 +196,20 @@
         white-space: pre-wrap;
     }
 
+    #{$parent} .headline {
+        text-align: left;
+        margin-bottom: 1em;
+    }
+
+    #{$parent} .headline a {
+        font-style: italic;
+        text-decoration: none;
+    }
+
+    #{$parent} .headline .source {
+        text-align: right;
+    }
+
     #{$parent} .footer {
         box-sizing: border-box;
 
