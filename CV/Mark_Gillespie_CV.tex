@@ -12,6 +12,10 @@
 \usepackage[varqu]{zi4}
 \usepackage[libertine]{newtxmath}
 
+\usepackage{xcolor}
+\definecolor{cvblue}{rgb}{0.22,0.45,0.70}
+
+
 %=== bibliography stuff
 \usepackage[
             datamodel=acmdatamodel, % acm stuff
@@ -25,6 +29,7 @@
 \DeclareNameAlias{sortname}{given-family}
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
 \newcommand{\me}[1]{\textbf{\sffamily #1}}
+\newcommand{\HonorableMention}{{\color{cvblue}[Best Paper, Honorable Mention]}}
 
 %=== number refs in reverse order https://tex.stackexchange.com/a/22770
 % Count total number of entries in each refsection
@@ -79,7 +84,7 @@
 \phone[mobile]{+1~(908)~477~1822}                   % optional, remove / comment the line if not wanted
 %\phone[fixed]{+2~(345)~678~901}                    % optional, remove / comment the line if not wanted
 %\phone[fax]{+3~(456)~789~012}                      % optional, remove / comment the line if not wanted
-\email{mgillesp@cs.cmu.edu}                 % optional, remove / comment the line if not wanted
+\email{mark.gillespie81@gmail.com}                 % optional, remove / comment the line if not wanted
 \homepage{www.markjgillespie.com}                   % optional, remove / comment the line if not wanted
 \extrainfo{\orcidicon{} \href{https://orcid.org/0009-0000-5645-9636}{0009-0000-5645-9636} \quad\textbullet\quad \faGraduationCap{} \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{google scholar}}                 % optional, remove / comment the line if not wanted
 %\photo[64pt][0.4pt]{card_image}                    % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
@@ -112,18 +117,27 @@
 
 % PUBLICATIONS ----------------------------------
 
+\begin{refsection}
 \nocite{Gillespie:2024:RTH}
 \nocite{Hirose:2024:SK}
 \nocite{Feng:2023:WND}
 \nocite{Liu:2023:SSI}
 \nocite{Gillespie:2021:ICI}
-\nocite{Sharp:2021:GPI}
 \nocite{Gillespie:2021:DCE}
-\printbibliography[title={Publications}]
+\printbibliography[title={Journal Articles}]
+\end{refsection}
+
+\begin{refsection}
+\nocite{Sharp:2021:GPI}
+\printbibliography[title={Other Refereed Publications}]
+\end{refsection}
 %% \bibliographystyle{plain}
 
 %----------------------------------
 \section{Experience}
+
+\cventry{2024--present}{Research Assistant}{Carnegie Mellon University}{}
+{Advisor: Keenan Crane}{}
 
 \cventry{2018--2024}{Graduate Researcher}{Carnegie Mellon University}{}
 {Advisor: Keenan Crane}{}
@@ -167,6 +181,11 @@
 
 %----------------------------------
 \section{Selected Talks}
+\cventry
+    {Aug. 2024}
+    {Ray Tracing Harmonic Functions}
+    {ACM SIGGRAPH 2024}{}{}
+    {}
 \cventry
     {Sept. 2023}
     {Intrinsic Triangulations in Geometry Processing}
@@ -289,6 +308,7 @@
 %{I am currently working with Professor Mathieu Desbrun to write up the work we did together to submit for publication}
 
   \section{Awards \& Fellowships}
+  \cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{}
   \cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{}
   \cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
   \cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
@@ -303,8 +323,8 @@
   \cvitem{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
 
   % ----------------------------------
-  \section{Programming Languages}
-  \cvitem{}{C++, Mathematica, Python, Java, Matlab, Haskell, Ocaml, \LaTeX}
+  % \section{Programming Languages}
+  % \cvitem{}{C++, Mathematica, Python, Java, Matlab, Haskell, Ocaml, \LaTeX}
 
 
 %\section{References}
