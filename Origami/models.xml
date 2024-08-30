@@ -1,0 +1,85 @@
+<models>
+	<model>
+		<name>Flying Pig</name>
+		<year>2015</year>
+		<svg>flying_pig.svg</svg>
+		<img>flying_pig.png</img>
+		<page>flying_pig.html</page>
+		<crease_pattern>Flying_Pig_Crease_Pattern.svg</crease_pattern>
+		<diagram>Flying_Pig_Diagrams.pdf</diagram>
+		<description>
+			<p>I designed this model by trial and error while stuck in an airport waiting for a flight which was delayed for 12 hours. Initially, I was trying to fold a regular pig, but I wound up with some extra flaps on the back, which I turned into wings!</p>
+		</description>
+	</model>
+	<model>
+		<name>Macaw Card</name>
+		<year>2018</year>
+		<svg>macaw_card.svg</svg>
+		<img>macaw_card.png</img>
+		<page>macaw_card.html</page>
+		<crease_pattern>Macaw_Card_Crease_Pattern.svg</crease_pattern>
+		<diagram>Macaw_Card_Diagrams.pdf</diagram>
+		<description>
+			<p> A few years ago, I found <a href="https://www.youtube.com/watch?v=sR6VytS9XrU">this</a> origami card. I really liked it, and folded tons of them as thank you cards for various events. However, after I had given everyone I knew two or three, I figured it was time to find a new card.</p>
+			<p> My google image searches didn't yield any similar cards, so I designed my own. This card is based on a macaw model I learned several years ago. I also designed a <a href="crane_card.html">card with a traditional crane on it</a>. </p>
+		</description>
+	</model>
+	<model>
+		<name>Crane Card</name>
+		<year>2018</year>
+		<svg>crane_card.svg</svg>
+		<img>crane_card.png</img>
+		<page>crane_card.html</page>
+		<crease_pattern>Crane_Card_Crease_Pattern.svg</crease_pattern>
+		<diagram>Crane_Card_Diagrams.pdf</diagram>
+		<description>
+			<p> A few years ago, I found <a href="https://www.youtube.com/watch?v=sR6VytS9XrU">this</a> origami card. I really liked it, and folded tons of them as thank you cards for various events. However, after I had given everyone I knew two or three, I figured it was time to find a new card.</p>
+			<p> My google image searches didn't yield any similar cards, so I designed my own. I also designed a <a href="macaw_card.html">card with a macaw on it</a>.</p>
+		</description>
+	</model>
+	<model>
+		<name>Dog Card</name>
+		<year>2022</year>
+		<svg>dog_card.svg</svg>
+		<img>dog_card.svg</img>
+		<page>dog_card.html</page>
+		<crease_pattern>Dog_Card_Crease_Pattern.svg</crease_pattern>
+		<diagram>Dog_Card_Diagrams.pdf</diagram>
+		<description>
+			<p>The newest in my series of greeting cards based on elementary origami models. The dog is a classic origami model for beginners, but folding it on the front of a card using only a single piece of paper is quite tricky!</p>
+		</description>
+	</model>
+	<model>
+		<name>Winged Giraffe</name>
+		<year>2022</year>
+		<svg>winged_giraffe.svg</svg>
+		<img>winged_giraffe.png</img>
+		<page>winged_giraffe.html</page>
+		<crease_pattern>winged-giraffe-crease-pattern.svg</crease_pattern>
+		<diagram>Winged_Giraffe_Diagrams.pdf</diagram>
+		<description><p>Continuing my tradition of animals with wings, I designed a winged giraffe. I'm quite happy with how it came out! The head is heavily inspired by John Montroll's horse model.</p></description>
+	</model>
+	<model>
+		<name>Scottie</name>
+		<year>2024</year>
+		<svg>scottie.svg</svg>
+		<img>scottie.png</img>
+		<page>scottie.html</page>
+		<!-- <crease_pattern>scottie-crease-pattern.svg</crease_pattern> -->
+		<diagram>ScottieDiagrams.pdf</diagram>
+		<description><p>After six years at Carnegie Mellon University, I finally figured out how to fold a Scottie out of a chopstick wrapper. This model is based on a dog that I learned how to fold in a small origami shop in Japan.</p></description>
+	</model>
+</models>
+<page_templates>
+	<model_carousel_entry>
+		<a href="$PAGE" class="div_link">
+			<div class="model_display">
+				<img src="$SVG"/>
+				<div class="model_name">$NAME <span class="model_year">($YEAR)</span></div>
+			</div>
+		</a>
+	</model_carousel_entry>
+	<model_page_details>
+
+	</model_page_details>
+</page_templates>

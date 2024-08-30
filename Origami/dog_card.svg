@@ -1,34 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 139.7 198.5" style="enable-background:new 0 0 139.7 198.5;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;stroke:#3A3A3A;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st1{fill:#9F509F;stroke:#3A3A3A;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st2{opacity:0.2;}
-	.st3{fill:#EBF3FA;stroke:#3A3A3A;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-</style>
-<polygon class="st0" points="4.2,178.1 135.6,177.1 135.1,4.8 4.4,4.8 "/>
-<polygon class="st1" points="57.2,179.1 135.6,177.7 135.6,4.1 57.3,5.7 "/>
-<polygon class="st2" points="52.7,179 59.8,179.1 60.2,10.3 53.9,9.3 "/>
-<polygon class="st2" points="74.1,91.5 120.9,133.6 94.5,154.9 55,150.4 55,91.5 "/>
-<path class="st1" d="M83,150.4l15.5-31.2l29.6-2.8c0,0-1.9,4.7-11.8,16.9c-4.5,5.5-23.6,17.4-23.6,17.4L83,150.4z"/>
-<polygon class="st1" points="92.7,150.7 72.1,143.7 100.1,117.4 116.9,129.6 "/>
-<polygon class="st0" points="92.7,150.7 55,148.3 55.2,132 73.8,132.5 "/>
-<polygon class="st0" points="73.8,132.5 92.7,150.7 83,150.9 "/>
-<polygon class="st0" points="74.1,91.5 111.6,128.9 91.5,148.3 55,148.3 55,91.5 "/>
-<polygon class="st0" points="84,148.3 100.1,117.4 128.2,116.4 91.5,148.3 "/>
-<polygon class="st0" points="20.5,100.6 21.8,69 52.6,71.5 "/>
-<polygon class="st1" points="56.4,183 4.2,177.7 4.2,4.1 56.3,9.6 "/>
-<g>
-	<polygon class="st2" points="39.4,52 73.8,52.1 98.6,65.6 74.7,94 40.2,94.3 14.2,65.4 	"/>
-	<polygon class="st0" points="39.4,52 73.8,52.1 98.6,65.6 72.9,92.9 41,92.9 14.2,65.4 	"/>
-	<polygon class="st2" points="73.8,52.1 98.9,65.4 92.7,83.3 	"/>
-	<polygon class="st2" points="39.4,52 14.3,65.3 19.8,85.2 	"/>
-	<line class="st3" x1="56.6" y1="57.1" x2="56.6" y2="76.9"/>
-	<polygon class="st1" points="72.9,92.9 41,92.9 52.6,81.3 61.7,81.3 	"/>
-	<polygon class="st0" points="61.7,81.3 52.6,81.3 57.2,86 	"/>
-	<polygon class="st0" points="39.4,52 14.3,65.3 18.4,83.3 	"/>
-	<polygon class="st0" points="73.8,52.1 98.9,65.4 94.8,83.4 	"/>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132.4 179.9">
+  <polygon points=".5 174.5 131.9 173.5 131.4 1.2 .7 1.2 .5 174.5" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="53.5 175.5 131.9 174.1 131.9 .5 53.6 2.1 53.5 175.5" fill="#9f509f" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="49 175.4 56.1 175.5 56.5 6.7 50.2 5.7 49 175.4" fill="#000" isolation="isolate" opacity=".2" stroke-width="0"/>
+  <polygon points="70.4 87.9 117.2 130 90.8 151.3 51.3 146.8 51.3 87.9 70.4 87.9" fill="#000" isolation="isolate" opacity=".2" stroke-width="0"/>
+  <path d="M79.3,146.8l15.5-31.2,29.6-2.8s-1.9,4.7-11.8,16.9c-4.5,5.5-23.6,17.4-23.6,17.4l-9.7-.3Z" fill="#9f509f" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="89 147.1 68.4 140.1 96.4 113.8 113.2 126 89 147.1" fill="#9f509f" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="89 147.1 51.3 144.7 51.5 128.4 70.1 128.9 89 147.1" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="70.1 128.9 89 147.1 79.3 147.3 70.1 128.9" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="70.4 87.9 107.9 125.3 87.8 144.7 51.3 144.7 51.3 87.9 70.4 87.9" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="80.3 144.7 96.4 113.8 124.5 112.8 87.8 144.7 80.3 144.7" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="16.8 97 18.1 65.4 48.9 67.9 16.8 97" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="52.7 179.4 .5 174.1 .5 .5 52.6 6 52.7 179.4" fill="#9f509f" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  <g>
+    <polygon points="35.7 48.4 70.1 48.5 94.9 62 71 90.4 36.5 90.7 10.5 61.8 35.7 48.4" fill="#000" isolation="isolate" opacity=".2" stroke-width="0"/>
+    <polygon points="35.7 48.4 70.1 48.5 94.9 62 69.2 89.3 37.3 89.3 10.5 61.8 35.7 48.4" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="70.1 48.5 95.2 61.8 89 79.7 70.1 48.5" fill="#000" isolation="isolate" opacity=".2" stroke-width="0"/>
+    <polygon points="35.7 48.4 10.6 61.7 16.1 81.6 35.7 48.4" fill="#000" isolation="isolate" opacity=".2" stroke-width="0"/>
+    <line x1="52.9" y1="53.5" x2="52.9" y2="73.3" fill="none" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round" stroke-width=".5"/>
+    <polygon points="69.2 89.3 37.3 89.3 48.9 77.7 58 77.7 69.2 89.3" fill="#9f509f" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="58 77.7 48.9 77.7 53.5 82.4 58 77.7" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="35.7 48.4 10.6 61.7 14.7 79.7 35.7 48.4" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="70.1 48.5 95.2 61.8 91.1 79.8 70.1 48.5" fill="#fff" stroke="#3a3a3a" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
 </svg>
