@@ -38,6 +38,18 @@
 		</description>
 	</model>
 	<model>
+		<name>Mimic</name>
+		<year>2018</year>
+		<svg>Mimic.svg</svg>
+		<img>mimic.png</img>
+		<page>mimic.html</page>
+		<!-- <crease_pattern>Mimic_Crease_Pattern.svg</crease_pattern> -->
+		<diagram>Mimic_Diagrams.pdf</diagram>
+		<description>
+			<p>This origami mimic is based off of Jon Moran’s <a href="https://origamiusa.org/classes/convention/2018/treasure-chest">treasure chest</a>, which I learned how to fold at his class at the 2018 OrigamiUSA convention. I grafted on some pointy teeth and modified the band pattern a little to turn the treasure chest into a mimic.</p>
+		</description>
+	</model>
+	<model>
 		<name>Dog Card</name>
 		<year>2022</year>
 		<svg>dog_card.svg</svg>
@@ -70,7 +82,7 @@
 		<description><p>After six years at Carnegie Mellon University, I finally figured out how to fold a Scottie out of a chopstick wrapper. This model is based on a dog that I learned how to fold in a small origami shop in Japan.</p></description>
 	</model>
 </models>
-<page_templates>
+<!-- <page_templates>
 	<model_carousel_entry>
 		<a href="$PAGE" class="div_link">
 			<div class="model_display">
@@ -80,6 +92,6 @@
 		</a>
 	</model_carousel_entry>
 	<model_page_details>
-
+		foo
 	</model_page_details>
-</page_templates>
+</page_templates> -->
