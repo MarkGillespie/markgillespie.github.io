@@ -32,6 +32,8 @@ div.page_title {
 /*  border-top: 0.25em solid var(--accent-light);*/
   padding: 0.5em 0em 0.75em 0em;
   text-align: center;
+  z-index: 1;
+  position: relative;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
 
   font-size: 3em;
