@@ -23,7 +23,7 @@ with open('index_template.html') as f:
 with open('model_template.html') as f:
     model_template = f.read()
 
-title_str = "Origami Models"
+title_str = "Mark's Origami Models"
 date_str = datetime.datetime.now().strftime("%B %Y")
 
 # you need to save the SVG from illustrator by running "Export > SVG"

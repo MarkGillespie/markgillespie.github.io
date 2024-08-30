@@ -52,6 +52,14 @@ div.footer {
   color: #FFF;
 }
 
+div.footer a {
+  color: #FFF;
+}
+
+div.footer a:hover {
+  color: var(--accent-light);
+}
+
 div.content_wrapper {
   min-height: 100%;
   margin: 0;
