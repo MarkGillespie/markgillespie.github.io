@@ -40,7 +40,7 @@ div.page_title {
 
 div.footer {
   width: 100%;
-  height: 1em;
+  min-height: 1em;
 
   background-color: #373737;
   border-top: 0.25em solid #575757;
@@ -122,12 +122,18 @@ div.current_model {
     padding: 1em;
     justify-content: center;
   }
+  div.model_list > .model_list_heading {
+    font-size: 25pt;
+  }
   div.model_list a > .model_display {
     display: flex;
     flex-direction: column;
   }
   div.model_display svg {
     margin-top: auto;
+  }
+  div.footer {
+    font-size: 1.5em;
   }
 }
 
@@ -168,10 +174,12 @@ div.model_details {
 
 div.model_display {
     min-width: 10em;
+    max-width: 25em;
 }
 
 div.model_display > img, div.model_display > svg {
     min-width: 10em;
+    max-width: 100%;
 }
 
 div.model_name {
