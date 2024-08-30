@@ -3,7 +3,7 @@
 		<name>Flying Pig</name>
 		<year>2015</year>
 		<svg>flying_pig.svg</svg>
-		<img>flying_pig.png</img>
+		<img>flying_pig_small.png</img>
 		<page>flying_pig.html</page>
 		<crease_pattern>Flying_Pig_Crease_Pattern.svg</crease_pattern>
 		<diagram>Flying_Pig_Diagrams.pdf</diagram>
@@ -15,7 +15,7 @@
 		<name>Macaw Card</name>
 		<year>2018</year>
 		<svg>macaw_card.svg</svg>
-		<img>macaw_card.png</img>
+		<img>macaw_card_small.png</img>
 		<page>macaw_card.html</page>
 		<crease_pattern>Macaw_Card_Crease_Pattern.svg</crease_pattern>
 		<diagram>Macaw_Card_Diagrams.pdf</diagram>
@@ -28,7 +28,7 @@
 		<name>Crane Card</name>
 		<year>2018</year>
 		<svg>crane_card.svg</svg>
-		<img>crane_card.png</img>
+		<img>crane_card_small.png</img>
 		<page>crane_card.html</page>
 		<crease_pattern>Crane_Card_Crease_Pattern.svg</crease_pattern>
 		<diagram>Crane_Card_Diagrams.pdf</diagram>
@@ -41,7 +41,7 @@
 		<name>Mimic</name>
 		<year>2018</year>
 		<svg>Mimic.svg</svg>
-		<img>mimic.png</img>
+		<img>mimic_small.png</img>
 		<page>mimic.html</page>
 		<!-- <crease_pattern>Mimic_Crease_Pattern.svg</crease_pattern> -->
 		<diagram>Mimic_Diagrams.pdf</diagram>
@@ -65,7 +65,7 @@
 		<name>Winged Giraffe</name>
 		<year>2022</year>
 		<svg>winged_giraffe.svg</svg>
-		<img>winged_giraffe.png</img>
+		<img>winged_giraffe_small.png</img>
 		<page>winged_giraffe.html</page>
 		<crease_pattern>winged-giraffe-crease-pattern.svg</crease_pattern>
 		<diagram>Winged_Giraffe_Diagrams.pdf</diagram>
@@ -75,7 +75,7 @@
 		<name>Scottie</name>
 		<year>2024</year>
 		<svg>scottie.svg</svg>
-		<img>scottie.png</img>
+		<img>scottie_small.png</img>
 		<page>scottie.html</page>
 		<!-- <crease_pattern>scottie-crease-pattern.svg</crease_pattern> -->
 		<diagram>ScottieDiagrams.pdf</diagram>
