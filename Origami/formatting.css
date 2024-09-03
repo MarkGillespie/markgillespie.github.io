@@ -96,7 +96,7 @@ div.model_list {
   gap: 1em;
 }
 
-div.model_list .model_list_heading {
+.model_list_heading {
   color: #666;
   padding: .5em;
   text-align: center;
@@ -105,6 +105,26 @@ div.model_list .model_list_heading {
   font-variant-caps: small-caps;
   width: 100%;
   box-sizing: border-box;
+}
+
+.note_list {
+  margin-top: -1.25em;
+}
+
+.note_list li {
+  list-style-type: none;
+}
+
+.note_list a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--accent);
+
+}
+
+.note_list a:hover {
+  color: var(--accent-bright);
+  text-decoration: underline;
 }
 
 div.current_model {
