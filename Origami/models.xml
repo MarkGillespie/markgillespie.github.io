@@ -1,3 +1,4 @@
+<data>
 <models>
 	<model>
 		<name>Flying Pig</name>
@@ -82,16 +83,25 @@
 		<description><p>After six years at Carnegie Mellon University, I finally figured out how to fold a Scottie out of a chopstick wrapper. This model is based on a dog that I learned how to fold in a small origami shop in Japan.</p></description>
 	</model>
 </models>
-<!-- <page_templates>
+<ui_element_templates>
 	<model_carousel_entry>
 		<a href="$PAGE" class="div_link">
 			<div class="model_display">
-				<img src="$SVG"/>
+				$SVG
 				<div class="model_name">$NAME <span class="model_year">($YEAR)</span></div>
 			</div>
 		</a>
 	</model_carousel_entry>
 	<model_page_details>
-		foo
+		<img src="$IMAGE" class="header_image"/>
+
+		<!-- in order to only show the crease pattern for models which
+		     have one, we set this css class on the parent which will
+		     hide all crease pattern related content if the class is
+		     set to .has_no_crease_pattern -->
+		<img src="$CREASE_PATTERN_URL" class="crease_pattern optional_crease_pattern_data"/>
+		$DESCRIPTION
+		<p>Diagrams are available <a href="$DIAGRAM_URL">here</a>. <span class="optional_crease_pattern_data">The crease pattern is available <a href="$CREASE_PATTERN_URL">here</a>.</span></p>
 	</model_page_details>
-</page_templates> -->
+</ui_element_templates>
+</data>

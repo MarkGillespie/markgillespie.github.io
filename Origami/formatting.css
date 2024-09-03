@@ -180,6 +180,7 @@ img.header_image {
 
 img.crease_pattern {
   width: 60%;
+  max-height: 250pt;
 /*  float: right;*/
 }
 
@@ -246,4 +247,9 @@ div.model_display img {
 
 .svg_main_color {
   fill: var(--accent);
+}
+
+/* switch to turn off crease pattern link for models with no crease pattern */
+.has_no_crease_pattern .optional_crease_pattern_data {
+  display: none;
 }
