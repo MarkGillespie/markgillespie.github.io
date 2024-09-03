@@ -108,7 +108,9 @@ div.model_list {
 }
 
 .note_list {
+  padding: 0;
   margin-top: -1.25em;
+  text-align: center;
 }
 
 .note_list li {

@@ -80,7 +80,7 @@
 		<page>scottie.html</page>
 		<!-- <crease_pattern>scottie-crease-pattern.svg</crease_pattern> -->
 		<diagram>ScottieDiagrams.pdf</diagram>
-		<description><p>After six years at Carnegie Mellon University, I finally figured out how to fold a Scottie out of a chopstick wrapper. This model is based on a dog that I learned how to fold in a small origami shop in Japan.</p></description>
+		<description><p>After six years at Carnegie Mellon University, I finally figured out how to fold a Scottie out of a chopstick wrapper. This model is based on <a href="Basset_Hound_Diagrams.pdf">a dog</a> that I learned how to fold in at <a href="https://origamikaikan.co.jp/lp/english_guide.html">Origami Kaikan</a> in Tokyo.</p></description>
 	</model>
 </models>
 <ui_element_templates>
