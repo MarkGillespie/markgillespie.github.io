@@ -152,12 +152,16 @@ div.current_model {
     padding: 1em;
     justify-content: center;
   }
-  div.model_list > .model_list_heading {
+  .model_list_heading {
     font-size: 25pt;
   }
   div.model_list a > .model_display {
     display: flex;
     flex-direction: column;
+    font-size: 18pt;
+  }
+  .note_list li {
+    font-size: 18pt;
   }
   div.model_display svg {
     margin-top: auto;
