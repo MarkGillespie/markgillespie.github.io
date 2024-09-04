@@ -115,13 +115,19 @@ div.model_list {
 
 .note_list li {
   list-style-type: none;
+  margin-bottom: .25em;
 }
 
-.note_list a {
+.note_list .other_model_name {
   font-weight: bold;
   text-decoration: none;
   color: var(--accent);
-
+}
+.note_list .other_model_author {
+/*  font-weight: bold;*/
+  text-decoration: none;
+  color: var(--accent);
+/*color: #666;*/
 }
 
 .note_list a:hover {
