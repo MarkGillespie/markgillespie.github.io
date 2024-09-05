@@ -239,8 +239,11 @@ div.model_display {
 }
 
 div.model_display > img, div.model_display > svg {
-    min-width: 10em;
-    max-width: 100%;
+    width: 8em;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 div.model_name {
@@ -252,6 +255,7 @@ div.model_name {
   margin-top: -.5em;
   text-align: center;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+  max-width: 9em;
 }
 
 div.model_name > span.model_year {
