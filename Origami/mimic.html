@@ -1,8 +1,20 @@
-<html>
+<html class="desktop">
 <head>
-  <meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="formatting.css"/>
-        <title>Mimic</title>
+	<title>Mimic</title>
+
+	<script type="text/javascript">
+	// give <html> a css class of either 'mobile' or
+	// 'desktop' depending on whether the browser
+	// userAgent appears to be mobile or desktop.
+	// default to desktop
+	// https://stackoverflow.com/a/9306800
+	let isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
+	const html = document.getElementsByTagName('html')[0];
+	html.classList.remove('desktop');
+	html.classList.add(isMobile ? 'mobile' : 'desktop');
+	</script>
 </head>
 
 <body>
@@ -15,7 +27,7 @@
 
 <div class="content_wrapper">
 
-	<div class="model_list">
+	<div class="model_list panel">
 		<div class="model_list_heading">My Models</div>
 		
 		<a href="flying_pig.html" class="div_link">
@@ -466,7 +478,7 @@
 		</ul>
 	</div>
 
-	<div class="current_model">
+	<div class="current_model panel">
 		<div class="model_title">
 			Mimic
 		</div>

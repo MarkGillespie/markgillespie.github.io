@@ -1,8 +1,20 @@
-<html>
+<html class="desktop">
 <head>
   <meta charset="UTF-8">
 	<link rel="stylesheet" href="formatting.css"/>
-        <title>Mark's Origami Models</title>
+  <title>Mark's Origami Models</title>
+
+	<script type="text/javascript">
+		// give <html> a css class of either 'mobile' or
+		// 'desktop' depending on whether the browser
+		// userAgent appears to be mobile or desktop.
+		// default to desktop
+		// https://stackoverflow.com/a/9306800
+		let isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
+		const html = document.getElementsByTagName('html')[0];
+		html.classList.remove('desktop');
+		html.classList.add(isMobile ? 'mobile' : 'desktop');
+	</script>
 </head>
 
 <body>
