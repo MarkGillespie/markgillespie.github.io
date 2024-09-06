@@ -101,6 +101,7 @@ div.model_list {
   flex-direction: column;
   gap: 1em;
   margin-top: 15pt;
+  align-items: baseline;
 }
 
 .model_list_heading {
