@@ -100,6 +100,7 @@
 
     #{$parent} #misc .project_header {
         margin-bottom: 2em;
+        flex-direction: row-reverse; /* put images left of text by default */
     }
 
     #{$parent} .project_header .image {
@@ -546,6 +547,11 @@
             flex-direction: column;
             align-items: center;
             text-align: left;
+        }
+
+
+        #{$parent} #misc .project_header {
+            flex-direction: column; /* put images below text on thin screens */
         }
 
         #{$parent} .project_header .image {
