@@ -42,7 +42,7 @@ div.page_title {
   text-align: center;
   z-index: 1;
   position: relative;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
 
   font-size: 3em;
   color: #FFF;
@@ -56,7 +56,7 @@ div.footer {
   border-top: 0.25em solid #575757;
   padding: 0.5em 0em 0.75em 0em;
   text-align: center;
-  box-shadow: 1px -1px 5px rgba(0, 0, 0, .5);
+  box-shadow: 0px -1px 5px rgba(0, 0, 0, .5);
 
   font-size: 1em;
   color: #FFF;
@@ -92,7 +92,7 @@ div.show_all_models {
   gap: 1em;
   justify-content: center;
 
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
 }
 
 div.model_list {
@@ -202,7 +202,7 @@ div.model_title {
   font-size: 2em;
   padding: 0.5em 20% 0.75em 1em;
   text-align: left;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
 
   color: #FFF;
   z-index: 1;
@@ -231,7 +231,7 @@ div.model_details {
 div.panel {
   background: #F4F4F4;
   overflow: visible;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
 }
 
 div.model_display {
@@ -255,30 +255,43 @@ div.model_name {
   padding-top: 0.5em;
   margin-top: -.5em;
   text-align: center;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
   max-width: 9em;
 }
 
 div.model_name > span.model_year {
-  color: #BBB;
+  color: #D8D8D8;
 }
 
-div.model_display:hover div.model_name {
+div.model_name .name {
+  font-weight: bold;
+}
+div.model_name .attribution {
+  color: #D8D8D8;
+}
+
+a div.model_display:hover div.model_name {
   background-color: var(--accent);
   border-top: 0.25em solid var(--accent-light);
 }
 
-div.model_display:hover img {
+a div.model_display:hover img {
   /*filter: url(#monochrome);*/
   /*-webkit-filter: url(#monochrome);*/
 }
 
-div.model_display:hover .svg_main_color {
+a div.model_display:hover .svg_main_color {
   fill: var(--accent-bright);
 }
 
 div.model_display img {
   width:  100%;
+}
+
+div.model_display img.folded_model {
+  width: 10em;
+  margin-bottom: .5em;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
 }
 
 .defs-only {
