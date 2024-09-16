@@ -1008,7 +1008,7 @@ html.singlecolumn div {
 html.singlecolumn body {
   margin: 0;
   padding: 0;
-  font-family: "Palatino", "Garamond", serif;
+  font-family: "Palatino", serif;
   line-height: 1.4;
   text-align: center;
   box-sizing: border-box;
@@ -1121,7 +1121,7 @@ html.singlecolumn .project_header .text {
 }
 
 html.singlecolumn .project_header .text .project_title {
-  font-family: "Palatino", "Garamond", serif;
+  font-family: "Palatino", serif;
   font-weight: 300;
   font-size: 40px;
   line-height: 1;
@@ -1375,7 +1375,7 @@ html.singlecolumn h4 {
   display: inline-block;
   margin-top: 0;
   margin-bottom: 0;
-  font-family: "Palatino", "Garamond", serif;
+  font-family: "Palatino", serif;
   font-weight: 200;
   font-size: 22px;
   line-height: 1.1;
@@ -1582,7 +1582,7 @@ html.singlecolumn a {
 html.project body {
   margin: 0;
   padding: 0;
-  font-family: "Palatino", "Garamond", serif;
+  font-family: "Palatino", serif;
   line-height: 1.4;
   text-align: center;
 }
