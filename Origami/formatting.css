@@ -9,7 +9,7 @@ body {
   /* background-repeat:  repeat; */
   background-color: #D5D5D5;
   margin: 0;
-  font-family: 'Palatino', 'Garamond', serif;
+  font-family: 'Palatino', serif;
 /*  font-size: 15pt;*/
 }
 
@@ -256,7 +256,8 @@ div.model_name {
   margin-top: -.5em;
   text-align: center;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
-  max-width: 9em;
+  width: 10em;
+  box-sizing: border-box;
 }
 
 div.model_name > span.model_year {
