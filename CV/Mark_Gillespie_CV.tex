@@ -13,7 +13,10 @@
 \usepackage[libertine]{newtxmath}
 
 \usepackage{xcolor}
-\definecolor{cvblue}{rgb}{0.22,0.45,0.70}
+\definecolor{accent}{HTML}{007985}
+\definecolor{color0}{rgb}{0,0,0}% black
+\colorlet{color1}{accent}% accent
+\definecolor{color2}{rgb}{0.45,0.45,0.45}% dark grey
 
 
 %=== bibliography stuff
@@ -29,7 +32,7 @@
 \DeclareNameAlias{sortname}{given-family}
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
 \newcommand{\me}[1]{\textbf{\sffamily #1}}
-\newcommand{\HonorableMention}{{\color{cvblue}[Best Paper, Honorable Mention]}}
+\newcommand{\HonorableMention}{{\color{accent}[Best Paper, Honorable Mention]}}
 
 %=== number refs in reverse order https://tex.stackexchange.com/a/22770
 % Count total number of entries in each refsection
@@ -45,7 +48,7 @@
 
 %==== moderncv themes
 \moderncvstyle{casual}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
-\moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+% \moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
 %\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
 %\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
 
@@ -134,10 +137,12 @@
 %% \bibliographystyle{plain}
 
 %----------------------------------
-\section{Experience}
+\section{Academic Positions}
 
-\cventry{2024--present}{Research Assistant}{Carnegie Mellon University}{}
-{Advisor: Keenan Crane}{}
+\cventry{{Sept. 2024}--\\present}{Postdoctoral Researcher}{École Polytechnique}{Palaiseau, France}{}{}
+
+% \cventry{2024--present}{Research Assistant}{Carnegie Mellon University}{}
+% {Advisor: Keenan Crane}{}
 
 \cventry{2018--2024}{Graduate Researcher}{Carnegie Mellon University}{}
 {Advisor: Keenan Crane}{}
@@ -176,11 +181,25 @@
 
 % \cventry{Spring 2017, Spring 2016}{Teaching Assistant for CS 38, Introduction to Algorithms}{California Institute of Technology}{}{}{Under Professor Leonard Schulman, graded problem sets and held weekly office hours}
 
-\cventry{Summer 2015}{Software Engineering Intern}{Google}{}{}{}
+% \cventry{Summer 2015}{Software Engineering Intern}{Google}{}{}{}
 % Prototyped new credit card entry interface for Android library. Developed in Java}
+
+
+
+\section{Awards \& Fellowships}
+\cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{Awarded to 12 papers out of about 840 submissions}
+\cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{Awarded to top 15\% of applicants across all areas of science; \$147,000 over 3 years}
+\cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
+\cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
+% \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31 points (rank: 365/3214)}
 
 %----------------------------------
 \section{Selected Talks}
+\cventry
+    {Nov. 2024}
+    {Solid Knitting \& Harmonic Hitting}
+    {IST Austria}{}{}
+    {}
 \cventry
     {Aug. 2024}
     {Ray Tracing Harmonic Functions}
@@ -307,20 +326,34 @@
 %\cventry{ongoing}{Smooth Embeddings from Pairwise Distances}{}{}{}
 %{I am currently working with Professor Mathieu Desbrun to write up the work we did together to submit for publication}
 
-  \section{Awards \& Fellowships}
-  \cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{}
-  \cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{}
-  \cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
-  \cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
-  % \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31 points (rank: 365/3214)}
-
   \section{Service}
   \cvitem{Departmental}{
           Organizer, Graphics Reading Group (2022-2023);
           Organizer, Graphics Seminar (2020-2021);
           Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022)}
-  \cvitem{Reviewing}{SIGGRAPH (2019, 2022, 2023, 2024), SIGGRAPH Asia (2022, 2023, 2024), Eurographics (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023, 2024), Computers \& Graphics (2021)}
+  \cvitem{Reviewing}{SIGGRAPH (2019, 2022, 2023, 2024), SIGGRAPH Asia (2022, 2023, 2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023, 2024), Computers \& Graphics (2021)}
   \cvitem{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
+
+\section{Press Coverage}
+
+\cventry{July 2024}{Cosmos magazine}{
+\href{https://cosmosmagazine.com/technology/computing/3d-knitting-could-make-solid-but-soft-furniture/}{3D knitting could make solid but soft furniture}}{}{}{}
+
+
+\cventry{July 2024}{Interesting Engineering}{\href{https://interestingengineering.com/innovation/solid-knitted-three-dimensional-furniture-could-be-reality}{Beware IKEA: Solid knitted three-dimensional furniture could be a reality}}{}{}{}
+
+
+\cventry{July 2024}{New Atlas}{\href{https://newatlas.com/materials/solid-knitting-reconfigurable/}{Innovative `solid knitting' machine builds 100\% reconfigurable objects}}{}{}{}
+
+
+\cventry{July 2024}{ZME Science}{\href{https://www.msn.com/en-us/news/technology/solid-knitting-a-different-spin-on-3d-printing-that-can-make-furniture-out-of-yarn/ar-AA1ogaiP?ocid=BingNewsVerp}{Solid knitting: a different spin on 3D printing that can make furniture out of yarn}}{}{}{}
+
+
+\cventry{July 2024}{ACM SIGGRAPH Blog}{\href{https://blog.siggraph.org/2024/07/beyond-the-threads.html/}{Beyond the Threads}}{}{}{}
+
+
+\cventry{July 2024}{CMU News}{\href{https://www.cmu.edu/news/stories/archives/2024/july/robotics-institute-introduces-solid-knitting-as-new-fabrication-technique}{Robotics Institute Introduces Solid Knitting as New Fabrication Technique}}{}{}{}
+
 
   % ----------------------------------
   % \section{Programming Languages}
