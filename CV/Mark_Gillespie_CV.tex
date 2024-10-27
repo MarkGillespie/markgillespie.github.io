@@ -11,6 +11,8 @@
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage[varqu]{zi4}
 \usepackage[libertine]{newtxmath}
+\usepackage{enumitem}
+\usepackage{makecell} % line breaks inside table cells
 
 \usepackage{xcolor}
 \definecolor{accent}{HTML}{007985}
@@ -26,13 +28,57 @@
             style=acmnumeric,
             % bibstyle=numeric,    % number refs
             giveninits=false,    % print full author names
-            maxbibnames=99       % list all author names
+            maxbibnames=99,      % list all author names in references
+            maxcitenames=99      % list all author names in citations (since our styled references are secretly citations)
            ]{biblatex}
-\DeclareNameAlias{default}{given-family}
-\DeclareNameAlias{sortname}{given-family}
+% \DeclareNameAlias{default}{given-family}
+% \DeclareNameAlias{sortname}{given-family}
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
+
 \newcommand{\me}[1]{\textbf{\sffamily #1}}
 \newcommand{\HonorableMention}{{\color{accent}[Best Paper, Honorable Mention]}}
+
+% highlight name in references based on "highlight" annotation from bib file
+% https://tex.stackexchange.com/a/304968
+\renewcommand*{\mkbibnamegiven}[1]{%
+  \ifitemannotation{highlight}
+    {\me{#1}}
+    {#1}}
+
+\renewcommand*{\mkbibnamefamily}[1]{%
+  \ifitemannotation{highlight}
+    {\me{#1}}
+    {#1}}
+
+\newcommand{\nameuse}[1]{%
+  \def\do##1{\settoggle{blx@use##1}{#1}}%
+  \dolistcsloop{blx@datamodel@names}
+  }
+
+%=== Custom cite command with a newline for authors and journal
+% https://tex.stackexchange.com/a/401936
+\DeclareCiteCommand{\rawcvcite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{maintitle+title}
+   \newline\nopunct\newblock
+   \usebibmacro{author}
+   \newline\nopunct\newblock
+   \usebibmacro{journal+issuetitle}
+  }
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% use minipage to vertically center enumeration label next to citation
+\newcommand{\cvcite}[1]{
+    \begin{minipage}{\linewidth}
+    \rawcvcite{#1}
+    \end{minipage}
+}
+
+% format the titles in bold
+\DeclareFieldFormat
+  [article,book,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  {title}{{\textbf{\sffamily #1}}}
 
 %=== number refs in reverse order https://tex.stackexchange.com/a/22770
 % Count total number of entries in each refsection
@@ -111,41 +157,59 @@
 %-----       resume       ---------------------------------------------------------
 \makecvtitle
 
+\section{Academic Appointments}
+\cventry{{Sept. 2024}--\\present}{Postdoctoral Researcher}{École Polytechnique}{Palaiseau, France}{}{}
+
 \section{Education}
-\cventry{2018--2024}{PhD Computer Science}{Carnegie Mellon University}{Pittsburgh}{}{Advisor: Keenan Crane. Topics: geometry processing, computer graphics}
-\cventry{2014--2018}{B.S. Computer Science, Mathematics}{California Institute of Technology}{Pasadena}{}{Double major. GPA: 4.1}
+\cventry{2018--2024}{PhD Computer Science}{Carnegie Mellon University}{Pittsburgh}{}{Advisor: Keenan Crane}% . Topics: geometry processing, computer graphics}
+\cventry{2014--2018}{B.S. Computer Science \& B.S. Mathematics}{California Institute of Technology}{Pasadena}{}{}%Double major. GPA: 4.1}
 % {The computer science degree involves courses in systems, algorithms, functional programming, and complexity theory. I supplemented these courses with electives in computer graphics and advanced algorithms.
 % The math degree involves courses in abstract algebra, differential geometry, and analysis. I supplemented these courses with electives in algebraic topology and Riemannian geometry.}  % arguments 3 to 6 can be left empty
 
 
 % PUBLICATIONS ----------------------------------
 
-\begin{refsection}
-\nocite{Gillespie:2024:RTH}
-\nocite{Hirose:2024:SK}
-\nocite{Feng:2023:WND}
-\nocite{Liu:2023:SSI}
-\nocite{Gillespie:2021:ICI}
-\nocite{Gillespie:2021:DCE}
-\printbibliography[title={Journal Articles}]
-\end{refsection}
+\section{Journal Articles}
+\begin{enumerate}[itemsep=.25\baselineskip, leftmargin=3em, labelsep=1em]
+\item[{[6]}] \cvcite{Gillespie:2024:RTH}
+\item[{[5]}] \cvcite{Hirose:2024:SK}
+\item[{[4]}] \cvcite{Feng:2023:WND}
+\item[{[3]}] \cvcite{Liu:2023:SSI}
+\item[{[2]}] \cvcite{Gillespie:2021:ICI}
+\item[{[1]}] \cvcite{Gillespie:2021:DCE}
+\end{enumerate}
 
-\begin{refsection}
-\nocite{Sharp:2021:GPI}
-\printbibliography[title={Other Refereed Publications}]
-\end{refsection}
-%% \bibliographystyle{plain}
+\section{Other Refereed Publications}
+\begin{enumerate}[itemsep=.25\baselineskip, leftmargin=3em, labelsep=1em]
+\item[{[1]}] \cvcite{Sharp:2021:GPI}
+\end{enumerate}
+
+% \nameuse{false}
+
+% \nocite{*}
+% \printbibliography[keyword={journal},title={Journal Articles}]
+% \printbibliography[notkeyword={journal},title={Other Refereed Publications}]
+
+% \begin{refsection}
+
+% \printbibliography[title={Journal Articles}]
+% \end{refsection}
+
+% \begin{refsection}
+% \nocite{Sharp:2021:GPI}
+% \printbibliography[title={Other Refereed Publications}]
+% \end{refsection}
+% %% \bibliographystyle{plain}
 
 %----------------------------------
-\section{Academic Positions}
-
-\cventry{{Sept. 2024}--\\present}{Postdoctoral Researcher}{École Polytechnique}{Palaiseau, France}{}{}
+\pagebreak % TODO: might need to delete later
+\section{Other Research Experience}
 
 % \cventry{2024--present}{Research Assistant}{Carnegie Mellon University}{}
 % {Advisor: Keenan Crane}{}
 
-\cventry{2018--2024}{Graduate Researcher}{Carnegie Mellon University}{}
-{Advisor: Keenan Crane}{}
+% \cventry{2018--2024}{Graduate Researcher}{Carnegie Mellon University}{}
+% {Advisor: Keenan Crane}{}
 
 \cventry{July 2023}{Visiting Researcher}{Technische Universit\"at Berlin, Berlin}{}
         {Host: Boris Springborn}{}
@@ -331,7 +395,7 @@
           Organizer, Graphics Reading Group (2022-2023);
           Organizer, Graphics Seminar (2020-2021);
           Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022)}
-  \cvitem{Reviewing}{SIGGRAPH (2019, 2022, 2023, 2024), SIGGRAPH Asia (2022, 2023, 2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023, 2024), Computers \& Graphics (2021)}
+  \cvitem{Reviewing}{SIGGRAPH (2019, 2022, 2023, 2024), SIGGRAPH Asia (2022, 2023, 2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Journal of Computational and Applied Mathematics (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023, 2024), Computers \& Graphics (2021)}
   \cvitem{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
 
 \section{Press Coverage}
