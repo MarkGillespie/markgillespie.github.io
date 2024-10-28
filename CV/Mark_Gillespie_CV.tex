@@ -5,20 +5,37 @@
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
 
-\documentclass[11pt,letterpaper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\documentclass[11pt,letterpaper,roman,colorlinks=true]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % use linux libertine as the serif font / linux biolinum as the sans serif font
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage[varqu]{zi4}
 \usepackage[libertine]{newtxmath}
-\usepackage{enumitem}
 \usepackage{makecell} % line breaks inside table cells
+
 
 \usepackage{xcolor}
 \definecolor{accent}{HTML}{007985}
 \definecolor{color0}{rgb}{0,0,0}% black
 \colorlet{color1}{accent}% accent
 \definecolor{color2}{rgb}{0.45,0.45,0.45}% dark grey
+
+\usepackage{enumitem}
+\usepackage{etaremune} % reversed-order lists
+% print brackets around list index
+% https://tex.stackexchange.com/a/428870
+\renewcommand*{\labelenumi}{[\theenumi]}
+
+
+
+% for some reason this has to go inside document
+% https://tex.stackexchange.com/a/572408
+% \usepackage[colorlinks]{hyperref}
+\AtBeginDocument{%
+\hypersetup{
+  urlcolor={color2},
+}
+}
 
 
 %=== bibliography stuff
@@ -35,7 +52,7 @@
 % \DeclareNameAlias{sortname}{given-family}
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
 
-\newcommand{\me}[1]{\textbf{\sffamily #1}}
+\newcommand{\me}[1]{\textbf{#1}}
 \newcommand{\HonorableMention}{{\color{accent}[Best Paper, Honorable Mention]}}
 
 % highlight name in references based on "highlight" annotation from bib file
@@ -59,11 +76,12 @@
 % https://tex.stackexchange.com/a/401936
 \DeclareCiteCommand{\rawcvcite}
   {\usebibmacro{prenote}}
-  {\usebibmacro{maintitle+title}
-   \newline\nopunct\newblock
-   \usebibmacro{author}
+  {\usebibmacro{author}
+   \newline\nopunct\newblock\usebibmacro{maintitle+title}
    \newline\nopunct\newblock
    \usebibmacro{journal+issuetitle}
+   \usebibmacro{year}
+   \usebibmacro{doi+eprint+url}
   }
   {\multicitedelim}
   {\usebibmacro{postnote}}
@@ -75,10 +93,16 @@
     \end{minipage}
 }
 
-% format the titles in bold
+% format the titles in italics
 \DeclareFieldFormat
   [article,book,inbook,incollection,inproceedings,patent,thesis,unpublished]
-  {title}{{\textbf{\sffamily #1}}}
+  {title}{{\textit{#1}}}
+\DeclareFieldFormat
+  [article,book,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  {journaltitle}{{{#1}}}
+
+% use title case
+\DeclareFieldFormat{titlecase}{#1}
 
 %=== number refs in reverse order https://tex.stackexchange.com/a/22770
 % Count total number of entries in each refsection
@@ -154,16 +178,20 @@
 %            content
 %----------------------------------------------------------------------------------
 \begin{document}
+
 %\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
 %-----       resume       ---------------------------------------------------------
 \makecvtitle
+
+
+\vspace{-2\baselineskip}
 
 \section{Academic Appointments}
 \cventry{{Sept. 2024}--\\present}{Postdoctoral Researcher}{École Polytechnique}{Palaiseau, France}{}{}
 
 \section{Education}
-\cventry{2018--2024}{PhD Computer Science}{Carnegie Mellon University}{Pittsburgh}{}{Advisor: Keenan Crane}% . Topics: geometry processing, computer graphics}
-\cventry{2014--2018}{B.S. Computer Science \& B.S. Mathematics}{California Institute of Technology}{Pasadena}{}{}%Double major. GPA: 4.1}
+\cventry{2018--2024}{PhD Computer Science}{Carnegie Mellon University}{}{}{Advisor: Keenan Crane}% . Topics: geometry processing, computer graphics}
+\cventry{2014--2018}{B.S. Computer Science \& B.S. Mathematics}{California Institute of Technology}{}{}{}%Double major. GPA: 4.1}
 % {The computer science degree involves courses in systems, algorithms, functional programming, and complexity theory. I supplemented these courses with electives in computer graphics and advanced algorithms.
 % The math degree involves courses in abstract algebra, differential geometry, and analysis. I supplemented these courses with electives in algebraic topology and Riemannian geometry.}  % arguments 3 to 6 can be left empty
 
@@ -171,19 +199,21 @@
 % PUBLICATIONS ----------------------------------
 
 \section{Journal Articles}
-\begin{enumerate}[itemsep=.25\baselineskip, leftmargin=3em, labelsep=1em]
-\item[{[6]}] \cvcite{Gillespie:2024:RTH}
-\item[{[5]}] \cvcite{Hirose:2024:SK}
-\item[{[4]}] \cvcite{Feng:2023:WND}
-\item[{[3]}] \cvcite{Liu:2023:SSI}
-\item[{[2]}] \cvcite{Gillespie:2021:ICI}
-\item[{[1]}] \cvcite{Gillespie:2021:DCE}
-\end{enumerate}
+\begin{etaremune}[itemsep=.25\baselineskip, leftmargin=2.75em, labelsep=1em]
+\item \cvcite{Gillespie:2024:RTH}
+\item \cvcite{Hirose:2024:SK}
+\item \cvcite{Feng:2023:WND}
+\item \cvcite{Liu:2023:SSI}
+\item \cvcite{Gillespie:2021:ICI}
+\item \cvcite{Gillespie:2021:DCE}
+\end{etaremune}
 
-\section{Other Refereed Publications}
-\begin{enumerate}[itemsep=.25\baselineskip, leftmargin=3em, labelsep=1em]
-\item[{[1]}] \cvcite{Sharp:2021:GPI}
-\end{enumerate}
+% \section{Other Refereed Publications}
+\section{Other Publications}
+\begin{etaremune}[itemsep=.25\baselineskip, leftmargin=2.75em, labelsep=1em]
+\item \cvcite{Gillespie:2024:EIT}
+\item \cvcite{Sharp:2021:GPI}
+\end{etaremune}
 
 % \nameuse{false}
 
@@ -203,7 +233,6 @@
 % %% \bibliographystyle{plain}
 
 %----------------------------------
-\pagebreak % TODO: might need to delete later
 \section{Other Research Experience}
 
 % \cventry{2024--present}{Research Assistant}{Carnegie Mellon University}{}
@@ -251,7 +280,7 @@
 
 
 
-\section{Awards \& Fellowships}
+\section{Awards \& Honors}
 \cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{Awarded to 12 papers out of about 840 submissions}
 \cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{Awarded to top 15\% of applicants across all areas of science; \$147,000 over 3 years}
 \cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
