@@ -54,7 +54,7 @@
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
 
 \newcommand{\me}[1]{\textbf{#1}}
-\newcommand{\HonorableMention}{{\color{accent}[Best Paper, Honorable Mention]}}
+\newcommand{\HonorableMention}{\\{\color{accent}[Best Paper, Honorable Mention]}}
 
 % highlight name in references based on "highlight" annotation from bib file
 % https://tex.stackexchange.com/a/304968
@@ -83,6 +83,7 @@
    \usebibmacro{journal+issuetitle}
    \usebibmacro{year}
    \usebibmacro{doi+eprint+url}
+   \usebibmacro{addendum+pubstate}
   }
   {\multicitedelim}
   {\usebibmacro{postnote}}
@@ -185,7 +186,7 @@
 \makecvtitle
 
 
-\vspace{-2\baselineskip}
+\vspace{-3\baselineskip}
 
 \section{Academic Appointments}
 \cventry{{Sept. 2024}--\\present}{Postdoctoral Researcher}{École Polytechnique}{Palaiseau, France}{}{}
@@ -282,7 +283,7 @@
 
 
 \section{Awards \& Honors}
-\cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{Awarded to 12 papers out of about 840 submissions}
+\cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{Awarded to 12 papers out of $\sim$840 submissions; $\sim$top 1.5\% of papers}
 \cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{Awarded to top 15\% of applicants across all areas of science; \$147,000 over 3 years}
 \cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
 \cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
