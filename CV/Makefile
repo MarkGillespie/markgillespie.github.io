@@ -1,3 +1,6 @@
+cv:
+	latexmk -pdf --pvc -view=none Mark_Gillespie_CV
+
 clean:
 	rm *.aux
 	rm *.bbl
