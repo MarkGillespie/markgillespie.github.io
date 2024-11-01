@@ -5,7 +5,7 @@
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
 
-\documentclass[11pt,letterpaper,roman,colorlinks=true]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\documentclass[11pt,letterpaper,roman,colorlinks=true]{moderncv}
 
 % use linux libertine as the serif font / linux biolinum as the sans serif font
 \usepackage[tt=false, type1=true]{libertine}
@@ -26,8 +26,6 @@
 % https://tex.stackexchange.com/a/428870
 \renewcommand*{\labelenumi}{[\theenumi]}
 
-
-
 % for some reason this has to go inside document
 % https://tex.stackexchange.com/a/572408
 % \usepackage[colorlinks]{hyperref}
@@ -37,7 +35,6 @@
   linkcolor={color2},
 }
 }
-
 
 %=== bibliography stuff
 \usepackage[
@@ -49,12 +46,13 @@
             maxbibnames=99,      % list all author names in references
             maxcitenames=99      % list all author names in citations (since our styled references are secretly citations)
            ]{biblatex}
+
 % \DeclareNameAlias{default}{given-family}
 % \DeclareNameAlias{sortname}{given-family}
 \bibliography{publications}                        % 'publications' is the name of a BibTeX file
 
 \newcommand{\me}[1]{\textbf{#1}}
-\newcommand{\HonorableMention}{\\{\color{accent}[Best Paper, Honorable Mention]}}
+\newcommand{\HonorableMention}[1]{\\{\href{#1}{\color{accent}[Best Paper, Honorable Mention]}}}
 
 % highlight name in references based on "highlight" annotation from bib file
 % https://tex.stackexchange.com/a/304968
@@ -119,73 +117,40 @@
   \number\numexpr\csuse{entrycount:\therefsection}+1-#1\relax}
 
 %==== moderncv themes
-\moderncvstyle{casual}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
-% \moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
-%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
-%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+\moderncvstyle{classic}
+%\nopagenumbers{}
 
 % character encoding
-\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
-%\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+\usepackage[utf8]{inputenc}
 
 % adjust the page margins
-\usepackage[margin=1in]{geometry}
-%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
-%\setlength{\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+\usepackage[margin=.75in]{geometry}
 
-% draw orcid logo https://tex.stackexchange.com/a/445583
-\usepackage{scalerel}
-\usepackage{tikz}
-\usetikzlibrary{svg.path}
-\tikzset{
-  orcidlogo/.pic={
-    \fill[color2] svg{M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z};
-    \fill[white] svg{M86.3,186.2H70.9V79.1h15.4v48.4V186.2z}
-    svg{M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z}
-    svg{M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z};
-  }
-}
-
-\newcommand\orcidicon{\mbox{\scalerel*{
-        \begin{tikzpicture}[yscale=-1,transform shape]
-          \pic{orcidlogo};
-        \end{tikzpicture}
-      }{|}}}
+% if you want to change the width of the column with the dates
+%\setlength{\hintscolumnwidth}{3cm}
 
 % personal data
-\name{Mark}{Gillespie}
-\title{Curriculum Vitae}                               % optional, remove / comment the line if not wanted
-%\address{street and number}{postcode city}{country}% optional, remove / comment the line if not wanted; the "postcode city" and and "country" arguments can be omitted or provided empty
-\phone[mobile]{+1~(908)~477~1822}                   % optional, remove / comment the line if not wanted
-%\phone[fixed]{+2~(345)~678~901}                    % optional, remove / comment the line if not wanted
-%\phone[fax]{+3~(456)~789~012}                      % optional, remove / comment the line if not wanted
-% \email{mark.gillespie81@gmail.com}                 % optional, remove / comment the line if not wanted
-\email{mark.gillespie@inria.fr}                 % optional,
-\homepage{www.markjgillespie.com}                   % optional, remove / comment the line if not wanted
-\extrainfo{\orcidicon{} \href{https://orcid.org/0009-0000-5645-9636}{0009-0000-5645-9636} \quad\textbullet\quad \faGraduationCap{} \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{google scholar}}                 % optional, remove / comment the line if not wanted
-%\photo[64pt][0.4pt]{card_image}                    % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
-%\quote{Some quote}                                 % optional, remove / comment the line if not wanted
+\name{Mark}{Gillespie\vspace{-.4\baselineskip}}
+\title{Curriculum Vitae}
 
-% to show numerical labels in the bibliography (default is to show no labels); only useful if you make citations in your resume
-%\makeatletter
-%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
-%\makeatother
-%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}% CONSIDER REPLACING THE ABOVE BY THIS
-
-% bibliography with mutiple entries
-% \usepackage{multibib}
-% \newcites{book,misc}{{Books},{Others}}
+%\address{street and number}{postcode city}{country}
+\email{mark.gillespie@inria.fr}
+\homepage{www.markjgillespie.com} 
+\extrainfo{\faGraduationCap{} \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{google scholar}}
+\social[orcid]{0009-0000-5645-9636}
+% \phone[mobile]{+1~(908)~477~1822}
+\social[github]{MarkGillespie}
+% '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame)
+%\photo[64pt][0.4pt]{card_image}  
+%\quote{Some quote}
 
 %----------------------------------------------------------------------------------
 %            content
 %----------------------------------------------------------------------------------
 \begin{document}
+\newgeometry{margin=.75in, top=.6in}
 
-%\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
-%-----       resume       ---------------------------------------------------------
 \makecvtitle
-
-
 \vspace{-3\baselineskip}
 
 \section{Academic Appointments}
@@ -214,25 +179,11 @@
 \section{Other Publications}
 \begin{etaremune}[itemsep=.25\baselineskip, leftmargin=2.75em, labelsep=1em]
 \item \cvcite{Gillespie:2024:EIT}
+\item \cvcite{Hirose:2024:SKA}
 \item \cvcite{Sharp:2021:GPI}
 \end{etaremune}
 
-% \nameuse{false}
-
-% \nocite{*}
-% \printbibliography[keyword={journal},title={Journal Articles}]
-% \printbibliography[notkeyword={journal},title={Other Refereed Publications}]
-
-% \begin{refsection}
-
-% \printbibliography[title={Journal Articles}]
-% \end{refsection}
-
-% \begin{refsection}
-% \nocite{Sharp:2021:GPI}
-% \printbibliography[title={Other Refereed Publications}]
-% \end{refsection}
-% %% \bibliographystyle{plain}
+\restoregeometry
 
 %----------------------------------
 \section{Other Research Experience}
@@ -455,33 +406,4 @@
   % \section{Programming Languages}
   % \cvitem{}{C++, Mathematica, Python, Java, Matlab, Haskell, Ocaml, \LaTeX}
 
-
-%\section{References}
-%\begin{cvcolumns}
-  %\cvcolumn{Category 1}{\begin{itemize}\item Person 1\item Person 2\item Person 3\end{itemize}}
-  %\cvcolumn{Category 2}{Amongst others:\begin{itemize}\item Person 1, and\item Person 2\end{itemize}(more upon request)}
-  %\cvcolumn[0.5]{All the rest \& some more}{\textit{That} person, and \textbf{those} also (all available upon request).}
-%\end{cvcolumns}
-
-% Publications from a BibTeX file without multibib
-%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
-%  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
-%\nocite{*}
-%\bibliographystyle{plain}
-%\bibliography{publications}                        % 'publications' is the name of a BibTeX file
-
-% Publications from a BibTeX file using the multibib package
-%\section{Publications}
-%\nocitebook{book1,book2}
-%\bibliographystylebook{plain}
-%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
-%\nocitemisc{misc1,misc2,misc3}
-%\bibliographystylemisc{plain}
-%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
-
-
-%\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
 \end{document}
-
-
-%% end of file `template.tex'.
