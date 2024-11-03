@@ -1,18 +1,12 @@
-%% start of file `template.tex'.
-%% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
-%
-% This work may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License version 1.3c,
-% available at http://www.latex-project.org/lppl/.
-
-\documentclass[11pt,letterpaper,roman,colorlinks=true]{moderncv}
+% \documentclass[11pt,letterpaper,roman,colorlinks=true]{moderncv}
+\documentclass[11pt]{article}
 
 % use linux libertine as the serif font / linux biolinum as the sans serif font
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage[varqu]{zi4}
 \usepackage[libertine]{newtxmath}
-\usepackage{makecell} % line breaks inside table cells
 
+\RequirePackage{fontawesome} % logo font
 
 \usepackage{xcolor}
 \definecolor{accent}{HTML}{007985}
@@ -26,9 +20,9 @@
 % https://tex.stackexchange.com/a/428870
 \renewcommand*{\labelenumi}{[\theenumi]}
 
-% for some reason this has to go inside document
+% for some reason this has to go inside document when using moderncv
 % https://tex.stackexchange.com/a/572408
-% \usepackage[colorlinks]{hyperref}
+\usepackage[colorlinks]{hyperref}
 \AtBeginDocument{%
 \hypersetup{
   urlcolor={color2},
@@ -117,7 +111,7 @@
   \number\numexpr\csuse{entrycount:\therefsection}+1-#1\relax}
 
 %==== moderncv themes
-\moderncvstyle{classic}
+% \moderncvstyle{classic}
 %\nopagenumbers{}
 
 % character encoding
@@ -126,41 +120,74 @@
 % adjust the page margins
 \usepackage[margin=.75in]{geometry}
 
-% if you want to change the width of the column with the dates
-%\setlength{\hintscolumnwidth}{3cm}
+\newcommand{\cvindent}[1]{
+% https://tex.stackexchange.com/a/35936
+\hspace*{1em}
+\begin{minipage}{\dimexpr\textwidth-1em}
+#1
+\end{minipage}
+}
 
-% personal data
-\name{Mark}{Gillespie\vspace{-.4\baselineskip}}
-\title{Curriculum Vitae}
+\newcommand{\shortcventry}[6]{ % {year} {title} {institution} {???} {???} {comment}
+\noindent{}{\bfseries #3}, {#2} \hfill {\itshape #1}\\[-.75\baselineskip]
+}
 
-%\address{street and number}{postcode city}{country}
-\email{mark.gillespie@inria.fr}
-\homepage{www.markjgillespie.com} 
-\extrainfo{\faGraduationCap{} \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{google scholar}}
-\social[orcid]{0009-0000-5645-9636}
-% \phone[mobile]{+1~(908)~477~1822}
-\social[github]{MarkGillespie}
-% '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame)
-%\photo[64pt][0.4pt]{card_image}  
-%\quote{Some quote}
+\newcommand{\cventry}[6]{ % {year} {title} {institution} {???} {???} {comment}
+\noindent{}{\bfseries #3}, \hfill {\itshape #1}
+\cvindent{#2}\\[-.5\baselineskip]
+}
 
-%----------------------------------------------------------------------------------
-%            content
-%----------------------------------------------------------------------------------
+\newcommand{\cventrywithcomment}[6]{ % {year} {title} {institution} {???} {???} {comment}
+\noindent{}{\bfseries #3},  \hfill {\itshape #1}
+\cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[-.5\baselineskip]
+}
+
+\newcommand{\cvitem}[2]{
+\noindent{}{\bfseries #2} \hfill {\itshape #1}\\[-.5\baselineskip]
+}
+
+\newcommand{\cvitemwithcomment}[3]{
+\noindent{}{\bfseries #2} \hfill {\itshape #1}\\[.1\baselineskip]
+\cvindent{{#3}}\\[-.25\baselineskip]
+}
+
+
+\usepackage{titlesec}
+% section title formatting https://tex.stackexchange.com/a/40051
+\titleformat{name=\section}[block]
+  {\Large\bfseries\color{accent}}
+  {} % before
+  {0pt} % spacing
+  {} % after
+  [\hrule height 1pt]
+\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.3\baselineskip}
+
 \begin{document}
-\newgeometry{margin=.75in, top=.6in}
 
-\makecvtitle
-\vspace{-3\baselineskip}
+\noindent{}\begin{minipage}[t]{.3\linewidth}
+{\Huge Mark Gillespie}
+
+{\large \itshape Curriculum Vitae}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.7\linewidth}
+\raggedleft
+\href{mailto:mark.gillespie@inria.fr}{mark.gillespie@inria.fr}\\
+\href{https://www.markjgillespie.com}{www.markjgillespie.com}\\
+\href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\raisebox{-2pt}{\faGraduationCap{}} google scholar} \; $\mid$ \;
+\href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\faGithub{} MarkGillespie}
+\end{minipage}
+
+% \makecvtitle
+% \vspace{-3\baselineskip}
 
 \section{Academic Appointments}
-\cventry{{Sept. 2024}--\\present}{Postdoctoral Researcher}{École Polytechnique}{Palaiseau, France}{}{}
+\cventry{{Sept. 2024}--present}{Postdoctoral Researcher}{École Polytechnique}{Palaiseau, France}{}{}
 
 \section{Education}
-\cventry{2018--2024}{PhD Computer Science}{Carnegie Mellon University}{}{}{Advisor: Keenan Crane}% . Topics: geometry processing, computer graphics}
-\cventry{2014--2018}{B.S. Computer Science \& B.S. Mathematics}{California Institute of Technology}{}{}{}%Double major. GPA: 4.1}
-% {The computer science degree involves courses in systems, algorithms, functional programming, and complexity theory. I supplemented these courses with electives in computer graphics and advanced algorithms.
-% The math degree involves courses in abstract algebra, differential geometry, and analysis. I supplemented these courses with electives in algebraic topology and Riemannian geometry.}  % arguments 3 to 6 can be left empty
+\cventrywithcomment{2018--2024}{PhD Computer Science}{Carnegie Mellon University}{}{}{Advisor: Keenan Crane}% . Topics: geometry processing, computer graphics}
+
+\cventry{2014--2018}{B.S. Computer Science \& B.S. Mathematics}{California Institute of Technology}{}{}{}
 
 
 % PUBLICATIONS ----------------------------------
@@ -183,223 +210,123 @@
 \item \cvcite{Sharp:2021:GPI}
 \end{etaremune}
 
-\restoregeometry
+%----------------------------------
+\section{Awards \& Honors}
+\cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{Awarded to 12 papers out of about 840 submissions; $\sim$top 1.5\% of papers}
+
+\cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{Awarded to top 15\% of applicants across all areas of science; \$147,000 over 3 years}
+
+\cvitem{2016-2017}{Arthur R Adams SURF Fellow}{}
+
+\cvitem{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
+% \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31 points (rank: 365/3214)}
+
 
 %----------------------------------
 \section{Other Research Experience}
 
-% \cventry{2024--present}{Research Assistant}{Carnegie Mellon University}{}
-% {Advisor: Keenan Crane}{}
+\cventrywithcomment{July 2023}{Visiting Researcher}{Technische Universit\"at Berlin, Berlin}{}{}{Host: Boris Springborn}
 
-% \cventry{2018--2024}{Graduate Researcher}{Carnegie Mellon University}{}
-% {Advisor: Keenan Crane}{}
+\cventrywithcomment{Summer 2022}{Visiting Graduate}{University of California, San Diego}{}{}{Host: Albert Chern}
 
-\cventry{July 2023}{Visiting Researcher}{Technische Universit\"at Berlin, Berlin}{}
-        {Host: Boris Springborn}{}
-
-\cventry{Summer 2022}{Visiting Graduate}{University of California, San Diego}{}
-        {Host: Albert Chern}{}
-
-% \cventry{Fall 2017}{Teaching Assistant for CS 171, Introduction to Computer Graphics}{California Institute of Technology}{}{}{Under Professor Alan Barr, graded problem sets, held weekly office hours, delivered recitation lectures}
-
-\cventry{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{Caltech}{}
+\cventrywithcomment{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}{}
 {Mentor: Peter Schr\"oder}
-{} % Implemented an energy-preserving integrator for 2D MHD on grids and proved its conservation properties
-% \begin{itemize}%
-% \item Analyzed conservation behavior of the algorithm using discrete differential geometry
-% \item Implemented algorithm in Houdini
-% \end{itemize}
 
-\cventry{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{Caltech}{}
+\cventrywithcomment{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}
+{}
 {Mentor: Mathieu Desbrun}
-{} % Developed an algorithm for computing polymer conformation using dimensionality reduction techniques.
-% \begin{itemize}%
-% \item Implemented algorithm in C++
-% \item Experimented with applying the algorithm to point cloud denoising
-% \end{itemize}
 
-\cventry{2016--2017}{Undergraduate Researcher}{Caltech}{}
+\cventrywithcomment{2016--2017}{Undergraduate Researcher}{California Institute of Technology}{}
+{}
 {Mentor: Alan Barr}
-{}% Explored applications of interval analysis to root-finding and solving differential equations
-% \begin{itemize}%
-% \item Implemented interval analysis library in Haskell
-% \item Implemented graphical viewer for interval root-finding and minimization algorithms
-% \end{itemize}
 
-% \cventry{Spring 2017, Spring 2016}{Teaching Assistant for CS 38, Introduction to Algorithms}{California Institute of Technology}{}{}{Under Professor Leonard Schulman, graded problem sets and held weekly office hours}
-
-% \cventry{Summer 2015}{Software Engineering Intern}{Google}{}{}{}
-% Prototyped new credit card entry interface for Android library. Developed in Java}
-
-
-
-\section{Awards \& Honors}
-\cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{Awarded to 12 papers out of $\sim$840 submissions; $\sim$top 1.5\% of papers}
-\cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{Awarded to top 15\% of applicants across all areas of science; \$147,000 over 3 years}
-\cvitemwithcomment{2016-2017}{Arthur R Adams SURF Fellow}{}
-\cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{}
-% \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31 points (rank: 365/3214)}
 
 %----------------------------------
 \section{Selected Talks}
-\cventry
+\shortcventry
     {Nov. 2024}
     {Solid Knitting \& Harmonic Hitting}
     {IST Austria}{}{}
     {}
-\cventry
+
+\shortcventry
     {Aug. 2024}
     {Ray Tracing Harmonic Functions}
     {ACM SIGGRAPH 2024}{}{}
     {}
-\cventry
+
+\shortcventry
     {Sept. 2023}
     {Intrinsic Triangulations in Geometry Processing}
     {IST Austria}{}{}
     {}
-\cventry
+
+\shortcventry
     {Aug. 2023}
     {Intrinsic Triangulations in Geometry Processing}
     {Geometry Workshop in Obergurgl}{}{}
     {}
-\cventry
+
+\shortcventry
     {Jul. 2023}
     {Intrinsic Triangulations in Geometry Processing}
     {TU Berlin SFB TRR 109 Colloquium}{}{}
     {}
-\cventry
+
+\shortcventry
     {Apr. 2022}
     {Discrete Conformal Equivalence of Polyhedral Surfaces}
     {UCSD Pixel Cafe}{}{}
     {}
-\cventry
+
+\shortcventry
     {Nov. 2021}
     {Integer Coordinates for Intrinsic Geometry Processing}
     {ACM SIGGRAPH Asia 2021}{}{}
     {}
-\cventry
+
+\shortcventry
     {Aug. 2021}
     {Discrete Conformal Equivalence of Polyhedral Surfaces}
     {ACM SIGGRAPH 2021}{}{}
     {}
-\cventry
+
+\shortcventry
     {Aug. 2021}
     {Geometry Processing with Intrinsic Triangulations}
     {ACM SIGGRAPH 2021 Courses}{}{}
     {}
-\cventry
+
+\shortcventry
     {June 2021}
     {Geometry Processing with Intrinsic Triangulations}
-    {SIAM International Meshing Roundtable Courses (IMR 2021)}{}{}
+    {SIAM IMR 2021 Courses}{}{}
     {}
 
+\section{Service}
+\cvitemwithcomment{}{Departmental}{
+      Organizer, Graphics Reading Group (2022-2023);
+      Organizer, Graphics Seminar (2020-2021);
+      Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022); Organizer, PhD mutual mentorship pod (2022-2024)}
 
-% \cventry
-%   {Oct. 2017}
-%   {2D Plasma Simulation via Discrete Exterior Calculus}
-%   {California Institute of Technology Summer Research Seminar Day}{}{}
-%   {15 minute presentation on the results of my summer research}
+\cvitemwithcomment{}{Reviewing}{SIGGRAPH (2019, 2022, 2023, 2024), SIGGRAPH Asia (2022, 2023, 2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Journal of Computational and Applied Mathematics (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023, 2024), Computers \& Graphics (2021)}
 
-% \cventry
-%   {Sept. 2017}
-%   {Combinatorics and the Probabilistic Method}
-%   {Westfield High School Seminar in College Mathematics}{}{}
-%   {30 minute presentation to a high school math class. Gave an introduction to elementary combinatorics and presented some simple applications of the probabilistic method}
-
-% \cventry
-%   {Mar. 2017}
-%   {Continuous and Discrete Mechanics for Variational Integrators}
-%   {California Institute of Technology CS 177b}{}{}
-%   {1.5 hour final presentation for a computer graphics class. Gave an overview of Hamiltonian/Lagrangian mechanics and how to discretize them to produce variational time integrators}
-
-% \cventry
-%   {Dec. 2016}
-%   {Measurement in Quantum Mechanics}
-%   {Westfield High School Seminar in College Mathematics}{}{}
-%   {30 minute presentation to a high school math class. Gave an introduction to projective measurements in Quantum Mechanics, working through the example of the Stern-Gerlach device}
-
-% \cventry
-%   {Oct. 2016}
-%   {Computing Chromosome Embedding from Contact Frequencies}
-%   {California Institute of Technology Summer Research Seminar Day}{}{}
-%   {15 minute presentation on the results of my summer research}
-
-%----------------------------------
-% \section{Selected Classes Taken}
-
-% \cvitemwithcomment
-%   {CS 177ab}
-%   {Discrete Differential Geometry}
-%   {discrete study of: differential forms, deRham cohomology, Poisson problems, variational mechanics}
-
-% \cvitemwithcomment
-%   {CS 176}
-%   {Introduction to Computer Graphics Research}
-%   {geometry processing, data visualization, vector fields and flows}
-
-% \cvitemwithcomment
-%   {CS 171}
-%   {Introduction to Computer Graphics Laboratory}
-%   {shaders, geometry processing, physical simulation, ray tracing}
-
-% \cvitemwithcomment
-%   {Ma 151abc}
-%   {Algebraic Topology}
-%   {fundamental groups, covering spaces, homology, cohomology, spectral sequences, characteristic classes}
-
-% \cvitemwithcomment
-%   {Ma 157ab}
-%   {Riemannian Geometry}
-%   {Riemannian metrics, geodesics, vector fields, Riemannian curvature, Representation theory of Lie groups}
-
-% \cvitemwithcomment
-%   {CS 150}
-%   {Probability and Algorithms}
-%   {analysis of probabilistic algorithms, the probabilistic method}
-
-% \cvitemwithcomment
-%   {CS 139}
-%   {Analysis and Design of Algorithms}
-%   {streaming algorithms, experts algorithm, SDPs, spectral graph theory}
-
-
-% \cvitemwithcomment
-%   {PS 172}
-%   {Bayesian Statistics}
-%   {Bayesian updates, Markov Chain Monte Carlo}
-
-%----------------------------------
-%\section{Publications}
-%\cventry{ongoing}{Smooth Embeddings from Pairwise Distances}{}{}{}
-%{I am currently working with Professor Mathieu Desbrun to write up the work we did together to submit for publication}
-
-  \section{Service}
-  \cvitem{Departmental}{
-          Organizer, Graphics Reading Group (2022-2023);
-          Organizer, Graphics Seminar (2020-2021);
-          Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022); Organizer, PhD mutual mentorship pod (2022-2024)}
-  \cvitem{Reviewing}{SIGGRAPH (2019, 2022, 2023, 2024), SIGGRAPH Asia (2022, 2023, 2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Journal of Computational and Applied Mathematics (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023, 2024), Computers \& Graphics (2021)}
-  \cvitem{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
+\cvitemwithcomment{}{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
 
 \section{Press Coverage}
 
-\cventry{July 2024}{Cosmos magazine}{
-\href{https://cosmosmagazine.com/technology/computing/3d-knitting-could-make-solid-but-soft-furniture/}{3D knitting could make solid but soft furniture}}{}{}{}
+\shortcventry{July 2024}{
+\href{https://cosmosmagazine.com/technology/computing/3d-knitting-could-make-solid-but-soft-furniture/}{``3D knitting could make solid but soft furniture''}}{Cosmos magazine}{}{}{}
 
+\shortcventry{July 2024}{\href{https://interestingengineering.com/innovation/solid-knitted-three-dimensional-furniture-could-be-reality}{``Beware IKEA: Solid knitted three-dimensional furniture could be a reality''}}{Interesting Engineering}{}{}{}
 
-\cventry{July 2024}{Interesting Engineering}{\href{https://interestingengineering.com/innovation/solid-knitted-three-dimensional-furniture-could-be-reality}{Beware IKEA: Solid knitted three-dimensional furniture could be a reality}}{}{}{}
+\shortcventry{July 2024}{\href{https://newatlas.com/materials/solid-knitting-reconfigurable/}{``Innovative `solid knitting' machine builds 100\% reconfigurable objects''}}{New Atlas}{}{}{}
 
+\shortcventry{July 2024}{\href{https://www.msn.com/en-us/news/technology/solid-knitting-a-different-spin-on-3d-printing-that-can-make-furniture-out-of-yarn/ar-AA1ogaiP?ocid=BingNewsVerp}{``Solid knitting: a different spin on 3D printing that can make furniture out of yarn''}}{ZME Science}{}{}{}
 
-\cventry{July 2024}{New Atlas}{\href{https://newatlas.com/materials/solid-knitting-reconfigurable/}{Innovative `solid knitting' machine builds 100\% reconfigurable objects}}{}{}{}
+\shortcventry{July 2024}{\href{https://blog.siggraph.org/2024/07/beyond-the-threads.html/}{``Beyond the Threads''}}{ACM SIGGRAPH Blog}{}{}{}
 
-
-\cventry{July 2024}{ZME Science}{\href{https://www.msn.com/en-us/news/technology/solid-knitting-a-different-spin-on-3d-printing-that-can-make-furniture-out-of-yarn/ar-AA1ogaiP?ocid=BingNewsVerp}{Solid knitting: a different spin on 3D printing that can make furniture out of yarn}}{}{}{}
-
-
-\cventry{July 2024}{ACM SIGGRAPH Blog}{\href{https://blog.siggraph.org/2024/07/beyond-the-threads.html/}{Beyond the Threads}}{}{}{}
-
-
-\cventry{July 2024}{CMU News}{\href{https://www.cmu.edu/news/stories/archives/2024/july/robotics-institute-introduces-solid-knitting-as-new-fabrication-technique}{Robotics Institute Introduces Solid Knitting as New Fabrication Technique}}{}{}{}
+\shortcventry{July 2024}{\href{https://www.cmu.edu/news/stories/archives/2024/july/robotics-institute-introduces-solid-knitting-as-new-fabrication-technique}{``Robotics Institute Introduces Solid Knitting as New Fabrication Technique''}}{CMU News}{}{}{}
 
 
   % ----------------------------------
