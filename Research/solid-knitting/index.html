@@ -52,13 +52,14 @@
      }
 
      // Load saved style
-     const currentStyle=getCookie("style");
-     if (currentStyle) {
-         setStyle(currentStyle);
-     } else {
-         const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-         setStyle( isDarkMode ? "darkmode" : "lightmode" );
-     }
+     // const currentStyle=getCookie("style");
+     // if (currentStyle) {
+     //     setStyle(currentStyle);
+     // } else {
+     //     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+     //     setStyle( isDarkMode ? "darkmode" : "lightmode" );
+     // }
+     setStyle("lightmode");
 
     </script>
     <!-- tweak figure background color -->
@@ -82,10 +83,11 @@
         <a href="../../index.html#misc" class="navbar_link vanishing"><span class="navbar_item">Misc</span></a>
         <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
         <a href="../../index.html" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-		    <form id="darkmode-toggle"> <!-- toggle lightmode -->
+        <!-- toggle lightmode -->
+        <!-- <form id="darkmode-toggle">
 			      <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
             <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
-		    </form>
+		    </form> -->
       </div>
     </div>
 
