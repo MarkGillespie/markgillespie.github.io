@@ -5,12 +5,16 @@
 \usepackage[utf8]{inputenc}
 
 % adjust the page margins
-\usepackage[margin=.75in]{geometry}
+\usepackage[margin=.75in, bmargin=.9in]{geometry}
 
 % use linux libertine as the serif font / linux biolinum as the sans serif font
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage[varqu]{zi4}
 \usepackage[libertine]{newtxmath}
+
+% use charter as the font
+% \usepackage[bitstream-charter]{mathdesign}
+% \usepackage[T1]{fontenc}
 
 \RequirePackage{fontawesome} % logo font
 
@@ -149,7 +153,7 @@
 
 \newcommand{\cventrywithcomment}[6]{ % {year} {title} {institution} {???} {???} {comment}
 \noindent{}{\bfseries #3},  \hfill {\itshape #1}
-\cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[-.6\baselineskip]
+\cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[-.8\baselineskip]
 }
 
 \newcommand{\cvitem}[2]{
@@ -165,12 +169,12 @@
 \usepackage{titlesec}
 % section title formatting https://tex.stackexchange.com/a/40051
 \titleformat{name=\section}[block]
-  {\Large\bfseries\color{accent}}
+  {\Large\bfseries\itshape\color{accent}}
   {} % before
   {0pt} % spacing
   {} % after
   [\hrule height 1pt]
-\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.3\baselineskip}
+\titlespacing*{\section}{0pt}{0.4\baselineskip}{0.3\baselineskip}
 
 
 % draw orcid logo https://tex.stackexchange.com/a/445583
@@ -196,7 +200,7 @@
 
 \noindent{}\begin{minipage}[t]{.3\linewidth}
     {\Huge Mark Gillespie}\\
-    {\Large \itshape \color{color2} \hspace*{.3em}Curriculum Vitae}
+    {\Large \itshape \color{color2} \hspace*{.75em}Curriculum Vitae}
 \end{minipage}
 \hfill
 \raisebox{10pt}{
@@ -224,7 +228,7 @@
 % PUBLICATIONS ----------------------------------
 
 \section{Journal Articles}
-\begin{etaremune}[itemsep=.25\baselineskip, leftmargin=2.75em, labelsep=1em]
+\begin{etaremune}[itemsep=.2\baselineskip, leftmargin=2.75em, labelsep=1em]
 \item \cvcite{Gillespie:2024:RTH}
 \item \cvcite{Hirose:2024:SK}
 \item \cvcite{Feng:2023:WND}
@@ -235,7 +239,7 @@
 
 % \section{Other Refereed Publications}
 \section{Other Publications}
-\begin{etaremune}[itemsep=.25\baselineskip, leftmargin=2.75em, labelsep=1em]
+\begin{etaremune}[itemsep=.2\baselineskip, leftmargin=2.75em, labelsep=1em]
 \item \cvcite{Gillespie:2024:EIT}
 \item \cvcite{Hirose:2024:SKA}
 \item \cvcite{Sharp:2021:GPI}
@@ -342,11 +346,11 @@
 
 \section{Service}
 \cvitemwithcomment{}{Departmental}{
-      Organizer, Graphics Reading Group (2022-2023);
-      Organizer, Graphics Seminar (2020-2021);
-      Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022); Organizer, PhD mutual mentorship pod (2022-2024)}
+      Organizer, Graphics Reading Group (2022--2023);
+      Organizer, Graphics Seminar (2020--2021);
+      Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022); Organizer, PhD mutual mentorship pod (2022--2024)}
 
-\cvitemwithcomment{}{Reviewing}{SIGGRAPH (2019, 2022, 2023, 2024), SIGGRAPH Asia (2022, 2023, 2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Journal of Computational and Applied Mathematics (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023, 2024), Computers \& Graphics (2021)}
+\cvitemwithcomment{}{Reviewing}{SIGGRAPH (2019, 2022--2024), SIGGRAPH Asia (2022--2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Journal of Computational and Applied Mathematics (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023--2024), Computers \& Graphics (2021)}
 
 \cvitemwithcomment{}{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
 
@@ -356,7 +360,7 @@
 
 \shortcventry{August 2024}{\href{https://textiletechsource.com/2024/08/12/solid-knitting-machine-builds-reconfigurable-objects/}{``Solid-knitting machine builds reconfigurable objects''}}{Textile Technology Source}{}{}{}
 
-\shortcventry{August 2024}{\href{https://www.designboom.com/technology/machine-knitting-solid-furniture-3d-accessories-elastic-cord-yarn-carnegie-mellon-university-08-02-2024/}{``Carnegie Mellon University’s researchers develop `solid knitting'''}}{Design Boom}{}{}{}
+\shortcventry{August 2024}{\href{https://www.designboom.com/technology/machine-knitting-solid-furniture-3d-accessories-elastic-cord-yarn-carnegie-mellon-university-08-02-2024/}{``Carnegie Mellon University’s researchers develop `solid knitting'{}''}}{Design Boom}{}{}{}
 
 \shortcventry{August 2024}{\href{https://materialdistrict.com/article/solid-knitting-3d-printing-with-yarn/}{``Solid knitting: 3D printing with yarn''}}{Material District}{}{}{}
 
