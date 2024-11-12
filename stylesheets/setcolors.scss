@@ -104,10 +104,9 @@
         border-bottom: 1px solid rgba($link-color, .3);
     }
 
-    #{parent} #header_img {
+    #{$parent} #header_img {
         box-shadow: 1px 1px 3px rgba($shadow-color, .3);
     }
-
 
     #{$parent} .page-content {
         background-color: $background-color;
