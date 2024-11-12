@@ -93,6 +93,11 @@
         padding-top: 2em;
     }
 
+    #{$parent} .section_text a {
+        display: inline;
+        white-space: normal; /* allow line breaks on spaces in links */
+    }
+
     #{$parent} .project_header {
         display: flex; /* equal child height */
         column-gap: 1em;

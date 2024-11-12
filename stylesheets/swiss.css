@@ -1089,6 +1089,11 @@ html.singlecolumn .section_text {
   padding-top: 2em;
 }
 
+html.singlecolumn .section_text a {
+  display: inline;
+  white-space: normal; /* allow line breaks on spaces in links */
+}
+
 html.singlecolumn .project_header {
   display: flex; /* equal child height */
   column-gap: 1em;
