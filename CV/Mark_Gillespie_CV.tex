@@ -1,6 +1,12 @@
 % \documentclass[11pt,letterpaper,roman,colorlinks=true]{moderncv}
 \documentclass[11pt]{article}
 
+% character encoding
+\usepackage[utf8]{inputenc}
+
+% adjust the page margins
+\usepackage[margin=.75in]{geometry}
+
 % use linux libertine as the serif font / linux biolinum as the sans serif font
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage[varqu]{zi4}
@@ -12,7 +18,7 @@
 \definecolor{accent}{HTML}{007985}
 \definecolor{color0}{rgb}{0,0,0}% black
 \colorlet{color1}{accent}% accent
-\definecolor{color2}{rgb}{0.45,0.45,0.45}% dark grey
+\definecolor{color2}{rgb}{0.35,0.35,0.35}% dark grey
 
 \usepackage{enumitem}
 \usepackage{etaremune} % reversed-order lists
@@ -29,6 +35,16 @@
   linkcolor={color2},
 }
 }
+
+
+%== page numbers
+% https://tex.stackexchange.com/a/153176
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{} % Clear the header and footer
+\fancyfoot{}
+\fancyfoot[R]{\thepage} % Number pages at right foot
+\renewcommand{\headrulewidth}{0pt} % Don't draw line at top
 
 %=== bibliography stuff
 \usepackage[
@@ -114,12 +130,6 @@
 % \moderncvstyle{classic}
 %\nopagenumbers{}
 
-% character encoding
-\usepackage[utf8]{inputenc}
-
-% adjust the page margins
-\usepackage[margin=.75in]{geometry}
-
 \newcommand{\cvindent}[1]{
 % https://tex.stackexchange.com/a/35936
 \hspace*{1em}
@@ -139,7 +149,7 @@
 
 \newcommand{\cventrywithcomment}[6]{ % {year} {title} {institution} {???} {???} {comment}
 \noindent{}{\bfseries #3},  \hfill {\itshape #1}
-\cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[-.5\baselineskip]
+\cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[-.6\baselineskip]
 }
 
 \newcommand{\cvitem}[2]{
@@ -162,21 +172,42 @@
   [\hrule height 1pt]
 \titlespacing*{\section}{0pt}{0.5\baselineskip}{0.3\baselineskip}
 
+
+% draw orcid logo https://tex.stackexchange.com/a/445583
+\usepackage{scalerel}
+\usepackage{tikz}
+\usetikzlibrary{svg.path}
+\tikzset{
+  orcidlogo/.pic={
+    \fill[color2] svg{M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z};
+    \fill[white] svg{M86.3,186.2H70.9V79.1h15.4v48.4V186.2z}
+    svg{M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z}
+    svg{M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z};
+  }
+}
+
+\newcommand\orcidicon{\mbox{\scalerel*{
+        \begin{tikzpicture}[yscale=-1,transform shape]
+          \pic{orcidlogo};
+        \end{tikzpicture}
+      }{|}}}
+
 \begin{document}
 
 \noindent{}\begin{minipage}[t]{.3\linewidth}
-{\Huge Mark Gillespie}
-
-{\Large \itshape \color{color2} \hspace*{.3em}Curriculum Vitae}
+    {\Huge Mark Gillespie}\\
+    {\Large \itshape \color{color2} \hspace*{.3em}Curriculum Vitae}
 \end{minipage}
 \hfill
-\begin{minipage}[t]{.7\linewidth}
-\raggedleft
-\href{mailto:mark.gillespie@inria.fr}{mark.gillespie@inria.fr}\\
-\href{https://www.markjgillespie.com}{www.markjgillespie.com}\\
-\href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\raisebox{-2pt}{\faGraduationCap{}} google scholar} \; $\mid$ \;
-\href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\faGithub{} MarkGillespie}
-\end{minipage}
+\raisebox{10pt}{
+\begin{minipage}[t][1.6cm][t]{.7\linewidth}
+    \raggedleft
+    \href{mailto:mark.gillespie@inria.fr}{mark.gillespie@inria.fr}\\
+    \href{https://www.markjgillespie.com}{www.markjgillespie.com}\\
+    \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\raisebox{-2pt}{\faGraduationCap{}} google scholar}\\
+    \href{https://orcid.org/0009-0000-5645-9636}{\orcidicon{} 0009-0000-5645-9636}\\
+    \href{https://github.com/MarkGillespie/}{\faGithub{} MarkGillespie}
+\end{minipage}}
 
 % \makecvtitle
 % \vspace{-3\baselineskip}
