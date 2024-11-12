@@ -151,8 +151,8 @@
 \cvindent{#2}\\[-.5\baselineskip]
 }
 
-\newcommand{\cventrywithcomment}[6]{ % {year} {title} {institution} {???} {???} {comment}
-\noindent{}{\bfseries #3},  \hfill {\itshape #1}
+\newcommand{\cventrywithcomment}[6]{ % {year} {title} {institution} {department} {???} {comment}
+\noindent{}{\bfseries #3}, {#4}  \hfill {\itshape #1}
 \cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[-.8\baselineskip]
 }
 
@@ -174,7 +174,7 @@
   {0pt} % spacing
   {} % after
   [\hrule height 1pt]
-\titlespacing*{\section}{0pt}{0.4\baselineskip}{0.3\baselineskip}
+\titlespacing*{\section}{0pt}{0.3\baselineskip}{0.2\baselineskip}
 
 
 % draw orcid logo https://tex.stackexchange.com/a/445583
@@ -208,8 +208,8 @@
     \raggedleft
     \href{mailto:mark.gillespie@inria.fr}{mark.gillespie@inria.fr}\\
     \href{https://www.markjgillespie.com}{www.markjgillespie.com}\\
-    \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\raisebox{-2pt}{\faGraduationCap{}} google scholar}\\
     \href{https://orcid.org/0009-0000-5645-9636}{\orcidicon{} 0009-0000-5645-9636}\\
+    \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\raisebox{-2pt}{\faGraduationCap{}} google scholar}\\
     \href{https://github.com/MarkGillespie/}{\faGithub{} MarkGillespie}
 \end{minipage}}
 
@@ -228,22 +228,23 @@
 % PUBLICATIONS ----------------------------------
 
 \section{Journal Articles}
-\begin{etaremune}[itemsep=.2\baselineskip, leftmargin=2.75em, labelsep=1em]
+% use etaremune for reversed order
+\begin{enumerate}[itemsep=.2\baselineskip, leftmargin=.5em, labelsep=1em, label={}]
 \item \cvcite{Gillespie:2024:RTH}
 \item \cvcite{Hirose:2024:SK}
 \item \cvcite{Feng:2023:WND}
 \item \cvcite{Liu:2023:SSI}
 \item \cvcite{Gillespie:2021:ICI}
 \item \cvcite{Gillespie:2021:DCE}
-\end{etaremune}
+\end{enumerate}
 
 % \section{Other Refereed Publications}
 \section{Other Publications}
-\begin{etaremune}[itemsep=.2\baselineskip, leftmargin=2.75em, labelsep=1em]
+\begin{enumerate}[itemsep=.2\baselineskip, leftmargin=.5em, labelsep=1em, label={}]
 \item \cvcite{Gillespie:2024:EIT}
 \item \cvcite{Hirose:2024:SKA}
 \item \cvcite{Sharp:2021:GPI}
-\end{etaremune}
+\end{enumerate}
 
 %----------------------------------
 \section{Awards \& Honors}
@@ -260,18 +261,18 @@
 %----------------------------------
 \section{Other Research Experience}
 
-\cventrywithcomment{July 2023}{Visiting Researcher}{Technische Universit\"at Berlin}{}{}{Host: Boris Springborn}
+\cventrywithcomment{July 2023}{Visiting Researcher}{Technische Universit\"at Berlin}{Department of Mathematics}{}{Host: Boris Springborn}
 
-\cventrywithcomment{Summer 2022}{Visiting Graduate}{University of California, San Diego}{}{}{Host: Albert Chern}
+\cventrywithcomment{Summer 2022}{Visiting Graduate}{University of California, San Diego}{Department of Computer Science and Engineering}{}{Host: Albert Chern}
 
-\cventrywithcomment{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}{}
+\cventrywithcomment{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{Department of Computing and Mathematical Sciences}{}
 {Mentor: Peter Schr\"oder}
 
-\cventrywithcomment{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{}
+\cventrywithcomment{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{Department of Computing and Mathematical Sciences}
 {}
 {Mentor: Mathieu Desbrun}
 
-\cventrywithcomment{2016--2017}{Undergraduate Researcher}{California Institute of Technology}{}
+\cventrywithcomment{2016--2017}{Undergraduate Researcher}{California Institute of Technology}{Department of Computing and Mathematical Sciences}
 {}
 {Mentor: Alan Barr}
 
@@ -352,6 +353,7 @@
 
 \cvitemwithcomment{}{Reviewing}{SIGGRAPH (2019, 2022--2024), SIGGRAPH Asia (2022--2024), ACM Transactions on Graphics (2024), Eurographics (2024), Computer Graphics Forum (2024), Journal of Computational and Applied Mathematics (2024), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023--2024), Computers \& Graphics (2021)}
 
+\pagebreak
 \cvitemwithcomment{}{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
 
 \section{Press Coverage}
