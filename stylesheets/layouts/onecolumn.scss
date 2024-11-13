@@ -438,14 +438,6 @@
 
     }
 
-    @media (max-width: 425px) {
-        /* line break between "ACM Transactions on Graphics" and "SIGGRAPH" */
-        #{$parent} .venue {
-            max-width: 15em;
-        }
-
-    }
-
     #{$parent} h3 {
         font-family: 'Helvetica';
         font-weight: 200;

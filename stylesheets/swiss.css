@@ -1428,12 +1428,6 @@ html.singlecolumn h2, html.singlecolumn .section_header {
     padding: 8px;
   }
 }
-@media (max-width: 425px) {
-  /* line break between "ACM Transactions on Graphics" and "SIGGRAPH" */
-  html.singlecolumn .venue {
-    max-width: 15em;
-  }
-}
 html.singlecolumn h3 {
   font-family: "Helvetica";
   font-weight: 200;
