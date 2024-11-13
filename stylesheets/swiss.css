@@ -38,6 +38,10 @@ html.darkmode #style-menu ul button {
     background-color: #558;
   }
 }
+html.darkmode .section_text .news summary {
+  color: #bdf;
+}
+
 html.darkmode .project_header .text .venue {
   color: #bdf;
 }
@@ -466,6 +470,10 @@ html.lightmode #style-menu ul button {
     background-color: #de3d83;
   }
 }
+html.lightmode .section_text .news summary {
+  color: #4783D5;
+}
+
 html.lightmode .project_header .text .venue {
   color: #4783D5;
 }
@@ -1097,6 +1105,66 @@ html.singlecolumn .section_text a {
 html.singlecolumn .project_header {
   display: flex; /* equal child height */
   column-gap: 1em;
+}
+
+html.singlecolumn .section_text .news {
+  position: relative; /* needed to position "...more" label later */
+  padding-bottom: 0.5em;
+  font-size: 14px;
+}
+
+html.singlecolumn .section_text .news h4 {
+  font-family: "Palatino", serif;
+  font-weight: 600;
+  font-size: 14px;
+  font-variant-caps: small-caps;
+}
+
+html.singlecolumn .section_text .news ul {
+  margin: 0;
+  margin-left: 1em;
+  padding: 0;
+}
+
+html.singlecolumn .section_text .news li {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+html.singlecolumn .section_text .news .when {
+  width: 4.5em;
+  flex: 0 0 auto;
+  display: inline;
+  font-style: italic;
+}
+
+html.singlecolumn .section_text .news .where {
+  display: inline;
+}
+
+html.singlecolumn .section_text .news summary {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  margin-left: 1em;
+  list-style: none;
+}
+
+html.singlecolumn .section_text .news summary:hover {
+  cursor: pointer;
+}
+
+html.singlecolumn .section_text .news details summary::-webkit-details-marker {
+  display: none;
+}
+
+html.singlecolumn .section_text .news details summary::before {
+  content: "... see more ...";
+}
+
+html.singlecolumn .section_text .news details[open] summary::before {
+  content: "... see less ...";
 }
 
 html.singlecolumn #misc .project_header {

@@ -103,6 +103,66 @@
         column-gap: 1em;
     }
 
+    #{$parent} .section_text .news {
+        position: relative; /* needed to position "...more" label later */
+        padding-bottom: .5em;
+        font-size: 14px;
+    }
+
+    #{$parent} .section_text .news h4 {
+        font-family: 'Palatino', serif;
+        font-weight: 600;
+        font-size: 14px;
+        font-variant-caps: small-caps;
+    }
+
+    #{$parent} .section_text .news ul {
+        margin: 0;
+        margin-left: 1em;
+        padding: 0;
+    }
+
+    #{$parent} .section_text .news li {
+        display: flex;
+        flex-direction: row;
+        gap: .5em;
+    }
+
+    #{$parent} .section_text .news .when {
+        width: 4.5em;
+        flex: 0 0 auto;
+        display: inline;
+        font-style: italic;
+    }
+
+    #{$parent} .section_text .news .where {
+        display: inline;
+    }
+
+    #{$parent} .section_text .news summary {
+        position:absolute;
+        bottom:0px;
+        left:0;
+        margin-left: 1em;
+        list-style: none;
+    }
+
+    #{$parent} .section_text .news summary:hover {
+        cursor: pointer;
+    }
+
+    #{$parent} .section_text .news details summary::-webkit-details-marker {
+        display:none;
+    }
+
+    #{$parent} .section_text .news details summary::before {
+        content: "... see more ...";
+    }
+    
+    #{$parent} .section_text .news details[open] summary::before {
+        content: "... see less ...";
+    }
+
     #{$parent} #misc .project_header {
         margin-bottom: 2em;
         flex-direction: row-reverse; /* put images left of text by default */

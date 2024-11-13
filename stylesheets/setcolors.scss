@@ -69,6 +69,10 @@
         }
     }
 
+    #{$parent} .section_text .news summary {
+        color: $link-color;
+    }
+
     #{$parent} .project_header .text .venue {
         color: $link-color;
     }
