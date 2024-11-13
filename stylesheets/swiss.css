@@ -1613,6 +1613,9 @@ html.singlecolumn .header .fa {
   html.singlecolumn .project_header .text .award {
     margin-left: 0;
   }
+  html.singlecolumn .project_header .text .mini_abstract {
+    margin-top: 0.5em;
+  }
 }
 @media (max-width: 450px) {
   html.singlecolumn .name_box {

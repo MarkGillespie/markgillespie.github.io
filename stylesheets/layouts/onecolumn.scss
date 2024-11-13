@@ -639,6 +639,10 @@
         #{$parent} .project_header .text .award {
             margin-left: 0;
         }
+
+        #{$parent} .project_header .text .mini_abstract {
+            margin-top: .5em;
+        }
     }
 
     @media (max-width: 450px) {
