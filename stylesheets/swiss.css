@@ -1573,6 +1573,9 @@ html.singlecolumn .header .fa {
     text-align: left;
     font-weight: normal;
   }
+  html.singlecolumn h2, html.singlecolumn .section_header {
+    margin-left: 10pt;
+  }
 }
 @media (max-width: 710px) {
   html.singlecolumn .header {
@@ -1606,6 +1609,15 @@ html.singlecolumn .header .fa {
     display: inline-block;
     width: 100%;
     max-width: 300px;
+  }
+  html.singlecolumn .project_header .text {
+    padding: 0;
+  }
+  html.singlecolumn .project_header .text .project_title {
+    margin: 0;
+  }
+  html.singlecolumn .project_header .text .award {
+    margin-left: 0;
   }
 }
 @media (max-width: 450px) {

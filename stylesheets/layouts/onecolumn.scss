@@ -590,6 +590,9 @@
             font-weight: normal;
         }
 
+        #{$parent} h2, #{$parent} .section_header {
+            margin-left: 10pt;
+        }
     }
 
     @media (max-width: 710px) {
@@ -631,6 +634,18 @@
             display: inline-block;
             width: 100%;
             max-width: 300px;
+        }
+
+        #{$parent} .project_header .text {
+            padding: 0;
+        }
+
+        #{$parent} .project_header .text .project_title {
+            margin: 0;
+        }
+
+        #{$parent} .project_header .text .award {
+            margin-left: 0;
         }
     }
 
