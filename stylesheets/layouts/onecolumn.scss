@@ -630,18 +630,20 @@
 
         #{$parent} .project_header .text {
             padding: 0;
+            text-align: center;
         }
 
         #{$parent} .project_header .text .project_title {
             margin: 0;
+            text-align: center;
         }
-
         #{$parent} .project_header .text .award {
-            margin-left: 0;
+            margin: 0;
         }
 
         #{$parent} .project_header .text .mini_abstract {
             margin-top: .5em;
+            text-align: left;
         }
     }
 

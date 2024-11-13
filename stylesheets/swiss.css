@@ -1606,15 +1606,18 @@ html.singlecolumn .header .fa {
   }
   html.singlecolumn .project_header .text {
     padding: 0;
+    text-align: center;
   }
   html.singlecolumn .project_header .text .project_title {
     margin: 0;
+    text-align: center;
   }
   html.singlecolumn .project_header .text .award {
-    margin-left: 0;
+    margin: 0;
   }
   html.singlecolumn .project_header .text .mini_abstract {
     margin-top: 0.5em;
+    text-align: left;
   }
 }
 @media (max-width: 450px) {
