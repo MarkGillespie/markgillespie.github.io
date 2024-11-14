@@ -476,11 +476,11 @@ html.lightmode #style-menu ul button {
   }
 }
 html.lightmode .section_text .news summary {
-  color: #4783D5;
+  color: #2E6ABD;
 }
 
 html.lightmode .project_header .text .venue {
-  color: #4783D5;
+  color: #2E6ABD;
 }
 
 html.lightmode .award {
@@ -510,7 +510,7 @@ html.lightmode .headline a:hover {
 }
 
 html.lightmode .child_lines div {
-  border-bottom: 1px solid rgba(71, 131, 213, 0.3);
+  border-bottom: 1px solid rgba(46, 106, 189, 0.3);
 }
 
 html.lightmode #header_img {
@@ -589,7 +589,7 @@ html.lightmode .figures img {
 }
 
 html.lightmode .name_box .venue {
-  color: #4783D5;
+  color: #2E6ABD;
 }
 
 html.lightmode .footer {
@@ -601,7 +601,7 @@ html.lightmode .footer a {
 }
 
 html.lightmode a {
-  color: #4783D5;
+  color: #2E6ABD;
 }
 
 html.lightmode a:hover {
