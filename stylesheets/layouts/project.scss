@@ -1,9 +1,11 @@
 /* Project page layout */
 @mixin layout($map, $parent: "html") {
+    @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400');
+
     #{$parent} body {
         margin: 0;
         padding: 0;
-        font-family: 'Palatino', serif;
+        font-family: 'Charis SIL', 'Palatino', serif;
         line-height: 1.4;
         text-align: center;
     }

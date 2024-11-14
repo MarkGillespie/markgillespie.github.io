@@ -1,4 +1,9 @@
 @charset "UTF-8";
+/******************************/
+/*         NAVBAR             */
+/******************************/
+@import url("https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400");
+@import url("https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400");
 html.darkmode {
   background-color: #111;
   color: #ddd;
@@ -879,9 +884,6 @@ html.nojs #darkmode-toggle {
 }
 
 /* One column layout */ /* Two column layout */ /* Project page layout */ /* Two column layout */
-/******************************/
-/*         NAVBAR             */
-/******************************/
 body div.navbar {
   font-family: "Helvetica", sans-serif;
   padding-right: 1em;
@@ -930,7 +932,7 @@ body div.navbar_buttons {
   text-align: center;
   overflow: visible;
   float: right;
-  font-family: "Palatino", serif;
+  font-family: "Charis SIL", "Palatino", serif;
   margin-right: 1em;
 }
 
@@ -940,7 +942,7 @@ body .navbar_item, body #style-menu > button {
   font-weight: 400;
   display: inline-block;
   font-size: 1.3em;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
@@ -1016,7 +1018,7 @@ html.singlecolumn div {
 html.singlecolumn body {
   margin: 0;
   padding: 0;
-  font-family: "Palatino", serif;
+  font-family: "Charis SIL", "Palatino", serif;
   line-height: 1.4;
   text-align: center;
   box-sizing: border-box;
@@ -1114,7 +1116,6 @@ html.singlecolumn .section_text .news {
 }
 
 html.singlecolumn .section_text .news h4 {
-  font-family: "Palatino", serif;
   font-weight: 600;
   font-size: 14px;
   font-variant-caps: small-caps;
@@ -1194,7 +1195,6 @@ html.singlecolumn .project_header .text {
 }
 
 html.singlecolumn .project_header .text .project_title {
-  font-family: "Palatino", serif;
   font-weight: 300;
   font-size: 40px;
   line-height: 1;
@@ -1442,7 +1442,6 @@ html.singlecolumn h4 {
   display: inline-block;
   margin-top: 0;
   margin-bottom: 0;
-  font-family: "Palatino", serif;
   font-weight: 200;
   font-size: 22px;
   line-height: 1.1;
@@ -1676,7 +1675,7 @@ html.singlecolumn a {
 html.project body {
   margin: 0;
   padding: 0;
-  font-family: "Palatino", serif;
+  font-family: "Charis SIL", "Palatino", serif;
   line-height: 1.4;
   text-align: center;
 }

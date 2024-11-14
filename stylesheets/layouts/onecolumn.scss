@@ -1,5 +1,7 @@
 /* One column layout */
 @mixin layout($map, $parent: "html") {
+    @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400');
+
     #{$parent} div {
         box-sizing: border-box;
     }
@@ -7,7 +9,7 @@
     #{$parent} body {
         margin: 0;
         padding: 0;
-        font-family: 'Palatino', serif;
+        font-family: 'Charis SIL', 'Palatino', serif;
         line-height: 1.4;
         text-align: center;
         box-sizing: border-box;
@@ -110,7 +112,6 @@
     }
 
     #{$parent} .section_text .news h4 {
-        font-family: 'Palatino', serif;
         font-weight: 600;
         font-size: 14px;
         font-variant-caps: small-caps;
@@ -193,7 +194,6 @@
     }
 
     #{$parent} .project_header .text .project_title {
-        font-family: 'Palatino', serif;
         font-weight: 300;
         font-size: 40px;
         line-height: 1;
@@ -452,7 +452,6 @@
         display: inline-block;
         margin-top: 0;
         margin-bottom: 0;
-        font-family: 'Palatino', serif;
         font-weight: 200;
         font-size: 22px;
         line-height: 1.1;
