@@ -1024,6 +1024,10 @@ html.singlecolumn body {
   box-sizing: border-box;
 }
 
+html.singlecolumn .cpp {
+  font-family: monospace; /* for typesetting the word "C++" */
+}
+
 html.singlecolumn #background_image {
   max-width: 1300px;
   width: 1040px;
@@ -1678,6 +1682,10 @@ html.project body {
   font-family: "Charis SIL", "Palatino", serif;
   line-height: 1.4;
   text-align: center;
+}
+
+html.project .cpp {
+  font-family: monospace; /* for typesetting the word "C++" */
 }
 
 html.project .body {

@@ -14,6 +14,11 @@
         text-align: center;
         box-sizing: border-box;
     }
+
+    #{$parent} .cpp {
+        font-family: monospace; /* for typesetting the word "C++" */
+    }
+
     #{$parent} #background_image {
         max-width: 1300px;
         width:  1040px;
