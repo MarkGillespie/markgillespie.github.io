@@ -1535,12 +1535,13 @@ html.singlecolumn .header .info .links .fa, html.singlecolumn .header .info .lin
 }
 
 html.singlecolumn .name {
-  font-size: 2em;
+  font-size: 1.75em;
   font-weight: 400;
-  text-align: left;
+  text-align: center;
   line-height: 0.85;
   margin-top: 0.25em;
-  font-style: italic;
+  /*        font-style: italic;*/
+  /*        font-variant-caps: small-caps;*/
 }
 
 html.singlecolumn .header .section_text {

@@ -547,12 +547,13 @@
     }
 
     #{$parent} .name {
-        font-size: 2em;
+        font-size: 1.75em;
         font-weight: 400;
-        text-align: left;
+        text-align: center;
         line-height: 0.85;
         margin-top: .25em;
-        font-style: italic;
+/*        font-style: italic;*/
+/*        font-variant-caps: small-caps;*/
     }
 
     #{$parent} .header .section_text {
