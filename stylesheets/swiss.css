@@ -1607,6 +1607,7 @@ html.singlecolumn .header .fa {
     display: inline-block;
     width: 100%;
     max-width: 300px;
+    text-align: center;
   }
   html.singlecolumn .project_header .text {
     padding: 0;
@@ -1639,6 +1640,10 @@ html.singlecolumn .wrapper {
 
 html.singlecolumn .space_under {
   padding-bottom: 1em;
+}
+
+html.singlecolumn .award_details {
+  font-style: italic;
 }
 
 html.singlecolumn table {

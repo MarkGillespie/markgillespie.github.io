@@ -631,6 +631,7 @@
             display: inline-block;
             width: 100%;
             max-width: 300px;
+            text-align: center;
         }
 
         #{$parent} .project_header .text {
@@ -668,6 +669,10 @@
 
     #{$parent} .space_under {
         padding-bottom: 1em;
+    }
+
+    #{$parent} .award_details {
+        font-style: italic;
     }
 
     #{$parent} table {
