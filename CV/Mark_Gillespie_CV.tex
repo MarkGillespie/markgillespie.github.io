@@ -40,6 +40,17 @@
 }
 }
 
+% turn off links to bib which cause problems when the CV is included in the same PDF as my research statement
+% https://tex.stackexchange.com/questions/662944/remove-clickable-links-on-citations-to-the-bibliography
+\makeatletter
+\renewcommand\hyper@natanchorstart[1]{} 
+\renewcommand\hyper@natanchorend{} 
+\renewcommand\hyper@natlinkstart[1]{} 
+\renewcommand\hyper@natlinkend{} 
+\renewcommand\hyper@natlinkbreak[2]{#1}
+\makeatother
+
+
 
 %== page numbers
 % https://tex.stackexchange.com/a/153176
