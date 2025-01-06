@@ -1138,7 +1138,7 @@ html.singlecolumn .section_text .news li {
 }
 
 html.singlecolumn .section_text .news .when {
-  width: 4.5em;
+  width: 5em;
   flex: 0 0 auto;
   display: inline;
   font-style: italic;
