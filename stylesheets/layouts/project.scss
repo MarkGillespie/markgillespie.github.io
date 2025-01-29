@@ -119,10 +119,10 @@
         margin-bottom: 0.5em;
     }
 
-    #{$parent} .abstract::before {
+    /*#{$parent} .abstract::before {
         content: "Abstract: ";
         font-weight: 600;
-    }
+    }*/
 
     #{$parent} .abstract {
         text-align: justify;

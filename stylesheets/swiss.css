@@ -51,6 +51,19 @@ html.darkmode .project_header .text .venue {
   color: #bdf;
 }
 
+html.darkmode .abstract:first-letter {
+  color: #bdf;
+  float: left;
+  font-size: 5em;
+  padding-top: 0.075em;
+  padding-right: 0.05em;
+}
+
+html.darkmode .abstract .first-word {
+  color: #bdf;
+  margin-left: -0.1em;
+}
+
 html.darkmode .award {
   background-color: #db6334;
   border: 2px solid #e18f6f;
@@ -481,6 +494,19 @@ html.lightmode .section_text .news summary {
 
 html.lightmode .project_header .text .venue {
   color: #2E6ABD;
+}
+
+html.lightmode .abstract:first-letter {
+  color: #2E6ABD;
+  float: left;
+  font-size: 5em;
+  padding-top: 0.075em;
+  padding-right: 0.05em;
+}
+
+html.lightmode .abstract .first-word {
+  color: #2E6ABD;
+  margin-left: -0.1em;
 }
 
 html.lightmode .award {
@@ -1798,11 +1824,10 @@ html.project .quick_links {
   margin-bottom: 0.5em;
 }
 
-html.project .abstract::before {
-  content: "Abstract: ";
-  font-weight: 600;
-}
-
+/*html.project .abstract::before {
+    content: "Abstract: ";
+    font-weight: 600;
+}*/
 html.project .abstract {
   text-align: justify;
   width: 95%;

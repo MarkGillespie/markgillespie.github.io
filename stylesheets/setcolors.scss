@@ -20,6 +20,8 @@
     $link-hover-color: map-get($map, 'link-hover-color');
     $menu-font-color: map-get($map, 'menu-font-color');
 
+    $dropcap-color: map-get($map, 'dropcap-color');
+
     $award-background-color: map-get($map, 'award-background-color');
     $award-font-color: map-get($map, 'award-font-color');
     $award-border-color: map-get($map, 'award-border-color');
@@ -75,6 +77,19 @@
 
     #{$parent} .project_header .text .venue {
         color: $link-color;
+    }
+
+    #{$parent} .abstract:first-letter {
+        color: $link-color;
+        float: left;
+        font-size: 5em;
+        padding-top: .075em;
+        padding-right: 0.05em;
+    }
+
+    #{$parent} .abstract .first-word {
+        color: $link-color;
+        margin-left: -.1em;
     }
 
     #{$parent} .award {
