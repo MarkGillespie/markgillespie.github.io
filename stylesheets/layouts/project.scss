@@ -91,8 +91,8 @@
     }
 
     #{$parent} .name_box > .authors > .author {
-        margin-left: 0.25em;
-        margin-right: 0.25em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
         line-height: 1;
     }
 
@@ -109,6 +109,7 @@
     #{$parent} .name_box > .authors > .author > .affiliation {
         display: block;
         margin-top: -0.25em;
+        font-size: .9em;
     }
 
     #{$parent} .quick_links {
@@ -178,11 +179,12 @@
         max-width: 80%;
     }
 
-    #{$parent} .figures .caption {
+    #{$parent} .figures .caption, #{$parent} .caption {
         margin-top: 0.5em;
         margin-bottom: 1.5em;
+        font-size: .9em;
+        line-height: 1.2;
     }
-
 
     #{$parent} .section_text {
         padding: 1em;
@@ -256,6 +258,10 @@
             margin-bottom: 0;
             margin-right: 0.5em;
             flex: 0 0 auto;
+        }
+
+        #{$parent} .name_box > .authors > .author > .name::after {
+            content:',';
         }
 
         #{$parent} .name_box > .authors > .author > .affiliation {

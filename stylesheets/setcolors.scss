@@ -80,7 +80,7 @@
     }
 
     #{$parent} .abstract:first-letter {
-        color: $link-color;
+        color: $dropcap-color;
         float: left;
         font-size: 5em;
         padding-top: .075em;
@@ -88,8 +88,10 @@
     }
 
     #{$parent} .abstract .first-word {
-        color: $link-color;
+        color: $dropcap-color;
         margin-left: -.1em;
+        font-variant-caps: small-caps;
+/*        font-weight: 600;*/
     }
 
     #{$parent} .award {
