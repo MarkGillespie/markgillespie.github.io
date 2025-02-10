@@ -221,6 +221,15 @@
         color: $link-hover-color;
     }
 
+    #{$parent} .section_panel .project_links details summary {
+        color: $link-color;
+        text-decoration-line: underline;
+    }
+
+    #{$parent} .section_panel .project_links details summary:hover {
+        color: $link-hover-color;
+    }
+
     #{$parent} .bibBox .bibliography {
         background-color: mix(rgba($foreground-color, 1), $blank-space);
         box-shadow: .2em .2em .3em rgba($ordinary-font-color, .7);

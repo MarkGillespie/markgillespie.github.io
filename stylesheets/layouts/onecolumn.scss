@@ -250,6 +250,52 @@
         margin-left: 1em;
     }
 
+    #{$parent} .section_panel .project_links details {
+        position: relative; /* needed to position "...more" label later */
+        width: 4em;
+        height: 1.35em;
+        margin: 0;
+    }
+
+    #{$parent} .section_panel .project_links details[open] {
+        width: 100%;
+    }
+
+    #{$parent} .section_panel .project_links details summary {
+        position:absolute;
+        bottom:0pt;
+        right:0;
+        margin-left: 1em;
+        list-style: none;
+    }
+
+    #{$parent} .section_panel .project_links summary:hover {
+        cursor: pointer;
+    }
+
+    #{$parent} .section_panel .project_links details summary::-webkit-details-marker {
+        display:none;
+    }
+
+    #{$parent} .section_panel .project_links details .more_project_links {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    #{$parent} .section_panel .project_links details summary::before {
+        content: "...more";
+    }
+    
+    #{$parent} .section_panel .project_links details[open] summary {
+        bottom:-15pt;
+    }
+    
+    #{$parent} .section_panel .project_links details[open] summary::before {
+        content: "...less";
+    }
+
     /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
     #{$parent} .bibBox
     {
@@ -257,6 +303,7 @@
         position: relative;
         width: 50px;
         height: 15pt;
+        margin-right: 8pt;
     }
 
     /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */

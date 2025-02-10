@@ -191,6 +191,15 @@ html.darkmode a:hover {
   color: #c9f;
 }
 
+html.darkmode .section_panel .project_links details summary {
+  color: #bdf;
+  text-decoration-line: underline;
+}
+
+html.darkmode .section_panel .project_links details summary:hover {
+  color: #c9f;
+}
+
 html.darkmode .bibBox .bibliography {
   background-color: #22222b;
   box-shadow: 0.2em 0.2em 0.3em rgba(221, 221, 221, 0.7);
@@ -635,6 +644,15 @@ html.lightmode a {
 }
 
 html.lightmode a:hover {
+  color: #ee4d93;
+}
+
+html.lightmode .section_panel .project_links details summary {
+  color: #2E6ABD;
+  text-decoration-line: underline;
+}
+
+html.lightmode .section_panel .project_links details summary:hover {
   color: #ee4d93;
 }
 
@@ -1279,12 +1297,59 @@ html.singlecolumn .section_panel .project_links a {
   margin-left: 1em;
 }
 
+html.singlecolumn .section_panel .project_links details {
+  position: relative; /* needed to position "...more" label later */
+  width: 4em;
+  height: 1.35em;
+  margin: 0;
+}
+
+html.singlecolumn .section_panel .project_links details[open] {
+  width: 100%;
+}
+
+html.singlecolumn .section_panel .project_links details summary {
+  position: absolute;
+  bottom: 0pt;
+  right: 0;
+  margin-left: 1em;
+  list-style: none;
+}
+
+html.singlecolumn .section_panel .project_links summary:hover {
+  cursor: pointer;
+}
+
+html.singlecolumn .section_panel .project_links details summary::-webkit-details-marker {
+  display: none;
+}
+
+html.singlecolumn .section_panel .project_links details .more_project_links {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+html.singlecolumn .section_panel .project_links details summary::before {
+  content: "...more";
+}
+
+html.singlecolumn .section_panel .project_links details[open] summary {
+  bottom: -15pt;
+}
+
+html.singlecolumn .section_panel .project_links details[open] summary::before {
+  content: "...less";
+}
+
 /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
 html.singlecolumn .bibBox {
   display: inline-block;
   position: relative;
   width: 50px;
   height: 15pt;
+  margin-right: 8pt;
 }
 
 /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
