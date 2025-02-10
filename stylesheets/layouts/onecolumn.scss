@@ -259,6 +259,7 @@
 
     #{$parent} .section_panel .project_links details[open] {
         width: 100%;
+        height: auto;
     }
 
     #{$parent} .section_panel .project_links details summary {
@@ -282,6 +283,7 @@
         display: flex;
         justify-content: flex-end;
         flex-wrap: wrap;
+        box-sizing: border-box;
     }
 
     #{$parent} .section_panel .project_links details summary::before {

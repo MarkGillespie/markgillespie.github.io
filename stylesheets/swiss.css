@@ -1306,6 +1306,7 @@ html.singlecolumn .section_panel .project_links details {
 
 html.singlecolumn .section_panel .project_links details[open] {
   width: 100%;
+  height: auto;
 }
 
 html.singlecolumn .section_panel .project_links details summary {
@@ -1329,6 +1330,7 @@ html.singlecolumn .section_panel .project_links details .more_project_links {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 html.singlecolumn .section_panel .project_links details summary::before {
