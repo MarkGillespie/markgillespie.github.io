@@ -116,8 +116,17 @@
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 0 1em;
+        gap: 0 .5em;
         margin-bottom: 0.5em;
+    }
+
+
+    #{$parent} .quick_links a::before {
+        content: "[";
+    }
+
+    #{$parent} .quick_links a::after {
+        content: "]";
     }
 
     /*#{$parent} .abstract::before {

@@ -1294,12 +1294,20 @@ html.singlecolumn .section_panel .project_links {
 }
 
 html.singlecolumn .section_panel .project_links a {
-  margin-left: 1em;
+  margin-left: 0.25em;
+}
+
+html.singlecolumn .project_links a::before {
+  content: "[";
+}
+
+html.singlecolumn .project_links a::after {
+  content: "]";
 }
 
 html.singlecolumn .section_panel .project_links details {
   position: relative; /* needed to position "...more" label later */
-  width: 4em;
+  width: 4.2em;
   height: 1.35em;
   margin: 0;
 }
@@ -1334,7 +1342,7 @@ html.singlecolumn .section_panel .project_links details .more_project_links {
 }
 
 html.singlecolumn .section_panel .project_links details summary::before {
-  content: "...more";
+  content: "[...more]";
 }
 
 html.singlecolumn .section_panel .project_links details[open] summary {
@@ -1342,16 +1350,15 @@ html.singlecolumn .section_panel .project_links details[open] summary {
 }
 
 html.singlecolumn .section_panel .project_links details[open] summary::before {
-  content: "...less";
+  content: "[...less]";
 }
 
 /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
 html.singlecolumn .bibBox {
   display: inline-block;
   position: relative;
-  width: 50px;
+  width: 3.85em;
   height: 15pt;
-  margin-right: 8pt;
 }
 
 /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
@@ -1892,8 +1899,16 @@ html.project .quick_links {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0 1em;
+  gap: 0 0.5em;
   margin-bottom: 0.5em;
+}
+
+html.project .quick_links a::before {
+  content: "[";
+}
+
+html.project .quick_links a::after {
+  content: "]";
 }
 
 /*html.project .abstract::before {
