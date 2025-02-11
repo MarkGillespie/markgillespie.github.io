@@ -126,6 +126,8 @@
         margin: 0;
         margin-left: 1em;
         padding: 0;
+        display: flex; /* displaying with flex allows us to control the list order from css for the summary/details */
+        flex-direction: column;
     }
 
     #{$parent} .section_text .news li {
@@ -146,11 +148,15 @@
     }
 
     #{$parent} .section_text .news summary {
-        position:absolute;
+/*        position:absolute;
         bottom:0px;
-        left:0;
+        left:0;*/
         margin-left: 1em;
         list-style: none;
+    }
+
+    #{$parent} .section_text .news details {
+        display: contents; /* make details participate in flexbox layout */
     }
 
     #{$parent} .section_text .news summary:hover {
@@ -167,6 +173,10 @@
     
     #{$parent} .section_text .news details[open] summary::before {
         content: "... see less ...";
+    }
+    
+    #{$parent} .section_text .news details[open] > summary {
+        order: 2;
     }
 
     #{$parent} #misc .project_header {
@@ -259,22 +269,11 @@
     }
 
     #{$parent} .section_panel .project_links details {
-        position: relative; /* needed to position "...more" label later */
-        width: 4.2em;
-        height: 1.35em;
-        margin: 0;
-    }
-
-    #{$parent} .section_panel .project_links details[open] {
-        width: 100%;
-        height: auto;
+        display: contents; /* make details participate in flexbox layout */
     }
 
     #{$parent} .section_panel .project_links details summary {
-        position:absolute;
-        bottom:0pt;
-        right:0;
-        margin-left: 1em;
+        margin-left: .25em;
         list-style: none;
     }
 
@@ -286,20 +285,12 @@
         display:none;
     }
 
-    #{$parent} .section_panel .project_links details .more_project_links {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-    }
-
     #{$parent} .section_panel .project_links details summary::before {
         content: "[...more]";
     }
     
     #{$parent} .section_panel .project_links details[open] summary {
-        bottom:-15pt;
+      order: 2; /* move to end */
     }
     
     #{$parent} .section_panel .project_links details[open] summary::before {
@@ -706,6 +697,23 @@
         #{$parent} .project_header .text .mini_abstract {
             margin-top: .5em;
             text-align: left;
+        }
+
+        /* more spacing for clicking on mobile */
+        #{$parent} .section_panel .project_links {
+            line-height: 1.75; 
+        }
+
+        #{$parent} .section_panel .project_links a {
+            margin-left: .5em;
+        }
+
+        #{$parent} .section_panel .project_links summary {
+            padding-left: .2em;
+        }
+
+        #{$parent} .bibBox {
+            margin-right: .25em;
         }
     }
 
