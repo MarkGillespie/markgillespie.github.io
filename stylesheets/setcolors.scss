@@ -103,12 +103,12 @@
         }
     }
 
-    #{$parent} .project_author_list, #{$parent} .project_author_list a, #{$parent} .author .name a, #{$parent} .project_title a {
+    #{$parent} .project_author_list, #{$parent} .project_author_list a, #{$parent} .author .name a, #{$parent} .project_title a, #{$parent} .venue a {
         color: $name-color;
         text-decoration: none;
     }
 
-    #{$parent} .project_author_list a:hover, #{$parent} .author .name a:hover, #{$parent} .project_title a:hover {
+    #{$parent} .project_author_list a:hover, #{$parent} .author .name a:hover, #{$parent} .project_title a:hover, #{$parent} .venue a:hover {
         color: $link-hover-color;
     }
 

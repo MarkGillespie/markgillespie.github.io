@@ -742,6 +742,15 @@
         vertical-align:top;
     }
 
+    #{$parent} .venue {
+        font-style: italic;
+    }
+
+    #{$parent} .venue a {
+        text-decoration: none;
+        font-weight: normal;
+    }
+
     #{$parent} details {
         margin-bottom: 1em;
     }

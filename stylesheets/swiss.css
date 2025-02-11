@@ -75,12 +75,12 @@ html.darkmode .award a, html.darkmode .award a:hover {
   color: #f4f4f4;
 }
 
-html.darkmode .project_author_list, html.darkmode .project_author_list a, html.darkmode .author .name a, html.darkmode .project_title a {
+html.darkmode .project_author_list, html.darkmode .project_author_list a, html.darkmode .author .name a, html.darkmode .project_title a, html.darkmode .venue a {
   color: #c1c1d8;
   text-decoration: none;
 }
 
-html.darkmode .project_author_list a:hover, html.darkmode .author .name a:hover, html.darkmode .project_title a:hover {
+html.darkmode .project_author_list a:hover, html.darkmode .author .name a:hover, html.darkmode .project_title a:hover, html.darkmode .venue a:hover {
   color: #c9f;
 }
 
@@ -531,12 +531,12 @@ html.lightmode .award a, html.lightmode .award a:hover {
   color: #f4f4f4;
 }
 
-html.lightmode .project_author_list, html.lightmode .project_author_list a, html.lightmode .author .name a, html.lightmode .project_title a {
+html.lightmode .project_author_list, html.lightmode .project_author_list a, html.lightmode .author .name a, html.lightmode .project_title a, html.lightmode .venue a {
   color: #000;
   text-decoration: none;
 }
 
-html.lightmode .project_author_list a:hover, html.lightmode .author .name a:hover, html.lightmode .project_title a:hover {
+html.lightmode .project_author_list a:hover, html.lightmode .author .name a:hover, html.lightmode .project_title a:hover, html.lightmode .venue a:hover {
   color: #ee4d93;
 }
 
@@ -1759,6 +1759,15 @@ html.singlecolumn table {
 */
 html.singlecolumn td {
   vertical-align: top;
+}
+
+html.singlecolumn .venue {
+  font-style: italic;
+}
+
+html.singlecolumn .venue a {
+  text-decoration: none;
+  font-weight: normal;
 }
 
 html.singlecolumn details {
