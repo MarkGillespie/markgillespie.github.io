@@ -167,7 +167,7 @@
                         <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</div>
                         <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
                         <div class="mini_abstract">
-                            Sphere tracing is a fast and effective algorithm for visualizing surfaces encoded by signed distance functions, which have become a centerpiece in a wide range of visual computing algorithms. We introduce an analogous algorithm for a completely different class of functions, <em>harmonic functions</em>, opening up a whole new set of possibilities. Our new algorithm can be used to directly visualize smooth surfaces reconstructed from point clouds (via Poisson surface reconstruction) or polygon soup (via generalized winding numbers) without requiring linear solves or mesh extraction. We also show applications to rendering nonplanar polygons and to mathematical visualization of objects such Seifert surfaces for knots and links, spherical harmonics, and Riemann surfaces.
+                            Sphere tracing is a classic algorithm for visualizing surfaces encoded by signed distance functions, which arise throughout visual computing. We introduce an analogous algorithm for <em>harmonic functions</em>, enabling a new range of possibilities. For instance, it can visualize reconstructions of point clouds (via Poisson surface reconstruction) or polygon soups (via generalized winding numbers) without any linear solves or mesh extraction. We also show applications to Riemann surfaces, nonplanar polygons, architectural grid shells, and Seifert surfaces of knots.
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@
                         <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2024) </div>
                         <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
                         <div class="mini_abstract">
-                            This paper introduces <em>solid knitting</em>, a new form of fabrication. Unlike standard knitting, which makes hollow surfaces, solid knitting creates dense volumes by layering knit sheets—much as 3D printers layer sheets of plastic. We envision a future where everyday objects like furniture or shoes—including soles—can be knit as one piece. We define the basic building blocks of solid knitting and demonstrate a working prototype of a solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns.
+                            This paper introduces <em>solid knitting</em>, a fabrication technique. Unlike standard knitting, which makes hollow surfaces, solid knitting creates dense volumes by layering knit sheets—much as 3D printers layer sheets of plastic. We envision a future where everyday objects like furniture or shoes can be knit as one piece. We define the basic building blocks of solid knitting and demonstrate a working prototype solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns.
                         </div>
                     </div>
                 </div>
@@ -293,7 +293,8 @@
                         </div>
                         <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2023) </div>
                         <div class="mini_abstract">
-                            Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven invaluable in robust geometry processing. However, standard definitions do not immediately apply on surfaces, where not all curves bound regions. We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions. Ultimately, our algorithm yields (i) a closed completion the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region.
+                            Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven invaluable in robust geometry processing. However, standard definitions do not immediately apply on surfaces, where not all curves bound regions. We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions. 
+                            <!-- Ultimately, our algorithm yields (i) a closed completion the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region. -->
                         </div>
                     </div>
                 </div>
@@ -342,7 +343,7 @@
                         </div>
                         <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2023) </div>
                         <div class="mini_abstract">
-                            This paper describes a method for fast simplification of surface meshes. Rather than approximate the extrinsic geometry, we construct a coarse intrinsic triangulation of the input domain. In the spirit of the quadric error metric (QEM), we perform greedy decimation while agglomerating global information about approximation error. In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature “drifts” during simplification. The overall payoff is a “black box” approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.
+                            This paper describes a method for fast simplification of surface meshes. Rather than approximating the extrinsic geometry, we construct a coarse intrinsic triangulation of the input domain. In the spirit of the quadric error metric (QEM), we perform greedy decimation while agglomerating global information about approximation error. In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature “drifts” during simplification. The overall payoff is a “black box” approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.
                         </div>
                     </div>
                 </div>
