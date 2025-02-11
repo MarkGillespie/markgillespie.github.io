@@ -1248,10 +1248,10 @@ html.singlecolumn .project_header .text {
 
 html.singlecolumn .project_header .text .project_title {
   font-weight: 300;
-  font-size: 40px;
+  font-size: 20pt;
   line-height: 1;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 2pt;
   text-align: left;
   margin-left: -15pt;
 }
