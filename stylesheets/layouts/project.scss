@@ -43,7 +43,8 @@
         max-width: 80%;
         display: inline-block;
         padding: 0.25em;
-        margin-bottom: 0.5em;
+        padding-bottom: 0pt;
+        margin-bottom: -7pt;
         overflow: hidden;
     }
 
@@ -51,7 +52,6 @@
         width: 100%;
         display: inline-block;
         margin: 0;
-        margin-bottom: -7px;
     }
 
     #{$parent} .name_box {
@@ -118,6 +118,8 @@
         flex-wrap: wrap;
         gap: 0 .5em;
         margin-bottom: 0.5em;
+        margin-left: 1em;
+        margin-right: 1em;
     }
 
 
@@ -206,6 +208,25 @@
         display: inline-block;
     }
 
+    #{$parent} .example_grid_container {
+        max-width: 100%;
+    }
+
+    #{$parent} .example_grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #{$parent} .example_grid .example_grid_entry {
+        max-width: 32%;
+        margin: auto;
+        text-align: center;
+    }
+
+    #{$parent} .example_grid .example_grid_entry .caption {
+        text-align: left;
+    }
+
     #{$parent} .bibEntry {
         font-family: monospace;
         word-wrap: break-word;
@@ -241,6 +262,10 @@
     @media (max-width: 970px) {
         #{$parent} .footer {
             margin-top: 2em;
+        }
+
+        #{$parent} .example_grid .example_grid_entry {
+            max-width: 48%;
         }
     }
 
@@ -288,6 +313,14 @@
         /* more spacing for clicking on mobile */
         #{$parent} .quick_links {
             line-height: 1.75; 
+        }
+
+        #{$parent} .example_grid .example_grid_entry {
+            max-width: 100%;
+        }
+
+        #{$parent} .example_grid .example_grid_entry img {
+            max-width: 80%;
         }
     }
 

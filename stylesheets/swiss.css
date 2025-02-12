@@ -1857,7 +1857,8 @@ html.project .paper_teaser {
   max-width: 80%;
   display: inline-block;
   padding: 0.25em;
-  margin-bottom: 0.5em;
+  padding-bottom: 0pt;
+  margin-bottom: -7pt;
   overflow: hidden;
 }
 
@@ -1865,7 +1866,6 @@ html.project .paper_teaser > img {
   width: 100%;
   display: inline-block;
   margin: 0;
-  margin-bottom: -7px;
 }
 
 html.project .name_box {
@@ -1932,6 +1932,8 @@ html.project .quick_links {
   flex-wrap: wrap;
   gap: 0 0.5em;
   margin-bottom: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 html.project .quick_links a::before {
@@ -2016,6 +2018,25 @@ html.project .section_text > .paper-preview > img {
   display: inline-block;
 }
 
+html.project .example_grid_container {
+  max-width: 100%;
+}
+
+html.project .example_grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+html.project .example_grid .example_grid_entry {
+  max-width: 32%;
+  margin: auto;
+  text-align: center;
+}
+
+html.project .example_grid .example_grid_entry .caption {
+  text-align: left;
+}
+
 html.project .bibEntry {
   font-family: monospace;
   word-wrap: break-word;
@@ -2049,6 +2070,9 @@ html.project .footer {
 @media (max-width: 970px) {
   html.project .footer {
     margin-top: 2em;
+  }
+  html.project .example_grid .example_grid_entry {
+    max-width: 48%;
   }
 }
 @media (max-width: 710px) {
@@ -2087,6 +2111,12 @@ html.project .footer {
   /* more spacing for clicking on mobile */
   html.project .quick_links {
     line-height: 1.75;
+  }
+  html.project .example_grid .example_grid_entry {
+    max-width: 100%;
+  }
+  html.project .example_grid .example_grid_entry img {
+    max-width: 80%;
   }
 }
 @media (max-width: 450px) {
