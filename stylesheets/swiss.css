@@ -479,7 +479,7 @@ html.lightmode .nav a:hover {
 }
 
 html.lightmode .navbar_item {
-  color: #333;
+  color: #335;
 }
 
 html.lightmode #style-menu ul button {
@@ -935,7 +935,7 @@ html.nojs #darkmode-toggle {
 body div.navbar {
   font-family: "Helvetica", sans-serif;
   padding-right: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 0.25em;
   overflow: visible;
   display: inline-block;
   width: 100%;
@@ -980,18 +980,20 @@ body div.navbar_buttons {
   text-align: center;
   overflow: visible;
   float: right;
-  font-family: "Charis SIL", "Palatino", serif;
   margin-right: 1em;
 }
 
 body .navbar_item, body #style-menu > button {
   float: none;
   height: 100%;
-  font-weight: 400;
+  font-weight: 300;
   display: inline-block;
-  font-size: 1.3em;
+  font-size: 13pt;
+  font-family: "Charis SIL", "Palatino", serif;
+  /*        text-decoration-line: underline;*/
+  font-variant-caps: small-caps;
   padding-top: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -1151,6 +1153,20 @@ html.singlecolumn .section_text {
   padding-top: 2em;
 }
 
+html.singlecolumn .section_text > p:first-child {
+  margin-top: -5pt;
+}
+
+html.singlecolumn .section_text > p {
+  margin-top: 5pt;
+  margin-bottom: 5pt;
+}
+
+html.singlecolumn .section_text hr {
+  margin-top: 5pt;
+  margin-bottom: -5pt;
+}
+
 html.singlecolumn .section_text a {
   display: inline;
   white-space: normal; /* allow line breaks on spaces in links */
@@ -1289,7 +1305,8 @@ html.singlecolumn .project_author_list a {
 }
 
 html.singlecolumn .project_header .text .mini_abstract {
-  line-height: 1.4;
+  line-height: 1.2;
+  /*        font-size: 11pt;*/
   box-sizing: border-box;
 }
 
@@ -1298,7 +1315,8 @@ html.singlecolumn .section_panel .project_links {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
-  margin-bottom: 3em;
+  margin-top: 2pt;
+  margin-bottom: 15pt;
   padding-left: 15pt;
   padding-right: 15pt;
 }

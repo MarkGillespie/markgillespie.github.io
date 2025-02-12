@@ -100,6 +100,20 @@
         padding-top: 2em;
     }
 
+    #{$parent} .section_text > p:first-child {
+        margin-top: -5pt;
+    }
+
+    #{$parent} .section_text > p {
+        margin-top: 5pt;
+        margin-bottom: 5pt;
+    }
+
+    #{$parent} .section_text hr {
+        margin-top: 5pt;
+        margin-bottom: -5pt;
+    }
+
     #{$parent} .section_text a {
         display: inline;
         white-space: normal; /* allow line breaks on spaces in links */
@@ -242,7 +256,8 @@
     }
 
     #{$parent} .project_header .text .mini_abstract {
-        line-height: 1.4;
+        line-height: 1.2;
+/*        font-size: 11pt;*/
         box-sizing: border-box;
     }
 
@@ -251,7 +266,8 @@
         display: flex;
         justify-content: flex-end;
         flex-wrap: wrap;
-        margin-bottom: 3em;
+        margin-top: 2pt;
+        margin-bottom: 15pt;
         padding-left: 15pt;
         padding-right: 15pt;
     }
