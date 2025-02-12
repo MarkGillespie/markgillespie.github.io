@@ -2066,6 +2066,10 @@ html.project .footer {
   html.project .figures img {
     max-width: 100%;
   }
+  /* more spacing for clicking on mobile */
+  html.project .quick_links {
+    line-height: 1.75;
+  }
 }
 @media (max-width: 450px) {
   /* line break between "ACM Transactions on Graphics" and "SIGGRAPH" */
