@@ -1,0 +1,21 @@
+<project>
+    <title>Evolving Intrinsic Triangulations</title>
+    <key>thesis</key>
+    <href>Research/Thesis/thesis.pdf</href>
+    <doi>10.1184/R1/25898782.v1</doi>
+    <img_small>Research/Thesis/RepresentativeImage.svg</img_small>
+    <authors>
+        <author>
+            <name>Mark Gillespie</name>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+    </authors>
+    <venue>PhD Thesis (Carnegie Mellon University)</venue>
+    <links>
+        <link><name>pdf (25.5 mb)</name><href>Research/Thesis/thesis.pdf</href></link>
+        <link><name>slides (75.9 mb)</name><href>Research/Thesis/defense.pdf</href></link>
+    </links>
+    <bibtex>Research/Thesis/bib.txt</bibtex>
+    <abstract_small>
+        This thesis presents algorithms and data structures for computing on surfaces whose intrinsic geometry evolves over time. We take as examples the problems of mesh simplification and surface parameterization—in both cases, we find that the intrinsic perspective leads to simple algorithms which are robust and efficient on a variety of challenging examples. 
+    </abstract_small>
+</project>

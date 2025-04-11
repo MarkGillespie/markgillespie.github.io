@@ -1,0 +1,30 @@
+<project>
+    <title>Geometry Processing with Intrinsic Triangulations</title>
+    <key>int-tri-course</key>
+    <href>https://doi.org/10.1145/3450508.3464592</href>
+    <doi>10.1145/3450508.3464592</doi>
+    <img_small>Research/int-tri-course/SmallRepresentativeImage.svg</img_small>
+    <authors>
+        <author>
+            <name>Nicholas Sharp</name>
+            <href>https://nmwsharp.com/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Mark Gillespie</name>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Keenan Crane</name>
+            <href>http://www.cs.cmu.edu/~kmcrane/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+    </authors>
+    <venue>ACM SIGGRAPH Courses (2021), SIAM&amp;nbsp;IMR&amp;nbsp;2021&amp;nbsp;Courses</venue>
+    <links>
+        <link><name>pdf (25 mb)</name><href>https://nmwsharp.com/media/papers/int-tri-course/int_tri_course.pdf</href></link>
+        <link><name>video (3 hours)</name><href>https://www.youtube.com/watch?v=gcRDdYrgOhg</href></link>
+        <link><name>coding tutorial</name><href>https://github.com/nmwsharp/intrinsic-triangulations-tutorial</href></link>
+    </links>
+    <bibtex>Research/int-tri-course/bib.txt</bibtex>
+    <abstract_small>
+        Intrinsic triangulations de-couple the mesh used to encode geometry from the one used for computation. The basic shift in perspective is to encode the geometry of a mesh not in terms of ordinary vertex positions, but instead only in terms of edge lengths. This course provides a first introduction to intrinsic triangulations and their use in mesh processing algorithms, covering the theory, practical details, and some cutting-edge research in the area.
+    </abstract_small>
+</project>

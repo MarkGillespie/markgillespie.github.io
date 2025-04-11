@@ -1,0 +1,78 @@
+<project>
+    <title>Surface Simplification using Intrinsic Error Metrics</title>
+    <folder>intrinsic-coarsening</folder>
+    <key>intrinsic-coarsening</key>
+    <href>index.html</href>
+    <doi>10.1145/3592403</doi>
+    <img_small>Research/intrinsic-coarsening/RepresentativeImage.png</img_small>
+    <img_large>Research/intrinsic-coarsening/images/teaser.png</img_large>
+    <authors>
+        <author>
+            <name>Hsueh-Ti&amp;nbsp;Derek&amp;nbsp;Liu</name>
+            <href>https://www.dgp.toronto.edu/~hsuehtil/</href>
+            <affiliation>University of Toronto &amp;amp; Roblox</affiliation></author>
+        <author>
+            <name>Mark Gillespie</name>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Benjamin Chislett</name>
+            <href>https://www.gitshowcase.com/benchislett</href>
+            <affiliation>University of Toronto</affiliation></author>
+        <author>
+            <name>Nicholas Sharp</name>
+            <href>https://nmwsharp.com/</href>
+            <affiliation>University of Toronto &amp;amp; NVIDIA</affiliation></author>
+        <author>
+            <name>Alec Jacobson</name>
+            <href>https://www.cs.toronto.edu/~jacobson/</href>
+            <affiliation>University of Toronto &amp;amp; Adobe&amp;nbsp;Research</affiliation></author>
+        <author>
+            <name>Keenan Crane</name>
+            <href>http://www.cs.cmu.edu/~kmcrane/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+    </authors>
+    <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2023)</venue>
+    <links>
+        <link><name>pdf (15.6 mb)</name><href>Research/intrinsic-coarsening/IntrinsicErrorMetric.pdf</href></link>
+        <link><name>code</name><href>https://github.com/HTDerekLiu/intrinsic-simplification</href></link>
+    </links>
+    <more_links>
+        <link><name>arxiv</name><href>https://arxiv.org/abs/2305.06410</href></link>
+        <link><name>poster (9mb)</name><href>Research/intrinsic-coarsening/IntrinsicErrorMetricPoster.pdf</href></link>
+    </more_links>
+    <bibtex>Research/intrinsic-coarsening/bib.txt</bibtex>
+    <abstract_small>
+        This paper describes a method for fast simplification of surface meshes. Rather than approximating the extrinsic geometry, we construct a coarse intrinsic triangulation of the input domain. In the spirit of the quadric error metric (QEM), we perform greedy decimation while agglomerating global information about approximation error. In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature “drifts” during simplification. The overall payoff is a “black box” approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.
+    </abstract_small>
+    <abstract_big>
+        This paper describes a method for fast simplification of surface meshes.  Whereas past methods focus on visual appearance, our goal is to solve equations on the surface.  Hence, rather than approximate the extrinsic geometry, we construct a coarse <em>intrinsic triangulation</em> of the input domain.  In the spirit of the <em>quadric error metric (QEM)</em>, we perform greedy decimation while agglomerating global information about approximation error.  In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature "drifts" during simplification.  This process also yields a bijective map between the fine and coarse mesh, and prolongation operators for both scalar- and vector-valued data.  Moreover, we obtain hard guarantees on element quality via intrinsic retriangulation—a feature unique to the intrinsic setting.  The overall payoff is a "black box" approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.  We show how our method benefits several fundamental tasks, including geometric multigrid, all-pairs geodesic distance, mean curvature flow, geodesic Voronoi diagrams, and the discrete exponential map.
+    </abstract_big>
+    <panels>
+        <panel>
+            <title>Paper</title>
+            <content>
+                <a href="IntrinsicErrorMetric.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"/><br/>
+                    <span> pdf (15.6 mb)</span>
+                </a>
+            </content>
+        </panel>
+        <panel>
+            <title>Acknowledgements</title>
+            <content>
+                  This work was funded in part by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship, NSERC Discovery (RGPIN–2022–04680), the Ontario Early Research Award program, the Canada Research Chairs Program, a Sloan Research Fellowship, the DSI Catalyst Grant program, the Fields Institute for Mathematics, the Vector Institute for AI, and gifts from Adobe Inc., Facebook Reality Labs, and Google, Inc.
+            </content>
+        </panel>
+        <panel>
+            <bibtex></bibtex>
+        </panel>
+        <panel>
+            <title>Errata</title>
+            <content>
+                <p>
+                    The caption on Figure 19 has been fixed to refer to "intrinsic curvature" rather than "extrinsic curvature". The attribution has also been fixed to cite <a href="https://doi.org/10.1145/3272127.3275088">Rabinovich et al.'s [2018]</a> paper on developable surfaces, rather than an unnamed "cloth simulation". Thanks to Olga Sorkine-Hornung for catching these issues!
+                </p>
+            </content>
+        </panel>
+    </panels>
+</project>

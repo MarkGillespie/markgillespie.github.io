@@ -1,97 +1,31 @@
 <!DOCTYPE html>
 <html lang="en-us" class="nojs singlecolumn lightmode">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Mark Gillespie</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/swiss.css" media="screen">
-    <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script type="text/javascript">
-      // === Cookie stuff for saving style (Maybe I should switch to select/options)
-      function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-        const expires = "expires=" + d.toUTCString();
-        const cookieString =
-          cname +
-          "=" +
-          encodeURIComponent(cvalue) +
-          ";" +
-          expires +
-          ";path=/;SameSite=Strict";
-        document.cookie = cookieString;
-      }
-
-      function getCookie(cname) {
-        const name = cname + "=";
-        const ca = document.cookie.split(";");
-        for (let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == " ") {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return decodeURIComponent(c.substring(name.length, c.length));
-          }
-        }
-        return "";
-      }
-
-     function setStyle(style) {
-         setCookie("style", style);
-         const html = document.getElementsByTagName('html')[0];
-         html.classList.remove("lightmode");
-         html.classList.remove("darkmode");
-         html.classList.add(style);
-     }
-
-     window.onload = function() {
-         document.getElementById("background_image").style.opacity = 1.0;
-         document.getElementsByTagName('html')[0].classList.remove("nojs");
-     }
-
-     // Load saved style
-     // const currentStyle=getCookie("style");
-     // if (currentStyle) {
-     //     setStyle(currentStyle);
-     // } else {
-     //     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-     //     setStyle( isDarkMode ? "darkmode" : "lightmode" );
-     // }
-     setStyle("lightmode")
-
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/swiss.css" media="screen"/>
+    <link href="partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   </head>
 
   <body class="nojs singlecolumn">
     <div class="mega-container">
     <div class="page-content">
-    <div class="navbar">
-      <div class="navbar_buttons">
-        <a href="#research" class="navbar_link"><span class="navbar_item">Research</span></a>
-        <a href="Research/Thesis/thesis.pdf" class="navbar_link"><span class="navbar_item">Thesis</span></a>
-        <!-- <a href="#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a> -->
-        <a href="#awards" class="navbar_link"><span class="navbar_item">Awards</span></a>
-        <!-- <a href="#education" class="navbar_link vanishing"><span class="navbar_item">Education</span></a> -->
-        <a href="#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
-        <a href="#misc" class="navbar_link"><span class="navbar_item">Misc</span></a>
-        <a href="Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
-        <a href="" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-            <!-- toggle lightmode -->
-		   <!--  <form id="darkmode-toggle"> 
-			      <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
-            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
-		    </form> -->
-      </div>
-    </div>
+    <div class="navbar"><div class="navbar_buttons">
+<a href="index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
+<a href="Research/Thesis/thesis.pdf" class="navbar_link "><span class="navbar_item">Thesis</span></a>
+<a href="index.html#awards" class="navbar_link "><span class="navbar_item">Awards</span></a>
+<a href="index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
+<a href="index.html#misc" class="navbar_link "><span class="navbar_item">Misc</span></a>
+<a href="Mark_Gillespie_CV.pdf" class="navbar_link "><span class="navbar_item">CV</span></a>
+<a href="" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+</div></div>
 
     <div class="wrapper" id="home">
-
       <div class="body">
-
         <div class="header">
-            <img id="header_img" src="images/me_berlin.jpg" alt="A picture of me">
+            <img id="header_img" src="images/me_berlin.jpg" alt="A picture of me"/>
             <div class="info">
                 <div class="name">Mark Gillespie</div>
                 <div class="email">
@@ -106,7 +40,7 @@
             </div>
                 
             <div class="section_text panel">
-                <p>I am a postdoc in computer science at <a href="https://www.polytechnique.edu/en">École Polytechnique</a>, working with <a href="https://pages.saclay.inria.fr/mathieu.desbrun/">Mathieu Desbrun</a>. I design algorithms for reliably and efficiently processing geometric data, drawing inspiration from classical topology and differential geometry. I just received my PhD in computer science from <a href="https://www.cs.cmu.edu/">Carnegie Mellon University</a>, where I was advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. Previously I was an undergraduate at <a href="https://www.caltech.edu/">Caltech</a>, where I worked on plasma simulation with <a href="http://users.cms.caltech.edu/~ps/">Peter Schr&ouml;der</a>, chromosomal shape embeddings with Mathieu Desbrun, and interval analysis root finding techniques with <a href="http://www.gg.caltech.edu/~barr/">Alan Barr</a>.
+                <p>I am a postdoc in computer science at <a href="https://www.polytechnique.edu/en">École Polytechnique</a>, working with <a href="https://pages.saclay.inria.fr/mathieu.desbrun/">Mathieu Desbrun</a>. I design algorithms for reliably and efficiently processing geometric data, drawing inspiration from classical topology and differential geometry. I just received my PhD in computer science from <a href="https://www.cs.cmu.edu/">Carnegie Mellon University</a>, where I was advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. Previously I was an undergraduate at <a href="https://www.caltech.edu/">Caltech</a>, where I worked on plasma simulation with <a href="http://users.cms.caltech.edu/~ps/">Peter Schröder</a>, chromosomal shape embeddings with Mathieu Desbrun, and interval analysis root finding techniques with <a href="http://www.gg.caltech.edu/~barr/">Alan Barr</a>.
               </p>
               <p>
                 In my spare time, I like to design <a href="Origami/index.html">origami models</a> and <a href="https://www.ravelry.com/projects/markgillespie">knit</a>.
@@ -114,68 +48,45 @@
               <div class="news">
                   <h4>News</h4>
                   <ul>
-                    <li>
-                        <div class="when">Dec. 2024</div>
-                        <div class="what">I will serve on the program committee for the 2025 <a href="https://sgp2025.my.canva.site/">Symposium on Geometry Processing (SGP)</a>.</div>
-                    </li>
-                    <li>
-                        <div class="when">Sept. 2024</div>
-                        <div class="what">I started a postdoc with Mathieu Desbrun at École Polytechnique.</div>
-                    </li>
-                    <li>
-                        <div class="when">Aug. 2024</div>
-                        <div class="what"><a href="Research/harnack-tracing/index.html">Ray Tracing Harmonic Functions</a> and <a href="Research/solid-knitting/index.html">Solid Knitting</a> were both awarded <a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper Honorable Mentions</a> at Siggraph 2024.</div>
-                    </li>
-                <details>
-                    <li>
-                        <div class="when">May 2024</div>
-                        <div class="what">I defended my <a href="Research/Thesis/thesis.pdf">PhD thesis</a> at CMU.</div>
-                    </li>
-                    <li>
-                        <div class="when">Aug. 2023</div>
-                        <div class="what">I was invited to attend the <a href="https://www.geometrie.tugraz.at/events/og2023.html">geometry workshop in Obergurgl</a>, which was relocated to Innsbruck due to flooding in Ötztal valley.</div>
-                    </li>
-                    <li>
-                        <div class="when">Apr. 2019</div>
-                        <div class="what">The National Science Foundation awarded me a Graduate Research Fellowship.</div>
-                    </li>
-                    <summary></summary>
-                </details>
-                </ul>
+<li><div class="when">Dec. 2024</div><div class="what">I will serve on the program committee for the 2025 <a href="https://sgp2025.my.canva.site/">Symposium on Geometry Processing (SGP)</a>.</div></li>
+<li><div class="when">Sept. 2024</div><div class="what">I started a postdoc with Mathieu Desbrun at École Polytechnique.</div></li>
+<li><div class="when">Aug. 2024</div><div class="what"><a href="Research/harnack-tracing/index.html">Ray Tracing Harmonic Functions</a> and <a href="Research/solid-knitting/index.html">Solid Knitting</a> were both awarded <a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper Honorable Mentions</a> at Siggraph 2024.</div></li>
+<details><li><div class="when">May 2024</div><div class="what">I defended my <a href="Research/Thesis/thesis.pdf">PhD thesis</a> at CMU.</div></li>
+<li><div class="when">Aug. 2023</div><div class="what">I was invited to attend the <a href="https://www.geometrie.tugraz.at/events/og2023.html">geometry workshop in Obergurgl</a>, which was relocated to Innsbruck due to flooding in Ötztal valley.</div></li>
+<li><div class="when">Apr. 2019</div><div class="what">The National Science Foundation awarded me a Graduate Research Fellowship.</div></li>
+<summary></summary></details></ul>
                 </div>
               <hr />
             </div>
 
         </div>
 
-          <div class="section_panel">
-              <a name="research"><div class="section_header"> Research </div></a>
-              <div class="section_text">
-
-                <div class="project_header">
-                    <div class="image"><img src="Research/harnack-tracing/images/teaser-small.png"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="Research/harnack-tracing/index.html">Ray Tracing Harmonic Functions</a></div>
-                        <div class="project_author_list">
-                            Mark&nbsp;Gillespie,
-                            <a href="https://www.linkedin.com/in/denise-yang-899b33179">Denise&nbsp;Yang</a>,
-                            <a href="https://cg.cs.tu-dortmund.de/people/botsch_mario.html">Mario&nbsp;Botsch</a>,
-                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a>
-                        </div>
-                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</div>
-                        <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
-                        <div class="mini_abstract">
-                            Sphere tracing is a classic algorithm for visualizing surfaces encoded by signed distance functions, which arise throughout visual computing. We introduce an analogous algorithm for <em>harmonic functions</em>, enabling a new range of possibilities. For instance, it can visualize reconstructions of point clouds (via Poisson surface reconstruction) or polygon soups (via generalized winding numbers) without any linear solves or mesh extraction. We also show applications to Riemann surfaces, nonplanar polygons, architectural grid shells, and Seifert surfaces of knots.
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="Research/harnack-tracing/index.html"><span class="project_link">project</span></a>
-                    <a href="Research/harnack-tracing/HarnackTracing.pdf"><span class="project_link">pdf (11.2 mb)</span></a>
-                    <a href="https://www.shadertoy.com/playlist/dflXzN"><span class="project_link">code (ShaderToy)</span></a>
-                    <a href="https://youtu.be/oDwedIuqh5Q"><span class="project_link">video (10 min)</span></a>
-                    <div class="bibBox"><a href="Research/harnack-tracing/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@article{Gillespie:2024:RTH,
+            <div class="section_panel">
+            <a name="research"><div class="section_header"> Research </div></a>
+            <div class="section_text">
+                
+    
+<div class="project_header">
+    <div class="image"><img src="Research/harnack-tracing/images/teaser-small.png" /></div>
+    <div class="text">
+        <div class="project_title"><a href="Research/harnack-tracing/index.html">Ray Tracing Harmonic Functions</a></div>
+        <div class="project_author_list">Mark&nbsp;Gillespie,
+<a href="https://www.linkedin.com/in/denise-yang-899b33179">Denise&nbsp;Yang</a>,
+<a href="https://cg.cs.tu-dortmund.de/people/botsch_mario.html">Mario&nbsp;Botsch</a>,
+<a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></div>
+        <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</div>
+        <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
+        <div class="mini_abstract">
+        Sphere tracing is a classic algorithm for visualizing surfaces encoded by signed distance functions, which arise throughout visual computing. We introduce an analogous algorithm for <em>harmonic functions</em>, enabling a new range of possibilities. For instance, it can visualize reconstructions of point clouds (via Poisson surface reconstruction) or polygon soups (via generalized winding numbers) without any linear solves or mesh extraction. We also show applications to Riemann surfaces, nonplanar polygons, architectural grid shells, and Seifert surfaces of knots.
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="Research/harnack-tracing/index.html"><span class="project_link">project</span></a>
+<a href="Research/harnack-tracing/HarnackTracing.pdf"><span class="project_link">pdf (11.2 mb)</span></a>
+<a href="https://www.shadertoy.com/playlist/dflXzN"><span class="project_link">code (ShaderToy)</span></a>
+<a href="https://youtu.be/oDwedIuqh5Q"><span class="project_link">video (10 min)</span></a>
+<div class="bibBox"><a href="Research/harnack-tracing/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@article{Gillespie:2024:RTH,
     author = {Gillespie, Mark and Yang, Denise and Botsch, Mario and Crane, Keenan},
     title = {Ray Tracing Harmonic Functions},
     journal = {ACM Trans. Graph.},
@@ -188,42 +99,38 @@
     month = jul,
     articleno = {99},
     pages = {1--18}
-}</div>
-                    </div>
-                    <a href="https://doi.org/10.1145/3658201"><span class="project_link">doi</span></a>
-                    <details>
-                        <a href="Research/harnack-tracing/HarnackTracingSupplement.pdf"><span class="project_link">supplement (350 kb)</span></a>
-                        <a href="https://www.youtube.com/watch?v=6j6WWzPV6aY"><span class="project_link">video (2 min)</span></a>
-                        <a href="https://youtu.be/9h13FPuBvM8"><span class="project_link">video (30 min)</span></a>
-                        <a href="https://github.com/MarkGillespie/harnack-blender"><span class="project_link">code (C<span class="cpp">++</span>)</span></a>
-                        <a href="Research/harnack-tracing/harnack-tracing-poster.pdf"><span class="project_link">poster (13 mb)</span></a>
-                    <summary></summary>
-                    </details>
-                </div>
+}</div></div>
+<a href="https://doi.org/10.1145/3658201"><span class="project_link">doi</span></a>
+<details>
+<a href="Research/harnack-tracing/HarnackTracingSupplement.pdf"><span class="project_link">supplement (350 kb)</span></a>
+<a href="https://www.youtube.com/watch?v=6j6WWzPV6aY"><span class="project_link">video (2 min)</span></a>
+<a href="https://youtu.be/9h13FPuBvM8"><span class="project_link">video (30 min)</span></a>
+<a href="https://github.com/MarkGillespie/harnack-blender"><span class="project_link">code (C<span class="cpp">++</span>)</span></a>
+<a href="Research/harnack-tracing/harnack-tracing-poster.pdf"><span class="project_link">poster (13 mb)</span></a>
+<summary></summary></details>
+</div>
 
-                <div class="project_header">
-                    <div class="image"><img src="Research/solid-knitting/RepresentativeImage.jpg"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="Research/solid-knitting/index.html">Solid Knitting</a></div>
-                        <div class="project_author_list">
-                            <a href="https://hirose-yuichi.github.io/">Yuichi&nbsp;Hirose</a>,
-                            Mark&nbsp;Gillespie,
-                            <a href="https://abfominaya.com/">Angelica M. Bonilla&nbsp;Fominaya</a>,
-                            <a href="https://www.cs.cmu.edu/~jmccann/">James&nbsp;McCann</a>
-                        </div>
-                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2024) </div>
-                        <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
-                        <div class="mini_abstract">
-                            This paper introduces <em>solid knitting</em>, a fabrication technique. Unlike standard knitting, which makes hollow surfaces, solid knitting creates dense volumes by layering knit sheets—much as 3D printers layer sheets of plastic. We envision a future where everyday objects like furniture or shoes can be knit as one piece. We define the basic building blocks of solid knitting and demonstrate a working prototype solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns.
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="Research/solid-knitting/index.html"><span class="project_link">project</span></a>
-                    <a href="Research/solid-knitting/SolidKnitting.pdf"><span class="project_link">pdf (18.5 mb)</span></a>
-                    <a href="https://youtu.be/uVRXWlpiyAc"><span class="project_link">video (5 m)</span></a>
-                    <div class="bibBox"><a href="Research/solid-knitting/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@article{Hirose:2024:SK,
+    
+<div class="project_header">
+    <div class="image"><img src="Research/solid-knitting/images/RepresentativeImage.jpg" /></div>
+    <div class="text">
+        <div class="project_title"><a href="Research/solid-knitting/index.html">Solid Knitting</a></div>
+        <div class="project_author_list">Mark&nbsp;Gillespie,
+<a href="https://hirose-yuichi.github.io/">Yuichi&nbsp;Hirose</a>,
+<a href="https://abfominaya.com/">Angelica M. Bonilla&nbsp;Fominaya</a>,
+<a href="https://www.cs.cmu.edu/~jmccann/">James&nbsp;McCann</a></div>
+        <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</div>
+        <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
+        <div class="mini_abstract">
+        This paper introduces <em>solid knitting</em>, a fabrication technique. Unlike standard knitting, which makes hollow surfaces, solid knitting creates dense volumes by layering knit sheets—much as 3D printers layer sheets of plastic. We envision a future where everyday objects like furniture or shoes can be knit as one piece. We define the basic building blocks of solid knitting and demonstrate a working prototype solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns.
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="Research/solid-knitting/index.html"><span class="project_link">project</span></a>
+<a href="Research/solid-knitting/SolidKnitting.pdf"><span class="project_link">pdf (18.5 mb)</span></a>
+<a href="https://youtu.be/uVRXWlpiyAc"><span class="project_link">video (5m)</span></a>
+<div class="bibBox"><a href="Research/solid-knitting/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@article{Hirose:2024:SK,
     author = {Hirose, Yuichi and Gillespie, Mark and Bonilla Fominaya, Angelica M. and McCann, James},
     title = {Solid Knitting},
     journal = {ACM Trans. Graph.},
@@ -236,296 +143,250 @@
     month = jul,
     articleno = {88},
     pages = {1--15}
-}</div>
-                    </div>
-                    <a href="https://doi.org/10.1145/3658123"><span class="project_link">doi</span></a>
-                    <details>
-                    <a href="Research/solid-knitting/SolidKnittingHandInstructions.pdf"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(10 mb)</span></a>
-                    <a href="https://youtu.be/t2PIVAvan-c"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(video)</span></a>
-                    <a href="https://github.com/textiles-lab/solid-knitting-ui"><span class="project_link">code</span></a>
-                    <summary></summary>
-                    </details>
-                </div>
+}</div></div>
+<a href="https://doi.org/10.1145/3658123"><span class="project_link">doi</span></a>
+<details>
+<a href="Research/solid-knitting/SolidKnittingHandInstructions.pdf"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(10 mb)</span></a>
+<a href="https://youtu.be/t2PIVAvan-c"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(video)</span></a>
+<a href="https://github.com/textiles-lab/solid-knitting-ui"><span class="project_link">code</span></a>
+<summary></summary></details>
+</div>
 
-                <div class="project_header">
-                    <div class="image"><img src="Research/Thesis/RepresentativeImage.svg"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="Research/Thesis/thesis.pdf">Evolving Intrinsic Triangulations</a></div>
-                        <div class="project_author_list">
-                            Mark&nbsp;Gillespie
-                        </div>
-                        <div class="venue">  PhD Thesis (Carnegie Mellon University) </div>
-                        <div class="mini_abstract">
-                            This thesis presents algorithms and data structures for computing on surfaces whose intrinsic geometry evolves over time. We take as examples the problems of mesh simplification and surface parameterization—in both cases, we find that the intrinsic perspective leads to simple algorithms which are robust and efficient on a variety of challenging examples. 
-                        </div>
-                        <div class="project_links">
-                            <a href="Research/Thesis/thesis.pdf"><span class="project_link">pdf (25.5 mb)</span></a>
-                            <a href="Research/Thesis/defense.pdf"><span class="project_link">slides (75.9 mb)</span></a>
-                            <a href="https://doi.org/10.1184/R1/25898782.v1"><span class="project_link">doi</span></a>
-                            <div class="bibBox">
-                                <a href="Research/Thesis/bib.txt"><span class="project_link">bibtex</span></a>
-                                <div class="bibliography">@phdthesis{Gillespie:2024:EIT,
-  author = {Mark Gillespie},
-  title = {Evolving Intrinsic Triangulations},
-  school = {Carnegie Mellon University},
-  month = {April},
-  year = {2024},
-  doi = {10.1184/R1/25898782.v1}
-}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    
+<div class="project_header">
+    <div class="image"><img src="Research/Thesis/RepresentativeImage.svg" /></div>
+    <div class="text">
+        <div class="project_title"><a href="Research/Thesis/thesis.pdf">Evolving Intrinsic Triangulations</a></div>
+        <div class="project_author_list">Mark&nbsp;Gillespie</div>
+        <div class="venue">PhD Thesis (Carnegie Mellon University)</div>
+        
+        <div class="mini_abstract">
+        This thesis presents algorithms and data structures for computing on surfaces whose intrinsic geometry evolves over time. We take as examples the problems of mesh simplification and surface parameterization—in both cases, we find that the intrinsic perspective leads to simple algorithms which are robust and efficient on a variety of challenging examples. 
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="Research/Thesis/thesis.pdf"><span class="project_link">pdf (25.5 mb)</span></a>
+<a href="Research/Thesis/defense.pdf"><span class="project_link">slides (75.9 mb)</span></a>
+<div class="bibBox"><a href="Research/Thesis/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@phdthesis{Gillespie:2024:EIT,
+	author = {Mark Gillespie},
+	title = {Evolving Intrinsic Triangulations},
+	school = {Carnegie Mellon University},
+	month = {April},
+	year = {2024}
+}</div></div>
+<a href="https://doi.org/10.1184/R1/25898782.v1"><span class="project_link">doi</span></a>
+</div>
+
+    
+<div class="project_header">
+    <div class="image"><img src="Research/WNoDS/RepresentativeImage.jpg" /></div>
+    <div class="text">
+        <div class="project_title"><a href="Research/WNoDS/index.html">Winding Numbers on Discrete Surfaces</a></div>
+        <div class="project_author_list"><a href="https://nzfeng.github.io/">Nicole&nbsp;Feng</a>,
+Mark&nbsp;Gillespie,
+<a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></div>
+        <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2023)</div>
+        
+        <div class="mini_abstract">
+        Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven invaluable in robust geometry processing. However, standard definitions do not immediately apply on surfaces, where not all curves bound regions. We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions. 
+        
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="Research/WNoDS/index.html"><span class="project_link">project</span></a>
+<a href="Research/WNoDS/WindingNumbersOnSurfaces.pdf"><span class="project_link">pdf (11 mb)</span></a>
+<a href="https://github.com/nzfeng/SWN"><span class="project_link">code</span></a>
+<a href="https://youtu.be/QnMx3s4_4WY"><span class="project_link">video (10 min)</span></a>
+<div class="bibBox"><a href="Research/WNoDS/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@article{Feng:2023:WND,
+  author = {Feng, Nicole and Gillespie, Mark and Crane, Keenan},
+  title = {Winding Numbers on Discrete Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {42},
+  number = {4},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  issn = {0730-0301},
+  url = {https://doi.org/10.1145/3592401},
+  doi = {10.1145/3592401},
+  month = {jul},
+  articleno = {36},
+}
+</div></div>
+<a href="https://doi.org/10.1145/3592401"><span class="project_link">doi</span></a>
+<details>
+<a href="Research/WNoDS/PerspectivesOnWindingNumbers.pdf"><span class="project_link">supplement (2.7 mb)</span></a>
+<a href="https://youtu.be/3undxB8rcvE"><span class="project_link">video (20 s)</span></a>
+<summary></summary></details>
+</div>
+
+    
+<div class="project_header">
+    <div class="image"><img src="Research/intrinsic-coarsening/RepresentativeImage.png" /></div>
+    <div class="text">
+        <div class="project_title"><a href="Research/intrinsic-coarsening/index.html">Surface Simplification using Intrinsic Error Metrics</a></div>
+        <div class="project_author_list"><a href="https://www.dgp.toronto.edu/~hsuehtil/">Hsueh-Ti&nbsp;Derek&nbsp;Liu</a>,
+Mark&nbsp;Gillespie,
+<a href="https://www.gitshowcase.com/benchislett">Benjamin&nbsp;Chislett</a>,
+<a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a>,
+<a href="https://www.cs.toronto.edu/~jacobson/">Alec&nbsp;Jacobson</a>,
+<a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></div>
+        <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2023)</div>
+        
+        <div class="mini_abstract">
+        This paper describes a method for fast simplification of surface meshes. Rather than approximating the extrinsic geometry, we construct a coarse intrinsic triangulation of the input domain. In the spirit of the quadric error metric (QEM), we perform greedy decimation while agglomerating global information about approximation error. In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature “drifts” during simplification. The overall payoff is a “black box” approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="Research/intrinsic-coarsening/index.html"><span class="project_link">project</span></a>
+<a href="Research/intrinsic-coarsening/IntrinsicErrorMetric.pdf"><span class="project_link">pdf (15.6 mb)</span></a>
+<a href="https://github.com/HTDerekLiu/intrinsic-simplification"><span class="project_link">code</span></a>
+<div class="bibBox"><a href="Research/intrinsic-coarsening/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@article{Liu:2023:SSI,
+  author = {Liu, Hsueh-Ti Derek and Gillespie, Mark and Chislett, Benjamin and Sharp, Nicholas and Jacobson, Alec and Crane, Keenan},
+  title = {Surface Simplification Using Intrinsic Error Metrics},
+  journal = {ACM Trans. Graph.},
+  volume = {42},
+  number = {4},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  issn = {0730-0301},
+  url = {https://doi.org/10.1145/3592403},
+  doi = {10.1145/3592403},
+  month = {jul},
+  articleno = {118},
+}
+</div></div>
+<a href="https://doi.org/10.1145/3592403"><span class="project_link">doi</span></a>
+<details>
+<a href="https://arxiv.org/abs/2305.06410"><span class="project_link">arxiv</span></a>
+<a href="Research/intrinsic-coarsening/IntrinsicErrorMetricPoster.pdf"><span class="project_link">poster (9mb)</span></a>
+<summary></summary></details>
+</div>
+
+    
+<div class="project_header">
+    <div class="image"><img src="Research/integer-coordinates/images/SmallRepresentativeImage.svg" /></div>
+    <div class="text">
+        <div class="project_title"><a href="Research/integer-coordinates/index.html">Integer Coordinates for Intrinsic Geometry Processing</a></div>
+        <div class="project_author_list">Mark&nbsp;Gillespie,
+<a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a>,
+<a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></div>
+        <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;Asia&nbsp;2021)</div>
+        
+        <div class="mini_abstract">
+        This paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to a broader set of operations needed for mesh processing. As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="Research/integer-coordinates/index.html"><span class="project_link">project</span></a>
+<a href="Research/integer-coordinates/integer_coordinates.pdf"><span class="project_link">pdf (7.6 mb)</span></a>
+<a href="https://youtu.be/3czWJxSmCuc"><span class="project_link">video (20 min)</span></a>
+<a href="https://github.com/MarkGillespie/intrinsic-triangulations-demo"><span class="project_link">code (C<span class="cpp">++</span> demo)</span></a>
+<div class="bibBox"><a href="Research/integer-coordinates/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@article{Gillespie:2021:ICI,
+  author = {Gillespie, Mark and Sharp, Nicholas and Crane, Keenan},
+  title = {Integer Coordinates for Intrinsic Geometry Processing},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {6},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3478513.3480522},
+  doi = {10.1145/3478513.3480522},
+}
+</div></div>
+<a href="https://doi.org/10.1145/3478513.3480522"><span class="project_link">doi</span></a>
+<details>
+<a href="https://arxiv.org/abs/2106.00220"><span class="project_link">arxiv</span></a>
+<a href="https://youtu.be/a4sgxoZRSCk"><span class="project_link">video (5 min)</span></a>
+<a href="https://youtu.be/0ZN79VqGMaI"><span class="project_link">video (45 s)</span></a>
+<a href="https://geometry-central.net/surface/intrinsic_triangulations/basics/"><span class="project_link">code (C<span class="cpp">++</span> library)</span></a>
+<summary></summary></details>
+</div>
+
+    
+<div class="project_header">
+    <div class="image"><img src="Research/int-tri-course/SmallRepresentativeImage.svg" /></div>
+    <div class="text">
+        <div class="project_title"><a href="https://doi.org/10.1145/3450508.3464592">Geometry Processing with Intrinsic Triangulations</a></div>
+        <div class="project_author_list"><a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a>,
+Mark&nbsp;Gillespie,
+<a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></div>
+        <div class="venue">ACM SIGGRAPH Courses (2021), SIAM&nbsp;IMR&nbsp;2021&nbsp;Courses</div>
+        
+        <div class="mini_abstract">
+        Intrinsic triangulations de-couple the mesh used to encode geometry from the one used for computation. The basic shift in perspective is to encode the geometry of a mesh not in terms of ordinary vertex positions, but instead only in terms of edge lengths. This course provides a first introduction to intrinsic triangulations and their use in mesh processing algorithms, covering the theory, practical details, and some cutting-edge research in the area.
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="https://nmwsharp.com/media/papers/int-tri-course/int_tri_course.pdf"><span class="project_link">pdf (25 mb)</span></a>
+<a href="https://www.youtube.com/watch?v=gcRDdYrgOhg"><span class="project_link">video (3 hours)</span></a>
+<a href="https://github.com/nmwsharp/intrinsic-triangulations-tutorial"><span class="project_link">coding tutorial</span></a>
+<div class="bibBox"><a href="Research/int-tri-course/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@article{Sharp:2021:GPI,
+  author = {Sharp, Nicholas and Gillespie, Mark and Crane, Keenan},
+  title = {Geometry Processing with Intrinsic Triangulations},
+  booktitle = {ACM SIGGRAPH 2021 courses},
+  series = {SIGGRAPH '21},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3450508.3464592},
+  doi = {10.1145/3450508.3464592},
+}
+</div></div>
+<a href="https://doi.org/10.1145/3450508.3464592"><span class="project_link">doi</span></a>
+</div>
+
+    
+<div class="project_header">
+    <div class="image"><img src="Research/CEPS/images/RepresentativeImage.png" /></div>
+    <div class="text">
+        <div class="project_title"><a href="Research/CEPS/index.html">Discrete Conformal Equivalence of Polyhedral Surfaces</a></div>
+        <div class="project_author_list">Mark&nbsp;Gillespie,
+<a href="https://page.math.tu-berlin.de/~springb/">Boris&nbsp;Springborn</a>,
+<a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></div>
+        <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2021)</div>
+        
+        <div class="mini_abstract">
+        We present a new method for surface parameterization, leveraging <em>hyperbolic geometry</em> to find maps that are locally injective and discretely conformal in an exact sense. Stress tests involving difficult cone configurations and near-degenerate meshes indicate that the method is extremely robust in practice, providing high-quality interpolation even on meshes with poor elements.
+    </div>
+    </div>
+</div>
+<div class="project_links"><a href="Research/CEPS/index.html"><span class="project_link">project</span></a>
+<a href="Research/CEPS/Paper.pdf"><span class="project_link">pdf (16 mb)</span></a>
+<a href="https://www.youtube.com/watch?v=wwuHFUQLlWA"><span class="project_link">video (20 min)</span></a>
+<a href="https://github.com/MarkGillespie/CEPS"><span class="project_link">code (C<span class="cpp">++</span> demo)</span></a>
+<div class="bibBox"><a href="Research/CEPS/bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography">@article{Gillespie:2021:DCE,
+  author = {Gillespie, Mark and Springborn, Boris and Crane, Keenan},
+  title = {Discrete Conformal Equivalence of Polyhedral Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {4},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3450626.3459763},
+  doi = {10.1145/3450626.3459763},
+}
+</div></div>
+<a href="https://doi.org/10.1145/3450626.3459763"><span class="project_link">doi</span></a>
+<details>
+<a href="https://www.youtube.com/watch?v=W0iBHF5-r-M"><span class="project_link">video (5 min)</span></a>
+<summary></summary></details>
+</div>
 
 
-                <div class="project_header">
-                    <div class="image"><img src="Research/WNoDS/RepresentativeImage.jpg"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="Research/WNoDS/index.html">Winding Numbers on Discrete Surfaces</a></div>
-                        <div class="project_author_list">
-                            <a href="https://nzfeng.github.io/">Nicole&nbsp;Feng</a>,
-                            Mark&nbsp;Gillespie,
-                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a>
-                        </div>
-                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2023) </div>
-                        <div class="mini_abstract">
-                            Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven invaluable in robust geometry processing. However, standard definitions do not immediately apply on surfaces, where not all curves bound regions. We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions. 
-                            <!-- Ultimately, our algorithm yields (i) a closed completion the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region. -->
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="Research/WNoDS/index.html"><span class="project_link">project</span></a>
-                    <a href="Research/WNoDS/WindingNumbersOnSurfaces.pdf"><span class="project_link">pdf (11 mb)</span></a>
-                    <a href="https://github.com/nzfeng/SWN"><span class="project_link" >code</span></a>
-                    <a href="https://youtu.be/QnMx3s4_4WY"><span class="project_link">video (10 min)</span></a>
-                    <div class="bibBox"><a href="Research/WNoDS/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@article{Feng:2023:WND,
-    author = {Feng, Nicole and Gillespie, Mark and Crane, Keenan},
-    title = {Winding Numbers on Discrete Surfaces},
-    journal = {ACM Trans. Graph.},
-    volume = {42},
-    number = {4},
-    year = {2023},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    issn = {0730-0301},
-    url = {https://doi.org/10.1145/3592401},
-    doi = {10.1145/3592401},
-    month = {jul},
-    articleno = {36},
-}</div>
-                    </div>
-                    <a href="https://doi.org/10.1145/3592401"><span class="project_link">doi</span></a>
-                    <details>
-                    <a href="Research/WNoDS/PerspectivesOnWindingNumbers.pdf"><span class="project_link">supplement (2.7 mb)</span></a>
-                    <a href="https://youtu.be/3undxB8rcvE"><span class="project_link">video (20 s)</span></a>
-                    <summary></summary>
-                    </details>
-                </div>
-
-                <div class="project_header">
-                    <div class="image"><img src="Research/intrinsic-coarsening/RepresentativeImage.png"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="Research/intrinsic-coarsening/index.html">Surface Simplification using Intrinsic Error Metrics</a></div>
-                        <div class="project_author_list">
-                            <a href="https://www.dgp.toronto.edu/~hsuehtil/">Hsueh-Ti&nbsp;Derek&nbsp;Liu</a>,
-                            Mark&nbsp;Gillespie,
-                            <a href="https://www.gitshowcase.com/benchislett">Benjamin&nbsp;Chislett</a>,
-                            <a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a>,
-                            <a href="https://www.cs.toronto.edu/~jacobson/">Alec&nbsp;Jacobson</a>,
-                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a>
-                        </div>
-                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2023) </div>
-                        <div class="mini_abstract">
-                            This paper describes a method for fast simplification of surface meshes. Rather than approximating the extrinsic geometry, we construct a coarse intrinsic triangulation of the input domain. In the spirit of the quadric error metric (QEM), we perform greedy decimation while agglomerating global information about approximation error. In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature “drifts” during simplification. The overall payoff is a “black box” approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="Research/intrinsic-coarsening/index.html"><span class="project_link">project</span></a>
-                    <a href="Research/intrinsic-coarsening/IntrinsicErrorMetric.pdf"><span class="project_link">pdf (15.6 mb)</span></a>
-                    <!-- <a href="https://youtu.be/3czWJxSmCuc"><span class="project_link">video (20 min)</span></a> -->
-                    <a href="https://github.com/HTDerekLiu/intrinsic-simplification"><span class="project_link" >code</span></a>
-                    <div class="bibBox"><a href="Research/intrinsic-coarsening/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@article{Liu:2023:SSI,
-    author = {Liu, Hsueh-Ti Derek and Gillespie, Mark and Chislett, Benjamin and Sharp, Nicholas and Jacobson, Alec and Crane, Keenan},
-    title = {Surface Simplification Using Intrinsic Error Metrics},
-    journal = {ACM Trans. Graph.},
-    volume = {42},
-    number = {4},
-    year = {2023},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    issn = {0730-0301},
-    url = {https://doi.org/10.1145/3592403},
-    doi = {10.1145/3592403},
-    month = {jul},
-    articleno = {118},
-}</div>
-                    </div>
-                    <a href="https://doi.org/10.1145/3592403"><span class="project_link">doi</span></a>
-                    <details>
-                    <a href="https://arxiv.org/abs/2305.06410"><span class="project_link">arxiv</span></a>
-                    <a href="Research/intrinsic-coarsening/IntrinsicErrorMetricPoster.pdf"><span class="project_link">poster (9 mb)</span></a>
-                    <summary></summary>
-                    </details>
-                </div>
-
-                <div class="project_header">
-                    <div class="image"><img src="Research/integer-coordinates/SmallRepresentativeImage.svg"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="Research/integer-coordinates/index.html">Integer Coordinates for Intrinsic Geometry Processing</a></div>
-                        <div class="project_author_list">
-                            Mark&nbsp;Gillespie,
-                            <a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a>,
-                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a>
-                        </div>
-                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;Asia&nbsp;2021) </div>
-                        <div class="mini_abstract">
-                            This paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to a broader set of operations needed for mesh processing. As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="Research/integer-coordinates/index.html"><span class="project_link">project</span></a>
-                    <a href="Research/integer-coordinates/integer_coordinates.pdf"><span class="project_link">pdf (7.6 mb)</span></a>
-                    <a href="https://youtu.be/3czWJxSmCuc"><span class="project_link">video (20 min)</span></a>
-                    <a href="https://github.com/MarkGillespie/intrinsic-triangulations-demo"><span class="project_link" >code (C<span class="cpp">++</span> demo)</span></a>
-                    <div class="bibBox"><a href="Research/integer-coordinates/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@article{Gillespie:2021:ICI,
-    author = {Gillespie, Mark and Sharp, Nicholas and Crane, Keenan},
-    title = {Integer Coordinates for Intrinsic Geometry Processing},
-    journal = {ACM Trans. Graph.},
-    volume = {40},
-    number = {6},
-    year = {2021},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    url = {https://doi.org/10.1145/3478513.3480522},
-    doi = {10.1145/3478513.3480522},
-}</div>
-                    </div>
-                    <a href="https://doi.org/10.1145/3478513.3480522"><span class="project_link">doi</span></a>
-
-                    <details>
-                    <a href="https://arxiv.org/abs/2106.00220"><span class="project_link">arxiv</span></a>
-                    <a href="https://youtu.be/a4sgxoZRSCk"><span class="project_link">video (5 min)</span></a>
-                    <a href="https://youtu.be/0ZN79VqGMaI"><span class="project_link">video (45 s)</span></a>
-                    <a href="https://geometry-central.net/surface/intrinsic_triangulations/basics/"><span class="project_link" >code (C<span class="cpp">++</span> library)</span></a>
-                    <summary></summary>
-                    </details>
-                </div>
-
-                <div class="project_header">
-                    <div class="image"><img src="Research/int-tri-course/SmallRepresentativeImage.svg"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="https://doi.org/10.1145/3450508.3464592">Geometry Processing with Intrinsic Triangulations</a></div>
-                        <div class="project_author_list">
-                            <a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a>,
-                            Mark&nbsp;Gillespie,
-                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a>
-                        </div>
-                        <div class="venue">ACM SIGGRAPH Courses (2021), SIAM&nbsp;IMR&nbsp;2021&nbsp;Courses </div>
-                        <div class="mini_abstract">
-                            Intrinsic triangulations de-couple the mesh used to encode geometry from the one used for computation. The basic shift in perspective is to encode the geometry of a mesh not in terms of ordinary vertex positions, but instead only in terms of edge lengths. This course provides a first introduction to intrinsic triangulations and their use in mesh processing algorithms, covering the theory, practical details, and some cutting-edge research in the area.
-
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="https://nmwsharp.com/media/papers/int-tri-course/int_tri_course.pdf"><span class="project_link">pdf (25 mb)</span></a>
-                    <a href="https://www.youtube.com/watch?v=gcRDdYrgOhg"><span class="project_link">video (3 hour)</span></a>
-                    <a href="https://github.com/nmwsharp/intrinsic-triangulations-tutorial"><span class="project_link">coding tutorial</span></a>
-                    <div class="bibBox"><a href="Research/int-tri-course/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@article{Sharp:2021:GPI,
-    author = {Sharp, Nicholas and Gillespie, Mark and Crane, Keenan},
-    title = {Geometry Processing with Intrinsic Triangulations},
-    booktitle = {ACM SIGGRAPH 2021 courses},
-    series = {SIGGRAPH '21},
-    year = {2021},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    url = {https://doi.org/10.1145/3450508.3464592},
-    doi = {10.1145/3450508.3464592},
-}</div>
-                    </div>
-                    <a href="https://doi.org/10.1145/3450508.3464592"><span class="project_link">doi</span></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="image"><img src="Research/CEPS/SmallRepresentativeImage.png"></div>
-                    <div class="text">
-                        <div class="project_title"><a href="Research/CEPS/index.html">Discrete Conformal Equivalence of Polyhedral Surfaces</a></div>
-                        <div class="project_author_list">
-                            Mark Gillespie,
-                            <a href="https://page.math.tu-berlin.de/~springb/">Boris Springborn</a>,
-                            <a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a>
-                        </div>
-                        <div class="venue">  ACM Transactions on Graphics (SIGGRAPH&nbsp;2021) </div>
-                        <div class="mini_abstract">
-                            We present a new method for surface parameterization, leveraging <em>hyperbolic geometry</em> to find maps that are locally injective and discretely conformal in an exact sense. Stress tests involving difficult cone configurations and near-degenerate meshes indicate that the method is extremely robust in practice, providing high-quality interpolation even on meshes with poor elements.
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="Research/CEPS/index.html"><span class="project_link">project</span></a>
-                    <a href="Research/CEPS/Paper.pdf"><span class="project_link">pdf (16 mb)</span></a>
-                    <a href="https://www.youtube.com/watch?v=wwuHFUQLlWA"><span class="project_link">video (20 min)</span></a>
-                    <a href="https://github.com/MarkGillespie/CEPS/"><span class="project_link" >code (C<span class="cpp">++</span> demo)</span></a>
-                    <div class="bibBox"><a href="Research/CEPS/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@article{Gillespie:2021:DCE,
-    author = {Gillespie, Mark and Springborn, Boris and Crane, Keenan},
-    title = {Discrete Conformal Equivalence of Polyhedral Surfaces},
-    journal = {ACM Trans. Graph.},
-    volume = {40},
-    number = {4},
-    year = {2021},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    url = {https://doi.org/10.1145/3450626.3459763},
-    doi = {10.1145/3450626.3459763},
-}</div>
-                    </div>
-                    <a href="https://doi.org/10.1145/3450626.3459763"><span class="project_link">doi</span></a>
-                    
-                    <details>
-                    <a href="https://www.youtube.com/watch?v=W0iBHF5-r-M"><span class="project_link">video (5 min)</span></a>
-                    <summary></summary>
-                    </details>
-                </div>
-
-                <!-- <div class="project_header">
-                    <div class="image"><span style="margin:auto;"><img src="images/MHD/plume10.jpg"><img src="images/MHD/plume20.jpg"></span></div>
-                    <div class="text">
-                        <div class="project_title">Magnetohydrodynamics Simulation via Discrete Exterior Calculus</div>
-                        <div class="project_author_list">
-                            Mark Gillespie
-                        </div>
-                        <div class="venue"> Senior Thesis (Caltech) </div>
-                        <div class="mini_abstract">
-                            Magnetohydrodyamics (MHD) models the behavior of current-carrying fluids such as plasma on the surface of the sun, or the earth's molten core. In this thesis, I gave an integrator for ideal MHD in two-dimensional domains with boundary and showed that the integrator preserves total energy and cross helicity.
-                        </div>
-                    </div>
-                </div>
-                <div class="project_links">
-                    <a href="Research/MHD/MHD_Simulation_with_DEC.pdf"><span class="project_link">pdf (6.6 mb)</span></a>
-                    <div class="bibBox"><a href="Research/MHD/bib.txt"><span class="project_link">bibtex</span></a>
-                        <div class="bibliography">@mastersthesis{Gillespie:2018:MHD,
-    author = {Gillespie, Mark},
-    title = {Magnetohydrodynamics Simulation via Discrete Exterior Calculus},
-    type = {Bachelor's Thesis},
-    school = {California Institute of Technology},
-    year = {2018}
-}</div>
-                    </div>
-                </div> -->
-
-              <hr />
             </div>
-          </div>
+            </div>
 
-          <div class="section_panel">
+            <div class="section_panel">
               <a name="awards"><div class="section_header">Awards </div></a>
             <div class="section_text">
               <table>
@@ -567,7 +428,7 @@
                         Summer research fellowship.
                 </td></tr>
 
-<!--                 <tr>
+            <!--                 <tr>
                   <td rowspan="2">2016</td>
                   <td><h4>William Lowell Putnam Mathematics Competition</h4></td>
                 </tr>
@@ -575,497 +436,402 @@
                         31 points (rank: 365/3214)
                 </td></tr> -->
             </table>
-          <hr />
-          </div>
-          </div>
-<!-- 
-          <div class="section_panel">
-              <a name="education"><div class="section_header"> Education </div></a>
-            <div class="section_text" style="margin-top: 0; padding-top: 0;">
-              <dl>
-              <dt>Carnegie Mellon University</dt>
-                <dd> 2018-2024
-                  <ul class="pointless">
-                    <li> PhD in Computer Science </li>
-                  </ul>
-                </dd>
-                <dt>California Institute of Technology</dt>
-                <dd> 2014-2018
-                  <ul class="pointless">
-                    <li> Majors: Computer Science, Mathematics </li>
-                    <li> GPA: 4.1</li>
-                  </ul>
-                </dd>
-              </dl>
-              <hr />
             </div>
-          </div> -->
-
-          <div class="section_panel">
-              <a name="talks"><div class="section_header">Selected Talks</div></a>
-            <div class="section_text">
-              <table>
-                <tr>
-                      <td rowspan="3">Feb. 2025</td>
-                      <td><h4>Ray Tracing Harmonic Functions</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://www.mfo.de/occasion/2506/www_view">Oberwolfach Workshop on Mathematical Imaging and Surface Processing</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          45 minute talk about my work on my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. A recording is available on <a href="https://youtu.be/9h13FPuBvM8">YouTube</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-Oberwolfach2025.pdf">pdf [31 mb]</a>, or a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-Oberwolfach2025.key
-                          ">keynote file [1 gb]</a>.
-                      </td>
-                  </tr>
-                <tr>
-                      <td rowspan="3">Nov. 2024</td>
-                      <td><h4>Solid Knitting and Harmonic Hitting</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://visualcomputing.ist.ac.at/seminars/">Institute of Science and Technology Austria (ISTA)</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          45 minute talk about my work on <a href="Research/solid-knitting/index.html">solid knitting</a> and <a href="Research/harnack-tracing/index.html">ray tracing harmnic functions</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/SolidKnittingAndHarmonicHitting.pdf">pdf [38 mb]</a>, or a <a href="https://markjgillespie.com/Talks/SolidKnittingAndHarmonicHitting.key
-                          ">keynote file [1.7 gb]</a>.
-                      </td>
-                  </tr>
-                  <tr>
-                      <td rowspan="3">Aug. 2024</td>
-                      <td><h4>Ray Tracing Harmonic Functions</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://s2024.conference-program.org/presentation/?id=papers_786&sess=sess128">ACM SIGGRAPH Technical Papers</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          10 minute talk about my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. The talk is available on YouTube <a href="https://youtu.be/oDwedIuqh5Q">here</a>.
-                      </td>
-                  </tr>
-
-                  <tr>
-                      <td rowspan="3">Apr. 2024</td>
-                      <td><h4>Evolving Intrinsic Triangulations</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue">Carnegie Mellon University (CMU)</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="space_under">
-                          Thesis defense. My slides are available as a <a href="Research/Thesis/defense.pdf">pdf [76 mb]</a> or a <a href="https://markjgillespie.com/Talks/Thesis_Defense.key
-                          ">keynote file [0.8 gb]</a>, and my thesis document is available <a href="Research/Thesis/thesis.pdf">here [26 mb]</a>.
-                      </td>
-                  </tr>
-
-                  <tr>
-                      <td rowspan="3">Dec. 2023</td>
-                      <td><h4>Dynamic Intrinsic Geometry Processing</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue">Carnegie Mellon University (CMU)</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="space_under">
-                          Thesis proposal talk. My slides are available <a href="Research/Thesis/proposal-talk.pdf">here [79 mb]</a> and my proposal document is available <a href="Research/Thesis/proposal.pdf">here [13 mb]</a>.
-                      </td>
-                  </tr>
-
-                  <tr>
-                      <td rowspan="3">Sept. 2023</td>
-                      <td><h4>Intrinsic Triangulations in Geometry Processing</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://visualcomputing.ist.ac.at/seminars/">Institute of Science and Technology Austria (ISTA)</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          90 minute talk about my work on intrinsic triangulations.
-                      </td>
-                  </tr>
-
-                  <tr>
-                      <td rowspan="3">Aug. 2023</td>
-                      <td><h4>Intrinsic Triangulations in Geometry Processing</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://www.geometrie.tugraz.at/events/og2023.html">Geometry Workshop in Obergurgl</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          30 minute talk about my work on intrinsic triangulations.
-                      </td>
-                  </tr>
-
-                  <tr>
-                      <td rowspan="3">Jul. 2023</td>
-                      <td><h4>Intrinsic Triangulations in Geometry Processing</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://www.discretization.de/events/14/">TU Berlin SFB TRR 109 Colloquium</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          45 minute talk about some of <a href="Research/integer-coordinates/index.html">my</a> <a href="Research/intrinsic-coarsening/index.html">assorted</a> <a href="Research/CEPS/index.html">work</a> on intrinsic triangulations. The slides are available <a href="Talks/TUBerlin-intrinsic-triangulations.pdf">here [49 mb]</a>.
-                      </td>
-                  </tr>
-
-                  <tr>
-                      <td rowspan="3">Apr. 2022</td>
-                      <td><h4>Discrete Conformal Equivalence of Polyhedral Surfaces</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="http://jacobsschool.ucsd.edu/visualcomputing/}">UCSD Pixel Cafe</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          45 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The slides are available <a href="Talks/UCSD-CEPS.pdf">here [32 mb]</a>.
-                      </td>
-                  </tr>
-
-
-                  <tr>
-                      <td rowspan="3">Mar. 2022</td>
-                      <td><h4>Discrete Conformal Equivalence of Polyhedral Surfaces</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://www.youtube.com/watch?v=MLnswieg4Gw">Toronto Geometry Colloquium</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          10 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The slides are available <a href="Talks/TGC-CEPS.pdf">here [19 mb]</a>, and the beautiful poster designed by Rachel Joan Wallis is available <a href="Talks/tgc_poster_036.pdf">here</a>.
-                      </td>
-                  </tr>
-
-                  <tr>
-                      <td rowspan="3">Dec. 2021</td>
-                      <td><h4>Integer Coordinates for Intrinsic Geometry Processing</h4></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="venue"><a href="https://sa2021.siggraph.org/en/attend/technical-papers/8/session/55">ACM SIGGRAPH Asia Technical Papers</a></span>
-                      </td>
-                  </tr>
-                  <tr>
-
-                      <td class="space_under">
-                          20 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The full talk is available on YouTube <a href="https://youtu.be/3czWJxSmCuc">here</a>, and a 5-minute version is available <a href="https://youtu.be/a4sgxoZRSCk">here</a>.
-                      </td>
-                  </tr>
-
-                <tr>
-                    <td rowspan="3">Aug. 2021</td>
-                    <td><h4>Discrete Conformal Equivalence of Polyhedral Surfaces</h4></td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="venue"><a href="https://s2021.siggraph.org/full-program/">ACM SIGGRAPH Technical Papers</a></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="space_under">
-                        20 minute talk about my <a href="Research/CEPS/index.html">paper of the same name</a>. The full talk is available on YouTube <a href="https://www.youtube.com/watch?v=wwuHFUQLlWA">here</a>, and a 5-minute version is available <a href="https://www.youtube.com/watch?v=W0iBHF5-r-M">here</a>.
-                    </td>
-                </tr>
-
-                <tr>
-                  <td rowspan="3">Oct. 2019</td>
-                  <td><h4>Origami and Geometry</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <span class="venue"><a href="http://graphics.cs.cmu.edu/">Carnegie Mellon University Graphics Lab</a></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                      1 hour overview of algorithms for origami design, and how they relate to geometry.
-                      The slides are available <a href="Talks/OrigamiTalk.pdf">here [37 mb]</a>.
-                  </td>
-                </tr>
-
-                <tr>
-                  <td rowspan="3">Aug. 2021</td>
-                  <td><h4>Geometry Processing with Intrinsic Triangulations</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <span class="venue"><a href="https://dl.acm.org/doi/10.1145/3450508.3464592">ACM SIGGRAPH 2021 Courses</a></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                      3 hour course featuring my work on intrinsic geometry processing. The talk is available on <a href="https://www.youtube.com/watch?v=gcRDdYrgOhg">YouTube</a>, with accompanying lecture notes <a href="https://nmwsharp.com/media/papers/int-tri-course/int_tri_course.pdf">here [25 mb]</a>.
-                  </td>
-                </tr>
-
-                <tr>
-                  <td rowspan="3">Jun. 2021</td>
-                  <td><h4>Geometry Processing with Intrinsic Triangulations</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <span class="venue"><a href="https://meshingroundtable.com/previous-imrs/">SIAM IMR 2021 Courses</a></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                      3 hour course featuring my work on intrinsic geometry processing.
-                  </td>
-                </tr>
-
-                <!-- <tr>
-                  <td rowspan="3">Jun. 2019</td>
-                  <td><h4>Hyperbolic Geometry and Discrete Conformal Maps</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <em>Carnegie Mellon University Graphics Lab</em>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                      1 hour talk about discrete conformal maps, length cross ratios, and hyperbolic geometry.
-                      The slides are available <a href="Talks/DiscreteConformalMaps.pdf">here [26 mb]</a>.
-                  </td>
-                </tr>
-
-                <tr>
-                  <td rowspan="3">Jan. 2019</td>
-                  <td><h4>Magnetohydrodynamics and the Geometry of Conservation Laws</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <em>Carnegie Mellon University Graphics Lab</em>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                      1 hour talk introducing geometric mechanics and magnetohydrodynamics.
-                      The slides are available <a href="Talks/MHD_talk.pdf">here [22 mb]</a>.
-                  </td>
-                </tr>
-
-                <tr>
-                  <td rowspan="3">Oct. 2017</td>
-                  <td><h4>2D Plasma Simulation via Discrete Exterior Calculus</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <em>Caltech Summer Research Seminar Day</em>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                      15 minute presentation on the results of my summer research. The slides are available <a href="Talks/2017_SURF_slides.pdf">here [1 mb]</a>.
-                  </td>
-                </tr>
-
-                <tr>
-                  <td rowspan="3">Sept. 2017</td>
-                  <td><h4>Combinatorics and the Probabilistic Method</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <em>Westfield High School Seminar in College Mathematics</em>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                    30 minute presentation to a high school math class. Gave an introduction to elementary combinatorics and presented some simple applications of the probabilistic method. My notes are available <a href="Talks/Probabilistic_Method_Talk.pdf">here</a>.
-                  </td>
-                </tr> -->
-
-
-                <!-- <tr>
-                  <td rowspan="3">Mar. 2017</td>
-                  <td><h4>Continuous and Discrete Mechanics for Variational Integrators</h4></td>
-                  </tr>
-                <tr>
-                  <td>
-                    <em>Caltech CS 177b</em>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="space_under">
-                    1.5 hour final presentation for a computer graphics class. Gave an overview of Hamiltonian and Lagrangian mechanics, and discussed how to discretize them to produce variational time integrators. Extended notes are available <a href="Talks/Variational_Integrators.pdf">here</a>.
-                  </td>
-                </tr> -->
-              </table>
-
-              <hr />
             </div>
-          </div>
 
+            <div class="section_panel">
+                <a name="talks"><div class="section_header">Selected Talks</div></a>
+                <div class="section_text">
+                    <table>
 
-          <div class="section_panel" id="misc">
-              <a name="misc"><div class="section_header"> Miscellanea </div></a>
-              <div class="section_text">
+  <tr>
+    <td rowspan="3">Feb. 2025</td>
+    <td><h4>Ray Tracing Harmonic Functions</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://www.mfo.de/occasion/2506/www_view">Oberwolfach Workshop on Mathematical Imaging and Surface Processing</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      45 minute talk about my work on my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. A recording is available on <a href="https://youtu.be/9h13FPuBvM8">YouTube</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-Oberwolfach2025.pdf">pdf [31 mb]</a>, or a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-Oberwolfach2025.key">keynote file [1 gb]</a>.
+    </td>
+  </tr>
 
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="Demos/GeodesicWalker/html/">Geodesic walker</a></h4></div>
-                        <div class="mini_abstract">
-                            Web demo which traces out geodesics on a mesh. The code is available <a href="https://github.com/MarkGillespie/GeodesicWalker">here</a>.
-                        </div>
-                    </div>
-                    <a href="Demos/GeodesicWalker/html/" class="image"><img src="images/GeodesicWalker.png"></a>
+  <tr>
+    <td rowspan="3">Nov. 2024</td>
+    <td><h4>Solid Knitting and Harmonic Hitting</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://visualcomputing.ist.ac.at/seminars/">Institute of Science and Technology Austria (ISTA)</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      45 minute talk about my work on <a href="Research/solid-knitting/index.html">solid knitting</a> and <a href="Research/harnack-tracing/index.html">ray tracing harmnic functions</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/SolidKnittingAndHarmonicHitting.pdf">pdf [38 mb]</a>, or a <a href="https://markjgillespie.com/Talks/SolidKnittingAndHarmonicHitting.key">keynote file [1.7 gb]</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Aug. 2024</td>
+    <td><h4>Ray Tracing Harmonic Functions</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://s2024.conference-program.org/presentation/?id=papers_786&amp;sess=sess128">ACM SIGGRAPH Technical Papers</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      10 minute talk about my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. The talk is available on YouTube <a href="https://youtu.be/oDwedIuqh5Q">here</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Apr. 2024</td>
+    <td><h4>Evolving Intrinsic Triangulations</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue">Carnegie Mellon University (CMU)</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      Thesis defense. My slides are available as a <a href="Research/Thesis/defense.pdf">pdf [76 mb]</a> or a <a href="https://markjgillespie.com/Talks/Thesis_Defense.key">keynote file [0.8 gb]</a>, and my thesis document is available <a href="Research/Thesis/thesis.pdf">here [26 mb]</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Dec. 2023</td>
+    <td><h4>Dynamic Intrinsic Geometry Processing</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue">Carnegie Mellon University (CMU)</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      Thesis proposal talk. My slides are available <a href="Research/Thesis/proposal-talk.pdf">here [79 mb]</a> and my proposal document is available <a href="Research/Thesis/proposal.pdf">here [13 mb]</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Sept. 2023</td>
+    <td><h4>Intrinsic Triangulations in Geometry Processing</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://visualcomputing.ist.ac.at/seminars/">Institute of Science and Technology Austria (ISTA)</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      90 minute talk about my work on intrinsic triangulations.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Aug. 2023</td>
+    <td><h4>Intrinsic Triangulations in Geometry Processing</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://www.geometrie.tugraz.at/events/og2023.html">Geometry Workshop in Obergurgl</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      30 minute talk about my work on intrinsic triangulations.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Jul. 2023</td>
+    <td><h4>Intrinsic Triangulations in Geometry Processing</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://www.discretization.de/events/14/">TU Berlin SFB TRR 109 Colloquium</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+        45 minute talk about some of <a href="Research/integer-coordinates/index.html">my</a> <a href="Research/intrinsic-coarsening/index.html">assorted</a> <a href="Research/CEPS/index.html">work</a> on intrinsic triangulations. The slides are available <a href="Talks/TUBerlin-intrinsic-triangulations.pdf">here [49 mb]</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Apr. 2022</td>
+    <td><h4>Discrete Conformal Equivalence of Polyhedral Surfaces</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="http://jacobsschool.ucsd.edu/visualcomputing/">UCSD Pixel Cafe</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      45 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The slides are available <a href="Talks/UCSD-CEPS.pdf">here [32 mb]</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Mar. 2022</td>
+    <td><h4>Discrete Conformal Equivalence of Polyhedral Surfaces</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://www.youtube.com/watch?v=MLnswieg4Gw">Toronto Geometry Colloquium</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      10 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The slides are available <a href="Talks/TGC-CEPS.pdf">here [19 mb]</a>, and the beautiful poster designed by Rachel Joan Wallis is available <a href="Talks/tgc_poster_036.pdf">here</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Dec. 2021</td>
+    <td><h4>Integer Coordinates for Intrinsic Geometry Processing</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://sa2021.siggraph.org/en/attend/technical-papers/8/session/55">ACM SIGGRAPH Asia Technical Papers</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+      20 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The full talk is available on YouTube <a href="https://youtu.be/3czWJxSmCuc">here</a>, and a 5-minute version is available <a href="https://youtu.be/a4sgxoZRSCk">here</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Aug. 2021</td>
+    <td><h4>Discrete Conformal Equivalence of Polyhedral Surfaces</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://s2021.siggraph.org/full-program/">ACM SIGGRAPH Technical Papers</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+        20 minute talk about my <a href="Research/CEPS/index.html">paper of the same name</a>. The full talk is available on YouTube <a href="https://www.youtube.com/watch?v=wwuHFUQLlWA">here</a>, and a 5-minute version is available <a href="https://www.youtube.com/watch?v=W0iBHF5-r-M">here</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Oct. 2019</td>
+    <td><h4>Origami and Geometry</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="http://graphics.cs.cmu.edu/">Carnegie Mellon University Graphics Lab</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+        1 hour overview of algorithms for origami design, and how they relate to geometry.
+        The slides are available <a href="Talks/OrigamiTalk.pdf">here [37 mb]</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Aug. 2021</td>
+    <td><h4>Geometry Processing with Intrinsic Triangulations</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://dl.acm.org/doi/10.1145/3450508.3464592">ACM SIGGRAPH 2021 Courses</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+        3 hour course featuring my work on intrinsic geometry processing. The talk is available on <a href="https://www.youtube.com/watch?v=gcRDdYrgOhg">YouTube</a>, with accompanying lecture notes <a href="https://nmwsharp.com/media/papers/int-tri-course/int_tri_course.pdf">here [25 mb]</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Jun. 2021</td>
+    <td><h4>Geometry Processing with Intrinsic Triangulations</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue"><a href="https://meshingroundtable.com/previous-imrs/">SIAM IMR 2021 Courses</a></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">
+        3 hour course featuring my work on intrinsic geometry processing.
+    </td>
+  </tr>
+</table>
                 </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="https://www.shadertoy.com/user/mgillesp">ShaderToy Demos</a></h4></div>
-                        <div class="mini_abstract">
-                            Algorithm demonstrations on <a href="https://www.shadertoy.com/">ShaderToy</a>. Mostly from my paper on <a href="Research/harnack-tracing/index.html">ray tracing harmonic functions</a>.
-                        </div>
-                    </div>
-                    <a href="https://www.shadertoy.com/user/mgillesp" class="image"><img src="images/tartan-riemann-surface.png"></a>
-                </div>
-
-                
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="Misc/HyperbolicNotes/">Hyperbolic notes</a></h4></div>
-                        <div class="mini_abstract">
-                            Notes on hyperbolic geometry and discrete conformal maps.
-                        </div>
-                    </div>
-                    <a href="Misc/HyperbolicNotes/" class="image"><img src="Misc/HyperbolicNotes/images/hyperboloid_model_horocycle.svg"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="Misc/TartanShader/">Tartan shader</a></h4></div>
-                        <div class="mini_abstract">
-                            A shader to make meshes tartan.
-                        </div>
-                    </div>
-                    <a href="Misc/TartanShader/" class="image"><img src="Misc/TartanShader/Bunny.png"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="https://github.com/MarkGillespie/BlendedPiecewiseMoebiusMaps">Blended Piecewise M&ouml;bius Maps</a></h4></div>
-                        <div class="mini_abstract">
-                            GLSL implementation of <a href="https://arxiv.org/pdf/2306.12792.pdf">BPM: Blended Piecewise Möbius Maps</a> by Rorberg, Vaxman & Ben-Chen, incorporated into <a href="https://polyscope.run/">polyscope</a>.
-                        </div>
-                    </div>
-                    <a href="https://github.com/MarkGillespie/BlendedPiecewiseMoebiusMaps" class="image"><img src="images/BPM.png"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="https://github.com/MarkGillespie/OrientingMeshes">Computing orientable double covers</a></h4></div>
-                        <div class="mini_abstract">
-                            Takes any triangle mesh and turns it into an orientable manifold mesh by constructing the orientable double cover.
-                        </div>
-                    </div>
-                    <a href="https://github.com/MarkGillespie/OrientingMeshes" class="image"><img src="images/double_cover.png"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="https://github.com/MarkGillespie/SplitToDelaunay">Split to Delaunay</a></h4></div>
-                        <div class="mini_abstract">
-                            This is a rough implementation of the Delaunay edge split algorithm presented in <a href="https://dl.acm.org/doi/10.1145/2816795.2818076">Efficient construction and simplification of Delaunay meshes</a> by Yong-Jin Liu, Chunxu  Xu, Dian  Fan, and Ying He. It takes in a triangle mesh and then performs edge splits to make the mesh Delaunay.
-                        </div>
-                    </div>
-                    <a href="https://github.com/MarkGillespie/SplitToDelaunay" class="image"><img src="images/split_delaunay_bunny.png"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="Misc/Karcher/">Spherical Karcher means</a></h4></div>
-                        <div class="mini_abstract">
-                            Web demo computing the Karcher mean of points on a sphere.
-                        </div>
-                    </div>
-                    <a href="Misc/Karcher/" class="image"><img src="Misc/Karcher/SphereKarcherMean.png"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="Misc/PhaseSpace/">Pendulum phase space</a></h4></div>
-                        <div class="mini_abstract">
-                            Visualization of the phase space of a pendulum as a cylinder.
-                        </div>
-                    </div>
-                    <a href="Misc/PhaseSpace/" class="image"><img src="Misc/PhaseSpace/phase_space.png"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="Misc/integrators/">Euler integrators</a></h4></div>
-                        <div class="mini_abstract">
-                            Comparison of explicit, implicit, and symplectic Euler integrators for a pendulum.
-                        </div>
-                    </div>
-                    <a href="Misc/integrators/" class="image"><img src="Misc/integrators/Pendulum.png"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="https://github.com/MarkGillespie/GC-CombinatorialMaps/">Combinatorial maps</a></h4></div>
-                        <div class="mini_abstract">
-                            Demo of an implementation of the <a href="https://doc.cgal.org/latest/Combinatorial_map/index.html">combinatorial map</a> data structure for <em>n</em>-dimensional simplicial complexes that I experimented with in <tt>geometry-central</tt>. It has not yet made its way into the library itself, but the implementation can be found <a href="https://github.com/MarkGillespie/geometry-central/tree/CombinatorialMaps/include/geometrycentral/combinatorial-maps">here</a>.
-                        </div>
-                    </div>
-                    <a href="https://github.com/MarkGillespie/GC-CombinatorialMaps" class="image"><img src="images/CombinatorialMap.svg"></a>
-                </div>
-
-                <div class="project_header">
-                    <div class="text">
-                        <div class="project_title"><h4><a href="WordValidator/#/">Word validator</a></h4></div>
-                        <div class="mini_abstract">
-                            Online tool to check if a word is in the dictionary.
-                        </div>
-                    </div>
-                    <a href="WordValidator/#/" class="image"><img src="images/WordValidator.svg"></a>
-                </div>
-                <hr />
-              </div>
-          </div>
+            </div>
 
 
-      </div>
+            <div class="section_panel" id="misc">
+                <a name="misc"><div class="section_header"> Miscellanea </div></a>
+                <div class="section_text">
+                    
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="Demos/GeodesicWalker/html/">Geodesic walker</a></h4></div>
+            <div class="mini_abstract">
+                Web demo which traces out geodesics on a mesh. The code is available <a href="https://github.com/MarkGillespie/GeodesicWalker">here</a>.
+            </div>
+        </div>
+        <a href="Demos/GeodesicWalker/html/" class="image"><img src="images/GeodesicWalker.png" /></a>
     </div>
 
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="https://www.shadertoy.com/user/mgillesp">ShaderToy Demos</a></h4></div>
+            <div class="mini_abstract">
+                
+            Algorithm demonstrations on <a href="https://www.shadertoy.com/">ShaderToy</a>. Mostly from my paper on <a href="Research/harnack-tracing/index.html">ray tracing harmonic functions</a>.
+        
+            </div>
+        </div>
+        <a href="https://www.shadertoy.com/user/mgillesp" class="image"><img src="images/tartan-riemann-surface.png" /></a>
+    </div>
 
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="Misc/HyperbolicNotes/">Hyperbolic notes</a></h4></div>
+            <div class="mini_abstract">
+                
+            Notes on hyperbolic geometry and discrete conformal maps.
+        
+            </div>
+        </div>
+        <a href="Misc/HyperbolicNotes/" class="image"><img src="Misc/HyperbolicNotes/images/hyperboloid_model_horocycle.svg" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="Misc/TartanShader/">Tartan shader</a></h4></div>
+            <div class="mini_abstract">
+                
+            A shader to make meshes tartan.
+        
+            </div>
+        </div>
+        <a href="Misc/TartanShader/" class="image"><img src="Misc/TartanShader/Bunny.png" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="https://github.com/MarkGillespie/BlendedPiecewiseMoebiusMaps">Blended Piecewise Möbius Maps</a></h4></div>
+            <div class="mini_abstract">
+                
+            GLSL implementation of <a href="https://arxiv.org/pdf/2306.12792.pdf">BPM: Blended Piecewise Möbius Maps</a> by Rorberg, Vaxman &amp;amp; Ben-Chen, incorporated into <a href="https://polyscope.run/">polyscope</a>.
+        
+            </div>
+        </div>
+        <a href="https://github.com/MarkGillespie/BlendedPiecewiseMoebiusMaps" class="image"><img src="images/BPM.png" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="https://github.com/MarkGillespie/OrientingMeshes">Computing orientable double covers</a></h4></div>
+            <div class="mini_abstract">
+                
+            Takes any triangle mesh and turns it into an orientable manifold mesh by constructing the orientable double cover.
+        
+            </div>
+        </div>
+        <a href="https://github.com/MarkGillespie/OrientingMeshes" class="image"><img src="images/double_cover.png" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="https://github.com/MarkGillespie/SplitToDelaunay">Split to Delaunay</a></h4></div>
+            <div class="mini_abstract">
+                
+            This is a rough implementation of the Delaunay edge split algorithm presented in <a href="https://dl.acm.org/doi/10.1145/2816795.2818076">Efficient construction and simplification of Delaunay meshes</a> by Yong-Jin Liu, Chunxu  Xu, Dian  Fan, and Ying He. It takes in a triangle mesh and then performs edge splits to make the mesh Delaunay.
+        
+            </div>
+        </div>
+        <a href="https://github.com/MarkGillespie/SplitToDelaunay" class="image"><img src="images/split_delaunay_bunny.png" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="Misc/Karcher/">Spherical Karcher means</a></h4></div>
+            <div class="mini_abstract">
+                
+            Web demo computing the Karcher mean of points on a sphere.
+        
+            </div>
+        </div>
+        <a href="Misc/Karcher/" class="image"><img src="Misc/Karcher/SphereKarcherMean.png" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="Misc/PhaseSpace/">Pendulum phase space</a></h4></div>
+            <div class="mini_abstract">
+                
+            Visualization of the phase space of a pendulum as a cylinder.
+        
+            </div>
+        </div>
+        <a href="Misc/PhaseSpace/" class="image"><img src="Misc/PhaseSpace/phase_space.png" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="Misc/integrators/">Euler integrators</a></h4></div>
+            <div class="mini_abstract">
+                
+            Comparison of explicit, implicit, and symplectic Euler integrators for a pendulum.
+        
+            </div>
+        </div>
+        <a href="Misc/integrators/" class="image"><img src="Misc/integrators/Pendulum.png" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="https://github.com/MarkGillespie/GC-CombinatorialMaps/">Combinatorial maps</a></h4></div>
+            <div class="mini_abstract">
+                
+            Demo of an implementation of the <a href="https://doc.cgal.org/latest/Combinatorial_map/index.html">combinatorial map</a> data structure for <em>n</em>-dimensional simplicial complexes that I experimented with in <tt>geometry-central</tt>. It has not yet made its way into the library itself, but the implementation can be found <a href="https://github.com/MarkGillespie/geometry-central/tree/CombinatorialMaps/include/geometrycentral/combinatorial-maps">here</a>.
+        
+            </div>
+        </div>
+        <a href="https://github.com/MarkGillespie/GC-CombinatorialMaps/" class="image"><img src="images/CombinatorialMap.svg" /></a>
+    </div>
+
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="WordValidator/#/">Word validator</a></h4></div>
+            <div class="mini_abstract">
+                
+            Online tool to check if a word is in the dictionary.
+        
+            </div>
+        </div>
+        <a href="WordValidator/#/" class="image"><img src="images/WordValidator.svg" /></a>
+    </div>
+
+                </div>
+            </div>
+
+
+            </div>
+    </div>
 
     <!--</div>-->
     <div class="footer">
-      <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
-      <hr />
-      Mark Gillespie 2025
+        <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
+        <hr />
+        Mark Gillespie 2025
     </div>
 
     <div id="background_image"><svg viewbox="25 20 500 250">
@@ -1416,14 +1182,9 @@
 	<g>
 	</g>
 </g>
-</svg>
-    </div>
+</svg></div>
     </div>
     </div>
   </body>
-
-  <script>
-    document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(document.getElementsByTagName("html")[0].classList.contains("darkmode") ? "lightmode" : "darkmode");});
-  </script>
 </html>
 

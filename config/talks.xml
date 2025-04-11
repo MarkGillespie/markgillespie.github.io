@@ -1,0 +1,213 @@
+<talk_data>
+<talks>
+  <talk>
+    <when>Feb. 2025</when>
+    <title>Ray Tracing Harmonic Functions</title>
+    <venue_link>https://www.mfo.de/occasion/2506/www_view</venue_link>
+    <venue_name>Oberwolfach Workshop on Mathematical Imaging and Surface Processing</venue_name>
+    <description>
+      45 minute talk about my work on my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. A recording is available on <a href="https://youtu.be/9h13FPuBvM8">YouTube</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-Oberwolfach2025.pdf">pdf [31 mb]</a>, or a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-Oberwolfach2025.key">keynote file [1 gb]</a>.
+    </description>
+  </talk>
+  <talk>
+    <when>Nov. 2024</when>
+    <title>Solid Knitting and Harmonic Hitting</title>
+    <venue_link>https://visualcomputing.ist.ac.at/seminars/</venue_link>
+    <venue_name>Institute of Science and Technology Austria (ISTA)</venue_name>
+    <description>
+      45 minute talk about my work on <a href="Research/solid-knitting/index.html">solid knitting</a> and <a href="Research/harnack-tracing/index.html">ray tracing harmnic functions</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/SolidKnittingAndHarmonicHitting.pdf">pdf [38 mb]</a>, or a <a href="https://markjgillespie.com/Talks/SolidKnittingAndHarmonicHitting.key">keynote file [1.7 gb]</a>.
+    </description>
+  </talk>
+  <talk>
+    <when>Aug. 2024</when>
+    <title>Ray Tracing Harmonic Functions</title>
+    <venue_link>https://s2024.conference-program.org/presentation/?id=papers_786&amp;amp;sess=sess128</venue_link>
+    <venue_name>ACM SIGGRAPH Technical Papers</venue_name>
+    <description>
+      10 minute talk about my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. The talk is available on YouTube <a href="https://youtu.be/oDwedIuqh5Q">here</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Apr. 2024</when>
+    <title>Evolving Intrinsic Triangulations</title>
+    <venue_name>Carnegie Mellon University (CMU)</venue_name>
+    <description>
+      Thesis defense. My slides are available as a <a href="Research/Thesis/defense.pdf">pdf [76 mb]</a> or a <a href="https://markjgillespie.com/Talks/Thesis_Defense.key">keynote file [0.8 gb]</a>, and my thesis document is available <a href="Research/Thesis/thesis.pdf">here [26 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Dec. 2023</when>
+    <title>Dynamic Intrinsic Geometry Processing</title>
+    <venue_name>Carnegie Mellon University (CMU)</venue_name>
+    <description>
+      Thesis proposal talk. My slides are available <a href="Research/Thesis/proposal-talk.pdf">here [79 mb]</a> and my proposal document is available <a href="Research/Thesis/proposal.pdf">here [13 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Sept. 2023</when>
+    <title>Intrinsic Triangulations in Geometry Processing</title>
+    <venue_link>https://visualcomputing.ist.ac.at/seminars/</venue_link>
+    <venue_name>Institute of Science and Technology Austria (ISTA)</venue_name>
+    <description>
+      90 minute talk about my work on intrinsic triangulations.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Aug. 2023</when>
+    <title>Intrinsic Triangulations in Geometry Processing</title>
+    <venue_link>https://www.geometrie.tugraz.at/events/og2023.html</venue_link>
+    <venue_name>Geometry Workshop in Obergurgl</venue_name>
+    <description>
+      30 minute talk about my work on intrinsic triangulations.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Jul. 2023</when>
+    <title>Intrinsic Triangulations in Geometry Processing</title>
+    <venue_link>https://www.discretization.de/events/14/</venue_link>
+    <venue_name>TU Berlin SFB TRR 109 Colloquium</venue_name>
+    <description>
+        45 minute talk about some of <a href="Research/integer-coordinates/index.html">my</a> <a href="Research/intrinsic-coarsening/index.html">assorted</a> <a href="Research/CEPS/index.html">work</a> on intrinsic triangulations. The slides are available <a href="Talks/TUBerlin-intrinsic-triangulations.pdf">here [49 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Apr. 2022</when>
+    <title>Discrete Conformal Equivalence of Polyhedral Surfaces</title>
+    <venue_link>http://jacobsschool.ucsd.edu/visualcomputing/</venue_link>
+    <venue_name>UCSD Pixel Cafe</venue_name>
+    <description>
+      45 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The slides are available <a href="Talks/UCSD-CEPS.pdf">here [32 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Mar. 2022</when>
+    <title>Discrete Conformal Equivalence of Polyhedral Surfaces</title>
+    <venue_link>https://www.youtube.com/watch?v=MLnswieg4Gw</venue_link>
+    <venue_name>Toronto Geometry Colloquium</venue_name>
+    <description>
+      10 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The slides are available <a href="Talks/TGC-CEPS.pdf">here [19 mb]</a>, and the beautiful poster designed by Rachel Joan Wallis is available <a href="Talks/tgc_poster_036.pdf">here</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Dec. 2021</when>
+    <title>Integer Coordinates for Intrinsic Geometry Processing</title>
+    <venue_link>https://sa2021.siggraph.org/en/attend/technical-papers/8/session/55</venue_link>
+    <venue_name>ACM SIGGRAPH Asia Technical Papers</venue_name>
+    <description>
+      20 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The full talk is available on YouTube <a href="https://youtu.be/3czWJxSmCuc">here</a>, and a 5-minute version is available <a href="https://youtu.be/a4sgxoZRSCk">here</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Aug. 2021</when>
+    <title>Discrete Conformal Equivalence of Polyhedral Surfaces</title>
+    <venue_link>https://s2021.siggraph.org/full-program/</venue_link>
+    <venue_name>ACM SIGGRAPH Technical Papers</venue_name>
+    <description>
+        20 minute talk about my <a href="Research/CEPS/index.html">paper of the same name</a>. The full talk is available on YouTube <a href="https://www.youtube.com/watch?v=wwuHFUQLlWA">here</a>, and a 5-minute version is available <a href="https://www.youtube.com/watch?v=W0iBHF5-r-M">here</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Oct. 2019</when>
+    <title>Origami and Geometry</title>
+    <venue_link>http://graphics.cs.cmu.edu/</venue_link>
+    <venue_name>Carnegie Mellon University Graphics Lab</venue_name>
+    <description>
+        1 hour overview of algorithms for origami design, and how they relate to geometry.
+        The slides are available <a href="Talks/OrigamiTalk.pdf">here [37 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Aug. 2021</when>
+    <title>Geometry Processing with Intrinsic Triangulations</title>
+    <venue_link>https://dl.acm.org/doi/10.1145/3450508.3464592</venue_link>
+    <venue_name>ACM SIGGRAPH 2021 Courses</venue_name>
+    <description>
+        3 hour course featuring my work on intrinsic geometry processing. The talk is available on <a href="https://www.youtube.com/watch?v=gcRDdYrgOhg">YouTube</a>, with accompanying lecture notes <a href="https://nmwsharp.com/media/papers/int-tri-course/int_tri_course.pdf">here [25 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Jun. 2021</when>
+    <title>Geometry Processing with Intrinsic Triangulations</title>
+    <venue_link>https://meshingroundtable.com/previous-imrs/</venue_link>
+    <venue_name>SIAM IMR 2021 Courses</venue_name>
+    <description>
+        3 hour course featuring my work on intrinsic geometry processing.
+    </description>
+  </talk>
+
+  <!--
+  <talk>
+    <when>Jun. 2019</when>
+    <title>Hyperbolic Geometry and Discrete Conformal Maps</title>
+    <venue>Carnegie Mellon University Graphics Lab</venue>
+    <description>
+        1 hour talk about discrete conformal maps, length cross ratios, and hyperbolic geometry.
+        The slides are available <a href="Talks/DiscreteConformalMaps.pdf">here [26 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Jan. 2019</when>
+    <title>Magnetohydrodynamics and the Geometry of Conservation Laws</title>
+    <venue>Carnegie Mellon University Graphics Lab</venue>
+    <description>
+        1 hour talk introducing geometric mechanics and magnetohydrodynamics.
+        The slides are available <a href="Talks/MHD_talk.pdf">here [22 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Oct. 2017</when>
+    <title>2D Plasma Simulation via Discrete Exterior Calculus</title>
+    <venue>Caltech Summer Research Seminar Day</venue>
+    <description>
+        15 minute presentation on the results of my summer research. The slides are available <a href="Talks/2017_SURF_slides.pdf">here [1 mb]</a>.
+    </description>
+  </talk>
+
+  <talk>
+    <when>Sept. 2017</when>
+    <title>Combinatorics and the Probabilistic Method</title>
+    <venue>Westfield High School Seminar in College Mathematics</venue>
+    <description>
+      30 minute presentation to a high school math class. Gave an introduction to elementary combinatorics and presented some simple applications of the probabilistic method. My notes are available <a href="Talks/Probabilistic_Method_Talk.pdf">here</a>.
+    </description>
+  </talk> -->
+
+
+  <!-- <talk>
+    <when>Mar. 2017</when>
+    <title>Continuous and Discrete Mechanics for Variational Integrators</title>
+    <venue>Caltech CS 177b</venue>
+    <description>
+      1.5 hour final presentation for a computer graphics class. Gave an overview of Hamiltonian and Lagrangian mechanics, and discussed how to discretize them to produce variational time integrators. Extended notes are available <a href="Talks/Variational_Integrators.pdf">here</a>.
+    </description>
+  </talk> -->
+</talks>
+<template>
+  <tr>
+    <td rowspan="3">$WHEN</td>
+    <td><h4>$TITLE</h4></td>
+  </tr>
+  <tr>
+    <td>
+      <span class="venue">$VENUE_NAME</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="space_under">$DESCRIPTION</td>
+  </tr>
+</template>
+</talk_data>

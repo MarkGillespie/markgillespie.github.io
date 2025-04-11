@@ -1,0 +1,129 @@
+<project>
+    <title>Discrete Conformal Equivalence of Polyhedral Surfaces</title>
+    <folder>CEPS</folder>
+    <key>CEPS</key>
+    <href>index.html</href>
+    <doi>10.1145/3450626.3459763</doi>
+    <img_small>Research/CEPS/images/RepresentativeImage.png</img_small>
+    <img_large>Research/CEPS/images/teaser.png</img_large>
+    <authors>
+        <author>
+            <name>Mark Gillespie</name>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Boris Springborn</name>
+            <href>https://page.math.tu-berlin.de/~springb/</href>
+            <affiliation>TU Berlin</affiliation></author>
+        <author>
+            <name>Keenan Crane</name>
+            <href>http://www.cs.cmu.edu/~kmcrane/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+    </authors>
+    <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2021)</venue>
+    <links>
+        <link><name>pdf (16 mb)</name><href>Research/CEPS/Paper.pdf</href></link>
+        <link><name>video (20 min)</name><href>https://www.youtube.com/watch?v=wwuHFUQLlWA</href></link>
+        <link><name>code (C<span class="cpp">++</span> demo)</name><href>https://github.com/MarkGillespie/CEPS</href></link>
+    </links>
+    <more_links>
+        <link><name>video (5 min)</name><href>https://www.youtube.com/watch?v=W0iBHF5-r-M</href></link>
+    </more_links>
+    <bibtex>Research/CEPS/bib.txt</bibtex>
+    <abstract_small>
+        We present a new method for surface parameterization, leveraging <em>hyperbolic geometry</em> to find maps that are locally injective and discretely conformal in an exact sense. Stress tests involving difficult cone configurations and near-degenerate meshes indicate that the method is extremely robust in practice, providing high-quality interpolation even on meshes with poor elements.
+    </abstract_small>
+    <abstract_big>
+        This paper describes a numerical method for surface parameterization, yielding maps that are locally injective and discretely conformal in an exact sense. Unlike previous methods for discrete conformal parameterization, the method is guaranteed to work for any manifold triangle mesh, with no restrictions on triangulation quality or cone singularities. In particular we consider maps from surfaces of any genus (with or without boundary) to the plane, or globally bijective maps from genus zero surfaces to the sphere. Recent theoretical developments show that each task can be formulated as a convex problem where the triangulation is allowed to change—we complete the picture by introducing the machinery needed to actually construct a discrete conformal map.  In particular, we introduce a new scheme for tracking correspondence between triangulations based on <em>normal coordinates</em>, and a new interpolation procedure based on layout in the <em>light cone</em>.  Stress tests involving difficult cone configurations and near-degenerate triangulations indicate that the method is extremely robust in practice, and provides high-quality interpolation even on meshes with poor elements.
+    </abstract_big>
+    <panels>
+        <panel>
+            <title>Paper</title>
+            <content>
+                <a href="Paper.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"/><br/>
+                    <span> pdf (16 mb)</span>
+                </a>
+            </content>
+        </panel>
+        <panel>
+            <title>Acknowledgements</title>
+            <content>
+                  This work was supported by a Packard Fellowship, NSF Award 1717320, DFG TRR 109, an NSF Graduate Research Fellowship, and gifts from Autodesk, Adobe, and Facebook.
+            </content>
+        </panel>
+        <panel>
+            <bibtex></bibtex>
+        </panel>
+        <panel>
+            <title>Selected Figures</title>
+            <content>
+                <img src="images/figures/figure28.jpg"/>
+                <div class="caption">
+                    Our method robustly handles extremely poor triangulations (left), including almost all models from Thingi10k, as well as extreme configurations of cone singularities (center). It also guarantees global injectivity for discrete conformal maps to the sphere—a case not handled by previous algorithms.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure6.jpg"/>
+                <div class="caption">
+                    We adopt a notion of conformal equivalence that yields the same discrete conformal map, no matter how the input polyhedral surface is triangulated. Here a mesh with planar faces is triangulated two different ways, yielding identical results.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure2.jpg"/>
+                <div class="caption">
+                    Beyond just flattening the mesh, we also show how to perform high-quality projective interpolation across intersecting triangulations—providing a high-quality parameterization even for meshes with very low-quality elements.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure16.jpg"/>
+                <div class="caption">
+                    We can also prescribe boundary lengths or angles (while ensuring local injectivity), or compute a globally injective discrete conformal map to the unit disk.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure14.jpg"/>
+                <div class="caption">
+                    A key idea in our formulation is that an ordinary triangle mesh (left) can always be viewed as an ideal hyperbolic polyhedron (right), i.e., surface made from triangles of constant negative curvature and all three vertices at infinity.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure8.jpg"/>
+                <div class="caption">
+                    The reason the hyperbolic perspective is useful is that Euclidean edge lengths that violate the triangle inequality (top) still describe a perfectly valid ideal hyperbolic polyhedra. So, we can scale edge lengths arbitrarily and still apply a well-defined edge flip operation, called a Ptolemy flip, at any moment in the flow (rather than, say, stopping at the first moment where triangles degenerate).
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure24.jpg"/>
+                <div class="caption">
+                    Even when CETM succeeds, the quality of the map may be lower since it effectively considers a different notion of conformal equivalence (based on the input rather than Delaunay triangulation).
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure27.jpg"/>
+                <div class="caption">
+                    Left: The signpost data structure fails to be numerically robust in extreme situations, such as when tracing the “peacock triangulation.” Right: our integer-based encoding ensures we get the right connectivity.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure30.jpg"/>
+                <div class="caption">
+                    Since we allow edge flips, we need not worry how coarse the mesh is near large cones. Here we set all but one angle defect to almost 2&amp;pi;—the remaining vertex has an angle defect of −1032.79.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure32.jpg"/>
+                <div class="caption">
+                    In the genus-0 case, our method guarantees a bijective discrete conformal map to a convex polyhedron with vertices on the sphere.
+                </div>
+                <hr/>
+
+                <img src="images/figures/figure33.jpg"/>
+                <div class="caption">
+                    We can handle multiply-connected domains by simply triangulating holes prior to flattening, then removing these triangles after flattening.
+                </div>
+                <hr/>
+            </content>
+            <extra_classes>figures</extra_classes>
+        </panel>
+    </panels>
+</project>

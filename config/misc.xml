@@ -1,0 +1,120 @@
+<misc_data>
+<misc>
+    <entry>
+        <title>Geodesic walker</title>
+        <href>Demos/GeodesicWalker/html/</href>
+        <details>Web demo which traces out geodesics on a mesh. The code is available <a href="https://github.com/MarkGillespie/GeodesicWalker">here</a>.</details>
+        <img>images/GeodesicWalker.png</img>
+    </entry>
+
+    <entry>
+        <href>https://www.shadertoy.com/user/mgillesp</href>
+        <title>ShaderToy Demos</title>
+        <details>
+            Algorithm demonstrations on <a href="https://www.shadertoy.com/">ShaderToy</a>. Mostly from my paper on <a href="Research/harnack-tracing/index.html">ray tracing harmonic functions</a>.
+        </details>
+        <img>images/tartan-riemann-surface.png</img>
+    </entry>
+
+    <entry>
+        <href>Misc/HyperbolicNotes/</href>
+        <title>Hyperbolic notes</title>
+        <details>
+            Notes on hyperbolic geometry and discrete conformal maps.
+        </details>
+            <img>Misc/HyperbolicNotes/images/hyperboloid_model_horocycle.svg</img>
+    </entry>
+
+    <entry>
+        <href>Misc/TartanShader/</href>
+        <title>Tartan shader</title>
+        <details>
+            A shader to make meshes tartan.
+        </details>
+        <img>Misc/TartanShader/Bunny.png</img>
+    </entry>
+
+    <entry>
+        <href>https://github.com/MarkGillespie/BlendedPiecewiseMoebiusMaps</href>
+        <title>Blended Piecewise Möbius Maps</title>
+        <details>
+            GLSL implementation of <a href="https://arxiv.org/pdf/2306.12792.pdf">BPM: Blended Piecewise Möbius Maps</a> by Rorberg, Vaxman &amp;amp; Ben-Chen, incorporated into <a href="https://polyscope.run/">polyscope</a>.
+        </details>
+        <img>images/BPM.png</img>
+    </entry>
+
+    <entry>
+        <href>https://github.com/MarkGillespie/OrientingMeshes</href>
+        <title>Computing orientable double covers</title>
+        <details>
+            Takes any triangle mesh and turns it into an orientable manifold mesh by constructing the orientable double cover.
+        </details>
+        <img>images/double_cover.png</img>
+    </entry>
+
+    <entry>
+        <href>https://github.com/MarkGillespie/SplitToDelaunay</href>
+        <title>Split to Delaunay</title>
+        <details>
+            This is a rough implementation of the Delaunay edge split algorithm presented in <a href="https://dl.acm.org/doi/10.1145/2816795.2818076">Efficient construction and simplification of Delaunay meshes</a> by Yong-Jin Liu, Chunxu  Xu, Dian  Fan, and Ying He. It takes in a triangle mesh and then performs edge splits to make the mesh Delaunay.
+        </details>
+        <img>images/split_delaunay_bunny.png</img>
+    </entry>
+
+    <entry>
+        <href>Misc/Karcher/</href>
+        <title>Spherical Karcher means</title>
+        <details>
+            Web demo computing the Karcher mean of points on a sphere.
+        </details>
+        <img>Misc/Karcher/SphereKarcherMean.png</img>
+    </entry>
+
+    <entry>
+        <href>Misc/PhaseSpace/</href>
+        <title>Pendulum phase space</title>
+        <details>
+            Visualization of the phase space of a pendulum as a cylinder.
+        </details>
+        <img>Misc/PhaseSpace/phase_space.png</img>
+    </entry>
+
+    <entry>
+        <href>Misc/integrators/</href>
+        <title>Euler integrators</title>
+        <details>
+            Comparison of explicit, implicit, and symplectic Euler integrators for a pendulum.
+        </details>
+        <img>Misc/integrators/Pendulum.png</img>
+    </entry>
+
+    <entry>
+        <href>https://github.com/MarkGillespie/GC-CombinatorialMaps/</href>
+        <title>Combinatorial maps</title>
+        <details>
+            Demo of an implementation of the <a href="https://doc.cgal.org/latest/Combinatorial_map/index.html">combinatorial map</a> data structure for <em>n</em>-dimensional simplicial complexes that I experimented with in <tt>geometry-central</tt>. It has not yet made its way into the library itself, but the implementation can be found <a href="https://github.com/MarkGillespie/geometry-central/tree/CombinatorialMaps/include/geometrycentral/combinatorial-maps">here</a>.
+        </details>
+        <img>images/CombinatorialMap.svg</img>
+    </entry>
+
+    <entry>
+        <href>WordValidator/#/</href>
+        <title>Word validator</title>
+        <details>
+            Online tool to check if a word is in the dictionary.
+        </details>
+        <img>images/WordValidator.svg</img>
+    </entry>
+</misc>
+<template>
+    <div class="project_header">
+        <div class="text">
+            <div class="project_title"><h4><a href="$HREF">$TITLE</a></h4></div>
+            <div class="mini_abstract">
+                $DETAILS
+            </div>
+        </div>
+        <a href="$HREF" class="image"><img src="$IMG"/></a>
+    </div>
+</template>
+</misc_data>

@@ -1,0 +1,82 @@
+<project>
+    <title>Winding Numbers on Discrete Surfaces</title>
+    <folder>WNoDS</folder>
+    <key>WNoDS</key>
+    <href>index.html</href>
+    <doi>10.1145/3592401</doi>
+    <img_small>Research/WNoDS/RepresentativeImage.jpg</img_small>
+    <img_large>Research/WNoDS/images/teaser.png</img_large>
+    <authors>
+        <author>
+            <name>Nicole Feng</name>
+            <href>https://nzfeng.github.io/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Mark Gillespie</name>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Keenan Crane</name>
+            <href>http://www.cs.cmu.edu/~kmcrane/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+    </authors>
+    <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2023)</venue>
+    <links>
+        <link><name>pdf (11 mb)</name><href>Research/WNoDS/WindingNumbersOnSurfaces.pdf</href></link>
+        <link><name>code</name><href>https://github.com/nzfeng/SWN</href></link>
+        <link><name>video (10 min)</name><href>https://youtu.be/QnMx3s4_4WY</href></link>
+    </links>
+    <more_links>
+        <link><name>supplement (2.7 mb)</name><href>Research/WNoDS/PerspectivesOnWindingNumbers.pdf</href></link>
+        <link><name>video (20 s)</name><href>https://youtu.be/3undxB8rcvE</href></link>
+    </more_links>
+    <bibtex>Research/WNoDS/bib.txt</bibtex>
+    <abstract_small>
+        Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven invaluable in robust geometry processing. However, standard definitions do not immediately apply on surfaces, where not all curves bound regions. We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions. 
+        <!-- Ultimately, our algorithm yields (i) a closed completion the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region. -->
+    </abstract_small>
+    <abstract_big>
+        In the plane, the <em>winding number</em> is the number of times a curve wraps around a given point.  Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven valuable for geometry processing tasks ranging from surface reconstruction to mesh booleans.  However, standard definitions do not immediately apply on surfaces, where not all curves bound regions.  We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions.  By processing the derivatives of such functions, we can robustly filter out components of the input that do not bound any region.  Ultimately, our algorithm yields (i) a closed, completed version of the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region.  The main computational cost is solving a standard Poisson equation, or for surfaces with nontrivial topology, a sparse linear program.  We also introduce special basis functions to represent singularities that naturally occur at endpoints of open curves.
+    </abstract_big>
+    <panels>
+        <panel>
+            <title>Paper</title>
+            <content>
+                <a href="WindingNumbersOnSurfaces.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"/><br/>
+                    <span> pdf (11 mb)</span>
+                </a>
+            </content>
+        </panel>
+        <panel>
+            <title>Acknowledgements</title>
+            <content>
+                  This work was funded by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship and gifts from Facebook Reality Labs, and Google, Inc.
+            </content>
+        </panel>
+        <panel>
+            <bibtex></bibtex>
+        </panel>
+        <panel>
+            <title>Supplement: Perspectives on Winding Numbers</title>
+            <content>
+                  <a href="PerspectivesOnWindingNumbers.pdf" class="paper-preview">
+                      <img src="images/perspectives-preview.png" alt="preview"/><br/>
+                      <span> pdf (2.7 mb)</span>
+                  </a>
+            </content>
+        </panel>
+        <panel>
+            <title>Errata</title>
+            <content>
+                  <p>
+                      Nicole Feng has a list of detailed errata <a href="https://nzfeng.github.io/research/WNoDS/index.html">available on her website.</a> The upshot is that after publication, we realized that you can approximate the solution to the linear program in our algorithm <em>(left)</em>, resulting in a 100x speedup <em>(right)</em>.
+                  </p>
+                  <img style="background-color: #ddd;" src="images/UpdatedPlots.png"/>
+                  <p>
+                      In addition, we realized that something went wrong when measuring runtime in the paper, and the correct runtimes are actually ~5x faster than those reported.
+                  </p>
+            </content>
+            <extra_classes>figures</extra_classes>
+        </panel>
+    </panels>
+</project>

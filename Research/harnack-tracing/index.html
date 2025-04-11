@@ -6,61 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
     <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
-    <script type="text/javascript">
-      // === Cookie stuff for saving style (Maybe I should switch to select/options)
-      function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-        const expires = "expires=" + d.toUTCString();
-        const cookieString =
-          cname +
-          "=" +
-          encodeURIComponent(cvalue) +
-          ";" +
-          expires +
-          ";path=/;SameSite=Strict";
-        document.cookie = cookieString;
-      }
-
-      function getCookie(cname) {
-        const name = cname + "=";
-        const ca = document.cookie.split(";");
-        for (let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == " ") {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return decodeURIComponent(c.substring(name.length, c.length));
-          }
-        }
-        return "";
-      }
-
-     function setStyle(style) {
-         setCookie("style", style);
-         const html = document.getElementsByTagName('html')[0];
-         html.classList.remove("lightmode");
-         html.classList.remove("darkmode");
-         html.classList.add(style);
-     }
-
-     window.onload = function() {
-         /* document.getElementById("background_image").style.opacity = 1.0; */
-         document.getElementsByTagName('html')[0].classList.remove("nojs");
-     }
-
-     // Load saved style
-     // const currentStyle=getCookie("style");
-     // if (currentStyle) {
-     //     setStyle(currentStyle);
-     // } else {
-     //     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-     //     setStyle( isDarkMode ? "darkmode" : "lightmode" );
-     // }
-     setStyle("lightmode");
-
-    </script>
     <!-- tweak figure background color -->
     <style>
      html.darkmode .paper_teaser {
@@ -72,165 +17,141 @@
   <body class="nojs singlecolumn">
     <div class="mega-container">
     <div class="page-content">
-    <div class="navbar">
-      <div class="navbar_buttons">
-        <a href="../../index.html#research" class="navbar_link"><span class="navbar_item">Research</span></a>
-        <a href="../Thesis/thesis.pdf" class="navbar_link"><span class="navbar_item">Thesis</span></a>
-        <!-- <a href="../../index.html#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a> -->
-        <a href="../../index.html#awards" class="navbar_link"><span class="navbar_item">Awards</span></a>
-        <!-- <a href="../../index.html#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a> -->
-        <a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
-        <a href="../../index.html#misc" class="navbar_link"><span class="navbar_item">Misc</span></a>
-        <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
-        <a href="../../index.html" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-        <!-- toggle lightmode -->
-        <!-- <form id="darkmode-toggle">
-            <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
-            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
-        </form> -->
-      </div>
-    </div>
+    <div class="navbar"><div class="navbar_buttons">
+<a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
+<a href="../Thesis/thesis.pdf" class="navbar_link "><span class="navbar_item">Thesis</span></a>
+<a href="../../index.html#awards" class="navbar_link "><span class="navbar_item">Awards</span></a>
+<a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
+<a href="../../index.html#misc" class="navbar_link "><span class="navbar_item">Misc</span></a>
+<a href="../../Mark_Gillespie_CV.pdf" class="navbar_link "><span class="navbar_item">CV</span></a>
+<a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+</div></div>
 
     <div class="wrapper" id="home">
-        <div class="name_box">
-            <div class="title">Ray Tracing Harmonic Functions</div>
-            <div class="venue">ACM Transactions on Graphics (SIGGRAPH 2024)</div>
-            <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
-            <div class="authors">
-                <div class="author">
-                  <span class="name"><a href="../../">Mark Gillespie</a></span>
-                  <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-                <div class="author">
-                  <span class="name"><a href="https://www.linkedin.com/in/denise-yang-899b33179">Denise Yang</a></span>
-                  <span class="affiliation">Carnegie Mellon University<br/>&amp; Pixar Animation Studios</span>
-                </div>
-                <div class="author">
-                    <span class="name"><a href="https://cg.cs.tu-dortmund.de/people/botsch_mario.html">Mario Botsch</a></span>
-                    <span class="affiliation">TU Dortmund University</span>
-                </div>
-                <div class="author">
-                    <span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a></span>
-                    <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-            </div>
-            <div class="paper_teaser">
-                <img style="max-width: 400pt;" src="images/teaser.png">
-            </div>
+      <div class="name_box">
+          <div class="title">Ray Tracing Harmonic Functions</div>
+          <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</div>
+          <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
+          <div class="authors">
+              <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
+<div class="author"><span class="name"><a href="https://www.linkedin.com/in/denise-yang-899b33179">Denise&nbsp;Yang</a></span><span class="affiliation">Carnegie Mellon University<br />&amp; Pixar Animation Studios</span></div>
+<div class="author"><span class="name"><a href="https://cg.cs.tu-dortmund.de/people/botsch_mario.html">Mario&nbsp;Botsch</a></span><span class="affiliation">TU Dortmund University</span></div>
+<div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-            <div class="quick_links">
-                <a href="HarnackTracing.pdf"><span class="project_link">pdf (11.2 mb)</span></a>
-                <a href="HarnackTracingSupplement.pdf"><span class="project_link">supplement (350 kb)</span></a>
-                <a href="https://www.youtube.com/watch?v=6j6WWzPV6aY"><span class="project_link">video (2 min)</span></a>
-                <a href="https://youtu.be/oDwedIuqh5Q"><span class="project_link">video (10 min)</span></a>
-                <a href="https://youtu.be/9h13FPuBvM8"><span class="project_link">video (30 min)</span></a>
-                <a href="https://www.shadertoy.com/playlist/dflXzN"><span class="project_link">code (ShaderToy)</span></a>
-                <a href="https://github.com/MarkGillespie/harnack-blender"><span class="project_link">code (C<span class="cpp">++</span>)</span></a>
-                <a href="harnack-tracing-poster.pdf"><span class="project_link">poster (13 mb)</span></a>
-                <a href="https://doi.org/10.1145/3658201"><span class="project_link">doi</span></a>
-                <a href="bib.txt"><span class="project_link">bibtex</span></a>
-            </div>
+          </div>
+          <div class="paper_teaser">
+              <img src="images/teaser.png" style="max-width: 400pt;">
+          </div>
 
-            <div class="abstract">
-              S<span class="first-word">phere</span> tracing is a fast and high-quality method for visualizing surfaces encoded by signed distance functions (SDFs). We introduce a similar method for a completely different class of surfaces encoded by <em>harmonic functions</em>, opening up rich new possibilities for visual computing.  Our starting point is similar in spirit to sphere tracing: using conservative <em>Harnack bounds</em> on the growth of harmonic functions, we develop a <em>Harnack tracing</em> algorithm for visualizing level sets of harmonic functions, including those that are angle-valued and exhibit singularities.  The method takes much larger steps than naïve ray marching, avoids numerical issues common to generic root finding methods and, like sphere tracing, needs only perform pointwise evaluation of the function at each step.  For many use cases, the method is fast enough to run real time in a shader program.  We use it to visualize smooth surfaces directly from point clouds (via Poisson surface reconstruction) or polygon soup (via generalized winding numbers) without linear solves or mesh extraction.  We also use it to visualize nonplanar polygons (possibly with holes), surfaces from architectural geometry, mesh "exoskeletons", and key mathematical objects including knots, links, spherical harmonics, and Riemann surfaces.  Finally we show that, at least in theory, Harnack tracing provides an alternative mechanism for visualizing arbitrary implicit surfaces.
-            </div>
-    </div>
+          <div class="quick_links">
+            <a href="HarnackTracing.pdf"><span class="project_link">pdf (11.2 mb)</span></a>
+<a href="https://www.shadertoy.com/playlist/dflXzN"><span class="project_link">code (ShaderToy)</span></a>
+<a href="https://youtu.be/oDwedIuqh5Q"><span class="project_link">video (10 min)</span></a>
+<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<a href="https://doi.org/10.1145/3658201"><span class="project_link">doi</span></a>
+<a href="HarnackTracingSupplement.pdf"><span class="project_link">supplement (350 kb)</span></a>
+<a href="https://www.youtube.com/watch?v=6j6WWzPV6aY"><span class="project_link">video (2 min)</span></a>
+<a href="https://youtu.be/9h13FPuBvM8"><span class="project_link">video (30 min)</span></a>
+<a href="https://github.com/MarkGillespie/harnack-blender"><span class="project_link">code (C<span class="cpp">++</span>)</span></a>
+<a href="harnack-tracing-poster.pdf"><span class="project_link">poster (13 mb)</span></a>
+
+          </div>
+
+          <div class="abstract">
+            S<span class="first-word">phere</span> tracing is a fast and high-quality method for visualizing surfaces encoded by signed distance functions (SDFs). We introduce a similar method for a completely different class of surfaces encoded by <em>harmonic functions</em>, opening up rich new possibilities for visual computing.  Our starting point is similar in spirit to sphere tracing: using conservative <em>Harnack bounds</em> on the growth of harmonic functions, we develop a <em>Harnack tracing</em> algorithm for visualizing level sets of harmonic functions, including those that are angle-valued and exhibit singularities.  The method takes much larger steps than naïve ray marching, avoids numerical issues common to generic root finding methods and, like sphere tracing, needs only perform pointwise evaluation of the function at each step.  For many use cases, the method is fast enough to run real time in a shader program.  We use it to visualize smooth surfaces directly from point clouds (via Poisson surface reconstruction) or polygon soup (via generalized winding numbers) without linear solves or mesh extraction.  We also use it to visualize nonplanar polygons (possibly with holes), surfaces from architectural geometry, mesh "exoskeletons", and key mathematical objects including knots, links, spherical harmonics, and Riemann surfaces.  Finally we show that, at least in theory, Harnack tracing provides an alternative mechanism for visualizing arbitrary implicit surfaces.
+
+          </div>
+        </div>
+      </div>
 
       <div class="body">
-          <div class="section_panel">
-            <div class="section_header"> Paper </div>
-            <div class="section_text">
+          <div class="section_panel ">
+
+<div class="section_header">Paper</div>
+<div class="section_text">
                 <a href="HarnackTracing.pdf" class="paper-preview">
-                    <img src="images/preview.png" alt="preview"><br/>
+                    <img src="images/preview.png" alt="preview" /><br />
                     <span> pdf (11.2 mb)</span>
                 </a>
-                <hr />
             </div>
-          </div>
+</div>
+<div class="section_panel ">
 
-          <div class="section_panel">
-              <div class="section_header"> Supplement</div>
-              <div class="section_text">
-                  <a href="HarnackTracingSupplement.pdf" class="paper-preview">
-                      <img src="images/supplement-preview.png" alt="preview"><br/>
-                      <span> pdf (350 kb)</span>
-                  </a>
-                  <hr />
-              </div>
-          </div>
+<div class="section_header">Supplement</div>
+<div class="section_text">
+                <a href="HarnackTracingSupplement.pdf" class="paper-preview">
+                    <img src="images/supplement-preview.png" alt="preview" /><br />
+                    <span> pdf (350 kb)</span>
+                </a>
+            </div>
+</div>
+<div class="section_panel example_grid_container">
 
-          <div class="section_panel example_grid_container">
-              <div class="section_header">GLSL Examples</div>
-              <div class="section_text" style="text-align: left;">
-                  Several examples in the paper were implemented as GLSL shaders in <a href="https://www.shadertoy.com/">ShaderToy</a>. You can find a complete list <a href="https://www.shadertoy.com/playlist/dflXzN">here</a>, but below are a few of my favorites:
+<div class="section_header">GLSL Examples</div>
+<div class="section_text">
+                Several examples in the paper were implemented as GLSL shaders in <a href="https://www.shadertoy.com/">ShaderToy</a>. You can find a complete list <a href="https://www.shadertoy.com/playlist/dflXzN">here</a>, but below are a few of my favorites:
+                <div class="example_grid">
+                    <div class="example_grid_entry">
+                        <a href="https://www.shadertoy.com/view/DlSfWd">
+                            <img src="images/RiemannSurfaces.png" style="width: 100%;" />
+                        </a>
+                        <div class="caption">
+                            <h4 style="margin: 0;">Riemann Surfaces</h4>
+                            <a href="https://www.shadertoy.com/view/DlSfWd">https://www.shadertoy.com/view/DlSfWd</a><br />
+                            <em>Riemann surfaces are central objects of study in complex analysis. Much of their interesting behavior occurs at singular points, which pose problems for standard techniques, but are accurately resolved by Harnack tracing.</em>
+                        </div>
+                    </div>
 
-                  <div class="example_grid">
+                    <div class="example_grid_entry">
+                        <a href="https://www.shadertoy.com/view/4cfXWs">
+                            <img src="images/NonplanarPolygon.png" style="width: 50%; margin: auto;" />
+                        </a>
+                        <div class="caption">
+                            <h4 style="margin: 0;">Nonplanar Polygons</h4>
+                            <a href="https://www.shadertoy.com/view/4cfXWs">https://www.shadertoy.com/view/4cfXWs</a><br />
+                            <em>A perennial question in computer graphics is how to interpret polygons whose vertices do not sit in a common plane. The ability to ray trace harmonic functions provides an elegant answer: we can visualize a nonplanar polygon as a level set of a harmonic function naturally associated to the polygon, namely, its (signed) solid angle.</em>
+                        </div>
+                    </div>
 
-                  <div class="example_grid_entry">
-                  <a href="https://www.shadertoy.com/view/DlSfWd">
-                  <img src="images/RiemannSurfaces.png" style="width: 100%;">
-                  </a>
-                  <div class="caption">
-                    <h4 style="margin: 0;">Riemann Surfaces</h4>
-                    <a href="https://www.shadertoy.com/view/DlSfWd">https://www.shadertoy.com/view/DlSfWd</a><br/>
-                    <em>Riemann surfaces are central objects of study in complex analysis. Much of their interesting behavior occurs at singular points, which pose problems for standard techniques, but are accurately resolved by Harnack tracing.</em>
-                  </div>
-                  </div>
+                    <div class="example_grid_entry">
+                        <a href="https://www.shadertoy.com/view/mtcBDl">
+                            <img src="images/PointCloud.png" style="width: 75%; margin: auto;" />
+                        </a>
+                        <div class="caption">
+                            <h4 style="margin: 0;">Point Cloud Reconstruction</h4>
+                            <a href="https://www.shadertoy.com/view/mtcBDl">https://www.shadertoy.com/view/mtcBDl</a><br />
+                            <em>Given an oriented point cloud (left), we can directly visualize an interpolating surface (right). This procedure effectively shows the result of running the Poisson surface reconstruction algorithm of Kazhdan et al. [<a href="https://hhoppe.com/poissonrecon.pdf">2006</a>], without requiring any volumetric meshing or linear solves.</em>
+                        </div>
+                    </div>
 
-                  <div class="example_grid_entry">
-                  <a href="https://www.shadertoy.com/view/4cfXWs">
-                  <img src="images/NonplanarPolygon.png" style="width: 50%; margin: auto;">
-                  </a>
-                  <div class="caption">
-                    <h4 style="margin: 0;">Nonplanar Polygons</h4>
-                    <a href="https://www.shadertoy.com/view/4cfXWs">https://www.shadertoy.com/view/4cfXWs</a><br/>
-                    <em>A perennial question in computer graphics is how to interpret polygons whose vertices do not sit in a common plane. The ability to ray trace harmonic functions provides an elegant answer: we can visualize a nonplanar polygon as a level set of a harmonic function naturally associated to the polygon, namely, its (signed) solid angle.</em>
-                  </div>
-                  </div>
+                    <div class="example_grid_entry">
+                        <a href="https://www.shadertoy.com/view/MffGzS">
+                            <img src="images/Gyroid.png" style="width: 50%; margin: auto; margin-bottom: -2em;" />
+                        </a>
+                        <div class="caption">
+                            <h4 style="margin: 0;">Gyroid</h4>
+                            <a href="https://www.shadertoy.com/view/MffGzS">https://www.shadertoy.com/view/MffGzS</a><br />
+                            <em>The gyroid is described by the zero level set of the function f(x, y, z) = sin(x) cos(y) + sin(y) cos(z) + sin(z) cos(x). Although this function is not harmonic, we can still ray trace its level sets by constructing a harmonic extension in four dimensions.</em>
+                        </div>
+                    </div>
 
-                  <div class="example_grid_entry">
-                  <a href="https://www.shadertoy.com/view/mtcBDl">
-                  <img src="images/PointCloud.png" style="width: 75%; margin: auto;">
-                  </a>
-                  <div class="caption">
-                    <h4 style="margin: 0;">Point Cloud Reconstruction</h4>
-                    <a href="https://www.shadertoy.com/view/mtcBDl">https://www.shadertoy.com/view/mtcBDl</a><br/>
-                    <em>Given an oriented point cloud (left), we can directly visualize an interpolating surface (right). This procedure effectively shows the result of running the Poisson surface reconstruction algorithm of Kazhdan et al. [<a href="https://hhoppe.com/poissonrecon.pdf">2006</a>], without requiring any volumetric meshing or linear solves.</em>
-                  </div>
-                  </div>
+                    <div class="example_grid_entry">
+                        <a href="https://www.shadertoy.com/view/DdXyRj">
+                        <img src="images/HypersphericalHarmonics.jpg" style="width: 75%; margin: auto;" />
+                        </a>
+                        <div class="caption">
+                            <h4 style="margin: 0;">Hyperspherical Harmonics</h4>
+                            <a href="https://www.shadertoy.com/view/DdXyRj">https://www.shadertoy.com/view/DdXyRj</a><br />
+                            <em>We can also visualize “hyperspherical” harmonics: 4D harmonic polynomials restricted to the 3-sphere and mapped into R³ via stereographic projection.</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+<div class="section_panel  bibEntry">
 
-                  <div class="example_grid_entry">
-                  <a href="https://www.shadertoy.com/view/MffGzS">
-                  <img src="images/Gyroid.png" style="width: 50%; margin: auto; margin-bottom: -2em;">
-                  </a>
-                  <div class="caption">
-                    <h4 style="margin: 0;">Gyroid</h4>
-                    <a href="https://www.shadertoy.com/view/MffGzS">https://www.shadertoy.com/view/MffGzS</a><br/>
-                    <em>The gyroid is described by the zero level set of the function f(x, y, z) = sin(x) cos(y) + sin(y) cos(z) + sin(z) cos(x). Although this function is not harmonic, we can still ray trace its level sets by constructing a harmonic extension in four dimensions.</em>
-                  </div>
-                  </div>
-
-                  <div class="example_grid_entry">
-                  <a href="https://www.shadertoy.com/view/DdXyRj">
-                  <img src="images/HypersphericalHarmonics.jpg" style="width: 75%; margin: auto;">
-                  </a>
-                  <div class="caption">
-                    <h4 style="margin: 0;">Hyperspherical Harmonics</h4>
-                    <a href="https://www.shadertoy.com/view/DdXyRj">https://www.shadertoy.com/view/DdXyRj</a><br/>
-                    <em>We can also visualize “hyperspherical” harmonics: 4D harmonic polynomials restricted to the 3-sphere and mapped into R³ via stereographic projection.</em>
-                  </div>
-                  </div>
-
-
-                  </div>
-
-                  <hr />
-              </div>
-          </div>
-
-          <div class="section_panel">
-              <div class="section_header"> Bibtex </div>
-              <div class="section_text bibEntry">@article{Gillespie:2024:RTH,
+<div class="section_header">Bibtex</div>
+<div class="section_text">@article{Gillespie:2024:RTH,
     author = {Gillespie, Mark and Yang, Denise and Botsch, Mario and Crane, Keenan},
     title = {Ray Tracing Harmonic Functions},
     journal = {ACM Trans. Graph.},
@@ -243,52 +164,50 @@
     month = jul,
     articleno = {99},
     pages = {1--18}
-}<hr /><div></div></div>
-          </div>
+}</div>
+</div>
+<div class="section_panel ">
 
-          <div class="section_panel">
-              <div class="section_header"> Acknowledgements </div>
-              <div class="section_text">
+<div class="section_header">Acknowledgements</div>
+<div class="section_text">
                 Thanks to Nicole Feng for help with Biot-Savart-based expressions for our surface normals, to Albert Chern for helpful discussion of the Biot-Savart law and random projections of curves, and to Andrea Tagliasacchi and Google Brain for supporting this work.  Figure 2 is based on an illustration by the last author. This work was funded by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship and a gift from Google Brain. 
-                  <hr />
-              </div>
-          </div>
+            </div>
+</div>
+<div class="section_panel figures">
 
-          <div class="section_panel figures">
-              <div class="section_header"> Selected Figures </div>
-              <div class="section_text">
-                  <img src="images/figures/WeirdNonplanarPolygons.svg">
-                  <div class="caption">
-                      Our nonplanar polygon definition automatically applies to difficult cases like polygons with holes <em>(left)</em>, or knotted boundaries <em>(right)</em>
-                  </div>
-                  <hr/>
-
-                  <img src="images/PointCloud.png" style="box-shadow: none;">
-                  <div class="caption">
-                    Given an oriented point cloud (left), we can directly visualize an interpolating surface (right). This procedure effectively shows the result of running the Poisson surface reconstruction algorithm of Kazhdan et al. [<a href="https://hhoppe.com/poissonrecon.pdf">2006</a>], without requiring any volumetric meshing or linear solves.
-                  </div>
-                  <hr/>
-
-                  <img src="images/figures/Exoskeleton.svg">
-                  <div class="caption">
-                      Given a sparse "exoskeleton" approximating a surface <em>(top left)</em> we can directly ray trace an interpolating surface <em>(top right)</em>.  The resulting image is both higher-quality than the simple triangulation used by most mesh viewers <em>(bottom left)</em>, and much simpler to compute than optimizing a mesh-based minimal surface, as originally proposed by de Goes <em>et al.</em> [<a href="https://doi.org/10.1016/j.cag.2010.11.012">2011</a>].
-                  </div>
-                  <hr/>
-
-                  <img src="images/figures/GWN.svg" style="box-shadow: none;">
-                  <div class="caption">
-                      Given a surface mesh with imperfections such as holes <em>(left)</em>, we can directly visualize the repaired surface defined via the <em>generalized winding number</em> <em>(right)</em>, reproducing the example from Jacobson <em>et al.</em> [<a href="https://doi.org/10.1145/2461912.2461916">2013, Figure 1</a>].
-                  </div>
-                  <hr/>
-
-                  <img src="images/figures/Architecture.jpg">
-                  <div class="caption">
-                      Here we use Harnack tracing to directly visualize a special class of <em>grid shells</em> used in architecture, reproducing examples from Adiels [<a href="https://arxiv.org/pdf/2212.05913.pdf">2022</a>] figures 11, 12, and 22 (<em>resp.</em>).  To do so, we extend our algorithm to handle circular holes in addition to polygons.
-                  </div>
-                  <hr/>
-                  
+<div class="section_header">Selected Figures</div>
+<div class="section_text">
+                <img src="images/figures/WeirdNonplanarPolygons.svg" />
+                <div class="caption">
+                    Our nonplanar polygon definition automatically applies to difficult cases like polygons with holes <em>(left)</em>, or knotted boundaries <em>(right)</em>
                 </div>
-          </div>
+                <hr />
+
+                <img src="images/PointCloud.png" style="box-shadow: none;" />
+                <div class="caption">
+                    Given an oriented point cloud (left), we can directly visualize an interpolating surface (right). This procedure effectively shows the result of running the Poisson surface reconstruction algorithm of Kazhdan et al. [<a href="https://hhoppe.com/poissonrecon.pdf">2006</a>], without requiring any volumetric meshing or linear solves.
+                </div>
+                <hr />
+
+                <img src="images/figures/Exoskeleton.svg" />
+                <div class="caption">
+                    Given a sparse "exoskeleton" approximating a surface <em>(top left)</em> we can directly ray trace an interpolating surface <em>(top right)</em>.  The resulting image is both higher-quality than the simple triangulation used by most mesh viewers <em>(bottom left)</em>, and much simpler to compute than optimizing a mesh-based minimal surface, as originally proposed by de Goes <em>et al.</em> [<a href="https://doi.org/10.1016/j.cag.2010.11.012">2011</a>].
+                </div>
+                <hr />
+
+                <img src="images/figures/GWN.svg" style="box-shadow: none;" />
+                <div class="caption">
+                    Given a surface mesh with imperfections such as holes <em>(left)</em>, we can directly visualize the repaired surface defined via the <em>generalized winding number</em> <em>(right)</em>, reproducing the example from Jacobson <em>et al.</em> [<a href="https://doi.org/10.1145/2461912.2461916">2013, Figure 1</a>].
+                </div>
+                <hr />
+
+                <img src="images/figures/Architecture.jpg" />
+                <div class="caption">
+                    Here we use Harnack tracing to directly visualize a special class of <em>grid shells</em> used in architecture, reproducing examples from Adiels [<a href="https://arxiv.org/pdf/2212.05913.pdf">2022</a>] figures 11, 12, and 22 (<em>resp.</em>).  To do so, we extend our algorithm to handle circular holes in addition to polygons.
+                </div>
+                <hr />
+            </div>
+</div>
 
       </div>
 
@@ -300,7 +219,4 @@
       </div>
     </div>
   </body>
-  <script>
-   document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(document.getElementsByTagName("html")[0].classList.contains("darkmode") ? "lightmode" : "darkmode");});
-  </script>
 </html>

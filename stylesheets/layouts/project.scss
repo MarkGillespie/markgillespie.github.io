@@ -227,7 +227,7 @@
         text-align: left;
     }
 
-    #{$parent} .bibEntry {
+    #{$parent} .bibEntry .section_text {
         font-family: monospace;
         word-wrap: break-word;
         text-align: left;

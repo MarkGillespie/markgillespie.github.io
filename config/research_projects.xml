@@ -1,0 +1,25 @@
+<data>
+<project_list>
+    ${harnack-tracing}
+    ${solid-knitting}
+    ${thesis}
+    ${WNoDS}
+    ${intrinsic-coarsening}
+    ${integer-coordinates}
+    ${int-tri-course}
+    ${CEPS}
+</project_list>
+<project_template>
+<div class="project_header">
+    <div class="image"><img src="$IMG_SMALL"/></div>
+    <div class="text">
+        <div class="project_title"><a href="$HREF">$TITLE</a></div>
+        <div class="project_author_list">$AUTHORS</div>
+        <div class="venue">$VENUE</div>
+        $AWARD
+        <div class="mini_abstract">$ABSTRACT_SMALL</div>
+    </div>
+</div>
+<div class="project_links">$LINKS</div>
+</project_template>
+</data>

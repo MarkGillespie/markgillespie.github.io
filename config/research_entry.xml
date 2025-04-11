@@ -1,0 +1,12 @@
+<div class="project_header">
+    $ANCHOR
+    <div class="image"><img src="$IMG_SMALL"></div>
+    <div class="text">
+        <div class="project_title"><a href="$HREF">$TITLE</a></div>
+        <div class="project_author_list">$AUTHORS</div>
+        <div class="venue">$VENUE</div>
+        $AWARD
+        <div class="mini_abstract">$ABSTRACT_SMALL</div>
+    </div>
+</div>
+<div class="project_links">$LINKS</div>

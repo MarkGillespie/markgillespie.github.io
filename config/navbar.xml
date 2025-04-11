@@ -1,0 +1,38 @@
+
+<nav_links>
+    <link>
+        <href>$HOME/index.html#research</href>
+        <title>Research</title>
+    </link>
+    <link>
+        <href>$HOME/Research/Thesis/thesis.pdf</href>
+        <title>Thesis</title>
+    </link>
+    <link>
+        <href>$HOME/index.html#awards</href>
+        <title>Awards</title>
+    </link>
+    <link>
+        <href>$HOME/index.html#talks</href>
+        <title>Talks</title>
+        <classes>vanishing</classes>
+    </link>
+    <link>
+        <href>$HOME/index.html#misc</href>
+        <title>Misc</title>
+    </link>
+    <link>
+        <href>$HOME/Mark_Gillespie_CV.pdf</href>
+        <title>CV</title>
+    </link>
+    <link>
+        <href>$HOME/</href>
+        <title>About Me</title>
+        <classes>vanishing</classes>
+    </link>
+<!-- toggle lightmode -->
+<!--  <form id="darkmode-toggle"> 
+  <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
+<label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
+</form> -->
+</nav_links>

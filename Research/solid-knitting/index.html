@@ -6,61 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
     <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
-    <script type="text/javascript">
-      // === Cookie stuff for saving style (Maybe I should switch to select/options)
-      function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-        const expires = "expires=" + d.toUTCString();
-        const cookieString =
-          cname +
-          "=" +
-          encodeURIComponent(cvalue) +
-          ";" +
-          expires +
-          ";path=/;SameSite=Strict";
-        document.cookie = cookieString;
-      }
-
-      function getCookie(cname) {
-        const name = cname + "=";
-        const ca = document.cookie.split(";");
-        for (let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == " ") {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return decodeURIComponent(c.substring(name.length, c.length));
-          }
-        }
-        return "";
-      }
-
-     function setStyle(style) {
-         setCookie("style", style);
-         const html = document.getElementsByTagName('html')[0];
-         html.classList.remove("lightmode");
-         html.classList.remove("darkmode");
-         html.classList.add(style);
-     }
-
-     window.onload = function() {
-         /* document.getElementById("background_image").style.opacity = 1.0; */
-         document.getElementsByTagName('html')[0].classList.remove("nojs");
-     }
-
-     // Load saved style
-     // const currentStyle=getCookie("style");
-     // if (currentStyle) {
-     //     setStyle(currentStyle);
-     // } else {
-     //     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-     //     setStyle( isDarkMode ? "darkmode" : "lightmode" );
-     // }
-     setStyle("lightmode");
-
-    </script>
     <!-- tweak figure background color -->
     <style>
      html.darkmode .paper_teaser {
@@ -72,83 +17,65 @@
   <body class="nojs singlecolumn">
     <div class="mega-container">
     <div class="page-content">
-    <div class="navbar">
-      <div class="navbar_buttons">
-        <a href="../../index.html#research" class="navbar_link"><span class="navbar_item">Research</span></a>
-        <a href="../Thesis/thesis.pdf" class="navbar_link"><span class="navbar_item">Thesis</span></a>
-        <!-- <a href="../../index.html#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a> -->
-        <a href="../../index.html#awards" class="navbar_link"><span class="navbar_item">Awards</span></a>
-        <!-- <a href="../../index.html#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a> -->
-        <a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
-        <a href="../../index.html#misc" class="navbar_link"><span class="navbar_item">Misc</span></a>
-        <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
-        <a href="../../index.html" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-        <!-- toggle lightmode -->
-        <!-- <form id="darkmode-toggle">
-			      <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
-            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
-		    </form> -->
-      </div>
-    </div>
+    <div class="navbar"><div class="navbar_buttons">
+<a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
+<a href="../Thesis/thesis.pdf" class="navbar_link "><span class="navbar_item">Thesis</span></a>
+<a href="../../index.html#awards" class="navbar_link "><span class="navbar_item">Awards</span></a>
+<a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
+<a href="../../index.html#misc" class="navbar_link "><span class="navbar_item">Misc</span></a>
+<a href="../../Mark_Gillespie_CV.pdf" class="navbar_link "><span class="navbar_item">CV</span></a>
+<a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+</div></div>
 
     <div class="wrapper" id="home">
-        <div class="name_box">
-            <div class="title">Solid Knitting</div>
-            <div class="venue">ACM Transactions on Graphics (SIGGRAPH 2024)</div>
-            <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
-            <div class="authors">
-                <div class="author">
-                  <span class="name"><a href="https://hirose-yuichi.github.io/">Yuichi Hirose</a></span>
-                  <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-                <div class="author">
-                  <span class="name"><a href="../../">Mark Gillespie</a></span>
-                  <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-                <div class="author">
-                  <span class="name"><a href="https://abfominaya.com/">Angelica M. Bonilla Fominaya</a></span>
-                  <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-                <div class="author">
-                  <span class="name"><a href="https://www.cs.cmu.edu/~jmccann/">James McCann</a></span>
-                  <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-            </div>
-            <div class="paper_teaser">
-                <img src="images/teaser.png">
-            </div>
+      <div class="name_box">
+          <div class="title">Solid Knitting</div>
+          <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</div>
+          <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
+          <div class="authors">
+              <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
+<div class="author"><span class="name"><a href="https://hirose-yuichi.github.io/">Yuichi&nbsp;Hirose</a></span><span class="affiliation">Carnegie Mellon University</span></div>
+<div class="author"><span class="name"><a href="https://abfominaya.com/">Angelica M. Bonilla&nbsp;Fominaya</a></span><span class="affiliation">Carnegie Mellon University</span></div>
+<div class="author"><span class="name"><a href="https://www.cs.cmu.edu/~jmccann/">James&nbsp;McCann</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-            <div class="quick_links">
-                <a href="SolidKnitting.pdf"><span class="project_link">pdf (18.5 mb)</span></a>
-                <a href="SolidKnittingHandInstructions.pdf"><span class="project_link">hand knitting instructions (10 mb)</span></a>
-                <a href="https://youtu.be/t2PIVAvan-c"><span class="project_link">hand knitting instructions (video)</span></a>
-                <!-- <a href="https://youtu.be/3undxB8rcvE"><span class="project_link">video (20 s)</span></a> -->
-                <a href="https://youtu.be/uVRXWlpiyAc"><span class="project_link">video (5 m)</span></a>
-                <a href="https://github.com/textiles-lab/solid-knitting-ui"><span class="project_link">code</span></a>
-                <a href="https://doi.org/10.1145/3658123"><span class="project_link">doi</span></a>
-                <a href="bib.txt"><span class="project_link">bibtex</span></a>
-            </div>
-
-            <div class="abstract">
-                W<span class="first-word">e</span> introduce solid knitting, a new fabrication technique that combines the layer-by-layer volumetric approach of 3D printing with the topologically-entwined stitch structure of knitting to produce solid 3D objects. We define the basic building blocks of solid knitting and demonstrate a working prototype of a solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns. Solid knitting uses a course-wale-layer structure, where every loop in a solid-knit object passes through both a loop from the previous layer and a loop from the previous course. Our machine uses two beds of latch needles to create stitches like a conventional V-bed knitting machine, but augments these needles with a pair of rotating hook arrays to provide storage locations for all of the loops in one layer of the object. It can autonomously produce solid-knit prisms of arbitrary length, although it requires manual intervention to cast on the first layer and bind off the final row. Our design tool allows users to create solid knitting patterns by connecting elementary stitches; objects designed in our interface can—after basic topological checks and constraint propagation—be exported as a sequence of instructions for fabrication on the solid knitting machine. We validate our solid knitting hardware and software on prism examples, detail the mechanical errors which we have encountered, and discuss potential extensions to the capability of our solid knitting machine.
-            </div>
-    </div>
-
-      <div class="body">
-          <div class="section_panel">
-            <div class="section_header"> Paper </div>
-            <div class="section_text">
-                <a href="SolidKnitting.pdf" class="paper-preview">
-                    <img src="images/preview.png" alt="preview"><br/>
-                    <span> pdf (18.5 mb)</span>
-                </a>
-                <hr />
-            </div>
+          </div>
+          <div class="paper_teaser">
+              <img src="images/teaser.png" style="">
           </div>
 
-          <div class="section_panel">
-              <div class="section_header"> Bibtex </div>
-              <div class="section_text bibEntry">@article{Hirose:2024:SK,
+          <div class="quick_links">
+            <a href="SolidKnitting.pdf"><span class="project_link">pdf (18.5 mb)</span></a>
+<a href="https://youtu.be/uVRXWlpiyAc"><span class="project_link">video (5m)</span></a>
+<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<a href="https://doi.org/10.1145/3658123"><span class="project_link">doi</span></a>
+<a href="SolidKnittingHandInstructions.pdf"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(10 mb)</span></a>
+<a href="https://youtu.be/t2PIVAvan-c"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(video)</span></a>
+<a href="https://github.com/textiles-lab/solid-knitting-ui"><span class="project_link">code</span></a>
+
+          </div>
+
+          <div class="abstract">
+            W<span class="first-word">e</span> introduce solid knitting, a new fabrication technique that combines the layer-by-layer volumetric approach of 3D printing with the topologically-entwined stitch structure of knitting to produce solid 3D objects. We define the basic building blocks of solid knitting and demonstrate a working prototype of a solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns. Solid knitting uses a course-wale-layer structure, where every loop in a solid-knit object passes through both a loop from the previous layer and a loop from the previous course. Our machine uses two beds of latch needles to create stitches like a conventional V-bed knitting machine, but augments these needles with a pair of rotating hook arrays to provide storage locations for all of the loops in one layer of the object. It can autonomously produce solid-knit prisms of arbitrary length, although it requires manual intervention to cast on the first layer and bind off the final row. Our design tool allows users to create solid knitting patterns by connecting elementary stitches; objects designed in our interface can—after basic topological checks and constraint propagation—be exported as a sequence of instructions for fabrication on the solid knitting machine. We validate our solid knitting hardware and software on prism examples, detail the mechanical errors which we have encountered, and discuss potential extensions to the capability of our solid knitting machine.
+
+          </div>
+        </div>
+      </div>
+
+      <div class="body">
+          <div class="section_panel ">
+
+<div class="section_header">Paper</div>
+<div class="section_text">
+                <a href="SolidKnitting.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview" /><br />
+                    <span> pdf (18.5 mb)</span>
+                </a>
+            </div>
+</div>
+<div class="section_panel  bibEntry">
+
+<div class="section_header">Bibtex</div>
+<div class="section_text">@article{Hirose:2024:SK,
     author = {Hirose, Yuichi and Gillespie, Mark and Bonilla Fominaya, Angelica M. and McCann, James},
     title = {Solid Knitting},
     journal = {ACM Trans. Graph.},
@@ -161,55 +88,54 @@
     month = jul,
     articleno = {88},
     pages = {1--15}
-}<hr /><div></div></div>
-          </div>
+}</div>
+</div>
+<div class="section_panel ">
 
-          <div class="section_panel">
-              <div class="section_header" style="max-width: 10em;"> Supplement: Solid Knitting by Hand </div>
-              <div class="section_text">
-                  <a href="SolidKnittingHandInstructions.pdf" class="paper-preview" style="display: inline-block; width: 100%; text-align: center;">
-                      <img src="images/cube.png" alt="preview" style="box-shadow: none; max-width: 256px; width: 100%;"><br/>
-                      <span> hand knitting instructions (text; 10 mb)</span>
-                  </a>
-                  <center><a href="https://youtu.be/t2PIVAvan-c">hand knitting instructions (video)</a></center>
-                  <hr />
-              </div>
-          </div>
+<div class="section_header">Supplement: Solid Knitting by Hand</div>
+<div class="section_text">
+                <a href="SolidKnittingHandInstructions.pdf" class="paper-preview" style="display: inline-block; width: 100%; text-align: center;">
+                    <img src="images/cube.png" alt="preview" style="box-shadow: none; max-width: 256px; width: 100%;" /><br />
+                    <span> hand knitting instructions (text; 10 mb)</span>
+                </a>
+                <center><a href="https://youtu.be/t2PIVAvan-c">hand knitting instructions (video)</a></center>
+            </div>
+</div>
+<div class="section_panel figures">
 
-          <div class="section_panel figures">
-              <div class="section_header"> Selected Figures </div>
-              <div class="section_text">
-                  <img src="images/figures/surface_knitting_vs_solid_knitting.svg">
+<div class="section_header">Selected Figures</div>
+<div class="section_text">
+                  <img src="images/figures/surface_knitting_vs_solid_knitting.svg" />
                   <div class="caption">
                       Unlike standard knitting, which makes hollow surfaces, solid knitting makes dense volumes by layering knit sheets---much as 3D printers layer plastic sheets.
                   </div>
-                  <hr/>
+                  <hr />
 
-                  <img src="images/figures/pyramid_smaller.jpg">
+                  <img src="images/figures/pyramid_smaller.jpg" />
                   <div class="caption">
-                      Solid knitting builds up objects using layered sheets of fabric.<br/><span style="display: inline-block; text-align: right; width: 100%; font-size: .75em">(this example was fabricated by hand)</span>
+                      Solid knitting builds up objects using layered sheets of fabric.<br /><span style="display: inline-block; text-align: right; width: 100%; font-size: .75em">(this example was fabricated by hand)</span>
                   </div>
-                  <hr/>
+                  <hr />
 
-                  <img src="images/figures/solid-purling.svg">
+                  <img src="images/figures/solid-purling.svg" />
                   <div class="caption">
                       Each layer of a solid-knit is made of rows of stitches (<em>left</em>). To form a new row, one runs yarn across the latest row of loops on the top layer (<em>center</em>) and pulls the yarn through both these loops <em>and</em> loops from a row one layer down (<em>right</em>).
                   </div>
-                  <hr/>
+                  <hr />
 
-                  <img src="images/figures/solid-knit-stitch.svg" style="max-width: 60%; box-shadow: none;">
+                  <img src="images/figures/solid-knit-stitch.svg" style="max-width: 60%; box-shadow: none;" />
                   <div class="caption">
                       Just as a traditional knit stitch can be seen as a rectangular tile, a solid knit stitch can be seen as a box-shaped tile attached to six neighbors. It is connected to its left and right neighbors via the yarn and connected to its neighbors in the other two directions by interlocking loops.
                   </div>
-                  <hr/>
+                  <hr />
 
-                  <img src="images/figures/machine-parts.png" style="max-width: 100%;">
+                  <img src="images/figures/machine-parts.png" style="max-width: 100%;" />
                   <div class="caption">
                       The solid knitting machine has two needle beds, which are each made up of holders, needles, and retaining needles (<em>top right</em>). The holders have space to hold onto every loop in a layer of solid knitting (<em>bottom right</em>). The machine also has a single yarn carrier to feeds in new yarn (<em>top left</em>).
                   </div>
-                  <hr/>
+                  <hr />
 
-                  <img src="images/figures/machine-solid-knit-stitch.svg" style="box-shadow:none; max-width: 105%; width: 105%;">
+                  <img src="images/figures/machine-solid-knit-stitch.svg" style="box-shadow:none; max-width: 105%; width: 105%;" />
                   <div class="caption">
                       Knitting the first row of a new layer on the solid knitting machine:
                       (1) the machine first tucks a new span of yarn beneath the holder.
@@ -219,103 +145,98 @@
                       Finally, the machine performs a knit operation, (5) pushing this needle forward, grabbing onto the new span of yarn tucked beneath the holder hook, and (6) retracting to pull the yarn through the loop on the holder and the loop on the needle.
                       Note that the loop on the holder is retained to be knit through again in the subsequent layer, while the loop that was on the needle is released. (7) shows the completed solid knit stitch.
                   </div>
-                  <hr/>
+                  <hr />
 
-                  <img src="images/figures/results.svg" style="max-width: 65%;">
+                  <img src="images/figures/results.svg" style="max-width: 65%;" />
                   <div class="caption">
                       Rectangular and triangular prisms designed in our software and constructed by the solid knitting machine.
                   </div>
-                  <hr/>
+                  <hr />
 
-                  <img src="images/figures/solidknittedSandalsLayer.svg" style="max-width: 100%;">
+                  <img src="images/figures/solidknittedSandalsLayer.svg" style="max-width: 100%;" />
                   <div class="caption">
                       <em>Left</em>: a model of sandals is converted into a solid knitting pattern by voxelizing with rectangular elements whose aspect ratio matches the stitches then slicing into layers. <em>Right</em>: Solid-knit sandals constructed by hand from this pattern.
                   </div>
-                  <hr/>
-
-              </div>
-          </div>
-
-          <div class="section_panel">
-              <a name="in_the_media">
-              <div class="section_header" style="max-width: 10em;"> In the media </div>
-              <div class="section_text child_lines">
-
-                  <div class="headline">
+                  <hr />
+            </div>
+</div>
+<div class="section_panel child_lines">
+<a name="in_the_media">
+<div class="section_header">In the media</div>
+<div class="section_text">
+                <div class="headline">
                     <a href="https://creative.knittingindustry.com/solid-knitting-a-new-fabrication-technique/">Solid Knitting – a new fabrication technique</a>
                     <div class="source">
-                      (Knitting Industry Creative)
+                        (Knitting Industry Creative)
                     </div>
-                  </div>
+                </div>
 
-                  <div class="headline">
+                <div class="headline">
                     <a href="https://textiletechsource.com/2024/08/12/solid-knitting-machine-builds-reconfigurable-objects/">Solid-knitting machine builds reconfigurable objects</a>
                     <div class="source">
-                      (Textile Technology Source)
+                        (Textile Technology Source)
                     </div>
-                  </div>
+                </div>
 
-                  <div class="headline">
+                <div class="headline">
                     <a href="https://www.designboom.com/technology/machine-knitting-solid-furniture-3d-accessories-elastic-cord-yarn-carnegie-mellon-university-08-02-2024/">Carnegie Mellon University’s researchers develop `solid knitting'</a>
                     <div class="source">
-                      (Design Boom)
+                        (Design Boom)
                     </div>
-                  </div>
+                </div>
 
-                  <div class="headline">
+                <div class="headline">
                     <a href="https://materialdistrict.com/article/solid-knitting-3d-printing-with-yarn/">Solid knitting: 3D printing with yarn</a>
                     <div class="source">
-                      (Material District)
+                        (Material District)
                     </div>
-                  </div>
+                </div>
 
-
-                  <div class="headline">
+                <div class="headline">
                     <a href="https://cosmosmagazine.com/technology/computing/3d-knitting-could-make-solid-but-soft-furniture/">3D knitting could make solid but soft furniture</a>
                     <div class="source">
-                      (Cosmos magazine)
+                        (Cosmos magazine)
                     </div>
-                  </div>
-                  <div class="headline">
+                </div>
+                <div class="headline">
                     <a href="https://interestingengineering.com/innovation/solid-knitted-three-dimensional-furniture-could-be-reality">Beware IKEA: Solid knitted three-dimensional furniture could be a reality</a>
                     <div class="source">
-                      (Interesting Engineering)
+                        (Interesting Engineering)
                     </div>
-                  </div>
-                  <div class="headline">
+                </div>
+                <div class="headline">
                     <a href="https://newatlas.com/materials/solid-knitting-reconfigurable/">Innovative 'solid knitting' machine builds 100% reconfigurable objects</a>
                     <div class="source">
-                      (New Atlas)
+                        (New Atlas)
                     </div>
-                  </div>
-                  <div class="headline">
+                </div>
+                <div class="headline">
                     <a href="https://www.msn.com/en-us/news/technology/solid-knitting-a-different-spin-on-3d-printing-that-can-make-furniture-out-of-yarn/ar-AA1ogaiP?ocid=BingNewsVerp">Solid knitting: a different spin on 3D printing that can make furniture out of yarn</a>
                     <div class="source">
-                       (ZME Science)
-                     </div>
-                  </div>
-                  <div class="headline">
+                        (ZME Science)
+                    </div>
+                </div>
+                <div class="headline">
                     <a href="https://blog.siggraph.org/2024/07/beyond-the-threads.html/">Beyond the Threads</a>
                     <div class="source">
-                      (ACM SIGGRAPH Blog)
+                        (ACM SIGGRAPH Blog)
                     </div>
-                  </div>
-                  <div class="headline">
+                </div>
+                <div class="headline">
                     <a href="https://www.cmu.edu/news/stories/archives/2024/july/robotics-institute-introduces-solid-knitting-as-new-fabrication-technique">Robotics Institute Introduces Solid Knitting as New Fabrication Technique</a>
                     <div class="source">
                         (CMU News)
                     </div>
-                  </div>
-              </div>
-          </div>
+                </div>
+            </div>
+</div>
+<div class="section_panel ">
 
-          <div class="section_panel">
-              <div class="section_header"> Acknowledgements </div>
-              <div class="section_text">
-                  Part of this work was supported by the INNO-vation Program of the Ministry of Internal Affairs and Communications, Japan, the 100BANCH GARAGE Program of Panasonic Holdings Corporation, and the MITOU Advanced Program of the Information-technology Promotion Agency, Japan.  This material is partially based upon work supported by the National Science Foundation under Award No. 1955444, and upon the master's thesis and patent of our first author [Hirose 2014, <a href="https://patentscope.wipo.int/search/en/detail.jsf?docId=JP337722897">2022</a>].
-                  <hr />
-              </div>
-          </div>
+<div class="section_header">Acknowledgements</div>
+<div class="section_text">
+                Part of this work was supported by the INNO-vation Program of the Ministry of Internal Affairs and Communications, Japan, the 100BANCH GARAGE Program of Panasonic Holdings Corporation, and the MITOU Advanced Program of the Information-technology Promotion Agency, Japan.  This material is partially based upon work supported by the National Science Foundation under Award No. 1955444, and upon the master's thesis and patent of our first author [Hirose 2014, <a href="https://patentscope.wipo.int/search/en/detail.jsf?docId=JP337722897">2022</a>].
+            </div>
+</div>
 
       </div>
 
@@ -327,7 +248,4 @@
       </div>
     </div>
   </body>
-  <script>
-   document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(document.getElementsByTagName("html")[0].classList.contains("darkmode") ? "lightmode" : "darkmode");});
-  </script>
 </html>

@@ -2037,7 +2037,7 @@ html.project .example_grid .example_grid_entry .caption {
   text-align: left;
 }
 
-html.project .bibEntry {
+html.project .bibEntry .section_text {
   font-family: monospace;
   word-wrap: break-word;
   text-align: left;

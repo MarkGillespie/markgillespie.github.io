@@ -1,0 +1,61 @@
+<project>
+    <title>Integer Coordinates for Intrinsic Geometry Processing</title>
+    <folder>integer-coordinates</folder>
+    <key>integer-coordinates</key>
+    <href>index.html</href>
+    <doi>10.1145/3478513.3480522</doi>
+    <img_small>Research/integer-coordinates/images/SmallRepresentativeImage.svg</img_small>
+    <img_large>Research/integer-coordinates/images/teaser.png<style>max-height: 25em;</style></img_large>
+    <authors>
+        <author>
+            <name>Mark Gillespie</name>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Nicholas Sharp</name>
+            <href>https://nmwsharp.com/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Keenan Crane</name>
+            <href>http://www.cs.cmu.edu/~kmcrane/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+    </authors>
+    <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;Asia&amp;nbsp;2021)</venue>
+    <links>
+        <link><name>pdf (7.6 mb)</name><href>Research/integer-coordinates/integer_coordinates.pdf</href></link>
+        <link><name>video (20 min)</name><href>https://youtu.be/3czWJxSmCuc</href></link>
+        <link><name>code (C<span class="cpp">++</span> demo)</name><href>https://github.com/MarkGillespie/intrinsic-triangulations-demo</href></link>
+    </links>
+    <more_links>
+        <link><name>arxiv</name><href>https://arxiv.org/abs/2106.00220</href></link>
+        <link><name>video (5 min)</name><href>https://youtu.be/a4sgxoZRSCk</href></link>
+        <link><name>video (45 s)</name><href>https://youtu.be/0ZN79VqGMaI</href></link>
+        <link><name>code (C<span class="cpp">++</span> library)</name><href>https://geometry-central.net/surface/intrinsic_triangulations/basics/</href></link>
+    </more_links>
+    <bibtex>Research/integer-coordinates/bib.txt</bibtex>
+    <abstract_small>
+        This paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to a broader set of operations needed for mesh processing. As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.
+    </abstract_small>
+    <abstract_big>
+        This paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Many applications demand a correspondence between the intrinsic triangulation and the input surface, but existing data structures either rely on floating point values to encode correspondence, or do not support remeshing operations beyond basic edge flips.  We instead provide an integer-based data structure that guarantees valid correspondence, even for meshes with near-degenerate elements.  Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to the broader set of operations needed for mesh processing (vertex insertion, edge splits, <em>etc</em>.).  The resulting data structure can be used as a drop-in replacement for earlier schemes, automatically improving reliability across a wide variety of applications.  As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.  In turn, we can compute reliable and highly accurate solutions to partial differential equations even on extremely low-quality meshes.
+    </abstract_big>
+    <panels>
+        <panel>
+            <title>Paper</title>
+            <content>
+                <a href="integer_coordinates.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"/><br/>
+                    <span> pdf (7.7 mb)</span>
+                </a>
+            </content>
+        </panel>
+        <panel>
+            <title>Acknowledgements</title>
+            <content>
+                  This work was supported by a Packard Fellowship, NSF Award 1717320, DFG TRR 109, an NSF Graduate Research Fellowship, and gifts from Autodesk, Adobe, and Facebook.
+            </content>
+        </panel>
+        <panel>
+            <bibtex></bibtex>
+        </panel>
+    </panels>
+</project>

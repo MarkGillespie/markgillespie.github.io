@@ -11,3 +11,5 @@
 *.run.xml
 main.pdf
 *.swp
+
+config/generated

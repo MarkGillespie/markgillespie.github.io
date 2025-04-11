@@ -6,61 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
     <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
-    <script type="text/javascript">
-      // === Cookie stuff for saving style (Maybe I should switch to select/options)
-      function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-        const expires = "expires=" + d.toUTCString();
-        const cookieString =
-          cname +
-          "=" +
-          encodeURIComponent(cvalue) +
-          ";" +
-          expires +
-          ";path=/;SameSite=Strict";
-        document.cookie = cookieString;
-      }
-
-      function getCookie(cname) {
-        const name = cname + "=";
-        const ca = document.cookie.split(";");
-        for (let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == " ") {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return decodeURIComponent(c.substring(name.length, c.length));
-          }
-        }
-        return "";
-      }
-
-     function setStyle(style) {
-         setCookie("style", style);
-         const html = document.getElementsByTagName('html')[0];
-         html.classList.remove("lightmode");
-         html.classList.remove("darkmode");
-         html.classList.add(style);
-     }
-
-     window.onload = function() {
-         /* document.getElementById("background_image").style.opacity = 1.0; */
-         document.getElementsByTagName('html')[0].classList.remove("nojs");
-     }
-
-     // Load saved style
-     // const currentStyle=getCookie("style");
-     // if (currentStyle) {
-     //     setStyle(currentStyle);
-     // } else {
-     //     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-     //     setStyle( isDarkMode ? "darkmode" : "lightmode" );
-     // }
-     setStyle("lightmode");
-
-    </script>
     <!-- tweak figure background color -->
     <style>
      html.darkmode .paper_teaser {
@@ -72,137 +17,110 @@
   <body class="nojs singlecolumn">
     <div class="mega-container">
     <div class="page-content">
-    <div class="navbar">
-      <div class="navbar_buttons">
-        <a href="../../index.html#research" class="navbar_link"><span class="navbar_item">Research</span></a>
-        <a href="../Thesis/thesis.pdf" class="navbar_link"><span class="navbar_item">Thesis</span></a>
-        <!-- <a href="../../index.html#teaching" class="navbar_link"><span class="navbar_item">Teaching</span></a> -->
-        <a href="../../index.html#awards" class="navbar_link"><span class="navbar_item">Awards</span></a>
-        <!-- <a href="../../index.html#education" class="navbar_link vanishing_early"><span class="navbar_item">Education</span></a> -->
-        <a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
-        <a href="../../index.html#misc" class="navbar_link"><span class="navbar_item">Misc</span></a>
-        <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link"><span class="navbar_item">CV</span></a>
-        <a href="../../index.html" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-        <!-- toggle lightmode -->
-        <!-- <form id="darkmode-toggle">
-            <input type="checkbox" id="darkmode-checkbox" name="darkmode" value="darkmode" checked>
-            <label for="darkmode-checkbox" id="darkmode-checkbox-label" class="navbar_item"></label>
-        </form> -->
-      </div>
-    </div>
+    <div class="navbar"><div class="navbar_buttons">
+<a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
+<a href="../Thesis/thesis.pdf" class="navbar_link "><span class="navbar_item">Thesis</span></a>
+<a href="../../index.html#awards" class="navbar_link "><span class="navbar_item">Awards</span></a>
+<a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
+<a href="../../index.html#misc" class="navbar_link "><span class="navbar_item">Misc</span></a>
+<a href="../../Mark_Gillespie_CV.pdf" class="navbar_link "><span class="navbar_item">CV</span></a>
+<a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+</div></div>
 
     <div class="wrapper" id="home">
-        <div class="name_box">
-            <div class="title">Winding Numbers on Discrete Surfaces</div>
-            <div class="venue">ACM Transactions on Graphics (SIGGRAPH 2023)</div>
-            <div class="authors">
-                <div class="author">
-                    <span class="name"><a href="https://nzfeng.github.io/">Nicole Feng</a></span>
-                    <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-                <div class="author">
-                    <span class="name"><a href="../../">Mark Gillespie</a></span>
-                    <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-                <div class="author">
-                    <span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan Crane</a></span>
-                    <span class="affiliation">Carnegie Mellon University</span>
-                </div>
-            </div>
-            <div class="paper_teaser">
-                <img src="images/teaser.png">
-            </div>
+      <div class="name_box">
+          <div class="title">Winding Numbers on Discrete Surfaces</div>
+          <div class="venue">ACM Transactions on Graphics (SIGGRAPH&nbsp;2023)</div>
+          
+          <div class="authors">
+              <div class="author"><span class="name"><a href="https://nzfeng.github.io/">Nicole&nbsp;Feng</a></span><span class="affiliation">Carnegie Mellon University</span></div>
+<div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
+<div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-            <div class="quick_links">
-                <a href="WindingNumbersOnSurfaces.pdf"><span class="project_link">pdf (11 mb)</span></a>
-                <a href="PerspectivesOnWindingNumbers.pdf"><span class="project_link">supplement (2.7 mb)</span></a>
-                <a href="https://youtu.be/3undxB8rcvE"><span class="project_link">video (20 s)</span></a>
-                <a href="https://youtu.be/QnMx3s4_4WY"><span class="project_link">video (10 min)</span></a>
-                <a href="https://github.com/nzfeng/SWN"><span class="project_link" >code</span></a>
-                <a href="https://doi.org/10.1145/3592401"><span class="project_link">doi</span></a>
-                <a href="bib.txt"><span class="project_link">bibtex</span></a>
-            </div>
+          </div>
+          <div class="paper_teaser">
+              <img src="images/teaser.png" style="">
+          </div>
 
-            <div class="abstract">
-                I<span class="first-word">n</span> the plane, the <em>winding number</em> is the number of times a curve wraps around a given point.  Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven valuable for geometry processing tasks ranging from surface reconstruction to mesh booleans.  However, standard definitions do not immediately apply on surfaces, where not all curves bound regions.  We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions.  By processing the derivatives of such functions, we can robustly filter out components of the input that do not bound any region.  Ultimately, our algorithm yields (i) a closed, completed version of the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region.  The main computational cost is solving a standard Poisson equation, or for surfaces with nontrivial topology, a sparse linear program.  We also introduce special basis functions to represent singularities that naturally occur at endpoints of open curves.
-            </div>
-    </div>
+          <div class="quick_links">
+            <a href="WindingNumbersOnSurfaces.pdf"><span class="project_link">pdf (11 mb)</span></a>
+<a href="https://github.com/nzfeng/SWN"><span class="project_link">code</span></a>
+<a href="https://youtu.be/QnMx3s4_4WY"><span class="project_link">video (10 min)</span></a>
+<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<a href="https://doi.org/10.1145/3592401"><span class="project_link">doi</span></a>
+<a href="PerspectivesOnWindingNumbers.pdf"><span class="project_link">supplement (2.7 mb)</span></a>
+<a href="https://youtu.be/3undxB8rcvE"><span class="project_link">video (20 s)</span></a>
+
+          </div>
+
+          <div class="abstract">
+            I<span class="first-word">n</span> the plane, the <em>winding number</em> is the number of times a curve wraps around a given point.  Winding numbers are a basic component of geometric algorithms such as point-in-polygon tests, and their generalization to data with noise or topological errors has proven valuable for geometry processing tasks ranging from surface reconstruction to mesh booleans.  However, standard definitions do not immediately apply on surfaces, where not all curves bound regions.  We develop a meaningful generalization, starting with the well-known relationship between winding numbers and harmonic functions.  By processing the derivatives of such functions, we can robustly filter out components of the input that do not bound any region.  Ultimately, our algorithm yields (i) a closed, completed version of the input curves, (ii) integer labels for regions that are meaningfully bounded by these curves, and (iii) the complementary curves that do not bound any region.  The main computational cost is solving a standard Poisson equation, or for surfaces with nontrivial topology, a sparse linear program.  We also introduce special basis functions to represent singularities that naturally occur at endpoints of open curves.
+
+          </div>
+        </div>
+      </div>
 
       <div class="body">
-          <div class="section_panel">
-            <div class="section_header"> Paper </div>
-            <div class="section_text">
+          <div class="section_panel ">
+
+<div class="section_header">Paper</div>
+<div class="section_text">
                 <a href="WindingNumbersOnSurfaces.pdf" class="paper-preview">
-                    <img src="images/preview.png" alt="preview"><br/>
+                    <img src="images/preview.png" alt="preview" /><br />
                     <span> pdf (11 mb)</span>
                 </a>
-                <hr />
             </div>
-          </div>
+</div>
+<div class="section_panel ">
 
-          <div class="section_panel">
-              <div class="section_header"> Acknowledgements </div>
-              <div class="section_text">
+<div class="section_header">Acknowledgements</div>
+<div class="section_text">
                   This work was funded by an NSF CAREER Award (IIS 1943123), NSF Award IIS 2212290, a Packard Fellowship and gifts from Facebook Reality Labs, and Google, Inc.
-                  <hr />
-              </div>
-          </div>
+            </div>
+</div>
+<div class="section_panel  bibEntry">
 
-          <div class="section_panel">
-              <div class="section_header"> Bibtex </div>
-              <div class="section_text bibEntry">@article{Feng:2023:WND,
-    author = {Feng, Nicole and Gillespie, Mark and Crane, Keenan},
-    title = {Winding Numbers on Discrete Surfaces},
-    journal = {ACM Trans. Graph.},
-    volume = {42},
-    number = {4},
-    year = {2023},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    issn = {0730-0301},
-    url = {https://doi.org/10.1145/3592401},
-    doi = {10.1145/3592401},
-    month = {jul},
-    articleno = {36},
-}<hr /><div></div></div>
-          </div>
+<div class="section_header">Bibtex</div>
+<div class="section_text">@article{Feng:2023:WND,
+  author = {Feng, Nicole and Gillespie, Mark and Crane, Keenan},
+  title = {Winding Numbers on Discrete Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {42},
+  number = {4},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  issn = {0730-0301},
+  url = {https://doi.org/10.1145/3592401},
+  doi = {10.1145/3592401},
+  month = {jul},
+  articleno = {36},
+}
+</div>
+</div>
+<div class="section_panel ">
 
-          <div class="section_panel">
-              <div class="section_header" style="max-width: 10em;"> Supplement: Perspectives on Winding Numbers </div>
-              <div class="section_text">
+<div class="section_header">Supplement: Perspectives on Winding Numbers</div>
+<div class="section_text">
                   <a href="PerspectivesOnWindingNumbers.pdf" class="paper-preview">
-                      <img src="images/perspectives-preview.png" alt="preview"><br/>
+                      <img src="images/perspectives-preview.png" alt="preview" /><br />
                       <span> pdf (2.7 mb)</span>
                   </a>
-                  <hr />
-              </div>
-          </div>
+            </div>
+</div>
+<div class="section_panel figures">
 
-          <div class="section_panel figures">
-              <div class="section_header"> Errata </div>
-              <div class="section_text">
+<div class="section_header">Errata</div>
+<div class="section_text">
                   <p>
                       Nicole Feng has a list of detailed errata <a href="https://nzfeng.github.io/research/WNoDS/index.html">available on her website.</a> The upshot is that after publication, we realized that you can approximate the solution to the linear program in our algorithm <em>(left)</em>, resulting in a 100x speedup <em>(right)</em>.
                   </p>
-                  <img style="background-color: #ddd;" src="images/UpdatedPlots.png">
+                  <img style="background-color: #ddd;" src="images/UpdatedPlots.png" />
                   <p>
                       In addition, we realized that something went wrong when measuring runtime in the paper, and the correct runtimes are actually ~5x faster than those reported.
                   </p>
-                  <hr />
-              </div>
-          </div>
-
-          <!-- <div class="section_panel figures">
-               <div class="section_header"> Selected Figures </div>
-               <div class="section_text">
-               <img src="images/figures/figure28.jpg">
-               <div class="caption">
-               Our method robustly handles extremely poor triangulations (left), including almost all models from Thingi10k, as well as extreme configurations of cone singularities (center). It also guarantees global injectivity for discrete conformal maps to the sphere—a case not handled by previous algorithms.
-               </div>
-               <hr/>
-
-               </div>
-               </div> -->
+            </div>
+</div>
 
       </div>
 
@@ -214,7 +132,4 @@
       </div>
     </div>
   </body>
-  <script>
-   document.getElementById("darkmode-checkbox").addEventListener("change", function() {setStyle(document.getElementsByTagName("html")[0].classList.contains("darkmode") ? "lightmode" : "darkmode");});
-  </script>
 </html>
