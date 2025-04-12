@@ -63,7 +63,7 @@ navbar_str_home += '</div></div>'
 navbar_str_nest += '</div></div>'
 
 # == $TALKS
-talk_str = "<table>\n"
+talk_str = '<table class="talk_list">\n'
 talk_template = xml_child_string(talk_data.find('template'))
 for item in talk_data.find('talks'):
 	venue_name = xml_child_string(item.find('venue_name'))

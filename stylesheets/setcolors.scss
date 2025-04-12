@@ -79,6 +79,10 @@
         color: $link-color;
     }
 
+    #{$parent} .talk_list .venue a {
+        color: $ordinary-font-color;
+    }
+
     #{$parent} .abstract:first-letter {
         color: $dropcap-color;
         float: left;

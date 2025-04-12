@@ -51,6 +51,10 @@ html.darkmode .project_header .text .venue {
   color: #bdf;
 }
 
+html.darkmode .talk_list .venue a {
+  color: #ddd;
+}
+
 html.darkmode .abstract:first-letter {
   color: #bdf;
   float: left;
@@ -505,6 +509,10 @@ html.lightmode .section_text .news summary {
 
 html.lightmode .project_header .text .venue {
   color: #2E6ABD;
+}
+
+html.lightmode .talk_list .venue a {
+  color: #000;
 }
 
 html.lightmode .abstract:first-letter {
