@@ -103,7 +103,7 @@
         }
     }
 
-    #{$parent} .project_author_list, #{$parent} .project_author_list a, #{$parent} .author .name a, #{$parent} .project_title a, #{$parent} .venue a {
+    #{$parent} .project_author_list, #{$parent} .project_author_list a, #{$parent} .author .name a, #{$parent} .project_title a {
         color: $name-color;
         text-decoration: none;
     }

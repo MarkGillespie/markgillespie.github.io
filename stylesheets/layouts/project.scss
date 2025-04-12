@@ -72,6 +72,10 @@
         margin-bottom: .25em;
     }
 
+    #{$parent} .venue a {
+        text-decoration: none;
+    }
+
     #{$parent} .name_box > .award {
         display: inline-block;
         font-size: 1.1em;

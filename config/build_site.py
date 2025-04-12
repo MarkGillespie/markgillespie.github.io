@@ -131,6 +131,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		if project_data.find('folder') is not None:
 			home_link_str += f'<a href="Research/{project_folder}/index.html"><span class="project_link">project</span></a>\n'
 		nest_link_str = ""
+		nest_link_str_ending = "" # added to end
 		def n_path(s): # process nest path
 			prefix = f'Research/{project_folder}/'
 			return s[len(prefix):] if s.startswith(prefix) else s
@@ -140,11 +141,11 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			home_link_str += f'<a href="{href}"><span class="project_link">{name}</span></a>\n'
 			nest_link_str += f'<a href="{n_path(href)}"><span class="project_link">{name}</span></a>\n'
 		home_link_str += bib_str
-		nest_link_str += f'<a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n'
+		nest_link_str_ending += f'<a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n'
 		doi = project_data.find('doi').text
 		doi_str = f'<a href="https://doi.org/{doi}"><span class="project_link">doi</span></a>\n'
 		home_link_str += doi_str
-		nest_link_str += doi_str
+		nest_link_str_ending += doi_str
 		if project_data.find('more_links'):
 			home_link_str += '<details>\n'
 			for link in project_data.find('more_links'):
@@ -153,7 +154,9 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 				home_link_str += f'<a href="{href}"><span class="project_link">{name}</span></a>\n'
 				nest_link_str += f'<a href="{n_path(href)}"><span class="project_link">{name}</span></a>\n'
 			home_link_str += '<summary></summary></details>\n'
-		venue_str = xml_child_string(project_data.find('venue'))
+		nest_link_str += nest_link_str_ending
+		venue_name = xml_child_string(project_data.find('venue'))
+		venue_str = f'<a href="https://doi.org/{doi}">{venue_name}</a>'
 		title_str = xml_child_string(project_data.find('title'))
 		project_str = (short_project_template.replace('$IMG_SMALL', project_data.find('img_small').text)
 		                                     .replace('$HREF', href_str)

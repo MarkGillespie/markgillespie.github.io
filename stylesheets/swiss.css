@@ -75,7 +75,7 @@ html.darkmode .award a, html.darkmode .award a:hover {
   color: #f4f4f4;
 }
 
-html.darkmode .project_author_list, html.darkmode .project_author_list a, html.darkmode .author .name a, html.darkmode .project_title a, html.darkmode .venue a {
+html.darkmode .project_author_list, html.darkmode .project_author_list a, html.darkmode .author .name a, html.darkmode .project_title a {
   color: #c1c1d8;
   text-decoration: none;
 }
@@ -531,7 +531,7 @@ html.lightmode .award a, html.lightmode .award a:hover {
   color: #f4f4f4;
 }
 
-html.lightmode .project_author_list, html.lightmode .project_author_list a, html.lightmode .author .name a, html.lightmode .project_title a, html.lightmode .venue a {
+html.lightmode .project_author_list, html.lightmode .project_author_list a, html.lightmode .author .name a, html.lightmode .project_title a {
   color: #000;
   text-decoration: none;
 }
@@ -1884,6 +1884,10 @@ html.project .name_box > .title {
 html.project .name_box > .venue {
   font-size: 1.25em;
   margin-bottom: 0.25em;
+}
+
+html.project .venue a {
+  text-decoration: none;
 }
 
 html.project .name_box > .award {
