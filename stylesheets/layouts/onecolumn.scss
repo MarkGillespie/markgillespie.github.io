@@ -507,7 +507,6 @@
     }
 
     #{$parent} h3 {
-        font-family: 'Helvetica';
         font-weight: 200;
         font-size: 40px;
         line-height: 1;
@@ -523,6 +522,16 @@
         font-weight: 200;
         font-size: 22px;
         line-height: 1.1;
+        text-align: left;
+    }
+
+    #{$parent} h5 {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-weight: 200;
+        font-size: 20px;
+        line-height: .8;
         text-align: left;
     }
 
@@ -731,6 +740,11 @@
         #{$parent} .bibBox {
             margin-right: .25em;
         }
+
+        #{$parent} .talk_venue {
+            display: inline-block;
+            clear: left;
+        }
     }
 
     @media (max-width: 450px) {
@@ -748,7 +762,7 @@
     }
 
     #{$parent} .space_under {
-        padding-bottom: 1em;
+        padding-bottom: .75em;
     }
 
     #{$parent} .award_details {
@@ -756,7 +770,7 @@
     }
 
     #{$parent} table {
-        border-spacing:10px 0;
+        border-spacing: 10px 0;
     }
 
     /* Align first column right and other columns left
@@ -766,11 +780,15 @@
         vertical-align:top;
     }
 
-    #{$parent} .venue {
+    #{$parent} .talk_date {
+        max-width: 3em;
+    }
+
+    #{$parent} .venue, #{$parent} .talk_venue {
         font-style: italic;
     }
 
-    #{$parent} .venue a {
+    #{$parent} .venue a, #{$parent} .talk_venue a {
         text-decoration: none;
         font-weight: normal;
     }

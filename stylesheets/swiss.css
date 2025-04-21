@@ -51,7 +51,7 @@ html.darkmode .project_header .text .venue {
   color: #bdf;
 }
 
-html.darkmode .talk_list .venue a {
+html.darkmode .talk_venue a {
   color: #ddd;
 }
 
@@ -84,7 +84,7 @@ html.darkmode .project_author_list, html.darkmode .project_author_list a, html.d
   text-decoration: none;
 }
 
-html.darkmode .project_author_list a:hover, html.darkmode .author .name a:hover, html.darkmode .project_title a:hover, html.darkmode .venue a:hover {
+html.darkmode .project_author_list a:hover, html.darkmode .author .name a:hover, html.darkmode .project_title a:hover, html.darkmode .venue a:hover, html.darkmode .talk_venue a:hover {
   color: #c9f;
 }
 
@@ -511,7 +511,7 @@ html.lightmode .project_header .text .venue {
   color: #2E6ABD;
 }
 
-html.lightmode .talk_list .venue a {
+html.lightmode .talk_venue a {
   color: #000;
 }
 
@@ -544,7 +544,7 @@ html.lightmode .project_author_list, html.lightmode .project_author_list a, html
   text-decoration: none;
 }
 
-html.lightmode .project_author_list a:hover, html.lightmode .author .name a:hover, html.lightmode .project_title a:hover, html.lightmode .venue a:hover {
+html.lightmode .project_author_list a:hover, html.lightmode .author .name a:hover, html.lightmode .project_title a:hover, html.lightmode .venue a:hover, html.lightmode .talk_venue a:hover {
   color: #ee4d93;
 }
 
@@ -1554,7 +1554,6 @@ html.singlecolumn h2, html.singlecolumn .section_header {
   }
 }
 html.singlecolumn h3 {
-  font-family: "Helvetica";
   font-weight: 200;
   font-size: 40px;
   line-height: 1;
@@ -1570,6 +1569,16 @@ html.singlecolumn h4 {
   font-weight: 200;
   font-size: 22px;
   line-height: 1.1;
+  text-align: left;
+}
+
+html.singlecolumn h5 {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 200;
+  font-size: 20px;
+  line-height: 0.8;
   text-align: left;
 }
 
@@ -1758,6 +1767,10 @@ html.singlecolumn .header .fa {
   html.singlecolumn .bibBox {
     margin-right: 0.25em;
   }
+  html.singlecolumn .talk_venue {
+    display: inline-block;
+    clear: left;
+  }
 }
 @media (max-width: 450px) {
   html.singlecolumn .name_box {
@@ -1773,7 +1786,7 @@ html.singlecolumn .wrapper {
 }
 
 html.singlecolumn .space_under {
-  padding-bottom: 1em;
+  padding-bottom: 0.75em;
 }
 
 html.singlecolumn .award_details {
@@ -1791,11 +1804,15 @@ html.singlecolumn td {
   vertical-align: top;
 }
 
-html.singlecolumn .venue {
+html.singlecolumn .talk_date {
+  max-width: 3em;
+}
+
+html.singlecolumn .venue, html.singlecolumn .talk_venue {
   font-style: italic;
 }
 
-html.singlecolumn .venue a {
+html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
   text-decoration: none;
   font-weight: normal;
 }

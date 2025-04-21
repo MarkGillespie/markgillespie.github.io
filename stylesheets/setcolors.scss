@@ -79,7 +79,7 @@
         color: $link-color;
     }
 
-    #{$parent} .talk_list .venue a {
+    #{$parent} .talk_venue a {
         color: $ordinary-font-color;
     }
 
@@ -112,7 +112,7 @@
         text-decoration: none;
     }
 
-    #{$parent} .project_author_list a:hover, #{$parent} .author .name a:hover, #{$parent} .project_title a:hover, #{$parent} .venue a:hover {
+    #{$parent} .project_author_list a:hover, #{$parent} .author .name a:hover, #{$parent} .project_title a:hover, #{$parent} .venue a:hover, #{$parent} .talk_venue a:hover {
         color: $link-hover-color;
     }
 

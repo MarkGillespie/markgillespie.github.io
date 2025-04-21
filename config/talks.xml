@@ -225,13 +225,8 @@
 </talks>
 <template>
   <tr>
-    <td rowspan="3">$WHEN</td>
-    <td><h4>$TITLE</h4></td>
-  </tr>
-  <tr>
-    <td>
-      <span class="venue">$VENUE_NAME</span>
-    </td>
+    <td rowspan="2" class="talk_date">$WHEN</td>
+    <td><h5 class="talk_title">$TITLE,</h5> <span class="talk_venue">$VENUE_NAME</span></td>
   </tr>
   <tr>
     <td class="space_under">$DESCRIPTION</td>
