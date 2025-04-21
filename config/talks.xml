@@ -20,6 +20,15 @@
   </talk>
   <talk>
     <when>Feb. 2025</when>
+    <title>New Foundations for Robust Geometry Processing</title>
+    <venue_link>https://www.cs.utah.edu/</venue_link>
+    <venue_name>University of Utah</venue_name>
+    <description>
+      45 minute talk about my work on my work on robust geometry processing. My slides are available as a <a href="https://markjgillespie.com/Talks/RobustGeometryProcessing-Utah.pdf">pdf [107 mb]</a>, or a <a href="https://markjgillespie.com/Talks/RobustGeometryProcessing-Utah.key">keynote file [1.5 gb]</a>.
+    </description>
+  </talk>
+  <talk>
+    <when>Feb. 2025</when>
     <title>Ray Tracing Harmonic Functions</title>
     <venue_link>https://www.mfo.de/occasion/2506/www_view</venue_link>
     <venue_name>Oberwolfach Workshop on Mathematical Imaging and Surface Processing</venue_name>
