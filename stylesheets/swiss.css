@@ -1329,6 +1329,14 @@ html.singlecolumn .section_panel .project_links {
   padding-right: 15pt;
 }
 
+html.singlecolumn .talk .project_links {
+  justify-content: flex-start; /* left-align talk links */
+  padding-left: 0pt;
+  padding-top: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0.25em;
+}
+
 html.singlecolumn .section_panel .project_links a {
   margin-left: 0.25em;
 }
@@ -1689,6 +1697,30 @@ html.singlecolumn .header .fa {
   font-size: 1.75em;
 }
 
+html.singlecolumn table {
+  border-spacing: 10px 0;
+}
+
+/* Align first column right and other columns left
+* https://stackoverflow.com/questions/11984767/how-to-apply-text-align-left-in-the-first-column-and-text-align-right-in-the-oth
+*/
+html.singlecolumn td {
+  vertical-align: top;
+}
+
+html.singlecolumn .talk_date {
+  width: 5em;
+}
+
+html.singlecolumn .venue, html.singlecolumn .talk_venue {
+  font-style: italic;
+}
+
+html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
+  text-decoration: none;
+  font-weight: normal;
+}
+
 @media (max-width: 970px) {
   html.singlecolumn .name_box {
     /* font-size: 6em; */
@@ -1703,6 +1735,10 @@ html.singlecolumn .header .fa {
   }
   html.singlecolumn h2, html.singlecolumn .section_header {
     margin-left: 10pt;
+  }
+  html.singlecolumn .talk_venue {
+    display: inline-block;
+    clear: left;
   }
 }
 @media (max-width: 710px) {
@@ -1767,9 +1803,8 @@ html.singlecolumn .header .fa {
   html.singlecolumn .bibBox {
     margin-right: 0.25em;
   }
-  html.singlecolumn .talk_venue {
-    display: inline-block;
-    clear: left;
+  html.singlecolumn .talk_date {
+    width: 3em;
   }
 }
 @media (max-width: 450px) {
@@ -1786,35 +1821,12 @@ html.singlecolumn .wrapper {
 }
 
 html.singlecolumn .space_under {
-  padding-bottom: 0.75em;
+  display: inline-block;
+  margin-bottom: 0.5em;
 }
 
 html.singlecolumn .award_details {
   font-style: italic;
-}
-
-html.singlecolumn table {
-  border-spacing: 10px 0;
-}
-
-/* Align first column right and other columns left
-* https://stackoverflow.com/questions/11984767/how-to-apply-text-align-left-in-the-first-column-and-text-align-right-in-the-oth
-*/
-html.singlecolumn td {
-  vertical-align: top;
-}
-
-html.singlecolumn .talk_date {
-  max-width: 3em;
-}
-
-html.singlecolumn .venue, html.singlecolumn .talk_venue {
-  font-style: italic;
-}
-
-html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
-  text-decoration: none;
-  font-weight: normal;
 }
 
 html.singlecolumn details {

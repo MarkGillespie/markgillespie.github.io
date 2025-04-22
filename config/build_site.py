@@ -69,10 +69,17 @@ for item in talk_data.find('talks'):
 	venue_name = xml_child_string(item.find('venue_name'))
 	venue_link = item.find('venue_link')
 	venue_str = f'<a href="{venue_link.text}">{venue_name}</a>' if venue_link is not None else venue_name
+	link_str = ""
+	for link in item.find('links') if item.find('links') is not None else []:
+		href = link.find('href').text
+		name = xml_child_string(link.find('name'))
+		link_str += f'<a href="{href}"><span class="project_link">{name}</span></a>\n'
+
 	talk_str += (talk_template.replace('$WHEN',  xml_child_string(item.find('when')))
 		                      .replace('$TITLE', xml_child_string(item.find('title')))
 		                      .replace('$VENUE_NAME', venue_str)
 		                      .replace('$DESCRIPTION', xml_child_string(item.find('description')))
+		                      .replace('$LINKS', link_str)
 		        )
 talk_str += "</table>"
 

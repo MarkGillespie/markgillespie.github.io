@@ -272,6 +272,14 @@
         padding-right: 15pt;
     }
 
+    #{$parent} .talk .project_links {
+        justify-content: flex-start; /* left-align talk links */
+        padding-left: 0pt;
+        padding-top: 0pt;
+        margin-top: 0pt;
+        margin-bottom: .25em;
+    }
+
     #{$parent} .section_panel .project_links a {
         margin-left: .25em;
     }
@@ -644,6 +652,30 @@
         font-size: 1.75em;
     }
 
+    #{$parent} table {
+        border-spacing: 10px 0;
+    }
+
+    /* Align first column right and other columns left
+    * https://stackoverflow.com/questions/11984767/how-to-apply-text-align-left-in-the-first-column-and-text-align-right-in-the-oth
+    */
+    #{$parent} td {
+        vertical-align:top;
+    }
+
+    #{$parent} .talk_date {
+        width: 5em;
+    }
+
+    #{$parent} .venue, #{$parent} .talk_venue {
+        font-style: italic;
+    }
+
+    #{$parent} .venue a, #{$parent} .talk_venue a {
+        text-decoration: none;
+        font-weight: normal;
+    }
+
     @media (max-width: 970px) {
         #{$parent} .name_box {
             /* font-size: 6em; */
@@ -661,6 +693,11 @@
 
         #{$parent} h2, #{$parent} .section_header {
             margin-left: 10pt;
+        }
+
+        #{$parent} .talk_venue {
+            display: inline-block;
+            clear: left;
         }
     }
 
@@ -741,9 +778,8 @@
             margin-right: .25em;
         }
 
-        #{$parent} .talk_venue {
-            display: inline-block;
-            clear: left;
+        #{$parent} .talk_date {
+            width: 3em;
         }
     }
 
@@ -762,35 +798,12 @@
     }
 
     #{$parent} .space_under {
-        padding-bottom: .75em;
+        display: inline-block;
+        margin-bottom: .5em;
     }
 
     #{$parent} .award_details {
         font-style: italic;
-    }
-
-    #{$parent} table {
-        border-spacing: 10px 0;
-    }
-
-    /* Align first column right and other columns left
-    * https://stackoverflow.com/questions/11984767/how-to-apply-text-align-left-in-the-first-column-and-text-align-right-in-the-oth
-    */
-    #{$parent} td {
-        vertical-align:top;
-    }
-
-    #{$parent} .talk_date {
-        max-width: 3em;
-    }
-
-    #{$parent} .venue, #{$parent} .talk_venue {
-        font-style: italic;
-    }
-
-    #{$parent} .venue a, #{$parent} .talk_venue a {
-        text-decoration: none;
-        font-weight: normal;
     }
 
     #{$parent} details {
