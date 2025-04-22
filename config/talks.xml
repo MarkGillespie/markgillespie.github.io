@@ -87,7 +87,7 @@
       <!-- Thesis defense. My slides are available as a <a href="Research/Thesis/defense.pdf">pdf [76 mb]</a> or a <a href="https://markjgillespie.com/Talks/Thesis_Defense.key">keynote file [0.8 gb]</a>, and my thesis document is available <a href="Research/Thesis/thesis.pdf">here [26 mb]</a>. -->
     </description>
     <links>
-        <link><name>pdf (76 mb)</name><href>Thesis/defense.pdf</href></link>
+        <link><name>pdf (76 mb)</name><href>Research/Thesis/defense.pdf</href></link>
         <link><name>keynote file (0.8 gb)</name><href>Talks/Thesis_Defense.key</href></link>
     </links>
   </talk>
@@ -100,7 +100,7 @@
       <!-- Thesis proposal talk. My slides are available <a href="Research/Thesis/proposal-talk.pdf">here [79 mb]</a> and my proposal document is available <a href="Research/Thesis/proposal.pdf">here [13 mb]</a>. -->
     </description>
     <links>
-        <link><name>pdf (79 mb)</name><href>Thesis/proposal-talk.pdf</href></link>
+        <link><name>pdf (79 mb)</name><href>Research/Thesis/proposal-talk.pdf</href></link>
     </links>
   </talk>
 
@@ -146,7 +146,7 @@
       <!-- 45 minute talk about my <a href="Research/integer-coordinates/index.html">paper of the same name</a>. The slides are available <a href="Talks/UCSD-CEPS.pdf">here [32 mb]</a>. -->
     </description>
     <links>
-        <link><name>pdf (32 mb)</name><href>Talks/UCSD-CEPS</href></link>
+        <link><name>pdf (32 mb)</name><href>Talks/UCSD-CEPS.pdf</href></link>
     </links>
   </talk>
 

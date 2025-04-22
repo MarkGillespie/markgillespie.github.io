@@ -1,7 +1,8 @@
-#!/usr/bin/python
-
 import datetime, json, os
 import xml.etree.ElementTree as ET
+
+def prettify_html(html_string):
+	return html_string
 
 news_data = ET.parse('news.xml').getroot()
 misc_data = ET.parse('misc.xml').getroot()
@@ -40,12 +41,12 @@ news_str = "<ul>\n"
 for item in news_data.find('recent_items'):
 	when = xml_child_string(item.find('when'))
 	what = xml_child_string(item.find('what'))
-	news_str += f'<li><div class="when">{when}</div><div class="what">{what}</div></li>\n'
+	news_str += f'<li><span class="when">{when}</span><span class="what">{what}</span></li>\n'
 news_str += "<details>"
 for item in news_data.find('extra_items'):
 	when = xml_child_string(item.find('when'))
 	what = xml_child_string(item.find('what'))
-	news_str += f'<li><div class="when">{when}</div><div class="what">{what}</div></li>\n'
+	news_str += f'<li><span class="when">{when}</span><span class="what">{what}</span></li>\n'
 news_str += "<summary></summary></details></ul>"
 
 # == $NAVBAR
@@ -214,6 +215,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$IMG_BIG', img_big_path)
 		                                     .replace('$PANELS', panel_str)
 						)
+		project_page = prettify_html(project_page)
 		project_path = f'generated/Research/{project_folder}/index.html'
 		with open(project_path, 'w') as f:
 			print(project_path)
@@ -231,4 +233,5 @@ with open('generated/index.html', 'w') as f:
 	                            .replace('$NAVBAR', navbar_str_home)
 	                            .replace('$BACKGROUND_SVG', background_str)
 	                            )
+	index_text = prettify_html(index_text)
 	f.write(index_text)
