@@ -1346,6 +1346,10 @@ html.singlecolumn .section_panel .project_links a {
   margin-left: 0.25em;
 }
 
+html.singlecolumn .section_panel .project_links > :first-child {
+  margin-left: 0;
+}
+
 html.singlecolumn .project_links a::before {
   content: "[";
 }

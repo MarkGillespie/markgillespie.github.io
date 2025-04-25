@@ -289,6 +289,10 @@
         margin-left: .25em;
     }
 
+    #{$parent} .section_panel .project_links > :first-child {
+        margin-left: 0;
+    }
+
     #{$parent} .project_links a::before {
         content: "[";
     }
