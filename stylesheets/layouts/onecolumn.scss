@@ -233,8 +233,13 @@
     }
 
     #{$parent} .project_header .text .venue, .project_author_list {
-        line-height: 1.4;
+        line-height: 1.1;
         font-weight: normal;
+    }
+
+    #{$parent} .project_header .text .venue {
+        margin-top: .125em;
+        margin-bottom: .125em;
     }
 
     #{$parent} .project_header .text .award {

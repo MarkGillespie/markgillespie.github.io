@@ -1291,8 +1291,13 @@ html.singlecolumn .project_header .text .project_title {
 }
 
 html.singlecolumn .project_header .text .venue, .project_author_list {
-  line-height: 1.4;
+  line-height: 1.1;
   font-weight: normal;
+}
+
+html.singlecolumn .project_header .text .venue {
+  margin-top: 0.125em;
+  margin-bottom: 0.125em;
 }
 
 html.singlecolumn .project_header .text .award {
@@ -1915,12 +1920,13 @@ html.project .name_box {
 html.project .name_box > .title {
   font-size: 2em;
   line-height: 1;
-  margin-bottom: 0.1em;
+  margin: 0em 0.5em 0.1em 0.5em;
 }
 
 html.project .name_box > .venue {
   font-size: 1.25em;
-  margin-bottom: 0.25em;
+  margin: 0em 0.5em 0.25em 0.5em;
+  line-height: 1;
 }
 
 html.project .venue a {
