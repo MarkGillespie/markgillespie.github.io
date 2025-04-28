@@ -1,5 +1,6 @@
 <data>
 <project_list>
+    ${DiscreteTorsion}
     ${harnack-tracing}
     ${solid-knitting}
     ${thesis}

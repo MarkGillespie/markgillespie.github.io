@@ -1,0 +1,13 @@
+@article{Braune:2025:DTC,
+  author = {Braune, Theo and Gillespie, Mark and Tong, Yiying and Desbrun, Mathieu},
+  title = {Discrete Torsion of Connection Forms on Simplicial Meshes},
+  journal = {ACM Trans. Graph.},
+  volume = {44},
+  number = {4},
+  year = {2025},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3731197},
+  doi = {10.1145/3731197},
+  month = {aug},
+}

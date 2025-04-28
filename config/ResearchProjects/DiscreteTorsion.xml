@@ -1,0 +1,100 @@
+<project>
+    <title>Discrete Torsion of Connection Forms on Simplicial Meshes</title>
+    <folder>DiscreteTorsion</folder>
+    <key>DiscreteTorsion</key>
+    <href>index.html</href>
+    <doi>10.1145/3731197</doi>
+    <img_small>Research/DiscreteTorsion/images/teaser.png</img_small>
+    <img_large>Research/DiscreteTorsion/images/teaser.png<style>max-height: 25em;</style></img_large>
+    <authors>
+        <author>
+            <name>Theo Braune*</name>
+            <href>https://theofbraune.github.io/blog/</href>
+            <affiliation>LIX (IP Paris)</affiliation></author>
+        <author>
+            <name>Mark Gillespie*</name>
+            <affiliation>Inria</affiliation></author>
+        <author>
+            <name>Yiying Tong</name>
+            <href>https://www.cse.msu.edu/~ytong/</href>
+            <affiliation>Michigan State University</affiliation></author>
+        <author>
+            <name>Mathieu Desbrun</name>
+            <href>https://pages.saclay.inria.fr/mathieu.desbrun/</href>
+            <affiliation>Inria, LIX</affiliation></author>
+    </authors>
+    <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2025)</venue>
+    <links>
+        <link><name>pdf (6.1 mb)</name><href>Research/DiscreteTorsion/DiscreteTorsion.pdf</href></link>
+        <link><name>supplement (765 kb)</name><href>Research/DiscreteTorsion/DiscreteTorsionSupplemental.pdf</href></link>
+    </links>
+    <more_links>
+        <link><name>Mathematica notebook (57 kb)</name><href>Research/DiscreteTorsion/DiscreteTorsionLeviCivitaConnection.nb</href></link>
+    </more_links>
+    <bibtex>Research/DiscreteTorsion/bib.txt</bibtex>
+    <abstract_small>
+        While discrete connections have become a staple of vector field design and analysis on meshes, the notion of torsion of a discrete connection has remained unstudied. This is all the more surprising as torsion is a crucial component in the fundamental theorem of Riemannian geometry, which guarantees the existence and uniqueness of the Levi-Civita connection. We extend the existing geometry processing toolbox by providing torsion control over discrete connections: we introduce a new discrete Levi-Civita connection and from this reference connection, we define the torsion of discrete connections.
+    </abstract_small>
+    <abstract_big>
+        While discrete (metric) connections have become a staple of <em>n</em>-vector field design and analysis on simplicial meshes, the notion of torsion of a discrete connection has remained unstudied. This is all the more surprising as torsion is a crucial component in the fundamental theorem of Riemannian geometry, which introduces the existence and uniqueness of the Levi-Civita connection induced by the metric. In this paper, we extend the existing geometry processing toolbox by providing torsion control over discrete connections. Our approach consists in first introducing a new discrete Levi-Civita connection for a metric with locally-constant curvature to replace the hinge connection of a triangle mesh whose curvature is concentrated at singularities; from this reference connection, we define the discrete torsion of a connection to be the discrete dual 1-form by which a connection deviates from our discrete Levi-Civita connection. We discuss how the curvature and torsion of a discrete connection can then be controlled and assigned in a manner consistent with the continuous case. We also illustrate our approach through theoretical analysis and practical examples arising in vector and frame design.
+    </abstract_big>
+    <panels>
+        <panel>
+            <title>Paper</title>
+            <content>
+                <a href="DiscreteTorsion.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview"/><br/>
+                    <span> pdf (6.1 mb)</span>
+                </a>
+            </content>
+        </panel>
+        <panel>
+            <bibtex></bibtex>
+        </panel>
+        <panel>
+            <title>Supplemental Documents</title>
+            <content>
+                <div style="display: flex; flex-start; gap: .5em;">
+                <a href="DiscreteTorsionSupplemental.pdf" class="paper-preview">
+                    <img src="images/supplemental-preview.png" alt="preview"/><br/>
+                    <span> pdf (765 kb)</span>
+                </a>
+                <a href="DiscreteTorsionLeviCivitaConnection.nb" class="paper-preview">
+                    <img src="images/mathematica-preview.png" alt="preview"/><br/>
+                    <span> Mathematica notebook (57 kb)</span>
+                </a>
+            </div>
+            </content>
+            <extra_classes>centered_content gap</extra_classes>
+        </panel>
+        <panel>
+            <title>Selected Figures</title>
+            <content>
+                  <img src="images/vector_heat_log_map.png" style="box-shadow: none;"/>
+                  <div class="caption">
+                      The connection Laplacian used in the vector heat method of Sharp et al [<a href="https://doi.org/10.1145/3243651">2019</a>] can be formed for any connection. In this example, we compute a logarithmic map—a sort of global polar parameterization—using the connection Laplacian of an ordinary torsion-free connection <em>(left)</em>, and using a connection with prescribed non-zero torsion equal to the gradient of a torsion potential <em>(right)</em>, which introduces a distinct twist into the radial lines of the parameterization.
+                  </div>
+                  <hr/>
+
+                  <img src="images/trivial_connections.png" style="max-width: 100%; box-shadow: none;"/>
+                  <div class="caption">
+                      Here we explore the impact of torsion on vector field design: a parallel vector field for a minimal-torsion trivial connection with prescribed singularities is shown on the left, while parallel fields for trivial connections with additional gradient components in their torsion are shown in the center, along with the prescribed scalar potentials. A compact potential changes the field locally, while a globally-supported potential causes larger-scale changes <em>(top right)</em>. Torsion can also be incorporated into the design of <em>n</em>-vector fields such as cross fields <em>(bottom)</em>.
+                  </div>
+                  <hr/>
+
+                  <img src="images/torsion_stripes.png" style="box-shadow: none;"/>
+                  <div class="caption">
+                      Just as the ordinary Laplacian measures the smoothness of scalar functions, the connection Laplacian defines a notion of smoothness for vector fields. Computing an optimal vector field in the sense of Knoppel et al. [<a href="https://doi.org/10.1145/2461912.2462005">2013</a>] using the discrete Levi-Civita connection to build the connection Laplacian yields a field whose streamlines are as straight as possible in 3D space <em>(top)</em>, whereas using a connection with a nontrivial torsion (here, the gradient of a potential) introduces twists into the streamlines <em>(bottom)</em>.
+                  </div>
+                  <hr/>
+            </content>
+            <extra_classes>figures</extra_classes>
+        </panel>
+        <panel>
+            <title>Acknowledgements</title>
+            <content>
+                The first author was supported by an IP Paris graduate fellowship and a Monge complement from Ecole Polytechnique. The last author benefited from the generous support of the MediTwin consortium (funded by the French government as part of <em>France 2030</em>), Ansys, and of an Inria chair.
+            </content>
+        </panel>
+    </panels>
+</project>

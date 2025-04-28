@@ -244,15 +244,23 @@
 
     #{$parent} .project_header .text .award {
         display: inline-block;
-        line-height: 1.4;
+        line-height: 1;
         font-weight: normal;
         border-radius: .75em;
-        padding: .15em .5em;
+        padding: .4em .6em;
         margin: .25em 0em .25em -.75em ;
 
         a {
             text-decoration: none;
         }
+    }
+
+    #{$parent} .project_header .award .description {
+        font-size: 10pt;
+        text-align: center;
+        display: inline-block;
+        margin-left: 1em;
+        font-style: italic;
     }
 
     #{$parent} .project_author_list a {
@@ -293,11 +301,11 @@
         margin-left: 0;
     }
 
-    #{$parent} .project_links a::before {
+    #{$parent} .project_links a::before, #{$parent} .bibBox button::before, #{$parent} .bibEntry button::before {
         content: "[";
     }
 
-    #{$parent} .project_links a::after {
+    #{$parent} .project_links a::after, #{$parent} .bibBox button::after, #{$parent} .bibEntry button::after {
         content: "]";
     }
 
@@ -331,8 +339,7 @@
     }
 
     /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
-    #{$parent} .bibBox
-    {
+    #{$parent} .bibBox {
         display: inline-block;
         position: relative;
         width: 3.85em;
@@ -340,8 +347,7 @@
     }
 
     /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
-    #{$parent} .bibBox .bibliography
-    {
+    #{$parent} .bibBox .bibliography {
         font-family: monospace;
         word-wrap: break-word;
         text-align: left;
@@ -367,8 +373,7 @@
     }
 
     /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
-    #{$parent} .bibBox:hover .bibliography
-    {
+    #{$parent} .bibBox:hover .bibliography {
         visibility: visible;
         opacity: 1.0;
         transition: .5s;
@@ -378,6 +383,18 @@
         -webkit-transition: .5s;
     }
 
+    #{$parent} .bibBox button, #{$parent} .bibEntry button {
+        padding: 0;
+        border: none;
+        background: none;
+        float: right;
+        font-family: 'Charis SIL', 'Palatino', serif;
+        font-size: 12pt;
+    }
+
+    #{$parent} .bibBox button:hover, #{$parent} .bibEntry button:hover {
+        cursor: pointer;
+    }
 
     #{$parent} .noise {
         position: fixed;
@@ -584,13 +601,6 @@
         padding-top: 8px;
         text-decoration: none;
     }
-    .section-content img {
-        display: block;
-        max-width: 300px;
-        height: auto;
-    }
-
-
 
     /*picture at top of page (behind my name)*/
     #{$parent} .header {
@@ -748,7 +758,7 @@
         #{$parent} .project_header .image {
             display: inline-block;
             width: 100%;
-            max-width: 300px;
+            max-height: 300px;
             text-align: center;
         }
 
@@ -761,6 +771,7 @@
             margin: 0;
             text-align: center;
         }
+
         #{$parent} .project_header .text .award {
             margin: 0;
         }

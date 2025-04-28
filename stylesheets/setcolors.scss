@@ -105,6 +105,10 @@
         a, a:hover {
             color: $award-font-color;
         }
+
+        .description {
+            color: rgba($award-font-color, .80);;
+        }
     }
 
     #{$parent} .project_author_list, #{$parent} .project_author_list a, #{$parent} .author .name a, #{$parent} .project_title a {
@@ -217,11 +221,11 @@
         }
     }
 
-    #{$parent} a {
+    #{$parent} a, #{$parent} .bibBox button, #{$parent} .bibEntry button {
         color: $link-color;
     }
 
-    #{$parent} a:hover {
+    #{$parent} a:hover, #{$parent} .bibBox button:hover, #{$parent} .bibEntry button:hover {
         color: $link-hover-color;
     }
 

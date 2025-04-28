@@ -1,0 +1,1561 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     57066,       1553]
+NotebookOptionsPosition[     53440,       1498]
+NotebookOutlinePosition[     53836,       1514]
+CellTagsIndexPosition[     53793,       1511]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ StyleBox["This notebook demonstrates the calculation of the Levi-Civita \
+connection of a quadratic surface expressed in cartesian coordinates in the \
+parallel propagated frame based at the origin. \n\nGiven a symmetric matrix ",
+  
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["A", "TI"], TraditionalForm], "errors" -> {}, "input" -> 
+     "$A$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "dfd9b1c9-688b-488c-9938-57f01b3e1693"],
+ StyleBox[", we  can define a height field",
+  FontFamily->"Linux Libertine O"],
+ "\n",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["c", "TI"], ":", 
+         SuperscriptBox[
+          StyleBox["R", FontSlant -> "Plain"], "2"], "\[Rule]", 
+         SuperscriptBox[
+          StyleBox["R", FontSlant -> "Plain"], "3"], ":", 
+         StyleBox["p", "TI"], "\[LongEqual]", 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["x", "TI"], ",", 
+             StyleBox["y", "TI"]}], ")"}], "\[RightTeeArrow]", 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["x", "TI"], ",", 
+             StyleBox["y", "TI"], ",", 
+             FractionBox["1", "2"], 
+             SuperscriptBox[
+              StyleBox["p", "TI"], 
+              StyleBox["t", "TI"]], 
+             StyleBox["A", "TI"], 
+             StyleBox["p", "TI"]}], ")"}]}], TraditionalForm], "errors" -> {},
+      "input" -> 
+     "$c\\colon \\mathbb{R}^2\\to \\mathbb{R}^3 :p = (x,y)\\mapsto \
+(x,y,\\frac{1}{2} p^t A p)$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "51bfd030-b96d-0d45-9695-668d235e80de"],
+ StyleBox[" ",
+  FontFamily->"Linux Libertine O"],
+ "\n",
+ StyleBox["and a quadratic surface ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["M", "TI"], "\[LongEqual]", 
+         StyleBox["c", "TI"], 
+         RowBox[{"(", 
+           SuperscriptBox[
+            StyleBox["R", FontSlant -> "Plain"], "2"], ")"}], "\[Subset]", 
+         SuperscriptBox[
+          StyleBox["R", FontSlant -> "Plain"], "3"]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "$M = c(\\mathbb{R}^2)\\subset\\mathbb{R}^3$",
+      "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "503a98e3-fa8c-a545-8b47-c76fddb827aa"],
+ StyleBox[" as the image ",
+  FontFamily->"Linux Libertine O"]
+}], "Text",
+ CellChangeTimes->{{3.95431561331534*^9, 3.954315788687294*^9}, {
+   3.9543158253974724`*^9, 3.9543158508163967`*^9}, {3.9543159945208683`*^9, 
+   3.9543160548496456`*^9}, {3.9543239428278885`*^9, 3.954324015093405*^9}, {
+   3.9543241288766537`*^9, 3.954324225467022*^9}, {3.9543242565899734`*^9, 
+   3.9543242613254566`*^9}, 
+   3.954511813416198*^9},ExpressionUUID->"c401621c-721f-2749-8263-\
+4d891a5640e3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Define", " ", "the", " ", "matrix", " ", "that", " ", "will", " ", "form",
+     " ", "the", " ", "quadratic", " ", "form"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"A", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a", ",", " ", "d"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"d", ",", "b"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"J", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0"}], "}"}]}], "}"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.954248829960253*^9, 3.954248877781481*^9}, {
+   3.9542687097704945`*^9, 3.9542687116415863`*^9}, {3.9542690547784023`*^9, 
+   3.9542690754230824`*^9}, {3.9542693223277493`*^9, 3.9542693269005356`*^9}, 
+   3.954316025348921*^9, 3.9543162869292736`*^9},
+ CellLabel->
+  "In[573]:=",ExpressionUUID->"4c18ea66-f6a5-1d41-9121-ff2714f821ba"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Define", " ", "the", " ", "surface", " ", "in", " ", "cartesian", " ", 
+    "coordinates"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"c", "[", 
+     RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{"x", ",", "\[IndentingNewLine]", "y", ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x", ",", "y"}], "}"}], ".", "A", ".", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "y"}], "}"}]}], ")"}], "/", "2"}]}], 
+     "\[IndentingNewLine]", "}"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{
+  3.9542368137244434`*^9, {3.954236953799015*^9, 3.9542369846509705`*^9}, {
+   3.9542488986165447`*^9, 3.954248906012146*^9}},
+ CellLabel->
+  "In[510]:=",ExpressionUUID->"adf10bc6-0235-be4a-9a7d-815db139c97e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DcDx", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"D", "[", 
+     RowBox[{
+      RowBox[{"c", "[", 
+       RowBox[{"x", ",", "y"}], "]"}], ",", "x"}], "]"}], " ", "//", 
+    "Simplify"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DcDy", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"D", "[", 
+     RowBox[{
+      RowBox[{"c", "[", 
+       RowBox[{"x", ",", "y"}], "]"}], ",", "y"}], "]"}], " ", "//", 
+    "Simplify"}]}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.954236854404993*^9, {3.9543165479120274`*^9, 3.9543165493332253`*^9}},
+ CellLabel->
+  "In[511]:=",ExpressionUUID->"7328377e-4f07-5c49-b602-a7811df2109f"],
+
+Cell[TextData[StyleBox["Now, for this frame we calculate the first \
+fundamental form.",
+ FontFamily->"Linux Libertine O"]], "Text",
+ CellChangeTimes->{{3.954236871894039*^9, 3.954236875874344*^9}, {
+  3.954316553580763*^9, 
+  3.9543165572218246`*^9}},ExpressionUUID->"ac3de4fc-29a1-b14e-8983-\
+2919feea3c5a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"g00", "=", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"DcDx", ".", "DcDx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g01", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"DcDx", ".", "DcDy"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g11", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"DcDy", ".", "DcDy"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.9542368849151535`*^9, 3.954236929960863*^9}},
+ CellLabel->
+  "In[513]:=",ExpressionUUID->"dc6dda65-f91c-4a49-8657-128eecbbbb8d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FirstFundamentalForm", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"g00", ",", "g01"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"g01", ",", "g11"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.9542369441077404`*^9, {3.954511068120159*^9, 3.954511074601899*^9}},
+ CellLabel->
+  "In[519]:=",ExpressionUUID->"fc013cf7-825b-6e4e-80fd-3deb5465d5cf"],
+
+Cell[TextData[{
+ StyleBox["Based on the expression in the supplemental material to our \
+submission ",
+  FontFamily->"Linux Libertine O"],
+ StyleBox["\[OpenCurlyDoubleQuote]Discrete Torsion of Connection Forms on \
+Simplicial Meshes\[CloseCurlyDoubleQuote]",
+  FontFamily->"Linux Libertine O",
+  FontSlant->"Italic"],
+ StyleBox[" we calculate the parallel propagated frame based in the origin. \
+We parallel propagate the standard frame along radial lines leaving the \
+origin.",
+  FontFamily->"Linux Libertine O"]
+}], "Text",
+ CellChangeTimes->{{3.9542484747113667`*^9, 3.9542484824658604`*^9}, {
+  3.9543165778474236`*^9, 3.9543166987962627`*^9}, {3.954324092873659*^9, 
+  3.9543241033729916`*^9}},ExpressionUUID->"c7ed6831-355d-2e48-9804-\
+e842e1b65fac"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"q", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Aq", " ", "=", " ", 
+   RowBox[{"A", ".", "q"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"JAq", " ", "=", " ", 
+   RowBox[{"J", ".", "Aq"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"qA2q", " ", "=", " ", 
+   RowBox[{"q", ".", "A", ".", "A", ".", "q"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.9542489371693935`*^9, 3.9542490172517815`*^9}, {
+  3.9543167023968105`*^9, 3.9543167169494953`*^9}},
+ CellLabel->
+  "In[524]:=",ExpressionUUID->"fc8349b8-8e6f-ce42-b682-976c424b6edf"],
+
+Cell[TextData[{
+ StyleBox["We showed that given a vector ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["V", "TI"], "0"], TraditionalForm], "errors" -> {}, "input" -> 
+     "$V_0$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "2127416a-fee9-524f-9a40-19a9b36d8a70"],
+ StyleBox["  in the tangent space at the origin, and a direction vector   ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["q", "TI"], "\[Element]", 
+         SuperscriptBox[
+          StyleBox["R", FontSlant -> "Plain"], "2"]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "$q\\in \\mathbb{R}^2$", "state" -> "Boxes"|>,
+    
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "2eff813c-6cef-2849-894c-035120e414c4"],
+ StyleBox[", the parallel transported vector along the curve  ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"\[Gamma]", 
+         RowBox[{"(", 
+           StyleBox["t", "TI"], ")"}], "\[LongEqual]", 
+         StyleBox["t", "TI"], 
+         StyleBox["q", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "$\\gamma(t) = t q$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "65170be3-6757-654d-aac6-049b8665660b"],
+ StyleBox["  is given by ",
+  FontFamily->"Linux Libertine O"]
+}], "Text",
+ CellChangeTimes->{{3.954316722196089*^9, 3.954316759695957*^9}, {
+  3.9543177408952045`*^9, 3.9543177777957706`*^9}, {3.9543180102083187`*^9, 
+  3.9543181710858345`*^9}},ExpressionUUID->"7c498c0c-9750-bc48-a3b9-\
+d4f9f209dcc2"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     StyleBox["V", "TI"], 
+     RowBox[{"(", 
+      StyleBox["t", "TI"], ")"}]}], "\[LongEqual]", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "+", 
+           RowBox[{
+            SuperscriptBox[
+             StyleBox["t", "TI"], "2"], 
+            SuperscriptBox[
+             StyleBox["q", "TI"], 
+             StyleBox["T", "TI"]], 
+            SuperscriptBox[
+             StyleBox["A", "TI"], "2"], 
+            StyleBox["q", "TI"]}]}]]], 
+        FractionBox[
+         RowBox[{
+          RowBox[{"(", 
+           StyleBox[
+            RowBox[{"A", "q"}], "TI"], ")"}], 
+          SuperscriptBox[
+           RowBox[{"(", 
+            StyleBox[
+             RowBox[{"A", "q"}], "TI"], ")"}], 
+           StyleBox["T", "TI"]]}], 
+         RowBox[{
+          SuperscriptBox[
+           StyleBox["q", "TI"], 
+           StyleBox["T", "TI"]], 
+          SuperscriptBox[
+           StyleBox["A", "TI"], "2"], 
+          StyleBox["q", "TI"]}]]}], "+", 
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           StyleBox["J",
+            FontSlant->"Plain"], 
+           StyleBox["A", "TI"], 
+           StyleBox["q", "TI"]}], ")"}], 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            StyleBox["J",
+             FontSlant->"Plain"], 
+            StyleBox["A", "TI"], 
+            StyleBox["q", "TI"]}], ")"}], 
+          StyleBox["T", "TI"]]}], 
+        RowBox[{
+         SuperscriptBox[
+          StyleBox["q", "TI"], 
+          StyleBox["T", "TI"]], 
+         SuperscriptBox[
+          StyleBox["A", "TI"], "2"], 
+         StyleBox["q", "TI"]}]]}], ")"}], 
+     SubscriptBox[
+      StyleBox["V", "TI"], "0"]}]}], ",", " "}], TraditionalForm]], "Input",
+ CellChangeTimes->{{3.954317881233326*^9, 
+  3.954317896220459*^9}},ExpressionUUID->"738a209d-58a0-494a-be71-\
+7e9b1fc67912"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PPFMatrix", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "/", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "+", "qA2q"}], "]"}]}], ")"}], "*", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"Outer", "[", 
+        RowBox[{"Times", ",", "Aq", ",", "Aq"}], "]"}], "/", "qA2q"}], 
+      ")"}]}], "+", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Outer", "[", 
+       RowBox[{"Times", ",", "JAq", ",", "JAq"}], "]"}], "/", "qA2q"}], 
+     ")"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.954248624985029*^9, 3.954248662227726*^9}, {
+   3.954248947024122*^9, 3.954248960089815*^9}, {3.9542490304268303`*^9, 
+   3.954249041580517*^9}, 3.9542490818155365`*^9},
+ CellLabel->
+  "In[528]:=",ExpressionUUID->"2102e81c-87d5-954a-a59a-b13c57f75f4d"],
+
+Cell[TextData[{
+ StyleBox["Therefore, evaluated at a point ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["p", "TI"], "\[LongEqual]", 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["x", "TI"], ",", 
+             StyleBox["y", "TI"]}], ")"}]}], TraditionalForm], "errors" -> {},
+      "input" -> "$p =(x,y)$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "45572df7-49b9-064b-9daf-323453b3dd2a"],
+ StyleBox[" , the parallel propagated standard frame is given by ",
+  FontFamily->"Linux Libertine O"]
+}], "Text",
+ CellChangeTimes->{{3.9543179258008823`*^9, 3.9543180045522804`*^9}, {
+  3.9543181868339653`*^9, 3.9543182139095783`*^9}, {3.9543182849082375`*^9, 
+  3.9543182859412346`*^9}},ExpressionUUID->"ce2d72a5-944f-2245-abaa-\
+e066d3436838"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"PPFX", " ", "=", " ", 
+   RowBox[{"PPFMatrix", ".", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PPFY", " ", "=", " ", 
+   RowBox[{"PPFMatrix", ".", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1"}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.954249109263338*^9, 3.9542491335467415`*^9}, {
+  3.954318295637285*^9, 3.954318296877283*^9}},
+ CellLabel->
+  "In[529]:=",ExpressionUUID->"d8ce1a79-2223-cf44-a907-8483ea7b326d"],
+
+Cell[TextData[StyleBox["Now, we can do a sanity check to ensure the \
+orthonormality of the PPF with respect to the first fundamental form.",
+ FontFamily->"Linux Libertine O"]], "Text",
+ CellChangeTimes->{{3.954250057674719*^9, 3.954250091964756*^9}, {
+  3.954318301497284*^9, 3.954318349617737*^9}, {3.9543243916215496`*^9, 
+  3.9543244385388966`*^9}},ExpressionUUID->"23b78aa1-5cde-1c43-8569-\
+1fe8b755a17f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"OrthoCheck00", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"PPFX", ".", 
+     RowBox[{"(", 
+      RowBox[{"FirstFundamentalForm", ".", "PPFX"}], ")"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"OrthoCheck10", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"PPFY", ".", 
+     RowBox[{"(", 
+      RowBox[{"FirstFundamentalForm", ".", "PPFX"}], ")"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"OrthoCheck11", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"PPFY", ".", 
+     RowBox[{"(", 
+      RowBox[{"FirstFundamentalForm", ".", "PPFY"}], ")"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"OrthoCheck00", ",", " ", "OrthoCheck10"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"OrthoCheck10", ",", " ", "OrthoCheck11"}], "}"}]}], "}"}], " ", 
+  "//", " ", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.9542499388899097`*^9, 3.9542499844597397`*^9}, {
+  3.9545114632307177`*^9, 3.95451148933323*^9}},
+ CellLabel->
+  "In[588]:=",ExpressionUUID->"773b6e55-c414-c04a-9a16-5211cb4a639b"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"},
+     {"0", "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.9542499617840004`*^9, 3.9542499861716957`*^9}, 
+   3.9542687764978905`*^9, 3.954269249534317*^9, 3.9542693506460285`*^9, 
+   3.9543189928252296`*^9, 3.95451108304871*^9, 3.954511489616868*^9},
+ CellLabel->
+  "Out[591]//MatrixForm=",ExpressionUUID->"538afc8b-dfec-45b5-880f-\
+c6135699e845"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["We can express the PPF in cartesian coordinates via\n",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["e", "TI"], 
+          RowBox[{"1", 
+            StyleBox["PPF", FontSlant -> "Plain"]}]], "\[LongEqual]", 
+         SubscriptBox["\[Alpha]", "1"], 
+         SubscriptBox["\[PartialD]", 
+          StyleBox["x", "TI"]], "+", 
+         SubscriptBox["\[Beta]", "1"], 
+         SubscriptBox["\[PartialD]", 
+          StyleBox["y", "TI"]]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "$e_{1\\mathrm{PPF}} = \\alpha_1 \\partial_x + \\beta_1 \\partial_y$", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "719622a4-f636-5642-977b-e8127d74498f"],
+ StyleBox[" and ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["e", "TI"], 
+          RowBox[{"2", 
+            StyleBox["PPF", FontSlant -> "Plain"]}]], "\[LongEqual]", 
+         SubscriptBox["\[Alpha]", "2"], 
+         SubscriptBox["\[PartialD]", 
+          StyleBox["x", "TI"]], "+", 
+         SubscriptBox["\[Beta]", "2"], 
+         SubscriptBox["\[PartialD]", 
+          StyleBox["y", "TI"]]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "$e_{2\\mathrm{PPF}} = \\alpha_2\\partial_x + \\beta_2\\partial_y$", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "cc6b5f1c-246a-fb43-9bd3-efdd63e4805b"],
+ StyleBox["\nWe are now aiming to find the dual Parallel-Propagated frame \n",
+  
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubsuperscriptBox[
+        StyleBox["e", "TI"], 
+        StyleBox["PPF", FontSlant -> "Plain"], "1"], TraditionalForm], 
+     "errors" -> {}, "input" -> "$e^1_{\\mathrm{PPF}}$", "state" -> "Boxes"|>,
+    
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "d6911baf-5d30-9c49-a5dd-e769fd8d49af"],
+ StyleBox[" and ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubsuperscriptBox[
+        StyleBox["e", "TI"], 
+        StyleBox["PPF", FontSlant -> "Plain"], "2"], TraditionalForm], 
+     "errors" -> {}, "input" -> "$e^2_{\\mathrm{PPF}}$", "state" -> "Boxes"|>,
+    
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "a847cd2b-57df-2d44-a0d9-c96df633437e"],
+ StyleBox[". We will stick to cartesian coordinates, i.e we define scalar \
+functions ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[Lambda]", "1"], ",", 
+         SubscriptBox["\[Lambda]", "2"], ",", 
+         SubscriptBox["\[Mu]", "1"], ",", 
+         SubscriptBox["\[Mu]", "2"]}], TraditionalForm], "errors" -> {}, 
+     "input" -> "$\\lambda_1,\\lambda_2,\\mu_1,\\mu_2 $", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "5b615fb2-b297-844a-b2e8-6e4edfa3b7f2"],
+ StyleBox[",\nsuch that ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["e", "TI"], 
+          StyleBox["PPF", FontSlant -> "Plain"], "1"], "\[LongEqual]", 
+         SubscriptBox["\[Lambda]", "1"], 
+         StyleBox["d", "TI"], 
+         StyleBox["x", "TI"], "+", 
+         SubscriptBox["\[Mu]", "1"], 
+         StyleBox["d", "TI"], 
+         StyleBox["y", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "$e^1_{\\mathrm{PPF}} =\\lambda_1 dx + \\mu_1 dy$", "state" -> "Boxes"|>,
+    
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "512d0c7f-62ea-e54f-84e0-748bb10ba9cb"],
+ StyleBox[" and ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["e", "TI"], 
+          StyleBox["PPF", FontSlant -> "Plain"], "2"], "\[LongEqual]", 
+         SubscriptBox["\[Lambda]", "2"], 
+         StyleBox["d", "TI"], 
+         StyleBox["x", "TI"], "+", 
+         SubscriptBox["\[Mu]", "2"], 
+         StyleBox["d", "TI"], 
+         StyleBox["y", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "$e^2_{\\mathrm{PPF}} = \\lambda_2 dx + \\mu_2 dy$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "3898a106-8fff-0440-9682-589ebc0d9cb6"],
+ StyleBox[" is the dual frame. ",
+  FontFamily->"Linux Libertine O"]
+}], "Text",
+ CellChangeTimes->{{3.954251095386795*^9, 3.954251101220566*^9}, {
+   3.954251135106968*^9, 3.9542512373756485`*^9}, {3.9543183559797363`*^9, 
+   3.9543184008151913`*^9}, {3.9543184416171856`*^9, 
+   3.9543184496952705`*^9}, {3.954318524223587*^9, 3.95431869577874*^9}, {
+   3.9543187438897095`*^9, 3.9543187940900764`*^9}, {3.954318826671488*^9, 
+   3.9543189098683662`*^9}, {3.9543189412443047`*^9, 3.9543190087737923`*^9}, 
+   3.954511443685781*^9, {3.954511673739624*^9, 
+   3.954511675178852*^9}},ExpressionUUID->"b7a5988e-6227-7f42-9e47-\
+61336b4d4d6e"],
+
+Cell[TextData[{
+ StyleBox["The coefficients for the dual frame are given by\n",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"\[Theta]", "\[LongEqual]", 
+         FractionBox["1", 
+          RowBox[{
+            SuperscriptBox[
+             StyleBox["p", "TI"], 
+             StyleBox["T", "TI"]], 
+            SuperscriptBox[
+             StyleBox["A", "TI"], "2"], 
+            StyleBox["p", "TI"]}]], 
+         RowBox[{"(", 
+           RowBox[{
+             SqrtBox[
+              RowBox[{"1", "+", 
+                SuperscriptBox[
+                 StyleBox["p", "TI"], 
+                 StyleBox["T", "TI"]], 
+                SuperscriptBox[
+                 StyleBox["A", "TI"], "2"], 
+                StyleBox["p", "TI"]}]], 
+             RowBox[{"(", 
+               RowBox[{
+                 StyleBox["A", "TI"], 
+                 StyleBox["p", "TI"]}], ")"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  StyleBox["A", "TI"], 
+                  StyleBox["p", "TI"]}], ")"}], 
+              StyleBox["T", "TI"]], "+", 
+             RowBox[{"(", 
+               RowBox[{
+                 StyleBox["J", FontSlant -> "Plain"], 
+                 StyleBox["A", "TI"], 
+                 StyleBox["p", "TI"]}], ")"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  StyleBox["J", FontSlant -> "Plain"], 
+                  StyleBox["A", "TI"], 
+                  StyleBox["p", "TI"]}], ")"}], 
+              StyleBox["T", "TI"]]}], ")"}]}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "$\\theta = \\frac{1}{p^T A^2 p}\\left(\\sqrt{1 + p^TA^2p}  (Ap)(Ap)^T + \
+ (\\mathbb{J}Ap)(\\mathbb{J}Ap)^T\\right)$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "8baf345c-88e0-42e3-974d-8b5e5bb03310"],
+ StyleBox[" :",
+  FontFamily->"Linux Libertine O"]
+}], "Text",
+ CellChangeTimes->{{3.9543190520342197`*^9, 3.9543190766045303`*^9}, {
+  3.95451154042689*^9, 
+  3.9545116814608107`*^9}},ExpressionUUID->"7e63755b-209c-7d46-aa89-\
+d5325a31790b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]1", ",", " ", "\[Mu]1"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]2", ",", " ", "\[Mu]2"}], "}"}]}], "}"}], " ", "=", 
+   " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"1", "+", "qA2q"}], "]"}], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"Outer", "[", 
+        RowBox[{"Times", ",", "Aq", ",", "Aq"}], "]"}], "/", "qA2q"}], 
+      ")"}]}], "+", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Outer", "[", 
+       RowBox[{"Times", ",", "JAq", ",", "JAq"}], "]"}], "/", "qA2q"}], 
+     ")"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.9542519184122486`*^9, 3.954251929302492*^9}, {
+   3.9542522574187584`*^9, 3.9542522892753353`*^9}, {3.95451099909446*^9, 
+   3.954511052640736*^9}, 3.9545110980573874`*^9},
+ CellLabel->
+  "In[535]:=",ExpressionUUID->"bcecbc18-3db7-a04e-94cb-dcba188f3734"],
+
+Cell[TextData[{
+ StyleBox["Now, we can do a sanity check to see ensure that ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["e", "TI"], 
+          StyleBox["PPF", FontSlant -> "Plain"], 
+          StyleBox["i", "TI"]], 
+         RowBox[{"(", 
+           SubscriptBox[
+            StyleBox["e", "TI"], 
+            RowBox[{
+              StyleBox["j", "TI"], 
+              StyleBox["PPF", FontSlant -> "Plain"]}]], ")"}], "\[LongEqual]", 
+         SubscriptBox["\[Delta]", 
+          RowBox[{
+            StyleBox["i", "TI"], 
+            StyleBox["j", "TI"]}]]}], TraditionalForm], "errors" -> {}, 
+     "input" -> "$e^i_{\\mathrm{PPF}}(e_{j\\mathrm{PPF}}) = \\delta_{ij}$", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "4eae3f9b-372b-e642-8ae5-27af19d5488f"]
+}], "Text",
+ CellChangeTimes->{{3.9542519645670376`*^9, 3.954252016680546*^9}, {
+  3.954319083098736*^9, 3.954319105147436*^9}, {3.954319141886898*^9, 
+  3.954319143444927*^9}, {3.954511525262261*^9, 
+  3.954511527618003*^9}},ExpressionUUID->"6dbf6a2d-9c39-fc46-b20b-\
+e4180dbbbd11"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"check00", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]1", ",", "\[Mu]1"}], "}"}], ".", "PPFX"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"check10", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]2", ",", "\[Mu]2"}], "}"}], ".", "PPFX"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"check01", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]1", ",", "\[Mu]1"}], "}"}], ".", "PPFY"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"check11", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]2", ",", "\[Mu]2"}], "}"}], ".", "PPFY"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"check00", ",", " ", "check10"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"check01", ",", " ", "check11"}], "}"}]}], "}"}], " ", "//", " ",
+   "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.954252237692692*^9, 3.9542522524051743`*^9}, {
+  3.954252297438057*^9, 3.954252453107073*^9}, {3.9543191522529774`*^9, 
+  3.954319154665022*^9}, {3.954319298522482*^9, 3.9543193027485123`*^9}, {
+  3.95451110208146*^9, 3.95451112625919*^9}},
+ CellLabel->
+  "In[556]:=",ExpressionUUID->"48ffe900-165e-4146-9560-cbaa2a7bec2e"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"},
+     {"0", "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.954511102328165*^9, 3.954511126484598*^9}},
+ CellLabel->
+  "Out[560]//MatrixForm=",ExpressionUUID->"5595b809-c864-4e82-a83b-\
+427366a2128e"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Now, we are aiming to solve the Cartan structure equations for the \
+Levi-Civita connection. This means, we are searching for a 1-form ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[<|"boxes" -> FormBox[
+        RowBox[{"\[Alpha]", "\[LongEqual]", 
+          SubscriptBox["\[Omega]", "1"], 
+          StyleBox["d", "TI"], 
+          StyleBox["x", "TI"], "+", 
+          SubscriptBox["\[Omega]", "2"], 
+          StyleBox["d", "TI"], 
+          StyleBox["y", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+      "$\\alpha = \\omega_1 dx + \\omega_2 dy$", "state" -> "Boxes"|>,
+     "TeXAssistantTemplate"], " "}], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "e5040f34-7aeb-4a4c-8076-fd57dafc976f"],
+ StyleBox[" such that \n",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["d", "TI"], 
+         RowBox[{"(", 
+           Cell[
+            BoxData[
+             FormBox[
+              GridBox[{{
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "1"]], 
+                    "InlineFormula"], " "}]]}, {
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "2"]], 
+                    "InlineFormula"], " "}]]}}], TraditionalForm]]], ")"}], 
+         "+", 
+         RowBox[{"(", 
+           Cell[
+            BoxData[
+             FormBox[
+              GridBox[{{
+                 Cell[
+                  TextData[{" ", 
+                    Cell["0", "InlineFormula"], " "}]], 
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{"-", "\[Alpha]"}]], "InlineFormula"], " "}]]}, {
+                 Cell[
+                  TextData[{" ", 
+                    Cell["\[Alpha]", "InlineFormula"], " "}]], 
+                 Cell[
+                  TextData[{" ", 
+                    Cell["0", "InlineFormula"], " "}]]}}], TraditionalForm]]],
+            ")"}], "\[Wedge]", 
+         RowBox[{"(", 
+           Cell[
+            BoxData[
+             FormBox[
+              GridBox[{{
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "1"]], 
+                    "InlineFormula"], " "}]]}, {
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "2"]], 
+                    "InlineFormula"], " "}]]}}], TraditionalForm]]], ")"}], 
+         "\[LongEqual]", "0"}], TraditionalForm], "errors" -> {}, "input" -> 
+     "$d\\begin{pmatrix} \
+e^1_{\\mathrm{PPF}}\\\\e^2_{\\mathrm{PPF}}\\end{pmatrix} +\\begin{pmatrix}0 & \
+-\\alpha\\\\ \\alpha& 0\\end{pmatrix}\\wedge \
+\\begin{pmatrix}e^1_{\\mathrm{PPF}}\\\\e^2_{\\mathrm{PPF}}\\end{pmatrix} = \
+0$", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "254bf9af-97e9-e147-8546-66b06c72102e"],
+ StyleBox["\nHere, ",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[<|"boxes" -> FormBox[
+        StyleBox["d", "TI"], TraditionalForm], "errors" -> {}, "input" -> 
+      "$d$", "state" -> "Boxes"|>,
+     "TeXAssistantTemplate"], " "}], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "47070996-1683-9642-aa8e-6ca61027bccd"],
+ StyleBox["denotes the ordinary exterior derivative on 1-forms. It holds ",
+  FontFamily->"Linux Libertine O"],
+ "\n",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["d", "TI"], 
+         RowBox[{"(", 
+           Cell[
+            BoxData[
+             FormBox[
+              GridBox[{{
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "1"]], 
+                    "InlineFormula"], " "}]]}, {
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "2"]], 
+                    "InlineFormula"], " "}]]}}], TraditionalForm]]], ")"}], 
+         "\[LongEqual]", 
+         RowBox[{"(", 
+           Cell[
+            BoxData[
+             FormBox[
+              GridBox[{{
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"\[PartialD]", 
+                    SubscriptBox["\[Mu]", "1"]}], 
+                    RowBox[{"\[PartialD]", 
+                    StyleBox["x", "TI"]}]], "-", 
+                    FractionBox[
+                    RowBox[{"\[PartialD]", 
+                    SubscriptBox["\[Lambda]", "1"]}], 
+                    RowBox[{"\[PartialD]", 
+                    StyleBox["y", "TI"]}]]}]], "InlineFormula"], " "}]]}, {
+                 Cell[
+                  TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"\[PartialD]", 
+                    SubscriptBox["\[Mu]", "2"]}], 
+                    RowBox[{"\[PartialD]", 
+                    StyleBox["x", "TI"]}]], "-", 
+                    FractionBox[
+                    RowBox[{"\[PartialD]", 
+                    SubscriptBox["\[Lambda]", "2"]}], 
+                    RowBox[{"\[PartialD]", 
+                    StyleBox["y", "TI"]}]]}]], "InlineFormula"], " "}]]}}], 
+              TraditionalForm]]], ")"}], 
+         StyleBox["d", "TI"], 
+         StyleBox["x", "TI"], "\[Wedge]", 
+         StyleBox["d", "TI"], 
+         StyleBox["y", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "$d\\begin{pmatrix} \
+e^1_{\\mathrm{PPF}}\\\\e^2_{\\mathrm{PPF}}\\end{pmatrix} = \
+\\begin{pmatrix}\\frac{\\partial \\mu_1}{\\partial x} - \\frac{\\partial \
+\\lambda_1}{\\partial y} \\\\ \\frac{\\partial \\mu_2}{\\partial x} - \\frac{\
+\\partial \\lambda_2}{\\partial y}\\end{pmatrix} dx\\wedge dy$", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "114f8dd6-2205-4140-8961-67eb6575a742"]
+}], "Text",
+ CellChangeTimes->{{3.954319167190897*^9, 3.9543191835715084`*^9}, {
+   3.954319432831682*^9, 3.9543194391447697`*^9}, {3.9543196216533012`*^9, 
+   3.9543196845254745`*^9}, {3.954322522619774*^9, 3.9543226061344604`*^9}, {
+   3.954322732495964*^9, 3.954322734165962*^9}, {3.954511129537283*^9, 
+   3.954511129701926*^9}, 
+   3.954511965490622*^9},ExpressionUUID->"e0283f27-1d67-8c4c-bb13-\
+57fbb36732c1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DLambda1Dy", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"D", "[", 
+     RowBox[{"\[Lambda]1", ",", "y"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DLambda2Dy", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"D", "[", 
+     RowBox[{"\[Lambda]2", ",", "y"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DMu1Dx", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"D", "[", 
+     RowBox[{"\[Mu]1", ",", "x"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DMu2Dx", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"D", "[", 
+     RowBox[{"\[Mu]2", ",", "x"}], "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.9542527029588146`*^9, 3.954252910540472*^9}},
+ CellLabel->
+  "In[561]:=",ExpressionUUID->"fe0c7a84-8437-d144-a281-4dd2eb73d9a0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"dPPFX", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"DMu1Dx", " ", "-", " ", "DLambda1Dy"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dPPFY", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"DMu2Dx", " ", "-", " ", "DLambda2Dy"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dPPF", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"dPPFX", ",", "dPPFY"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.9542529212522182`*^9, 3.954252972488682*^9}, {
+  3.9542530052223663`*^9, 3.954253023338255*^9}, {3.9542530537649593`*^9, 
+  3.9542530548092594`*^9}, {3.9542540921448364`*^9, 3.954254107682865*^9}},
+ CellLabel->
+  "In[565]:=",ExpressionUUID->"18e33b40-80e2-7b48-814c-0bbed6178291"],
+
+Cell[TextData[{
+ StyleBox["It holds for the wedge product",
+  FontFamily->"Linux Libertine O"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", "\[IndentingNewLine]", 
+    TemplateBox[<|"boxes" -> FormBox[
+        RowBox[{
+          RowBox[{"(", 
+            Cell[
+             BoxData[
+              FormBox[
+               GridBox[{{
+                  Cell[
+                   TextData[{" ", 
+                    Cell["0", "InlineFormula"], " "}]], 
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{"-", "\[Alpha]"}]], "InlineFormula"], " "}]]}, {
+                  Cell[
+                   TextData[{" ", 
+                    Cell["\[Alpha]", "InlineFormula"], " "}]], 
+                  Cell[
+                   TextData[{" ", 
+                    Cell["0", "InlineFormula"], " "}]]}}], TraditionalForm]]],
+             ")"}], "\[Wedge]", 
+          RowBox[{"(", 
+            Cell[
+             BoxData[
+              FormBox[
+               GridBox[{{
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "1"]], 
+                    "InlineFormula"], " "}]]}, {
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "2"]], 
+                    "InlineFormula"], " "}]]}}], TraditionalForm]]], ")"}], 
+          "\[LongEqual]", 
+          RowBox[{"(", 
+            Cell[
+             BoxData[
+              FormBox[
+               GridBox[{{
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{"-", "\[Alpha]", "\[Wedge]", 
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "1"]}]], 
+                    "InlineFormula"], " "}]]}, {
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{"\[Alpha]", "\[Wedge]", 
+                    SubsuperscriptBox[
+                    StyleBox["e", "TI"], 
+                    StyleBox["PPF", FontSlant -> "Plain"], "2"]}]], 
+                    "InlineFormula"], " "}]]}}], TraditionalForm]]], ")"}], 
+          "\[LongEqual]", 
+          RowBox[{"(", 
+            Cell[
+             BoxData[
+              FormBox[
+               GridBox[{{
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{"-", 
+                    SubscriptBox["\[Omega]", "1"], 
+                    SubscriptBox["\[Mu]", "2"], "+", 
+                    SubscriptBox["\[Omega]", "2"], 
+                    SubscriptBox["\[Lambda]", "2"]}]], "InlineFormula"], 
+                    " "}]]}, {
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{
+                    SubscriptBox["\[Omega]", "1"], 
+                    SubscriptBox["\[Mu]", "1"], "-", 
+                    SubscriptBox["\[Omega]", "2"], 
+                    SubscriptBox["\[Lambda]", "1"]}]], "InlineFormula"], 
+                    " "}]]}}], TraditionalForm]]], ")"}], 
+          StyleBox["d", "TI"], 
+          StyleBox["x", "TI"], "\[Wedge]", 
+          StyleBox["d", "TI"], 
+          StyleBox["y", "TI"], "\[LongEqual]", 
+          RowBox[{"(", 
+            Cell[
+             BoxData[
+              FormBox[
+               GridBox[{{
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{"-", 
+                    SubscriptBox["\[Mu]", "2"]}]], "InlineFormula"], " "}]], 
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubscriptBox["\[Lambda]", "2"]], "InlineFormula"], 
+                    " "}]]}, {
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubscriptBox["\[Mu]", "1"]], "InlineFormula"], " "}]], 
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    RowBox[{"-", 
+                    SubscriptBox["\[Lambda]", "1"]}]], "InlineFormula"], 
+                    " "}]]}}], TraditionalForm]]], ")"}], 
+          RowBox[{"(", 
+            Cell[
+             BoxData[
+              FormBox[
+               GridBox[{{
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubscriptBox["\[Omega]", "1"]], "InlineFormula"], 
+                    " "}]]}, {
+                  Cell[
+                   TextData[{" ", 
+                    Cell[
+                    BoxData[
+                    SubscriptBox["\[Omega]", "2"]], "InlineFormula"], 
+                    " "}]]}}], TraditionalForm]]], ")"}], 
+          StyleBox["d", "TI"], 
+          StyleBox["x", "TI"], "\[Wedge]", 
+          StyleBox["d", "TI"], 
+          StyleBox["y", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+      "$\\begin{pmatrix}0& -\\alpha\\\\ \\alpha & 0\\end{pmatrix}\\wedge \
+\\begin{pmatrix} e^1_{\\mathrm{PPF}} \\\\ e^2_{\\mathrm{PPF}}\\end{pmatrix} = \
+\n\\begin{pmatrix}\n-\\alpha\\wedge e^1_{\\mathrm{PPF}}\\\\\n\\alpha \\wedge \
+e^2_{\\mathrm{PPF}}\n\\end{pmatrix} = \n\\begin{pmatrix}\n-\\omega_1\\mu_2 + \
+\\omega_2 \\lambda_2 \\\\\n\\omega_1\\mu_1 - \\omega_2\\lambda_1\n\
+\\end{pmatrix} dx\\wedge dy = \\begin{pmatrix}-\\mu_2& \\lambda_2 \\\\ \\mu_1 \
+& -\\lambda_1\\end{pmatrix} \\begin{pmatrix}\\omega_1 \\\\ \\omega_2 \
+\\end{pmatrix} dx\\wedge dy$", "state" -> "Boxes"|>,
+     "TeXAssistantTemplate"]}], TraditionalForm]],
+  FontFamily->"Linux Libertine O",ExpressionUUID->
+  "4d6b6bb6-63f3-c141-9bc5-e5c10529c839"]
+}], "Text",
+ CellChangeTimes->{{3.954323354905369*^9, 
+  3.95432338087323*^9}},ExpressionUUID->"d75d4042-f115-3444-8539-\
+61a5a08a418c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BforCartanStructure", " ", "=", " ", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "\[Mu]2"}], ",", "\[Lambda]2"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Mu]1", ",", 
+        RowBox[{"-", "\[Lambda]1"}]}], "}"}]}], "}"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.9542541179424953`*^9, 3.9542541862579784`*^9}},
+ CellLabel->
+  "In[568]:=",ExpressionUUID->"4c7537d6-d5f1-4b40-a113-692e6f964568"],
+
+Cell[TextData[StyleBox["We can therefore now solve for the coefficients of \
+the Levi-Civita connection",
+ FontFamily->"Linux Libertine O"]], "Text",
+ CellChangeTimes->{{3.9542542141529903`*^9, 3.954254236880188*^9}, {
+  3.954323391807472*^9, 
+  3.954323414622961*^9}},ExpressionUUID->"338571a6-51ca-4641-8328-\
+7a0d21668ec9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"\[Omega]1", ",", "\[Omega]2"}], "}"}], " ", "=", " ", 
+  RowBox[{"FullSimplify", "[", 
+   RowBox[{"LinearSolve", "[", 
+    RowBox[{"BforCartanStructure", ",", 
+     RowBox[{"-", "dPPF"}]}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.954254194025858*^9, 3.954254209113344*^9}, {
+  3.954254281717432*^9, 3.954254332595949*^9}, {3.954511342227736*^9, 
+  3.95451135786243*^9}, {3.954511722450982*^9, 3.954511752926414*^9}},
+ CellLabel->
+  "In[596]:=",ExpressionUUID->"a3320a01-d786-8a47-8904-7f32715fffa0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", " ", "b"}], "-", 
+       SuperscriptBox["d", "2"]}], ")"}], " ", "y", " ", 
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox["a", "2"], "+", 
+          SuperscriptBox["d", "2"]}], ")"}], " ", 
+        SuperscriptBox["x", "2"]}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{"(", 
+         RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], "+", 
+       
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox["b", "2"], "+", 
+          SuperscriptBox["d", "2"]}], ")"}], " ", 
+        SuperscriptBox["y", "2"]}], "-", 
+       SqrtBox[
+        RowBox[{"1", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            SuperscriptBox["a", "2"], "+", 
+            SuperscriptBox["d", "2"]}], ")"}], " ", 
+          SuperscriptBox["x", "2"]}], "+", 
+         RowBox[{"2", " ", 
+          RowBox[{"(", 
+           RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], 
+         "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            SuperscriptBox["b", "2"], "+", 
+            SuperscriptBox["d", "2"]}], ")"}], " ", 
+          SuperscriptBox["y", "2"]}]}]]}], ")"}]}], 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox["a", "2"], "+", 
+          SuperscriptBox["d", "2"]}], ")"}], " ", 
+        SuperscriptBox["x", "2"]}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{"(", 
+         RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], "+", 
+       
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox["b", "2"], "+", 
+          SuperscriptBox["d", "2"]}], ")"}], " ", 
+        SuperscriptBox["y", "2"]}]}], ")"}], " ", 
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox["a", "2"], "+", 
+          SuperscriptBox["d", "2"]}], ")"}], " ", 
+        SuperscriptBox["x", "2"]}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{"(", 
+         RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], "+", 
+       
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox["b", "2"], "+", 
+          SuperscriptBox["d", "2"]}], ")"}], " ", 
+        SuperscriptBox["y", "2"]}]}], ")"}]}]], ",", 
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"a", " ", "b"}], "-", 
+        SuperscriptBox["d", "2"]}], ")"}], " ", "x", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["a", "2"], "+", 
+           SuperscriptBox["d", "2"]}], ")"}], " ", 
+         SuperscriptBox["x", "2"]}], "+", 
+        RowBox[{"2", " ", 
+         RowBox[{"(", 
+          RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], "+", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["b", "2"], "+", 
+           SuperscriptBox["d", "2"]}], ")"}], " ", 
+         SuperscriptBox["y", "2"]}], "-", 
+        SqrtBox[
+         RowBox[{"1", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             SuperscriptBox["a", "2"], "+", 
+             SuperscriptBox["d", "2"]}], ")"}], " ", 
+           SuperscriptBox["x", "2"]}], "+", 
+          RowBox[{"2", " ", 
+           RowBox[{"(", 
+            RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], 
+          "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             SuperscriptBox["b", "2"], "+", 
+             SuperscriptBox["d", "2"]}], ")"}], " ", 
+           SuperscriptBox["y", "2"]}]}]]}], ")"}]}], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["a", "2"], "+", 
+           SuperscriptBox["d", "2"]}], ")"}], " ", 
+         SuperscriptBox["x", "2"]}], "+", 
+        RowBox[{"2", " ", 
+         RowBox[{"(", 
+          RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], "+", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["b", "2"], "+", 
+           SuperscriptBox["d", "2"]}], ")"}], " ", 
+         SuperscriptBox["y", "2"]}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["a", "2"], "+", 
+           SuperscriptBox["d", "2"]}], ")"}], " ", 
+         SuperscriptBox["x", "2"]}], "+", 
+        RowBox[{"2", " ", 
+         RowBox[{"(", 
+          RowBox[{"a", "+", "b"}], ")"}], " ", "d", " ", "x", " ", "y"}], "+", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["b", "2"], "+", 
+           SuperscriptBox["d", "2"]}], ")"}], " ", 
+         SuperscriptBox["y", "2"]}]}], ")"}]}]]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.9542692856960163`*^9, 3.954269367673876*^9, 3.9543234189390354`*^9, 
+   3.95451116234617*^9, {3.954511344577085*^9, 3.9545113582685213`*^9}, {
+   3.954511736362358*^9, 3.9545117534599047`*^9}},
+ CellLabel->
+  "Out[596]=",ExpressionUUID->"f0a0f072-beda-4363-9362-3ac01459243a"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["Finally, we verify the simpler form of the solution \
+given in the supplemental material:",
+ FontFamily->"Linux Libertine O"]], "Text",
+ CellChangeTimes->{{3.954323454372841*^9, 3.95432348980377*^9}, {
+  3.954323621519825*^9, 3.9543236287060795`*^9}, {3.954512006244034*^9, 
+  3.954512019879304*^9}},ExpressionUUID->"77f2bc5b-b6d0-7346-bf5e-\
+969db84de275"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\[Omega]1", ",", "\[Omega]2"}], "}"}], " ", "-", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Det", "[", "A", "]"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"1", " ", "+", " ", "qA2q", " ", "+", " ", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"1", "+", "qA2q"}], "]"}]}], ")"}]}], 
+    RowBox[{"(", 
+     RowBox[{"-", 
+      RowBox[{"J", ".", "q"}]}], ")"}]}]}], " ", "//", 
+  "FullSimplify"}]], "Input",
+ CellChangeTimes->{{3.954323497276436*^9, 3.954323556894911*^9}},
+ CellLabel->
+  "In[576]:=",ExpressionUUID->"b7484bf5-df55-ea4d-ba41-5f73194f3f5e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.95432356159095*^9, 3.954511165043233*^9, 
+  3.954511295837492*^9},
+ CellLabel->
+  "Out[576]=",ExpressionUUID->"2f18705f-6caa-4143-91b5-de7661254665"]
+}, Open  ]]
+},
+WindowSize->{1120, 1018},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"13.2 for Mac OS X ARM (64-bit) (January 30, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9f88158b-85b8-9849-add0-40e2a91155d4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 3075, 77, 161, "Text",ExpressionUUID->"c401621c-721f-2749-8263-4d891a5640e3"],
+Cell[3632, 99, 1106, 31, 73, "Input",ExpressionUUID->"4c18ea66-f6a5-1d41-9121-ff2714f821ba"],
+Cell[4741, 132, 903, 24, 136, "Input",ExpressionUUID->"adf10bc6-0235-be4a-9a7d-815db139c97e"],
+Cell[5647, 158, 657, 20, 52, "Input",ExpressionUUID->"7328377e-4f07-5c49-b602-a7811df2109f"],
+Cell[6307, 180, 309, 6, 33, "Text",ExpressionUUID->"ac3de4fc-29a1-b14e-8983-2919feea3c5a"],
+Cell[6619, 188, 595, 15, 73, "Input",ExpressionUUID->"dc6dda65-f91c-4a49-8657-128eecbbbb8d"],
+Cell[7217, 205, 435, 12, 30, "Input",ExpressionUUID->"fc013cf7-825b-6e4e-80fd-3deb5465d5cf"],
+Cell[7655, 219, 757, 16, 54, "Text",ExpressionUUID->"c7ed6831-355d-2e48-9804-e842e1b65fac"],
+Cell[8415, 237, 667, 17, 94, "Input",ExpressionUUID->"fc8349b8-8e6f-ce42-b682-976c424b6edf"],
+Cell[9085, 256, 1875, 46, 56, "Text",ExpressionUUID->"7c498c0c-9750-bc48-a3b9-d4f9f209dcc2"],
+Cell[10963, 304, 1987, 68, 67, "Input",ExpressionUUID->"738a209d-58a0-494a-be71-7e9b1fc67912"],
+Cell[12953, 374, 817, 23, 30, "Input",ExpressionUUID->"2102e81c-87d5-954a-a59a-b13c57f75f4d"],
+Cell[13773, 399, 928, 22, 35, "Text",ExpressionUUID->"ce2d72a5-944f-2245-abaa-e066d3436838"],
+Cell[14704, 423, 529, 14, 52, "Input",ExpressionUUID->"d8ce1a79-2223-cf44-a907-8483ea7b326d"],
+Cell[15236, 439, 410, 6, 33, "Text",ExpressionUUID->"23b78aa1-5cde-1c43-8569-1fe8b755a17f"],
+Cell[CellGroupData[{
+Cell[15671, 449, 1190, 33, 94, "Input",ExpressionUUID->"773b6e55-c414-c04a-9a16-5211cb4a639b"],
+Cell[16864, 484, 794, 21, 63, "Output",ExpressionUUID->"538afc8b-dfec-45b5-880f-c6135699e845"]
+}, Open  ]],
+Cell[17673, 508, 5456, 135, 125, "Text",ExpressionUUID->"b7a5988e-6227-7f42-9e47-61336b4d4d6e"],
+Cell[23132, 645, 2202, 59, 75, "Text",ExpressionUUID->"7e63755b-209c-7d46-aa89-d5325a31790b"],
+Cell[25337, 706, 952, 28, 30, "Input",ExpressionUUID->"bcecbc18-3db7-a04e-94cb-dcba188f3734"],
+Cell[26292, 736, 1245, 31, 37, "Text",ExpressionUUID->"6dbf6a2d-9c39-fc46-b20b-e4180dbbbd11"],
+Cell[CellGroupData[{
+Cell[27562, 771, 1496, 42, 115, "Input",ExpressionUUID->"48ffe900-165e-4146-9560-cbaa2a7bec2e"],
+Cell[29061, 815, 645, 19, 63, "Output",ExpressionUUID->"5595b809-c864-4e82-a83b-427366a2128e"]
+}, Open  ]],
+Cell[29721, 837, 7505, 194, 184, "Text",ExpressionUUID->"e0283f27-1d67-8c4c-bb13-57fbb36732c1"],
+Cell[37229, 1033, 913, 26, 94, "Input",ExpressionUUID->"fe0c7a84-8437-d144-a281-4dd2eb73d9a0"],
+Cell[38145, 1061, 790, 19, 73, "Input",ExpressionUUID->"18e33b40-80e2-7b48-814c-0bbed6178291"],
+Cell[38938, 1082, 6392, 167, 98, "Text",ExpressionUUID->"d75d4042-f115-3444-8539-61a5a08a418c"],
+Cell[45333, 1251, 528, 15, 30, "Input",ExpressionUUID->"4c7537d6-d5f1-4b40-a113-692e6f964568"],
+Cell[45864, 1268, 326, 6, 33, "Text",ExpressionUUID->"338571a6-51ca-4641-8328-7a0d21668ec9"],
+Cell[CellGroupData[{
+Cell[46215, 1278, 559, 12, 30, "Input",ExpressionUUID->"a3320a01-d786-8a47-8904-7f32715fffa0"],
+Cell[46777, 1292, 5359, 164, 125, "Output",ExpressionUUID->"f0a0f072-beda-4363-9362-3ac01459243a"]
+}, Open  ]],
+Cell[52151, 1459, 381, 6, 33, "Text",ExpressionUUID->"77f2bc5b-b6d0-7346-bf5e-969db84de275"],
+Cell[CellGroupData[{
+Cell[52557, 1469, 620, 18, 30, "Input",ExpressionUUID->"b7484bf5-df55-ea4d-ba41-5f73194f3f5e"],
+Cell[53180, 1489, 244, 6, 34, "Output",ExpressionUUID->"2f18705f-6caa-4143-91b5-de7661254665"]
+}, Open  ]]
+}
+]
+*)
+

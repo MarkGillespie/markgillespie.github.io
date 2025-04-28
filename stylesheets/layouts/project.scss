@@ -57,7 +57,7 @@
     #{$parent} .name_box {
         display: inline-block;
         text-align: center;
-        overflow: hidden;
+        overflow: visible;
         margin-bottom: 15px;
     }
 
@@ -79,10 +79,19 @@
 
     #{$parent} .name_box > .award {
         display: inline-block;
+        line-height: 1;
         font-size: 1.1em;
         border-radius: .75em;
-        padding: .15em .5em;
+        padding: .4em .6em;
         margin: 0em 0em .75em 0em ;
+    }
+
+    #{$parent} .name_box .award .description {
+        font-size: 10pt;
+        text-align: center;
+        display: inline-block;
+        margin-left: 1em;
+        font-style: italic;
     }
 
     #{$parent} .name_box > .award > a {
@@ -125,15 +134,73 @@
         margin-bottom: 0.5em;
         margin-left: 1em;
         margin-right: 1em;
+        white-space: none;
     }
 
-
-    #{$parent} .quick_links a::before {
+    #{$parent} .quick_links a::before, #{$parent} .bibBox button::before, #{$parent} .bibEntry button::before {
         content: "[";
     }
 
-    #{$parent} .quick_links a::after {
+    #{$parent} .quick_links a::after, #{$parent} .bibBox button::after, #{$parent} .bibEntry button::after {
         content: "]";
+    }
+
+    /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
+    #{$parent} .bibBox {
+        display: inline-block;
+        position: relative;
+        width: 3.85em;
+        height: 15pt;
+    }
+
+    /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
+    #{$parent} .bibBox .bibliography {
+        font-family: monospace;
+        word-wrap: break-word;
+        text-align: left;
+        white-space: pre-wrap;
+
+        position: absolute;
+        top:2em;
+        right:-1em;
+        padding: 1em .75em 1em 1em;
+        margin: 0;
+        width: 30em;
+        height: auto;
+        border-radius: 0.25em;
+
+        z-index: 200;
+        visibility: hidden;
+        opacity: .0001;
+        transition: .5s;
+        -o-transition: .5s;
+        -ms-transition: .5s;
+        -moz-transition: .5s;
+        -webkit-transition: .5s;
+    }
+
+    /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
+    #{$parent} .bibBox:hover .bibliography {
+        visibility: visible;
+        opacity: 1.0;
+        transition: .5s;
+        -o-transition: .5s;
+        -ms-transition: .5s;
+        -moz-transition: .5s;
+        -webkit-transition: .5s;
+    }
+
+    #{$parent} .bibBox button, #{$parent} .bibEntry button {
+        padding: 0;
+        border: none;
+        background: none;
+        float: right;
+        font-family: 'Charis SIL', 'Palatino', serif;
+        font-size: 12pt;
+    }
+
+    #{$parent} .bibBox button:hover, #{$parent} .bibEntry button:hover {
+        cursor: pointer;
     }
 
     /*#{$parent} .abstract::before {
@@ -208,9 +275,19 @@
         margin-top: -2.25em;
     }
 
-    #{$parent} .section_text > .paper-preview > img {
+    #{$parent} .section_text .paper-preview {
+        display: inline-block;
+    }
+
+    #{$parent} .section_text .paper-preview > img {
         width: 128px;
         display: inline-block;
+    }
+
+    #{$parent} .section_text .paper-preview > span {
+        width: 128px;
+        display: inline-block;
+        line-height: 1;
     }
 
     #{$parent} .example_grid_container {
@@ -262,6 +339,10 @@
         margin-top: 15vh;
         position: relative;
         z-index: 200;
+    }
+
+    #{$parent} .centered_content {
+        text-align: center;
     }
 
     @media (max-width: 970px) {

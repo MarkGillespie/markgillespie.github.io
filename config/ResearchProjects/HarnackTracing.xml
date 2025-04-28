@@ -24,7 +24,7 @@
             <affiliation>Carnegie Mellon University</affiliation></author>
     </authors>
     <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2024)</venue>
-    <award><name>Best Paper (Honorable Mention)</name><href>https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/</href></award>
+    <award><name>Best Paper (Honorable Mention)</name><href>https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/</href><description>top 1.5% of accepted papers.</description></award>
     <links>
         <link><name>pdf (11.2 mb)</name><href>Research/harnack-tracing/HarnackTracing.pdf</href></link>
         <link><name>code (ShaderToy)</name><href>https://www.shadertoy.com/playlist/dflXzN</href></link>

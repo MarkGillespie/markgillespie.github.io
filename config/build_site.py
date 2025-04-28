@@ -104,6 +104,11 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 	filename = os.fsdecode(file)
 	if filename.endswith('.xml'):
 		project_data = ET.parse(f"ResearchProjects/{filename}").getroot()
+
+		project_folder = project_data.find('folder').text if project_data.find('folder') is not None else 'FOLDER'
+		def n_path(s): # process nest path
+			prefix = f'Research/{project_folder}/'
+			return s[len(prefix):] if s.startswith(prefix) else s
 		#==== entry in main page list
 		#= author list
 		author_str = "" # short version for main page
@@ -123,33 +128,33 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		if project_data.find('award') is not None:
 			href = project_data.find('award').find('href').text
 			name = xml_child_string(project_data.find('award').find('name'))
-			award_str = f'<div class="award"><a href="{href}">{name}</a></div>'
+			desc = xml_child_string(project_data.find('award').find('description'))
+			desc_str = f'<div class="description">{desc}</div>' if len(desc) > 0 else ''
+			award_str = f'<div class="award"><a href="{href}">{name}</a>{desc_str}</div>'
 		#= bibtex
 		bib_path = project_data.find('bibtex').text
 		with open(f'../{bib_path}') as f:
 			bibtex = f.read()
-			bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography">{bibtex}</div></div>\n'
+			copy_button_str = f'<button onclick="navigator.clipboard.writeText(`{bibtex}`);">Copy</button>' # `string` creates multiline string in js
+			home_bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography">{bibtex}{copy_button_str}</div></div>\n'
+			nest_bib_str = f'<div class="bibBox"><a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n<div class="bibliography">{bibtex}{copy_button_str}</div></div>\n'
 		#= href
 		href_str = project_data.find('href').text
 		if project_data.find("folder") is not None:
 			href_str = f'Research/{project_data.find("folder").text}/{project_data.find("href").text}'
 		#= links
-		project_folder = project_data.find('folder').text if project_data.find('folder') is not None else 'FOLDER'
 		home_link_str = ""
 		if project_data.find('folder') is not None:
 			home_link_str += f'<a href="Research/{project_folder}/index.html"><span class="project_link">project</span></a>\n'
 		nest_link_str = ""
 		nest_link_str_ending = "" # added to end
-		def n_path(s): # process nest path
-			prefix = f'Research/{project_folder}/'
-			return s[len(prefix):] if s.startswith(prefix) else s
 		for link in project_data.find('links'):
 			href = link.find('href').text
 			name = xml_child_string(link.find('name'))
 			home_link_str += f'<a href="{href}"><span class="project_link">{name}</span></a>\n'
 			nest_link_str += f'<a href="{n_path(href)}"><span class="project_link">{name}</span></a>\n'
-		home_link_str += bib_str
-		nest_link_str_ending += f'<a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n'
+		home_link_str += home_bib_str
+		nest_link_str_ending += nest_bib_str
 		doi = project_data.find('doi').text
 		doi_str = f'<a href="https://doi.org/{doi}"><span class="project_link">doi</span></a>\n'
 		home_link_str += doi_str
@@ -189,7 +194,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			anchor_str = '' if panel.find('a') is None else f'<a name="{panel.find("a").text}">'
 			if panel.find('bibtex') is not None:
 				title = 'Bibtex'
-				content = f'{bibtex}'
+				content = f'{bibtex} {copy_button_str}'
 				extra_classes += ' bibEntry'
 			panel_str += f'<div class="section_panel {extra_classes}">\n'
 			panel_str += f'{anchor_str}\n'
