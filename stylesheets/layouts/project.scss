@@ -94,7 +94,7 @@
         font-style: italic;
     }
 
-    #{$parent} .name_box > .award > a {
+    #{$parent} .name_box a.award {
         text-decoration: none;
     }
 

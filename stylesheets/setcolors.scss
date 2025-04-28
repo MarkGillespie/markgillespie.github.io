@@ -102,13 +102,14 @@
         background-color: $award-background-color;
         border: 2px solid $award-border-color;
         color: $award-font-color;
-        a, a:hover {
-            color: $award-font-color;
-        }
 
         .description {
             color: rgba($award-font-color, .80);;
         }
+    }
+    
+    #{$parent} .award:hover {
+        color: $award-font-color;
     }
 
     #{$parent} .project_author_list, #{$parent} .project_author_list a, #{$parent} .author .name a, #{$parent} .project_title a {

@@ -75,11 +75,12 @@ html.darkmode .award {
   border: 2px solid #e18f6f;
   color: #f4f4f4;
 }
-html.darkmode .award a, html.darkmode .award a:hover {
-  color: #f4f4f4;
-}
 html.darkmode .award .description {
   color: rgba(244, 244, 244, 0.8);
+}
+
+html.darkmode .award:hover {
+  color: #f4f4f4;
 }
 
 html.darkmode .project_author_list, html.darkmode .project_author_list a, html.darkmode .author .name a, html.darkmode .project_title a {
@@ -538,11 +539,12 @@ html.lightmode .award {
   border: 2px solid #ae0d53;
   color: #f4f4f4;
 }
-html.lightmode .award a, html.lightmode .award a:hover {
-  color: #f4f4f4;
-}
 html.lightmode .award .description {
   color: rgba(244, 244, 244, 0.8);
+}
+
+html.lightmode .award:hover {
+  color: #f4f4f4;
 }
 
 html.lightmode .project_author_list, html.lightmode .project_author_list a, html.lightmode .author .name a, html.lightmode .project_title a {
@@ -1313,8 +1315,6 @@ html.singlecolumn .project_header .text .award {
   border-radius: 0.75em;
   padding: 0.4em 0.6em;
   margin: 0.25em 0em 0.25em -0.75em;
-}
-html.singlecolumn .project_header .text .award a {
   text-decoration: none;
 }
 
@@ -1975,7 +1975,7 @@ html.project .name_box .award .description {
   font-style: italic;
 }
 
-html.project .name_box > .award > a {
+html.project .name_box a.award {
   text-decoration: none;
 }
 

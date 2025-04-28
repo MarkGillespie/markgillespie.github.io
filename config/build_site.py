@@ -130,7 +130,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			name = xml_child_string(project_data.find('award').find('name'))
 			desc = xml_child_string(project_data.find('award').find('description'))
 			desc_str = f'<div class="description">{desc}</div>' if len(desc) > 0 else ''
-			award_str = f'<div class="award"><a href="{href}">{name}</a>{desc_str}</div>'
+			award_str = f'<a href="{href}" class="award">{name} {desc_str}</a>'
 		#= bibtex
 		bib_path = project_data.find('bibtex').text
 		with open(f'../{bib_path}') as f:

@@ -249,10 +249,7 @@
         border-radius: .75em;
         padding: .4em .6em;
         margin: .25em 0em .25em -.75em ;
-
-        a {
-            text-decoration: none;
-        }
+        text-decoration: none;
     }
 
     #{$parent} .project_header .award .description {
