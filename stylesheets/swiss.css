@@ -1262,22 +1262,26 @@ html.singlecolumn .section_text .news details[open] > summary {
   order: 2;
 }
 
-html.singlecolumn #misc .project_header {
+html.singlecolumn .misc_project_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+html.singlecolumn .misc_project_list .project_header {
   margin-bottom: 2em;
   flex-direction: row-reverse; /* put images left of text by default */
+  max-width: 48%;
 }
 
 html.singlecolumn .project_header .image {
   flex: 0 0 30%;
   width: 30%;
-  display: flex;
-  align-items: center;
 }
 
 html.singlecolumn .project_header .image img {
   max-width: 100%;
   max-height: 12em;
-  margin: auto;
 }
 
 html.singlecolumn .project_header .text {
@@ -1285,7 +1289,7 @@ html.singlecolumn .project_header .text {
   width: 100%;
   box-sizing: border-box;
   padding-left: 15pt;
-  padding-right: 15pt;
+  padding-right: 0pt;
 }
 
 html.singlecolumn .project_header .text .project_title {
@@ -1796,7 +1800,7 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
     align-items: center;
     text-align: left;
   }
-  html.singlecolumn #misc .project_header {
+  html.singlecolumn .misc_project_list .project_header {
     flex-direction: column; /* put images below text on thin screens */
   }
   html.singlecolumn .project_header .image {
@@ -1835,6 +1839,9 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
   }
   html.singlecolumn .talk_date {
     width: 3em;
+  }
+  html.singlecolumn .misc_project_list .project_header {
+    max-width: 75%;
   }
 }
 @media (max-width: 450px) {

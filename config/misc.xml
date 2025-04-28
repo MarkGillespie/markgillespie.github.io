@@ -38,7 +38,7 @@
         <href>https://github.com/MarkGillespie/BlendedPiecewiseMoebiusMaps</href>
         <title>Blended Piecewise Möbius Maps</title>
         <details>
-            GLSL implementation of <a href="https://arxiv.org/pdf/2306.12792.pdf">BPM: Blended Piecewise Möbius Maps</a> by Rorberg, Vaxman &amp;amp; Ben-Chen, incorporated into <a href="https://polyscope.run/">polyscope</a>.
+            GLSL implementation of <a href="https://arxiv.org/pdf/2306.12792.pdf">BPM: Blended Piecewise Möbius Maps</a> by Rorberg, Vaxman &amp; Ben-Chen, incorporated into <a href="https://polyscope.run/">polyscope</a>.
         </details>
         <img>images/BPM.png</img>
     </entry>
