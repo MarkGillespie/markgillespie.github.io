@@ -65,7 +65,7 @@
 \usepackage[
             datamodel=acmdatamodel, % acm stuff
             sorting=none,        % show refs in text order
-            style=acmnumeric,
+            style=acmauthoryear,
             % bibstyle=numeric,    % number refs
             giveninits=false,    % print full author names
             maxbibnames=99,      % list all author names in references
@@ -156,26 +156,26 @@
 }
 
 \newcommand{\shortcventry}[6]{ % {year} {title} {institution} {???} {???} {comment}
-\noindent{}{\bfseries #3}, {#2} \hfill {\itshape #1}\\[-.75\baselineskip]
+\noindent{}{\bfseries #3}, {#2} \hfill {\itshape #1}\\[.25\baselineskip]
 }
 
 \newcommand{\cventry}[6]{ % {year} {title} {institution} {???} {department} {comment}
 \noindent{}{\bfseries #3}, {#4} \hfill {\itshape #1}
-\cvindent{#2}\\[-.5\baselineskip]
+\cvindent{#2}\\[.25\baselineskip]
 }
 
 \newcommand{\cventrywithcomment}[6]{ % {year} {title} {institution} {department} {???} {comment}
 \noindent{}{\bfseries #3}, {#4}  \hfill {\itshape #1}
-\cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[-.8\baselineskip]
+\cvindent{{#2} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #6}}\\[.25\baselineskip]
 }
 
 \newcommand{\cvitem}[2]{
-\noindent{}{\bfseries #2} \hfill {\itshape #1}\\[-.5\baselineskip]
+\noindent{}{\bfseries #2} \hfill {\itshape #1}\\[.25\baselineskip]
 }
 
 \newcommand{\cvitemwithcomment}[3]{
 \noindent{}{\bfseries #2} \hfill {\itshape #1}\nopagebreak\\[.1\baselineskip]
-\cvindent{{#3}}\\[-.25\baselineskip]
+\cvindent{{#3}}\\[.25\baselineskip]
 }
 
 
@@ -210,7 +210,6 @@
       }{|}}}
 
 \begin{document}
-
 \noindent{}\begin{minipage}[t]{.3\linewidth}
     {\Huge Mark Gillespie}\\
     {\Large \itshape \color{color2} \hspace*{.75em}Curriculum Vitae}
@@ -234,7 +233,7 @@
 
 \section{Education}
 \cventrywithcomment{2018--2024}{PhD in Computer Science}{Carnegie Mellon University}{}{}{Advisor: Keenan Crane}% . Topics: geometry processing, computer graphics}
-
+%
 \cventry{2014--2018}{B.S. in Computer Science and B.S. in Mathematics}{California Institute of Technology}{}{}{}
 
 
@@ -243,6 +242,7 @@
 \section{Journal Articles}
 % use etaremune for reversed order
 \begin{enumerate}[itemsep=.2\baselineskip, leftmargin=.5em, labelsep=1em, label={}]
+\item \cvcite{Braune:2025:DTC}
 \item \cvcite{Gillespie:2024:RTH}
 \item \cvcite{Hirose:2024:SK}
 \item \cvcite{Feng:2023:WND}
@@ -262,13 +262,13 @@
 %----------------------------------
 \section{Awards \& Honors}
 \cvitemwithcomment{2024}{Two SIGGRAPH Best Paper Award Honorable Mentions}{Awarded to 12 papers out of about 840 submissions; $\sim$top 1.5\% of papers}
-
+%
 \cvitemwithcomment{2019-2022}{NSF Graduate Research Fellowship}{Awarded to top 15\% of applicants across all areas of science; \$147,000 over 3 years}
-
+%
 \cvitemwithcomment{2017}{Hertz Fellowship Finalist}{Awarded to top 5\% of applicants of applicants across applied science, math, and engineering.}
-
+%
 \cvitem{2016-2017}{Arthur R Adams SURF Fellow}{}
-
+%
 \cvitemwithcomment{2017}{SIGGRAPH ACM Turing Award Celebration Grant}{Awarded to 10 students in computer graphics from across the country.}
 % \cvitemwithcomment{2016}{William Lowell Putnam Mathematics Competition }{31 points (rank: 365/3214)}
 
@@ -277,20 +277,20 @@
 \section{Other Research Experience}
 
 \cventrywithcomment{July 2023}{Visiting Researcher}{Technische Universit\"at Berlin}{Department of Mathematics}{}{Host: Boris Springborn}
-
+%
 \cventrywithcomment{Summer 2022}{Visiting Graduate}{University of California, San Diego}{Department of Computer Science and Engineering}{}{Host: Albert Chern}
-
+%
 \cventrywithcomment{Summer 2017}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{Department of Computing and Mathematical Sciences}{}
 {Mentor: Peter Schr\"oder}
-
+%
 \cventrywithcomment{Summer 2016}{Arthur R. Adams Undergraduate Researcher}{California Institute of Technology}{Department of Computing and Mathematical Sciences}
 {}
 {Mentor: Mathieu Desbrun}
-
+%
 \cventrywithcomment{2016--2017}{Undergraduate Researcher}{California Institute of Technology}{Department of Computing and Mathematical Sciences}
 {}
 {Mentor: Alan Barr}
-
+%
 
 %----------------------------------
 \section{Selected Talks}
@@ -300,135 +300,138 @@
     {\href{https://www.cgal.org/}{49th CGAL Developer Meeting}} %, Inria Sophia Antipolis
     {Geometry Processing with Intrinsic Triangulations}
     {}{}{}
-
+%
 \shortcventry
     {Apr. 2025}
     {\href{https://www.cgal.org/}{49th CGAL Developer Meeting}} %, Inria Sophia Antipolis
     {Ray Tracing Harmonic Functions}
     {}{}{}
-
+%
 \shortcventry
     {Feb. 2025}
     {\href{https://www.cs.utah.edu/}{University of Utah}}
     {New Foundations for Robust Geometry Processing}
     {}{}{}
-
+%
 \shortcventry
     {Feb. 2025}
     {\href{https://www.mfo.de/occasion/2506/www_view}{Oberwolfach Workshop on Surface Processing}}
     {Ray Tracing Harmonic Functions}
     {}{}{}
-
+%
 \shortcventry
     {Nov. 2024}
     {\href{https://visualcomputing.ist.ac.at/seminars/}{IST Austria}}
     {Solid Knitting \& Harmonic Hitting}
     {}{}{}
-
+%
 \shortcventry
     {Aug. 2024}
     {\href{https://s2024.conference-program.org/presentation/?id=papers_786&sess=sess128}{ACM SIGGRAPH 2024}}
     {Ray Tracing Harmonic Functions}
     {}{}{}
-
+%
 \shortcventry
     {Sept. 2023}
     {\href{https://visualcomputing.ist.ac.at/seminars/}{IST Austria}}
     {Intrinsic Triangulations in Geometry Processing}
     {}{}{}
-
+%
 \shortcventry
     {Aug. 2023}
     {\href{https://www.geometrie.tugraz.at/events/og2023.html}{Geometry Workshop in Obergurgl}}
     {Intrinsic Triangulations in Geometry Processing}
     {}{}{}
-
+%
 \shortcventry
     {Jul. 2023}
     {\href{https://www.discretization.de/events/14/}{TU Berlin SFB TRR 109 Colloquium}}
     {Intrinsic Triangulations in Geometry Processing}
     {}{}{}
-
+%
 \shortcventry
     {Apr. 2022}
     {\href{http://jacobsschool.ucsd.edu/visualcomputing/}{UCSD Pixel Cafe}}
     {Discrete Conformal Equivalence of Polyhedral Surfaces}
     {}{}{}
-
+%
 \shortcventry
     {Mar. 2022}
     {\href{https://www.youtube.com/watch?v=MLnswieg4Gw}{Toronto Geometry Colloquium}}
     {Discrete Conformal Equivalence of Polyhedral Surfaces}
     {}{}{}
-
+%
 \shortcventry
     {Nov. 2021}
     {\href{https://sa2021.siggraph.org/en/attend/technical-papers/8/session/55}{ACM SIGGRAPH Asia 2021}}
     {Integer Coordinates for Intrinsic Geometry Processing}
     {}{}{}
-
+%
 \shortcventry
     {Aug. 2021}
     {\href{https://s2021.siggraph.org/full-program/}{ACM SIGGRAPH 2021}}
     {Discrete Conformal Equivalence of Polyhedral Surfaces}
     {}{}{}
-
+%
 \shortcventry
     {Aug. 2021}
     {\href{https://dl.acm.org/doi/10.1145/3450508.3464592}{ACM SIGGRAPH 2021 Courses}}
     {Geometry Processing with Intrinsic Triangulations}
     {}{}{}
-
+%
 \shortcventry
     {June 2021}
     {\href{https://meshingroundtable.com/previous-imrs/}{SIAM IMR 2021 Courses}}
     {Geometry Processing with Intrinsic Triangulations}
     {}{}{}
+%
 
 \section{Service}
 
 \cvitemwithcomment{}{Program Committee}{Symposium on Geometry Processing (2025)}
-
+%
 \cvitemwithcomment{}{Reviewing}{SIGGRAPH (2019, 2022--2025), SIGGRAPH Asia (2022--2024), ACM Transactions on Graphics (2024--2025), Symposium on Geometry Processing (2025), Graphics Replicability Stamp Initiative (2025), Eurographics (2024), Computer Graphics Forum (2024), Journal of Computational and Applied Mathematics (2024--2025), Computer-Aided Design (2023), Transactions on Visualization and Computer Graphics (2023--2025), Computers \& Graphics (2021)}
-
+%
 \cvitemwithcomment{}{Departmental}{
       Organizer, Graphics Reading Group (2022--2023);
       Organizer, Graphics Seminar (2020--2021);
       Panel Speaker (CSD Visit Day 2020, 2023, CSD Introductory Course 2022); Organizer, PhD mutual mentorship pod (2022--2024)}
-
+%
 \cvitemwithcomment{}{Mentorship}{Summer Geometry Initiative volunteer (2024), Advising Master's student (2022-2023), CMU Summer Undergraduate Research Fellowship (2020)}
+%
 
 \section{Teaching Experience}
 
 \cventry{Fall 2022}{Teaching Assistant}{CS 15-466/666: Computer Game Programming}{Carnegie Mellon University}{}{}
-
+%
 \cventry{Spring 2019}{Teaching Assistant}{CS 15-458/858: Discrete Differential Geometry}{Carnegie Mellon University}{}{}
-
+%
 \cventry{Fall 2017, 2018}{Teaching Assistant}{CS 171: Introduction to Computer Graphics}{California Institute of Technology}{}{}
-
+%
 \cventry{Spring 2016, 2017}{Teaching Assistant}{CS 38: Introduction to Algorithms}{California Institute of Technology}{}{}
+%
 
 \section{Press Coverage}
 
 \shortcventry{Aug. 2024}{\href{https://creative.knittingindustry.com/solid-knitting-a-new-fabrication-technique/}{``Solid Knitting -- A New Fabrication Technique''}}{Knitting Industry Creative}{}{}{}
-
+%
 \shortcventry{Aug. 2024}{\href{https://textiletechsource.com/2024/08/12/solid-knitting-machine-builds-reconfigurable-objects/}{``Solid-Knitting Machine Builds Reconfigurable Objects''}}{Textile Technology Source}{}{}{}
-
+%
 \shortcventry{Aug. 2024}{\href{https://www.designboom.com/technology/machine-knitting-solid-furniture-3d-accessories-elastic-cord-yarn-carnegie-mellon-university-08-02-2024/}{``Carnegie Mellon University’s Researchers Develop `Solid Knitting'{}''}}{Design Boom}{}{}{}
-
+%
 \shortcventry{Aug. 2024}{\href{https://materialdistrict.com/article/solid-knitting-3d-printing-with-yarn/}{``Solid Knitting: 3D Printing with Yarn''}}{Material District}{}{}{}
-
+%
 \shortcventry{Jul. 2024}{
 \href{https://cosmosmagazine.com/technology/computing/3d-knitting-could-make-solid-but-soft-furniture/}{``3D Knitting Could Make Solid But Soft Furniture''}}{Cosmos Magazine}{}{}{}
-
-\shortcventry{Jul. 2024}{\href{https://interestingengineering.com/innovation/solid-knitted-three-dimensional-furniture-could-be-reality}{``Beware IKEA: Solid Knitted Three-Dimensional Furniture Could Be a Reality''}}{Interesting Engineering}{}{}{}
-
+%
+\shortcventry{Jul. 2024}{\href{https://interestingengineering.com/innovation/solid-knitted-three-dimensional-furniture-could-be-reality}{``Beware IKEA: Solid Knitted 3-Dimensional Furniture Could Be a Reality''}}{Interesting Engineering}{}{}{}
+%
 \shortcventry{Jul. 2024}{\href{https://newatlas.com/materials/solid-knitting-reconfigurable/}{``Innovative `Solid Knitting' Machine Builds 100\% Reconfigurable Objects''}}{New Atlas}{}{}{}
-
+%
 \shortcventry{Jul. 2024}{\href{https://www.msn.com/en-us/news/technology/solid-knitting-a-different-spin-on-3d-printing-that-can-make-furniture-out-of-yarn/ar-AA1ogaiP?ocid=BingNewsVerp}{``Solid Knitting: A Different Spin on 3D Printing That Can Make Furniture Out of Yarn''}}{ZME Science}{}{}{}
-
+%
 \shortcventry{Jul. 2024}{\href{https://blog.siggraph.org/2024/07/beyond-the-threads.html/}{``Beyond the Threads''}}{ACM SIGGRAPH Blog}{}{}{}
-
+%
 \shortcventry{Jul. 2024}{\href{https://www.cmu.edu/news/stories/archives/2024/july/robotics-institute-introduces-solid-knitting-as-new-fabrication-technique}{``Robotics Institute Introduces Solid Knitting as New Fabrication Technique''}}{CMU News}{}{}{}
 
 

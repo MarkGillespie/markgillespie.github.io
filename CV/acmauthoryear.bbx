@@ -51,7 +51,7 @@
 
 \DeclareFieldFormat{number}{#1}
 
-\DeclareFieldFormat{articleno}{Article #1}
+\DeclareFieldFormat{articleno}{(#1)}
 
 \DeclareFieldFormat{key}{#1}
 
@@ -131,7 +131,7 @@
   \printfield{volume}%
   \setunit*{\addcomma\space}%
   \printfield{number}%
-  \setunit*{\addcomma\space}%
+  \setunit*{\space}%
   \printfield{articleno}
   \setunit{\addcomma\space}
   \usebibmacro{date-ifmonth}
