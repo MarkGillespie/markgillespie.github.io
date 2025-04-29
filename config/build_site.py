@@ -31,6 +31,7 @@ year_str = datetime.datetime.now().strftime("%Y")
 
 # == $EMAIL
 email_str = "mark.gillespie@inria.fr"
+gmail_str = "mark.gillespie81@gmail.com"
 
 # == BACKGROUND_SVG
 with open('torus.svg') as f:
@@ -42,12 +43,12 @@ for item in news_data.find('recent_items'):
 	when = xml_child_string(item.find('when'))
 	what = xml_child_string(item.find('what'))
 	news_str += f'<li><span class="when">{when}</span><span class="what">{what}</span></li>\n'
-news_str += "<details>"
+news_str += "<details><div>"
 for item in news_data.find('extra_items'):
 	when = xml_child_string(item.find('when'))
 	what = xml_child_string(item.find('what'))
 	news_str += f'<li><span class="when">{when}</span><span class="what">{what}</span></li>\n'
-news_str += "<summary></summary></details></ul>"
+news_str += "</div><summary></summary></details></ul>"
 
 # == $NAVBAR
 navbar_str_home = '<div class="navbar"><div class="navbar_buttons">\n'
@@ -210,7 +211,6 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		project_page = (project_page_template.replace('$TITLE', project_data.find('title').text)
 		                                     .replace('$NAVBAR', navbar_str_nest)
 		                                     .replace('$YEAR', year_str)
-                                             .replace('$EMAIL',  email_str)
 		                                     .replace('$VENUE', venue_str)
 		                                     .replace('$AWARD', award_str)
 		                                     .replace('$AUTHORS', long_author_str)
@@ -219,6 +219,8 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$IMG_BIG_STYLE', img_big_style)
 		                                     .replace('$IMG_BIG', img_big_path)
 		                                     .replace('$PANELS', panel_str)
+                                             .replace('$EMAIL',  email_str)
+                                             .replace('$GMAIL',  gmail_str)
 						)
 		project_page = prettify_html(project_page)
 		project_path = f'generated/Research/{project_folder}/index.html'
@@ -230,13 +232,14 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 with open('generated/index.html', 'w') as f:
 	index_text = (index_template.replace('$DATE',   date_str)
 	                            .replace('$YEAR',   year_str)
-	                            .replace('$EMAIL',  email_str)
 	                            .replace('$NEWS',   news_str)
 	                            .replace('$MISC',   misc_str)
 	                            .replace('$TALKS',  talk_str)
 	                            .replace('$RESEARCH_LIST',  research_list_str)
 	                            .replace('$NAVBAR', navbar_str_home)
 	                            .replace('$BACKGROUND_SVG', background_str)
+	                            .replace('$EMAIL',  email_str)
+	                            .replace('$GMAIL',  gmail_str)
 	                            )
 	index_text = prettify_html(index_text)
 	f.write(index_text)

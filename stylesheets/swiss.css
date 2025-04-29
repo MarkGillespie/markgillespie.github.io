@@ -43,6 +43,12 @@ html.darkmode #style-menu ul button {
     background-color: #558;
   }
 }
+html.darkmode .breaking_news {
+  background-color: rgba(187, 221, 255, 0.1);
+  border: 2pt solid rgba(187, 221, 255, 0.25);
+  box-shadow: 2px 2px 4px rgba(119, 119, 119, 0.1);
+}
+
 html.darkmode .section_text .news summary {
   color: #bdf;
 }
@@ -507,6 +513,12 @@ html.lightmode #style-menu ul button {
     background-color: #de3d83;
   }
 }
+html.lightmode .breaking_news {
+  background-color: rgba(46, 106, 189, 0.1);
+  border: 2pt solid rgba(46, 106, 189, 0.25);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 html.lightmode .section_text .news summary {
   color: #2E6ABD;
 }
@@ -1193,6 +1205,20 @@ html.singlecolumn .project_header {
   column-gap: 1em;
 }
 
+html.singlecolumn .breaking_news {
+  font-size: 12pt;
+  line-height: 1.2;
+  padding: 0.75em;
+  margin: -0.5em -0.5em 0em -0.5em;
+  border-radius: 0.5em;
+}
+html.singlecolumn .breaking_news p:first-child {
+  margin-top: 0;
+}
+html.singlecolumn .breaking_news p:last-child {
+  margin-bottom: 0;
+}
+
 html.singlecolumn .section_text .news {
   position: relative; /* needed to position "...more" label later */
   padding-bottom: 0.5em;
@@ -1205,17 +1231,22 @@ html.singlecolumn .section_text .news h4 {
   font-variant-caps: small-caps;
 }
 
-html.singlecolumn .section_text .news ul {
+html.singlecolumn .section_text .news ul, html.singlecolumn .section_text .news ul div {
   margin: 0;
-  margin-left: 1em;
   padding: 0;
   display: flex; /* displaying with flex allows us to control the list order from css for the summary/details */
   flex-direction: column;
+  gap: 0.4em;
 }
 
-html.singlecolumn .section_text .news li {
+html.singlecolumn .section_text .news ul {
+  margin-left: 1em;
+}
+
+html.singlecolumn .news li, html.singlecolumn .news div li {
   display: flex;
   flex-direction: row;
+  line-height: 1.1;
   gap: 0.5em;
 }
 
@@ -1260,6 +1291,17 @@ html.singlecolumn .section_text .news details[open] summary::before {
 
 html.singlecolumn .section_text .news details[open] > summary {
   order: 2;
+}
+
+/* animate details opening */
+html.singlecolumn .section_text .news details > div {
+  overflow: hidden;
+  max-height: 0px;
+}
+
+html.singlecolumn .section_text .news details[open] > div {
+  max-height: 1000px;
+  transition: max-height 0.25s ease-in;
 }
 
 html.singlecolumn .misc_project_list {
@@ -1852,9 +1894,8 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
     width: 100vw;
   }
 }
-html.singlecolumn .wrapper {
-  z-index: 10;
-  position: relative;
+html.singlecolumn #background_image {
+  z-index: -10;
 }
 
 html.singlecolumn .space_under {

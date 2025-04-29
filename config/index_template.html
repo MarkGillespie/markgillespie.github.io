@@ -10,119 +10,118 @@
   </head>
 
   <body class="nojs singlecolumn">
-    <div class="mega-container">
     <div class="page-content">
     $NAVBAR
-
-    <div class="wrapper" id="home">
-      <div class="body">
-        <div class="header">
-            <img id="header_img" src="images/me_berlin.jpg" alt="A picture of me"/>
-            <div class="info">
-                <div class="name">Mark Gillespie</div>
-                <div class="email">
-                    <a href="mailto:$EMAIL" target="_top">$EMAIL</a>
-                </div>
-                <div class="links">
-                    <a title="GitHub" href="https://github.com/MarkGillespie/"><i class="fa-brands fa-github"></i></a>
-                    <a title="YouTube" href="https://www.youtube.com/channel/UC7MQjPEmpKJ_7Lk_AY9icbQ"><i class="fa-brands fa-youtube"></i></a>
-                    <a title="Google Scholar" href="https://scholar.google.com/citations?user=o_OqGM0AAAAJ"><i class="fa fa-graduation-cap"></i></a>
-                    <a title="ORCID iD" href="https://orcid.org/0009-0000-5645-9636"><i class="fa-brands fa-orcid"></i></a>
-                </div>
+  <div class="body">
+    <div class="header">
+        <img id="header_img" src="images/me_berlin.jpg" alt="A picture of me"/>
+        <div class="info">
+            <div class="name">Mark Gillespie</div>
+            <div class="email">
+                <a href="mailto:$EMAIL" target="_top">$EMAIL</a>
             </div>
-                
-            <div class="section_text panel">
-                <p>I am a postdoc in computer science at <a href="https://www.polytechnique.edu/en">École Polytechnique</a>, working with <a href="https://pages.saclay.inria.fr/mathieu.desbrun/">Mathieu Desbrun</a>. I design algorithms for reliably and efficiently processing geometric data, drawing inspiration from classical topology and differential geometry. I just received my PhD in computer science from <a href="https://www.cs.cmu.edu/">Carnegie Mellon University</a>, where I was advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. Previously I was an undergraduate at <a href="https://www.caltech.edu/">Caltech</a>, where I worked on plasma simulation with <a href="http://users.cms.caltech.edu/~ps/">Peter Schröder</a>, chromosomal shape embeddings with Mathieu Desbrun, and interval analysis root finding techniques with <a href="http://www.gg.caltech.edu/~barr/">Alan Barr</a>.
-              </p>
-              <p>
-                In my spare time, I like to design <a href="Origami/index.html">origami models</a> and <a href="https://www.ravelry.com/projects/markgillespie">knit</a>.
-              </p>
-              <div class="news">
-                  <h4>News</h4>
-                  $NEWS
-                </div>
-              <hr />
+            <div class="links">
+                <a title="GitHub" href="https://github.com/MarkGillespie/"><i class="fa-brands fa-github"></i></a>
+                <a title="YouTube" href="https://www.youtube.com/channel/UC7MQjPEmpKJ_7Lk_AY9icbQ"><i class="fa-brands fa-youtube"></i></a>
+                <a title="Google Scholar" href="https://scholar.google.com/citations?user=o_OqGM0AAAAJ"><i class="fa fa-graduation-cap"></i></a>
+                <a title="ORCID iD" href="https://orcid.org/0009-0000-5645-9636"><i class="fa-brands fa-orcid"></i></a>
             </div>
-
+        </div>
+            
+        <div class="section_text panel">
+            <div class="breaking_news">
+                <p>I will start as an assistant professor in computer science at the <a href="https://www.cs.utah.edu/">University of Utah</a> in fall 2026! I am looking for PhD students excited about graphics and geometry processing—if that fits you, please <a href="mailto:$GMAIL">reach out!</a></p>
+            </div>
+            <p>I currently am a postdoc in computer science at <a href="https://www.polytechnique.edu/en">École Polytechnique</a>, working with <a href="https://pages.saclay.inria.fr/mathieu.desbrun/">Mathieu Desbrun</a>. I design algorithms for reliably and efficiently processing geometric data, drawing inspiration from topology and differential geometry. I received my PhD from <a href="https://www.cs.cmu.edu/">Carnegie Mellon University</a>, where I was advised by <a href="https://cs.cmu.edu/~kmcrane">Keenan Crane</a>. Before that, I was an undergraduate at <a href="https://www.caltech.edu/">Caltech</a>, where I worked on plasma simulation with <a href="http://users.cms.caltech.edu/~ps/">Peter Schröder</a>, chromosomal shape embeddings with Mathieu Desbrun, and interval analysis root finding techniques with <a href="http://www.gg.caltech.edu/~barr/">Alan Barr</a>.
+          </p>
+          <p>
+            In my spare time, I like to design <a href="Origami/index.html">origami models</a> and <a href="https://www.ravelry.com/projects/markgillespie">knit</a>.
+          </p>
+          <div class="news">
+              <h4>News</h4>
+              $NEWS
+            </div>
+          <hr />
         </div>
 
-            <div class="section_panel">
-            <a name="research"><div class="section_header"> Research </div></a>
+    </div>
+
+        <div class="section_panel">
+        <a name="research"><div class="section_header"> Research </div></a>
+        <div class="section_text">
+            $RESEARCH_LIST
+        </div>
+        </div>
+
+        <div class="section_panel">
+          <a name="awards"><div class="section_header">Awards </div></a>
+        <div class="section_text">
+          <table>
+            <tr>
+              <td rowspan="2">2024</td>
+              <td><h4>Two SIGGRAPH Best Paper Award Honorable Mentions</h4></td>
+            </tr>
+            <tr><td class="space_under award_details">
+                <!-- For <a href="Research/harnack-tracing/index.html">Ray Tracing Harmonic Functions</a> and <a href="Research/solid-knitting/index.html">Solid Knitting</a>.<br/> -->
+                Awarded to 12 papers out of about 840 submissions; ~1.5% of papers.
+            </td></tr>
+            <tr>
+              <td rowspan="2">2019</td>
+              <td><h4>NSF Graduate Research Fellowship</h4></td>
+            </tr>
+            <tr><td class="space_under award_details">
+                Awarded to top 15% of applicants across all areas of science; $147,000 over 3 years.
+            </td></tr>
+            <tr>
+              <td rowspan="2">2019</td>
+              <td><h4>Hertz Fellowship Finalist</h4></td>
+            </tr>
+            <tr><td class="space_under award_details">
+                Awarded to top 5% of applicants across applied science, math, and engineering. See <a href="https://www.hertzfoundation.org/news/41-finalists-named-for-the-2019-hertz-fellowships/?platform=hootsuite">here</a> for details.
+            </td></tr>
+            <tr>
+              <td rowspan="2">2017</td>
+              <td><h4>SIGGRAPH ACM Turing Award Celebration Grant</h4></td>
+            </tr>
+            <tr><td class="space_under award_details">
+                    Awarded by SIGGRAPH to 10 students to attend the <a href="https://www.acm.org/turing-award-50/conference">ACM Turing Award Celebration</a>.
+            </td></tr>
+
+            <tr>
+              <td rowspan="2">2017, 2016</td>
+              <td><h4>Arthur R. Adams SURF Fellowship</h4></td>
+            </tr>
+            <tr><td class="space_under award_details">
+                    Summer research fellowship.
+            </td></tr>
+
+        <!--                 <tr>
+              <td rowspan="2">2016</td>
+              <td><h4>William Lowell Putnam Mathematics Competition</h4></td>
+            </tr>
+            <tr><td class="space_under">
+                    31 points (rank: 365/3214)
+            </td></tr> -->
+        </table>
+        </div>
+        </div>
+
+        <div class="section_panel">
+            <a name="talks"><div class="section_header">Selected Talks</div></a>
             <div class="section_text">
-                $RESEARCH_LIST
+                $TALKS
             </div>
+        </div>
+
+
+        <div class="section_panel">
+            <a name="misc"><div class="section_header"> Miscellanea </div></a>
+            <div class="section_text misc_project_list">
+                $MISC
             </div>
-
-            <div class="section_panel">
-              <a name="awards"><div class="section_header">Awards </div></a>
-            <div class="section_text">
-              <table>
-                <tr>
-                  <td rowspan="2">2024</td>
-                  <td><h4>Two SIGGRAPH Best Paper Award Honorable Mentions</h4></td>
-                </tr>
-                <tr><td class="space_under award_details">
-                    <!-- For <a href="Research/harnack-tracing/index.html">Ray Tracing Harmonic Functions</a> and <a href="Research/solid-knitting/index.html">Solid Knitting</a>.<br/> -->
-                    Awarded to 12 papers out of about 840 submissions; ~1.5% of papers.
-                </td></tr>
-                <tr>
-                  <td rowspan="2">2019</td>
-                  <td><h4>NSF Graduate Research Fellowship</h4></td>
-                </tr>
-                <tr><td class="space_under award_details">
-                    Awarded to top 15% of applicants across all areas of science; $147,000 over 3 years.
-                </td></tr>
-                <tr>
-                  <td rowspan="2">2019</td>
-                  <td><h4>Hertz Fellowship Finalist</h4></td>
-                </tr>
-                <tr><td class="space_under award_details">
-                    Awarded to top 5% of applicants across applied science, math, and engineering. See <a href="https://www.hertzfoundation.org/news/41-finalists-named-for-the-2019-hertz-fellowships/?platform=hootsuite">here</a> for details.
-                </td></tr>
-                <tr>
-                  <td rowspan="2">2017</td>
-                  <td><h4>SIGGRAPH ACM Turing Award Celebration Grant</h4></td>
-                </tr>
-                <tr><td class="space_under award_details">
-                        Awarded by SIGGRAPH to 10 students to attend the <a href="https://www.acm.org/turing-award-50/conference">ACM Turing Award Celebration</a>.
-                </td></tr>
-
-                <tr>
-                  <td rowspan="2">2017, 2016</td>
-                  <td><h4>Arthur R. Adams SURF Fellowship</h4></td>
-                </tr>
-                <tr><td class="space_under award_details">
-                        Summer research fellowship.
-                </td></tr>
-
-            <!--                 <tr>
-                  <td rowspan="2">2016</td>
-                  <td><h4>William Lowell Putnam Mathematics Competition</h4></td>
-                </tr>
-                <tr><td class="space_under">
-                        31 points (rank: 365/3214)
-                </td></tr> -->
-            </table>
-            </div>
-            </div>
-
-            <div class="section_panel">
-                <a name="talks"><div class="section_header">Selected Talks</div></a>
-                <div class="section_text">
-                    $TALKS
-                </div>
-            </div>
+        </div>
 
 
-            <div class="section_panel">
-                <a name="misc"><div class="section_header"> Miscellanea </div></a>
-                <div class="section_text misc_project_list">
-                    $MISC
-                </div>
-            </div>
-
-
-            </div>
     </div>
 
     <!--</div>-->
@@ -133,7 +132,6 @@
     </div>
 
     <div id="background_image">$BACKGROUND_SVG</div>
-    </div>
     </div>
   </body>
 </html>

@@ -124,6 +124,17 @@
         column-gap: 1em;
     }
 
+    #{$parent} .breaking_news {
+        font-size: 12pt;
+        line-height: 1.2;
+        padding: .75em;
+        margin: -.5em -.5em 0em -.5em;
+        border-radius: .5em;
+
+        p:first-child { margin-top: 0; }
+        p:last-child { margin-bottom: 0; }
+    }
+
     #{$parent} .section_text .news {
         position: relative; /* needed to position "...more" label later */
         padding-bottom: .5em;
@@ -136,17 +147,22 @@
         font-variant-caps: small-caps;
     }
 
-    #{$parent} .section_text .news ul {
+    #{$parent} .section_text .news ul, #{$parent} .section_text .news ul div {
         margin: 0;
-        margin-left: 1em;
         padding: 0;
         display: flex; /* displaying with flex allows us to control the list order from css for the summary/details */
         flex-direction: column;
+        gap: .4em;
     }
 
-    #{$parent} .section_text .news li {
+    #{$parent} .section_text .news ul {    
+        margin-left: 1em;
+    }
+
+    #{$parent} .news li, #{$parent} .news div li, {
         display: flex;
         flex-direction: row;
+        line-height: 1.1;
         gap: .5em;
     }
 
@@ -191,6 +207,17 @@
     
     #{$parent} .section_text .news details[open] > summary {
         order: 2;
+    }
+
+     /* animate details opening */
+    #{$parent} .section_text .news details > div {
+      overflow: hidden;
+      max-height: 0px;
+    }
+    
+    #{$parent} .section_text .news details[open] > div {
+      max-height: 1000px;
+      transition: max-height 0.25s ease-in;
     }
 
     #{$parent} .misc_project_list {
@@ -816,9 +843,8 @@
         }
     }
 
-    #{$parent} .wrapper {
-        z-index: 10;
-        position: relative;
+    #{$parent} #background_image {
+        z-index: -10;
     }
 
     #{$parent} .space_under {

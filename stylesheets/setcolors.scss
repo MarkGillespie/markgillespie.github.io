@@ -71,6 +71,12 @@
         }
     }
 
+    #{$parent} .breaking_news {
+        background-color: rgba($link-color, .1);
+        border: 2pt solid rgba($link-color, .25);
+        box-shadow: 2px 2px 4px rgba($shadow-color, .1);
+    }
+
     #{$parent} .section_text .news summary {
         color: $link-color;
     }
@@ -104,10 +110,10 @@
         color: $award-font-color;
 
         .description {
-            color: rgba($award-font-color, .80);;
+            color: rgba($award-font-color, .80);
         }
     }
-    
+
     #{$parent} .award:hover {
         color: $award-font-color;
     }

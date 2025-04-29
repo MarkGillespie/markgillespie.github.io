@@ -1,9 +1,19 @@
 <news>
 <recent_items>
     <item>
+        <when>Jul. 2025</when>
+        <what>This summer, I will be attending <a href="https://sgp2025.my.canva.site/">SGP</a> in Bilbao and <a href="https://s2025.siggraph.org/">Siggraph</a> in Vancouver. If you're planning on attending either one and want to meet up, <a href="mailto:$GMAIL">let me know!</a></what>
+    </item>
+    <item>
+        <when>Apr. 2024</when>
+        <what>I accepted an assistant professor position at the <a href="https://www.cs.utah.edu/">University of Utah's Kahlert School of Computing</a>! I will start in fall 2026.</what>
+    </item>
+    <item>
         <when>Dec. 2024</when>
         <what>I will serve on the program committee for the 2025 <a href="https://sgp2025.my.canva.site/">Symposium on Geometry Processing (SGP)</a>.</what>
     </item>
+</recent_items>
+<extra_items>
     <item>
         <when>Sept. 2024</when>
         <what>I started a postdoc with Mathieu Desbrun at École Polytechnique.</what>
@@ -12,8 +22,6 @@
         <when>Aug. 2024</when>
         <what><a href="Research/harnack-tracing/index.html">Ray Tracing Harmonic Functions</a> and <a href="Research/solid-knitting/index.html">Solid Knitting</a> were both awarded <a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper Honorable Mentions</a> at Siggraph 2024.</what>
     </item>
-</recent_items>
-<extra_items>
     <item>
         <when>May 2024</when>
         <what>I defended my <a href="Research/Thesis/thesis.pdf">PhD thesis</a> at CMU.</what>
