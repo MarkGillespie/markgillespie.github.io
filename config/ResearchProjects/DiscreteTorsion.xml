@@ -44,7 +44,7 @@
             <content>
                 <a href="DiscreteTorsion.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview"/><br/>
-                    <span> pdf (6.1 mb)</span>
+                    <span>pdf (6.1 mb)</span>
                 </a>
             </content>
         </panel>
@@ -57,11 +57,11 @@
                 <div style="display: flex; flex-start; gap: .5em;">
                 <a href="DiscreteTorsionSupplemental.pdf" class="paper-preview">
                     <img src="images/supplemental-preview.png" alt="preview"/><br/>
-                    <span> pdf (765 kb)</span>
+                    <span>pdf (765 kb)</span>
                 </a>
                 <a href="DiscreteTorsionLeviCivitaConnection.nb" class="paper-preview">
                     <img src="images/mathematica-preview.png" alt="preview"/><br/>
-                    <span> Mathematica notebook (57 kb)</span>
+                    <span>Mathematica (57&nbsp;kb)</span>
                 </a>
             </div>
             </content>

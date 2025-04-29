@@ -2066,11 +2066,11 @@ html.project .quick_links {
   white-space: none;
 }
 
-html.project .quick_links a::before, html.project .bibBox button::before, html.project .bibEntry button::before {
+html.project .quick_links a::before, html.project .bibBox button::before, html.project .bibEntry button::before, html.project a.paper-preview span::before {
   content: "[";
 }
 
-html.project .quick_links a::after, html.project .bibBox button::after, html.project .bibEntry button::after {
+html.project .quick_links a::after, html.project .bibBox button::after, html.project .bibEntry button::after, html.project a.paper-preview span::after {
   content: "]";
 }
 
@@ -2153,7 +2153,6 @@ html.project .section_header {
   padding-top: 5px;
   padding-right: 5px;
   padding-left: 20px;
-  position: relative;
   display: inline-block;
   margin-left: -10px;
   margin-top: -1.5em;
@@ -2212,6 +2211,11 @@ html.project .section_text .paper-preview > span {
   width: 128px;
   display: inline-block;
   line-height: 1;
+  text-align: center;
+}
+
+html.project .section_text a.paper-preview span {
+  text-decoration: underline;
 }
 
 html.project .example_grid_container {

@@ -47,7 +47,7 @@
             <content>
                 <a href="SolidKnitting.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview"/><br/>
-                    <span> pdf (18.5 mb)</span>
+                    <span>pdf (18.5 mb)</span>
                 </a>
             </content>
         </panel>
@@ -55,11 +55,11 @@
             <bibtex></bibtex>
         </panel>
         <panel>
-            <title>Supplement: Solid Knitting by Hand</title>
+            <title>Solid Knitting by Hand</title>
             <content>
                 <a href="SolidKnittingHandInstructions.pdf" class="paper-preview" style="display: inline-block; width: 100%; text-align: center;">
                     <img src="images/cube.png" alt="preview" style="box-shadow: none; max-width: 256px; width: 100%;"/><br/>
-                    <span> hand knitting instructions (text; 10 mb)</span>
+                    <span style="width: 100%;">hand knitting instructions (text; 10 mb)</span>
                 </a>
                 <center><a href="https://youtu.be/t2PIVAvan-c">hand knitting instructions (video)</a></center>
             </content>

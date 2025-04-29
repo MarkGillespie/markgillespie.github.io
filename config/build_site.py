@@ -4,11 +4,22 @@ import xml.etree.ElementTree as ET
 def prettify_html(html_string):
 	return html_string
 
-news_data = ET.parse('news.xml').getroot()
-misc_data = ET.parse('misc.xml').getroot()
-navb_data = ET.parse('navbar.xml').getroot()
-talk_data = ET.parse('talks.xml').getroot()
-proj_data = ET.parse('research_projects.xml').getroot()
+# allow &nbsp; in xml https://stackoverflow.com/a/35591479
+magic = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" [
+            <!ENTITY nbsp '$NBSP'>
+            ]>'''
+nbsp_str = '&nbsp;'
+# hack: turns nbsp into $NBSP, which we string-replace later
+def parse_xml(filepath):
+	with open(filepath) as f:
+		return ET.fromstring(magic + f.read())
+
+news_data = parse_xml('news.xml')
+misc_data = parse_xml('misc.xml')
+navb_data = parse_xml('navbar.xml')
+talk_data = parse_xml('talks.xml')
+proj_data = parse_xml('research_projects.xml')
 
 # get contents of xml element as a text string
 # https://stackoverflow.com/a/380717
@@ -104,7 +115,7 @@ with open('project_template.html') as f:
 for file in os.listdir(os.fsencode("ResearchProjects")):
 	filename = os.fsdecode(file)
 	if filename.endswith('.xml'):
-		project_data = ET.parse(f"ResearchProjects/{filename}").getroot()
+		project_data = parse_xml(f"ResearchProjects/{filename}")
 
 		project_folder = project_data.find('folder').text if project_data.find('folder') is not None else 'FOLDER'
 		def n_path(s): # process nest path
@@ -179,6 +190,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$VENUE', venue_str)
 		                                     .replace('$AWARD', award_str)
 		                                     .replace('$LINKS', home_link_str)
+		                                     .replace('$NBSP',  nbsp_str)
 		                                     .replace('$ABSTRACT_SMALL', xml_child_string(project_data.find('abstract_small')))
 					   )
 		project_key = f'${{{project_data.find("key").text}}}'
@@ -219,8 +231,9 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$IMG_BIG_STYLE', img_big_style)
 		                                     .replace('$IMG_BIG', img_big_path)
 		                                     .replace('$PANELS', panel_str)
-                                             .replace('$EMAIL',  email_str)
-                                             .replace('$GMAIL',  gmail_str)
+		                                     .replace('$EMAIL',  email_str)
+		                                     .replace('$GMAIL',  gmail_str)
+		                                     .replace('$NBSP',  nbsp_str)
 						)
 		project_page = prettify_html(project_page)
 		project_path = f'generated/Research/{project_folder}/index.html'
@@ -240,6 +253,7 @@ with open('generated/index.html', 'w') as f:
 	                            .replace('$BACKGROUND_SVG', background_str)
 	                            .replace('$EMAIL',  email_str)
 	                            .replace('$GMAIL',  gmail_str)
+	                            .replace('$NBSP',  nbsp_str)
 	                            )
 	index_text = prettify_html(index_text)
 	f.write(index_text)

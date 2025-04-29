@@ -41,7 +41,7 @@
             <content>
                 <a href="Paper.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview"/><br/>
-                    <span> pdf (16 mb)</span>
+                    <span>pdf (16 mb)</span>
                 </a>
             </content>
         </panel>

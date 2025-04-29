@@ -137,11 +137,11 @@
         white-space: none;
     }
 
-    #{$parent} .quick_links a::before, #{$parent} .bibBox button::before, #{$parent} .bibEntry button::before {
+    #{$parent} .quick_links a::before, #{$parent} .bibBox button::before, #{$parent} .bibEntry button::before, #{$parent} a.paper-preview span::before {
         content: "[";
     }
 
-    #{$parent} .quick_links a::after, #{$parent} .bibBox button::after, #{$parent} .bibEntry button::after {
+    #{$parent} .quick_links a::after, #{$parent} .bibBox button::after, #{$parent} .bibEntry button::after, #{$parent} a.paper-preview span::after {
         content: "]";
     }
 
@@ -228,7 +228,6 @@
         padding-top: 5px;
         padding-right: 5px;
         padding-left: 20px;
-        position: relative;
         display: inline-block;
         margin-left: -10px;
         margin-top: -1.5em;
@@ -288,6 +287,11 @@
         width: 128px;
         display: inline-block;
         line-height: 1;
+        text-align: center;
+    }
+
+    #{$parent} .section_text a.paper-preview span {
+        text-decoration: underline;
     }
 
     #{$parent} .example_grid_container {
