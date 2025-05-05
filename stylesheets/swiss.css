@@ -1206,10 +1206,10 @@ html.singlecolumn .project_header {
 }
 
 html.singlecolumn .breaking_news {
-  font-size: 12pt;
+  font-size: 13pt;
   line-height: 1.3;
-  padding: 0.7em 1em 0.7em 1em;
-  margin: -2em -0.25em 0em -0.25em;
+  padding: 0.5em 1em 0.5em 1em;
+  margin: -2em -0.5em 0em -0.5em;
   border-radius: 1em;
   /*        font-style: italic;*/
 }
