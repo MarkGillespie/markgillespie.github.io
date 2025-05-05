@@ -1324,6 +1324,7 @@ html.singlecolumn .misc_project_list .project_header {
 html.singlecolumn .project_header .image {
   flex: 0 0 30%;
   width: 30%;
+  margin-top: 5pt;
 }
 
 html.singlecolumn .project_header .image img {
@@ -1855,6 +1856,7 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
     width: 100%;
     max-height: 300px;
     text-align: center;
+    margin-top: 0;
   }
   html.singlecolumn .project_header .text {
     padding: 0;
