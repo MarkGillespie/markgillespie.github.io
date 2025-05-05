@@ -1,7 +1,7 @@
 <misc_data>
 <misc>
     <entry>
-        <title>Geodesic walker</title>
+        <title>Geodesic Walker</title>
         <href>Demos/GeodesicWalker/html/</href>
         <details>Web demo which traces out geodesics on a mesh. The code is available <a href="https://github.com/MarkGillespie/GeodesicWalker">here</a>.</details>
         <img>images/GeodesicWalker.png</img>
@@ -17,8 +17,17 @@
     </entry>
 
     <entry>
+        <href>https://github.com/MarkGillespie/StreamlineTracing</href>
+        <title>Streamline Tracing</title>
+        <details>
+            Helper functions for tracing streamlines of vector/direction fields and generating textures for rendering them.
+        </details>
+        <img>images/streamline-example.png</img>
+    </entry>
+
+    <entry>
         <href>Misc/HyperbolicNotes/</href>
-        <title>Hyperbolic notes</title>
+        <title>Hyperbolic Notes</title>
         <details>
             Notes on hyperbolic geometry and discrete conformal maps.
         </details>
@@ -27,7 +36,7 @@
 
     <entry>
         <href>Misc/TartanShader/</href>
-        <title>Tartan shader</title>
+        <title>Tartan Shader</title>
         <details>
             A shader to make meshes tartan.
         </details>
@@ -45,7 +54,7 @@
 
     <entry>
         <href>https://github.com/MarkGillespie/OrientingMeshes</href>
-        <title>Computing orientable double covers</title>
+        <title>Orientable Double Covers</title>
         <details>
             Takes any triangle mesh and turns it into an orientable manifold mesh by constructing the orientable double cover.
         </details>
@@ -63,7 +72,7 @@
 
     <entry>
         <href>Misc/Karcher/</href>
-        <title>Spherical Karcher means</title>
+        <title>Spherical Karcher Means</title>
         <details>
             Web demo computing the Karcher mean of points on a sphere.
         </details>
@@ -72,7 +81,7 @@
 
     <entry>
         <href>Misc/PhaseSpace/</href>
-        <title>Pendulum phase space</title>
+        <title>Pendulum Phase Space</title>
         <details>
             Visualization of the phase space of a pendulum as a cylinder.
         </details>
@@ -81,7 +90,7 @@
 
     <entry>
         <href>Misc/integrators/</href>
-        <title>Euler integrators</title>
+        <title>Euler Integrators</title>
         <details>
             Comparison of explicit, implicit, and symplectic Euler integrators for a pendulum.
         </details>
@@ -90,7 +99,7 @@
 
     <entry>
         <href>https://github.com/MarkGillespie/GC-CombinatorialMaps/</href>
-        <title>Combinatorial maps</title>
+        <title>Combinatorial Maps</title>
         <details>
             Demo of an implementation of the <a href="https://doc.cgal.org/latest/Combinatorial_map/index.html">combinatorial map</a> data structure for <em>n</em>-dimensional simplicial complexes that I experimented with in <tt>geometry-central</tt>. It has not yet made its way into the library itself, but the implementation can be found <a href="https://github.com/MarkGillespie/geometry-central/tree/CombinatorialMaps/include/geometrycentral/combinatorial-maps">here</a>.
         </details>
@@ -99,7 +108,7 @@
 
     <entry>
         <href>WordValidator/#/</href>
-        <title>Word validator</title>
+        <title>Word Validator</title>
         <details>
             Online tool to check if a word is in the dictionary.
         </details>

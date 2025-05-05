@@ -1,16 +1,11 @@
 <talk_data>
 <talks>
-  <talk>
-    <when>Apr. 2025</when>
-    <title>Ray Tracing Harmonic Functions</title>
-    <!-- <venue_link></venue_link> -->
-    <venue_name>CGAL Developer Meeting</venue_name>
-    <description>
-      <!-- 30 minute talk about my work on my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.pdf">pdf [28 mb]</a>, or a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.key">keynote file [1 gb]</a>. -->
-    </description>
+    <talk>
+    <when>May 2025</when>
+    <title>Geometry Processing with Intrinsic Triangulations</title>
+    <venue_link>https://team.inria.fr/geomerix/seminars-2/</venue_link>
+    <venue_name>GeomeriX Seminar, Inria Saclay</venue_name>
     <links>
-        <link><name>pdf (28 mb)</name><href>Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.pdf</href></link>
-        <link><name>keynote file (1 gb)</name><href>Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.key</href></link>
     </links>
   </talk>
   <talk>
@@ -24,6 +19,19 @@
     <links>
         <link><name>pdf (25 mb)</name><href>Talks/CGAL-Intrinsic-Triangulations.pdf</href></link>
         <link><name>keynote file (240 mb)</name><href>Talks/CGAL-Intrinsic-Triangulations.key</href></link>
+    </links>
+  </talk>
+  <talk>
+    <when>Apr. 2025</when>
+    <title>Ray Tracing Harmonic Functions</title>
+    <!-- <venue_link></venue_link> -->
+    <venue_name>CGAL Developer Meeting</venue_name>
+    <description>
+      <!-- 30 minute talk about my work on my <a href="Research/harnack-tracing/index.html">paper of the same name</a>. My slides are available as a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.pdf">pdf [28 mb]</a>, or a <a href="https://markjgillespie.com/Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.key">keynote file [1 gb]</a>. -->
+    </description>
+    <links>
+        <link><name>pdf (28 mb)</name><href>Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.pdf</href></link>
+        <link><name>keynote file (1 gb)</name><href>Talks/RayTracingHarmonicFunctions-CGAL-Developer-Meeting.key</href></link>
     </links>
   </talk>
   <talk>

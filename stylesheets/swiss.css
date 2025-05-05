@@ -44,8 +44,8 @@ html.darkmode #style-menu ul button {
   }
 }
 html.darkmode .breaking_news {
-  background-color: rgba(187, 221, 255, 0.1);
-  border: 2pt solid rgba(187, 221, 255, 0.25);
+  background-color: #2a2a2a;
+  border: 2pt solid white;
   box-shadow: 2px 2px 4px rgba(119, 119, 119, 0.1);
 }
 
@@ -514,8 +514,8 @@ html.lightmode #style-menu ul button {
   }
 }
 html.lightmode .breaking_news {
-  background-color: rgba(46, 106, 189, 0.1);
-  border: 2pt solid rgba(46, 106, 189, 0.25);
+  background-color: #eaf9ff;
+  border: 2pt solid #c6d8f1;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -1209,15 +1209,19 @@ html.singlecolumn .breaking_news {
   font-size: 12pt;
   line-height: 1.3;
   padding: 0.7em 1em 0.7em 1em;
-  margin: -0.25em -0.25em 0em -0.25em;
+  margin: -2em -0.25em 0em -0.25em;
   border-radius: 1em;
-  font-style: italic;
+  /*        font-style: italic;*/
 }
 html.singlecolumn .breaking_news p:first-child {
   margin-top: 0;
 }
 html.singlecolumn .breaking_news p:last-child {
   margin-bottom: 0;
+}
+
+html.singlecolumn .breaking_news_container {
+  margin-top: 1em !important;
 }
 
 html.singlecolumn .section_text .news {

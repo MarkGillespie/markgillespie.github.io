@@ -72,8 +72,8 @@
     }
 
     #{$parent} .breaking_news {
-        background-color: rgba($link-color, .1);
-        border: 2pt solid rgba($link-color, .25);
+        background-color: color.adjust($background-color, $lightness: 3%);
+        border: 2pt solid color.adjust($link-color, $lightness: 40%);
         box-shadow: 2px 2px 4px rgba($shadow-color, .1);
     }
 
