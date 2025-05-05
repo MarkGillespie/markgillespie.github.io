@@ -148,8 +148,8 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		with open(f'../{bib_path}') as f:
 			bibtex = f.read()
 			copy_button_str = f'<button onclick="navigator.clipboard.writeText(`{bibtex}`);">Copy</button>' # `string` creates multiline string in js
-			home_bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography">{bibtex}{copy_button_str}</div></div>\n'
-			nest_bib_str = f'<div class="bibBox"><a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n<div class="bibliography">{bibtex}{copy_button_str}</div></div>\n'
+			home_bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
+			nest_bib_str = f'<div class="bibBox"><a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
 		#= href
 		href_str = project_data.find('href').text
 		if project_data.find("folder") is not None:

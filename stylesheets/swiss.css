@@ -1475,7 +1475,7 @@ html.singlecolumn .bibBox .bibliography {
   height: auto;
   border-radius: 0.25em;
   z-index: 200;
-  visibility: hidden;
+  /*        visibility: hidden;*/
   opacity: 0.0001;
   transition: 0.5s;
   -o-transition: 0.5s;
@@ -1486,7 +1486,7 @@ html.singlecolumn .bibBox .bibliography {
 
 /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
 html.singlecolumn .bibBox:hover .bibliography {
-  visibility: visible;
+  visibility: visible !important;
   opacity: 1;
   transition: 0.5s;
   -o-transition: 0.5s;
@@ -2102,7 +2102,7 @@ html.project .bibBox .bibliography {
   height: auto;
   border-radius: 0.25em;
   z-index: 200;
-  visibility: hidden;
+  /*        visibility: hidden;*/
   opacity: 0.0001;
   transition: 0.5s;
   -o-transition: 0.5s;
@@ -2113,7 +2113,7 @@ html.project .bibBox .bibliography {
 
 /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
 html.project .bibBox:hover .bibliography {
-  visibility: visible;
+  visibility: visible !important;
   opacity: 1;
   transition: 0.5s;
   -o-transition: 0.5s;

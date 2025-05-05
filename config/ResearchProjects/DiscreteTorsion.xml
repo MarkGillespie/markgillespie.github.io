@@ -25,15 +25,15 @@
     </authors>
     <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2025)</venue>
     <links>
-        <link><name>pdf (6.1 mb)</name><href>Research/DiscreteTorsion/DiscreteTorsion.pdf</href></link>
-        <link><name>supplement (765 kb)</name><href>Research/DiscreteTorsion/DiscreteTorsionSupplemental.pdf</href></link>
+        <link><name>pdf (7.2 mb)</name><href>Research/DiscreteTorsion/DiscreteTorsion.pdf</href></link>
+        <link><name>supplement (715 kb)</name><href>Research/DiscreteTorsion/DiscreteTorsionSupplemental.pdf</href></link>
     </links>
     <more_links>
         <link><name>Mathematica notebook (57 kb)</name><href>Research/DiscreteTorsion/DiscreteTorsionLeviCivitaConnection.nb</href></link>
     </more_links>
     <bibtex>Research/DiscreteTorsion/bib.txt</bibtex>
     <abstract_small>
-        While discrete connections have become a staple of vector field design and analysis on meshes, the notion of torsion of a discrete connection has remained unstudied. This is all the more surprising as torsion is a crucial component in the fundamental theorem of Riemannian geometry, which guarantees the existence and uniqueness of the Levi-Civita connection. We extend the existing geometry processing toolbox by providing torsion control over discrete connections: we introduce a new discrete Levi-Civita connection and from this reference connection, we define the torsion of discrete connections.
+        Discrete connections are a staple of vector field design and analysis on meshes, but the notion of torsion of a discrete connection has remained unstudied. This is all the more surprising as torsion is a crucial ingredient of the smooth theory, underlying the fundamental theorem of Riemannian geometry. We extend the existing geometry processing toolbox by developing a theory of torsion for discrete connections.
     </abstract_small>
     <abstract_big>
         While discrete (metric) connections have become a staple of <em>n</em>-vector field design and analysis on simplicial meshes, the notion of torsion of a discrete connection has remained unstudied. This is all the more surprising as torsion is a crucial component in the fundamental theorem of Riemannian geometry, which introduces the existence and uniqueness of the Levi-Civita connection induced by the metric. In this paper, we extend the existing geometry processing toolbox by providing torsion control over discrete connections. Our approach consists in first introducing a new discrete Levi-Civita connection for a metric with locally-constant curvature to replace the hinge connection of a triangle mesh whose curvature is concentrated at singularities; from this reference connection, we define the discrete torsion of a connection to be the discrete dual 1-form by which a connection deviates from our discrete Levi-Civita connection. We discuss how the curvature and torsion of a discrete connection can then be controlled and assigned in a manner consistent with the continuous case. We also illustrate our approach through theoretical analysis and practical examples arising in vector and frame design.
@@ -44,7 +44,7 @@
             <content>
                 <a href="DiscreteTorsion.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview"/><br/>
-                    <span>pdf (6.1 mb)</span>
+                    <span>pdf (7.2 mb)</span>
                 </a>
             </content>
         </panel>
@@ -57,7 +57,7 @@
                 <div style="display: flex; flex-start; gap: .5em;">
                 <a href="DiscreteTorsionSupplemental.pdf" class="paper-preview">
                     <img src="images/supplemental-preview.png" alt="preview"/><br/>
-                    <span>pdf (765 kb)</span>
+                    <span>pdf (715 kb)</span>
                 </a>
                 <a href="DiscreteTorsionLeviCivitaConnection.nb" class="paper-preview">
                     <img src="images/mathematica-preview.png" alt="preview"/><br/>

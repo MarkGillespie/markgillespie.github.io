@@ -16,6 +16,6 @@
     </links>
     <bibtex>Research/Thesis/bib.txt</bibtex>
     <abstract_small>
-        This thesis presents algorithms and data structures for computing on surfaces whose intrinsic geometry evolves over time. We take as examples the problems of mesh simplification and surface parameterization—in both cases, we find that the intrinsic perspective leads to simple algorithms which are robust and efficient on a variety of challenging examples. 
+        My thesis develops algorithms and data structures for computing on surfaces whose geometry evolves over time. I take as examples the problems of mesh simplification and surface parameterization—in both cases, the intrinsic perspective leads to simple algorithms which are robust and efficient on a variety of challenging examples. 
     </abstract_small>
 </project>

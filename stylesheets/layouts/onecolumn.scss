@@ -395,7 +395,7 @@
         border-radius: 0.25em;
 
         z-index: 200;
-        visibility: hidden;
+/*        visibility: hidden;*/
         opacity: .0001;
         transition: .5s;
         -o-transition: .5s;
@@ -406,7 +406,7 @@
 
     /* hover bib style from: http://www.cs.cmu.edu/~kmcrane/style.css */
     #{$parent} .bibBox:hover .bibliography {
-        visibility: visible;
+        visibility: visible !important;
         opacity: 1.0;
         transition: .5s;
         -o-transition: .5s;

@@ -25,6 +25,6 @@
     </links>
     <bibtex>Research/int-tri-course/bib.txt</bibtex>
     <abstract_small>
-        Intrinsic triangulations de-couple the mesh used to encode geometry from the one used for computation. The basic shift in perspective is to encode the geometry of a mesh not in terms of ordinary vertex positions, but instead only in terms of edge lengths. This course provides a first introduction to intrinsic triangulations and their use in mesh processing algorithms, covering the theory, practical details, and some cutting-edge research in the area.
+        Intrinsic triangulations decouple the mesh used to encode geometry from the mesh used for computation. The basic shift in perspective is to encode the geometry of a mesh not using vertex positions, but instead via edge lengths. This course provides an introduction to intrinsic triangulations and their applications, covering the theory, practical details, and some cutting-edge research in the area.
     </abstract_small>
 </project>
