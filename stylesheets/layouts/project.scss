@@ -159,6 +159,7 @@
         word-wrap: break-word;
         text-align: left;
         white-space: pre-wrap;
+        line-height: 1.1;
 
         position: absolute;
         top:2em;
@@ -197,6 +198,7 @@
         float: right;
         font-family: 'Charis SIL', 'Palatino', serif;
         font-size: 12pt;
+        margin-top: -.5em;
     }
 
     #{$parent} .bibBox button:hover, #{$parent} .bibEntry button:hover {

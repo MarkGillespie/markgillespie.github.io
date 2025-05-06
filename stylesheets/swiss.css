@@ -1467,6 +1467,7 @@ html.singlecolumn .bibBox .bibliography {
   word-wrap: break-word;
   text-align: left;
   white-space: pre-wrap;
+  line-height: 1.1;
   position: absolute;
   top: 2em;
   right: -1em;
@@ -1503,6 +1504,7 @@ html.singlecolumn .bibBox button, html.singlecolumn .bibEntry button {
   float: right;
   font-family: "Charis SIL", "Palatino", serif;
   font-size: 12pt;
+  margin-top: -0.5em;
 }
 
 html.singlecolumn .bibBox button:hover, html.singlecolumn .bibEntry button:hover {
@@ -2095,6 +2097,7 @@ html.project .bibBox .bibliography {
   word-wrap: break-word;
   text-align: left;
   white-space: pre-wrap;
+  line-height: 1.1;
   position: absolute;
   top: 2em;
   right: -1em;
@@ -2131,6 +2134,7 @@ html.project .bibBox button, html.project .bibEntry button {
   float: right;
   font-family: "Charis SIL", "Palatino", serif;
   font-size: 12pt;
+  margin-top: -0.5em;
 }
 
 html.project .bibBox button:hover, html.project .bibEntry button:hover {
