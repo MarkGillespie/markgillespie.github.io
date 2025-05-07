@@ -15,7 +15,6 @@
   </head>
 
   <body class="nojs singlecolumn">
-    <div class="mega-container">
     <div class="page-content">
     <div class="navbar"><div class="navbar_buttons">
 <a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
@@ -27,49 +26,72 @@
 <a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
 </div></div>
 
-    <div class="wrapper" id="home">
-      <div class="name_box">
-          <div class="title">Integer Coordinates for Intrinsic Geometry Processing</div>
-          <div class="venue"><a href="https://doi.org/10.1145/3478513.3480522">ACM Transactions on Graphics (SIGGRAPH&nbsp;Asia&nbsp;2021)</a></div>
-          
-          <div class="authors">
-              <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
+    <div class="name_box">
+      <div class="title">Integer Coordinates for Intrinsic Geometry Processing</div>
+      <div class="venue"><a href="https://doi.org/10.1145/3478513.3480522">ACM Transactions on Graphics (SIGGRAPH&nbsp;Asia&nbsp;2021)</a></div>
+      
+      <div class="authors">
+          <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-          </div>
-          <div class="paper_teaser">
-              <img src="images/teaser.png" style="max-height: 25em;">
-          </div>
+      </div>
+      <div class="paper_teaser">
+          <img src="images/teaser.png" style="max-height: 25em;">
+      </div>
 
-          <div class="quick_links">
-            <a href="integer_coordinates.pdf"><span class="project_link">pdf (7.6 mb)</span></a>
+      <div class="quick_links">
+        <a href="integer_coordinates.pdf"><span class="project_link">pdf (7.6 mb)</span></a>
 <a href="https://youtu.be/3czWJxSmCuc"><span class="project_link">video (20 min)</span></a>
 <a href="https://github.com/MarkGillespie/intrinsic-triangulations-demo"><span class="project_link">code (C<span class="cpp">++</span> demo)</span></a>
 <a href="https://arxiv.org/abs/2106.00220"><span class="project_link">arxiv</span></a>
 <a href="https://youtu.be/a4sgxoZRSCk"><span class="project_link">video (5 min)</span></a>
 <a href="https://youtu.be/0ZN79VqGMaI"><span class="project_link">video (45 s)</span></a>
 <a href="https://geometry-central.net/surface/intrinsic_triangulations/basics/"><span class="project_link">code (C<span class="cpp">++</span> library)</span></a>
-<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibBox"><a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography" style="visibility: hidden;">@article{Gillespie:2021:ICI,
+  author = {Gillespie, Mark and Sharp, Nicholas and Crane, Keenan},
+  title = {Integer Coordinates for Intrinsic Geometry Processing},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {6},
+  articleno = {252},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3478513.3480522},
+  doi = {10.1145/3478513.3480522},
+}<button onclick="navigator.clipboard.writeText(`@article{Gillespie:2021:ICI,
+  author = {Gillespie, Mark and Sharp, Nicholas and Crane, Keenan},
+  title = {Integer Coordinates for Intrinsic Geometry Processing},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {6},
+  articleno = {252},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3478513.3480522},
+  doi = {10.1145/3478513.3480522},
+}`);">Copy</button></div></div>
 <a href="https://doi.org/10.1145/3478513.3480522"><span class="project_link">doi</span></a>
 
-          </div>
-
-          <div class="abstract">
-            T<span class="first-word">his</span> paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Many applications demand a correspondence between the intrinsic triangulation and the input surface, but existing data structures either rely on floating point values to encode correspondence, or do not support remeshing operations beyond basic edge flips.  We instead provide an integer-based data structure that guarantees valid correspondence, even for meshes with near-degenerate elements.  Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to the broader set of operations needed for mesh processing (vertex insertion, edge splits, <em>etc</em>.).  The resulting data structure can be used as a drop-in replacement for earlier schemes, automatically improving reliability across a wide variety of applications.  As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.  In turn, we can compute reliable and highly accurate solutions to partial differential equations even on extremely low-quality meshes.
-
-          </div>
-        </div>
       </div>
 
-      <div class="body">
-          <div class="section_panel ">
+      <div class="abstract">
+        T<span class="first-word">his</span> paper describes a numerically robust data structure for encoding intrinsic triangulations of polyhedral surfaces. Many applications demand a correspondence between the intrinsic triangulation and the input surface, but existing data structures either rely on floating point values to encode correspondence, or do not support remeshing operations beyond basic edge flips.  We instead provide an integer-based data structure that guarantees valid correspondence, even for meshes with near-degenerate elements.  Our starting point is the framework of <em>normal coordinates</em> from geometric topology, which we extend to the broader set of operations needed for mesh processing (vertex insertion, edge splits, <em>etc</em>.).  The resulting data structure can be used as a drop-in replacement for earlier schemes, automatically improving reliability across a wide variety of applications.  As a stress test, we successfully compute an intrinsic Delaunay refinement and associated subdivision for all manifold meshes in the Thingi10k dataset.  In turn, we can compute reliable and highly accurate solutions to partial differential equations even on extremely low-quality meshes.
+
+      </div>
+    </div>
+
+    <div class="body">
+        <div class="section_panel ">
 
 <div class="section_header">Paper</div>
 <div class="section_text">
                 <a href="integer_coordinates.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview" /><br />
-                    <span> pdf (7.7 mb)</span>
+                    <span>pdf (7.7 mb)</span>
                 </a>
             </div>
 </div>
@@ -89,23 +111,34 @@
   journal = {ACM Trans. Graph.},
   volume = {40},
   number = {6},
+  articleno = {252},
   year = {2021},
   publisher = {ACM},
   address = {New York, NY, USA},
   url = {https://doi.org/10.1145/3478513.3480522},
   doi = {10.1145/3478513.3480522},
-}
-</div>
+} <button onclick="navigator.clipboard.writeText(`@article{Gillespie:2021:ICI,
+  author = {Gillespie, Mark and Sharp, Nicholas and Crane, Keenan},
+  title = {Integer Coordinates for Intrinsic Geometry Processing},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {6},
+  articleno = {252},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3478513.3480522},
+  doi = {10.1145/3478513.3480522},
+}`);">Copy</button></div>
 </div>
 
-      </div>
+    </div>
 
-      <!--</div>-->
-      <div class="footer">
-        <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
-        <hr />
-        Mark Gillespie 2025
-      </div>
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
+      <hr />
+      Mark Gillespie 2025
     </div>
   </body>
 </html>

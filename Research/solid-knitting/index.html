@@ -15,7 +15,6 @@
   </head>
 
   <body class="nojs singlecolumn">
-    <div class="mega-container">
     <div class="page-content">
     <div class="navbar"><div class="navbar_buttons">
 <a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
@@ -27,48 +26,73 @@
 <a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
 </div></div>
 
-    <div class="wrapper" id="home">
-      <div class="name_box">
-          <div class="title">Solid Knitting</div>
-          <div class="venue"><a href="https://doi.org/10.1145/3658123">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</a></div>
-          <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
-          <div class="authors">
-              <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
+    <div class="name_box">
+      <div class="title">Solid Knitting</div>
+      <div class="venue"><a href="https://doi.org/10.1145/3658123">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</a></div>
+      <a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/" class="award">Best Paper (Honorable Mention) <div class="description">top 1.5% of accepted papers.</div></a>
+      <div class="authors">
+          <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://hirose-yuichi.github.io/">Yuichi&nbsp;Hirose</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://abfominaya.com/">Angelica M. Bonilla&nbsp;Fominaya</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://www.cs.cmu.edu/~jmccann/">James&nbsp;McCann</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-          </div>
-          <div class="paper_teaser">
-              <img src="images/teaser.png" style="">
-          </div>
+      </div>
+      <div class="paper_teaser">
+          <img src="images/teaser.png" style="">
+      </div>
 
-          <div class="quick_links">
-            <a href="SolidKnitting.pdf"><span class="project_link">pdf (18.5 mb)</span></a>
+      <div class="quick_links">
+        <a href="SolidKnitting.pdf"><span class="project_link">pdf (18.5 mb)</span></a>
 <a href="https://youtu.be/uVRXWlpiyAc"><span class="project_link">video (5m)</span></a>
 <a href="SolidKnittingHandInstructions.pdf"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(10 mb)</span></a>
 <a href="https://youtu.be/t2PIVAvan-c"><span class="project_link">hand&nbsp;knitting&nbsp;instructions&nbsp;(video)</span></a>
 <a href="https://github.com/textiles-lab/solid-knitting-ui"><span class="project_link">code</span></a>
-<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibBox"><a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography" style="visibility: hidden;">@article{Hirose:2024:SK,
+    author = {Hirose, Yuichi and Gillespie, Mark and Bonilla Fominaya, Angelica M. and McCann, James},
+    title = {Solid Knitting},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {4},
+    articleno = {88},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658123},
+    month = jul,
+    pages = {1--15}
+}<button onclick="navigator.clipboard.writeText(`@article{Hirose:2024:SK,
+    author = {Hirose, Yuichi and Gillespie, Mark and Bonilla Fominaya, Angelica M. and McCann, James},
+    title = {Solid Knitting},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {4},
+    articleno = {88},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658123},
+    month = jul,
+    pages = {1--15}
+}`);">Copy</button></div></div>
 <a href="https://doi.org/10.1145/3658123"><span class="project_link">doi</span></a>
 
-          </div>
-
-          <div class="abstract">
-            W<span class="first-word">e</span> introduce solid knitting, a new fabrication technique that combines the layer-by-layer volumetric approach of 3D printing with the topologically-entwined stitch structure of knitting to produce solid 3D objects. We define the basic building blocks of solid knitting and demonstrate a working prototype of a solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns. Solid knitting uses a course-wale-layer structure, where every loop in a solid-knit object passes through both a loop from the previous layer and a loop from the previous course. Our machine uses two beds of latch needles to create stitches like a conventional V-bed knitting machine, but augments these needles with a pair of rotating hook arrays to provide storage locations for all of the loops in one layer of the object. It can autonomously produce solid-knit prisms of arbitrary length, although it requires manual intervention to cast on the first layer and bind off the final row. Our design tool allows users to create solid knitting patterns by connecting elementary stitches; objects designed in our interface can—after basic topological checks and constraint propagation—be exported as a sequence of instructions for fabrication on the solid knitting machine. We validate our solid knitting hardware and software on prism examples, detail the mechanical errors which we have encountered, and discuss potential extensions to the capability of our solid knitting machine.
-
-          </div>
-        </div>
       </div>
 
-      <div class="body">
-          <div class="section_panel ">
+      <div class="abstract">
+        W<span class="first-word">e</span> introduce solid knitting, a new fabrication technique that combines the layer-by-layer volumetric approach of 3D printing with the topologically-entwined stitch structure of knitting to produce solid 3D objects. We define the basic building blocks of solid knitting and demonstrate a working prototype of a solid knitting machine controlled by a low-level instruction language, along with a volumetric design tool for creating machine-knittable patterns. Solid knitting uses a course-wale-layer structure, where every loop in a solid-knit object passes through both a loop from the previous layer and a loop from the previous course. Our machine uses two beds of latch needles to create stitches like a conventional V-bed knitting machine, but augments these needles with a pair of rotating hook arrays to provide storage locations for all of the loops in one layer of the object. It can autonomously produce solid-knit prisms of arbitrary length, although it requires manual intervention to cast on the first layer and bind off the final row. Our design tool allows users to create solid knitting patterns by connecting elementary stitches; objects designed in our interface can—after basic topological checks and constraint propagation—be exported as a sequence of instructions for fabrication on the solid knitting machine. We validate our solid knitting hardware and software on prism examples, detail the mechanical errors which we have encountered, and discuss potential extensions to the capability of our solid knitting machine.
+
+      </div>
+    </div>
+
+    <div class="body">
+        <div class="section_panel ">
 
 <div class="section_header">Paper</div>
 <div class="section_text">
                 <a href="SolidKnitting.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview" /><br />
-                    <span> pdf (18.5 mb)</span>
+                    <span>pdf (18.5 mb)</span>
                 </a>
             </div>
 </div>
@@ -81,22 +105,35 @@
     journal = {ACM Trans. Graph.},
     volume = {43},
     number = {4},
+    articleno = {88},
     year = {2024},
     publisher = {ACM},
     address = {New York, NY, USA},
     doi = {10.1145/3658123},
     month = jul,
-    articleno = {88},
     pages = {1--15}
-}</div>
+} <button onclick="navigator.clipboard.writeText(`@article{Hirose:2024:SK,
+    author = {Hirose, Yuichi and Gillespie, Mark and Bonilla Fominaya, Angelica M. and McCann, James},
+    title = {Solid Knitting},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {4},
+    articleno = {88},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658123},
+    month = jul,
+    pages = {1--15}
+}`);">Copy</button></div>
 </div>
 <div class="section_panel ">
 
-<div class="section_header">Supplement: Solid Knitting by Hand</div>
+<div class="section_header">Solid Knitting by Hand</div>
 <div class="section_text">
                 <a href="SolidKnittingHandInstructions.pdf" class="paper-preview" style="display: inline-block; width: 100%; text-align: center;">
                     <img src="images/cube.png" alt="preview" style="box-shadow: none; max-width: 256px; width: 100%;" /><br />
-                    <span> hand knitting instructions (text; 10 mb)</span>
+                    <span style="width: 100%;">hand knitting instructions (text; 10 mb)</span>
                 </a>
                 <center><a href="https://youtu.be/t2PIVAvan-c">hand knitting instructions (video)</a></center>
             </div>
@@ -238,14 +275,13 @@
             </div>
 </div>
 
-      </div>
+    </div>
 
-      <!--</div>-->
-      <div class="footer">
-        <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
-        <hr />
-        Mark Gillespie 2025
-      </div>
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
+      <hr />
+      Mark Gillespie 2025
     </div>
   </body>
 </html>

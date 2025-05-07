@@ -15,7 +15,6 @@
   </head>
 
   <body class="nojs singlecolumn">
-    <div class="mega-container">
     <div class="page-content">
     <div class="navbar"><div class="navbar_buttons">
 <a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
@@ -27,24 +26,23 @@
 <a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
 </div></div>
 
-    <div class="wrapper" id="home">
-      <div class="name_box">
-          <div class="title">Ray Tracing Harmonic Functions</div>
-          <div class="venue"><a href="https://doi.org/10.1145/3658201">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</a></div>
-          <div class="award"><a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/">Best Paper (Honorable Mention)</a></div>
-          <div class="authors">
-              <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
+    <div class="name_box">
+      <div class="title">Ray Tracing Harmonic Functions</div>
+      <div class="venue"><a href="https://doi.org/10.1145/3658201">ACM Transactions on Graphics (SIGGRAPH&nbsp;2024)</a></div>
+      <a href="https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/" class="award">Best Paper (Honorable Mention) <div class="description">top 1.5% of accepted papers.</div></a>
+      <div class="authors">
+          <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://www.linkedin.com/in/denise-yang-899b33179">Denise&nbsp;Yang</a></span><span class="affiliation">Carnegie Mellon University<br />&amp; Pixar Animation Studios</span></div>
 <div class="author"><span class="name"><a href="https://cg.cs.tu-dortmund.de/people/botsch_mario.html">Mario&nbsp;Botsch</a></span><span class="affiliation">TU Dortmund University</span></div>
 <div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-          </div>
-          <div class="paper_teaser">
-              <img src="images/teaser.png" style="max-width: 400pt;">
-          </div>
+      </div>
+      <div class="paper_teaser">
+          <img src="images/teaser.png" style="max-width: 400pt;">
+      </div>
 
-          <div class="quick_links">
-            <a href="HarnackTracing.pdf"><span class="project_link">pdf (11.2 mb)</span></a>
+      <div class="quick_links">
+        <a href="HarnackTracing.pdf"><span class="project_link">pdf (11.2 mb)</span></a>
 <a href="https://www.shadertoy.com/playlist/dflXzN"><span class="project_link">code (ShaderToy)</span></a>
 <a href="https://youtu.be/oDwedIuqh5Q"><span class="project_link">video (10 min)</span></a>
 <a href="HarnackTracingSupplement.pdf"><span class="project_link">supplement (350 kb)</span></a>
@@ -52,26 +50,52 @@
 <a href="https://youtu.be/9h13FPuBvM8"><span class="project_link">video (30 min)</span></a>
 <a href="https://github.com/MarkGillespie/harnack-blender"><span class="project_link">code (C<span class="cpp">++</span>)</span></a>
 <a href="harnack-tracing-poster.pdf"><span class="project_link">poster (13 mb)</span></a>
-<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibBox"><a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography" style="visibility: hidden;">@article{Gillespie:2024:RTH,
+    author = {Gillespie, Mark and Yang, Denise and Botsch, Mario and Crane, Keenan},
+    title = {Ray Tracing Harmonic Functions},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {4},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658201},
+    month = jul,
+    articleno = {99},
+    pages = {1--18}
+}<button onclick="navigator.clipboard.writeText(`@article{Gillespie:2024:RTH,
+    author = {Gillespie, Mark and Yang, Denise and Botsch, Mario and Crane, Keenan},
+    title = {Ray Tracing Harmonic Functions},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {4},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658201},
+    month = jul,
+    articleno = {99},
+    pages = {1--18}
+}`);">Copy</button></div></div>
 <a href="https://doi.org/10.1145/3658201"><span class="project_link">doi</span></a>
 
-          </div>
-
-          <div class="abstract">
-            S<span class="first-word">phere</span> tracing is a fast and high-quality method for visualizing surfaces encoded by signed distance functions (SDFs). We introduce a similar method for a completely different class of surfaces encoded by <em>harmonic functions</em>, opening up rich new possibilities for visual computing.  Our starting point is similar in spirit to sphere tracing: using conservative <em>Harnack bounds</em> on the growth of harmonic functions, we develop a <em>Harnack tracing</em> algorithm for visualizing level sets of harmonic functions, including those that are angle-valued and exhibit singularities.  The method takes much larger steps than naïve ray marching, avoids numerical issues common to generic root finding methods and, like sphere tracing, needs only perform pointwise evaluation of the function at each step.  For many use cases, the method is fast enough to run real time in a shader program.  We use it to visualize smooth surfaces directly from point clouds (via Poisson surface reconstruction) or polygon soup (via generalized winding numbers) without linear solves or mesh extraction.  We also use it to visualize nonplanar polygons (possibly with holes), surfaces from architectural geometry, mesh "exoskeletons", and key mathematical objects including knots, links, spherical harmonics, and Riemann surfaces.  Finally we show that, at least in theory, Harnack tracing provides an alternative mechanism for visualizing arbitrary implicit surfaces.
-
-          </div>
-        </div>
       </div>
 
-      <div class="body">
-          <div class="section_panel ">
+      <div class="abstract">
+        S<span class="first-word">phere</span> tracing is a fast and high-quality method for visualizing surfaces encoded by signed distance functions (SDFs). We introduce a similar method for a completely different class of surfaces encoded by <em>harmonic functions</em>, opening up rich new possibilities for visual computing.  Our starting point is similar in spirit to sphere tracing: using conservative <em>Harnack bounds</em> on the growth of harmonic functions, we develop a <em>Harnack tracing</em> algorithm for visualizing level sets of harmonic functions, including those that are angle-valued and exhibit singularities.  The method takes much larger steps than naïve ray marching, avoids numerical issues common to generic root finding methods and, like sphere tracing, needs only perform pointwise evaluation of the function at each step.  For many use cases, the method is fast enough to run real time in a shader program.  We use it to visualize smooth surfaces directly from point clouds (via Poisson surface reconstruction) or polygon soup (via generalized winding numbers) without linear solves or mesh extraction.  We also use it to visualize nonplanar polygons (possibly with holes), surfaces from architectural geometry, mesh "exoskeletons", and key mathematical objects including knots, links, spherical harmonics, and Riemann surfaces.  Finally we show that, at least in theory, Harnack tracing provides an alternative mechanism for visualizing arbitrary implicit surfaces.
+
+      </div>
+    </div>
+
+    <div class="body">
+        <div class="section_panel ">
 
 <div class="section_header">Paper</div>
 <div class="section_text">
                 <a href="HarnackTracing.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview" /><br />
-                    <span> pdf (11.2 mb)</span>
+                    <span>pdf (11.2 mb)</span>
                 </a>
             </div>
 </div>
@@ -81,7 +105,7 @@
 <div class="section_text">
                 <a href="HarnackTracingSupplement.pdf" class="paper-preview">
                     <img src="images/supplement-preview.png" alt="preview" /><br />
-                    <span> pdf (350 kb)</span>
+                    <span>pdf (350 kb)</span>
                 </a>
             </div>
 </div>
@@ -164,7 +188,20 @@
     month = jul,
     articleno = {99},
     pages = {1--18}
-}</div>
+} <button onclick="navigator.clipboard.writeText(`@article{Gillespie:2024:RTH,
+    author = {Gillespie, Mark and Yang, Denise and Botsch, Mario and Crane, Keenan},
+    title = {Ray Tracing Harmonic Functions},
+    journal = {ACM Trans. Graph.},
+    volume = {43},
+    number = {4},
+    year = {2024},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    doi = {10.1145/3658201},
+    month = jul,
+    articleno = {99},
+    pages = {1--18}
+}`);">Copy</button></div>
 </div>
 <div class="section_panel ">
 
@@ -209,14 +246,13 @@
             </div>
 </div>
 
-      </div>
+    </div>
 
-      <!--</div>-->
-      <div class="footer">
-        <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
-        <hr />
-        Mark Gillespie 2025
-      </div>
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
+      <hr />
+      Mark Gillespie 2025
     </div>
   </body>
 </html>

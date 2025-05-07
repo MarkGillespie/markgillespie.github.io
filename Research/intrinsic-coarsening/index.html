@@ -15,7 +15,6 @@
   </head>
 
   <body class="nojs singlecolumn">
-    <div class="mega-container">
     <div class="page-content">
     <div class="navbar"><div class="navbar_buttons">
 <a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
@@ -27,49 +26,76 @@
 <a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
 </div></div>
 
-    <div class="wrapper" id="home">
-      <div class="name_box">
-          <div class="title">Surface Simplification using Intrinsic Error Metrics</div>
-          <div class="venue"><a href="https://doi.org/10.1145/3592403">ACM Transactions on Graphics (SIGGRAPH&nbsp;2023)</a></div>
-          
-          <div class="authors">
-              <div class="author"><span class="name"><a href="https://www.dgp.toronto.edu/~hsuehtil/">Hsueh-Ti&nbsp;Derek&nbsp;Liu</a></span><span class="affiliation">University of Toronto &amp; Roblox</span></div>
+    <div class="name_box">
+      <div class="title">Surface Simplification using Intrinsic Error Metrics</div>
+      <div class="venue"><a href="https://doi.org/10.1145/3592403">ACM Transactions on Graphics (SIGGRAPH&nbsp;2023)</a></div>
+      
+      <div class="authors">
+          <div class="author"><span class="name"><a href="https://www.dgp.toronto.edu/~hsuehtil/">Hsueh-Ti&nbsp;Derek&nbsp;Liu</a></span><span class="affiliation">University of Toronto &amp; Roblox</span></div>
 <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://www.gitshowcase.com/benchislett">Benjamin&nbsp;Chislett</a></span><span class="affiliation">University of Toronto</span></div>
 <div class="author"><span class="name"><a href="https://nmwsharp.com/">Nicholas&nbsp;Sharp</a></span><span class="affiliation">University of Toronto &amp; NVIDIA</span></div>
 <div class="author"><span class="name"><a href="https://www.cs.toronto.edu/~jacobson/">Alec&nbsp;Jacobson</a></span><span class="affiliation">University of Toronto &amp; Adobe&nbsp;Research</span></div>
 <div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-          </div>
-          <div class="paper_teaser">
-              <img src="images/teaser.png" style="">
-          </div>
+      </div>
+      <div class="paper_teaser">
+          <img src="images/teaser.png" style="">
+      </div>
 
-          <div class="quick_links">
-            <a href="IntrinsicErrorMetric.pdf"><span class="project_link">pdf (15.6 mb)</span></a>
+      <div class="quick_links">
+        <a href="IntrinsicErrorMetric.pdf"><span class="project_link">pdf (15.6 mb)</span></a>
 <a href="https://github.com/HTDerekLiu/intrinsic-simplification"><span class="project_link">code</span></a>
 <a href="https://arxiv.org/abs/2305.06410"><span class="project_link">arxiv</span></a>
 <a href="IntrinsicErrorMetricPoster.pdf"><span class="project_link">poster (9mb)</span></a>
-<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibBox"><a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography" style="visibility: hidden;">@article{Liu:2023:SSI,
+  author = {Liu, Hsueh-Ti Derek and Gillespie, Mark and Chislett, Benjamin and Sharp, Nicholas and Jacobson, Alec and Crane, Keenan},
+  title = {Surface Simplification Using Intrinsic Error Metrics},
+  journal = {ACM Trans. Graph.},
+  volume = {42},
+  number = {4},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  issn = {0730-0301},
+  url = {https://doi.org/10.1145/3592403},
+  doi = {10.1145/3592403},
+  month = {jul},
+  articleno = {118},
+}<button onclick="navigator.clipboard.writeText(`@article{Liu:2023:SSI,
+  author = {Liu, Hsueh-Ti Derek and Gillespie, Mark and Chislett, Benjamin and Sharp, Nicholas and Jacobson, Alec and Crane, Keenan},
+  title = {Surface Simplification Using Intrinsic Error Metrics},
+  journal = {ACM Trans. Graph.},
+  volume = {42},
+  number = {4},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  issn = {0730-0301},
+  url = {https://doi.org/10.1145/3592403},
+  doi = {10.1145/3592403},
+  month = {jul},
+  articleno = {118},
+}`);">Copy</button></div></div>
 <a href="https://doi.org/10.1145/3592403"><span class="project_link">doi</span></a>
 
-          </div>
-
-          <div class="abstract">
-            T<span class="first-word">his</span> paper describes a method for fast simplification of surface meshes.  Whereas past methods focus on visual appearance, our goal is to solve equations on the surface.  Hence, rather than approximate the extrinsic geometry, we construct a coarse <em>intrinsic triangulation</em> of the input domain.  In the spirit of the <em>quadric error metric (QEM)</em>, we perform greedy decimation while agglomerating global information about approximation error.  In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature "drifts" during simplification.  This process also yields a bijective map between the fine and coarse mesh, and prolongation operators for both scalar- and vector-valued data.  Moreover, we obtain hard guarantees on element quality via intrinsic retriangulation—a feature unique to the intrinsic setting.  The overall payoff is a "black box" approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.  We show how our method benefits several fundamental tasks, including geometric multigrid, all-pairs geodesic distance, mean curvature flow, geodesic Voronoi diagrams, and the discrete exponential map.
-
-          </div>
-        </div>
       </div>
 
-      <div class="body">
-          <div class="section_panel ">
+      <div class="abstract">
+        T<span class="first-word">his</span> paper describes a method for fast simplification of surface meshes.  Whereas past methods focus on visual appearance, our goal is to solve equations on the surface.  Hence, rather than approximate the extrinsic geometry, we construct a coarse <em>intrinsic triangulation</em> of the input domain.  In the spirit of the <em>quadric error metric (QEM)</em>, we perform greedy decimation while agglomerating global information about approximation error.  In lieu of extrinsic quadrics, however, we store intrinsic tangent vectors that track how far curvature "drifts" during simplification.  This process also yields a bijective map between the fine and coarse mesh, and prolongation operators for both scalar- and vector-valued data.  Moreover, we obtain hard guarantees on element quality via intrinsic retriangulation—a feature unique to the intrinsic setting.  The overall payoff is a "black box" approach to geometry processing, which decouples mesh resolution from the size of matrices used to solve equations.  We show how our method benefits several fundamental tasks, including geometric multigrid, all-pairs geodesic distance, mean curvature flow, geodesic Voronoi diagrams, and the discrete exponential map.
+
+      </div>
+    </div>
+
+    <div class="body">
+        <div class="section_panel ">
 
 <div class="section_header">Paper</div>
 <div class="section_text">
                 <a href="IntrinsicErrorMetric.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview" /><br />
-                    <span> pdf (15.6 mb)</span>
+                    <span>pdf (15.6 mb)</span>
                 </a>
             </div>
 </div>
@@ -97,8 +123,21 @@
   doi = {10.1145/3592403},
   month = {jul},
   articleno = {118},
-}
-</div>
+} <button onclick="navigator.clipboard.writeText(`@article{Liu:2023:SSI,
+  author = {Liu, Hsueh-Ti Derek and Gillespie, Mark and Chislett, Benjamin and Sharp, Nicholas and Jacobson, Alec and Crane, Keenan},
+  title = {Surface Simplification Using Intrinsic Error Metrics},
+  journal = {ACM Trans. Graph.},
+  volume = {42},
+  number = {4},
+  year = {2023},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  issn = {0730-0301},
+  url = {https://doi.org/10.1145/3592403},
+  doi = {10.1145/3592403},
+  month = {jul},
+  articleno = {118},
+}`);">Copy</button></div>
 </div>
 <div class="section_panel ">
 
@@ -110,14 +149,13 @@
             </div>
 </div>
 
-      </div>
+    </div>
 
-      <!--</div>-->
-      <div class="footer">
-        <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
-        <hr />
-        Mark Gillespie 2025
-      </div>
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
+      <hr />
+      Mark Gillespie 2025
     </div>
   </body>
 </html>

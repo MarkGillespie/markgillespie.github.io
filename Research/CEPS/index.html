@@ -15,7 +15,6 @@
   </head>
 
   <body class="nojs singlecolumn">
-    <div class="mega-container">
     <div class="page-content">
     <div class="navbar"><div class="navbar_buttons">
 <a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
@@ -27,46 +26,69 @@
 <a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
 </div></div>
 
-    <div class="wrapper" id="home">
-      <div class="name_box">
-          <div class="title">Discrete Conformal Equivalence of Polyhedral Surfaces</div>
-          <div class="venue"><a href="https://doi.org/10.1145/3450626.3459763">ACM Transactions on Graphics (SIGGRAPH&nbsp;2021)</a></div>
-          
-          <div class="authors">
-              <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
+    <div class="name_box">
+      <div class="title">Discrete Conformal Equivalence of Polyhedral Surfaces</div>
+      <div class="venue"><a href="https://doi.org/10.1145/3450626.3459763">ACM Transactions on Graphics (SIGGRAPH&nbsp;2021)</a></div>
+      
+      <div class="authors">
+          <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://page.math.tu-berlin.de/~springb/">Boris&nbsp;Springborn</a></span><span class="affiliation">TU Berlin</span></div>
 <div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 
-          </div>
-          <div class="paper_teaser">
-              <img src="images/teaser.png" style="">
-          </div>
+      </div>
+      <div class="paper_teaser">
+          <img src="images/teaser.png" style="">
+      </div>
 
-          <div class="quick_links">
-            <a href="Paper.pdf"><span class="project_link">pdf (16 mb)</span></a>
+      <div class="quick_links">
+        <a href="Paper.pdf"><span class="project_link">pdf (16 mb)</span></a>
 <a href="https://www.youtube.com/watch?v=wwuHFUQLlWA"><span class="project_link">video (20 min)</span></a>
 <a href="https://github.com/MarkGillespie/CEPS"><span class="project_link">code (C<span class="cpp">++</span> demo)</span></a>
 <a href="https://www.youtube.com/watch?v=W0iBHF5-r-M"><span class="project_link">video (5 min)</span></a>
-<a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibBox"><a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography" style="visibility: hidden;">@article{Gillespie:2021:DCE,
+  author = {Gillespie, Mark and Springborn, Boris and Crane, Keenan},
+  title = {Discrete Conformal Equivalence of Polyhedral Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {4},
+  articleno = {103},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3450626.3459763},
+  doi = {10.1145/3450626.3459763},
+}<button onclick="navigator.clipboard.writeText(`@article{Gillespie:2021:DCE,
+  author = {Gillespie, Mark and Springborn, Boris and Crane, Keenan},
+  title = {Discrete Conformal Equivalence of Polyhedral Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {4},
+  articleno = {103},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3450626.3459763},
+  doi = {10.1145/3450626.3459763},
+}`);">Copy</button></div></div>
 <a href="https://doi.org/10.1145/3450626.3459763"><span class="project_link">doi</span></a>
 
-          </div>
-
-          <div class="abstract">
-            T<span class="first-word">his</span> paper describes a numerical method for surface parameterization, yielding maps that are locally injective and discretely conformal in an exact sense. Unlike previous methods for discrete conformal parameterization, the method is guaranteed to work for any manifold triangle mesh, with no restrictions on triangulation quality or cone singularities. In particular we consider maps from surfaces of any genus (with or without boundary) to the plane, or globally bijective maps from genus zero surfaces to the sphere. Recent theoretical developments show that each task can be formulated as a convex problem where the triangulation is allowed to change—we complete the picture by introducing the machinery needed to actually construct a discrete conformal map.  In particular, we introduce a new scheme for tracking correspondence between triangulations based on <em>normal coordinates</em>, and a new interpolation procedure based on layout in the <em>light cone</em>.  Stress tests involving difficult cone configurations and near-degenerate triangulations indicate that the method is extremely robust in practice, and provides high-quality interpolation even on meshes with poor elements.
-
-          </div>
-        </div>
       </div>
 
-      <div class="body">
-          <div class="section_panel ">
+      <div class="abstract">
+        T<span class="first-word">his</span> paper describes a numerical method for surface parameterization, yielding maps that are locally injective and discretely conformal in an exact sense. Unlike previous methods for discrete conformal parameterization, the method is guaranteed to work for any manifold triangle mesh, with no restrictions on triangulation quality or cone singularities. In particular we consider maps from surfaces of any genus (with or without boundary) to the plane, or globally bijective maps from genus zero surfaces to the sphere. Recent theoretical developments show that each task can be formulated as a convex problem where the triangulation is allowed to change—we complete the picture by introducing the machinery needed to actually construct a discrete conformal map.  In particular, we introduce a new scheme for tracking correspondence between triangulations based on <em>normal coordinates</em>, and a new interpolation procedure based on layout in the <em>light cone</em>.  Stress tests involving difficult cone configurations and near-degenerate triangulations indicate that the method is extremely robust in practice, and provides high-quality interpolation even on meshes with poor elements.
+
+      </div>
+    </div>
+
+    <div class="body">
+        <div class="section_panel ">
 
 <div class="section_header">Paper</div>
 <div class="section_text">
                 <a href="Paper.pdf" class="paper-preview">
                     <img src="images/preview.png" alt="preview" /><br />
-                    <span> pdf (16 mb)</span>
+                    <span>pdf (16 mb)</span>
                 </a>
             </div>
 </div>
@@ -86,13 +108,25 @@
   journal = {ACM Trans. Graph.},
   volume = {40},
   number = {4},
+  articleno = {103},
   year = {2021},
   publisher = {ACM},
   address = {New York, NY, USA},
   url = {https://doi.org/10.1145/3450626.3459763},
   doi = {10.1145/3450626.3459763},
-}
-</div>
+} <button onclick="navigator.clipboard.writeText(`@article{Gillespie:2021:DCE,
+  author = {Gillespie, Mark and Springborn, Boris and Crane, Keenan},
+  title = {Discrete Conformal Equivalence of Polyhedral Surfaces},
+  journal = {ACM Trans. Graph.},
+  volume = {40},
+  number = {4},
+  articleno = {103},
+  year = {2021},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3450626.3459763},
+  doi = {10.1145/3450626.3459763},
+}`);">Copy</button></div>
 </div>
 <div class="section_panel figures">
 
@@ -166,14 +200,13 @@
             </div>
 </div>
 
-      </div>
+    </div>
 
-      <!--</div>-->
-      <div class="footer">
-        <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
-        <hr />
-        Mark Gillespie 2025
-      </div>
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
+      <hr />
+      Mark Gillespie 2025
     </div>
   </body>
 </html>
