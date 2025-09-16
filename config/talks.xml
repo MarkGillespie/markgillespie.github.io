@@ -1,6 +1,14 @@
 <talk_data>
 <talks>
     <talk>
+    <when>Sep. 2025</when>
+    <title>Cellular Whitney Forms</title>
+    <!-- <venue_link></venue_link> -->
+    <venue_name>GeomeriX Seminar, Inria Saclay</venue_name>
+    <links>
+    </links>
+  </talk>
+    <talk>
     <when>May 2025</when>
     <title>Geometry Processing with Intrinsic Triangulations</title>
     <venue_link>https://team.inria.fr/geomerix/seminars-2/</venue_link>
