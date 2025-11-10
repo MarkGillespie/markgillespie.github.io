@@ -101,7 +101,7 @@
 % https://tex.stackexchange.com/a/401936
 \DeclareCiteCommand{\rawcvcite}
   {\usebibmacro{prenote}}
-  {\usebibmacro{author}
+  {\printnames{author}. \usebibmacro{year}
    \newline\nopunct\newblock
    \usebibmacro{maintitle+title}%
    \setunit{\addspace}\usebibmacro{addendum+pubstate}%
@@ -409,6 +409,8 @@
 
 \section{Service}
 
+\inlinecvitemwithcomment{Technical Papers Committee}{SIGGRAPH (2026)}
+%
 \inlinecvitemwithcomment{Graduate School co-Chair}{Symposium on Geometry Processing (2026)}
 %
 \inlinecvitemwithcomment{Program Committee}{Symposium on Geometry Processing (2025)}
