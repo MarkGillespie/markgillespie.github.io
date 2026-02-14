@@ -1,19 +1,27 @@
 <news>
 <recent_items>
     <item>
+        <when>Spring 2026</when>
+        <what>This summer, I will be attending <a href="https://cs2026.sciencesconf.org/">Curves and Surfaces 2026</a> in Saint-Malo; <a href="https://math-events.uni-bonn.de/event/598/">New Mathematical Methods in Geometry Processing</a> in Bonn; <a href="https://sgp26.org/">SGP 2026</a> in Bern and <a href="https://s2026.siggraph.org/">Siggraph 2026</a> in Los Angeles. If you're planning on attending any of them and want to meet up, <a href="mailto:$GMAIL">let me know!</a></what>
+    </item>
+    <item>
+        <when>Dec. 2025</when>
+        <what>This year I will be serving on the committees for SIGGRAPH 2026 &amp; SGP 2026, and serving as graduate school chair for SGP 2026.</what>
+    </item>
+    <item>
         <when>Jul. 2025</when>
-        <what>This summer, I will be attending <a href="https://sgp2025.my.canva.site/">SGP</a> in Bilbao and <a href="https://s2025.siggraph.org/">Siggraph</a> in Vancouver. If you're planning on attending either one and want to meet up, <a href="mailto:$GMAIL">let me know!</a></what>
+        <what>This summer, I will be attending <a href="https://sgp2025.my.canva.site/">SGP 2025</a> in Bilbao and <a href="https://s2025.siggraph.org/">Siggraph</a> in Vancouver.</what>
     </item>
     <item>
         <when>Apr. 2024</when>
         <what>I accepted an assistant professor position at the <a href="https://www.cs.utah.edu/">University of Utah's Kahlert School of Computing</a>! I will start in fall 2026.</what>
     </item>
-    <item>
-        <when>Dec. 2024</when>
-        <what>I will serve on the program committee for the 2025 <a href="https://sgp2025.my.canva.site/">Symposium on Geometry Processing (SGP)</a>.</what>
-    </item>
 </recent_items>
 <extra_items>
+    <item>
+    <when>Dec. 2024</when>
+        <what>I will serve on the program committee for the 2025 <a href="https://sgp2025.my.canva.site/">Symposium on Geometry Processing (SGP)</a>.</what>
+    </item>
     <item>
         <when>Sept. 2024</when>
         <what>I started a postdoc with Mathieu Desbrun at École Polytechnique.</what>

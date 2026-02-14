@@ -107,6 +107,15 @@
     </entry>
 
     <entry>
+        <href>Misc/CurvesOnSurfacesNotes/CurvesOnSurfaces.html</href>
+        <title>The Geometry and Algebra of Curves on Surfaces</title>
+        <details>
+            Archive of Dylan Thurston's course notes from his 2012 course. These notes were written and illustrated by Qiaochu Yuan, and originally hosted at <a href="https://web.archive.org/web/20130116031142/https://math.berkeley.edu/~qchu/Notes/274/">https://math.berkeley.edu/~qchu/Notes/274</a>.
+        </details>
+            <img>Misc/CurvesOnSurfacesNotes/double-torus-loop.svg</img>
+    </entry>
+
+    <entry>
         <href>WordValidator/#/</href>
         <title>Word Validator</title>
         <details>
