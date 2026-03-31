@@ -122,6 +122,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			prefix = f'Research/{project_folder}/'
 			return s[len(prefix):] if s.startswith(prefix) else s
 		#==== entry in main page list
+		title_str = xml_child_string(project_data.find('title'))
 		#= author list
 		author_str = "" # short version for main page
 		long_author_str = "" # long version for project page
@@ -144,12 +145,16 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			desc_str = f'<div class="description">{desc}</div>' if len(desc) > 0 else ''
 			award_str = f'<a href="{href}" class="award">{name} {desc_str}</a>'
 		#= bibtex
-		bib_path = project_data.find('bibtex').text
-		with open(f'../{bib_path}') as f:
-			bibtex = f.read().rstrip()
-			copy_button_str = f'<button onclick="navigator.clipboard.writeText(`{bibtex}`);">Copy</button>' # `string` creates multiline string in js
-			home_bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
-			nest_bib_str = f'<div class="bibBox"><a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
+		bibtex, copy_button_str, home_bib_str, nest_bib_str = None, '', '', ''
+		try:
+			bib_path = project_data.find('bibtex').text
+			with open(f'../{bib_path}') as f:
+				bibtex = f.read().rstrip()
+				copy_button_str = f'<button onclick="navigator.clipboard.writeText(`{bibtex}`);">Copy</button>' # `string` creates multiline string in js
+				home_bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
+				nest_bib_str = f'<div class="bibBox"><a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
+		except:
+			print(f"WARNING: missing bibtex for {title_str}")
 		#= href
 		href_str = project_data.find('href').text
 		if project_data.find("folder") is not None:
@@ -167,8 +172,13 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			nest_link_str += f'<a href="{n_path(href)}"><span class="project_link">{name}</span></a>\n'
 		home_link_str += home_bib_str
 		nest_link_str_ending += nest_bib_str
-		doi = project_data.find('doi').text
-		doi_str = f'<a href="https://doi.org/{doi}"><span class="project_link">doi</span></a>\n'
+		doi = None
+		doi_str = "";
+		try:
+			doi = project_data.find('doi').text
+			doi_str = f'<a href="https://doi.org/{doi}"><span class="project_link">doi</span></a>\n'
+		except:
+			print(f"WARNING: missing doi for {title_str}")
 		home_link_str += doi_str
 		nest_link_str_ending += doi_str
 		if project_data.find('more_links'):
@@ -181,8 +191,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			home_link_str += '<summary></summary></details>\n'
 		nest_link_str += nest_link_str_ending
 		venue_name = xml_child_string(project_data.find('venue'))
-		venue_str = f'<a href="https://doi.org/{doi}">{venue_name}</a>'
-		title_str = xml_child_string(project_data.find('title'))
+		venue_str = venue_name if doi is None else f'<a href="https://doi.org/{doi}">{venue_name}</a>'
 		project_str = (short_project_template.replace('$IMG_SMALL', project_data.find('img_small').text)
 		                                     .replace('$HREF', href_str)
 		                                     .replace('$TITLE', title_str)
@@ -205,7 +214,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			content = xml_child_string(panel.find('content'))
 			extra_classes = '' if panel.find('extra_classes') is None else panel.find('extra_classes').text
 			anchor_str = '' if panel.find('a') is None else f'<a name="{panel.find("a").text}">'
-			if panel.find('bibtex') is not None:
+			if panel.find('bibtex') is not None and bibtex is not None:
 				title = 'Bibtex'
 				content = f'{bibtex} {copy_button_str}'
 				extra_classes += ' bibEntry'

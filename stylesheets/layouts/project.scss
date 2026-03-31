@@ -1,7 +1,5 @@
 /* Project page layout */
 @mixin layout($map, $parent: "html") {
-    @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400');
-
     #{$parent} body {
         margin: 0;
         padding: 0;
@@ -71,6 +69,7 @@
         font-size: 1.25em;
         margin: 0em 0.5em 0.25em 0.5em;
         line-height: 1;
+        min-height: .7em;
     }
 
     #{$parent} .venue a {

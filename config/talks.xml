@@ -1,5 +1,21 @@
 <talk_data>
 <talks>
+  <talk>
+    <when>Apr. 2025</when>
+    <title>Implicit Minimal Surfaces for Bijective Correspondences</title>
+    <venue_name>IPAB Visitor Seminar, University of Edinburgh</venue_name>
+    <!-- <venue_link>https://graphics.cs.utah.edu/courses/cs7933/spring2026/</venue_link> -->
+    <links>
+    </links>
+  </talk>
+  <talk>
+    <when>Mar. 2025</when>
+    <title>Implicit Minimal Surfaces for Bijective Correspondences</title>
+    <venue_name>University of Utah Graphics Seminar</venue_name>
+    <venue_link>https://graphics.cs.utah.edu/courses/cs7933/spring2026/</venue_link>
+    <links>
+    </links>
+  </talk>
 <!--   <talk>
     <when>Sep. 2025</when>
     <title>Cellular Whitney Forms</title>

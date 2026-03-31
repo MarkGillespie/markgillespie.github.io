@@ -1,7 +1,5 @@
 /* One column layout */
 @mixin layout($map, $parent: "html") {
-    @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400');
-
     #{$parent} div {
         box-sizing: border-box;
     }
@@ -241,6 +239,7 @@
         flex: 0 0 30%;
         width: 30%;
         margin-top: 5pt;
+        text-align: right;
     }
 
     #{$parent} .project_header .image img {
@@ -276,6 +275,7 @@
     #{$parent} .project_header .text .venue {
         margin-top: .125em;
         margin-bottom: .125em;
+        min-height: .7em;
     }
 
     #{$parent} .project_header .text .award {

@@ -1,5 +1,7 @@
 <data>
 <project_list>
+    ${ImplicitMinimalSurfaces}
+    ${SubgridMarchingTets}
     ${DiscreteTorsion}
     ${harnack-tracing}
     ${solid-knitting}
