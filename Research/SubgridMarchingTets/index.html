@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us" class="nojs project lightmode">
+  <head>
+    <meta charset="UTF-8">
+    <title>Subgrid Marching Tetrahedra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/swiss.css" media="screen">
+    <link href="../../partial.ico" rel="icon" type="image/x-icon" class="__web-inspector-hide-shortcut__">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- tweak figure background color -->
+    <style>
+     html.darkmode .paper_teaser {
+         background: #557;
+     }
+    </style>
+  </head>
+
+  <body class="nojs singlecolumn">
+    <div class="page-content">
+    <div class="navbar"><div class="navbar_buttons">
+<a href="../../index.html#research" class="navbar_link "><span class="navbar_item">Research</span></a>
+<a href="../Thesis/thesis.pdf" class="navbar_link "><span class="navbar_item">Thesis</span></a>
+<a href="../../index.html#awards" class="navbar_link "><span class="navbar_item">Awards</span></a>
+<a href="../../index.html#talks" class="navbar_link vanishing"><span class="navbar_item">Talks</span></a>
+<a href="../../index.html#misc" class="navbar_link "><span class="navbar_item">Misc</span></a>
+<a href="../../Mark_Gillespie_CV.pdf" class="navbar_link "><span class="navbar_item">CV</span></a>
+<a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
+</div></div>
+
+    <div class="name_box">
+      <div class="title">Subgrid Marching Tetrahedra</div>
+      <div class="venue">Conditionally accepted to SIGGRAPH&nbsp;2026</div>
+      
+      <div class="authors">
+          <div class="author"><span class="name"><a href="https://hbaktash.github.io/">Hossein&nbsp;Baktash</a></span><span class="affiliation">Carnegie Mellon University</span></div>
+<div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Inria (IP Paris) &amp; University of Utah</span></div>
+<div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University &amp; Roblox</span></div>
+
+      </div>
+      <div class="paper_teaser">
+          <img src="images/teaser.png" style="max-height: 25em; margin: 10px 0px;">
+      </div>
+
+      <div class="quick_links">
+        <a href="SubgridMarchingTets.pdf"><span class="project_link">preprint (21.5&nbsp;mb)</span></a>
+
+      </div>
+
+      <div class="abstract">
+        C<span class="first-word">ontouring</span> algorithms like marching cubes and marching tetrahedra are a fundamental tool in geometry processing, needed to convert from implicit representations (like signed distance functions) to explicit representations (namely, polygon meshes).
+However, they suffer from an equally fundamental challenge of signal processing, namely <em>aliasing</em>: unless the implicit function is sufficiently-well sampled onto a grid, the extracted mesh will have missing features, holes, etc.
+Moreover, these methods assume that the surface has a definite inside and outside—making them unsuitable for surfaces with boundary.
+The conventional solution is simply to increase grid resolution, but due to Nyquist-Shannon, this resolution may have to be made prohibitively large in order to capture very fine features in an implicit function; moreover, one most often does not even have an a priori bound on the smallest feature size.  A common workaround is to use spatially adaptive marching methods, but here one encounters significant complexity in data structures and implementation—and still suffers from the lack of an a priori bound.
+We adopt a fundamentally different approach: rather than adapt the grid to the feature size, we change the information stored on the grid to capture (in spirit) information about the <em>frequency</em> of geometric features within each cell.
+More precisely, we encode geometry using a generalization of <em>Haken's normal coordinates</em> from geometric topology, which count the number of surface intersections for each edge, plus the intersection locations (as 1D barycentric coordinates).
+Our key contribution, then, is a procedure for reconstructing manifold, intersection-free geometry from these generalized normal coordinates.
+Unlike other marching procedures, we do not require a distinct inside/outside—nor do we even require consistently-oriented surface patches.
+This procedure is a strict generalization of the one used for marching tetrahedra, and shares all of its attractive properties.  E.g., reconstruction can be performed in parallel across all cells, while still guaranteeing compatibility with neighbors.  Moreover, unlike classic marching algorithms, we do not need to build a large table of possibilities, but can instead just run a simple deterministic algorithm.
+We evaluate our method on two applications: contouring signed distance functions with thin features, and converting polygon soup to manifold, intersection-free meshes.
+In practice, we see that, for equal grid resolution, the surface fidelity achieved via contouring is dramatically closer to the true surface.
+More importantly, with our method there is no lower bound on the feature size that we can encode on a fixed grid (apart from floating precision), meaning that we do better even than an adaptive method, for any fixed maximal degree of refinement.
+
+      </div>
+    </div>
+
+    <div class="body">
+        <div class="section_panel ">
+
+<div class="section_header">Paper</div>
+<div class="section_text">
+                <a href="SubgridMarchingTets.pdf" class="paper-preview">
+                    <img src="images/preview.png" alt="preview" /><br />
+                    <span>preprint (21.5&nbsp;mb)</span>
+                </a>
+            </div>
+</div>
+
+    </div>
+
+    <!--</div>-->
+    <div class="footer">
+      <a href="mailto:mark.gillespie@inria.fr" target="_top" class="footer_email">mark.gillespie@inria.fr</a>
+      <hr />
+      Mark Gillespie 2026
+    </div>
+  </body>
+</html>
