@@ -8,11 +8,11 @@
     <img_large>Research/solid-knitting/images/teaser.png</img_large>
     <authors>
         <author>
-            <name>Mark Gillespie</name>
-            <affiliation>Carnegie Mellon University</affiliation></author>
-        <author>
             <name>Yuichi Hirose</name>
             <href>https://hirose-yuichi.github.io/</href>
+            <affiliation>Carnegie Mellon University</affiliation></author>
+        <author>
+            <name>Mark Gillespie</name>
             <affiliation>Carnegie Mellon University</affiliation></author>
         <author>
             <name>Angelica M. Bonilla&amp;nbsp;Fominaya</name>
