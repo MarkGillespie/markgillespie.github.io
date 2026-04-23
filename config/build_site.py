@@ -1,5 +1,6 @@
 import datetime, json, os
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 def prettify_html(html_string):
 	return html_string
@@ -245,13 +246,14 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$NBSP',  nbsp_str)
 						)
 		project_page = prettify_html(project_page)
-		project_path = f'generated/Research/{project_folder}/index.html'
+		project_path = f'../Research/{project_folder}/index.html'
+		Path(project_path).parent.mkdir(parents=True, exist_ok=True) # ensure path exists
 		with open(project_path, 'w') as f:
 			print(project_path)
 			f.write(project_page)
 
 # write index
-with open('generated/index.html', 'w') as f:
+with open('../index.html', 'w') as f:
 	index_text = (index_template.replace('$DATE',   date_str)
 	                            .replace('$YEAR',   year_str)
 	                            .replace('$NEWS',   news_str)

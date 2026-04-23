@@ -53,10 +53,10 @@
     }
 
     #{$parent} .name_box {
-        display: inline-block;
         text-align: center;
         overflow: visible;
-        margin-bottom: 15px;
+        margin: auto;
+        margin-bottom: 15px !important;
     }
 
     #{$parent} .name_box > .title {
@@ -212,8 +212,11 @@
     #{$parent} .abstract {
         text-align: justify;
         width: 95%;
+        max-width: 750px;
         padding-left: auto;
         display: inline-block; /* center */
+        line-height: 1.15;
+        margin: auto;
     }
 
     #{$parent} .section_header {

@@ -7,6 +7,14 @@
 @use 'layouts/project.scss' as Project;
 @use 'layouts/navbar.scss' as Navbar;
 
+@font-face {
+  font-family:goudyinitialen;
+  src:url(GoudyInitialen.woff2)format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap
+}
+
 @include Navbar.navbar(());
 /* @include TwoColumn.layout(()); */
 @include OneColumn.layout((), "html.singlecolumn");

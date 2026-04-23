@@ -90,16 +90,17 @@
     }
 
     #{$parent} .abstract:first-letter {
+        font-family: 'goudyinitialen', 'Charis SIL', 'Palatino', serif;
         color: $dropcap-color;
         float: left;
-        font-size: 5em;
-        padding-top: .075em;
-        padding-right: 0.05em;
+        font-size: 6.5em;
+        padding-top: .05em;
+        padding-right: 0.025em;
     }
 
     #{$parent} .abstract .first-word {
         color: $dropcap-color;
-        margin-left: -.1em;
+        margin-left: -.2em;
         font-variant-caps: small-caps;
 /*        font-weight: 600;*/
     }
