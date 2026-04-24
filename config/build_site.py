@@ -1,6 +1,7 @@
 import datetime, json, os
 import xml.etree.ElementTree as ET
 from pathlib import Path
+# import brotli
 
 def prettify_html(html_string):
 	return html_string
@@ -261,19 +262,24 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			f.write(project_page)
 
 # write index
+index_text = (index_template.replace('$DATE',   date_str)
+                            .replace('$YEAR',   year_str)
+                            .replace('$NEWS',   news_str)
+                            .replace('$MISC',   misc_str)
+                            .replace('$TALKS',  talk_str)
+                            .replace('$RESEARCH_LIST',  research_list_str)
+                            .replace('$NAVBAR', navbar_str_home)
+                            .replace('$BACKGROUND_SVG', background_str)
+                            .replace('$EMAIL',  email_str)
+                            .replace('$GMAIL',  gmail_str)
+                            .replace('$NBSP',  nbsp_str)
+                            .replace('$MAIN_CSS',  main_css_str)
+                            )
+index_text = prettify_html(index_text)
 with open('../index.html', 'w') as f:
-	index_text = (index_template.replace('$DATE',   date_str)
-	                            .replace('$YEAR',   year_str)
-	                            .replace('$NEWS',   news_str)
-	                            .replace('$MISC',   misc_str)
-	                            .replace('$TALKS',  talk_str)
-	                            .replace('$RESEARCH_LIST',  research_list_str)
-	                            .replace('$NAVBAR', navbar_str_home)
-	                            .replace('$BACKGROUND_SVG', background_str)
-	                            .replace('$EMAIL',  email_str)
-	                            .replace('$GMAIL',  gmail_str)
-	                            .replace('$NBSP',  nbsp_str)
-	                            .replace('$MAIN_CSS',  main_css_str)
-	                            )
-	index_text = prettify_html(index_text)
 	f.write(index_text)
+
+# only saves a few kb
+# compressed_index_text = brotli.compress(index_text.encode(), quality=11) # Max compression
+# with open("../index.html.br", "wb") as f:
+#     f.write(compressed_index_text)
