@@ -49,6 +49,13 @@ gmail_str = "mark.gillespie81@gmail.com"
 with open('torus.svg') as f:
     background_str = f.read()
 
+# == CSS
+with open('../stylesheets/swiss-main.css') as f:
+	main_css_str = f"<style>{f.read().rstrip()}</style>"
+
+with open('../stylesheets/swiss-project.css') as f:
+	project_css_str = f"<style>{f.read().rstrip()}</style>"
+
 # == $NEWS
 news_str = "<ul>\n"
 for item in news_data.find('recent_items'):
@@ -244,6 +251,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$EMAIL',  email_str)
 		                                     .replace('$GMAIL',  gmail_str)
 		                                     .replace('$NBSP',  nbsp_str)
+		                                     .replace('$PROJECT_CSS',  project_css_str)
 						)
 		project_page = prettify_html(project_page)
 		project_path = f'../Research/{project_folder}/index.html'
@@ -265,6 +273,7 @@ with open('../index.html', 'w') as f:
 	                            .replace('$EMAIL',  email_str)
 	                            .replace('$GMAIL',  gmail_str)
 	                            .replace('$NBSP',  nbsp_str)
+	                            .replace('$MAIN_CSS',  main_css_str)
 	                            )
 	index_text = prettify_html(index_text)
 	f.write(index_text)

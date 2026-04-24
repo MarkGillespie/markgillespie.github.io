@@ -68,10 +68,10 @@
 ), $parent);
 }
 
-@include darkmode("html.darkmode");
+/*@include darkmode("html.darkmode");*/
 @include lightmode("html.lightmode");
 
-#darkmode-checkbox {
+/*#darkmode-checkbox {
 	  width: 0;
 	  height: 0;
     margin: 0;
@@ -80,12 +80,12 @@
 
 html.darkmode #darkmode-checkbox-label::after {
 	  content: "\263C";
-}
+}*/
 
 html.lightmode #darkmode-checkbox-label::after {
 	  content: "\263D";
 }
 
-html.nojs #darkmode-toggle {
+/*html.nojs #darkmode-toggle {
     display: none;
-}
+}*/

@@ -1,12 +1,4 @@
 @use "sass:color";
-@font-face {
-  font-family:goudyinitialencolorv3;
-  src:url(GoudyInitialenColor-v3.woff2)format("woff2");
-  font-weight:400;
-  font-style:normal;
-  font-display:block;
-}
-
 @mixin setcolors($map, $parent:"html") {
     $accent : map-get($map, 'accent');
     $blank-space : map-get($map, 'blank-space');
