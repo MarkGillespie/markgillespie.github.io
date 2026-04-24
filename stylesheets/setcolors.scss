@@ -4,7 +4,7 @@
   src:url(GoudyInitialenColor-v3.woff2)format("woff2");
   font-weight:400;
   font-style:normal;
-  font-display:swap
+  font-display:block;
 }
 
 @mixin setcolors($map, $parent:"html") {
