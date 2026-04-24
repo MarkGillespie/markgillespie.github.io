@@ -67,37 +67,37 @@
         <panel>
             <title>Selected Figures</title>
             <content>
-                  <img src="images/figures/surface_knitting_vs_solid_knitting.svg"/>
+                  <img src="images/figures/surface_knitting_vs_solid_knitting.svg" loading="lazy"/>
                   <div class="caption">
                       Unlike standard knitting, which makes hollow surfaces, solid knitting makes dense volumes by layering knit sheets---much as 3D printers layer plastic sheets.
                   </div>
                   <hr/>
 
-                  <img src="images/figures/pyramid-smaller.webp"/>
+                  <img src="images/figures/pyramid-smaller.webp" loading="lazy"/>
                   <div class="caption">
                       Solid knitting builds up objects using layered sheets of fabric.<br/><span style="display: inline-block; text-align: right; width: 100%; font-size: .75em">(this example was fabricated by hand)</span>
                   </div>
                   <hr/>
 
-                  <img src="images/figures/solid-purling.svg"/>
+                  <img src="images/figures/solid-purling.svg" loading="lazy"/>
                   <div class="caption">
                       Each layer of a solid-knit is made of rows of stitches (<em>left</em>). To form a new row, one runs yarn across the latest row of loops on the top layer (<em>center</em>) and pulls the yarn through both these loops <em>and</em> loops from a row one layer down (<em>right</em>).
                   </div>
                   <hr/>
 
-                  <img src="images/figures/solid-knit-stitch.svg" style="max-width: 60%; box-shadow: none;"/>
+                  <img src="images/figures/solid-knit-stitch.svg" style="max-width: 60%; box-shadow: none;" loading="lazy"/>
                   <div class="caption">
                       Just as a traditional knit stitch can be seen as a rectangular tile, a solid knit stitch can be seen as a box-shaped tile attached to six neighbors. It is connected to its left and right neighbors via the yarn and connected to its neighbors in the other two directions by interlocking loops.
                   </div>
                   <hr/>
 
-                  <img src="images/figures/machine-parts.webp" style="max-width: 100%;"/>
+                  <img src="images/figures/machine-parts.webp" style="max-width: 100%;" loading="lazy"/>
                   <div class="caption">
                       The solid knitting machine has two needle beds, which are each made up of holders, needles, and retaining needles (<em>top right</em>). The holders have space to hold onto every loop in a layer of solid knitting (<em>bottom right</em>). The machine also has a single yarn carrier to feeds in new yarn (<em>top left</em>).
                   </div>
                   <hr/>
 
-                  <img src="images/figures/machine-solid-knit-stitch.webp" style="box-shadow:none; max-width: 105%; width: 105%;"/>
+                  <img src="images/figures/machine-solid-knit-stitch.webp" style="box-shadow:none; max-width: 105%; width: 105%;" loading="lazy"/>
                   <div class="caption">
                       Knitting the first row of a new layer on the solid knitting machine:
                       (1) the machine first tucks a new span of yarn beneath the holder.
@@ -109,13 +109,13 @@
                   </div>
                   <hr/>
 
-                  <img src="images/figures/results.webp" style="max-width: 65%;"/>
+                  <img src="images/figures/results.webp" style="max-width: 65%;" loading="lazy"/>
                   <div class="caption">
                       Rectangular and triangular prisms designed in our software and constructed by the solid knitting machine.
                   </div>
                   <hr/>
 
-                  <img src="images/figures/solidknittedSandalsLayer.webp" style="max-width: 100%;"/>
+                  <img src="images/figures/solidknittedSandalsLayer.webp" style="max-width: 100%;" loading="lazy"/>
                   <div class="caption">
                       <em>Left</em>: a model of sandals is converted into a solid knitting pattern by voxelizing with rectangular elements whose aspect ratio matches the stitches then slicing into layers. <em>Right</em>: Solid-knit sandals constructed by hand from this pattern.
                   </div>
