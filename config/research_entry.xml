@@ -1,6 +1,6 @@
 <div class="project_header">
     $ANCHOR
-    <div class="image"><img src="$IMG_SMALL"></div>
+    <div class="image"><img src="$IMG_SMALL" width="250" height="200"></div>
     <div class="text">
         <div class="project_title"><a href="$HREF">$TITLE</a></div>
         <div class="project_author_list">$AUTHORS</div>

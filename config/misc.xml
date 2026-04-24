@@ -132,7 +132,7 @@
                 $DETAILS
             </div>
         </div>
-        <a href="$HREF" class="image"><img src="$IMG"/></a>
+        <a href="$HREF" class="image"><img src="$IMG" width="120" height="120"/></a>
     </div>
 </template>
 </misc_data>
