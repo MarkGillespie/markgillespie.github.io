@@ -2,7 +2,7 @@ import datetime, json, os
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
-# import brotli
+import brotli
 
 def prettify_html(html_string):
 	return html_string
@@ -270,6 +270,10 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			print(project_path)
 			f.write(project_page)
 
+		compressed_project_page = brotli.compress(project_page.encode(), quality=11) # Max compression
+		with open(f"{project_path}.br", "wb") as f:
+		    f.write(compressed_project_page)
+
 # write index
 index_text = (index_template.replace('$DATE',   date_str)
                             .replace('$YEAR',   year_str)
@@ -289,7 +293,6 @@ index_text = prettify_html(index_text)
 with open('../index.html', 'w') as f:
 	f.write(index_text)
 
-# only saves a few kb
-# compressed_index_text = brotli.compress(index_text.encode(), quality=11) # Max compression
-# with open("../index.html.br", "wb") as f:
-#     f.write(compressed_index_text)
+compressed_index_text = brotli.compress(index_text.encode(), quality=11) # Max compression
+with open("../index.html.br", "wb") as f:
+    f.write(compressed_index_text)
