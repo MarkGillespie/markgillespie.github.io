@@ -1,4 +1,11 @@
 @use "sass:color";
+@font-face {
+  font-family:goudyinitialencolorv3;
+  src:url(GoudyInitialenColor-v3.woff2)format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap
+}
 
 @mixin setcolors($map, $parent:"html") {
     $accent : map-get($map, 'accent');
@@ -89,18 +96,28 @@
         color: $ordinary-font-color;
     }
 
-    #{$parent} .abstract:first-letter {
-        font-family: 'goudyinitialen', 'Charis SIL', 'Palatino', serif;
+    @font-palette-values --swiss-theme {
+      font-family: 'goudyinitialencolorv3';
+      override-colors: 
+        0 white,
+        1 $dropcap-color,
+        2 color.scale($dropcap-color, $lightness:+80%),
+        3 #fffc;
+    }
+
+    #{$parent} .abstract::first-letter {
+        font-family: 'goudyinitialencolorv3', 'Charis SIL', 'Palatino', serif;
         color: $dropcap-color;
         float: left;
-        font-size: 6.5em;
-        padding-top: .05em;
-        padding-right: 0.025em;
+        font-size: 5.6em;
+        padding-top: .0em;
+        padding-right: 0.06em;
+        font-palette: --swiss-theme;
     }
 
     #{$parent} .abstract .first-word {
         color: $dropcap-color;
-        margin-left: -.2em;
+        margin-left: -.3em;
         font-variant-caps: small-caps;
 /*        font-weight: 600;*/
     }

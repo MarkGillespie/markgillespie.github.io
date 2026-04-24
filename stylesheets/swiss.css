@@ -1,11 +1,18 @@
 @charset "UTF-8";
+@font-face {
+  font-family: goudyinitialencolorv3;
+  src: url(GoudyInitialenColor-v3.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 html.darkmode {
   background-color: #111;
   color: #ddd;
 }
 
 html.darkmode .section_panel, html.darkmode .panel {
-  background-color: #334e;
+  background-color: rgba(51, 51, 68, 0.9333333333);
   box-shadow: 1px 1px 3px rgba(119, 119, 119, 0.3);
 }
 
@@ -56,18 +63,23 @@ html.darkmode .talk_venue a {
   color: #ddd;
 }
 
-html.darkmode .abstract:first-letter {
-  font-family: "goudyinitialen", "Charis SIL", "Palatino", serif;
+@font-palette-values --swiss-theme {
+  font-family: "goudyinitialencolorv3";
+  override-colors: 0 white, 1 #bdf, 2 #f1f8ff, 3 rgba(255, 255, 255, 0.8);
+}
+html.darkmode .abstract::first-letter {
+  font-family: "goudyinitialencolorv3", "Charis SIL", "Palatino", serif;
   color: #bdf;
   float: left;
-  font-size: 6.5em;
-  padding-top: 0.05em;
-  padding-right: 0.025em;
+  font-size: 5.6em;
+  padding-top: 0em;
+  padding-right: 0.06em;
+  font-palette: --swiss-theme;
 }
 
 html.darkmode .abstract .first-word {
   color: #bdf;
-  margin-left: -0.2em;
+  margin-left: -0.3em;
   font-variant-caps: small-caps;
   /*        font-weight: 600;*/
 }
@@ -256,15 +268,15 @@ html.darkmode .st9 {
 }
 html.darkmode .st10 {
   opacity: 0.4;
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st11 {
   opacity: 0.8;
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st12 {
   opacity: 0.4;
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st13 {
   opacity: 0.25;
@@ -442,7 +454,7 @@ html.darkmode .st42 {
   fill: #bbf;
 }
 html.darkmode .st43 {
-  fill: #a7eb;
+  fill: rgba(170, 119, 238, 0.7333333333);
 }
 html.darkmode .st44 {
   opacity: 0.4;
@@ -476,7 +488,7 @@ html.lightmode {
 }
 
 html.lightmode .section_panel, html.lightmode .panel {
-  background-color: #cde6f7f2;
+  background-color: rgba(205, 230, 247, 0.9490196078);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -527,18 +539,23 @@ html.lightmode .talk_venue a {
   color: #000;
 }
 
-html.lightmode .abstract:first-letter {
-  font-family: "goudyinitialen", "Charis SIL", "Palatino", serif;
+@font-palette-values --swiss-theme {
+  font-family: "goudyinitialencolorv3";
+  override-colors: 0 white, 1 #1E59AA, 2 #caddf6, 3 rgba(255, 255, 255, 0.8);
+}
+html.lightmode .abstract::first-letter {
+  font-family: "goudyinitialencolorv3", "Charis SIL", "Palatino", serif;
   color: #1E59AA;
   float: left;
-  font-size: 6.5em;
-  padding-top: 0.05em;
-  padding-right: 0.025em;
+  font-size: 5.6em;
+  padding-top: 0em;
+  padding-right: 0.06em;
+  font-palette: --swiss-theme;
 }
 
 html.lightmode .abstract .first-word {
   color: #1E59AA;
-  margin-left: -0.2em;
+  margin-left: -0.3em;
   font-variant-caps: small-caps;
   /*        font-weight: 600;*/
 }
@@ -956,17 +973,7 @@ html.nojs #darkmode-toggle {
   display: none;
 }
 
-/* One column layout */
-/* Two column layout */
-/* Project page layout */
-/* Two column layout */
-@font-face {
-  font-family: goudyinitialen;
-  src: url(GoudyInitialen.woff2) format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+/* One column layout */ /* Two column layout */ /* Project page layout */ /* Two column layout */
 /******************************/
 /*         NAVBAR             */
 /******************************/
@@ -1006,12 +1013,10 @@ body a.navbar_link:hover {
   body .vanishing {
     display: none !important;
   }
-
   body .section_panel {
     max-width: 100%;
     width: 100vw;
   }
-
   body .body {
     justify-content: left;
   }
@@ -1069,10 +1074,8 @@ body #style-menu ul {
   display: none;
   position: absolute;
   right: 0;
-  list-style-type: none;
-  /* Remove bullets */
-  margin: 0;
-  /* Remove margins */
+  list-style-type: none; /* Remove bullets */
+  margin: 0; /* Remove margins */
   padding: 0;
 }
 
@@ -1117,8 +1120,7 @@ html.singlecolumn body {
 }
 
 html.singlecolumn .cpp {
-  font-family: monospace;
-  /* for typesetting the word "C++" */
+  font-family: monospace; /* for typesetting the word "C++" */
 }
 
 html.singlecolumn #background_image {
@@ -1186,7 +1188,6 @@ html.singlecolumn .section_panel > a {
     max-width: 100%;
     padding-right: 0em;
   }
-
   html.singlecolumn .project_title {
     font-size: 20pt !important;
     font-weight: normal !important;
@@ -1213,13 +1214,11 @@ html.singlecolumn .section_text hr {
 
 html.singlecolumn .section_text a {
   display: inline;
-  white-space: normal;
-  /* allow line breaks on spaces in links */
+  white-space: normal; /* allow line breaks on spaces in links */
 }
 
 html.singlecolumn .project_header {
-  display: flex;
-  /* equal child height */
+  display: flex; /* equal child height */
   column-gap: 1em;
 }
 
@@ -1243,8 +1242,7 @@ html.singlecolumn .breaking_news_container {
 }
 
 html.singlecolumn .section_text .news {
-  position: relative;
-  /* needed to position "...more" label later */
+  position: relative; /* needed to position "...more" label later */
   padding-bottom: 0.5em;
   font-size: 14px;
 }
@@ -1258,8 +1256,7 @@ html.singlecolumn .section_text .news h4 {
 html.singlecolumn .section_text .news ul, html.singlecolumn .section_text .news ul div {
   margin: 0;
   padding: 0;
-  display: flex;
-  /* displaying with flex allows us to control the list order from css for the summary/details */
+  display: flex; /* displaying with flex allows us to control the list order from css for the summary/details */
   flex-direction: column;
   gap: 0.4em;
 }
@@ -1295,8 +1292,7 @@ html.singlecolumn .section_text .news summary {
 }
 
 html.singlecolumn .section_text .news details {
-  display: contents;
-  /* make details participate in flexbox layout */
+  display: contents; /* make details participate in flexbox layout */
 }
 
 html.singlecolumn .section_text .news summary:hover {
@@ -1338,8 +1334,7 @@ html.singlecolumn .misc_project_list {
 
 html.singlecolumn .misc_project_list .project_header {
   margin-bottom: 2em;
-  flex-direction: row-reverse;
-  /* put images left of text by default */
+  flex-direction: row-reverse; /* put images left of text by default */
   max-width: 48%;
 }
 
@@ -1425,8 +1420,7 @@ html.singlecolumn .section_panel .project_links {
 }
 
 html.singlecolumn .talk .project_links {
-  justify-content: flex-start;
-  /* left-align talk links */
+  justify-content: flex-start; /* left-align talk links */
   padding-left: 0pt;
   padding-top: 0pt;
   margin-top: 0pt;
@@ -1450,8 +1444,7 @@ html.singlecolumn .project_links a::after, html.singlecolumn .bibBox button::aft
 }
 
 html.singlecolumn .section_panel .project_links details {
-  display: contents;
-  /* make details participate in flexbox layout */
+  display: contents; /* make details participate in flexbox layout */
 }
 
 html.singlecolumn .section_panel .project_links details summary {
@@ -1472,8 +1465,7 @@ html.singlecolumn .section_panel .project_links details summary::before {
 }
 
 html.singlecolumn .section_panel .project_links details[open] summary {
-  order: 2;
-  /* move to end */
+  order: 2; /* move to end */
 }
 
 html.singlecolumn .section_panel .project_links details[open] summary::before {
@@ -1674,7 +1666,6 @@ html.singlecolumn h2, html.singlecolumn .section_header {
   html.singlecolumn h1 {
     font-size: 75px;
   }
-
   html.singlecolumn .title {
     padding: 8px;
   }
@@ -1837,21 +1828,17 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
   html.singlecolumn .name_box {
     /* font-size: 6em; */
   }
-
   html.singlecolumn h3 {
     font-size: 2em;
     font-weight: normal;
   }
-
   html.singlecolumn h4 {
     text-align: left;
     font-weight: normal;
   }
-
   html.singlecolumn h2, html.singlecolumn .section_header {
     margin-left: 10pt;
   }
-
   html.singlecolumn .talk_venue {
     display: inline-block;
     clear: left;
@@ -1865,33 +1852,26 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
     grid-template-rows: min-content min-content auto;
     grid-template-columns: auto;
   }
-
   html.singlecolumn #header_img {
     grid-column: 1/span 1;
     grid-row: 1/span 1;
   }
-
   html.singlecolumn .name {
     grid-column: 1/span 1;
     grid-row: 2/2;
   }
-
   html.singlecolumn .header .section_text {
     grid-column: 1/span 1;
     grid-row: 3/span 1;
   }
-
   html.singlecolumn .project_header {
     flex-direction: column;
     align-items: center;
     text-align: left;
   }
-
   html.singlecolumn .misc_project_list .project_header {
-    flex-direction: column;
-    /* put images below text on thin screens */
+    flex-direction: column; /* put images below text on thin screens */
   }
-
   html.singlecolumn .project_header .image {
     display: inline-block;
     width: 100%;
@@ -1899,47 +1879,37 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
     text-align: center;
     margin-top: 0;
   }
-
   html.singlecolumn .project_header .text {
     padding: 0;
     text-align: center;
   }
-
   html.singlecolumn .project_header .text .project_title {
     margin: 0;
     text-align: center;
   }
-
   html.singlecolumn .project_header .text .award {
     margin: 0;
   }
-
   html.singlecolumn .project_header .text .mini_abstract {
     margin-top: 0.5em;
     text-align: left;
   }
-
   /* more spacing for clicking on mobile */
   html.singlecolumn .section_panel .project_links {
     line-height: 1.75;
   }
-
   html.singlecolumn .section_panel .project_links a {
     margin-left: 0.5em;
   }
-
   html.singlecolumn .section_panel .project_links summary {
     padding-left: 0.2em;
   }
-
   html.singlecolumn .bibBox {
     margin-right: 0.25em;
   }
-
   html.singlecolumn .talk_date {
     width: 3em;
   }
-
   html.singlecolumn .misc_project_list .project_header {
     max-width: 75%;
   }
@@ -1948,7 +1918,6 @@ html.singlecolumn .venue a, html.singlecolumn .talk_venue a {
   html.singlecolumn .name_box {
     font-size: 3em;
   }
-
   html.singlecolumn .body {
     width: 100vw;
   }
@@ -1999,8 +1968,7 @@ html.project body {
 }
 
 html.project .cpp {
-  font-family: monospace;
-  /* for typesetting the word "C++" */
+  font-family: monospace; /* for typesetting the word "C++" */
 }
 
 html.project .body {
@@ -2202,8 +2170,7 @@ html.project .abstract {
   width: 95%;
   max-width: 750px;
   padding-left: auto;
-  display: inline-block;
-  /* center */
+  display: inline-block; /* center */
   line-height: 1.15;
   margin: auto;
 }
@@ -2227,8 +2194,7 @@ html.project .section_header {
 }
 
 html.project .section_panel {
-  width: auto;
-  /* undo a width: 100% from somewhere else */
+  width: auto; /* undo a width: 100% from somewhere else */
   max-width: 400px;
   margin: 1em;
   box-sizing: border-box;
@@ -2343,7 +2309,6 @@ html.project .centered_content {
   html.project .footer {
     margin-top: 2em;
   }
-
   html.project .example_grid .example_grid_entry {
     max-width: 48%;
   }
@@ -2352,7 +2317,6 @@ html.project .centered_content {
   html.project .abstract {
     text-align: left;
   }
-
   html.project .name_box > .authors {
     flex-direction: column;
     max-width: 80%;
@@ -2360,44 +2324,35 @@ html.project .centered_content {
     display: block;
     text-align: left;
   }
-
   html.project .name_box > .authors > .author {
     display: flex;
     align-items: start;
     margin-bottom: 0.3em;
   }
-
   html.project .name_box > .authors > .author > .name {
     margin-bottom: 0;
     margin-right: 0.5em;
     flex: 0 0 auto;
   }
-
   html.project .name_box > .authors > .author > .name::after {
     content: ",";
   }
-
   html.project .name_box > .authors > .author > .affiliation {
     margin: 0;
   }
-
   html.project .paper_teaser {
     max-width: 100%;
   }
-
   html.project .figures img {
     max-width: 100%;
   }
-
   /* more spacing for clicking on mobile */
   html.project .quick_links {
     line-height: 1.75;
   }
-
   html.project .example_grid .example_grid_entry {
     max-width: 100%;
   }
-
   html.project .example_grid .example_grid_entry img {
     max-width: 80%;
   }
