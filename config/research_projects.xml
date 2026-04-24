@@ -14,7 +14,7 @@
 </project_list>
 <project_template>
 <div class="project_header">
-    <div class="image"><a href="$HREF"><img src="$IMG_SMALL"/></a></div>
+    <div class="image"><a href="$HREF"><img src="$IMG_SMALL" loading="lazy"/></a></div>
     <div class="text">
         <div class="project_title"><a href="$HREF">$TITLE</a></div>
         <div class="project_author_list">$AUTHORS</div>
