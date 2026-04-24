@@ -1,6 +1,7 @@
 import datetime, json, os
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import quote
 # import brotli
 
 def prettify_html(html_string):
@@ -49,6 +50,13 @@ gmail_str = "mark.gillespie81@gmail.com"
 # == BACKGROUND_SVG
 with open('torus.svg') as f:
     background_str = f.read()
+
+# == FAVICON
+with open('../favicon.svg', encoding='utf-8') as f:
+    svg = f.read()
+    svg = " ".join(svg.split()) # collapse whitespace
+    svg = quote(svg, safe="=:/?&;,@+$!*'()~") # Escape characters that would break an HTML attribute or URI.
+    favicon_str = f'<link rel="icon" href="data:image/svg+xml,{svg}" type="image/svg+xml"/>'
 
 # == CSS
 with open('../stylesheets/swiss-main.css') as f:
@@ -253,6 +261,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$GMAIL',  gmail_str)
 		                                     .replace('$NBSP',  nbsp_str)
 		                                     .replace('$PROJECT_CSS',  project_css_str)
+		                                     .replace('$FAVICON',  favicon_str)
 						)
 		project_page = prettify_html(project_page)
 		project_path = f'../Research/{project_folder}/index.html'
@@ -274,6 +283,7 @@ index_text = (index_template.replace('$DATE',   date_str)
                             .replace('$GMAIL',  gmail_str)
                             .replace('$NBSP',  nbsp_str)
                             .replace('$MAIN_CSS',  main_css_str)
+                            .replace('$FAVICON',  favicon_str)
                             )
 index_text = prettify_html(index_text)
 with open('../index.html', 'w') as f:
