@@ -4,8 +4,8 @@
     <key>harnack-tracing</key>
     <href>index.html</href>
     <doi>10.1145/3658201</doi>
-    <img_small>Research/harnack-tracing/images/teaser-small.png</img_small>
-    <img_large>Research/harnack-tracing/images/teaser.png<style>max-width: 400pt;</style></img_large>
+    <img_small>Research/harnack-tracing/images/teaser-small.webp</img_small>
+    <img_large>Research/harnack-tracing/images/teaser.webp<style>max-width: 400pt;</style></img_large>
     <authors>
         <author>
             <name>Mark Gillespie</name>
@@ -49,7 +49,7 @@
             <title>Paper</title>
             <content>
                 <a href="HarnackTracing.pdf" class="paper-preview">
-                    <img src="images/preview.png" alt="preview"/><br/>
+                    <img src="images/preview.webp" alt="preview"/><br/>
                     <span>pdf (11.2 mb)</span>
                 </a>
             </content>
@@ -58,7 +58,7 @@
             <title>Supplement</title>
             <content>
                 <a href="HarnackTracingSupplement.pdf" class="paper-preview">
-                    <img src="images/supplement-preview.png" alt="preview"/><br/>
+                    <img src="images/supplement-preview.webp" alt="preview"/><br/>
                     <span>pdf (350 kb)</span>
                 </a>
             </content>
@@ -70,7 +70,7 @@
                 <div class="example_grid">
                     <div class="example_grid_entry">
                         <a href="https://www.shadertoy.com/view/DlSfWd">
-                            <img src="images/RiemannSurfaces.png" style="width: 100%;"/>
+                            <img src="images/RiemannSurfaces.webp" style="width: 100%;"/>
                         </a>
                         <div class="caption">
                             <h4 style="margin: 0;">Riemann Surfaces</h4>
@@ -81,7 +81,7 @@
 
                     <div class="example_grid_entry">
                         <a href="https://www.shadertoy.com/view/4cfXWs">
-                            <img src="images/NonplanarPolygon.png" style="width: 50%; margin: auto;"/>
+                            <img src="images/NonplanarPolygon.webp" style="width: 50%; margin: auto;"/>
                         </a>
                         <div class="caption">
                             <h4 style="margin: 0;">Nonplanar Polygons</h4>
@@ -92,7 +92,7 @@
 
                     <div class="example_grid_entry">
                         <a href="https://www.shadertoy.com/view/mtcBDl">
-                            <img src="images/PointCloud.png" style="width: 75%; margin: auto;"/>
+                            <img src="images/PointCloud.webp" style="width: 75%; margin: auto;"/>
                         </a>
                         <div class="caption">
                             <h4 style="margin: 0;">Point Cloud Reconstruction</h4>
@@ -103,7 +103,7 @@
 
                     <div class="example_grid_entry">
                         <a href="https://www.shadertoy.com/view/MffGzS">
-                            <img src="images/Gyroid.png" style="width: 50%; margin: auto; margin-bottom: -2em;"/>
+                            <img src="images/Gyroid.webp" style="width: 50%; margin: auto; margin-bottom: -2em;"/>
                         </a>
                         <div class="caption">
                             <h4 style="margin: 0;">Gyroid</h4>
@@ -114,7 +114,7 @@
 
                     <div class="example_grid_entry">
                         <a href="https://www.shadertoy.com/view/DdXyRj">
-                        <img src="images/HypersphericalHarmonics.jpg" style="width: 75%; margin: auto;"/>
+                        <img src="images/HypersphericalHarmonics.webp" style="width: 75%; margin: auto;"/>
                         </a>
                         <div class="caption">
                             <h4 style="margin: 0;">Hyperspherical Harmonics</h4>
@@ -144,7 +144,7 @@
                 </div>
                 <hr/>
 
-                <img src="images/PointCloud.png" style="box-shadow: none;"/>
+                <img src="images/PointCloud.webp" style="box-shadow: none;"/>
                 <div class="caption">
                     Given an oriented point cloud (left), we can directly visualize an interpolating surface (right). This procedure effectively shows the result of running the Poisson surface reconstruction algorithm of Kazhdan et al. [<a href="https://hhoppe.com/poissonrecon.pdf">2006</a>], without requiring any volumetric meshing or linear solves.
                 </div>

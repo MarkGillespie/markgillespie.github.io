@@ -4,8 +4,8 @@
     <key>SubgridMarchingTets</key>
     <href>index.html</href>
     <!-- <doi>10.1145/3731197</doi> -->
-    <img_small>Research/SubgridMarchingTets/images/RepresentativeImage.png<style>max-height: 1em;</style></img_small>
-    <img_large>Research/SubgridMarchingTets/images/teaser.png<style>max-height: 25em; margin: 10px 0px;</style></img_large>
+    <img_small>Research/SubgridMarchingTets/images/RepresentativeImage.webp<style>max-width: 5em;</style></img_small>
+    <img_large>Research/SubgridMarchingTets/images/teaser.webp<style>max-height: 25em; margin: 10px 0px;</style></img_large>
     <authors>
         <author>
             <name>Hossein Baktash</name>
@@ -51,7 +51,7 @@ More importantly, with our method there is no lower bound on the feature size th
             <title>Paper</title>
             <content>
                 <a href="SubgridMarchingTets.pdf" class="paper-preview">
-                    <img src="images/preview.png" alt="preview"/><br/>
+                    <img src="images/preview.webp" alt="preview"/><br/>
                     <span>preprint (21.5&nbsp;mb)</span>
                 </a>
             </content>
@@ -61,11 +61,11 @@ More importantly, with our method there is no lower bound on the feature size th
             <content>
                 <div style="display: flex; flex-start; gap: .5em;">
                 <a href="DiscreteTorsionSupplemental.pdf" class="paper-preview">
-                    <img src="images/supplemental-preview.png" alt="preview"/><br/>
+                    <img src="images/supplemental-preview.webp" alt="preview"/><br/>
                     <span>pdf (715 kb)</span>
                 </a>
                 <a href="DiscreteTorsionLeviCivitaConnection.nb" class="paper-preview">
-                    <img src="images/mathematica-preview.png" alt="preview"/><br/>
+                    <img src="images/mathematica-preview.webp" alt="preview"/><br/>
                     <span>Mathematica (57&nbsp;kb)</span>
                 </a>
             </div>
@@ -77,21 +77,21 @@ More importantly, with our method there is no lower bound on the feature size th
             <content>
                 <div class="example_grid">
                   <div class="example_grid_entry">
-                  <img src="images/vector_heat_log_map.png" style="max-width: 100%; box-shadow: none;"/>
+                  <img src="images/vector_heat_log_map.webp" style="max-width: 100%; box-shadow: none;"/>
                   <div class="caption">
                       The connection Laplacian used in the vector heat method of Sharp et al [<a href="https://doi.org/10.1145/3243651">2019</a>] can be formed for any connection. In this example, we compute a logarithmic map—a sort of global polar parameterization—using the connection Laplacian of an ordinary torsion-free connection <em>(left)</em>, and using a connection with prescribed non-zero torsion equal to the gradient of a torsion potential <em>(right)</em>, which introduces a distinct twist into the radial lines of the parameterization.
                   </div>
                   </div>
                   <div class="example_grid_entry">
 
-                  <img src="images/trivial_connections.png" style="max-width: 100%; box-shadow: none;"/>
+                  <img src="images/trivial_connections.webp" style="max-width: 100%; box-shadow: none;"/>
                   <div class="caption">
                       Here we explore the impact of torsion on vector field design: a parallel vector field for a minimal-torsion trivial connection with prescribed singularities is shown on the left, while parallel fields for trivial connections with additional gradient components in their torsion are shown in the center, along with the prescribed scalar potentials. A compact potential changes the field locally, while a globally-supported potential causes larger-scale changes <em>(top right)</em>. Torsion can also be incorporated into the design of <em>n</em>-vector fields such as cross fields <em>(bottom)</em>.
                   </div>
                   </div>
                   <div class="example_grid_entry">
 
-                  <img src="images/torsion_stripes.png" style="max-width: 100%; box-shadow: none;"/>
+                  <img src="images/torsion_stripes.webp" style="max-width: 100%; box-shadow: none;"/>
                   <div class="caption">
                       Just as the ordinary Laplacian measures the smoothness of scalar functions, the connection Laplacian defines a notion of smoothness for vector fields. Computing an optimal vector field in the sense of Knoppel et al. [<a href="https://doi.org/10.1145/2461912.2462005">2013</a>] using the discrete Levi-Civita connection to build the connection Laplacian yields a field whose streamlines are as straight as possible in 3D space <em>(top)</em>, whereas using a connection with a nontrivial torsion (here, the gradient of a potential) introduces twists into the streamlines <em>(bottom)</em>.
                   </div>

@@ -4,8 +4,8 @@
     <key>intrinsic-coarsening</key>
     <href>index.html</href>
     <doi>10.1145/3592403</doi>
-    <img_small>Research/intrinsic-coarsening/RepresentativeImage.png</img_small>
-    <img_large>Research/intrinsic-coarsening/images/teaser.png</img_large>
+    <img_small>Research/intrinsic-coarsening/RepresentativeImage.webp</img_small>
+    <img_large>Research/intrinsic-coarsening/images/teaser.webp</img_large>
     <authors>
         <author>
             <name>Hsueh-Ti&amp;nbsp;Derek&amp;nbsp;Liu</name>
@@ -52,7 +52,7 @@
             <title>Paper</title>
             <content>
                 <a href="IntrinsicErrorMetric.pdf" class="paper-preview">
-                    <img src="images/preview.png" alt="preview"/><br/>
+                    <img src="images/preview.webp" alt="preview"/><br/>
                     <span>pdf (15.6 mb)</span>
                 </a>
             </content>

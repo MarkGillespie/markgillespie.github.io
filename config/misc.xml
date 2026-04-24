@@ -4,7 +4,7 @@
         <title>Geodesic Walker</title>
         <href>Demos/GeodesicWalker/html/</href>
         <details>Web demo which traces out geodesics on a mesh. The code is available <a href="https://github.com/MarkGillespie/GeodesicWalker">here</a>.</details>
-        <img>images/GeodesicWalker.png</img>
+        <img>images/GeodesicWalker.webp</img>
     </entry>
 
     <entry>
@@ -13,7 +13,7 @@
         <details>
             Algorithm demonstrations on <a href="https://www.shadertoy.com/">ShaderToy</a>. Mostly from my paper on <a href="Research/harnack-tracing/index.html">ray tracing harmonic functions</a>.
         </details>
-        <img>images/tartan-riemann-surface.png</img>
+        <img>images/tartan-riemann-surface.webp</img>
     </entry>
 
     <entry>
@@ -22,7 +22,7 @@
         <details>
             Helper functions for tracing streamlines of vector/direction fields and generating textures for rendering them.
         </details>
-        <img>images/streamline-example.png</img>
+        <img>images/streamline-example.webp</img>
     </entry>
 
     <entry>
@@ -40,7 +40,7 @@
         <details>
             A shader to make meshes tartan.
         </details>
-        <img>Misc/TartanShader/Bunny_small.png</img>
+        <img>Misc/TartanShader/Bunny_small.webp</img>
     </entry>
 
     <entry>
@@ -49,7 +49,7 @@
         <details>
             GLSL implementation of <a href="https://arxiv.org/pdf/2306.12792.pdf">BPM: Blended Piecewise Möbius Maps</a> by Rorberg, Vaxman &amp; Ben-Chen, incorporated into <a href="https://polyscope.run/">polyscope</a>.
         </details>
-        <img>images/BPM.png</img>
+        <img>images/BPM.webp</img>
     </entry>
 
     <entry>
@@ -58,7 +58,7 @@
         <details>
             Takes any triangle mesh and turns it into an orientable manifold mesh by constructing the orientable double cover.
         </details>
-        <img>images/double_cover.png</img>
+        <img>images/double_cover.webp</img>
     </entry>
 
     <entry>
@@ -67,7 +67,7 @@
         <details>
             This is a rough implementation of the Delaunay edge split algorithm presented in <a href="https://dl.acm.org/doi/10.1145/2816795.2818076">Efficient construction and simplification of Delaunay meshes</a> by Yong-Jin Liu, Chunxu  Xu, Dian  Fan, and Ying He. It takes in a triangle mesh and then performs edge splits to make the mesh Delaunay.
         </details>
-        <img>images/split_delaunay_bunny.png</img>
+        <img>images/split_delaunay_bunny.webp</img>
     </entry>
 
     <entry>
@@ -76,7 +76,7 @@
         <details>
             Web demo computing the Karcher mean of points on a sphere.
         </details>
-        <img>Misc/Karcher/SphereKarcherMean.png</img>
+        <img>Misc/Karcher/SphereKarcherMean.webp</img>
     </entry>
 
     <entry>
@@ -85,7 +85,7 @@
         <details>
             Visualization of the phase space of a pendulum as a cylinder.
         </details>
-        <img>Misc/PhaseSpace/phase_space.png</img>
+        <img>Misc/PhaseSpace/phase_space.webp</img>
     </entry>
 
     <entry>
@@ -94,7 +94,7 @@
         <details>
             Comparison of explicit, implicit, and symplectic Euler integrators for a pendulum.
         </details>
-        <img>Misc/integrators/Pendulum.png</img>
+        <img>Misc/integrators/Pendulum.webp</img>
     </entry>
 
     <entry>
@@ -132,7 +132,7 @@
                 $DETAILS
             </div>
         </div>
-        <a href="$HREF" class="image"><img src="$IMG" width="120" height="120"/></a>
+        <a href="$HREF" class="image"><img src="$IMG" width="120" height="120" loading="lazy"/></a>
     </div>
 </template>
 </misc_data>
