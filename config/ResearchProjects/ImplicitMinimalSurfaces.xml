@@ -5,7 +5,7 @@
     <href>index.html</href>
     <!-- <doi>10.1145/3731197</doi> -->
     <img_small>Research/ImplicitMinimalSurfaces/images/RepresentativeImage.webp</img_small>
-    <img_large>Research/ImplicitMinimalSurfaces/images/teaser.webp<style>max-height: 25em;</style></img_large>
+    <img_large>Research/ImplicitMinimalSurfaces/images/teaser.webp<style>max-height: 25em; margin-top: .75em;</style></img_large>
     <authors>
         <author>
             <name>Etienne Corman</name>

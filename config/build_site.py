@@ -283,7 +283,9 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		letter, word = first_word[0], first_word[1:]
 		abstract_text = f'{letter}<span class="first-word">{word}</span> {rest}\n'
 		img_big_path = n_path(project_data.find('img_large').text)
+		w, h = get_image_dimensions(f'../Research/{project_folder}/{img_big_path}')
 		img_big_style = project_data.find('img_large').find('style').text if project_data.find('img_large').find('style') is not None else ""
+		img_big_str = f'<img src="{img_big_path}" width="{w}" height="{h}" style="{img_big_style}">'
 		project_page = (project_page_template.replace('$TITLE', project_data.find('title').text)
 		                                     .replace('$NAVBAR', navbar_str_nest)
 		                                     .replace('$YEAR', year_str)
@@ -293,6 +295,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$LINKS', nest_link_str)
 		                                     .replace('$ABSTRACT_BIG', abstract_text)
 		                                     .replace('$IMG_BIG_STYLE', img_big_style)
+		                                     .replace('$IMG_BIG_TAG', img_big_str)
 		                                     .replace('$IMG_BIG', img_big_path)
 		                                     .replace('$PANELS', panel_str)
 		                                     .replace('$EMAIL',  email_str)
