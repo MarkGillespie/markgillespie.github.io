@@ -4,6 +4,37 @@ from pathlib import Path
 from urllib.parse import quote
 import brotli
 
+from PIL import Image
+import re
+import os
+
+def get_image_dimensions(path):
+    ext = os.path.splitext(path)[1].lower()
+    if ext == '.svg':
+        return _svg_dimensions(path)
+    with Image.open(path) as img:
+        return img.size  # (width, height)
+
+def _svg_dimensions(path):
+    root = ET.parse(path).getroot()
+    vb = root.get('viewBox')
+    if vb:
+        parts = re.split(r'[\s,]+', vb.strip())
+        if len(parts) == 4:
+            _, _, w, h = parts
+            return (round(float(w)), round(float(h)))
+    w = _parse_length(root.get('width'))
+    h = _parse_length(root.get('height'))
+    if w and h:
+        return (w, h)
+
+    raise ValueError(f"Cannot determine dimensions of {path}")
+def _parse_length(s):
+    if not s:
+        return None
+    m = re.match(r'^\s*([\d.]+)', s)
+    return round(float(m.group(1))) if m else None
+
 def prettify_html(html_string):
 	return html_string
 
@@ -117,10 +148,13 @@ talk_str += "</table>"
 misc_str = ""
 misc_template = xml_child_string(misc_data.find('template'))
 for item in misc_data.find('misc'):
+	img_path = xml_child_string(item.find('img'))
+	w, h = get_image_dimensions(f'../{img_path}')
+	img_str = f'<img src="{img_path}" width="{w}" height="{h}"" loading="lazy"/>'
 	misc_str += (misc_template.replace('$TITLE',  xml_child_string(item.find('title')))
 		                      .replace('$HREF', xml_child_string(item.find('href')))
 		                      .replace('$DETAILS', xml_child_string(item.find('details')))
-		                      .replace('$IMG', xml_child_string(item.find('img')))
+		                      .replace('$IMG_TAG', img_str)
 		        )
 
 
@@ -209,7 +243,11 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		nest_link_str += nest_link_str_ending
 		venue_name = xml_child_string(project_data.find('venue'))
 		venue_str = venue_name if doi is None else f'<a href="https://doi.org/{doi}">{venue_name}</a>'
-		project_str = (short_project_template.replace('$IMG_SMALL', project_data.find('img_small').text)
+		img_path = project_data.find('img_small').text
+		w, h = get_image_dimensions(f'../{img_path}')
+		img_str = f'<img src="{img_path}" width="{w}" height="{h}"" loading="lazy"/>'
+		project_str = (short_project_template.replace('$IMG_SMALL', img_path)
+		                                     .replace('$IMG_TAG', img_str)
 		                                     .replace('$HREF', href_str)
 		                                     .replace('$TITLE', title_str)
 		                                     .replace('$AUTHORS', author_str)
