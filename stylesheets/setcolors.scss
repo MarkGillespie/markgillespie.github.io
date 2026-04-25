@@ -47,7 +47,7 @@
         color: $menu-font-color;
     }
 
-    #{$parent} #style-menu ul {
+/*    #{$parent} #style-menu ul {
         // background-color: $foreground-color;
         // box-shadow: 0px 8px 16px 0px rgba($shadow-color,0.2);
 
@@ -58,7 +58,7 @@
             background-color: $accent;
             border-radius: 0.75em;
         }
-    }
+    }*/
 
     /* Only apply hover effect when the user is using a mouse-like controller. Eliminate
      * sticky hover on mobile.
@@ -76,11 +76,7 @@
         box-shadow: 2px 2px 4px rgba($shadow-color, .1);
     }
 
-    #{$parent} .section_text .news summary {
-        color: $link-color;
-    }
-
-    #{$parent} .project_header .text .venue {
+    #{$parent} .section_text .news summary, #{$parent} .project_header .text .venue {
         color: $link-color;
     }
 
@@ -137,15 +133,6 @@
         color: $link-hover-color;
     }
 
-
-    #{$parent} .headline, #{$parent} .headline a {
-        color: $name-color;
-    }
-
-    #{$parent} .headline a:hover {
-        color: $link-hover-color;
-    }
-
     #{$parent} .child_lines div {
         border-bottom: 1px solid rgba($link-color, .3);
     }
@@ -163,22 +150,6 @@
         box-shadow: 1px 1px 5px rgba($shadow-color, .1);
     }
 
-    #{$parent} .section:nth-child(4n+1) {
-        background-color: $note-section-color-1;
-    }
-
-    #{$parent} .section:nth-child(4n+2) {
-        background-color: $note-section-color-2;
-    }
-
-    #{$parent} .section:nth-child(4n+3) {
-        background-color: $note-section-color-3;
-    }
-
-    #{$parent} .section:nth-child(4n+0) {
-        background-color: $note-section-color-4;
-    }
-
     #{$parent} h1 {
         color: $accent-font-color;
     }
@@ -187,14 +158,6 @@
         background-color: $accent;
         color: $accent-font-color;
         box-shadow: 1px 1px 10px rgba($shadow-color, .3);
-    }
-
-    #{$parent} h3 {
-        color: $ordinary-font-color;
-    }
-
-    #{$parent} h4 {
-        color: $ordinary-font-color;
     }
 
     #{$parent} div.warning {
@@ -209,24 +172,8 @@
         }
     }
 
-    #{$parent} .name_box {
-        color: $name-color;
-    }
-
-    #{$parent} .fancy-image {
+    #{$parent} .fancy-image, #{$parent} .paper-preview > img, #{$parent} .figures img {
         box-shadow: 1px 1px 10px rgba($shadow-color, .3);
-    }
-
-    #{$parent} .paper-preview > img {
-        box-shadow: 1px 1px 10px rgba($shadow-color, .3);
-    }
-
-    #{$parent} .figures img {
-        box-shadow: 1px 1px 10px rgba($shadow-color, .3);
-    }
-
-    #{$parent} .name_box .venue {
-        color: $link-color;
     }
 
     #{$parent} .footer {
@@ -238,11 +185,11 @@
         }
     }
 
-    #{$parent} a, #{$parent} .bibBox button, #{$parent} .bibEntry button {
+    #{$parent} .name_box .venue, #{$parent} a, #{$parent} .bibBox button, #{$parent} .bibEntry button {
         color: $link-color;
     }
 
-    #{$parent} a:hover, #{$parent} .bibBox button:hover, #{$parent} .bibEntry button:hover {
+    #{$parent} a:hover, #{$parent} .bibBox button:hover, #{$parent} .bibEntry button:hover, #{$parent} .section_panel .project_links details summary:hover {
         color: $link-hover-color;
     }
 
@@ -251,15 +198,9 @@
         text-decoration-line: underline;
     }
 
-    #{$parent} .section_panel .project_links details summary:hover {
-        color: $link-hover-color;
-    }
-
     #{$parent} .bibBox .bibliography {
         background-color: mix(rgba($foreground-color, 1), $blank-space);
         box-shadow: .2em .2em .3em rgba($ordinary-font-color, .7);
-        // color: #000000;
-        // background: rgba(255, 255, 255, .9);
     }
 }
 

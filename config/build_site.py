@@ -2,14 +2,13 @@ import datetime, json, os
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
-import brotli
-
-from PIL import Image
-import re
-import os
-
-import base64
-import mimetypes
+import brotli # compression
+from PIL import Image # image dimensions
+import re, os
+import base64, mimetypes # inline images
+# from pysvgo import optimize # optimize svgs
+from scour import scour # optimize svgs
+from htmlmin import minify
 
 def get_image_dimensions(path):
     ext = os.path.splitext(path)[1].lower()
@@ -137,9 +136,25 @@ def expand_inline_images(text, base_dir="."):
     pieces.append(text[last:])
     return "".join(pieces)
 
-
-def prettify_html(html_string):
-	return html_string
+def optimize_svg(svg_string):
+    options = scour.sanitizeOptions()
+    
+    # These are the magic flags for what you want:
+    options.group_empty_attributes = True # Helps with grouping
+    options.collapse_groups = True        # Collapses useless nested groups
+    options.enable_viewboxing = True      # Helps with the 14KB goal
+    options.remove_descriptive_elements = True
+    options.strip_xml_prolog = True
+    
+    # Cleaning up the "cruft"
+    options.remove_metadata = True
+    options.strip_comments = True
+    # options.shorten_ids = True
+    options.indent_type = 'none' # Minify!
+    options.precision = 2        # Round those long decimals
+    
+    return scour.scourString(svg_string, options=options)
+    # return svg_string
 
 # allow &nbsp; in xml https://stackoverflow.com/a/35591479
 magic = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -183,7 +198,7 @@ gmail_str = "mark.gillespie81@gmail.com"
 
 # == BACKGROUND_SVG
 with open('torus.svg') as f:
-    background_str = f.read()
+    background_str = optimize_svg(f.read())
 
 # == FAVICON
 with open('../favicon.svg', encoding='utf-8') as f:
@@ -253,7 +268,7 @@ misc_template = xml_child_string(misc_data.find('template'))
 for item in misc_data.find('misc'):
 	img_path = xml_child_string(item.find('img'))
 	w, h = get_image_dimensions(f'../{img_path}')
-	img_str = f'<img src="{img_path}" width="{w}" height="{h}"" loading="lazy"/>'
+	img_str = f'<img src="{img_path}" width="{w}" height="{h}" loading="lazy"/>'
 	misc_str += (misc_template.replace('$TITLE',  xml_child_string(item.find('title')))
 		                      .replace('$HREF', xml_child_string(item.find('href')))
 		                      .replace('$DETAILS', xml_child_string(item.find('details')))
@@ -266,6 +281,7 @@ short_project_template = xml_child_string(proj_data.find('project_template'))
 research_list_str = xml_child_string(proj_data.find('project_list'))
 with open('project_template.html') as f:
 	project_page_template = f.read()
+project_page_template = minify(project_page_template, remove_comments=True, reduce_empty_attributes=True)
 for file in os.listdir(os.fsencode("ResearchProjects")):
 	filename = os.fsdecode(file)
 	if filename.endswith('.xml'):
@@ -348,7 +364,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		venue_str = venue_name if doi is None else f'<a href="https://doi.org/{doi}">{venue_name}</a>'
 		img_path = project_data.find('img_small').text
 		w, h = get_image_dimensions(f'../{img_path}')
-		img_str = f'<img src="{img_path}" width="{w}" height="{h}"" loading="lazy"/>'
+		img_str = f'<img src="{img_path}" width="{w}" height="{h}" loading="lazy"/>'
 		project_str = (short_project_template.replace('$IMG_SMALL', img_path)
 		                                     .replace('$IMG_TAG', img_str)
 		                                     .replace('$HREF', href_str)
@@ -407,20 +423,20 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$PROJECT_CSS',  project_css_str)
 		                                     .replace('$FAVICON',  favicon_str)
 						)
-		project_page = prettify_html(project_page)
 		project_path = f'../Research/{project_folder}/index.html'
 		Path(project_path).parent.mkdir(parents=True, exist_ok=True) # ensure path exists
 		with open(project_path, 'w') as f:
-			print(project_path)
 			f.write(project_page)
 
 		compressed_project_page = brotli.compress(project_page.encode(), quality=11) # Max compression
 		with open(f"{project_path}.br", "wb") as f:
 		    f.write(compressed_project_page)
+		print(project_path)
 
 # write index
 index_template = re.sub(r"<!--.*?-->", "", index_template, flags=re.DOTALL) # strip comments
 index_template = expand_inline_images(index_template, '..')
+index_template = minify(index_template, remove_comments=True, reduce_empty_attributes=True)
 index_text = (index_template.replace('$DATE',   date_str)
                             .replace('$YEAR',   year_str)
                             .replace('$NEWS',   news_str)
@@ -435,10 +451,10 @@ index_text = (index_template.replace('$DATE',   date_str)
                             .replace('$MAIN_CSS',  main_css_str)
                             .replace('$FAVICON',  favicon_str)
                             )
-index_text = prettify_html(index_text)
 with open('../index.html', 'w') as f:
 	f.write(index_text)
 
 compressed_index_text = brotli.compress(index_text.encode(), quality=11) # Max compression
 with open("../index.html.br", "wb") as f:
     f.write(compressed_index_text)
+print('index.html')

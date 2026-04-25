@@ -3,17 +3,10 @@
 
 // Layouts
 @use 'layouts/onecolumn.scss' as OneColumn;
-@use 'layouts/twocolumn.scss' as TwoColumn;
 @use 'layouts/project.scss' as Project;
 @use 'layouts/navbar.scss' as Navbar;
 
 @use 'fonts.scss';
 
 @include Navbar.navbar(());
-/* @include TwoColumn.layout(()); */
 @include OneColumn.layout((), "html.singlecolumn");
-/*@include Project.layout((), "html.project");*/
-
-.nojs .jsonly {
-    display: none;
-}

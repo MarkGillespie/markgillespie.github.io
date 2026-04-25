@@ -23,13 +23,13 @@
     award-border-color: #e18f6f,
 ), $parent);
 
-@include sc.setTorusColors((
+/*@include sc.setTorusColors((
     body-color: #a7eb,
     shell-color: #bbf,
     stroke-color: #000,
     body-opacity:0.8,
     shell-opacity:0.8,
-), $parent);
+), $parent);*/
 
 #{$parent} #background_image svg {
     opacity: 0.75;
@@ -58,18 +58,10 @@
     award-font-color: #f4f4f4,
     award-border-color : #ae0d53,
 ), $parent);
-
-@include sc.setTorusColors((
-    body-color: #F15A24,
-    shell-color: #662D91,
-    stroke-color: #000,
-    body-opacity:0.4,
-    shell-opacity:0.4,
-), $parent);
 }
 
 /*@include darkmode("html.darkmode");*/
-@include lightmode("html.lightmode");
+@include lightmode();
 
 /*#darkmode-checkbox {
 	  width: 0;
@@ -82,9 +74,9 @@ html.darkmode #darkmode-checkbox-label::after {
 	  content: "\263C";
 }*/
 
-html.lightmode #darkmode-checkbox-label::after {
+/*html.lightmode #darkmode-checkbox-label::after {
 	  content: "\263D";
-}
+}*/
 
 /*html.nojs #darkmode-toggle {
     display: none;

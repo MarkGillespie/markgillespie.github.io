@@ -10,7 +10,6 @@
         font-family: 'Charis SIL', 'Palatino', serif;
         line-height: 1.4;
         text-align: center;
-        box-sizing: border-box;
     }
 
     #{$parent} .cpp {
@@ -43,7 +42,6 @@
             max-width: 1300px;
             width:  80vw;
             height: 40vw;
-
             opacity: 1;
             transition: opacity .25s ease-in-out;
             -moz-transition: opacity .25s ease-in-out;
@@ -251,8 +249,6 @@
 
     #{$parent} .project_header .text {
         flex: 1 1 70%;
-        // display: flex;
-        // align-items: center;
         width: 100%;
         box-sizing: border-box;
         padding-left: 15pt;
@@ -305,7 +301,6 @@
 
     #{$parent} .project_header .text .mini_abstract {
         line-height: 1.2;
-/*        font-size: 11pt;*/
         box-sizing: border-box;
     }
 
