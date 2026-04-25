@@ -8,6 +8,9 @@ from PIL import Image
 import re
 import os
 
+import base64
+import mimetypes
+
 def get_image_dimensions(path):
     ext = os.path.splitext(path)[1].lower()
     if ext == '.svg':
@@ -34,6 +37,106 @@ def _parse_length(s):
         return None
     m = re.match(r'^\s*([\d.]+)', s)
     return round(float(m.group(1))) if m else None
+
+def inline_image(path, alt="", attrs=None):
+    p = Path(path)
+    data = p.read_bytes()
+ 
+    with Image.open(p) as img:
+        intrinsic_w, intrinsic_h = img.size
+    merged_attrs = {"width": intrinsic_w, "height": intrinsic_h}
+    if attrs:
+        merged_attrs.update(attrs)
+    attrs = merged_attrs
+    mime, _ = mimetypes.guess_type(p.name)
+    if mime is None:
+        ext = p.suffix.lower().lstrip(".")
+        mime = {
+            "webp": "image/webp",
+            "avif": "image/avif",
+            "jxl":  "image/jxl",
+        }.get(ext, "application/octet-stream")
+    b64 = base64.b64encode(data).decode("ascii")
+    data_uri = f"data:{mime};base64,{b64}"
+    def esc(s):
+        return (str(s)
+                .replace("&", "&amp;")
+                .replace('"', "&quot;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;"))
+    parts = [f'src="{data_uri}"', f'alt="{esc(alt)}"']
+    if attrs:
+        for k, v in attrs.items():
+            if v is None or v is False:
+                continue
+            if v is True:
+                parts.append(esc(k))           # boolean attribute
+            else:
+                parts.append(f'{esc(k)}="{esc(v)}"')
+ 
+    return f"<img {' '.join(parts)}>"
+
+_ARG_RE = re.compile(r'(\w+)\s*=\s*"((?:[^"\\]|\\.)*)"') # key="value" — value may contain \" or \\ escapes.
+ 
+def _find_hero_directives(text, marker="INLINE_IMG"):
+    """# return (start, end, args_str) for each ${marker}(...) directive in `text`."""
+    marker = f"${marker}("
+    i = 0
+    while True:
+        start = text.find(marker, i)
+        if start == -1:
+            return
+        j = start + len(marker)
+        in_quote = False
+        while j < len(text):
+            c = text[j]
+            if in_quote:
+                if c == "\\" and j + 1 < len(text):
+                    j += 2          # skip escaped char
+                    continue
+                if c == '"':
+                    in_quote = False
+            elif c == '"':
+                in_quote = True
+            elif c == ")":
+                yield start, j + 1, text[start + len(marker):j]
+                i = j + 1
+                break
+            j += 1
+        else:
+            raise ValueError(
+                f"Unterminated ${marker}( starting at position {start}"
+            )
+ 
+ 
+def _parse_args(args_str):
+    """Parse `key="value", key="value", ...` into a dict, unescaping \\X."""
+    args = {}
+    for m in _ARG_RE.finditer(args_str):
+        key = m.group(1)
+        val = re.sub(r"\\(.)", r"\1", m.group(2))   # \" -> ", \\ -> \
+        args[key] = val
+    return args
+
+def expand_inline_images(text, base_dir="."):
+    base_dir = Path(base_dir)
+    pieces = []
+    last = 0
+    for start, end, args_str in _find_hero_directives(text):
+        args = _parse_args(args_str)
+        if "src" not in args:
+            raise ValueError(
+                f"$INLINE_IMG directive missing src: {text[start:end]!r}"
+            )
+        src = args.pop("src")
+        alt = args.pop("alt", "")
+        img_path = base_dir / src
+        pieces.append(text[last:start])
+        pieces.append(inline_image(img_path, alt=alt, attrs=args))
+        last = end
+    pieces.append(text[last:])
+    return "".join(pieces)
+
 
 def prettify_html(html_string):
 	return html_string
@@ -316,6 +419,8 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		    f.write(compressed_project_page)
 
 # write index
+index_template = re.sub(r"<!--.*?-->", "", index_template, flags=re.DOTALL) # strip comments
+index_template = expand_inline_images(index_template, '..')
 index_text = (index_template.replace('$DATE',   date_str)
                             .replace('$YEAR',   year_str)
                             .replace('$NEWS',   news_str)
