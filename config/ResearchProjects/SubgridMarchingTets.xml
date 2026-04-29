@@ -5,7 +5,7 @@
     <href>index.html</href>
     <!-- <doi>10.1145/3731197</doi> -->
     <img_small>Research/SubgridMarchingTets/images/RepresentativeImage.svg</img_small>
-    <img_large>Research/SubgridMarchingTets/images/teaser.webp<style>max-height: 25em; margin: 10px 0px;</style></img_large>
+    <img_large>Research/SubgridMarchingTets/images/cell-teaser.webp<style>max-height: 25em; margin: 10px 0px;</style></img_large>
     <authors>
         <author>
             <name>Hossein Baktash</name>
@@ -22,7 +22,7 @@
     <!-- <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2026)</venue> -->
     <venue>Conditionally accepted to SIGGRAPH&amp;nbsp;2026</venue>
     <links>
-        <link><name>preprint (21.5&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTets.pdf</href></link>
+        <link><name>preprint (26.1&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTets.pdf</href></link>
         <!-- <link><name>supplement (715 kb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTetsSupplemental.pdf</href></link> -->
     </links>
     <more_links>
