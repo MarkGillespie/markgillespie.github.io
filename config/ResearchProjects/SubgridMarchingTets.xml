@@ -60,11 +60,11 @@ More importantly, with our method there is no lower bound on the feature size th
             <title>Supplemental Documents</title>
             <content>
                 <div style="display: flex; flex-start; gap: .5em;">
-                <a href="DiscreteTorsionSupplemental.pdf" class="paper-preview">
+                <a href="SubgridMarchingTetsSupplemental.pdf" class="paper-preview">
                     <img src="images/preview-supplemental.webp" alt="preview"/><br/>
                     <span>pdf <!--(715 kb)--></span>
                 </a>
-                <a href="DiscreteTorsionLeviCivitaConnection.nb" class="paper-preview">
+                <a href="subgrid-tet.html" class="paper-preview">
                     <img src="images/preview-demo.webp" alt="preview"/><br/>
                     <span>Web demo (110&nbsp;kb)</span>
                 </a>
