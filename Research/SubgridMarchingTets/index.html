@@ -10,10 +10,37 @@
 <a href="../../index.html#misc" class="navbar_link "><span class="navbar_item">Misc</span></a>
 <a href="../../Mark_Gillespie_CV.pdf" class="navbar_link "><span class="navbar_item">CV</span></a>
 <a href="../../" class="navbar_link vanishing"><span class="navbar_item">About Me</span></a>
-</div></div> <div class=name_box> <div class=title>Subgrid Marching Tetrahedra</div> <div class=venue>Conditionally accepted to SIGGRAPH&nbsp;2026</div>  <div class=authors> <div class="author"><span class="name"><a href="https://hbaktash.github.io/">Hossein&nbsp;Baktash</a></span><span class="affiliation">Carnegie Mellon University</span></div>
+</div></div> <div class=name_box> <div class=title>Subgrid Marching Tetrahedra</div> <div class=venue><a href="https://doi.org/10.1145/3811358">ACM Transactions on Graphics (SIGGRAPH&nbsp;2026)</a></div>  <div class=authors> <div class="author"><span class="name"><a href="https://hbaktash.github.io/">Hossein&nbsp;Baktash</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name">Mark&nbsp;Gillespie</span><span class="affiliation">Inria (IP Paris) &amp; University of Utah</span></div>
 <div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University &amp; Roblox</span></div>
  </div> <div class=paper_teaser> <img src="images/cell-teaser.webp" width="2000" height="784" style="max-height: 25em; margin: 10px 0px;"> </div> <div class=quick_links> <a href="SubgridMarchingTets.pdf"><span class="project_link">preprint (26.1&nbsp;mb)</span></a>
+<div class="bibBox"><a href="bib.txt"><span class="project_link">bibtex</span></a>
+<div class="bibliography" style="visibility: hidden;">@article{Baktash:2026:SMT,
+  author = {Baktash, Hossein and Gillespie, Mark and Crane, Keenan},
+  title = {Subgrid Marching Tetrahedra},
+  journal = {ACM Trans. Graph.},
+  volume = {45},
+  number = {4},
+  articleno = {},
+  year = {2026},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3811368},
+  doi = {10.1145/3811368}
+}<button onclick="navigator.clipboard.writeText(`@article{Baktash:2026:SMT,
+  author = {Baktash, Hossein and Gillespie, Mark and Crane, Keenan},
+  title = {Subgrid Marching Tetrahedra},
+  journal = {ACM Trans. Graph.},
+  volume = {45},
+  number = {4},
+  articleno = {},
+  year = {2026},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3811368},
+  doi = {10.1145/3811368}
+}`);">Copy</button></div></div>
+<a href="https://doi.org/10.1145/3811358"><span class="project_link">doi</span></a>
  </div> <div class=abstract> C<span class="first-word">ontouring</span> algorithms like marching cubes and marching tetrahedra are a fundamental tool in geometry processing, needed to convert from implicit representations (like signed distance functions) to explicit representations (namely, polygon meshes).
 However, they suffer from an equally fundamental challenge of signal processing, namely <em>aliasing</em>: unless the implicit function is sufficiently-well sampled onto a grid, the extracted mesh will have missing features, holes, etc.
 Moreover, these methods assume that the surface has a definite inside and outside—making them unsuitable for surfaces with boundary.
@@ -34,6 +61,58 @@ More importantly, with our method there is no lower bound on the feature size th
                     <img src="images/preview.webp" alt="preview" /><br />
                     <span>preprint (26.1&nbsp;mb)</span>
                 </a>
+            </div>
+</div>
+<div class="section_panel centered_content gap">
+
+<div class="section_header">Supplemental Documents</div>
+<div class="section_text">
+                <div style="display: flex; flex-start; gap: .5em;">
+                <a href="DiscreteTorsionSupplemental.pdf" class="paper-preview">
+                    <img src="images/preview-supplemental.webp" alt="preview" /><br />
+                    <span>pdf </span>
+                </a>
+                <a href="DiscreteTorsionLeviCivitaConnection.nb" class="paper-preview">
+                    <img src="images/preview-demo.webp" alt="preview" /><br />
+                    <span>Web demo (110&nbsp;kb)</span>
+                </a>
+            </div>
+            </div>
+</div>
+<div class="section_panel  bibEntry">
+
+<div class="section_header">Bibtex</div>
+<div class="section_text">@article{Baktash:2026:SMT,
+  author = {Baktash, Hossein and Gillespie, Mark and Crane, Keenan},
+  title = {Subgrid Marching Tetrahedra},
+  journal = {ACM Trans. Graph.},
+  volume = {45},
+  number = {4},
+  articleno = {},
+  year = {2026},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3811368},
+  doi = {10.1145/3811368}
+} <button onclick="navigator.clipboard.writeText(`@article{Baktash:2026:SMT,
+  author = {Baktash, Hossein and Gillespie, Mark and Crane, Keenan},
+  title = {Subgrid Marching Tetrahedra},
+  journal = {ACM Trans. Graph.},
+  volume = {45},
+  number = {4},
+  articleno = {},
+  year = {2026},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3811368},
+  doi = {10.1145/3811368}
+}`);">Copy</button></div>
+</div>
+<div class="section_panel ">
+
+<div class="section_header">Acknowledgements</div>
+<div class="section_text">
+                This work was funded by the National Science Foundation (NSF) under awards 2212290 and 2504890. The soap film image in Figure 4 was generated by Nano Banana Pro [Google 2025] based on a render of a discrete minimal surface with the given boundary curve.
             </div>
 </div>
  </div> <div class=footer> <a href=mailto:mark.gillespie@inria.fr target=_top class=footer_email>mark.gillespie@inria.fr</a> <hr> Mark Gillespie 2026 </div> </body> </html> 

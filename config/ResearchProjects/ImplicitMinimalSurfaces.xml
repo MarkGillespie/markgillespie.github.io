@@ -3,7 +3,7 @@
     <folder>ImplicitMinimalSurfaces</folder>
     <key>ImplicitMinimalSurfaces</key>
     <href>index.html</href>
-    <!-- <doi>10.1145/3731197</doi> -->
+    <doi>10.1145/3811368</doi>
     <img_small>Research/ImplicitMinimalSurfaces/images/RepresentativeImage.webp</img_small>
     <img_large>Research/ImplicitMinimalSurfaces/images/teaser.webp<style>max-height: 25em; margin-top: .75em;</style></img_large>
     <authors>
@@ -23,8 +23,8 @@
             <name>Mark Gillespie</name>
             <affiliation>Inria (IP Paris) &amp;amp; University of Utah</affiliation></author>
     </authors>
-    <!-- <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2026)</venue> -->
-    <venue>Conditionally accepted to SIGGRAPH&amp;nbsp;2026</venue>
+    <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2026)</venue>
+    <!-- <venue>Conditionally accepted to SIGGRAPH&amp;nbsp;2026</venue> -->
     <links>
         <link><name>preprint (14.8&nbsp;mb)</name><href>Research/ImplicitMinimalSurfaces/MinimalSurfaces.pdf</href></link>
         <!-- <link><name>supplement (715 kb)</name><href>Research/ImplicitMinimalSurfaces/ImplicitMinimalSurfacesSupplemental.pdf</href></link> -->
@@ -95,14 +95,14 @@ We introduce an <em>implicit</em> representation of continuous, bijective, orien
             </content>
             <extra_classes>example_grid_container</extra_classes>
         </panel> -->
-        <!-- <panel>
+        <panel>
             <bibtex></bibtex>
-        </panel> -->
-        <!-- <panel>
+        </panel>
+        <panel>
             <title>Acknowledgements</title>
             <content>
-                The first author was supported by an IP Paris graduate fellowship and a Monge complement from Ecole Polytechnique. The last author benefited from the generous support of the MediTwin consortium (funded by the French government as part of <em>France 2030</em>), Ansys, and of an Inria chair.
+                Thanks to Aria Halavati for teaching us about the complex line bundle approach to codimension-two minimal surfaces.
             </content>
-        </panel> -->
+        </panel>
     </panels>
 </project>

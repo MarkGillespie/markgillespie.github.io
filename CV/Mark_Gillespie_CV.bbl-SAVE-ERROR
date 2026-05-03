@@ -19,6 +19,115 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
+    \entry{Corman:2026:IMS}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=030f73c54bea1796e401d05c06551ab6}{%
+           family={Corman},
+           familyi={C\bibinitperiod},
+           given={Etienne},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d4e197048e0ded78765426f9bc1d7a4}{%
+           family={Soliman},
+           familyi={S\bibinitperiod},
+           given={Yousuf},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9bbf1f057b1f861f594363f7fff3c9d2}{%
+           family={Magnet},
+           familyi={M\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a64e0287ec07cb114284e2facab4c628}{%
+           family={Gillespie},
+           familyi={G\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{3e9ba7775c4d42fa50ebe2e01469d0b0}
+      \strng{fullhash}{3e9ba7775c4d42fa50ebe2e01469d0b0}
+      \strng{bibnamehash}{3e9ba7775c4d42fa50ebe2e01469d0b0}
+      \strng{authorbibnamehash}{3e9ba7775c4d42fa50ebe2e01469d0b0}
+      \strng{authornamehash}{3e9ba7775c4d42fa50ebe2e01469d0b0}
+      \strng{authorfullhash}{3e9ba7775c4d42fa50ebe2e01469d0b0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ACM Transactions on Graphics (SIGGRAPH)}
+      \field{number}{4}
+      \field{title}{Subgrid Marching Tetrahedra}
+      \field{volume}{45}
+      \field{year}{2026}
+      \verb{doi}
+      \verb 10.1145/3811368
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3811368
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3811368
+      \endverb
+      \keyw{journal}
+      \annotation{item}{author}{default}{4}{}{0}{highlight}
+    \endentry
+    \entry{Baktash:2026:SMT}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=93b9125aa77e582b48d1f472ef89668f}{%
+           family={Baktash},
+           familyi={B\bibinitperiod},
+           given={Hossein},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a64e0287ec07cb114284e2facab4c628}{%
+           family={Gillespie},
+           familyi={G\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=581404e2a130ce3b3520c26831476f4e}{%
+           family={Crane},
+           familyi={C\bibinitperiod},
+           given={Keenan},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{b89731d9c5a5d221e81bc2401934223c}
+      \strng{fullhash}{b89731d9c5a5d221e81bc2401934223c}
+      \strng{bibnamehash}{b89731d9c5a5d221e81bc2401934223c}
+      \strng{authorbibnamehash}{b89731d9c5a5d221e81bc2401934223c}
+      \strng{authornamehash}{b89731d9c5a5d221e81bc2401934223c}
+      \strng{authorfullhash}{b89731d9c5a5d221e81bc2401934223c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ACM Transactions on Graphics (SIGGRAPH)}
+      \field{number}{4}
+      \field{title}{Subgrid Marching Tetrahedra}
+      \field{volume}{45}
+      \field{year}{2026}
+      \keyw{journal}
+      \annotation{item}{author}{default}{2}{}{0}{highlight}
+    \endentry
     \entry{Braune:2025:DTC}{article}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=8ad7831e50743bc5f35449368d73606f}{%
@@ -58,12 +167,13 @@
       \strng{authorbibnamehash}{d44a8816a0b16cf1f10ef53a43039d0b}
       \strng{authornamehash}{d44a8816a0b16cf1f10ef53a43039d0b}
       \strng{authorfullhash}{d44a8816a0b16cf1f10ef53a43039d0b}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{articleno}{67}
       \field{journaltitle}{ACM Transactions on Graphics (SIGGRAPH)}
       \field{number}{4}
       \field{title}{Discrete Torsion of Connection Forms on Simplicial Meshes}
@@ -120,8 +230,8 @@
       \strng{authorbibnamehash}{dc648627a29d5f0ae343a7e56b08fd90}
       \strng{authornamehash}{dc648627a29d5f0ae343a7e56b08fd90}
       \strng{authorfullhash}{dc648627a29d5f0ae343a7e56b08fd90}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -179,8 +289,8 @@
       \strng{authornamehash}{a3bbe8480ab3746be121c70e719d41d1}
       \strng{authorfullhash}{a3bbe8480ab3746be121c70e719d41d1}
       \field{extraname}{1}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{extradate}{1}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
@@ -232,8 +342,8 @@
       \strng{authorbibnamehash}{4dc9c21ecd125ac3c4312c656a1b2cdd}
       \strng{authornamehash}{4dc9c21ecd125ac3c4312c656a1b2cdd}
       \strng{authorfullhash}{4dc9c21ecd125ac3c4312c656a1b2cdd}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -301,8 +411,8 @@
       \strng{authorbibnamehash}{d764b884c8b1b2b44bc8d26070544971}
       \strng{authornamehash}{d764b884c8b1b2b44bc8d26070544971}
       \strng{authorfullhash}{d764b884c8b1b2b44bc8d26070544971}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -352,8 +462,8 @@
       \strng{authorbibnamehash}{c270ae10716e12610f06b213b14b28fc}
       \strng{authornamehash}{c270ae10716e12610f06b213b14b28fc}
       \strng{authorfullhash}{c270ae10716e12610f06b213b14b28fc}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -403,8 +513,8 @@
       \strng{authorbibnamehash}{121deeaf18f305321cc31a4ecdca52b6}
       \strng{authornamehash}{121deeaf18f305321cc31a4ecdca52b6}
       \strng{authorfullhash}{121deeaf18f305321cc31a4ecdca52b6}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -436,8 +546,8 @@
       \strng{authorbibnamehash}{a64e0287ec07cb114284e2facab4c628}
       \strng{authornamehash}{a64e0287ec07cb114284e2facab4c628}
       \strng{authorfullhash}{a64e0287ec07cb114284e2facab4c628}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -490,8 +600,8 @@
       \strng{authornamehash}{a3bbe8480ab3746be121c70e719d41d1}
       \strng{authorfullhash}{a3bbe8480ab3746be121c70e719d41d1}
       \field{extraname}{2}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{extradate}{2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
