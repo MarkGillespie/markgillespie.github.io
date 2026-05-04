@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Subgrid Marching Tetrahedra</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --panel-width: 320px;
+            --bg-dark: #1a1a2e;
+            --bg-panel: #16213e;
+            --accent: #e94560;
+            --text: #eaeaea;
+            --text-dim: #a0a0a0;
+            --slider-track: #0f3460;
+            --slider-thumb: #e94560;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        
+        #container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+        
+        #sidebar {
+            width: var(--panel-width);
+            min-width: var(--panel-width);
+            background: var(--bg-panel);
+            padding: 20px;
+            overflow-y: auto;
+            transition: margin-left 0.3s ease;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #sidebar.collapsed {
+            margin-left: calc(-1 * var(--panel-width));
+        }
+        
+        #toggle-btn {
+            position: fixed;
+            left: var(--panel-width);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 60px;
+            background: var(--bg-panel);
+            border: none;
+            border-radius: 0 8px 8px 0;
+            color: var(--text);
+            cursor: pointer;
+            z-index: 101;
+            transition: left 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #toggle-btn.collapsed {
+            left: 0;
+        }
+        
+        #toggle-btn:hover {
+            background: var(--accent);
+        }
+        
+        #canvas-container {
+            flex: 1;
+            position: relative;
+            min-width: 0;
+        }
+        
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        h1 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        
+        .section {
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--slider-track);
+            padding-bottom: 6px;
+        }
+        
+        .slider-group {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .slider-label {
+            font-size: 0.8rem;
+            min-width: 85px;
+            flex-shrink: 0;
+        }
+        
+        .slider-value {
+            color: var(--accent);
+            font-weight: 600;
+            min-width: 28px;
+            text-align: right;
+            font-size: 0.85rem;
+        }
+        
+        input[type="range"] {
+            flex: 1;
+            min-width: 60px;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--slider-track);
+            border-radius: 3px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--slider-thumb);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: var(--slider-thumb);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        button.export-btn {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: auto;
+        }
+        
+        button.export-btn:hover {
+            background: #ff6b6b;
+            transform: translateY(-1px);
+        }
+        
+        button.export-btn:active {
+            transform: translateY(0);
+        }
+        
+        .info-text {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 16px;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --panel-width: 280px;
+            }
+            
+            #sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+            }
+            
+            #sidebar.collapsed {
+                margin-left: calc(-1 * var(--panel-width));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <aside id="sidebar">
+            <h1>Subgrid Marching Tet</h1>
+            <p class="subtitle">Reconstruct a spanning surface from arbitrary edge intersection counts</p>
+            
+            <div class="section">
+                <div class="section-title">Corner Cuts</div>
+                <div class="slider-group">
+                    <span class="slider-label">Corner 0</span>
+                    <input type="range" id="cc0" min="0" max="10" value="0">
+                    <span class="slider-value" id="cc0-val">0</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Corner 1</span>
+                    <input type="range" id="cc1" min="0" max="10" value="0">
+                    <span class="slider-value" id="cc1-val">0</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Corner 2</span>
+                    <input type="range" id="cc2" min="0" max="10" value="0">
+                    <span class="slider-value" id="cc2-val">0</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Corner 3</span>
+                    <input type="range" id="cc3" min="0" max="10" value="0">
+                    <span class="slider-value" id="cc3-val">0</span>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">Diagonal Cuts</div>
+                <div class="slider-group">
+                    <span class="slider-label">Diag 01-23</span>
+                    <input type="range" id="dc0" min="0" max="10" value="2">
+                    <span class="slider-value" id="dc0-val">2</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Diag 02-13</span>
+                    <input type="range" id="dc1" min="0" max="10" value="1">
+                    <span class="slider-value" id="dc1-val">1</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Diag 03-12</span>
+                    <input type="range" id="dc2" min="0" max="10" value="0">
+                    <span class="slider-value" id="dc2-val">0</span>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">Edge Intersections</div>
+                <div class="slider-group">
+                    <span class="slider-label">Edge 0-1</span>
+                    <input type="range" id="e01" min="0" max="10" value="1">
+                    <span class="slider-value" id="e01-val">1</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Edge 0-2</span>
+                    <input type="range" id="e02" min="0" max="10" value="2">
+                    <span class="slider-value" id="e02-val">2</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Edge 0-3</span>
+                    <input type="range" id="e03" min="0" max="10" value="3">
+                    <span class="slider-value" id="e03-val">3</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Edge 1-2</span>
+                    <input type="range" id="e12" min="0" max="10" value="3">
+                    <span class="slider-value" id="e12-val">3</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Edge 1-3</span>
+                    <input type="range" id="e13" min="0" max="10" value="2">
+                    <span class="slider-value" id="e13-val">2</span>
+                </div>
+                <div class="slider-group">
+                    <span class="slider-label">Edge 2-3</span>
+                    <input type="range" id="e23" min="0" max="10" value="1">
+                    <span class="slider-value" id="e23-val">1</span>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">Display</div>
+                <div class="slider-group">
+                    <span class="slider-label">Opacity</span>
+                    <input type="range" id="opacity" min="0" max="100" value="100">
+                    <span class="slider-value" id="opacity-val">1.0</span>
+                </div>
+                <div class="slider-group">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="show-wireframe" style="width: 16px; height: 16px;" checked>
+                        <span style="font-size: 0.85rem;">Surface wireframe</span>
+                    </label>
+                </div>
+                <div class="slider-group">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="show-labels" style="width: 16px; height: 16px;">
+                        <span style="font-size: 0.85rem;">Vertex labels</span>
+                    </label>
+                </div>
+            </div>
+            
+            <button class="export-btn" id="export-btn">Export as OBJ</button>
+            
+            <p class="info-text">
+                Drag sliders to adjust intersection counts. The spanning surface updates in real time.
+                Rotate with mouse/touch, scroll to zoom.
+            </p>
+        </aside>
+        
+        <button id="toggle-btn">◀</button>
+        
+        <div id="canvas-container"></div>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+const ALL_TET_PAIRS = [[0,1], [0,2], [0,3], [1,2], [1,3], [2,3]];
+const ALL_TET_TRIPLETS = [[1,2,3], [0,2,3], [0,1,3], [0,1,2]];
+const INVALID_IND = -1;
+
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+function edgePairToIndex(i, j) {
+    if (i > j) [i, j] = [j, i];
+    if (i === 0 && j === 1) return 0;
+    if (i === 0 && j === 2) return 1;
+    if (i === 0 && j === 3) return 2;
+    if (i === 1 && j === 2) return 3;
+    if (i === 1 && j === 3) return 4;
+    if (i === 2 && j === 3) return 5;
+    throw new Error(`Invalid edge pair: (${i}, ${j})`);
+}
+
+function complement(inputs) {
+    const universe = new Set([0, 1, 2, 3]);
+    for (const x of inputs) universe.delete(x);
+    return Array.from(universe).sort((a, b) => a - b);
+}
+
+function allPairs(universe) {
+    const pairs = [];
+    for (let i = 0; i < universe.length; i++) {
+        for (let j = i + 1; j < universe.length; j++) {
+            pairs.push([universe[i], universe[j]]);
+        }
+    }
+    return pairs;
+}
+
+function gcd(a, b) {
+    a = Math.abs(a);
+    b = Math.abs(b);
+    while (b) { [a, b] = [b, a % b]; }
+    return a;
+}
+
+function triangleInequality(a, b, c) {
+    const max = Math.max(a, b, c);
+    const feasible = (a + b + c) >= 2 * max;
+    let resA = 0, resB = 0, resC = 0;
+    if (!feasible) {
+        if (a === max) { resA = a - b - c; }
+        else if (b === max) { resB = b - a - c; }
+        else { resC = c - a - b; }
+    }
+    return { feasible, resA, resB, resC };
+}
+
+// ============================================================================
+// VECTOR3 CLASS (simplified, matches GeometryCentral's Vector3)
+// ============================================================================
+
+class Vec3 {
+    constructor(x = 0, y = 0, z = 0) {
+        this.x = x; this.y = y; this.z = z;
+    }
+    static zero() { return new Vec3(0, 0, 0); }
+    add(v) { return new Vec3(this.x + v.x, this.y + v.y, this.z + v.z); }
+    sub(v) { return new Vec3(this.x - v.x, this.y - v.y, this.z - v.z); }
+    scale(s) { return new Vec3(this.x * s, this.y * s, this.z * s); }
+    lerp(v, t) { return this.scale(1 - t).add(v.scale(t)); }
+    toThree() { return new THREE.Vector3(this.x, this.y, this.z); }
+    clone() { return new Vec3(this.x, this.y, this.z); }
+}
+
+// ============================================================================
+// EDGE INTS
+// ============================================================================
+
+class EdgeInts {
+    constructor(n01 = 0, n02 = 0, n03 = 0, n12 = 0, n13 = 0, n23 = 0) {
+        this.data = new Map();
+        if (arguments.length === 1 && Array.isArray(arguments[0])) {
+            const arr = arguments[0];
+            this.set(0,1,arr[0]); this.set(0,2,arr[1]); this.set(0,3,arr[2]);
+            this.set(1,2,arr[3]); this.set(1,3,arr[4]); this.set(2,3,arr[5]);
+        } else if (arguments.length >= 6) {
+            this.set(0,1,n01); this.set(0,2,n02); this.set(0,3,n03);
+            this.set(1,2,n12); this.set(1,3,n13); this.set(2,3,n23);
+        }
+    }
+    
+    static key(i, j) {
+        if (i > j) [i, j] = [j, i];
+        return `${i},${j}`;
+    }
+    
+    get(i, j) {
+        const k = EdgeInts.key(i, j);
+        return this.data.has(k) ? this.data.get(k) : 0;
+    }
+    
+    set(i, j, v) {
+        this.data.set(EdgeInts.key(i, j), v);
+    }
+    
+    clone() {
+        const ei = new EdgeInts();
+        for (const [k, v] of this.data) ei.data.set(k, v);
+        return ei;
+    }
+    
+    subtract(other) {
+        const result = this.clone();
+        for (const [k, v] of other.data) {
+            result.data.set(k, (result.data.get(k) || 0) - v);
+        }
+        return result;
+    }
+    
+    add(other) {
+        const result = this.clone();
+        for (const [k, v] of other.data) {
+            result.data.set(k, (result.data.get(k) || 0) + v);
+        }
+        return result;
+    }
+    
+    print() {
+        let s = '';
+        for (const [i, j] of ALL_TET_PAIRS) {
+            s += `e{${i},${j}}: ${this.get(i,j)}  `;
+        }
+        console.log(s);
+    }
+}
+
+// ============================================================================
+// SEMI CORNER CUTS
+// ============================================================================
+
+class SemiCornerCuts {
+    constructor() {
+        this.data = [new Map(), new Map(), new Map(), new Map()];
+    }
+    
+    static key(j, k) {
+        if (j > k) [j, k] = [k, j];
+        return `${j},${k}`;
+    }
+    
+    get(i, j, k) {
+        const key = SemiCornerCuts.key(j, k);
+        return this.data[i].has(key) ? this.data[i].get(key) : 0;
+    }
+    
+    set(i, j, k, v) {
+        this.data[i].set(SemiCornerCuts.key(j, k), v);
+    }
+}
+
+// ============================================================================
+// CORNER CUTS
+// ============================================================================
+
+class CornerCuts {
+    constructor() {
+        this.data = [0, 0, 0, 0];
+    }
+    get(i) { return this.data[i]; }
+    set(i, v) { this.data[i] = v; }
+}
+
+// ============================================================================
+// DIAGONAL CUTS
+// ============================================================================
+
+class DiagonalCuts {
+    constructor() {
+        this.data = new Map();
+    }
+    
+    static key(i, j) {
+        if (i > j) [i, j] = [j, i];
+        return `${i},${j}`;
+    }
+    
+    get(i, j) {
+        const k = DiagonalCuts.key(i, j);
+        return this.data.has(k) ? this.data.get(k) : 0;
+    }
+    
+    set(i, j, v) {
+        this.data.set(DiagonalCuts.key(i, j), v);
+        // set complementary pair too
+        for (let k = 0; k < 4; k++) {
+            if (k === i || k === j) continue;
+            for (let l = k + 1; l < 4; l++) {
+                if (l === i || l === j) continue;
+                this.data.set(DiagonalCuts.key(k, l), v);
+            }
+        }
+    }
+}
+
+// ============================================================================
+// COMBINATORIAL VERTEX
+// ============================================================================
+
+class CombinatorialVertex {
+    constructor(i, j, order, edgeInt, k = -1, l = -1) {
+        this.i = i;
+        this.j = j;
+        this.order = order;
+        this.edgeInt = edgeInt;
+        this.k = k;
+        this.l = l;
+    }
+    
+    equals(other) {
+        if (this.i === other.i && this.j === other.j && this.order === other.order) return true;
+        if (this.i === other.j && this.j === other.i && this.order === this.edgeInt - other.order + 1) return true;
+        return false;
+    }
+    
+    sameEdgeAs(other) {
+        return (this.i === other.i && this.j === other.j) || (this.i === other.j && this.j === other.i);
+    }
+    
+    clone() {
+        return new CombinatorialVertex(this.i, this.j, this.order, this.edgeInt, this.k, this.l);
+    }
+}
+
+// ============================================================================
+// COMB FACE
+// ============================================================================
+
+const CombFaceType = { FLAT: 0, QUAD02: 1, QUAD13: 2, SPIRAL: 3 };
+
+class CombFace {
+    constructor(vertices, type) {
+        this.vertices = vertices;
+        this.type = type;
+    }
+}
+
+// ============================================================================
+// EDGE OCCUPATIONS
+// ============================================================================
+
+class EdgeOccupations {
+    constructor(edgeInts) {
+        this.data = new Map();
+        if (edgeInts) {
+            for (const [i, j] of ALL_TET_PAIRS) {
+                const count = edgeInts.get(i, j);
+                this.data.set(EdgeInts.key(i, j), new Array(count).fill(false));
+            }
+        }
+    }
+    
+    get(cv_or_i, j = undefined, index = undefined) {
+        if (cv_or_i instanceof CombinatorialVertex) {
+            const cv = cv_or_i;
+            let i = cv.i, jj = cv.j;
+            let idx = cv.order - 1;
+            if (i > jj) {
+                const arr = this.data.get(EdgeInts.key(i, jj));
+                idx = arr.length - 1 - idx;
+            }
+            const arr = this.data.get(EdgeInts.key(i, jj));
+            return arr ? arr[idx] : false;
+        } else {
+            let i = cv_or_i;
+            let idx = index;
+            if (i > j) {
+                const arr = this.data.get(EdgeInts.key(i, j));
+                idx = arr.length - 1 - idx;
+            }
+            const arr = this.data.get(EdgeInts.key(i, j));
+            return arr ? arr[idx] : false;
+        }
+    }
+    
+    set(cv_or_i, j_or_value, index = undefined, value = undefined) {
+        if (cv_or_i instanceof CombinatorialVertex) {
+            const cv = cv_or_i;
+            const val = j_or_value;
+            let i = cv.i, jj = cv.j;
+            let idx = cv.order - 1;
+            if (i > jj) {
+                const arr = this.data.get(EdgeInts.key(i, jj));
+                idx = arr.length - 1 - idx;
+            }
+            const arr = this.data.get(EdgeInts.key(i, jj));
+            if (arr) arr[idx] = val;
+        } else {
+            let i = cv_or_i;
+            let j = j_or_value;
+            let idx = index;
+            let val = value;
+            if (i > j) {
+                const arr = this.data.get(EdgeInts.key(i, j));
+                idx = arr.length - 1 - idx;
+            }
+            const arr = this.data.get(EdgeInts.key(i, j));
+            if (arr) arr[idx] = val;
+        }
+    }
+    
+    countOccupied() {
+        const result = new EdgeInts();
+        for (const [i, j] of ALL_TET_PAIRS) {
+            const arr = this.data.get(EdgeInts.key(i, j));
+            let count = 0;
+            if (arr) for (const v of arr) if (v) count++;
+            result.set(i, j, count);
+        }
+        return result;
+    }
+}
+
+// ============================================================================
+// INTERPOLATED POINT
+// ============================================================================
+
+class InterpolatedPoint {
+    constructor() {
+        this.pos = null;
+        this.parentAIdx = INVALID_IND;
+        this.parentBIdx = INVALID_IND;
+        this.order = -1;
+        this.edgeInt = -1;
+        this.t = -1.0;
+        this.weightedParents = [];
+        this.barycentricWeights = [];
+    }
+    
+    static fromRoot(pos) {
+        const ip = new InterpolatedPoint();
+        ip.pos = pos.clone();
+        return ip;
+    }
+    
+    static fromParents(aIdx, bIdx, order, edgeInt, pos = null) {
+        const ip = new InterpolatedPoint();
+        ip.parentAIdx = aIdx;
+        ip.parentBIdx = bIdx;
+        ip.order = order;
+        ip.edgeInt = edgeInt;
+        if (pos) ip.pos = pos.clone();
+        return ip;
+    }
+    
+    static fromParentsT(aIdx, bIdx, t, pos = null) {
+        const ip = new InterpolatedPoint();
+        ip.parentAIdx = aIdx;
+        ip.parentBIdx = bIdx;
+        ip.t = t;
+        if (pos) ip.pos = pos.clone();
+        return ip;
+    }
+    
+    static fromWeightedParents(parents, weights, pos = null) {
+        const ip = new InterpolatedPoint();
+        ip.weightedParents = [...parents];
+        ip.barycentricWeights = [...weights];
+        if (pos) ip.pos = pos.clone();
+        return ip;
+    }
+    
+    getPosition(pool) {
+        if (this.pos) return this.pos;
+        this.recomputeFromParents(pool);
+        return this.pos;
+    }
+    
+    recomputeFromParents(pool) {
+        if (this.weightedParents.length > 0 && this.barycentricWeights.length === this.weightedParents.length) {
+            this.pos = Vec3.zero();
+            for (let i = 0; i < this.weightedParents.length; i++) {
+                const p = pool[this.weightedParents[i]].getPosition(pool);
+                this.pos = this.pos.add(p.scale(this.barycentricWeights[i]));
+            }
+            return;
+        }
+        
+        if (this.parentAIdx === INVALID_IND || this.parentBIdx === INVALID_IND) return;
+        
+        const Pa = pool[this.parentAIdx].getPosition(pool);
+        const Pb = pool[this.parentBIdx].getPosition(pool);
+        
+        if (this.t >= 0.0) {
+            this.pos = Pa.lerp(Pb, this.t);
+            return;
+        }
+        
+        const t = (this.edgeInt > 0 && this.order > 0) ? this.order / (this.edgeInt + 1) : 0.5;
+        this.pos = Pa.lerp(Pb, t);
+    }
+}
+
+// ============================================================================
+// TRI SOUP
+// ============================================================================
+
+class TriSoup {
+    constructor() {
+        this.pool = [];
+        this.faces = [];
+        this.segments = [];
+    }
+    
+    addRoot(v) {
+        this.pool.push(InterpolatedPoint.fromRoot(v));
+        return this.pool.length - 1;
+    }
+    
+    addFromParents(a, b, order, edgeInt) {
+        const Pa = this.pool[a].getPosition(this.pool);
+        const Pb = this.pool[b].getPosition(this.pool);
+        const t = (edgeInt > 0) ? order / (edgeInt + 1) : 0.5;
+        const pos = Pa.lerp(Pb, t);
+        this.pool.push(InterpolatedPoint.fromParents(a, b, order, edgeInt, pos));
+        return this.pool.length - 1;
+    }
+    
+    addFromParentsT(a, b, t) {
+        const Pa = this.pool[a].getPosition(this.pool);
+        const Pb = this.pool[b].getPosition(this.pool);
+        const pos = Pa.lerp(Pb, t);
+        this.pool.push(InterpolatedPoint.fromParentsT(a, b, t, pos));
+        return this.pool.length - 1;
+    }
+    
+    addFace(i, j, k) {
+        this.faces.push([i, j, k]);
+    }
+    
+    addSegment(i, j) {
+        this.segments.push([i, j]);
+    }
+    
+    addAverageForPolygon(vertexIndices) {
+        let avgPos = Vec3.zero();
+        const weights = vertexIndices.map(() => 1.0 / vertexIndices.length);
+        for (const vi of vertexIndices) {
+            avgPos = avgPos.add(this.pool[vi].getPosition(this.pool));
+        }
+        avgPos = avgPos.scale(1.0 / vertexIndices.length);
+        this.pool.push(InterpolatedPoint.fromWeightedParents(vertexIndices, weights, avgPos));
+        return this.pool.length - 1;
+    }
+    
+    toVectorSoup() {
+        const faceIndices = [];
+        const vertexPositions = [];
+        for (const p of this.pool) {
+            if (p.barycentricWeights.length > 0) {
+                p.recomputeFromParents(this.pool);
+            }
+            vertexPositions.push(p.getPosition(this.pool));
+        }
+        for (const f of this.faces) {
+            faceIndices.push([f[0], f[1], f[2]]);
+        }
+        return { faceIndices, vertexPositions };
+    }
+    
+    segmentsToVectorSoup() {
+        const segIndices = [];
+        const vertexPositions = [];
+        for (const p of this.pool) {
+            vertexPositions.push(p.getPosition(this.pool));
+        }
+        for (const s of this.segments) {
+            segIndices.push([s[0], s[1]]);
+        }
+        return { segIndices, vertexPositions };
+    }
+    
+    getFirstOrderEdgePoints() {
+        const edgePoints = [];
+        for (const p of this.pool) {
+            if (p.order > 0 && p.edgeInt > 0 && p.parentAIdx !== INVALID_IND && p.parentBIdx !== INVALID_IND) {
+                edgePoints.push(p.getPosition(this.pool));
+            }
+        }
+        return edgePoints;
+    }
+}
+
+// ============================================================================
+// CORNER AND DIAGONAL CUTS TO EDGE INTS
+// ============================================================================
+
+function cornerAndDiagonalCutsToEdgeInts(cc, dc) {
+    const edgeInts = new EdgeInts();
+    for (const [i, j] of allPairs([0, 1, 2, 3])) {
+        const klSet = complement([i, j]);
+        const k = klSet[0], l = klSet[1];
+        edgeInts.set(i, j, cc.get(i) + cc.get(j) + dc.get(i, k) + dc.get(i, l));
+    }
+    return edgeInts;
+}
+
+// ============================================================================
+// NORMAL COORDINATES
+// ============================================================================
+
+class NormalCoordinates {
+    constructor(edgeInts = null) {
+        this.edgeInts = edgeInts ? edgeInts.clone() : new EdgeInts();
+        this.scc = new SemiCornerCuts();
+        this.sccReduced = new SemiCornerCuts();
+        this.cc = new CornerCuts();
+        this.dc = new DiagonalCuts();
+        this.edgeIntsResidual = new EdgeInts();
+        this.scoop = new SemiCornerCuts();
+        this.scoopCount = 0;
+        this.triangleIneq = true;
+        this.evenSum = true;
+        this.scoopDiagTypeExists = false;
+        this.allZeros = true;
+        
+        if (edgeInts) {
+            this.computeNC();
+        }
+    }
+    
+    computeNC() {
+        this.computeSemiCornerCutsAndScoops();
+        if ((this.evenSum && this.triangleIneq) || !this.evenSum) {
+            this.computeCornerCutsAndReducedSemiCornerCuts();
+            this.computeDiagonalCuts();
+        } else if (this.evenSum) {
+            const reducedEdgeInts = this.scoopReduction();
+            const reducedNC = new NormalCoordinates();
+            reducedNC.edgeInts = reducedEdgeInts;
+            reducedNC.computeNC();
+            if (!reducedNC.triangleIneq || !reducedNC.evenSum) {
+                throw new Error("computeNC: scoop reduction did not yield feasible NC!");
+            }
+            this.cc = reducedNC.cc;
+            this.dc = reducedNC.dc;
+            this.scoopDiagTypeExists = this.checkForNastyScoopTypes();
+        } else {
+            return;
+        }
+        this.computeResidualEdgeInts();
+        
+        this.allZeros = this.edgeInts.get(0,1) === 0 && this.edgeInts.get(0,2) === 0 &&
+                        this.edgeInts.get(0,3) === 0 && this.edgeInts.get(1,2) === 0 &&
+                        this.edgeInts.get(1,3) === 0 && this.edgeInts.get(2,3) === 0;
+    }
+    
+    computeSemiCornerCutsAndScoops() {
+        for (const triplet of ALL_TET_TRIPLETS) {
+            const [i, j, k] = triplet;
+            const { feasible, resA: resIJ, resB: resIK, resC: resJK } = 
+                triangleInequality(this.edgeInts.get(i,j), this.edgeInts.get(i,k), this.edgeInts.get(j,k));
+            const ijkEvenSum = (this.edgeInts.get(i,j) + this.edgeInts.get(i,k) + this.edgeInts.get(j,k)) % 2 === 0;
+            
+            this.triangleIneq = feasible && this.triangleIneq;
+            this.evenSum = ijkEvenSum && this.evenSum;
+            
+            let rIJ = resIJ, rIK = resIK, rJK = resJK;
+            if (!ijkEvenSum && feasible) {
+                rIJ = 1; rIK = 1; rJK = 1;
+            }
+            
+            const Mij = this.edgeInts.get(i,j) - rIJ;
+            const Mik = this.edgeInts.get(i,k) - rIK;
+            const Mjk = this.edgeInts.get(j,k) - rJK;
+            
+            this.scc.set(i, j, k, Math.max(Math.floor((Mij + Mik - Mjk) / 2), 0));
+            this.scc.set(j, i, k, Math.max(Math.floor((Mij + Mjk - Mik) / 2), 0));
+            this.scc.set(k, i, j, Math.max(Math.floor((Mik + Mjk - Mij) / 2), 0));
+            
+            this.scoop.set(i, j, k, Math.floor(rJK / 2));
+            this.scoop.set(j, i, k, Math.floor(rIK / 2));
+            this.scoop.set(k, i, j, Math.floor(rIJ / 2));
+            
+            this.scoopCount += Math.floor((rIJ + rIK + rJK) / 2);
+        }
+    }
+    
+    computeCornerCutsAndReducedSemiCornerCuts() {
+        this.cc.set(0, Math.min(this.scc.get(0,1,2), this.scc.get(0,1,3), this.scc.get(0,2,3)));
+        this.cc.set(1, Math.min(this.scc.get(1,0,2), this.scc.get(1,0,3), this.scc.get(1,2,3)));
+        this.cc.set(2, Math.min(this.scc.get(2,0,1), this.scc.get(2,0,3), this.scc.get(2,1,3)));
+        this.cc.set(3, Math.min(this.scc.get(3,0,1), this.scc.get(3,0,2), this.scc.get(3,1,2)));
+        
+        for (let i = 0; i < 4; i++) {
+            for (const [j, k] of allPairs(complement([i]))) {
+                this.sccReduced.set(i, j, k, this.scc.get(i, j, k) - this.cc.get(i));
+            }
+        }
+    }
+    
+    computeDiagonalCuts() {
+        for (let j = 1; j < 4; j++) {
+            const comp = complement([0, j]);
+            const k = comp[0], l = comp[1];
+            this.dc.set(0, j, Math.min(
+                this.sccReduced.get(k, 0, j),
+                this.sccReduced.get(l, 0, j),
+                this.sccReduced.get(j, k, l),
+                this.sccReduced.get(0, k, l)
+            ));
+        }
+    }
+    
+    computeResidualEdgeInts() {
+        const normalEdgeInts = cornerAndDiagonalCutsToEdgeInts(this.cc, this.dc);
+        this.edgeIntsResidual = this.edgeInts.subtract(normalEdgeInts);
+    }
+    
+    scoopReduction() {
+        const edgeOccupations = new EdgeOccupations(this.edgeInts);
+        for (const triplet of ALL_TET_TRIPLETS) {
+            const [ii, jj, kk] = triplet;
+            let base, v1, v2;
+            if (this.scoop.get(ii, jj, kk) > 0) {
+                base = ii; v1 = jj; v2 = kk;
+            } else if (this.scoop.get(jj, kk, ii) > 0) {
+                base = jj; v1 = kk; v2 = ii;
+            } else if (this.scoop.get(kk, ii, jj) > 0) {
+                base = kk; v1 = ii; v2 = jj;
+            } else {
+                continue;
+            }
+            const scoopCnt = this.scoop.get(base, v1, v2);
+            for (let s = 0; s < scoopCnt; s++) {
+                const cvFirst = new CombinatorialVertex(v1, v2, 2*s + this.scc.get(v1, v2, base) + 1, this.edgeInts.get(v1, v2), base);
+                const cvSecond = new CombinatorialVertex(v1, v2, 2*s + this.scc.get(v1, v2, base) + 2, this.edgeInts.get(v1, v2), base);
+                this.traceForever(cvFirst, edgeOccupations);
+                this.traceForever(cvSecond, edgeOccupations);
+            }
+        }
+        const reducedEdgeInts = new EdgeInts();
+        for (const [i, j] of allPairs([0,1,2,3])) {
+            let occCount = 0;
+            for (let idx = 0; idx < this.edgeInts.get(i, j); idx++) {
+                if (!edgeOccupations.get(i, j, idx)) occCount++;
+            }
+            reducedEdgeInts.set(i, j, occCount);
+        }
+        return reducedEdgeInts;
+    }
+    
+    findNextVertex(v0) {
+        if (!this.evenSum) throw new Error("combinatorial trace: evenSum is false");
+        const i = v0.i, j = v0.j;
+        const k = complement([i, j, v0.k])[0];
+        const order = v0.order;
+        const nij = v0.edgeInt;
+        
+        if (this.scc.get(i, j, k) + this.scc.get(j, i, k) + 2 * this.scoop.get(k, i, j) !== nij) {
+            throw new Error("combinatorial trace: inconsistent scoop and semicorner cut data");
+        }
+        
+        if (order <= this.scc.get(i, j, k)) {
+            return new CombinatorialVertex(i, k, order, this.edgeInts.get(i, k), j);
+        } else if (order >= nij - this.scc.get(j, i, k) + 1) {
+            return new CombinatorialVertex(j, k, nij - order + 1, this.edgeInts.get(j, k), i);
+        } else {
+            let nextOrder;
+            if ((order - this.scc.get(i, j, k)) % 2 === 0) {
+                nextOrder = order - 1;
+            } else {
+                nextOrder = order + 1;
+            }
+            return new CombinatorialVertex(i, j, nextOrder, nij, k);
+        }
+    }
+    
+    traceForever(v0, edgeOccupations) {
+        let cv = v0.clone();
+        while (true) {
+            if (edgeOccupations.get(cv)) return;
+            edgeOccupations.set(cv, true);
+            cv = this.findNextVertex(cv);
+        }
+    }
+    
+    scoopHomotopyCount(i, j, k, scoopCnt) {
+        const tempEdgeOccupations = new EdgeOccupations(this.edgeInts);
+        const cvFirst = new CombinatorialVertex(j, k, this.scc.get(j, k, i) + 2 * scoopCnt + 1, this.edgeInts.get(j, k), i);
+        this.traceForever(cvFirst, tempEdgeOccupations);
+        
+        const scoopEdgeInts = tempEdgeOccupations.countOccupied();
+        const scoopNC = new NormalCoordinates();
+        scoopNC.edgeInts = scoopEdgeInts;
+        scoopNC.computeSemiCornerCutsAndScoops();
+        
+        const isectsToI = scoopNC.scc.get(i, j, k) + 1;
+        const isectsToJ = scoopNC.scc.get(j, i, k) + 1;
+        const isectsToK = scoopNC.scc.get(k, i, j) + 1;
+        const l = complement([i, j, k])[0];
+        const isectsToL = isectsToI + scoopNC.edgeInts.get(i, l);
+        
+        let evenCount = 0;
+        if (isectsToI % 2 === 0) evenCount++;
+        if (isectsToJ % 2 === 0) evenCount++;
+        if (isectsToK % 2 === 0) evenCount++;
+        if (isectsToL % 2 === 0) evenCount++;
+        return evenCount;
+    }
+    
+    faceHomotopyCount(i, j, k) {
+        let cv;
+        const tempEdgeOccupations = new EdgeOccupations(this.edgeInts);
+        if (this.scc.get(i, j, k) > 0) {
+            cv = new CombinatorialVertex(i, j, this.scc.get(i, j, k), this.edgeInts.get(i, j), k);
+            this.traceForever(cv, tempEdgeOccupations);
+        } else if (this.scc.get(j, k, i) > 0) {
+            cv = new CombinatorialVertex(j, k, this.scc.get(j, k, i), this.edgeInts.get(j, k), i);
+            this.traceForever(cv, tempEdgeOccupations);
+        } else if (this.scc.get(k, i, j) > 0) {
+            cv = new CombinatorialVertex(k, i, this.scc.get(k, i, j), this.edgeInts.get(k, i), j);
+            this.traceForever(cv, tempEdgeOccupations);
+        } else {
+            return 4;
+        }
+        
+        const faceEdgeInts = tempEdgeOccupations.countOccupied();
+        const faceNC = new NormalCoordinates();
+        faceNC.edgeInts = faceEdgeInts;
+        faceNC.computeSemiCornerCutsAndScoops();
+        
+        const reducedI = faceNC.scc.get(i, j, k);
+        const reducedJ = faceNC.scc.get(j, i, k);
+        const reducedK = faceNC.scc.get(k, i, j);
+        const l = complement([i, j, k])[0];
+        const reducedL = reducedI + faceNC.edgeInts.get(i, l);
+        
+        let evenCount = 0;
+        if (reducedI % 2 === 0) evenCount++;
+        if (reducedJ % 2 === 0) evenCount++;
+        if (reducedK % 2 === 0) evenCount++;
+        if (reducedL % 2 === 0) evenCount++;
+        return evenCount;
+    }
+    
+    checkForNastyScoopTypes() {
+        for (const triplet of ALL_TET_TRIPLETS) {
+            const [i, j, k] = triplet;
+            const faceHomotopy = this.faceHomotopyCount(i, j, k);
+            if (faceHomotopy === 2) return true;
+        }
+        return false;
+    }
+    
+    traceScoopPair(cv1, cv2, edgeOccupations, contractible) {
+        if (edgeOccupations.get(cv1)) {
+            if (!edgeOccupations.get(cv2)) {
+                throw new Error("Scoop builder: first vertex occupied but second not!");
+            }
+            return [];
+        }
+        
+        const generatedCombFaces = [];
+        let done = false;
+        let curCv1 = cv1.clone(), curCv2 = cv2.clone();
+        
+        while (!done) {
+            edgeOccupations.set(curCv1, true);
+            edgeOccupations.set(curCv2, true);
+            const nextV1 = this.findNextVertex(curCv1);
+            const nextV2 = this.findNextVertex(curCv2);
+            
+            if (nextV1.equals(curCv2)) {
+                if (!nextV2.equals(curCv1)) throw new Error("Scoop builder: trace error!");
+                generatedCombFaces.push(new CombFace([curCv1.clone(), curCv2.clone()], CombFaceType.FLAT));
+                return generatedCombFaces;
+            } else if (!nextV1.sameEdgeAs(curCv1) && !nextV2.sameEdgeAs(curCv2)) {
+                if (nextV1.sameEdgeAs(nextV2)) {
+                    generatedCombFaces.push(new CombFace([curCv1.clone(), curCv2.clone(), nextV2.clone(), nextV1.clone()], CombFaceType.FLAT));
+                    edgeOccupations.set(nextV1, true);
+                    edgeOccupations.set(nextV2, true);
+                    curCv1 = nextV1;
+                    curCv2 = nextV2;
+                } else {
+                    if (contractible) return generatedCombFaces;
+                    const nextNextV1 = this.findNextVertex(nextV1);
+                    const nextNextV2 = this.findNextVertex(nextV2);
+                    if (!nextNextV1.equals(nextNextV2)) {
+                        throw new Error("Scoop builder: trace error at termination!");
+                    }
+                    generatedCombFaces.push(new CombFace([curCv1.clone(), curCv2.clone(), nextV2.clone(), nextV1.clone()], CombFaceType.FLAT));
+                    generatedCombFaces.push(new CombFace([nextV1.clone(), nextV2.clone(), nextNextV1.clone()], CombFaceType.FLAT));
+                    edgeOccupations.set(nextV1, true);
+                    edgeOccupations.set(nextV2, true);
+                    edgeOccupations.set(nextNextV1, true);
+                    return generatedCombFaces;
+                }
+            } else {
+                return generatedCombFaces;
+            }
+        }
+        throw new Error("Scoop builder: exited loop unexpectedly!");
+    }
+    
+    nastyScoopSpiral(cv, edgeOccupations) {
+        let nextCv = this.findNextVertex(cv);
+        const spiralBoundary = [cv.clone()];
+        while (!nextCv.equals(cv)) {
+            spiralBoundary.push(nextCv.clone());
+            nextCv = this.findNextVertex(nextCv);
+        }
+        return new CombFace(spiralBoundary, CombFaceType.SPIRAL);
+    }
+    
+    degenerateScoopRegion(i, j, k, edgeOccupations) {
+        const sccJ = this.scc.get(j, i, k);
+        const sccK = this.scc.get(k, i, j);
+        const vjk = new CombinatorialVertex(j, k, sccJ, this.edgeInts.get(j, k), i);
+        const vkj = new CombinatorialVertex(k, j, sccK, this.edgeInts.get(j, k), i);
+        const vji = new CombinatorialVertex(j, i, sccJ, this.edgeInts.get(i, j), k);
+        const vki = new CombinatorialVertex(k, i, sccK, this.edgeInts.get(i, k), j);
+        
+        const centerPolygon = [vji.clone(), vjk.clone()];
+        edgeOccupations.set(vji, true);
+        edgeOccupations.set(vjk, true);
+        
+        for (let s = 0; s < this.scoop.get(i, j, k); s++) {
+            const scoopV1 = new CombinatorialVertex(j, k, 2*s + sccJ + 1, this.edgeInts.get(j, k), i);
+            const scoopV2 = new CombinatorialVertex(j, k, 2*s + sccJ + 2, this.edgeInts.get(j, k), i);
+            centerPolygon.push(scoopV1.clone());
+            centerPolygon.push(scoopV2.clone());
+            edgeOccupations.set(scoopV1, true);
+            edgeOccupations.set(scoopV2, true);
+        }
+        centerPolygon.push(vkj.clone());
+        centerPolygon.push(vki.clone());
+        edgeOccupations.set(vkj, true);
+        edgeOccupations.set(vki, true);
+        
+        const nextVji = this.findNextVertex(vji);
+        const nextVki = this.findNextVertex(vki);
+        if (!nextVji.equals(nextVki)) {
+            throw new Error("Scoop builder: error at degenerate face corner!");
+        }
+        edgeOccupations.set(nextVji, true);
+        
+        return [
+            new CombFace([vji.clone(), vki.clone(), nextVji.clone()], CombFaceType.FLAT),
+            new CombFace(centerPolygon, CombFaceType.FLAT)
+        ];
+    }
+    
+    contractibleRegion(i, j, k, edgeOccupations) {
+        const vji = new CombinatorialVertex(j, i, this.scc.get(j, i, k), this.edgeInts.get(i, j), k);
+        const vij = new CombinatorialVertex(i, j, this.scc.get(i, j, k), this.edgeInts.get(i, j), k);
+        const vik = new CombinatorialVertex(i, k, this.scc.get(i, k, j), this.edgeInts.get(i, k), j);
+        const vki = new CombinatorialVertex(k, i, this.scc.get(k, i, j), this.edgeInts.get(i, k), j);
+        const vkj = new CombinatorialVertex(k, j, this.scc.get(k, j, i), this.edgeInts.get(j, k), i);
+        const vjk = new CombinatorialVertex(j, k, this.scc.get(j, k, i), this.edgeInts.get(j, k), i);
+        const hexagon = [vji, vij, vik, vki, vkj, vjk];
+        return new CombFace(hexagon, CombFaceType.FLAT);
+    }
+}
+
+// ============================================================================
+// INTERPOLATED TET
+// ============================================================================
+
+class InterpolatedTet {
+    constructor(p0Idx, p1Idx, p2Idx, p3Idx) {
+        this.poolIdx = [p0Idx, p1Idx, p2Idx, p3Idx];
+    }
+}
+
+// ============================================================================
+// SINGLE TET GEOMETRY SOLVER
+// ============================================================================
+
+class SingleTetGeometrySolver {
+    constructor(tet, ncOrEdgeInts) {
+        this.tet = tet;
+        if (ncOrEdgeInts instanceof NormalCoordinates) {
+            this.NC = ncOrEdgeInts;
+        } else {
+            this.NC = new NormalCoordinates(ncOrEdgeInts);
+        }
+        this.edgeOccupations = new EdgeOccupations(this.NC.edgeInts);
+        this.allowIntersections = false;
+        this.onlyRecursiveBuild = false;
+        this.recursed = false;
+        this.tetSplitPolicy = "plain";
+        this.verbose = false;
+        this.handleScoops = true;
+        this.preScoopNC = null;
+    }
+    
+    generateNCTriSoup(soup) {
+        let b1 = 0;
+        let diagTypes = 0;
+        let d1 = -1, d2 = -1;
+        for (let i = 1; i < 4; i++) {
+            if (this.NC.dc.get(b1, i) > 0) {
+                diagTypes++;
+                if (d1 === -1) d1 = this.NC.dc.get(b1, i);
+                else d2 = this.NC.dc.get(b1, i);
+            }
+        }
+        
+        this.preScoopNC = new NormalCoordinates();
+        this.preScoopNC.edgeInts = this.NC.edgeInts.clone();
+        this.preScoopNC.cc = this.NC.cc;
+        this.preScoopNC.dc = this.NC.dc;
+        this.preScoopNC.scc = this.NC.scc;
+        this.preScoopNC.scoop = this.NC.scoop;
+        
+        let combFaces = [];
+        if (this.handleScoops) {
+            if (this.NC.evenSum && !this.NC.triangleIneq) {
+                combFaces = this.generateScoopedTriSoup();
+            }
+        }
+        
+        if (diagTypes <= 1 || this.allowIntersections) {
+            this.generatePlanarDiagonalQuadSoup(soup);
+            this.generateCornerTriSoup(soup);
+            this.transferCombFacesToSoup(combFaces, soup);
+        } else {
+            if (!((d1 !== d2) && (gcd(d1, d2) > 1 || this.onlyRecursiveBuild))) {
+                this.generateCornerTriSoup(soup);
+                this.transferCombFacesToSoup(combFaces, soup);
+            }
+            this.generateAlmostNormalDiagonalTriSoup(soup, d1, d2);
+        }
+    }
+    
+    generateCornerTriSoup(soup) {
+        for (let i = 0; i < 4; i++) {
+            const others = complement([i]);
+            const j = others[0], k = others[1], l = others[2];
+            for (let order = 1; order <= this.NC.cc.get(i); order++) {
+                const rootI = this.tet.poolIdx[i];
+                const rootJ = this.tet.poolIdx[j];
+                const rootK = this.tet.poolIdx[k];
+                const rootL = this.tet.poolIdx[l];
+                const ipIJ = soup.addFromParents(rootI, rootJ, order, this.preScoopNC.edgeInts.get(i, j));
+                const ipIK = soup.addFromParents(rootI, rootK, order, this.preScoopNC.edgeInts.get(i, k));
+                const ipIL = soup.addFromParents(rootI, rootL, order, this.preScoopNC.edgeInts.get(i, l));
+                soup.addFace(ipIJ, ipIK, ipIL);
+            }
+        }
+    }
+    
+    findNextAvailableVertex(v, tempEdgeOccupations) {
+        const v0 = new CombinatorialVertex(v.i, v.j, 1, v.edgeInt);
+        let unoccupiedCount = 0;
+        while (true) {
+            if (tempEdgeOccupations.get(v0)) {
+                v0.order += 1;
+            } else {
+                unoccupiedCount += 1;
+                if (unoccupiedCount === v.order) {
+                    return v0;
+                }
+                v0.order += 1;
+            }
+            if (v0.order > v.edgeInt) {
+                throw new Error("findNextAvailableVertex: No available vertex found along edge!");
+            }
+        }
+    }
+    
+    generatePlanarDiagonalQuadSoup(soup) {
+        const b1 = 0;
+        const otherVs = [1, 2, 3];
+        let firstB2 = -1;
+        let firstDiagCount = -1;
+        
+        for (const b2 of otherVs) {
+            if (this.NC.dc.get(b1, b2) === 0) continue;
+            const headVs = complement([b1, b2]);
+            const h1 = headVs[0], h2 = headVs[1];
+            const diagCount = this.NC.dc.get(b1, b2);
+            
+            if (firstB2 === -1) {
+                const b1CC = this.NC.cc.get(b1);
+                const b2CC = this.NC.cc.get(b2);
+                
+                const tempOcc = new EdgeOccupations(this.edgeOccupations.data.size > 0 ? null : this.NC.edgeInts);
+                for (const [key, arr] of this.edgeOccupations.data) {
+                    tempOcc.data.set(key, [...arr]);
+                }
+                
+                for (let t = 0; t < diagCount; t++) {
+                    let order0 = t + b1CC + 1;
+                    let order1 = t + b1CC + 1;
+                    let order2 = t + b2CC + 1;
+                    let order3 = t + b2CC + 1;
+                    
+                    if (this.handleScoops) {
+                        let cv0 = new CombinatorialVertex(b1, h1, order0, this.preScoopNC.edgeInts.get(b1, h1));
+                        let cv1 = new CombinatorialVertex(b1, h2, order1, this.preScoopNC.edgeInts.get(b1, h2));
+                        let cv2 = new CombinatorialVertex(b2, h2, order2, this.preScoopNC.edgeInts.get(b2, h2));
+                        let cv3 = new CombinatorialVertex(b2, h1, order3, this.preScoopNC.edgeInts.get(b2, h1));
+                        cv0 = this.findNextAvailableVertex(cv0, tempOcc);
+                        cv1 = this.findNextAvailableVertex(cv1, tempOcc);
+                        cv2 = this.findNextAvailableVertex(cv2, tempOcc);
+                        cv3 = this.findNextAvailableVertex(cv3, tempOcc);
+                        order0 = cv0.order;
+                        order1 = cv1.order;
+                        order2 = cv2.order;
+                        order3 = cv3.order;
+                    }
+                    
+                    const ipIdx0 = soup.addFromParents(this.tet.poolIdx[b1], this.tet.poolIdx[h1], order0, this.preScoopNC.edgeInts.get(b1, h1));
+                    const ipIdx1 = soup.addFromParents(this.tet.poolIdx[b1], this.tet.poolIdx[h2], order1, this.preScoopNC.edgeInts.get(b1, h2));
+                    const ipIdx2 = soup.addFromParents(this.tet.poolIdx[b2], this.tet.poolIdx[h2], order2, this.preScoopNC.edgeInts.get(b2, h2));
+                    const ipIdx3 = soup.addFromParents(this.tet.poolIdx[b2], this.tet.poolIdx[h1], order3, this.preScoopNC.edgeInts.get(b2, h1));
+                    soup.addFace(ipIdx0, ipIdx1, ipIdx2);
+                    soup.addFace(ipIdx0, ipIdx2, ipIdx3);
+                }
+                firstB2 = b2;
+                firstDiagCount = diagCount;
+            } else {
+                const b1CC = this.NC.cc.get(b1);
+                const b2CC = this.NC.cc.get(b2);
+                for (let t = 0; t < diagCount; t++) {
+                    const h1Overhead = (h1 === firstB2) ? 0 : firstDiagCount;
+                    const h2Overhead = (h2 === firstB2) ? 0 : firstDiagCount;
+                    const ipIdx0 = soup.addFromParents(this.tet.poolIdx[b1], this.tet.poolIdx[h1], t + b1CC + h1Overhead + 1, this.NC.edgeInts.get(b1, h1));
+                    const ipIdx1 = soup.addFromParents(this.tet.poolIdx[b1], this.tet.poolIdx[h2], t + b1CC + h2Overhead + 1, this.NC.edgeInts.get(b1, h2));
+                    const ipIdx2 = soup.addFromParents(this.tet.poolIdx[b2], this.tet.poolIdx[h2], t + b2CC + 1, this.NC.edgeInts.get(b2, h2));
+                    const ipIdx3 = soup.addFromParents(this.tet.poolIdx[b2], this.tet.poolIdx[h1], t + b2CC + 1, this.NC.edgeInts.get(b2, h1));
+                    soup.addFace(ipIdx0, ipIdx1, ipIdx2);
+                    soup.addFace(ipIdx0, ipIdx2, ipIdx3);
+                }
+            }
+        }
+    }
+    
+    generateAlmostNormalDiagonalTriSoup(soup, d1, d2) {
+        const b1 = 0;
+        const otherVs = [1, 2, 3];
+        let vd1 = -1, vd2 = -1, vdd = -1;
+        for (const otherB1 of otherVs) {
+            if (this.NC.dc.get(b1, otherB1) !== 0) {
+                if (vd1 === -1) { vd1 = otherB1; continue; }
+                else vd2 = otherB1;
+            } else vdd = otherB1;
+        }
+        
+        if (d1 === d2) {
+            const d = d1;
+            const tempOcc = new EdgeOccupations(this.NC.edgeInts);
+            for (const [key, arr] of this.edgeOccupations.data) {
+                tempOcc.data.set(key, [...arr]);
+            }
+            
+            for (let t = 0; t < d; t++) {
+                const cB1 = this.NC.cc.get(b1), cVd1 = this.NC.cc.get(vd1);
+                const cVd2 = this.NC.cc.get(vd2), cVdd = this.NC.cc.get(vdd);
+                
+                const t1 = ((this.NC.edgeInts.get(vd1, vd2) + cVd1 - cVd2) / 2.0) / this.NC.edgeInts.get(vd1, vd2);
+                const t2 = ((this.NC.edgeInts.get(b1, vdd) + cB1 - cVdd) / 2.0) / this.NC.edgeInts.get(b1, vdd);
+                const proxyInner1Idx = soup.addFromParentsT(this.tet.poolIdx[vd1], this.tet.poolIdx[vd2], t1);
+                const proxyInner2Idx = soup.addFromParentsT(this.tet.poolIdx[b1], this.tet.poolIdx[vdd], t2);
+                const innerVertIdx = soup.addFromParents(proxyInner1Idx, proxyInner2Idx, t + 1, d);
+                
+                let orderD1d21 = d - t + cVd1, orderD1d22 = d - t + cVd2;
+                let orderB1vd1 = t + cB1 + 1, orderB1vd2 = t + cB1 + 1;
+                let orderB1vdd1 = t + cB1 + 1, orderB1vdd2 = t + cVdd + 1;
+                let orderD1vdd = d - t + cVd1, orderD2vdd = d - t + cVd2;
+                
+                if (this.handleScoops) {
+                    let cvD1d21 = new CombinatorialVertex(vd1, vd2, orderD1d21, this.preScoopNC.edgeInts.get(vd1, vd2));
+                    let cvD1d22 = new CombinatorialVertex(vd2, vd1, orderD1d22, this.preScoopNC.edgeInts.get(vd1, vd2));
+                    let cvB1vd1 = new CombinatorialVertex(b1, vd1, orderB1vd1, this.preScoopNC.edgeInts.get(b1, vd1));
+                    let cvB1vd2 = new CombinatorialVertex(b1, vd2, orderB1vd2, this.preScoopNC.edgeInts.get(b1, vd2));
+                    let cvB1vdd1 = new CombinatorialVertex(b1, vdd, orderB1vdd1, this.preScoopNC.edgeInts.get(b1, vdd));
+                    let cvB1vdd2 = new CombinatorialVertex(vdd, b1, orderB1vdd2, this.preScoopNC.edgeInts.get(b1, vdd));
+                    let cvD1vdd = new CombinatorialVertex(vd1, vdd, orderD1vdd, this.preScoopNC.edgeInts.get(vd1, vdd));
+                    let cvD2vdd = new CombinatorialVertex(vd2, vdd, orderD2vdd, this.preScoopNC.edgeInts.get(vd2, vdd));
+                    
+                    cvD1d21 = this.findNextAvailableVertex(cvD1d21, tempOcc);
+                    cvD1d22 = this.findNextAvailableVertex(cvD1d22, tempOcc);
+                    cvB1vd1 = this.findNextAvailableVertex(cvB1vd1, tempOcc);
+                    cvB1vd2 = this.findNextAvailableVertex(cvB1vd2, tempOcc);
+                    cvB1vdd1 = this.findNextAvailableVertex(cvB1vdd1, tempOcc);
+                    cvB1vdd2 = this.findNextAvailableVertex(cvB1vdd2, tempOcc);
+                    cvD1vdd = this.findNextAvailableVertex(cvD1vdd, tempOcc);
+                    cvD2vdd = this.findNextAvailableVertex(cvD2vdd, tempOcc);
+                    
+                    orderD1d21 = cvD1d21.order; orderD1d22 = cvD1d22.order;
+                    orderB1vd1 = cvB1vd1.order; orderB1vd2 = cvB1vd2.order;
+                    orderB1vdd1 = cvB1vdd1.order; orderB1vdd2 = cvB1vdd2.order;
+                    orderD1vdd = cvD1vdd.order; orderD2vdd = cvD2vdd.order;
+                }
+                
+                const d1d21Idx = soup.addFromParents(this.tet.poolIdx[vd1], this.tet.poolIdx[vd2], orderD1d21, this.preScoopNC.edgeInts.get(vd1, vd2));
+                const d1d22Idx = soup.addFromParents(this.tet.poolIdx[vd2], this.tet.poolIdx[vd1], orderD1d22, this.preScoopNC.edgeInts.get(vd1, vd2));
+                const b1vd1Idx = soup.addFromParents(this.tet.poolIdx[b1], this.tet.poolIdx[vd1], orderB1vd1, this.preScoopNC.edgeInts.get(b1, vd1));
+                const b1vd2Idx = soup.addFromParents(this.tet.poolIdx[b1], this.tet.poolIdx[vd2], orderB1vd2, this.preScoopNC.edgeInts.get(b1, vd2));
+                const b1vdd1Idx = soup.addFromParents(this.tet.poolIdx[b1], this.tet.poolIdx[vdd], orderB1vdd1, this.preScoopNC.edgeInts.get(b1, vdd));
+                const b1vdd2Idx = soup.addFromParents(this.tet.poolIdx[vdd], this.tet.poolIdx[b1], orderB1vdd2, this.preScoopNC.edgeInts.get(b1, vdd));
+                const d1vddIdx = soup.addFromParents(this.tet.poolIdx[vd1], this.tet.poolIdx[vdd], orderD1vdd, this.preScoopNC.edgeInts.get(vd1, vdd));
+                const d2vddIdx = soup.addFromParents(this.tet.poolIdx[vd2], this.tet.poolIdx[vdd], orderD2vdd, this.preScoopNC.edgeInts.get(vd2, vdd));
+                
+                soup.addFace(innerVertIdx, b1vd1Idx, b1vdd1Idx);
+                soup.addFace(innerVertIdx, b1vd2Idx, b1vdd1Idx);
+                soup.addFace(innerVertIdx, b1vd1Idx, d1d21Idx);
+                soup.addFace(innerVertIdx, b1vd2Idx, d1d22Idx);
+                soup.addFace(innerVertIdx, d1d21Idx, d1vddIdx);
+                soup.addFace(innerVertIdx, d1d22Idx, d2vddIdx);
+                soup.addFace(innerVertIdx, d1vddIdx, b1vdd2Idx);
+                soup.addFace(innerVertIdx, d2vddIdx, b1vdd2Idx);
+            }
+        } else if (gcd(d1, d2) === 1 && !this.onlyRecursiveBuild) {
+            const cB1 = this.NC.cc.get(b1), cVd1 = this.NC.cc.get(vd1);
+            const cVd2 = this.NC.cc.get(vd2), cVdd = this.NC.cc.get(vdd);
+            const t1 = ((this.NC.edgeInts.get(vd1, vd2) + cVd1 - cVd2) / 2.0) / this.NC.edgeInts.get(vd1, vd2);
+            const t2 = ((this.NC.edgeInts.get(b1, vdd) + cB1 - cVdd) / 2.0) / this.NC.edgeInts.get(b1, vdd);
+            const proxyInner1Idx = soup.addFromParentsT(this.tet.poolIdx[vd1], this.tet.poolIdx[vd2], t1);
+            const proxyInner2Idx = soup.addFromParentsT(this.tet.poolIdx[b1], this.tet.poolIdx[vdd], t2);
+            const innerVertIdx = soup.addFromParentsT(proxyInner1Idx, proxyInner2Idx, 0.5);
+            
+            for (const triplet of ALL_TET_TRIPLETS) {
+                let i = triplet[0], j = triplet[1], k = triplet[2];
+                let curB1, curVd1, curVd2, curCVd1, curCVd2;
+                
+                if (this.NC.dc.get(i, j) === 0) {
+                    curB1 = k;
+                    if (this.NC.dc.get(k, j) === d1) { curVd1 = j; curVd2 = i; curCVd1 = this.NC.cc.get(j); curCVd2 = this.NC.cc.get(i); }
+                    else if (this.NC.dc.get(k, j) === d2) { curVd1 = i; curVd2 = j; curCVd1 = this.NC.cc.get(i); curCVd2 = this.NC.cc.get(j); }
+                    else throw new Error("triplet does not correspond to a diagonal face");
+                } else if (this.NC.dc.get(j, k) === 0) {
+                    curB1 = i;
+                    if (this.NC.dc.get(i, k) === d1) { curVd1 = k; curVd2 = j; curCVd1 = this.NC.cc.get(k); curCVd2 = this.NC.cc.get(j); }
+                    else if (this.NC.dc.get(i, k) === d2) { curVd1 = j; curVd2 = k; curCVd1 = this.NC.cc.get(j); curCVd2 = this.NC.cc.get(k); }
+                    else throw new Error("triplet does not correspond to a diagonal face");
+                } else if (this.NC.dc.get(k, i) === 0) {
+                    curB1 = j;
+                    if (this.NC.dc.get(j, i) === d1) { curVd1 = i; curVd2 = k; curCVd1 = this.NC.cc.get(i); curCVd2 = this.NC.cc.get(k); }
+                    else if (this.NC.dc.get(j, i) === d2) { curVd1 = k; curVd2 = i; curCVd1 = this.NC.cc.get(k); curCVd2 = this.NC.cc.get(i); }
+                    else throw new Error("triplet does not correspond to a diagonal face");
+                } else {
+                    throw new Error("Something went wrong in combinatorial solve!!");
+                }
+                
+                const tempOcc = new EdgeOccupations(this.NC.edgeInts);
+                for (const [key, arr] of this.edgeOccupations.data) {
+                    tempOcc.data.set(key, [...arr]);
+                }
+                
+                for (let t = 0; t < d2; t++) {
+                    let orderB1vd1 = t + curCVd1 + 1;
+                    let orderD1d2 = t + curCVd1 + 1;
+                    if (this.handleScoops) {
+                        let cvB1d1 = new CombinatorialVertex(curVd1, curB1, orderB1vd1, this.preScoopNC.edgeInts.get(curB1, curVd1));
+                        let cvD1d2 = new CombinatorialVertex(curVd1, curVd2, orderD1d2, this.preScoopNC.edgeInts.get(curVd1, curVd2));
+                        cvB1d1 = this.findNextAvailableVertex(cvB1d1, tempOcc);
+                        cvD1d2 = this.findNextAvailableVertex(cvD1d2, tempOcc);
+                        orderB1vd1 = cvB1d1.order;
+                        orderD1d2 = cvD1d2.order;
+                    }
+                    const b1d1Idx = soup.addFromParents(this.tet.poolIdx[curVd1], this.tet.poolIdx[curB1], orderB1vd1, this.preScoopNC.edgeInts.get(curB1, curVd1));
+                    const d1d2Idx = soup.addFromParents(this.tet.poolIdx[curVd1], this.tet.poolIdx[curVd2], orderD1d2, this.preScoopNC.edgeInts.get(curVd1, curVd2));
+                    soup.addFace(innerVertIdx, b1d1Idx, d1d2Idx);
+                }
+                for (let t = 0; t < d1; t++) {
+                    let orderB1vd2 = t + curCVd2 + 1;
+                    let orderD2d1 = t + curCVd2 + 1;
+                    if (this.handleScoops) {
+                        let cvB1d2 = new CombinatorialVertex(curVd2, curB1, orderB1vd2, this.preScoopNC.edgeInts.get(curB1, curVd2));
+                        let cvD2d1 = new CombinatorialVertex(curVd2, curVd1, orderD2d1, this.preScoopNC.edgeInts.get(curVd2, curVd1));
+                        cvB1d2 = this.findNextAvailableVertex(cvB1d2, tempOcc);
+                        cvD2d1 = this.findNextAvailableVertex(cvD2d1, tempOcc);
+                        orderB1vd2 = cvB1d2.order;
+                        orderD2d1 = cvD2d1.order;
+                    }
+                    const b1d2Idx = soup.addFromParents(this.tet.poolIdx[curVd2], this.tet.poolIdx[curB1], orderB1vd2, this.preScoopNC.edgeInts.get(curB1, curVd2));
+                    const d2d1Idx = soup.addFromParents(this.tet.poolIdx[curVd2], this.tet.poolIdx[curVd1], orderD2d1, this.preScoopNC.edgeInts.get(curVd2, curVd1));
+                    soup.addFace(innerVertIdx, b1d2Idx, d2d1Idx);
+                }
+            }
+        } else {
+            if (d1 < d2) [d1, d2] = [d2, d1];
+            this.recursed = true;
+            const interiorEdgeInts = [0, 0, 0, 0];
+            interiorEdgeInts[b1] = d1 - d2 + this.NC.cc.get(b1);
+            for (const otherV of otherVs) {
+                if (this.NC.dc.get(b1, otherV) === 0) interiorEdgeInts[otherV] = 2 * d2 + this.NC.cc.get(otherV);
+                else if (this.NC.dc.get(b1, otherV) === d1) interiorEdgeInts[otherV] = d1 + this.NC.cc.get(otherV);
+                else if (this.NC.dc.get(b1, otherV) === d2) interiorEdgeInts[otherV] = d2 + this.NC.cc.get(otherV);
+                else throw new Error("diagonal cuts cant take any other values");
+            }
+            
+            let baryWeights;
+            const ie0 = interiorEdgeInts[0], ie1 = interiorEdgeInts[1];
+            const ie2 = interiorEdgeInts[2], ie3 = interiorEdgeInts[3];
+            if (this.tetSplitPolicy === "quad") {
+                baryWeights = [1/(ie0*ie0), 1/(ie1*ie1), 1/(ie2*ie2), 1/(ie3*ie3)];
+            } else if (this.tetSplitPolicy === "linear") {
+                baryWeights = [1/ie0, 1/ie1, 1/ie2, 1/ie3];
+            } else {
+                baryWeights = [1, 1, 1, 1];
+            }
+            const wSum = baryWeights[0] + baryWeights[1] + baryWeights[2] + baryWeights[3];
+            for (let i = 0; i < 4; i++) baryWeights[i] /= wSum;
+            
+            let splitPos = Vec3.zero();
+            for (let i = 0; i < 4; i++) {
+                splitPos = splitPos.add(soup.pool[this.tet.poolIdx[i]].getPosition(soup.pool).scale(baryWeights[i]));
+            }
+            const splitIpIdx = soup.addRoot(splitPos);
+            
+            for (const triplet of ALL_TET_TRIPLETS) {
+                const i = triplet[0], j = triplet[1], k = triplet[2];
+                const splitInterpTet = new InterpolatedTet(splitIpIdx, this.tet.poolIdx[i], this.tet.poolIdx[j], this.tet.poolIdx[k]);
+                const splitEdgeInts = new EdgeInts();
+                splitEdgeInts.set(0, 1, interiorEdgeInts[i]);
+                splitEdgeInts.set(0, 2, interiorEdgeInts[j]);
+                splitEdgeInts.set(0, 3, interiorEdgeInts[k]);
+                splitEdgeInts.set(1, 2, this.preScoopNC.edgeInts.get(i, j));
+                splitEdgeInts.set(1, 3, this.preScoopNC.edgeInts.get(i, k));
+                splitEdgeInts.set(2, 3, this.preScoopNC.edgeInts.get(j, k));
+                
+                const innerSolver = new SingleTetGeometrySolver(splitInterpTet, splitEdgeInts);
+                innerSolver.onlyRecursiveBuild = this.onlyRecursiveBuild;
+                innerSolver.tetSplitPolicy = this.tetSplitPolicy;
+                innerSolver.generateNCTriSoup(soup);
+            }
+        }
+    }
+    
+    generateScoopedTriSoup() {
+        const allGeneratedCombFaces = [];
+        for (const triplet of ALL_TET_TRIPLETS) {
+            const [ii, jj, kk] = triplet;
+            let base, v1, v2;
+            
+            const midFaceHomotopy = this.NC.faceHomotopyCount(ii, jj, kk);
+            if (this.NC.scoop.get(ii, jj, kk) > 0) {
+                base = ii; v1 = jj; v2 = kk;
+            } else if (this.NC.scoop.get(jj, kk, ii) > 0) {
+                base = jj; v1 = kk; v2 = ii;
+            } else if (this.NC.scoop.get(kk, ii, jj) > 0) {
+                base = kk; v1 = ii; v2 = jj;
+            } else if (midFaceHomotopy === 0) {
+                const hexFace = this.NC.contractibleRegion(ii, jj, kk, this.edgeOccupations);
+                allGeneratedCombFaces.push(hexFace);
+                continue;
+            } else {
+                continue;
+            }
+            
+            const scoopCnt = this.NC.scoop.get(base, v1, v2);
+            for (let s = 0; s < scoopCnt; s++) {
+                const cvFirst = new CombinatorialVertex(v1, v2, 2*s + this.NC.scc.get(v1, v2, base) + 1, this.NC.edgeInts.get(v1, v2), base);
+                const cvSecond = new CombinatorialVertex(v1, v2, 2*s + this.NC.scc.get(v1, v2, base) + 2, this.NC.edgeInts.get(v1, v2), base);
+                const scoopHomotopy = this.NC.scoopHomotopyCount(base, v1, v2, s);
+                
+                if (scoopHomotopy !== 3 && (this.edgeOccupations.get(cvFirst) || this.edgeOccupations.get(cvSecond))) {
+                    continue;
+                }
+                
+                if (scoopHomotopy <= 1) {
+                    const contractible = scoopHomotopy === 0;
+                    const generatedFaces = this.NC.traceScoopPair(cvFirst, cvSecond, this.edgeOccupations, contractible);
+                    allGeneratedCombFaces.push(...generatedFaces);
+                } else if (scoopHomotopy === 3) {
+                    const degenerateFaces = this.NC.degenerateScoopRegion(base, v1, v2, this.edgeOccupations);
+                    allGeneratedCombFaces.push(...degenerateFaces);
+                } else if (scoopHomotopy === 2) {
+                    const spiralFace = this.NC.nastyScoopSpiral(cvFirst, this.edgeOccupations);
+                    allGeneratedCombFaces.push(spiralFace);
+                } else {
+                    throw new Error("Scoop homotopy count can only be 0,1,2, or 3");
+                }
+            }
+        }
+        return allGeneratedCombFaces;
+    }
+    
+    transferCombFacesToSoup(combFaces, soup) {
+        for (const combFace of combFaces) {
+            if (combFace.vertices.length < 3) continue;
+            const faceIndices = [];
+            for (const combVertex of combFace.vertices) {
+                const ipIdx = soup.addFromParents(
+                    this.tet.poolIdx[combVertex.i],
+                    this.tet.poolIdx[combVertex.j],
+                    combVertex.order,
+                    this.NC.edgeInts.get(combVertex.i, combVertex.j)
+                );
+                faceIndices.push(ipIdx);
+            }
+            
+            if (combFace.type === CombFaceType.SPIRAL) {
+                const avgIpIdx = soup.addAverageForPolygon(faceIndices);
+                for (let fi = 0; fi < faceIndices.length; fi++) {
+                    const nextFi = (fi + 1) % faceIndices.length;
+                    soup.addFace(avgIpIdx, faceIndices[fi], faceIndices[nextFi]);
+                }
+            } else {
+                for (let fi = 1; fi + 1 < faceIndices.length; fi++) {
+                    soup.addFace(faceIndices[0], faceIndices[fi], faceIndices[fi + 1]);
+                }
+            }
+        }
+    }
+    
+    generateNormalCurvesOnly(soup) {
+        for (const triplet of ALL_TET_TRIPLETS) {
+            const [i, j, k] = triplet;
+            for (let sccI = 0; sccI < this.NC.scc.get(i, j, k); sccI++) {
+                const ipIJ = soup.addFromParents(this.tet.poolIdx[i], this.tet.poolIdx[j], sccI + 1, this.NC.edgeInts.get(i, j));
+                const ipIK = soup.addFromParents(this.tet.poolIdx[i], this.tet.poolIdx[k], sccI + 1, this.NC.edgeInts.get(i, k));
+                soup.addSegment(ipIJ, ipIK);
+            }
+            for (let sccJ = 0; sccJ < this.NC.scc.get(j, k, i); sccJ++) {
+                const ipJK = soup.addFromParents(this.tet.poolIdx[j], this.tet.poolIdx[k], sccJ + 1, this.NC.edgeInts.get(j, k));
+                const ipJI = soup.addFromParents(this.tet.poolIdx[j], this.tet.poolIdx[i], sccJ + 1, this.NC.edgeInts.get(i, j));
+                soup.addSegment(ipJK, ipJI);
+            }
+            for (let sccK = 0; sccK < this.NC.scc.get(k, i, j); sccK++) {
+                const ipKI = soup.addFromParents(this.tet.poolIdx[k], this.tet.poolIdx[i], sccK + 1, this.NC.edgeInts.get(i, k));
+                const ipKJ = soup.addFromParents(this.tet.poolIdx[k], this.tet.poolIdx[j], sccK + 1, this.NC.edgeInts.get(j, k));
+                soup.addSegment(ipKI, ipKJ);
+            }
+            
+            let base = -1, v1 = -1, v2 = -1;
+            if (this.NC.scoop.get(i, j, k) > 0) { base = i; v1 = j; v2 = k; }
+            else if (this.NC.scoop.get(j, k, i) > 0) { base = j; v1 = k; v2 = i; }
+            else if (this.NC.scoop.get(k, i, j) > 0) { base = k; v1 = i; v2 = j; }
+            else continue;
+            
+            for (let scoopI = 0; scoopI < this.NC.scoop.get(base, v1, v2); scoopI++) {
+                const ipJ1 = soup.addFromParents(this.tet.poolIdx[v1], this.tet.poolIdx[v2], 2*scoopI + 1 + this.NC.scc.get(v1, v2, base), this.NC.edgeInts.get(v1, v2));
+                const ipJ2 = soup.addFromParents(this.tet.poolIdx[v1], this.tet.poolIdx[v2], 2*scoopI + 2 + this.NC.scc.get(v1, base, v2), this.NC.edgeInts.get(v1, v2));
+                // Draw scoops as a single straight segment along the tet edge
+                soup.addSegment(ipJ1, ipJ2);
+            }
+        }
+    }
+}
+
+// ============================================================================
+// STATIC NORMAL GEOMETRY SOLVER
+// ============================================================================
+
+class StaticNormalGeometrySolver {
+    constructor(tetPositions, edgeIntersectionCounts) {
+        this.tetPositions = tetPositions;
+        this.edgeIntersectionCounts = edgeIntersectionCounts;
+        this.allowIntersections = false;
+        this.onlyRecursiveBuild = false;
+        this.handleScoops = true;
+        this.verbose = false;
+        this.soup = new TriSoup();
+        this.soup.addRoot(tetPositions[0]);
+        this.soup.addRoot(tetPositions[1]);
+        this.soup.addRoot(tetPositions[2]);
+        this.soup.addRoot(tetPositions[3]);
+        this.normalCond = false;
+        this.evenSum = false;
+        this.nonZero = false;
+        this.nastyScoop = false;
+    }
+    
+    generateNormalGeometry() {
+        const edgeInts = new EdgeInts(this.edgeIntersectionCounts);
+        const interpTet = new InterpolatedTet(0, 1, 2, 3);
+        
+        const tetSolver = new SingleTetGeometrySolver(interpTet, edgeInts);
+        tetSolver.allowIntersections = this.allowIntersections;
+        tetSolver.onlyRecursiveBuild = this.onlyRecursiveBuild;
+        tetSolver.handleScoops = this.handleScoops;
+        tetSolver.verbose = this.verbose;
+        
+        this.normalCond = tetSolver.NC.triangleIneq && tetSolver.NC.evenSum;
+        this.evenSum = tetSolver.NC.evenSum;
+        this.nonZero = !tetSolver.NC.allZeros;
+        this.nastyScoop = tetSolver.NC.scoopDiagTypeExists;
+        
+        if (tetSolver.NC.evenSum) {
+            tetSolver.generateNCTriSoup(this.soup);
+        }
+    }
+    
+    convertOrdersToBarycentricT(edgeIntersections) {
+        for (const ip of this.soup.pool) {
+            if (ip.edgeInt >= 0 && ip.order >= 1) {
+                const ipParentA = ip.parentAIdx;
+                const ipParentB = ip.parentBIdx;
+                if (ipParentA >= 4 || ipParentB >= 4) continue;
+                
+                const matchingEdgeOrder = ipParentA < ipParentB;
+                const eIdx = edgePairToIndex(ipParentA, ipParentB);
+                const ts = edgeIntersections[eIdx];
+                if (ts.length === ip.edgeInt) {
+                    ip.t = ts[ip.order - 1];
+                    if (!matchingEdgeOrder) {
+                        ip.t = 1.0 - ts[ip.edgeInt - ip.order];
+                    }
+                } else {
+                    throw new Error("edge_int mismatch when converting to barycentric t");
+                }
+                ip.recomputeFromParents(this.soup.pool);
+            }
+        }
+    }
+}
+
+// ============================================================================
+// ODD SUM HANDLING
+// ============================================================================
+
+function pickResidualCV(i, j, other, nc, globalInds) {
+    const nij = nc.edgeInts.get(i, j);
+    if (nc.edgeInts.get(i, j) > 2 * nc.scoop.get(other, i, j) + nc.scc.get(i, j, other) + nc.scc.get(j, i, other)) {
+        const scoopIJ = nc.scoop.get(other, i, j);
+        let outCV;
+        if (scoopIJ === 0) {
+            const order = nc.scc.get(i, j, other) + 1;
+            outCV = new CombinatorialVertex(i, j, order, nij, other);
+        } else {
+            if (scoopIJ % 2 === 0) {
+                const order = nc.scc.get(i, j, other) + scoopIJ + 1;
+                outCV = new CombinatorialVertex(i, j, order, nij, other);
+            } else {
+                let order = nc.scc.get(i, j, other) + scoopIJ - 1 + 1;
+                if (globalInds[i] > globalInds[j]) order += 2;
+                outCV = new CombinatorialVertex(i, j, order, nij, other);
+            }
+        }
+        return { hasResidual: true, cv: outCV };
+    }
+    return { hasResidual: false, cv: null };
+}
+
+function findNextOddVertex(cv0, nc, globalInds) {
+    const i = cv0.i, j = cv0.j;
+    const k = complement([i, j, cv0.k])[0];
+    const order = cv0.order;
+    const nij = cv0.edgeInt;
+    
+    if (order <= nc.scc.get(i, j, k)) {
+        return new CombinatorialVertex(i, k, order, nc.edgeInts.get(i, k), j);
+    } else if (order >= nij - nc.scc.get(j, i, k) + 1) {
+        return new CombinatorialVertex(j, k, nij - order + 1, nc.edgeInts.get(j, k), i);
+    }
+    
+    const { hasResidual, cv: cvResidual } = pickResidualCV(i, j, k, nc, globalInds);
+    const resOrder = hasResidual ? cvResidual.order : -1;
+    
+    if (order === resOrder) {
+        return cvResidual;
+    } else {
+        let nextOrder;
+        if (order < resOrder || !hasResidual) {
+            if ((order - nc.scc.get(i, j, k)) % 2 === 0) nextOrder = order - 1;
+            else nextOrder = order + 1;
+        } else {
+            if ((order - nc.scc.get(i, j, k)) % 2 === 0) nextOrder = order + 1;
+            else nextOrder = order - 1;
+        }
+        return new CombinatorialVertex(i, j, nextOrder, nij, k);
+    }
+}
+
+function traceOddCurve(startCV, nc, globalInds, occupations) {
+    const curveVertices = [startCV.clone()];
+    let currentCV = startCV.clone();
+    occupations.set(currentCV, true);
+    
+    while (true) {
+        const nextCV = findNextOddVertex(currentCV, nc, globalInds);
+        occupations.set(nextCV, true);
+        if (nextCV.equals(currentCV)) break;
+        curveVertices.push(nextCV.clone());
+        currentCV = nextCV;
+    }
+    return curveVertices;
+}
+
+function removeOddIntersections(edgeIsectCounts, edgeIsectTs, edgeIsectNormals, globalInds) {
+    const edgeInts = new EdgeInts(edgeIsectCounts);
+    const ncSolver = new NormalCoordinates();
+    ncSolver.edgeInts = edgeInts;
+    ncSolver.computeSemiCornerCutsAndScoops();
+    
+    const residualVertices = [];
+    for (const trp of ALL_TET_TRIPLETS) {
+        const [i, j, k] = trp;
+        const r1 = pickResidualCV(i, j, k, ncSolver, globalInds);
+        if (r1.hasResidual) residualVertices.push(r1.cv);
+        const r2 = pickResidualCV(i, k, j, ncSolver, globalInds);
+        if (r2.hasResidual) residualVertices.push(r2.cv);
+        const r3 = pickResidualCV(j, k, i, ncSolver, globalInds);
+        if (r3.hasResidual) residualVertices.push(r3.cv);
+    }
+    
+    const traceOccupations = new EdgeOccupations(edgeInts);
+    const oddPolygonCVs = [];
+    for (const residCV of residualVertices) {
+        if (traceOccupations.get(residCV)) continue;
+        const curveVertices = traceOddCurve(residCV, ncSolver, globalInds, traceOccupations);
+        oddPolygonCVs.push(curveVertices);
+    }
+    
+    const cleanedEdgeIsectTs = [[], [], [], [], [], []];
+    const cleanedEdgeIsectNormals = [[], [], [], [], [], []];
+    for (let eidx = 0; eidx < 6; eidx++) {
+        const [i, j] = ALL_TET_PAIRS[eidx];
+        const nE = edgeIsectTs[eidx].length;
+        for (let order = 1; order <= nE; order++) {
+            if (!traceOccupations.get(i, j, order - 1)) {
+                cleanedEdgeIsectTs[eidx].push(edgeIsectTs[eidx][order - 1]);
+                cleanedEdgeIsectNormals[eidx].push(edgeIsectNormals[eidx][order - 1]);
+            }
+        }
+    }
+    
+    return { cleanedEdgeIsectTs, cleanedEdgeIsectNormals, oddPolygonCVs };
+}
+
+function generateSoupForOddCurves(oddPolygonCVs, tetPositions, edgeIsectTs) {
+    const oddPolygons = [];
+    const outOddPositions = [];
+    let baseIdx = 0;
+    
+    for (const polygonCVs of oddPolygonCVs) {
+        const polygonIndices = [];
+        for (const cv of polygonCVs) {
+            const i = cv.i, j = cv.j;
+            const eidx = edgePairToIndex(i, j);
+            const order = cv.order;
+            const idx = (i < j) ? (order - 1) : (cv.edgeInt - order);
+            const orderedPi = (i < j) ? tetPositions[i] : tetPositions[j];
+            const orderedPj = (i < j) ? tetPositions[j] : tetPositions[i];
+            const t = edgeIsectTs[eidx][idx];
+            const pos = orderedPi.lerp(orderedPj, t);
+            outOddPositions.push(pos);
+            polygonIndices.push(baseIdx);
+            baseIdx++;
+        }
+        oddPolygons.push(polygonIndices);
+    }
+    return { oddPolygons, outOddPositions };
+}
+
+function buildCentroidFans(polygons, positions) {
+    const fanPolygons = [];
+    const fanPositions = [...positions];
+    
+    for (const poly of polygons) {
+        let centroid = Vec3.zero();
+        for (const vidx of poly) {
+            centroid = centroid.add(positions[vidx]);
+        }
+        centroid = centroid.scale(1.0 / poly.length);
+        const centroidIdx = fanPositions.length;
+        fanPositions.push(centroid);
+        
+        if (poly.length < 2) continue;
+        for (let i = 0; i < poly.length - 1; i++) {
+            fanPolygons.push([poly[i], poly[i + 1], centroidIdx]);
+        }
+    }
+    return { fanPolygons, fanPositions };
+}
+
+// ============================================================================
+// MAIN ALGORITHM: NORMAL SURFACE FROM SINGLE TET EDGE INTS
+// ============================================================================
+
+function normalSurfaceFromSingleTetEdgeInts(edgeInts, tetPositions) {
+    const globalInds = [0, 1, 2, 3];
+    const edgeIsectTs = [[], [], [], [], [], []];
+    const edgeIsectNormals = [[], [], [], [], [], []];
+    const edgeIntersectionCounts = [];
+    
+    for (let eIdx = 0; eIdx < 6; eIdx++) {
+        const [i, j] = ALL_TET_PAIRS[eIdx];
+        const nij = edgeInts.get(i, j);
+        edgeIntersectionCounts.push(nij);
+        for (let k = 0; k < nij; k++) {
+            edgeIsectTs[eIdx].push((k + 1) / (nij + 1));
+            edgeIsectNormals[eIdx].push(Vec3.zero());
+        }
+    }
+    
+    // Remove odd intersections
+    const { cleanedEdgeIsectTs, cleanedEdgeIsectNormals, oddPolygonCVs } = 
+        removeOddIntersections(edgeIntersectionCounts, edgeIsectTs, edgeIsectNormals, globalInds);
+    
+    const cleanedEdgeIsectCounts = cleanedEdgeIsectTs.map(arr => arr.length);
+    
+    // Build odd fans
+    const { oddPolygons, outOddPositions } = generateSoupForOddCurves(oddPolygonCVs, tetPositions, edgeIsectTs);
+    const { fanPolygons, fanPositions } = buildCentroidFans(oddPolygons, outOddPositions);
+    
+    // Build normal surface
+    const ncSolver = new StaticNormalGeometrySolver(tetPositions, cleanedEdgeIsectCounts);
+    ncSolver.allowIntersections = false;
+    ncSolver.onlyRecursiveBuild = false;
+    ncSolver.handleScoops = true;
+    ncSolver.generateNormalGeometry();
+    ncSolver.convertOrdersToBarycentricT(cleanedEdgeIsectTs);
+    
+    const { faceIndices: nsFaceInds, vertexPositions: nsVertexPositions } = ncSolver.soup.toVectorSoup();
+    
+    // Generate normal curves
+    const curveSoup = new TriSoup();
+    curveSoup.addRoot(tetPositions[0]);
+    curveSoup.addRoot(tetPositions[1]);
+    curveSoup.addRoot(tetPositions[2]);
+    curveSoup.addRoot(tetPositions[3]);
+    
+    const cleanedEdgeInts = new EdgeInts(cleanedEdgeIsectCounts);
+    const tempNC = new NormalCoordinates(cleanedEdgeInts);
+    staticGenerateNormalCurves(tempNC, curveSoup);
+    staticConvertOrdersToBarycentricT(cleanedEdgeIsectTs, curveSoup);
+    
+    const { segIndices, vertexPositions: curveVertexPositions } = curveSoup.segmentsToVectorSoup();
+    const interpPoints = curveSoup.getFirstOrderEdgePoints();
+    
+    // Odd curves
+    const oddSegs = polygonCollectionToCurves(oddPolygons, false);
+    
+    return {
+        nsFaceInds,
+        nsVertexPositions,
+        curveSegments: segIndices,
+        curvePositions: curveVertexPositions,
+        interpPoints,
+        oddFanPolygons: fanPolygons,
+        oddFanPositions: fanPositions,
+        oddSegs,
+        oddPositions: outOddPositions
+    };
+}
+
+function staticGenerateNormalCurves(NC, soup) {
+    for (const triplet of ALL_TET_TRIPLETS) {
+        const [i, j, k] = triplet;
+        for (let sccI = 0; sccI < NC.scc.get(i, j, k); sccI++) {
+            const ipIJ = soup.addFromParents(i, j, sccI + 1, NC.edgeInts.get(i, j));
+            const ipIK = soup.addFromParents(i, k, sccI + 1, NC.edgeInts.get(i, k));
+            soup.addSegment(ipIJ, ipIK);
+        }
+        for (let sccJ = 0; sccJ < NC.scc.get(j, k, i); sccJ++) {
+            const ipJK = soup.addFromParents(j, k, sccJ + 1, NC.edgeInts.get(j, k));
+            const ipJI = soup.addFromParents(j, i, sccJ + 1, NC.edgeInts.get(i, j));
+            soup.addSegment(ipJK, ipJI);
+        }
+        for (let sccK = 0; sccK < NC.scc.get(k, i, j); sccK++) {
+            const ipKI = soup.addFromParents(k, i, sccK + 1, NC.edgeInts.get(i, k));
+            const ipKJ = soup.addFromParents(k, j, sccK + 1, NC.edgeInts.get(j, k));
+            soup.addSegment(ipKI, ipKJ);
+        }
+        
+        let base = -1, v1 = -1, v2 = -1;
+        if (NC.scoop.get(i, j, k) > 0) { base = i; v1 = j; v2 = k; }
+        else if (NC.scoop.get(j, k, i) > 0) { base = j; v1 = k; v2 = i; }
+        else if (NC.scoop.get(k, i, j) > 0) { base = k; v1 = i; v2 = j; }
+        else continue;
+        
+        for (let scoopI = 0; scoopI < NC.scoop.get(base, v1, v2); scoopI++) {
+            const ipJ1 = soup.addFromParents(v1, v2, 2*scoopI + 1 + NC.scc.get(v1, v2, base), NC.edgeInts.get(v1, v2));
+            const ipJ2 = soup.addFromParents(v1, v2, 2*scoopI + 2 + NC.scc.get(v1, base, v2), NC.edgeInts.get(v1, v2));
+            // Draw scoops as a single straight segment along the tet edge
+            soup.addSegment(ipJ1, ipJ2);
+        }
+    }
+}
+
+function staticConvertOrdersToBarycentricT(edgeIntersections, soup) {
+    for (const ip of soup.pool) {
+        if (ip.edgeInt >= 0 && ip.order >= 1) {
+            const ipParentA = ip.parentAIdx;
+            const ipParentB = ip.parentBIdx;
+            if (ipParentA >= 4 || ipParentB >= 4) continue;
+            
+            const matchingEdgeOrder = ipParentA < ipParentB;
+            const eIdx = edgePairToIndex(ipParentA, ipParentB);
+            const ts = edgeIntersections[eIdx];
+            if (ts.length === ip.edgeInt) {
+                ip.t = ts[ip.order - 1];
+                if (!matchingEdgeOrder) {
+                    ip.t = 1.0 - ts[ip.edgeInt - ip.order];
+                }
+            } else {
+                throw new Error("edge_int mismatch when converting to barycentric t");
+            }
+            ip.recomputeFromParents(soup.pool);
+        }
+    }
+}
+
+function polygonCollectionToCurves(polygons, closed = true) {
+    const allCurves = [];
+    for (const poly of polygons) {
+        if (poly.length < 2) continue;
+        const n = poly.length;
+        for (let i = 0; i < n - (closed ? 0 : 1); i++) {
+            allCurves.push([poly[i], poly[(i + 1) % n]]);
+        }
+    }
+    return allCurves;
+}
+
+// ============================================================================
+// TETRAHEDRON GEOMETRY
+// ============================================================================
+
+function makeTetrahedronPositions() {
+    const p0 = new Vec3(0, Math.sqrt(6) / 4, 0);
+    const p1 = new Vec3(-0.5, -Math.sqrt(6) / 12, -Math.sqrt(3) / 6);
+    const p2 = new Vec3(0.5, -Math.sqrt(6) / 12, -Math.sqrt(3) / 6);
+    const p3 = new Vec3(0, -Math.sqrt(6) / 12, Math.sqrt(3) / 3);
+    return [p0, p1, p2, p3];
+}
+
+// ============================================================================
+// THREE.JS VISUALIZATION
+// ============================================================================
+
+let scene, camera, renderer, controls;
+let tetGroup, surfaceGroup, curveGroup, pointGroup, oddGroup, wireframeGroup, labelGroup;
+const tetPositions = makeTetrahedronPositions();
+let surfaceOpacity = 1.0;
+let showLabels = false;
+let showWireframe = true;
+
+// Colors (based on Polyscope defaults)
+const TET_FACE_COLOR = 0x7777aa;
+const TET_EDGE_COLOR = 0x444466;
+const SURFACE_COLOR = 0x2d89ef;
+const CURVE_COLOR = 0xff3355;
+const POINT_COLOR = 0xffcc00;
+const ODD_SURFACE_COLOR = 0x44aa88;
+const ODD_CURVE_COLOR = 0x88ddaa;
+
+const EDGE_RADIUS = 0.006;
+const POINT_RADIUS = 0.012;
+const CURVE_RADIUS = 0.008;
+const WIREFRAME_RADIUS = 0.003;
+const WIREFRAME_COLOR = 0xcccccc;
+
+function initThreeJS() {
+    const container = document.getElementById('canvas-container');
+    
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a2e);
+    
+    camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.01, 100);
+    camera.position.set(1.5, 1.2, 1.5);
+    camera.lookAt(0, 0, 0);
+    
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Shadows disabled - caused too many artifacts
+    container.appendChild(renderer.domElement);
+    
+    // OrbitControls (arcball-like)
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    controls.enablePan = false;
+    controls.target.set(0, 0, 0);
+    controls.update();
+    
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    
+    // Main directional light
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 5.0);
+    dirLight1.position.set(2, 4, 2);
+    scene.add(dirLight1);
+    
+    // Fill light
+    const fillLight = new THREE.DirectionalLight(0xffffff, 1.3);
+    fillLight.position.set(-2, -1, -2);
+    scene.add(fillLight);
+    
+    // Groups
+    tetGroup = new THREE.Group();
+    surfaceGroup = new THREE.Group();
+    curveGroup = new THREE.Group();
+    pointGroup = new THREE.Group();
+    oddGroup = new THREE.Group();
+    wireframeGroup = new THREE.Group();
+    labelGroup = new THREE.Group();
+    scene.add(tetGroup);
+    scene.add(surfaceGroup);
+    scene.add(wireframeGroup);
+    scene.add(curveGroup);
+    scene.add(pointGroup);
+    scene.add(oddGroup);
+    scene.add(labelGroup);
+    
+    // Build tet
+    buildTetMesh();
+    buildVertexLabels();
+    
+    // Handle resize - use ResizeObserver for robust container size tracking
+    const resizeObserver = new ResizeObserver(onContainerResize);
+    resizeObserver.observe(container);
+    
+    // Also handle window resize as fallback
+    window.addEventListener('resize', onContainerResize);
+    
+    animate();
+}
+
+function onContainerResize() {
+    const container = document.getElementById('canvas-container');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    if (width === 0 || height === 0) return; // Skip if container not visible
+    
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+// Create a tube between two points
+function createTube(p1, p2, radius, color) {
+    const dir = new THREE.Vector3().subVectors(p2.toThree(), p1.toThree());
+    const length = dir.length();
+    if (length < 0.0001) return null;
+    
+    const geometry = new THREE.CylinderGeometry(radius, radius, length, 8);
+    const material = new THREE.MeshStandardMaterial({ color, roughness: 0.5, metalness: 0.3 });
+    const mesh = new THREE.Mesh(geometry, material);
+    
+    const mid = new THREE.Vector3().addVectors(p1.toThree(), p2.toThree()).multiplyScalar(0.5);
+    mesh.position.copy(mid);
+    
+    const axis = new THREE.Vector3(0, 1, 0);
+    const dirNorm = dir.clone().normalize();
+    const quaternion = new THREE.Quaternion().setFromUnitVectors(axis, dirNorm);
+    mesh.quaternion.copy(quaternion);
+    
+    return mesh;
+}
+
+// Create a sphere at a point
+function createSphere(p, radius, color) {
+    const geometry = new THREE.SphereGeometry(radius, 16, 12);
+    const material = new THREE.MeshStandardMaterial({ color, roughness: 0.5, metalness: 0.1 });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.copy(p.toThree());
+    return mesh;
+}
+
+function buildTetMesh() {
+    // Clear previous
+    while (tetGroup.children.length > 0) {
+        tetGroup.remove(tetGroup.children[0]);
+    }
+    
+    // Create faces (semi-transparent) with faceted shading (non-indexed for per-triangle normals)
+    const faces = [[0,1,2], [0,1,3], [0,2,3], [1,2,3]];
+    const vertices = [];
+    
+    for (const f of faces) {
+        for (const idx of f) {
+            vertices.push(tetPositions[idx].x, tetPositions[idx].y, tetPositions[idx].z);
+        }
+    }
+    
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.computeVertexNormals();  // Will compute per-face normals for non-indexed geometry
+    
+    const material = new THREE.MeshStandardMaterial({
+        color: TET_FACE_COLOR,
+        transparent: true,
+        opacity: 0.3,
+        side: THREE.DoubleSide,
+        roughness: 0.8,
+        depthWrite: false,
+        depthTest: true,
+        flatShading: true  // Faceted shading
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.scale.set(1.01, 1.01, 1.01);
+    mesh.renderOrder = 0; // Render first among transparent objects
+    tetGroup.add(mesh);
+    
+    // Create edges as tubes
+    for (const [i, j] of ALL_TET_PAIRS) {
+        const tube = createTube(tetPositions[i], tetPositions[j], EDGE_RADIUS, TET_EDGE_COLOR);
+        if (tube) tetGroup.add(tube);
+    }
+    
+    // Create vertices as spheres
+    for (let i = 0; i < 4; i++) {
+        const sphere = createSphere(tetPositions[i], EDGE_RADIUS * 1.5, TET_EDGE_COLOR);
+        tetGroup.add(sphere);
+    }
+}
+
+function buildVertexLabels() {
+    // Clear previous
+    while (labelGroup.children.length > 0) {
+        labelGroup.remove(labelGroup.children[0]);
+    }
+    
+    // Create text sprites for each vertex
+    for (let i = 0; i < 4; i++) {
+        const sprite = createTextSprite(i.toString());
+        sprite.position.copy(tetPositions[i].toThree());
+        labelGroup.add(sprite);
+    }
+    
+    labelGroup.visible = showLabels;
+}
+
+function edgeKey(p1, p2) {
+    // Create a unique key for an edge based on rounded positions
+    const round = (v) => Math.round(v * 10000);
+    const a = [round(p1.x), round(p1.y), round(p1.z)];
+    const b = [round(p2.x), round(p2.y), round(p2.z)];
+    // Sort to make order-independent
+    const [first, second] = a < b ? [a, b] : [b, a];
+    return `${first.join(',')}_${second.join(',')}`;
+}
+
+function createTextSprite(text) {
+    const canvas = document.createElement('canvas');
+    const size = 128;
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.font = 'bold 80px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, size / 2, size / 2);
+    
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.minFilter = THREE.LinearFilter;
+    
+    const material = new THREE.SpriteMaterial({ 
+        map: texture, 
+        transparent: true,
+        depthTest: false
+    });
+    const sprite = new THREE.Sprite(material);
+    sprite.scale.set(0.12, 0.12, 1);
+    return sprite;
+}
+
+function updateVisualization(result) {
+    // Clear previous
+    while (surfaceGroup.children.length > 0) surfaceGroup.remove(surfaceGroup.children[0]);
+    while (curveGroup.children.length > 0) curveGroup.remove(curveGroup.children[0]);
+    while (pointGroup.children.length > 0) pointGroup.remove(pointGroup.children[0]);
+    while (oddGroup.children.length > 0) oddGroup.remove(oddGroup.children[0]);
+    while (wireframeGroup.children.length > 0) wireframeGroup.remove(wireframeGroup.children[0]);
+    
+    // Build spanning surface with flat shading
+    if (result.nsFaceInds.length > 0) {
+        // For flat shading, we need non-indexed geometry with per-face vertices
+        const positions = [];
+        for (const f of result.nsFaceInds) {
+            const p0 = result.nsVertexPositions[f[0]];
+            const p1 = result.nsVertexPositions[f[1]];
+            const p2 = result.nsVertexPositions[f[2]];
+            positions.push(p0.x, p0.y, p0.z);
+            positions.push(p1.x, p1.y, p1.z);
+            positions.push(p2.x, p2.y, p2.z);
+        }
+        
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        geometry.computeVertexNormals();
+        
+        const isOpaque = surfaceOpacity >= 1.0;
+        const material = new THREE.MeshStandardMaterial({
+            color: SURFACE_COLOR,
+            side: THREE.DoubleSide,
+            roughness: 1.0,
+            metalness: 0.0,
+            flatShading: true,
+            transparent: !isOpaque,
+            opacity: surfaceOpacity,
+            depthWrite: isOpaque  // Normal depth writes when opaque
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        if (!isOpaque) mesh.renderOrder = 1;
+        surfaceGroup.add(mesh);
+        
+        // Build wireframe for interior edges
+        const edgeSet = new Set();
+        const boundaryEdges = new Set();
+        
+        // Collect all edges from curve segments (these are boundary)
+        for (const seg of result.curveSegments) {
+            const p1 = result.curvePositions[seg[0]];
+            const p2 = result.curvePositions[seg[1]];
+            const key = edgeKey(p1, p2);
+            boundaryEdges.add(key);
+        }
+        
+        // Collect interior edges from faces
+        for (const f of result.nsFaceInds) {
+            const edges = [[f[0], f[1]], [f[1], f[2]], [f[2], f[0]]];
+            for (const [i, j] of edges) {
+                const p1 = result.nsVertexPositions[i];
+                const p2 = result.nsVertexPositions[j];
+                const key = edgeKey(p1, p2);
+                if (!boundaryEdges.has(key) && !edgeSet.has(key)) {
+                    edgeSet.add(key);
+                    const tube = createTube(p1, p2, WIREFRAME_RADIUS, WIREFRAME_COLOR);
+                    if (tube) wireframeGroup.add(tube);
+                }
+            }
+        }
+        wireframeGroup.visible = showWireframe;
+    }
+    
+    // Build odd fans with flat shading
+    if (result.oddFanPolygons.length > 0) {
+        // For flat shading, we need non-indexed geometry
+        const positions = [];
+        for (const f of result.oddFanPolygons) {
+            const p0 = result.oddFanPositions[f[0]];
+            const p1 = result.oddFanPositions[f[1]];
+            const p2 = result.oddFanPositions[f[2]];
+            positions.push(p0.x, p0.y, p0.z);
+            positions.push(p1.x, p1.y, p1.z);
+            positions.push(p2.x, p2.y, p2.z);
+        }
+        
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        geometry.computeVertexNormals();
+        
+        const isOpaque = surfaceOpacity >= 1.0;
+        const material = new THREE.MeshStandardMaterial({
+            color: ODD_SURFACE_COLOR,
+            side: THREE.DoubleSide,
+            roughness: 0.6,
+            metalness: 0.1,
+            flatShading: true,
+            transparent: !isOpaque,
+            opacity: surfaceOpacity,
+            depthWrite: isOpaque  // Normal depth writes when opaque
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        if (!isOpaque) mesh.renderOrder = 1;
+
+        // Don't show odd fans, because these don't correspond to any kind of polygons we use in practice
+        //oddGroup.add(mesh);
+    }
+    
+    // Build curves as tubes
+    for (const seg of result.curveSegments) {
+        const p1 = result.curvePositions[seg[0]];
+        const p2 = result.curvePositions[seg[1]];
+        const tube = createTube(p1, p2, CURVE_RADIUS, CURVE_COLOR);
+        if (tube) curveGroup.add(tube);
+    }
+    
+    // Build odd curves as tubes
+    for (const seg of result.oddSegs) {
+        const p1 = result.oddPositions[seg[0]];
+        const p2 = result.oddPositions[seg[1]];
+        const tube = createTube(p1, p2, CURVE_RADIUS, ODD_CURVE_COLOR);
+        if (tube) oddGroup.add(tube);
+    }
+    
+    // Build intersection points
+    for (const pos of result.interpPoints) {
+        const sphere = createSphere(pos, POINT_RADIUS, POINT_COLOR);
+        pointGroup.add(sphere);
+    }
+    
+    // Build odd intersection points
+    for (const pos of result.oddPositions) {
+        const sphere = createSphere(pos, POINT_RADIUS, ODD_CURVE_COLOR);
+        oddGroup.add(sphere);
+    }
+}
+
+// ============================================================================
+// OBJ EXPORT
+// ============================================================================
+
+function exportOBJ(result) {
+    let obj = "# Subgrid Marching Tetrahedra Export\n";
+    obj += "# Generated by the web visualization tool\n\n";
+    
+    // Materials
+    obj += "mtllib materials.mtl\n\n";
+    
+    let vertexOffset = 0;
+    
+    // Tetrahedron group
+    obj += "g tetrahedron\n";
+    obj += "usemtl tet_material\n";
+    for (const pos of tetPositions) {
+        obj += `v ${pos.x.toFixed(8)} ${pos.y.toFixed(8)} ${pos.z.toFixed(8)}\n`;
+    }
+    const tetFaces = [[1,2,3], [1,2,4], [1,3,4], [2,3,4]]; // 1-indexed
+    for (const f of tetFaces) {
+        obj += `f ${f[0]} ${f[1]} ${f[2]}\n`;
+    }
+    vertexOffset = 4;
+    obj += "\n";
+    
+    // Normal surface group
+    if (result.nsFaceInds.length > 0) {
+        obj += "g normal_surface\n";
+        obj += "usemtl surface_material\n";
+        for (const pos of result.nsVertexPositions) {
+            obj += `v ${pos.x.toFixed(8)} ${pos.y.toFixed(8)} ${pos.z.toFixed(8)}\n`;
+        }
+        for (const f of result.nsFaceInds) {
+            obj += `f ${f[0] + vertexOffset + 1} ${f[1] + vertexOffset + 1} ${f[2] + vertexOffset + 1}\n`;
+        }
+        vertexOffset += result.nsVertexPositions.length;
+        obj += "\n";
+    }
+    
+    // Odd fans group
+    if (result.oddFanPolygons.length > 0) {
+        obj += "g odd_fans\n";
+        obj += "usemtl odd_material\n";
+        for (const pos of result.oddFanPositions) {
+            obj += `v ${pos.x.toFixed(8)} ${pos.y.toFixed(8)} ${pos.z.toFixed(8)}\n`;
+        }
+        for (const f of result.oddFanPolygons) {
+            obj += `f ${f[0] + vertexOffset + 1} ${f[1] + vertexOffset + 1} ${f[2] + vertexOffset + 1}\n`;
+        }
+        vertexOffset += result.oddFanPositions.length;
+        obj += "\n";
+    }
+    
+    // Normal curves group
+    obj += "g normal_curves\n";
+    obj += "usemtl curve_material\n";
+    for (const pos of result.curvePositions) {
+        obj += `v ${pos.x.toFixed(8)} ${pos.y.toFixed(8)} ${pos.z.toFixed(8)}\n`;
+    }
+    for (const seg of result.curveSegments) {
+        obj += `l ${seg[0] + vertexOffset + 1} ${seg[1] + vertexOffset + 1}\n`;
+    }
+    vertexOffset += result.curvePositions.length;
+    obj += "\n";
+    
+    // Odd curves group
+    if (result.oddSegs.length > 0) {
+        obj += "g odd_curves\n";
+        obj += "usemtl odd_curve_material\n";
+        for (const pos of result.oddPositions) {
+            obj += `v ${pos.x.toFixed(8)} ${pos.y.toFixed(8)} ${pos.z.toFixed(8)}\n`;
+        }
+        for (const seg of result.oddSegs) {
+            obj += `l ${seg[0] + vertexOffset + 1} ${seg[1] + vertexOffset + 1}\n`;
+        }
+    }
+    
+    // Create MTL file content
+    let mtl = "# Materials for Subgrid Marching Tetrahedra\n\n";
+    mtl += "newmtl tet_material\nKd 0.47 0.47 0.67\n\n";
+    mtl += "newmtl surface_material\nKd 0.18 0.54 0.94\n\n";
+    mtl += "newmtl odd_material\nKd 0.27 0.67 0.53\n\n";
+    mtl += "newmtl curve_material\nKd 1.0 0.4 0.0\n\n";
+    mtl += "newmtl odd_curve_material\nKd 0.53 0.87 0.67\n\n";
+    
+    // Create combined download
+    const objBlob = new Blob([obj], { type: 'text/plain' });
+    const mtlBlob = new Blob([mtl], { type: 'text/plain' });
+    
+    // Download OBJ
+    const objLink = document.createElement('a');
+    objLink.href = URL.createObjectURL(objBlob);
+    objLink.download = 'normal_surface.obj';
+    objLink.click();
+    
+    // Download MTL
+    setTimeout(() => {
+        const mtlLink = document.createElement('a');
+        mtlLink.href = URL.createObjectURL(mtlBlob);
+        mtlLink.download = 'materials.mtl';
+        mtlLink.click();
+    }, 100);
+}
+
+// ============================================================================
+// UI INITIALIZATION
+// ============================================================================
+
+let currentEdgeInts = new EdgeInts(1, 2, 3, 3, 2, 1);
+let currentCornerCuts = [0, 0, 0, 0];
+let currentDiagonalCuts = [2, 1, 0]; // dc[01], dc[02], dc[03]
+let lastResult = null;
+let updatingFromCornerDiag = false;
+let updatingFromEdge = false;
+
+function updateFromCornerDiag() {
+    if (updatingFromEdge) return;
+    updatingFromCornerDiag = true;
+    
+    const cc = new CornerCuts();
+    cc.set(0, currentCornerCuts[0]);
+    cc.set(1, currentCornerCuts[1]);
+    cc.set(2, currentCornerCuts[2]);
+    cc.set(3, currentCornerCuts[3]);
+    
+    const dc = new DiagonalCuts();
+    dc.set(0, 1, currentDiagonalCuts[0]);
+    dc.set(0, 2, currentDiagonalCuts[1]);
+    dc.set(0, 3, currentDiagonalCuts[2]);
+    
+    currentEdgeInts = cornerAndDiagonalCutsToEdgeInts(cc, dc);
+    
+    // Update edge sliders
+    document.getElementById('e01').value = currentEdgeInts.get(0, 1);
+    document.getElementById('e02').value = currentEdgeInts.get(0, 2);
+    document.getElementById('e03').value = currentEdgeInts.get(0, 3);
+    document.getElementById('e12').value = currentEdgeInts.get(1, 2);
+    document.getElementById('e13').value = currentEdgeInts.get(1, 3);
+    document.getElementById('e23').value = currentEdgeInts.get(2, 3);
+    
+    document.getElementById('e01-val').textContent = currentEdgeInts.get(0, 1);
+    document.getElementById('e02-val').textContent = currentEdgeInts.get(0, 2);
+    document.getElementById('e03-val').textContent = currentEdgeInts.get(0, 3);
+    document.getElementById('e12-val').textContent = currentEdgeInts.get(1, 2);
+    document.getElementById('e13-val').textContent = currentEdgeInts.get(1, 3);
+    document.getElementById('e23-val').textContent = currentEdgeInts.get(2, 3);
+    
+    updatingFromCornerDiag = false;
+    rebuild();
+}
+
+function updateFromEdge() {
+    if (updatingFromCornerDiag) return;
+    updatingFromEdge = true;
+    
+    // Rebuild NormalCoordinates to extract corner/diagonal cuts
+    const nc = new NormalCoordinates(currentEdgeInts);
+    
+    currentCornerCuts[0] = nc.cc.get(0);
+    currentCornerCuts[1] = nc.cc.get(1);
+    currentCornerCuts[2] = nc.cc.get(2);
+    currentCornerCuts[3] = nc.cc.get(3);
+    currentDiagonalCuts[0] = nc.dc.get(0, 1);
+    currentDiagonalCuts[1] = nc.dc.get(0, 2);
+    currentDiagonalCuts[2] = nc.dc.get(0, 3);
+    
+    // Update corner/diagonal sliders
+    document.getElementById('cc0').value = currentCornerCuts[0];
+    document.getElementById('cc1').value = currentCornerCuts[1];
+    document.getElementById('cc2').value = currentCornerCuts[2];
+    document.getElementById('cc3').value = currentCornerCuts[3];
+    document.getElementById('dc0').value = currentDiagonalCuts[0];
+    document.getElementById('dc1').value = currentDiagonalCuts[1];
+    document.getElementById('dc2').value = currentDiagonalCuts[2];
+    
+    document.getElementById('cc0-val').textContent = currentCornerCuts[0];
+    document.getElementById('cc1-val').textContent = currentCornerCuts[1];
+    document.getElementById('cc2-val').textContent = currentCornerCuts[2];
+    document.getElementById('cc3-val').textContent = currentCornerCuts[3];
+    document.getElementById('dc0-val').textContent = currentDiagonalCuts[0];
+    document.getElementById('dc1-val').textContent = currentDiagonalCuts[1];
+    document.getElementById('dc2-val').textContent = currentDiagonalCuts[2];
+    
+    updatingFromEdge = false;
+    rebuild();
+}
+
+function rebuild() {
+    try {
+        lastResult = normalSurfaceFromSingleTetEdgeInts(currentEdgeInts, tetPositions);
+        updateVisualization(lastResult);
+    } catch (e) {
+        console.error("Error rebuilding:", e);
+    }
+}
+
+function initUI() {
+    // Toggle button
+    const toggleBtn = document.getElementById('toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        toggleBtn.classList.toggle('collapsed');
+        toggleBtn.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀';
+        setTimeout(onContainerResize, 300);
+    });
+    
+    // Corner cut sliders
+    for (let i = 0; i < 4; i++) {
+        const slider = document.getElementById(`cc${i}`);
+        const valSpan = document.getElementById(`cc${i}-val`);
+        slider.addEventListener('input', () => {
+            currentCornerCuts[i] = parseInt(slider.value);
+            valSpan.textContent = slider.value;
+            updateFromCornerDiag();
+        });
+    }
+    
+    // Diagonal cut sliders
+    for (let i = 0; i < 3; i++) {
+        const slider = document.getElementById(`dc${i}`);
+        const valSpan = document.getElementById(`dc${i}-val`);
+        slider.addEventListener('input', () => {
+            currentDiagonalCuts[i] = parseInt(slider.value);
+            valSpan.textContent = slider.value;
+            updateFromCornerDiag();
+        });
+    }
+    
+    // Edge sliders
+    const edgePairs = ['01', '02', '03', '12', '13', '23'];
+    const edgeIndices = [[0,1], [0,2], [0,3], [1,2], [1,3], [2,3]];
+    for (let idx = 0; idx < 6; idx++) {
+        const id = edgePairs[idx];
+        const [i, j] = edgeIndices[idx];
+        const slider = document.getElementById(`e${id}`);
+        const valSpan = document.getElementById(`e${id}-val`);
+        slider.addEventListener('input', () => {
+            currentEdgeInts.set(i, j, parseInt(slider.value));
+            valSpan.textContent = slider.value;
+            updateFromEdge();
+        });
+    }
+    
+    // Opacity slider
+    const opacitySlider = document.getElementById('opacity');
+    const opacityVal = document.getElementById('opacity-val');
+    opacitySlider.addEventListener('input', () => {
+        surfaceOpacity = parseInt(opacitySlider.value) / 100;
+        opacityVal.textContent = surfaceOpacity.toFixed(1);
+        if (lastResult) updateVisualization(lastResult);
+    });
+    
+    // Show wireframe checkbox
+    const showWireframeCheckbox = document.getElementById('show-wireframe');
+    showWireframeCheckbox.addEventListener('change', () => {
+        showWireframe = showWireframeCheckbox.checked;
+        wireframeGroup.visible = showWireframe;
+    });
+    
+    // Show labels checkbox
+    const showLabelsCheckbox = document.getElementById('show-labels');
+    showLabelsCheckbox.addEventListener('change', () => {
+        showLabels = showLabelsCheckbox.checked;
+        labelGroup.visible = showLabels;
+    });
+    
+    // Export button
+    document.getElementById('export-btn').addEventListener('click', () => {
+        if (lastResult) exportOBJ(lastResult);
+    });
+    
+    // Initial build
+    updateFromCornerDiag();
+}
+
+// ============================================================================
+// MAIN
+// ============================================================================
+
+initThreeJS();
+initUI();
+
+    </script>
+</body>
+</html>
+

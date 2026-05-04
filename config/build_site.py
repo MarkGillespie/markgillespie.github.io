@@ -363,8 +363,9 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		venue_name = xml_child_string(project_data.find('venue'))
 		venue_str = venue_name if doi is None else f'<a href="https://doi.org/{doi}">{venue_name}</a>'
 		img_path = project_data.find('img_small').text
+		img_style = project_data.find('img_small').find('style').text if project_data.find('img_small').find('style') is not None else ""
 		w, h = get_image_dimensions(f'../{img_path}')
-		img_str = f'<img src="{img_path}" width="{w}" height="{h}" loading="lazy"/>'
+		img_str = f'<img src="{img_path}" width="{w}" height="{h}" style="{img_style}" loading="lazy"/>'
 		project_str = (short_project_template.replace('$IMG_SMALL', img_path)
 		                                     .replace('$IMG_TAG', img_str)
 		                                     .replace('$HREF', href_str)

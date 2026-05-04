@@ -4,7 +4,7 @@
     <key>SubgridMarchingTets</key>
     <href>index.html</href>
     <doi>10.1145/3811358</doi>
-    <img_small>Research/SubgridMarchingTets/images/RepresentativeImage.svg</img_small>
+    <img_small>Research/SubgridMarchingTets/images/RepresentativeImage.svg<style>max-height: 8em; margin: auto;</style></img_small>
     <img_large>Research/SubgridMarchingTets/images/cell-teaser.webp<style>max-height: 25em; margin: 10px 0px;</style></img_large>
     <authors>
         <author>
@@ -23,10 +23,11 @@
     <!-- <venue>Conditionally accepted to SIGGRAPH&amp;nbsp;2026</venue> -->
     <links>
         <link><name>preprint (26.1&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTets.pdf</href></link>
-        <!-- <link><name>supplement (715 kb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTetsSupplemental.pdf</href></link> -->
+        <link><name>supplement</name><href>Research/SubgridMarchingTets/SubgridSupplement.pdf</href></link>
     </links>
     <more_links>
         <!-- <link><name>poster (6 mb)</name><href>Research/SubgridMarchingTets/DiscreteTorsionPoster.pdf</href></link> -->
+        <link><name>single-tet web demo</name><href>Research/SubgridMarchingTets/subgrid-tet.html</href></link>
     </more_links>
     <bibtex>Research/SubgridMarchingTets/bib.txt</bibtex>
     <abstract_small>
@@ -60,9 +61,9 @@ More importantly, with our method there is no lower bound on the feature size th
             <title>Supplemental Documents</title>
             <content>
                 <div style="display: flex; flex-start; gap: .5em;">
-                <a href="SubgridMarchingTetsSupplemental.pdf" class="paper-preview">
+                <a href="SubgridSupplement.pdf" class="paper-preview">
                     <img src="images/preview-supplemental.webp" alt="preview"/><br/>
-                    <span>pdf <!--(715 kb)--></span>
+                    <span>supplement <!--(715 kb)--></span>
                 </a>
                 <a href="subgrid-tet.html" class="paper-preview">
                     <img src="images/preview-demo.webp" alt="preview"/><br/>
