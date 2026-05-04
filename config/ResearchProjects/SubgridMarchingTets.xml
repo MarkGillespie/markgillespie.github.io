@@ -23,7 +23,7 @@
     <!-- <venue>Conditionally accepted to SIGGRAPH&amp;nbsp;2026</venue> -->
     <links>
         <link><name>preprint (26.1&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTets.pdf</href></link>
-        <link><name>supplement</name><href>Research/SubgridMarchingTets/SubgridSupplement.pdf</href></link>
+        <link><name>supplement (1.6&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridSupplement.pdf</href></link>
     </links>
     <more_links>
         <!-- <link><name>poster (6 mb)</name><href>Research/SubgridMarchingTets/DiscreteTorsionPoster.pdf</href></link> -->
@@ -63,7 +63,7 @@ More importantly, with our method there is no lower bound on the feature size th
                 <div style="display: flex; flex-start; gap: .5em;">
                 <a href="SubgridSupplement.pdf" class="paper-preview">
                     <img src="images/preview-supplemental.webp" alt="preview"/><br/>
-                    <span>supplement <!--(715 kb)--></span>
+                    <span>supplement (1.6&nbsp;mb)</span>
                 </a>
                 <a href="subgrid-tet.html" class="paper-preview">
                     <img src="images/preview-demo.webp" alt="preview"/><br/>
