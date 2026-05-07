@@ -4,10 +4,10 @@
   journal = {ACM Trans. Graph.},
   volume = {45},
   number = {4},
-  articleno = {},
+  articleno = {57},
   year = {2026},
   publisher = {ACM},
   address = {New York, NY, USA},
-  url = {https://doi.org/10.1145/3811368},
-  doi = {10.1145/3811368}
+  url = {https://doi.org/10.1145/3811358},
+  doi = {10.1145/3811358}
 }
