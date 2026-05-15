@@ -309,11 +309,11 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		#= awards
 		award_str = ""
 		if project_data.find('award') is not None:
-			href = project_data.find('award').find('href').text
+			href = project_data.find('award').find('href').text if project_data.find('award').find('href') is not None else None
 			name = xml_child_string(project_data.find('award').find('name'))
 			desc = xml_child_string(project_data.find('award').find('description'))
 			desc_str = f'<div class="description">{desc}</div>' if len(desc) > 0 else ''
-			award_str = f'<a href="{href}" class="award">{name} {desc_str}</a>'
+			award_str = f'<a href="{href}" class="award">{name} {desc_str}</a>' if href is not None else f'<div class="award">{name} {desc_str}</div>'
 		#= bibtex
 		bibtex, copy_button_str, home_bib_str, nest_bib_str = None, '', '', ''
 		try:
