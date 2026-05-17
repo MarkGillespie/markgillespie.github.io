@@ -69,7 +69,7 @@
 		<img>winged_giraffe_small.webp</img>
 		<page>winged_giraffe.html</page>
 		<crease_pattern>winged-giraffe-crease-pattern.svg</crease_pattern>
-		<diagram>Winged_Giraffe_Diagrams.pdf</diagram>
+		<diagram>Winged_Giraffe_Diagrams_Compressed.pdf</diagram>
 		<description><p>Continuing my tradition of animals with wings, I designed a winged giraffe. I'm quite happy with how it came out! The head is heavily inspired by John Montroll's horse model.</p></description>
 	</model>
 	<model>
@@ -79,7 +79,7 @@
 		<img>scottie_small.webp</img>
 		<page>scottie.html</page>
 		<!-- <crease_pattern>scottie-crease-pattern.svg</crease_pattern> -->
-		<diagram>ScottieDiagrams.pdf</diagram>
+		<diagram>ScottieDiagramsCompressed.pdf</diagram>
 		<description><p>After six years at Carnegie Mellon University, I finally figured out how to fold a Scottie out of a chopstick wrapper. This model is based on <a href="Basset_Hound_Diagrams.pdf">a dog</a> that I learned how to fold in at <a href="https://origamikaikan.co.jp/lp/english_guide.html">Origami Kaikan</a> in Tokyo.</p></description>
 	</model>
 	<model>
@@ -89,7 +89,7 @@
 		<img>my-origami-teapot.webp</img>
 		<page>teapot.html</page>
 		<!-- <crease_pattern>scottie-crease-pattern.svg</crease_pattern> -->
-		<diagram>TeapotDiagrams.pdf</diagram>
+		<diagram>TeapotDiagramsCompressed.pdf</diagram>
 		<description><p>The Utah teapot is one of the foundational 3D models in the history of computer graphics, a familiar sight to any graphics researcher. I'm still learning to fold Tomohiro Tachi's <a href="https://origami.c.u-tokyo.ac.jp/~tachi/origami/teapot.html">detailed teapot model</a>, so I designed a (much) simpler one.</p></description>
 	</model>
 </models>

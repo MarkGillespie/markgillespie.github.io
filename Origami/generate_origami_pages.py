@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 
 # read list of models and ui element templates from 'models.xml'
 data = ET.parse('models.xml').getroot()
-models = reversed(data.find('models'))
+models = data.find('models')
 templates = data.find('ui_element_templates')
 
 # get contents of xml element as a text string
@@ -40,7 +40,7 @@ def css_ify_svg(svg_text):
 # build carousel
 carousel_str = ""
 carousel_template_str = xml_child_string(templates.find('model_carousel_entry'))
-for model in models:
+for model in reversed(models):
 	with open(model.find('svg').text) as f:
 		model_svg_str = css_ify_svg(f.read())
 	model_url_str  = model.find('page').text
@@ -59,10 +59,9 @@ with open('generated/index.html', 'w') as f:
 	                            .replace('$DATE', date_str)
 	                            .replace('$MODEL_CAROUSEL', carousel_str))
 	f.write(index_text)
-
 # write model pages
 details_template_str = xml_child_string(templates.find('model_page_details'))
-for model in models:
+for model in reversed(models):
 	img_str  = model.find('img').text
 	crease_pattern_tag = model.find('crease_pattern')
 	crease_pattern_str = '' if crease_pattern_tag is None else crease_pattern_tag.text
