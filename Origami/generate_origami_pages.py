@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 
 # read list of models and ui element templates from 'models.xml'
 data = ET.parse('models.xml').getroot()
-models = data.find('models')
+models = reversed(data.find('models'))
 templates = data.find('ui_element_templates')
 
 # get contents of xml element as a text string
