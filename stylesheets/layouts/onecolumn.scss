@@ -299,6 +299,10 @@
         font-weight: normal;
     }
 
+    #{$parent} .project_author_list a.me {
+        font-weight: 400;
+    }
+
     #{$parent} .project_header .text .mini_abstract {
         line-height: 1.1;
         box-sizing: border-box;

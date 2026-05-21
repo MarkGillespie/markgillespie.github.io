@@ -301,7 +301,10 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			# if name has a single space, replace it with &nbsp; so that names don't break
 			if "nbsp;" not in name_data and name_data.count(' ') == 1:
 				name_data = name_data.replace(' ', "&nbsp;")
-			name = f'<a href="{author.find("href").text}">{name_data}</a>' if author.find('href') is not None else name_data
+			if 'Mark' in name_data and 'Gillespie' in name_data:
+				name = f'<a href="https://markjgillespie.com" class="me">{name_data}</a>'
+			else:
+				name = f'<a href="{author.find("href").text}">{name_data}</a>' if author.find('href') is not None else name_data
 			affiliation = xml_child_string(author.find("affiliation"))
 			author_str += f'{name},\n'
 			long_author_str += f'<div class="author"><span class="name">{name}</span><span class="affiliation">{affiliation}</span></div>\n'

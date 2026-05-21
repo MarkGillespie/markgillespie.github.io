@@ -24,7 +24,7 @@
             <affiliation>Inria (IP Paris) &amp;amp; University of Utah</affiliation></author>
     </authors>
     <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2026)</venue>
-    <!--<award><name>Best Paper (Honorable Mention)</name>--><!--<href>https://blog.siggraph.org/2024/06/siggraph-2024-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/</href>--><!--<description>top 1.5% of submissions.</description></award>-->
+<award><name>Best Paper (Honorable Mention)</name><href>https://blog.siggraph.org/2026/05/siggraph-2026-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/</href><description>top 1.5% of submissions.</description></award>
     <links>
         <link><name>preprint (16.4&nbsp;mb)</name><href>Research/ImplicitMinimalSurfaces/ImplicitMinimalSurfaces.pdf</href></link>
         <link><name>arXiv</name><href>https://arxiv.org/abs/2605.02770</href></link>
