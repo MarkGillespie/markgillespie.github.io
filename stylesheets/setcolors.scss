@@ -202,6 +202,13 @@
         background-color: mix(rgba($foreground-color, 1), $blank-space);
         box-shadow: .2em .2em .3em rgba($ordinary-font-color, .7);
     }
+
+    /* bibtex highlighting */
+    #{$parent} .bibliography .nc { color: #424; font-weight: bold; } /* Name.Class */
+    #{$parent} .bibliography .p  { color: #727;} /* Punctuatino */
+    #{$parent} .bibliography .w { color: #000; } /* Text.Whitespace */
+    #{$parent} .bibliography .s { color: #547; } /* Literal.String */
+    #{$parent} .bibliography .na { color: #000; } /* Name.Attribute */
 }
 
 @mixin setTorusColors($map, $parent:"body") {

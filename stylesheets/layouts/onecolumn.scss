@@ -427,7 +427,7 @@
         float: right;
         font-family: 'Charis SIL', 'Palatino', serif;
         font-size: 12pt;
-        margin-top: -.5em;
+        margin-top: -1.5em;
     }
 
     #{$parent} .bibBox button:hover, #{$parent} .bibEntry button:hover {
@@ -823,6 +823,7 @@
         /* more spacing for clicking on mobile */
         #{$parent} .section_panel .project_links {
             line-height: 1.75; 
+            position: relative;
         }
 
         #{$parent} .section_panel .project_links a {
@@ -834,7 +835,14 @@
         }
 
         #{$parent} .bibBox {
+            position: static;
             margin-right: .25em;
+        }
+
+        .bibBox .bibliography {
+            top: 4em !important;
+            width: 95vw !important;
+            right: 1vw !important;
         }
 
         #{$parent} .talk_date {

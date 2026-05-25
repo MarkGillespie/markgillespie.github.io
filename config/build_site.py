@@ -1,4 +1,4 @@
-import datetime, json, os
+import datetime, json, os, html
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import quote
@@ -9,6 +9,25 @@ import base64, mimetypes # inline images
 # from pysvgo import optimize # optimize svgs
 from scour import scour # optimize svgs
 from htmlmin import minify
+
+# syntax highlighting
+from pygments import highlight
+from pygments.lexers import BibTeXLexer
+from pygments.formatters import HtmlFormatter
+from pygments.filter import Filter
+from pygments.token import String, Punctuation
+
+# Custom pygments setup to ensure that the braces in a bibtex statement title = {paper title} are parsed as punctuation, rather than part of a single string
+class BraceFilter(Filter):
+    def filter(self, lexer, stream):
+        for ttype, value in stream:
+            if ttype is String and value in ('{', '}'):
+                yield Punctuation, value
+            else:
+                yield ttype, value
+bib_lexer = BibTeXLexer()
+bib_lexer.add_filter(BraceFilter())
+bib_formatter = HtmlFormatter(nowrap=True)
 
 def get_image_dimensions(path):
     ext = os.path.splitext(path)[1].lower()
@@ -318,14 +337,16 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			desc_str = f'<div class="description">{desc}</div>' if len(desc) > 0 else ''
 			award_str = f'<a href="{href}" class="award">{name} {desc_str}</a>' if href is not None else f'<div class="award">{name} {desc_str}</div>'
 		#= bibtex
-		bibtex, copy_button_str, home_bib_str, nest_bib_str = None, '', '', ''
+		bibtex, highlighted_bib, copy_button_str, home_bib_str, nest_bib_str = None, '', '', '', ''
 		try:
 			bib_path = project_data.find('bibtex').text
 			with open(f'../{bib_path}') as f:
 				bibtex = f.read().rstrip()
-				copy_button_str = f'<button onclick="navigator.clipboard.writeText(`{bibtex}`);">Copy</button>' # `string` creates multiline string in js
-				home_bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
-				nest_bib_str = f'<div class="bibBox"><a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{bibtex}{copy_button_str}</div></div>\n'
+				highlighted_bib = highlight(bibtex, bib_lexer, bib_formatter)
+				js_literal = html.escape(json.dumps(bibtex), quote=True) # use json.dumps to escape newlines, etc in bibtex file
+				copy_button_str = f'<button onclick="navigator.clipboard.writeText({js_literal});">Copy</button>'
+				home_bib_str = f'<div class="bibBox"><a href="{bib_path}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{highlighted_bib}{copy_button_str}</div></div>\n'
+				nest_bib_str = f'<div class="bibBox"><a href="{n_path(bib_path)}"><span class="project_link">bibtex</span></a>\n<div class="bibliography" style="visibility: hidden;">{highlighted_bib}{copy_button_str}</div></div>\n'
 		except:
 			print(f"WARNING: missing bibtex for {title_str}")
 		#= href
@@ -394,9 +415,9 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 			anchor_str = '' if panel.find('a') is None else f'<a name="{panel.find("a").text}">'
 			if panel.find('bibtex') is not None and bibtex is not None:
 				title = 'Bibtex'
-				content = f'{bibtex} {copy_button_str}'
+				content = f'{highlighted_bib} {copy_button_str}'
 				extra_classes += ' bibEntry'
-			panel_str += f'<div class="section_panel {extra_classes}">\n'
+			panel_str += f'<div class="section_panel bibliography {extra_classes}">\n'
 			panel_str += f'{anchor_str}\n'
 			panel_str += f'<div class="section_header">{title}</div>\n'
 			panel_str += f'<div class="section_text">{content}</div>\n</div>\n'
