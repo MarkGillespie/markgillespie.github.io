@@ -410,6 +410,7 @@
         /* more spacing for clicking on mobile */
         #{$parent} .quick_links {
             line-height: 1.75; 
+            position: relative;
         }
 
         #{$parent} .example_grid .example_grid_entry {
@@ -418,6 +419,17 @@
 
         #{$parent} .example_grid .example_grid_entry img {
             max-width: 80%;
+        }
+
+        #{$parent} .bibBox {
+            position: static;
+            margin-right: .25em;
+        }
+
+        .bibBox .bibliography {
+            top: 4em !important;
+            width: 90vw !important;
+            right: -1em!important;
         }
     }
 
