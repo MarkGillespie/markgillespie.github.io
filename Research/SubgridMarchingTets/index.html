@@ -13,8 +13,8 @@
 </div></div> <div class=name_box> <div class=title>Subgrid Marching Tetrahedra</div> <div class=venue><a href="https://doi.org/10.1145/3811358">ACM Transactions on Graphics (SIGGRAPH&nbsp;2026)</a></div>  <div class=authors> <div class="author"><span class="name"><a href="https://hbaktash.github.io/">Hossein&nbsp;Baktash</a></span><span class="affiliation">Carnegie Mellon University</span></div>
 <div class="author"><span class="name"><a href="https://markjgillespie.com" class="me">Mark&nbsp;Gillespie</a></span><span class="affiliation">Inria (IP Paris) &amp; University of Utah</span></div>
 <div class="author"><span class="name"><a href="http://www.cs.cmu.edu/~kmcrane/">Keenan&nbsp;Crane</a></span><span class="affiliation">Carnegie Mellon University &amp; Roblox</span></div>
- </div> <div class=paper_teaser> <img src="images/cell-teaser.webp" width="2000" height="784" style="max-height: 25em; margin: 10px 0px;"> </div> <div class=quick_links> <a href="SubgridMarchingTets.pdf"><span class="project_link">preprint (26.1&nbsp;mb)</span></a>
-<a href="SubgridSupplement.pdf"><span class="project_link">supplement (1.6&nbsp;mb)</span></a>
+ </div> <div class=paper_teaser> <img src="images/cell-teaser.webp" width="2000" height="784" style="max-height: 25em; margin: 10px 0px;"> </div> <div class=quick_links> <a href="SubgridMarchingTets.pdf"><span class="project_link">preprint (25.7&nbsp;mb)</span></a>
+<a href="SubgridSupplement.pdf"><span class="project_link">supplement (3.5&nbsp;mb)</span></a>
 <a href="subgrid-tet.html"><span class="project_link">single-tet web demo</span></a>
 <div class="bibBox"><a href="bib.txt"><span class="project_link">bibtex</span></a>
 <div class="bibliography" style="visibility: hidden;"><span class="nc">@article</span><span class="p">{</span><span class="nl">Baktash:2026:SMT</span><span class="p">,</span>
@@ -32,25 +32,21 @@
 <span class="p">}</span>
 <button onclick="navigator.clipboard.writeText(&quot;@article{Baktash:2026:SMT,\n  author = {Baktash, Hossein and Gillespie, Mark and Crane, Keenan},\n  title = {Subgrid Marching Tetrahedra},\n  journal = {ACM Trans. Graph.},\n  volume = {45},\n  number = {4},\n  articleno = {57},\n  year = {2026},\n  publisher = {ACM},\n  address = {New York, NY, USA},\n  url = {https://doi.org/10.1145/3811358},\n  doi = {10.1145/3811358}\n}&quot;);">Copy</button></div></div>
 <a href="https://doi.org/10.1145/3811358"><span class="project_link">doi</span></a>
- </div> <div class=abstract> C<span class="first-word">ontouring</span> algorithms like marching cubes and marching tetrahedra are a fundamental tool in geometry processing, needed to convert from implicit representations (like signed distance functions) to explicit representations (namely, polygon meshes).
-However, they suffer from an equally fundamental challenge of signal processing, namely <em>aliasing</em>: unless the implicit function is sufficiently-well sampled onto a grid, the extracted mesh will have missing features, holes, etc.
-Moreover, these methods assume that the surface has a definite inside and outside—making them unsuitable for surfaces with boundary.
-The conventional solution is simply to increase grid resolution, but due to Nyquist-Shannon, this resolution may have to be made prohibitively large in order to capture very fine features in an implicit function; moreover, one most often does not even have an a priori bound on the smallest feature size.  A common workaround is to use spatially adaptive marching methods, but here one encounters significant complexity in data structures and implementation—and still suffers from the lack of an a priori bound.
-We adopt a fundamentally different approach: rather than adapt the grid to the feature size, we change the information stored on the grid to capture (in spirit) information about the <em>frequency</em> of geometric features within each cell.
-More precisely, we encode geometry using a generalization of <em>Haken's normal coordinates</em> from geometric topology, which count the number of surface intersections for each edge, plus the intersection locations (as 1D barycentric coordinates).
-Our key contribution, then, is a procedure for reconstructing manifold, intersection-free geometry from these generalized normal coordinates.
-Unlike other marching procedures, we do not require a distinct inside/outside—nor do we even require consistently-oriented surface patches.
-This procedure is a strict generalization of the one used for marching tetrahedra, and shares all of its attractive properties.  E.g., reconstruction can be performed in parallel across all cells, while still guaranteeing compatibility with neighbors.  Moreover, unlike classic marching algorithms, we do not need to build a large table of possibilities, but can instead just run a simple deterministic algorithm.
-We evaluate our method on two applications: contouring signed distance functions with thin features, and converting polygon soup to manifold, intersection-free meshes.
-In practice, we see that, for equal grid resolution, the surface fidelity achieved via contouring is dramatically closer to the true surface.
-More importantly, with our method there is no lower bound on the feature size that we can encode on a fixed grid (apart from floating precision), meaning that we do better even than an adaptive method, for any fixed maximal degree of refinement.
+ </div> <div class=abstract> W<span class="first-word">e</span> describe a method for recovering a manifold, intersection-free triangle mesh from the points where edges of a tetrahedral grid pierce a continuous surface.
+Unlike classic marching cubes or tets, our <em>subgrid marching</em> scheme allows arbitrarily many surface patches within a single cell, capturing fine features and thin sheets.
+Moreover, it requires neither a well-defined inside/outside (allowing surfaces with boundary), nor consistently-oriented input geometry.
+Yet we retain the local, parallel nature of classic marching: reconstruction is performed independently per tet, yielding a conforming mesh across tet boundaries.
+Our key innovation is a generalization of <em>normal coordinates</em> from geometric topology, which encode surface connectivity via arbitrary integer intersection counts along each grid edge.
+This encoding sidesteps the usual Nyquist-Shannon limit, putting no lower bound on the size of features that can be resolved on a fixed grid.
+In practice, for similar compute time and equal grid resolution—or even an equal number of output triangles—meshes produced by subgrid marching are far more accurate than those from classic marching.
+Beyond standard contouring, our method can be used to convert polygon soup into a manifold, intersection-free mesh.
  </div> </div> <div class=body> <div class="section_panel bibliography ">
 
 <div class="section_header">Paper</div>
 <div class="section_text">
                 <a href="SubgridMarchingTets.pdf" class="paper-preview">
                     <img src="images/preview.webp" alt="preview" /><br />
-                    <span>preprint (26.1&nbsp;mb)</span>
+                    <span>preprint (25.7&nbsp;mb)</span>
                 </a>
             </div>
 </div>
@@ -61,7 +57,7 @@ More importantly, with our method there is no lower bound on the feature size th
                 <div style="display: flex; flex-start; gap: .5em;">
                 <a href="SubgridSupplement.pdf" class="paper-preview">
                     <img src="images/preview-supplemental.webp" alt="preview" /><br />
-                    <span>supplement (1.6&nbsp;mb)</span>
+                    <span>supplement (3.5&nbsp;mb)</span>
                 </a>
                 <a href="subgrid-tet.html" class="paper-preview">
                     <img src="images/preview-demo.webp" alt="preview" /><br />

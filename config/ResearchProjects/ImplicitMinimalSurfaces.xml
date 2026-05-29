@@ -53,7 +53,7 @@ We introduce an <em>implicit</em> representation of continuous, bijective, orien
             </content>
         </panel>
         <panel>
-            <title>Supplemental Documents</title>
+            <title>Supplemental</title>
             <content>
                 <div style="display: flex; flex-start; gap: .5em; align-items: center; justify-content: center;">
                 <a href="ImplicitMinimalSurfacesSupplemental.pdf" class="paper-preview">
