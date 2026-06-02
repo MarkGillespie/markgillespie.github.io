@@ -22,7 +22,8 @@
     <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2026)</venue>
     <!-- <venue>Conditionally accepted to SIGGRAPH&amp;nbsp;2026</venue> -->
     <links>
-        <link><name>preprint (25.7&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTets.pdf</href></link>
+        <link><name>paper (25.7&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridMarchingTets.pdf</href></link>
+        <link><name>arXiv</name><href>https://arxiv.org/abs/2606.00454</href></link>
         <link><name>supplement (3.5&nbsp;mb)</name><href>Research/SubgridMarchingTets/SubgridSupplement.pdf</href></link>
     </links>
     <more_links>
@@ -49,7 +50,7 @@ Beyond standard contouring, our method can be used to convert polygon soup into 
             <content>
                 <a href="SubgridMarchingTets.pdf" class="paper-preview">
                     <img src="images/preview.webp" alt="preview"/><br/>
-                    <span>preprint (25.7&nbsp;mb)</span>
+                    <span>paper (25.7&nbsp;mb)</span>
                 </a>
             </content>
         </panel>

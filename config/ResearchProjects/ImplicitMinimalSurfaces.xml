@@ -26,7 +26,7 @@
     <venue>ACM Transactions on Graphics (SIGGRAPH&amp;nbsp;2026)</venue>
 <award><name>Best Paper (Honorable Mention)</name><href>https://blog.siggraph.org/2026/05/siggraph-2026-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/</href><description>top 1.5% of submissions.</description></award>
     <links>
-        <link><name>preprint (16.4&nbsp;mb)</name><href>Research/ImplicitMinimalSurfaces/ImplicitMinimalSurfaces.pdf</href></link>
+        <link><name>paper (16.4&nbsp;mb)</name><href>Research/ImplicitMinimalSurfaces/ImplicitMinimalSurfaces.pdf</href></link>
         <link><name>arXiv</name><href>https://arxiv.org/abs/2605.02770</href></link>
     </links>
     <more_links>
@@ -48,7 +48,7 @@ We introduce an <em>implicit</em> representation of continuous, bijective, orien
             <content>
                 <a href="ImplicitMinimalSurfaces.pdf" class="paper-preview">
                     <img src="images/preview.webp" alt="preview"/><br/>
-                    <span>preprint (16.4&nbsp;mb)</span>
+                    <span>paper (16.4&nbsp;mb)</span>
                 </a>
             </content>
         </panel>
