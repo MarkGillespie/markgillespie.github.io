@@ -301,7 +301,7 @@ short_project_template = xml_child_string(proj_data.find('project_template'))
 research_list_str = xml_child_string(proj_data.find('project_list'))
 with open('project_template.html') as f:
 	project_page_template = f.read()
-project_page_template = minify(project_page_template, remove_comments=True, reduce_empty_attributes=True)
+project_page_template = project_page_template
 for file in os.listdir(os.fsencode("ResearchProjects")):
 	filename = os.fsdecode(file)
 	if filename.endswith('.xml'):
@@ -431,8 +431,8 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		w, h = get_image_dimensions(f'../Research/{project_folder}/{img_big_path}')
 		img_big_style = project_data.find('img_large').find('style').text if project_data.find('img_large').find('style') is not None else ""
 		img_big_str = f'<img src="{img_big_path}" width="{w}" height="{h}" style="{img_big_style}">'
-		project_page = (project_page_template.replace('$TITLE', project_data.find('title').text)
-		                                     .replace('$NAVBAR', navbar_str_nest)
+		title_str = project_data.find('title').text
+		project_page = (project_page_template.replace('$NAVBAR', navbar_str_nest)
 		                                     .replace('$YEAR', year_str)
 		                                     .replace('$VENUE', venue_str)
 		                                     .replace('$AWARD', award_str)
@@ -448,7 +448,9 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$NBSP',  nbsp_str)
 		                                     .replace('$PROJECT_CSS',  project_css_str)
 		                                     .replace('$FAVICON',  favicon_str)
+		                                     .replace('$TITLE', title_str)
 						)
+		project_page = minify(project_page, remove_comments=True, reduce_empty_attributes=True)
 		project_path = f'../Research/{project_folder}/index.html'
 		Path(project_path).parent.mkdir(parents=True, exist_ok=True) # ensure path exists
 		with open(project_path, 'w') as f:
