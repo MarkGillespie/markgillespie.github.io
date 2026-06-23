@@ -219,12 +219,13 @@ gmail_str = "mark.gillespie81@gmail.com"
 with open('torus.svg') as f:
     background_str = optimize_svg(f.read())
 
-# == FAVICON
-with open('../favicon.svg', encoding='utf-8') as f:
-    svg = f.read()
-    svg = " ".join(svg.split()) # collapse whitespace
-    svg = quote(svg, safe="=:/?&;,@+$!*'()~") # Escape characters that would break an HTML attribute or URI.
-    favicon_str = f'<link rel="icon" href="data:image/svg+xml,{svg}" type="image/svg+xml"/>'
+# == FAVICON (don't inline, it doesn't show up properly in search results)
+# with open('../favicon.svg', encoding='utf-8') as f:
+#     svg = f.read()
+#     svg = " ".join(svg.split()) # collapse whitespace
+#     svg = quote(svg, safe="=:/?&;,@+$!*'()~") # Escape characters that would break an HTML attribute or URI.
+#     favicon_str = f'<link rel="icon" href="data:image/svg+xml,{svg}" type="image/svg+xml"/>'
+    favicon_str = f'<link rel="icon" href="favicon.svg"/>'
 
 # == CSS
 with open('../stylesheets/swiss-main.css') as f:
