@@ -158,6 +158,16 @@
 \end{minipage}
 }
 
+\newcommand{\cvposition}[4]{ % {year} {title} {institution} {department}
+\noindent{}{\bfseries #2} \hfill {\itshape #1}
+\cvindent{{#3}\ifstrempty{#4}{}{, #4}}\\[.25\baselineskip]
+}
+
+\newcommand{\cvpositionwithcomment}[5]{ % {year} {title} {institution} {department} {comment}
+\noindent{}{\bfseries #2}  \hfill {\itshape #1}
+\cvindent{{#3}\ifstrempty{#4}{}{, #4} \hspace{.25em}\vrule width .75pt\hspace{.125em} {\itshape #5}}\\[.25\baselineskip]
+}
+
 \newcommand{\shortcventry}[6]{ % {year} {title} {institution} {???} {???} {comment}
 \noindent{}{\bfseries #3}, {#2} \hfill {\itshape #1}\\[.25\baselineskip]
 }
@@ -230,7 +240,7 @@
 \raisebox{10pt}{
 \begin{minipage}[t][1.6cm][t]{.7\linewidth}
     \raggedleft
-    \href{mailto:mark.gillespie@inria.fr}{mark.gillespie@inria.fr}\\
+    \href{mailto:mark.gillespie81@gmail.com}{mark.gillespie81@gmail.com}\\
     \href{https://www.markjgillespie.com}{www.markjgillespie.com}\\
     \href{https://scholar.google.com/citations?user=o_OqGM0AAAAJ}{\raisebox{-2pt}{\faGraduationCap{}} Google Scholar}\\
     \href{https://orcid.org/0009-0000-5645-9636}{\orcidicon{} 0009-0000-5645-9636}\\
@@ -242,14 +252,14 @@
 % \vspace{-3\baselineskip}
 
 \section{Academic Appointments}
-\cventry{To start July 2026}{Assistant Professor}{University of Utah}{Kahlert School of Computing}{}{}
-\cventrywithcomment{{Sept. 2024}--present}{Postdoctoral Researcher}{École Polytechnique / INRIA}{Laboratoire d'Informatique {\color{gray}[Computer Science Department]}}{}{working with Mathieu Desbrun}
+\cvposition{2026--present}{Assistant Professor}{University of Utah}{Kahlert School of Computing}
+\cvpositionwithcomment{2024--2026}{Postdoctoral Researcher}{École Polytechnique / INRIA Saclay}{}{working with Mathieu Desbrun} % {Sept. 2024}--June 2026
 
 \section{Education}
-\cventrywithcomment{2018--2024}{PhD in Computer Science}{Carnegie Mellon University}{}{}{Advisor: Keenan Crane}\\[-1.3\baselineskip]
+\cvpositionwithcomment{2018--2024}{PhD in Computer Science}{Carnegie Mellon University}{Compter Science Department}{Advisor: Keenan Crane}\\[-1.3\baselineskip]
 \cvindent{National Science Foundation Graduate Research Fellowship (NSF GRFP)}
 %
-\cventrywithcomment{2014--2018}{B.S. in Computer Science and B.S. in Mathematics}{California Institute of Technology}{}{}{Advisor: Peter Schröder}
+\cvpositionwithcomment{2014--2018}{B.S. in Computer Science and B.S. in Mathematics}{California Institute of Technology}{}{Advisor: Peter Schröder}
 
 
 % PUBLICATIONS ----------------------------------
