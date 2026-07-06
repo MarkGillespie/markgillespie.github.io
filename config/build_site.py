@@ -213,7 +213,7 @@ year_str = datetime.datetime.now().strftime("%Y")
 
 # == $EMAIL
 # email_str = "mark.gillespie@inria.fr"
-email_str = "mark.gillespie81@gmail.com"
+email_str = "mark.gillespie@utah.edu"
 gmail_str = "mark.gillespie81@gmail.com"
 
 # == BACKGROUND_SVG
