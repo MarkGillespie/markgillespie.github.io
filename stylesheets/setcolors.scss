@@ -214,6 +214,8 @@
     #{$parent} .bibliography .w { color: #000; } /* Text.Whitespace */
     #{$parent} .bibliography .s { color: #547; } /* Literal.String */
     #{$parent} .bibliography .na { color: #000; } /* Name.Attribute */
+
+    #{$parent} .unid { opacity: .65; }
 }
 
 @mixin setTorusColors($map, $parent:"body") {
