@@ -226,7 +226,8 @@ with open('torus.svg') as f:
 #     svg = " ".join(svg.split()) # collapse whitespace
 #     svg = quote(svg, safe="=:/?&;,@+$!*'()~") # Escape characters that would break an HTML attribute or URI.
 #     favicon_str = f'<link rel="icon" href="data:image/svg+xml,{svg}" type="image/svg+xml"/>'
-    favicon_str = f'<link rel="icon" href="favicon.svg"/>'
+main_favicon_str = f'<link rel="icon" href="favicon.svg"/>'
+project_favicon_str = f'<link rel="icon" href="../../favicon.svg"/>'
 
 # == CSS
 with open('../stylesheets/swiss-main.css') as f:
@@ -448,7 +449,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$GMAIL',  gmail_str)
 		                                     .replace('$NBSP',  nbsp_str)
 		                                     .replace('$PROJECT_CSS',  project_css_str)
-		                                     .replace('$FAVICON',  favicon_str)
+		                                     .replace('$FAVICON',  project_favicon_str)
 		                                     .replace('$TITLE', title_str)
 						)
 		project_page = minify(project_page, remove_comments=True, reduce_empty_attributes=True)
@@ -478,7 +479,7 @@ index_text = (index_template.replace('$DATE',   date_str)
                             .replace('$GMAIL',  gmail_str)
                             .replace('$NBSP',  nbsp_str)
                             .replace('$MAIN_CSS',  main_css_str)
-                            .replace('$FAVICON',  favicon_str)
+                            .replace('$FAVICON',  main_favicon_str)
                             )
 with open('../index.html', 'w') as f:
 	f.write(index_text)
