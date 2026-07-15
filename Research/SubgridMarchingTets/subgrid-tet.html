@@ -312,10 +312,14 @@
                     <input type="range" id="opacity" min="0" max="100" value="100">
                     <span class="slider-value" id="opacity-val">1.00</span>
                 </div>
-                <div class="slider-group">
+                <div class="slider-group" style="display: flex; align-items: center; gap: 16px;">
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                         <input type="checkbox" id="show-wireframe" style="width: 16px; height: 16px;" checked>
                         <span style="font-size: 0.85rem;">Surface wireframe</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="show-boundary-curves" style="width: 16px; height: 16px;" checked>
+                        <span style="font-size: 0.85rem;">Boundary curves</span>
                     </label>
                 </div>
                 <div class="slider-group" style="display: flex; align-items: center; gap: 16px;">
@@ -332,6 +336,12 @@
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                         <input type="checkbox" id="scoop-mid-vertices" style="width: 16px; height: 16px;">
                         <span style="font-size: 0.85rem;">Simplicial Embedding</span>
+                    </label>
+                </div>
+                <div class="slider-group">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;" title="Fan every boundary curve directly instead of the normal/even-sum construction">
+                        <input type="checkbox" id="greedy-construction" style="width: 16px; height: 16px;">
+                        <span style="font-size: 0.85rem;">Greedy construction</span>
                     </label>
                 </div>
                 <div class="slider-group">
@@ -499,6 +509,9 @@ class Vec3 {
     sub(v) { return new Vec3(this.x - v.x, this.y - v.y, this.z - v.z); }
     scale(s) { return new Vec3(this.x * s, this.y * s, this.z * s); }
     lerp(v, t) { return this.scale(1 - t).add(v.scale(t)); }
+    dot(v) { return this.x * v.x + this.y * v.y + this.z * v.z; }
+    cross(v) { return new Vec3(this.y * v.z - this.z * v.y, this.z * v.x - this.x * v.z, this.x * v.y - this.y * v.x); }
+    norm2() { return this.x * this.x + this.y * this.y + this.z * this.z; }
     toThree() { return new THREE.Vector3(this.x, this.y, this.z); }
     clone() { return new Vec3(this.x, this.y, this.z); }
 }
@@ -538,22 +551,6 @@ class EdgeInts {
         const ei = new EdgeInts();
         for (const [k, v] of this.data) ei.data.set(k, v);
         return ei;
-    }
-    
-    subtract(other) {
-        const result = this.clone();
-        for (const [k, v] of other.data) {
-            result.data.set(k, (result.data.get(k) || 0) - v);
-        }
-        return result;
-    }
-    
-    add(other) {
-        const result = this.clone();
-        for (const [k, v] of other.data) {
-            result.data.set(k, (result.data.get(k) || 0) + v);
-        }
-        return result;
     }
     
     print() {
@@ -672,10 +669,10 @@ class CombinatorialVertex {
 // ============================================================================
 
 const CombFaceType = {
-    FLAT: 0, QUAD02: 1, QUAD13: 2, SPIRAL: 3,
+    QUAD02: 1, QUAD13: 2, SPIRAL: 3,
     OPEN: 4, CLOSED_NON_NORMAL: 5, CLOSED_NORMAL: 6,
     TRIANGLE: 7, OCTAGON: 8,
-    SMEARED_QUAD: 9, CORNER_TYPE_TRIANGLE: 10, TUNNEL_QUAD: 11,
+    SMEARED_QUAD: 9, TUNNEL_QUAD: 11,
     INTERIOR_HEXAGON: 12, INTERIOR_CORNER_TYPE: 13
 };
 
@@ -765,186 +762,6 @@ class EdgeOccupations {
         }
     }
     
-    countOccupied() {
-        const result = new EdgeInts();
-        for (const [i, j] of ALL_TET_PAIRS) {
-            const arr = this.data.get(EdgeInts.key(i, j));
-            let count = 0;
-            if (arr) for (const v of arr) if (v) count++;
-            result.set(i, j, count);
-        }
-        return result;
-    }
-}
-
-// ============================================================================
-// INTERPOLATED POINT
-// ============================================================================
-
-class InterpolatedPoint {
-    constructor() {
-        this.pos = null;
-        this.parentAIdx = INVALID_IND;
-        this.parentBIdx = INVALID_IND;
-        this.order = -1;
-        this.edgeInt = -1;
-        this.t = -1.0;
-        this.weightedParents = [];
-        this.barycentricWeights = [];
-    }
-    
-    static fromRoot(pos) {
-        const ip = new InterpolatedPoint();
-        ip.pos = pos.clone();
-        return ip;
-    }
-    
-    static fromParents(aIdx, bIdx, order, edgeInt, pos = null) {
-        const ip = new InterpolatedPoint();
-        ip.parentAIdx = aIdx;
-        ip.parentBIdx = bIdx;
-        ip.order = order;
-        ip.edgeInt = edgeInt;
-        if (pos) ip.pos = pos.clone();
-        return ip;
-    }
-    
-    static fromParentsT(aIdx, bIdx, t, pos = null) {
-        const ip = new InterpolatedPoint();
-        ip.parentAIdx = aIdx;
-        ip.parentBIdx = bIdx;
-        ip.t = t;
-        if (pos) ip.pos = pos.clone();
-        return ip;
-    }
-    
-    static fromWeightedParents(parents, weights, pos = null) {
-        const ip = new InterpolatedPoint();
-        ip.weightedParents = [...parents];
-        ip.barycentricWeights = [...weights];
-        if (pos) ip.pos = pos.clone();
-        return ip;
-    }
-    
-    getPosition(pool) {
-        if (this.pos) return this.pos;
-        this.recomputeFromParents(pool);
-        return this.pos;
-    }
-    
-    recomputeFromParents(pool) {
-        if (this.weightedParents.length > 0 && this.barycentricWeights.length === this.weightedParents.length) {
-            this.pos = Vec3.zero();
-            for (let i = 0; i < this.weightedParents.length; i++) {
-                const p = pool[this.weightedParents[i]].getPosition(pool);
-                this.pos = this.pos.add(p.scale(this.barycentricWeights[i]));
-            }
-            return;
-        }
-        
-        if (this.parentAIdx === INVALID_IND || this.parentBIdx === INVALID_IND) return;
-        
-        const Pa = pool[this.parentAIdx].getPosition(pool);
-        const Pb = pool[this.parentBIdx].getPosition(pool);
-        
-        if (this.t >= 0.0) {
-            this.pos = Pa.lerp(Pb, this.t);
-            return;
-        }
-        
-        const t = (this.edgeInt > 0 && this.order > 0) ? this.order / (this.edgeInt + 1) : 0.5;
-        this.pos = Pa.lerp(Pb, t);
-    }
-}
-
-// ============================================================================
-// TRI SOUP
-// ============================================================================
-
-class TriSoup {
-    constructor() {
-        this.pool = [];
-        this.faces = [];
-        this.segments = [];
-    }
-    
-    addRoot(v) {
-        this.pool.push(InterpolatedPoint.fromRoot(v));
-        return this.pool.length - 1;
-    }
-    
-    addFromParents(a, b, order, edgeInt) {
-        const Pa = this.pool[a].getPosition(this.pool);
-        const Pb = this.pool[b].getPosition(this.pool);
-        const t = (edgeInt > 0) ? order / (edgeInt + 1) : 0.5;
-        const pos = Pa.lerp(Pb, t);
-        this.pool.push(InterpolatedPoint.fromParents(a, b, order, edgeInt, pos));
-        return this.pool.length - 1;
-    }
-    
-    addFromParentsT(a, b, t) {
-        const Pa = this.pool[a].getPosition(this.pool);
-        const Pb = this.pool[b].getPosition(this.pool);
-        const pos = Pa.lerp(Pb, t);
-        this.pool.push(InterpolatedPoint.fromParentsT(a, b, t, pos));
-        return this.pool.length - 1;
-    }
-    
-    addFace(i, j, k) {
-        this.faces.push([i, j, k]);
-    }
-    
-    addSegment(i, j) {
-        this.segments.push([i, j]);
-    }
-    
-    addAverageForPolygon(vertexIndices) {
-        let avgPos = Vec3.zero();
-        const weights = vertexIndices.map(() => 1.0 / vertexIndices.length);
-        for (const vi of vertexIndices) {
-            avgPos = avgPos.add(this.pool[vi].getPosition(this.pool));
-        }
-        avgPos = avgPos.scale(1.0 / vertexIndices.length);
-        this.pool.push(InterpolatedPoint.fromWeightedParents(vertexIndices, weights, avgPos));
-        return this.pool.length - 1;
-    }
-    
-    toVectorSoup() {
-        const faceIndices = [];
-        const vertexPositions = [];
-        for (const p of this.pool) {
-            if (p.barycentricWeights.length > 0) {
-                p.recomputeFromParents(this.pool);
-            }
-            vertexPositions.push(p.getPosition(this.pool));
-        }
-        for (const f of this.faces) {
-            faceIndices.push([f[0], f[1], f[2]]);
-        }
-        return { faceIndices, vertexPositions };
-    }
-    
-    segmentsToVectorSoup() {
-        const segIndices = [];
-        const vertexPositions = [];
-        for (const p of this.pool) {
-            vertexPositions.push(p.getPosition(this.pool));
-        }
-        for (const s of this.segments) {
-            segIndices.push([s[0], s[1]]);
-        }
-        return { segIndices, vertexPositions };
-    }
-    
-    getFirstOrderEdgePoints() {
-        const edgePoints = [];
-        for (const p of this.pool) {
-            if (p.order > 0 && p.edgeInt > 0 && p.parentAIdx !== INVALID_IND && p.parentBIdx !== INVALID_IND) {
-                edgePoints.push(p.getPosition(this.pool));
-            }
-        }
-        return edgePoints;
-    }
 }
 
 // ============================================================================
@@ -972,13 +789,9 @@ class NormalCoordinates {
         this.sccReduced = new SemiCornerCuts();
         this.cc = new CornerCuts();
         this.dc = new DiagonalCuts();
-        this.edgeIntsResidual = new EdgeInts();
         this.scoop = new SemiCornerCuts();
-        this.scoopCount = 0;
         this.triangleIneq = true;
         this.evenSum = true;
-        this.scoopDiagTypeExists = false;
-        this.allZeros = true;
         
         if (edgeInts) {
             this.computeNC();
@@ -1000,15 +813,7 @@ class NormalCoordinates {
             }
             this.cc = reducedNC.cc;
             this.dc = reducedNC.dc;
-            this.scoopDiagTypeExists = this.checkForNastyScoopTypes();
-        } else {
-            return;
         }
-        this.computeResidualEdgeInts();
-        
-        this.allZeros = this.edgeInts.get(0,1) === 0 && this.edgeInts.get(0,2) === 0 &&
-                        this.edgeInts.get(0,3) === 0 && this.edgeInts.get(1,2) === 0 &&
-                        this.edgeInts.get(1,3) === 0 && this.edgeInts.get(2,3) === 0;
     }
     
     computeSemiCornerCutsAndScoops() {
@@ -1037,8 +842,6 @@ class NormalCoordinates {
             this.scoop.set(i, j, k, Math.floor(rJK / 2));
             this.scoop.set(j, i, k, Math.floor(rIK / 2));
             this.scoop.set(k, i, j, Math.floor(rIJ / 2));
-            
-            this.scoopCount += Math.floor((rIJ + rIK + rJK) / 2);
         }
     }
     
@@ -1066,11 +869,6 @@ class NormalCoordinates {
                 this.sccReduced.get(0, k, l)
             ));
         }
-    }
-    
-    computeResidualEdgeInts() {
-        const normalEdgeInts = cornerAndDiagonalCutsToEdgeInts(this.cc, this.dc);
-        this.edgeIntsResidual = this.edgeInts.subtract(normalEdgeInts);
     }
     
     scoopReduction() {
@@ -1141,182 +939,6 @@ class NormalCoordinates {
         }
     }
     
-    scoopHomotopyCount(i, j, k, scoopCnt) {
-        const tempEdgeOccupations = new EdgeOccupations(this.edgeInts);
-        const cvFirst = new CombinatorialVertex(j, k, this.scc.get(j, k, i) + 2 * scoopCnt + 1, this.edgeInts.get(j, k), i);
-        this.traceForever(cvFirst, tempEdgeOccupations);
-        
-        const scoopEdgeInts = tempEdgeOccupations.countOccupied();
-        const scoopNC = new NormalCoordinates();
-        scoopNC.edgeInts = scoopEdgeInts;
-        scoopNC.computeSemiCornerCutsAndScoops();
-        
-        const isectsToI = scoopNC.scc.get(i, j, k) + 1;
-        const isectsToJ = scoopNC.scc.get(j, i, k) + 1;
-        const isectsToK = scoopNC.scc.get(k, i, j) + 1;
-        const l = complement([i, j, k])[0];
-        const isectsToL = isectsToI + scoopNC.edgeInts.get(i, l);
-        
-        let evenCount = 0;
-        if (isectsToI % 2 === 0) evenCount++;
-        if (isectsToJ % 2 === 0) evenCount++;
-        if (isectsToK % 2 === 0) evenCount++;
-        if (isectsToL % 2 === 0) evenCount++;
-        return evenCount;
-    }
-    
-    faceHomotopyCount(i, j, k) {
-        let cv;
-        const tempEdgeOccupations = new EdgeOccupations(this.edgeInts);
-        if (this.scc.get(i, j, k) > 0) {
-            cv = new CombinatorialVertex(i, j, this.scc.get(i, j, k), this.edgeInts.get(i, j), k);
-            this.traceForever(cv, tempEdgeOccupations);
-        } else if (this.scc.get(j, k, i) > 0) {
-            cv = new CombinatorialVertex(j, k, this.scc.get(j, k, i), this.edgeInts.get(j, k), i);
-            this.traceForever(cv, tempEdgeOccupations);
-        } else if (this.scc.get(k, i, j) > 0) {
-            cv = new CombinatorialVertex(k, i, this.scc.get(k, i, j), this.edgeInts.get(k, i), j);
-            this.traceForever(cv, tempEdgeOccupations);
-        } else {
-            return 4;
-        }
-        
-        const faceEdgeInts = tempEdgeOccupations.countOccupied();
-        const faceNC = new NormalCoordinates();
-        faceNC.edgeInts = faceEdgeInts;
-        faceNC.computeSemiCornerCutsAndScoops();
-        
-        const reducedI = faceNC.scc.get(i, j, k);
-        const reducedJ = faceNC.scc.get(j, i, k);
-        const reducedK = faceNC.scc.get(k, i, j);
-        const l = complement([i, j, k])[0];
-        const reducedL = reducedI + faceNC.edgeInts.get(i, l);
-        
-        let evenCount = 0;
-        if (reducedI % 2 === 0) evenCount++;
-        if (reducedJ % 2 === 0) evenCount++;
-        if (reducedK % 2 === 0) evenCount++;
-        if (reducedL % 2 === 0) evenCount++;
-        return evenCount;
-    }
-    
-    checkForNastyScoopTypes() {
-        for (const triplet of ALL_TET_TRIPLETS) {
-            const [i, j, k] = triplet;
-            const faceHomotopy = this.faceHomotopyCount(i, j, k);
-            if (faceHomotopy === 2) return true;
-        }
-        return false;
-    }
-    
-    traceScoopPair(cv1, cv2, edgeOccupations, contractible) {
-        if (edgeOccupations.get(cv1)) {
-            if (!edgeOccupations.get(cv2)) {
-                throw new Error("Scoop builder: first vertex occupied but second not!");
-            }
-            return [];
-        }
-        
-        const generatedCombFaces = [];
-        let done = false;
-        let curCv1 = cv1.clone(), curCv2 = cv2.clone();
-        
-        while (!done) {
-            edgeOccupations.set(curCv1, true);
-            edgeOccupations.set(curCv2, true);
-            const nextV1 = this.findNextVertex(curCv1);
-            const nextV2 = this.findNextVertex(curCv2);
-            
-            if (nextV1.equals(curCv2)) {
-                if (!nextV2.equals(curCv1)) throw new Error("Scoop builder: trace error!");
-                generatedCombFaces.push(new CombFace([curCv1.clone(), curCv2.clone()], CombFaceType.FLAT));
-                return generatedCombFaces;
-            } else if (!nextV1.sameEdgeAs(curCv1) && !nextV2.sameEdgeAs(curCv2)) {
-                if (nextV1.sameEdgeAs(nextV2)) {
-                    generatedCombFaces.push(new CombFace([curCv1.clone(), curCv2.clone(), nextV2.clone(), nextV1.clone()], CombFaceType.FLAT));
-                    edgeOccupations.set(nextV1, true);
-                    edgeOccupations.set(nextV2, true);
-                    curCv1 = nextV1;
-                    curCv2 = nextV2;
-                } else {
-                    if (contractible) return generatedCombFaces;
-                    const nextNextV1 = this.findNextVertex(nextV1);
-                    const nextNextV2 = this.findNextVertex(nextV2);
-                    if (!nextNextV1.equals(nextNextV2)) {
-                        throw new Error("Scoop builder: trace error at termination!");
-                    }
-                    generatedCombFaces.push(new CombFace([curCv1.clone(), curCv2.clone(), nextV2.clone(), nextV1.clone()], CombFaceType.FLAT));
-                    generatedCombFaces.push(new CombFace([nextV1.clone(), nextV2.clone(), nextNextV1.clone()], CombFaceType.FLAT));
-                    edgeOccupations.set(nextV1, true);
-                    edgeOccupations.set(nextV2, true);
-                    edgeOccupations.set(nextNextV1, true);
-                    return generatedCombFaces;
-                }
-            } else {
-                return generatedCombFaces;
-            }
-        }
-        throw new Error("Scoop builder: exited loop unexpectedly!");
-    }
-    
-    nastyScoopSpiral(cv, edgeOccupations) {
-        let nextCv = this.findNextVertex(cv);
-        const spiralBoundary = [cv.clone()];
-        while (!nextCv.equals(cv)) {
-            spiralBoundary.push(nextCv.clone());
-            nextCv = this.findNextVertex(nextCv);
-        }
-        return new CombFace(spiralBoundary, CombFaceType.SPIRAL);
-    }
-    
-    degenerateScoopRegion(i, j, k, edgeOccupations) {
-        const sccJ = this.scc.get(j, i, k);
-        const sccK = this.scc.get(k, i, j);
-        const vjk = new CombinatorialVertex(j, k, sccJ, this.edgeInts.get(j, k), i);
-        const vkj = new CombinatorialVertex(k, j, sccK, this.edgeInts.get(j, k), i);
-        const vji = new CombinatorialVertex(j, i, sccJ, this.edgeInts.get(i, j), k);
-        const vki = new CombinatorialVertex(k, i, sccK, this.edgeInts.get(i, k), j);
-        
-        const centerPolygon = [vji.clone(), vjk.clone()];
-        edgeOccupations.set(vji, true);
-        edgeOccupations.set(vjk, true);
-        
-        for (let s = 0; s < this.scoop.get(i, j, k); s++) {
-            const scoopV1 = new CombinatorialVertex(j, k, 2*s + sccJ + 1, this.edgeInts.get(j, k), i);
-            const scoopV2 = new CombinatorialVertex(j, k, 2*s + sccJ + 2, this.edgeInts.get(j, k), i);
-            centerPolygon.push(scoopV1.clone());
-            centerPolygon.push(scoopV2.clone());
-            edgeOccupations.set(scoopV1, true);
-            edgeOccupations.set(scoopV2, true);
-        }
-        centerPolygon.push(vkj.clone());
-        centerPolygon.push(vki.clone());
-        edgeOccupations.set(vkj, true);
-        edgeOccupations.set(vki, true);
-        
-        const nextVji = this.findNextVertex(vji);
-        const nextVki = this.findNextVertex(vki);
-        if (!nextVji.equals(nextVki)) {
-            throw new Error("Scoop builder: error at degenerate face corner!");
-        }
-        edgeOccupations.set(nextVji, true);
-        
-        return [
-            new CombFace([vji.clone(), vki.clone(), nextVji.clone()], CombFaceType.FLAT),
-            new CombFace(centerPolygon, CombFaceType.FLAT)
-        ];
-    }
-    
-    contractibleRegion(i, j, k, edgeOccupations) {
-        const vji = new CombinatorialVertex(j, i, this.scc.get(j, i, k), this.edgeInts.get(i, j), k);
-        const vij = new CombinatorialVertex(i, j, this.scc.get(i, j, k), this.edgeInts.get(i, j), k);
-        const vik = new CombinatorialVertex(i, k, this.scc.get(i, k, j), this.edgeInts.get(i, k), j);
-        const vki = new CombinatorialVertex(k, i, this.scc.get(k, i, j), this.edgeInts.get(i, k), j);
-        const vkj = new CombinatorialVertex(k, j, this.scc.get(k, j, i), this.edgeInts.get(j, k), i);
-        const vjk = new CombinatorialVertex(j, k, this.scc.get(j, k, i), this.edgeInts.get(j, k), i);
-        const hexagon = [vji, vij, vik, vki, vkj, vjk];
-        return new CombFace(hexagon, CombFaceType.FLAT);
-    }
 }
 
 // ============================================================================
@@ -1662,40 +1284,35 @@ function combFaceToPolygonSoup(combFace, tetPositions, edgeIsectTs, midScoopVert
         if (polySize !== 9) throw new Error("INTERIOR_HEXAGON with mid vertices must have 9 vertices");
         for (const cv of combFace.vertices) positions.push(interpolateCombVertex(cv, tetPositions, edgeIsectTs, bulge));
         polygons.push([8, 2, 5], [2, 8, 0], [2, 0, 1], [5, 2, 3], [5, 3, 4], [8, 5, 6], [8, 6, 7]);
-    } else if (
-        (combFace.type === CombFaceType.INTERIOR_CORNER_TYPE || combFace.type === CombFaceType.CORNER_TYPE_TRIANGLE) &&
-        midScoopVertices
-    ) {
-        for (const cv of combFace.vertices) {
-            positions.push(interpolateCombVertex(cv, tetPositions, edgeIsectTs, bulge));
-        }
-        
-        const cv0 = combFace.vertices[0];
-        const cv1 = combFace.vertices[1];
-        const commonI = (cv0.i === cv1.i || cv0.i === cv1.j) ? cv0.i :
-                        (cv0.j === cv1.i || cv0.j === cv1.j) ? cv0.j : -1;
-        if (commonI === -1) {
-            throw new Error("combFaceToPolygonSoup: CORNER_TYPE faces with mid vertices need first two vertices on adjacent edges");
-        }
-        
-        const opposite = complement([cv0.i, cv0.j, cv1.i, cv1.j])[0];
-        const pos0 = interpolateCombVertex(cv0, tetPositions, edgeIsectTs, bulge);
-        const pos1 = interpolateCombVertex(cv1, tetPositions, edgeIsectTs, bulge);
-        const edgeMid = pos0.add(pos1).scale(0.5);
-        const otherEdgeMid = tetPositions[opposite].add(tetPositions[commonI]).scale(0.5);
-        const steinerPos = edgeMid.scale(1 - bulge).add(otherEdgeMid.scale(bulge));
-        
-        positions.splice(1, 0, steinerPos);
-        const newPolySize = positions.length;
-        for (let i = 2; i < newPolySize; i++) {
-            polygons.push([1, i, (i + 1) % newPolySize]);
+    } else if (combFace.type === CombFaceType.INTERIOR_CORNER_TYPE) {
+        // The around-the-corner vertex is threaded in at index 1, so the corner
+        // triangle and the interior region share one polygon. Without mid vertices
+        // it fans from index 0; with mid vertices a bulge steiner (between the
+        // midpoint of vertices 0 and 2 and the opposite-edge midpoint) becomes the
+        // fan center.
+        for (const cv of combFace.vertices) positions.push(interpolateCombVertex(cv, tetPositions, edgeIsectTs, bulge));
+        const n = positions.length;
+        if (!midScoopVertices) {
+            for (let i = 1; i < n - 1; i++) polygons.push([0, i, i + 1]);
+        } else {
+            const cv0 = combFace.vertices[0];
+            const cv2 = combFace.vertices[2];
+            const commonI = (cv0.i === cv2.i || cv0.i === cv2.j) ? cv0.i :
+                            (cv0.j === cv2.i || cv0.j === cv2.j) ? cv0.j : -1;
+            if (commonI === -1) {
+                throw new Error("combFaceToPolygonSoup: INTERIOR_CORNER_TYPE first and third vertices must share an edge endpoint");
+            }
+            const l = complement([cv0.i, cv0.j, cv2.i, cv2.j])[0];
+            const midPos = positions[0].add(positions[2]).scale(0.5);
+            const otherEdgeMid = tetPositions[l].add(tetPositions[commonI]).scale(0.5);
+            const steinerPos = midPos.scale(1 - bulge).add(otherEdgeMid.scale(bulge));
+            positions.push(steinerPos);
+            for (let i = 0; i < n; i++) polygons.push([n, i, (i + 1) % n]);
         }
     } else if (
         combFace.type === CombFaceType.SMEARED_QUAD ||
         combFace.type === CombFaceType.INTERIOR_HEXAGON ||
-        combFace.type === CombFaceType.INTERIOR_CORNER_TYPE ||
-        combFace.type === CombFaceType.TUNNEL_QUAD ||
-        combFace.type === CombFaceType.CORNER_TYPE_TRIANGLE
+        combFace.type === CombFaceType.TUNNEL_QUAD
     ) {
         for (const cv of combFace.vertices) positions.push(interpolateCombVertex(cv, tetPositions, edgeIsectTs, bulge));
         for (let i = 2; i < polySize; i++) polygons.push([1, i, (i + 1) % polySize]);
@@ -1880,22 +1497,9 @@ function nondiagonalScoopConstruction(tetPositions, localEdgeIsectTs, smearedCur
         }
     }
     
+    // The corner triangle at the interior vertex is now folded into the interior
+    // region polygon (INTERIOR_CORNER_TYPE) inside interiorRegionConstruction.
     interiorRegionConstruction(tetPositions, localEdgeIsectTs, smearedCurveNC, interiorVertex, outputSoup, midScoopVertices, bulge);
-    
-    if (interiorVertex !== -1) {
-        const i = interiorVertex;
-        const [j, k, l] = complement([i]);
-        const cvIJ = new CombinatorialVertex(i, j, 1, smearedCurveEdgeInts.get(i, j));
-        const cvIK = new CombinatorialVertex(i, k, 1, smearedCurveEdgeInts.get(i, k));
-        const cvIL = new CombinatorialVertex(i, l, 1, smearedCurveEdgeInts.get(i, l));
-        let cornerFace;
-        if (!midScoopVertices || smearedCurveNC.scc.get(i, j, k) === 0) cornerFace = new CombFace([cvIJ, cvIK, cvIL], CombFaceType.CORNER_TYPE_TRIANGLE);
-        else if (smearedCurveNC.scc.get(i, j, l) === 0) cornerFace = new CombFace([cvIJ, cvIL, cvIK], CombFaceType.CORNER_TYPE_TRIANGLE);
-        else if (smearedCurveNC.scc.get(i, k, l) === 0) cornerFace = new CombFace([cvIK, cvIL, cvIJ], CombFaceType.CORNER_TYPE_TRIANGLE);
-        else throw new Error("nondiagonalScoopConstruction: invalid corner curve");
-        const { polygons, positions } = combFaceToPolygonSoup(cornerFace, tetPositions, localEdgeIsectTs, midScoopVertices, bulge);
-        addLocalSoup(outputSoup, polygons, positions);
-    }
     
     if (!midScoopVertices) return;
     for (const [i, j] of ALL_TET_PAIRS) {
@@ -1944,9 +1548,12 @@ function interiorRegionConstruction(tetPositions, localEdgeIsectTs, smearedCurve
     else if (smearedCurveNC.scc.get(i, jkl[0], jkl[2]) === 0) [j, k] = [jkl[0], jkl[2]];
     else if (smearedCurveNC.scc.get(i, jkl[1], jkl[2]) === 0) [j, k] = [jkl[1], jkl[2]];
     else throw new Error("interiorRegionConstruction: invalid corner curve");
+    const l = 6 - i - j - k;
     
+    // cv_il threads around the corner so the corner triangle is part of this polygon.
     const vertices = [
         new CombinatorialVertex(i, j, 1, smearedCurveNC.edgeInts.get(i, j), k),
+        new CombinatorialVertex(i, l, 1, smearedCurveNC.edgeInts.get(i, l), j),
         new CombinatorialVertex(i, k, 1, smearedCurveNC.edgeInts.get(i, k), j),
         new CombinatorialVertex(k, j, smearedCurveNC.scc.get(k, j, i), smearedCurveNC.edgeInts.get(k, j), i)
     ];
@@ -1978,6 +1585,9 @@ function normalSurfaceConstruction(tetPositions, normalEdgeIsectTs, outputSoup) 
         if (d1 === d2) octagonConstruction(tetPositions, normalEdgeIsectTs, NC, outputSoup);
         else spiralConstruction(tetPositions, normalEdgeIsectTs, NC, outputSoup);
     } else {
+        // Recursion with no_corner_recursion always on: corner triangles are built
+        // here (at the top of each level) and excluded from the subdivision below.
+        cornerConstruction(tetPositions, normalEdgeIsectTs, NC, outputSoup);
         recursiveConstruction(tetPositions, normalEdgeIsectTs, NC, outputSoup);
     }
 }
@@ -2063,28 +1673,93 @@ function spiralConstruction(tetPositions, edgeIsectTs, NC, outputSoup) {
     addLocalSoup(outputSoup, polygons, positions);
 }
 
+function generateUniformIsectTsSingleEdge(edgeInt, tMax) {
+    const ts = [];
+    for (let i = 0; i < edgeInt; i++) ts.push((i + 1) * tMax / (edgeInt + 1));
+    return ts;
+}
+
+// Möller-Trumbore segment/triangle intersection; mirrors segment_triangle_intersection in common/utils.cpp.
+function segmentTriangleIntersection(p0, p1, a, b, c) {
+    const EPS = 1e-12;
+    const dir = p1.sub(p0);
+    const edge1 = b.sub(a);
+    const edge2 = c.sub(a);
+    const pvec = dir.cross(edge2);
+    const det = edge1.dot(pvec);
+    if (Math.abs(det) < EPS) return { hit: false, t: 0 };
+    const invDet = 1.0 / det;
+    const tvec = p0.sub(a);
+    const u = tvec.dot(pvec) * invDet;
+    if (u < -EPS || u > 1.0 + EPS) return { hit: false, t: 0 };
+    const qvec = tvec.cross(edge1);
+    const v = dir.dot(qvec) * invDet;
+    if (v < -EPS || u + v > 1.0 + EPS) return { hit: false, t: 0 };
+    const tRay = edge2.dot(qvec) * invDet;
+    if (dir.norm2() <= EPS) return { hit: false, t: 0 };
+    if (tRay < -EPS || tRay > 1.0 + EPS) return { hit: false, t: 0 };
+    return { hit: true, t: Math.max(0.0, Math.min(1.0, tRay)) };
+}
+
+// Recursion center = centroid of the 12 first non-corner edge points; interior
+// subdivision t-values are clamped against the four corner triangles so the
+// synthetic interior intersections don't overshoot into the corner regions.
+function computeRecursionCenterAndIsectTs(tetPositions, normalEdgeIsectTs, NC) {
+    const firstNonCorner = (i, j) => new CombinatorialVertex(i, j, NC.cc.get(i) + 1, NC.edgeInts.get(i, j));
+    const p01 = interpolateCombVertex(firstNonCorner(0, 1), tetPositions, normalEdgeIsectTs, -1.0);
+    const p10 = interpolateCombVertex(firstNonCorner(1, 0), tetPositions, normalEdgeIsectTs, -1.0);
+    const p02 = interpolateCombVertex(firstNonCorner(0, 2), tetPositions, normalEdgeIsectTs, -1.0);
+    const p20 = interpolateCombVertex(firstNonCorner(2, 0), tetPositions, normalEdgeIsectTs, -1.0);
+    const p03 = interpolateCombVertex(firstNonCorner(0, 3), tetPositions, normalEdgeIsectTs, -1.0);
+    const p30 = interpolateCombVertex(firstNonCorner(3, 0), tetPositions, normalEdgeIsectTs, -1.0);
+    const p12 = interpolateCombVertex(firstNonCorner(1, 2), tetPositions, normalEdgeIsectTs, -1.0);
+    const p21 = interpolateCombVertex(firstNonCorner(2, 1), tetPositions, normalEdgeIsectTs, -1.0);
+    const p13 = interpolateCombVertex(firstNonCorner(1, 3), tetPositions, normalEdgeIsectTs, -1.0);
+    const p31 = interpolateCombVertex(firstNonCorner(3, 1), tetPositions, normalEdgeIsectTs, -1.0);
+    const p23 = interpolateCombVertex(firstNonCorner(2, 3), tetPositions, normalEdgeIsectTs, -1.0);
+    const p32 = interpolateCombVertex(firstNonCorner(3, 2), tetPositions, normalEdgeIsectTs, -1.0);
+    const subdCenter = p01.add(p10).add(p02).add(p20).add(p03).add(p30)
+        .add(p12).add(p21).add(p13).add(p31).add(p23).add(p32).scale(1 / 12);
+    const h0 = segmentTriangleIntersection(subdCenter, tetPositions[0], p01, p02, p03);
+    const h1 = segmentTriangleIntersection(subdCenter, tetPositions[1], p10, p12, p13);
+    const h2 = segmentTriangleIntersection(subdCenter, tetPositions[2], p20, p21, p23);
+    const h3 = segmentTriangleIntersection(subdCenter, tetPositions[3], p30, p31, p32);
+    let limits = [h0.t, h1.t, h2.t, h3.t];
+    if (!h0.hit || !h1.hit || !h2.hit || !h3.hit) {
+        // Fallback to greedy recursion intersections (full edge length).
+        limits = [1.0, 1.0, 1.0, 1.0];
+    }
+    return { center: subdCenter, limits };
+}
+
 function recursiveConstruction(tetPositions, edgeIsectTs, NC, outputSoup) {
     let [d1, d2] = getD1D2(NC);
     if (d1 < d2) [d1, d2] = [d2, d1];
     const interiorEdgeInts = [0, 0, 0, 0];
     const b1 = 0;
-    interiorEdgeInts[b1] = d1 - d2 + NC.cc.get(b1);
+    // no_corner_recursion: interior edge counts omit the corner cuts.
+    interiorEdgeInts[b1] = d1 - d2;
     for (const other of [1, 2, 3]) {
-        if (NC.dc.get(b1, other) === 0) interiorEdgeInts[other] = 2 * d2 + NC.cc.get(other);
-        else if (NC.dc.get(b1, other) === d1) interiorEdgeInts[other] = d1 + NC.cc.get(other);
-        else if (NC.dc.get(b1, other) === d2) interiorEdgeInts[other] = d2 + NC.cc.get(other);
+        if (NC.dc.get(b1, other) === 0) interiorEdgeInts[other] = 2 * d2;
+        else if (NC.dc.get(b1, other) === d1) interiorEdgeInts[other] = d1;
+        else if (NC.dc.get(b1, other) === d2) interiorEdgeInts[other] = d2;
         else throw new Error("recursiveConstruction: unexpected diagonal value");
     }
-    const newVertex = tetPositions[0].add(tetPositions[1]).add(tetPositions[2]).add(tetPositions[3]).scale(0.25);
+    const { center, limits } = computeRecursionCenterAndIsectTs(tetPositions, edgeIsectTs, NC);
     for (const [i, j, k] of ALL_TET_TRIPLETS) {
-        const childPositions = [newVertex, tetPositions[i], tetPositions[j], tetPositions[k]];
+        const childPositions = [center, tetPositions[i], tetPositions[j], tetPositions[k]];
         const childTs = [[], [], [], [], [], []];
-        childTs[0] = Array.from({ length: interiorEdgeInts[i] }, (_, idx) => (idx + 1) / (interiorEdgeInts[i] + 1));
-        childTs[1] = Array.from({ length: interiorEdgeInts[j] }, (_, idx) => (idx + 1) / (interiorEdgeInts[j] + 1));
-        childTs[2] = Array.from({ length: interiorEdgeInts[k] }, (_, idx) => (idx + 1) / (interiorEdgeInts[k] + 1));
-        childTs[3] = edgeIsectTs[edgePairToIndex(i, j)];
-        childTs[4] = edgeIsectTs[edgePairToIndex(i, k)];
-        childTs[5] = edgeIsectTs[edgePairToIndex(j, k)];
+        childTs[0] = generateUniformIsectTsSingleEdge(interiorEdgeInts[i], limits[i]);
+        childTs[1] = generateUniformIsectTsSingleEdge(interiorEdgeInts[j], limits[j]);
+        childTs[2] = generateUniformIsectTsSingleEdge(interiorEdgeInts[k], limits[k]);
+        // Outer-edge t-values are sliced to drop the corner intersections at both
+        // ends (first cc[i], last cc[j]) since corners were built before recursing.
+        const tsIJ = edgeIsectTs[edgePairToIndex(i, j)];
+        const tsIK = edgeIsectTs[edgePairToIndex(i, k)];
+        const tsJK = edgeIsectTs[edgePairToIndex(j, k)];
+        childTs[3] = tsIJ.slice(NC.cc.get(i), tsIJ.length - NC.cc.get(j));
+        childTs[4] = tsIK.slice(NC.cc.get(i), tsIK.length - NC.cc.get(k));
+        childTs[5] = tsJK.slice(NC.cc.get(j), tsJK.length - NC.cc.get(k));
         normalSurfaceConstruction(childPositions, childTs, outputSoup);
     }
 }
@@ -2114,6 +1789,30 @@ function subgridSurface(tetPositions, edgeIsectTs, openCurves, scoopCurves, nonN
     return outputSoup;
 }
 
+// Greedy construction (mirrors subgrid_greedy in primal_reconstruction.cpp):
+// fan every normal and scoop boundary curve directly. A 3-vertex curve becomes a
+// TRIANGLE, otherwise a SPIRAL fanned from its centroid. Open curves are discarded.
+function subgridGreedy(tetPositions, edgeIsectTs, scoopCurves, normalCurves, midScoopVertices, bulge) {
+    const outputSoup = { faces: [], vertices: [] };
+    const embedGreedy = (curve) => {
+        const face = new CombFace(
+            curve.vertices.map(cv => cv.clone()),
+            curve.vertices.length === 3 ? CombFaceType.TRIANGLE : CombFaceType.SPIRAL
+        );
+        const { polygons, positions } = combFaceToPolygonSoup(face, tetPositions, edgeIsectTs, false, bulge);
+        addLocalSoup(outputSoup, polygons, positions);
+    };
+    for (const curve of normalCurves) embedGreedy(curve);
+    for (let curve of scoopCurves) {
+        if (midScoopVertices) {
+            // add_mid_scoop_vertices_spiral: insert an on-face steiner in each same-edge segment.
+            curve = addMidScoopVertices(new CombFace(curve.vertices.map(cv => cv.clone()), CombFaceType.SPIRAL), null);
+        }
+        embedGreedy(curve);
+    }
+    return outputSoup;
+}
+
 // ============================================================================
 // MAIN ALGORITHM: NORMAL SURFACE FROM SINGLE TET EDGE INTS
 // ============================================================================
@@ -2124,21 +1823,31 @@ function normalSurfaceFromSingleTetEdgeInts(edgeInts, tetPositions, options = {}
     const includeScoopCurves = options.includeScoopCurves !== false;
     const includeNormalCurves = options.includeNormalCurves !== false;
     const scoopCurveFilter = options.scoopCurveFilter || (() => true);
+    const greedy = options.greedy !== undefined ? options.greedy : greedyConstruction;
     const edgeIsectTs = generateUniformIsectTs(edgeInts);
     const edgeIntersectionCounts = edgeInts.toArray ? edgeInts.toArray() : ALL_TET_PAIRS.map(([i, j]) => edgeInts.get(i, j));
     const { openCurves, scoopCurves, normalCurves, nonNormalEdgeOccupations } =
         boundaryCombCurves([0, 1, 2, 3], edgeIntersectionCounts);
     const activeScoopCurves = scoopCurves.filter(scoopCurveFilter);
-    const outputSoup = subgridSurface(
-        tetPositions,
-        edgeIsectTs,
-        openCurves,
-        activeScoopCurves,
-        nonNormalEdgeOccupations,
-        scoopMidVertices,
-        scoopMidVertexBulge,
-        { includeScoopSurface, includeNormalSurface }
-    );
+    const outputSoup = greedy
+        ? subgridGreedy(
+            tetPositions,
+            edgeIsectTs,
+            includeScoopSurface ? activeScoopCurves : [],
+            includeNormalSurface ? normalCurves : [],
+            scoopMidVertices,
+            scoopMidVertexBulge
+        )
+        : subgridSurface(
+            tetPositions,
+            edgeIsectTs,
+            openCurves,
+            activeScoopCurves,
+            nonNormalEdgeOccupations,
+            scoopMidVertices,
+            scoopMidVertexBulge,
+            { includeScoopSurface, includeNormalSurface }
+        );
     
     const boundaryCurveBulge = scoopMidVertices ? scoopMidVertexBulge : 0.0;
     const curveDataItems = [];
@@ -2164,8 +1873,6 @@ function normalSurfaceFromSingleTetEdgeInts(edgeInts, tetPositions, options = {}
         curvePositions: normalCurveData.positions,
         curveSegmentKinds: normalCurveData.segmentKinds,
         interpPoints: normalCurveData.edgePoints,
-        oddFanPolygons: [],
-        oddFanPositions: [],
         oddSegs: openCurveData.segments,
         oddPositions: openCurveData.positions,
         boundaryCurveStats: {
@@ -2202,6 +1909,7 @@ let webglSurfaceOpacity = 1.0;  // Stored WebGL opacity
 let svgSurfaceOpacity = 0.85;   // Stored SVG opacity
 let showLabels = false;
 let showWireframe = true;
+let showBoundaryCurves = true;
 let showEdgeCoords = false;
 let autoRotate = false;
 let rotateSpeed = 30; // degrees per second
@@ -2212,7 +1920,6 @@ const TET_EDGE_COLOR = 0x444466;
 const SURFACE_COLOR = 0x2d89ef;
 const CURVE_COLOR = 0xff3355;
 const POINT_COLOR = 0xffcc00;
-const ODD_SURFACE_COLOR = 0x44aa88;
 const ODD_CURVE_COLOR = 0x88ddaa;
 
 const EDGE_RADIUS = 0.006;
@@ -2532,41 +2239,6 @@ function updateVisualization(result) {
         wireframeGroup.visible = showWireframe;
     }
     
-    // Build odd fans with flat shading
-    if (result.oddFanPolygons.length > 0) {
-        // For flat shading, we need non-indexed geometry
-        const positions = [];
-        for (const f of result.oddFanPolygons) {
-            const p0 = result.oddFanPositions[f[0]];
-            const p1 = result.oddFanPositions[f[1]];
-            const p2 = result.oddFanPositions[f[2]];
-            positions.push(p0.x, p0.y, p0.z);
-            positions.push(p1.x, p1.y, p1.z);
-            positions.push(p2.x, p2.y, p2.z);
-        }
-        
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-        geometry.computeVertexNormals();
-        
-        const isOpaque = surfaceOpacity >= 1.0;
-        const material = new THREE.MeshStandardMaterial({
-            color: ODD_SURFACE_COLOR,
-            side: THREE.DoubleSide,
-            roughness: 0.6,
-            metalness: 0.1,
-            flatShading: true,
-            transparent: !isOpaque,
-            opacity: surfaceOpacity,
-            depthWrite: isOpaque  // Normal depth writes when opaque
-        });
-        const mesh = new THREE.Mesh(geometry, material);
-        if (!isOpaque) mesh.renderOrder = 1;
-
-        // Don't show odd fans, because these don't correspond to any kind of polygons we use in practice
-        //oddGroup.add(mesh);
-    }
-    
     // Build curves as tubes
     for (const seg of result.curveSegments) {
         const p1 = result.curvePositions[seg[0]];
@@ -2633,20 +2305,6 @@ function exportOBJ(result) {
             obj += `f ${f[0] + vertexOffset + 1} ${f[1] + vertexOffset + 1} ${f[2] + vertexOffset + 1}\n`;
         }
         vertexOffset += result.nsVertexPositions.length;
-        obj += "\n";
-    }
-    
-    // Odd fans group
-    if (result.oddFanPolygons.length > 0) {
-        obj += "g odd_fans\n";
-        obj += "usemtl odd_material\n";
-        for (const pos of result.oddFanPositions) {
-            obj += `v ${pos.x.toFixed(8)} ${pos.y.toFixed(8)} ${pos.z.toFixed(8)}\n`;
-        }
-        for (const f of result.oddFanPolygons) {
-            obj += `f ${f[0] + vertexOffset + 1} ${f[1] + vertexOffset + 1} ${f[2] + vertexOffset + 1}\n`;
-        }
-        vertexOffset += result.oddFanPositions.length;
         obj += "\n";
     }
     
@@ -3281,6 +2939,7 @@ function exportSVG(result, options = {}) {
     const cameraToUse = options.camera || camera;
     const surfaceOpacityToUse = options.svgOpacity !== undefined ? options.svgOpacity : svgSurfaceOpacity;
     const drawWireframe = options.drawWireframe !== undefined ? options.drawWireframe : showWireframe;
+    const drawBoundaryCurves = options.drawBoundaryCurves !== undefined ? options.drawBoundaryCurves : showBoundaryCurves;
     const drawLabels = options.drawLabels !== undefined ? options.drawLabels : showLabels;
     const drawEdgeCoords = options.drawEdgeCoords !== undefined ? options.drawEdgeCoords : showEdgeCoords;
     
@@ -3744,7 +3403,7 @@ function exportSVG(result, options = {}) {
     
     // ===== STEP 2b: Collect normal curve edges on back-facing tet faces =====
     const backfacingCurveEdges = [];
-    for (let segIdx = 0; segIdx < result.curveSegments.length; segIdx++) {
+    if (drawBoundaryCurves) for (let segIdx = 0; segIdx < result.curveSegments.length; segIdx++) {
         const faceIdx = curveSegmentOnFace[segIdx];
         if (faceIdx >= 0 && tetFaceBackFacing[faceIdx]) {
             const seg = result.curveSegments[segIdx];
@@ -3766,7 +3425,7 @@ function exportSVG(result, options = {}) {
     
     // ===== STEP 2c: Collect odd curve edges on back-facing tet faces =====
     const backfacingOddEdges = [];
-    for (let segIdx = 0; segIdx < result.oddSegs.length; segIdx++) {
+    if (drawBoundaryCurves) for (let segIdx = 0; segIdx < result.oddSegs.length; segIdx++) {
         const faceIdx = oddSegmentOnFace[segIdx];
         if (faceIdx >= 0 && tetFaceBackFacing[faceIdx]) {
             const seg = result.oddSegs[segIdx];
@@ -4069,7 +3728,7 @@ function exportSVG(result, options = {}) {
     
     
     // ==================== 8. REMAINING NORMAL CURVE EDGES ====================
-    for (let segIdx = 0; segIdx < result.curveSegments.length; segIdx++) {
+    if (drawBoundaryCurves) for (let segIdx = 0; segIdx < result.curveSegments.length; segIdx++) {
         if (!drawnCurveSegs[segIdx]) {
             const seg = result.curveSegments[segIdx];
             const p0 = projectedCurveVerts[seg[0]];
@@ -4085,7 +3744,7 @@ function exportSVG(result, options = {}) {
     }
     
     // ==================== 8b. REMAINING ODD CURVE EDGES (dashed gray) ====================
-    for (let segIdx = 0; segIdx < result.oddSegs.length; segIdx++) {
+    if (drawBoundaryCurves) for (let segIdx = 0; segIdx < result.oddSegs.length; segIdx++) {
         if (!drawnOddSegs[segIdx]) {
             const seg = result.oddSegs[segIdx];
             const p0 = projectedOddVerts[seg[0]];
@@ -4607,6 +4266,7 @@ let currentCornerCuts = [0, 0, 0, 0];
 let currentDiagonalCuts = [2, 1, 0]; // dc[01], dc[02], dc[03]
 let scoopMidVertices = false;
 let scoopMidVertexBulge = 0.05;
+let greedyConstruction = false;
 let lastResult = null;
 let updatingFromCornerDiag = false;
 let updatingFromEdge = false;
@@ -4638,6 +4298,7 @@ function exportSVGFast(result, options = {}) {
     const multicolorEnabled = options.multicolorEnabled || false;
     const surfaceOpacityToUse = options.svgOpacity !== undefined ? options.svgOpacity : svgSurfaceOpacity;
     const drawWireframe = options.drawWireframe !== undefined ? options.drawWireframe : showWireframe;
+    const drawBoundaryCurvesFlag = options.drawBoundaryCurves !== undefined ? options.drawBoundaryCurves : showBoundaryCurves;
     const drawLabelsFlag = options.drawLabels !== undefined ? options.drawLabels : showLabels;
     
     // Use cached component data
@@ -4793,7 +4454,7 @@ function exportSVGFast(result, options = {}) {
     }
     
     // 5. Draw curves
-    for (let segIdx = 0; segIdx < result.curveSegments.length; segIdx++) {
+    if (drawBoundaryCurvesFlag) for (let segIdx = 0; segIdx < result.curveSegments.length; segIdx++) {
         const seg = result.curveSegments[segIdx];
         const p0 = projectedCurveVerts[seg[0]], p1 = projectedCurveVerts[seg[1]];
         const compColor = getCurveColor(segIdx);
@@ -4802,7 +4463,7 @@ function exportSVGFast(result, options = {}) {
     
     // 6. Draw odd curves (dashed)
     const oddGray = '#808080';
-    for (const seg of result.oddSegs) {
+    if (drawBoundaryCurvesFlag) for (const seg of result.oddSegs) {
         const p0 = projectedOddVerts[seg[0]], p1 = projectedOddVerts[seg[1]];
         svgElements.push(`<line x1="${p0.x.toFixed(1)}" y1="${p0.y.toFixed(1)}" x2="${p1.x.toFixed(1)}" y2="${p1.y.toFixed(1)}" stroke="${oddGray}" stroke-width="${SVG_CURVE_WIDTH}" stroke-dasharray="2,2"/>`);
     }
@@ -4882,12 +4543,13 @@ function updateLiveSVG() {
     const multicolorEnabled = document.getElementById('multicolor-checkbox').checked;
     
     // Use full export for correct back-to-front ordering
-    const svgContent = exportSVG(lastResult, { 
+    const svgContent = exportSVG(lastResult, {
         returnContent: true,
         camera: camera,
         multicolorEnabled: multicolorEnabled,
         svgOpacity: svgSurfaceOpacity,
         drawWireframe: showWireframe,
+        drawBoundaryCurves: showBoundaryCurves,
         drawLabels: showLabels,
         drawEdgeCoords: showEdgeCoords
     });
@@ -5148,6 +4810,16 @@ function initUI() {
             requestSVGUpdate();
         }
     });
+
+    const showBoundaryCurvesCheckbox = document.getElementById('show-boundary-curves');
+    showBoundaryCurvesCheckbox.addEventListener('change', () => {
+        showBoundaryCurves = showBoundaryCurvesCheckbox.checked;
+        curveGroup.visible = showBoundaryCurves;
+        oddGroup.visible = showBoundaryCurves;
+        if (currentRendererMode === 'svg') {
+            requestSVGUpdate();
+        }
+    });
     
     // Show labels checkbox
     const showLabelsCheckbox = document.getElementById('show-labels');
@@ -5178,6 +4850,13 @@ function initUI() {
     scoopMidVerticesCheckbox.checked = scoopMidVertices;
     scoopMidVerticesCheckbox.addEventListener('change', () => {
         scoopMidVertices = scoopMidVerticesCheckbox.checked;
+        rebuild();
+    });
+    
+    const greedyConstructionCheckbox = document.getElementById('greedy-construction');
+    greedyConstructionCheckbox.checked = greedyConstruction;
+    greedyConstructionCheckbox.addEventListener('change', () => {
+        greedyConstruction = greedyConstructionCheckbox.checked;
         rebuild();
     });
     
