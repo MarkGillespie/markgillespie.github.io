@@ -434,6 +434,7 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		img_big_style = project_data.find('img_large').find('style').text if project_data.find('img_large').find('style') is not None else ""
 		img_big_str = f'<img src="{img_big_path}" width="{w}" height="{h}" style="{img_big_style}">'
 		title_str = project_data.find('title').text
+		project_page_template = minify(project_page_template, remove_comments=True, reduce_empty_attributes=True) # minify before bibtex injection
 		project_page = (project_page_template.replace('$NAVBAR', navbar_str_nest)
 		                                     .replace('$YEAR', year_str)
 		                                     .replace('$VENUE', venue_str)
@@ -452,7 +453,6 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 		                                     .replace('$FAVICON',  project_favicon_str)
 		                                     .replace('$TITLE', title_str)
 						)
-		project_page = minify(project_page, remove_comments=True, reduce_empty_attributes=True)
 		project_path = f'../Research/{project_folder}/index.html'
 		Path(project_path).parent.mkdir(parents=True, exist_ok=True) # ensure path exists
 		with open(project_path, 'w') as f:
