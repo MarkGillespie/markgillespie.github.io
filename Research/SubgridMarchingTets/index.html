@@ -68,6 +68,15 @@ Beyond standard contouring, our method can be used to convert polygon soup into 
             </div>
             </div>
 </div>
+<div class="section_panel bibliography centered_content gap">
+
+<div class="section_header">Errata</div>
+<div class="section_text">
+                <div style="text-align: left">
+                Chris Wojtan pointed us to prior work in the fluid simulation literature which tackles a similar problem: <a href="https://matthias-research.github.io/pages/publications/surfaceTracking.pdf">Fast and Robust Tracking of Fluid Surfaces</a> by Matthias Müller (2009) and <a href="https://visualcomputing.ist.ac.at/publications/2010/PITCTFF/">Physics-Inspired Topology Changes for Thin Fluid Features</a> by Chris Wojtan, Nils Thuerey, Markus Gross, and Greg Turk (2010) both proposed generalizations of marching tets/cubes to support certain thin features which often appear in the context of fluid simulation. The latter uses a convex hull to fill in each cell, allowing it to reconstruct surfaces with up to 2 sheets per cell. Thus, one can think of these algorithms as living on a continuum—marching tets allows up to 1 intersection per edge, this reconstruction allows up to 2 intersections per edge, and our general formulation extends further to allow arbitrary intersection counts per edge.
+                </div>
+            </div>
+</div>
 <div class="section_panel bibliography  bibEntry">
 
 <div class="section_header">Bibtex</div>
