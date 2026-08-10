@@ -1,0 +1,13 @@
+<course_data>
+<courses>
+<course>
+	<number>CS 4600</number>
+	<name>Introduction to Computer Graphics</name>
+	<semester>Fall 2026</semester>
+	<url>https://graphics.cs.utah.edu/courses/cs4600</url>
+</course>
+</courses>
+<template>
+	<li><span class="when">$SEMESTER</span><a href="$URL">$NUMBER: $NAME</a></li>
+</template>
+</course_data>

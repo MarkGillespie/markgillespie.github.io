@@ -186,11 +186,12 @@ def parse_xml(filepath):
 	with open(filepath) as f:
 		return ET.fromstring(magic + f.read())
 
-news_data = parse_xml('news.xml')
-misc_data = parse_xml('misc.xml')
-navb_data = parse_xml('navbar.xml')
-talk_data = parse_xml('talks.xml')
-proj_data = parse_xml('research_projects.xml')
+news_data   = parse_xml('news.xml')
+misc_data   = parse_xml('misc.xml')
+navb_data   = parse_xml('navbar.xml')
+talk_data   = parse_xml('talks.xml')
+course_data = parse_xml('courses.xml')
+proj_data   = parse_xml('research_projects.xml')
 
 # get contents of xml element as a text string
 # https://stackoverflow.com/a/380717
@@ -248,6 +249,16 @@ for item in news_data.find('extra_items'):
 	what = xml_child_string(item.find('what'))
 	news_str += f'<li><span class="when">{when}</span><span class="what">{what}</span></li>\n'
 news_str += "</div><summary></summary></details></ul>"
+
+# == $COURSES
+course_str = ""
+course_template = xml_child_string(course_data.find('template'))
+for course in course_data.find('courses'):
+	course_str += (course_template.replace('$NAME',  xml_child_string(course.find('name')))
+		                          .replace('$NUMBER', xml_child_string(course.find('number')))
+		                          .replace('$SEMESTER', xml_child_string(course.find('semester')))
+		                          .replace('$URL', xml_child_string(course.find('url')))
+                  )
 
 # == $NAVBAR
 navbar_str_home = '<div class="navbar"><div class="navbar_buttons">\n'
@@ -467,20 +478,22 @@ for file in os.listdir(os.fsencode("ResearchProjects")):
 index_template = re.sub(r"<!--.*?-->", "", index_template, flags=re.DOTALL) # strip comments
 index_template = expand_inline_images(index_template, '..')
 index_template = minify(index_template, remove_comments=True, reduce_empty_attributes=True)
-index_text = (index_template.replace('$DATE',   date_str)
-                            .replace('$YEAR',   year_str)
-                            .replace('$NEWS',   news_str)
-                            .replace('$MISC',   misc_str)
-                            .replace('$TALKS',  talk_str)
+index_text = (index_template.replace('$DATE',           date_str)
+                            .replace('$YEAR',           year_str)
+                            .replace('$NEWS',           news_str)
+                            .replace('$COURSES',        course_str)
+                            .replace('$MISC',           misc_str)
+                            .replace('$TALKS',          talk_str)
                             .replace('$RESEARCH_LIST',  research_list_str)
-                            .replace('$NAVBAR', navbar_str_home)
+                            .replace('$NAVBAR',         navbar_str_home)
                             .replace('$BACKGROUND_SVG', background_str)
-                            .replace('$EMAIL',  email_str)
-                            .replace('$GMAIL',  gmail_str)
-                            .replace('$NBSP',  nbsp_str)
-                            .replace('$MAIN_CSS',  main_css_str)
-                            .replace('$FAVICON',  main_favicon_str)
+                            .replace('$EMAIL',          email_str)
+                            .replace('$GMAIL',          gmail_str)
+                            .replace('$NBSP',           nbsp_str)
+                            .replace('$MAIN_CSS',       main_css_str)
+                            .replace('$FAVICON',        main_favicon_str)
                             )
+
 with open('../index.html', 'w') as f:
 	f.write(index_text)
 

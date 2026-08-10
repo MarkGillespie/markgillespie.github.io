@@ -136,19 +136,19 @@
         margin-top: 1em !important;
     }
 
-    #{$parent} .section_text .news {
+    #{$parent} .section_text .news, #{$parent} .section_text .teaching {
         position: relative; /* needed to position "...more" label later */
         padding-bottom: .5em;
         font-size: 14px;
     }
 
-    #{$parent} .section_text .news h4 {
+    #{$parent} .section_text .news h4, #{$parent} .section_text .teaching h4 {
         font-weight: 600;
         font-size: 14px;
         font-variant-caps: small-caps;
     }
 
-    #{$parent} .section_text .news ul, #{$parent} .section_text .news ul div {
+    #{$parent} .section_text .news ul, #{$parent} .section_text .news ul div, #{$parent} .section_text .teaching ul, #{$parent} .section_text .teaching ul div {
         margin: 0;
         padding: 0;
         display: flex; /* displaying with flex allows us to control the list order from css for the summary/details */
@@ -156,19 +156,19 @@
         gap: .4em;
     }
 
-    #{$parent} .section_text .news ul {    
+    #{$parent} .section_text .news ul, #{$parent} .section_text .teaching ul {    
         margin-left: 1em;
     }
 
-    #{$parent} .news li, #{$parent} .news div li, {
+    #{$parent} .news li, #{$parent} .news div li, #{$parent} .teaching li, #{$parent} .teaching div li {
         display: flex;
         flex-direction: row;
         line-height: 1.1;
         gap: .5em;
     }
 
-    #{$parent} .section_text .news .when {
-        width: 5em;
+    #{$parent} .section_text .news .when, #{$parent} .section_text .teaching .when {
+        width: 6em;
         flex: 0 0 auto;
         display: inline;
         font-style: italic;
@@ -179,7 +179,7 @@
         display: inline;
     }
 
-    #{$parent} .section_text .news summary {
+    #{$parent} .section_text .news summary, #{$parent} .section_text .teaching summary {
 /*        position:absolute;
         bottom:0px;
         left:0;*/
@@ -187,37 +187,37 @@
         list-style: none;
     }
 
-    #{$parent} .section_text .news details {
+    #{$parent} .section_text .news details, #{$parent} .section_text .teaching details {
         display: contents; /* make details participate in flexbox layout */
     }
 
-    #{$parent} .section_text .news summary:hover {
+    #{$parent} .section_text .news summary:hover, #{$parent} .section_text .teaching summary:hover {
         cursor: pointer;
     }
 
-    #{$parent} .section_text .news details summary::-webkit-details-marker {
+    #{$parent} .section_text .news details summary::-webkit-details-marker,#{$parent} .section_text .teaching details summary::-webkit-details-marker {
         display:none;
     }
 
-    #{$parent} .section_text .news details summary::before {
+    #{$parent} .section_text .news details summary::before, #{$parent} .section_text .teaching details summary::before {
         content: "... see more ...";
     }
     
-    #{$parent} .section_text .news details[open] summary::before {
+    #{$parent} .section_text .news details[open] summary::before, #{$parent} .section_text .teaching details[open] summary::before {
         content: "... see less ...";
     }
     
-    #{$parent} .section_text .news details[open] > summary {
+    #{$parent} .section_text .news details[open] > summary, #{$parent} .section_text .teaching details[open] > summary {
         order: 2;
     }
 
      /* animate details opening */
-    #{$parent} .section_text .news details > div {
+    #{$parent} .section_text .news details > div, #{$parent} .section_text .teaching details > div {
       overflow: hidden;
       max-height: 0px;
     }
     
-    #{$parent} .section_text .news details[open] > div {
+    #{$parent} .section_text .news details[open] > div, #{$parent} .section_text .teaching details[open] > div {
       max-height: 1000px;
       transition: max-height .25s ease-in;
     }

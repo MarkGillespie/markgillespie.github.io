@@ -1,6 +1,10 @@
 
 <nav_links>
     <link>
+        <href>$HOME/index.html#teaching</href>
+        <title>Teaching</title>
+    </link>
+    <link>
         <href>$HOME/index.html#research</href>
         <title>Research</title>
     </link>
