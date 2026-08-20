@@ -2,6 +2,14 @@
 <talks>
   <talk>
     <when>Aug. 2025</when>
+    <title>A Brief Introduction to Geometry Processing</title>
+    <venue_name>Kahlert School of Computing New Graduate Student Orientation</venue_name>
+    <links>
+        <link><name>pdf (10.2 mb)</name><href>Talks/MarkGillepieGraduateStudentOrientation2026.pdf</href></link>
+    </links>
+  </talk>
+  <talk>
+    <when>Aug. 2025</when>
     <title>Implicit Minimal Surfaces for Bijective Correspondences</title>
     <venue_name>Discrete Geometric Structures 2026</venue_name>
     <venue_link>https://www.geometrie.tuwien.ac.at/ig/events/dgs2026/</venue_link>
