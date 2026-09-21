@@ -2,6 +2,15 @@
 <talks>
   <talk>
     <when>Sep. 2026</when>
+    <title>A Brief Introduction to Geometry Processing</title>
+    <venue_name>CS 3020: Research Forum</venue_name>
+    <venue_link>https://utah.instructure.com/courses/1264797</venue_link>
+    <links>
+        <link><name>pdf (32 mb)</name><href>Talks/IntroductionToInGeometryProcessingCompressed.pdf</href></link>
+    </links>
+  </talk>
+  <talk>
+    <when>Sep. 2026</when>
     <title>Open Problems in Geometry Processing</title>
     <venue_name>University of Utah Graphics Seminar</venue_name>
     <venue_link>https://graphics.cs.utah.edu/courses/cs7933/fall2026/</venue_link>
