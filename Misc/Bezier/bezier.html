@@ -1,0 +1,1302 @@
+<!-- Written by Claude Opus 5.5 --->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bézier curve explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #E4D5B7;
+  --panel: #F3EBD7;
+  --ink: #231F20;
+  --muted: #66594A;
+  --line: #CDBC9A;
+  --field: #FAF5E8;
+  --grid: #E7DDC6;
+  --grid-major: #D8C9A9;
+  --axis: #5E5446;
+  --curve: #231F20;
+  --poly: #8C8273;
+  --point-fill: #FFFFFF;
+  --warm: #E0876A;
+  --on-warm: #F8F1DE;
+  --teal: #3F7677;
+  --map-zero: #F3EBD7;
+  --map-pos: #DE9A7E;
+  --map-neg: #4A7E80;
+  --contour: rgba(70, 60, 50, 0.30);
+  --cast: #3F7677;
+  --error: #A8321C;
+  --font-ui: "Libertinus Serif", "Linux Libertine O", "Linux Libertine", Georgia, "Times New Roman", serif;
+  --font-title: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-ui); font-size: 16.5px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+.bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px;
+  padding: 16px 20px 14px; max-width: 1500px; margin: 0 auto;
+}
+.bar h1 {
+  font-family: var(--font-title); font-weight: 700; font-size: 21px; letter-spacing: -0.015em;
+  margin: 0 6px 0 0; padding: 7px 20px 8px; border-radius: 999px;
+  background: var(--warm); color: var(--on-warm);
+}
+.group { display: flex; align-items: center; gap: 8px; }
+.lbl { color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--panel); }
+.seg button {
+  border: 0; background: transparent; padding: 3px 14px; cursor: pointer;
+  font-variant-numeric: tabular-nums; font-weight: 500;
+}
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--warm); color: var(--on-warm); font-weight: 600; }
+.chk { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+.chk input { accent-color: var(--teal); margin: 0; }
+select { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; }
+#tSlider { accent-color: var(--teal); width: 120px; }
+#tSlider:disabled { opacity: .4; }
+#tVal { font-variant-numeric: tabular-nums; min-width: 4.2em; }
+
+.layout {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 24px; padding: 0 20px 28px; max-width: 1500px; margin: 0 auto;
+}
+@media (max-width: 920px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.stage { position: relative; align-self: start; }
+@media (min-width: 921px) { .stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); } }
+#cv {
+  display: block; width: 100%; aspect-ratio: 1 / 1; max-height: calc(100vh - 130px);
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  touch-action: none; cursor: grab;
+}
+.zoom { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; }
+.zoom button {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+  min-width: 34px; height: 32px; padding: 0 11px; cursor: pointer;
+}
+.hint { color: var(--muted); font-size: 14.5px; margin: 8px 2px 0; }
+
+.eqs { min-width: 0; }
+.block { padding: 14px 0 16px; border-bottom: 1px solid var(--line); }
+.block:first-child { padding-top: 2px; }
+.block h2 { font-family: var(--font-title); font-size: 14px; font-weight: 700; color: var(--muted); margin: 0 0 6px; }
+.math { overflow-x: auto; overflow-y: hidden; min-height: 2.2em; font-size: 16px; padding-bottom: 2px; }
+.math .katex-display { margin: 6px 0; text-align: left; }
+.math .katex-display > .katex { text-align: left; }
+.math .katex { font-size: 1.12em; }
+.math.fallback { font-family: var(--font-code); font-size: 12.5px; white-space: pre-wrap; color: var(--muted); }
+.meta { color: var(--muted); font-size: 15px; margin: 6px 0 0; max-width: 70ch; }
+.note { color: var(--muted); font-size: 15px; min-height: 1.3em; margin: 0 0 4px; }
+.err { color: var(--error); font-size: 15px; margin: 6px 0 0; min-height: 1.2em; }
+
+.polyin { display: grid; grid-template-columns: 3.6em 1fr; align-items: center; gap: 8px; margin-top: 8px; }
+.polyin span { text-align: right; white-space: nowrap; }
+.polyin .katex { font-size: 1.12em; }
+input.code, table input {
+  font-family: var(--font-code); font-size: 13.5px;
+  background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; width: 100%;
+}
+table { border-collapse: collapse; width: 100%; max-width: 440px; }
+th { font-weight: 500; text-align: left; padding: 3px 10px 3px 0; font-family: "Times New Roman", serif; font-style: italic; font-size: 16px; }
+thead th { font-family: var(--font-ui); font-style: normal; font-size: 14px; color: var(--muted); }
+td { padding: 3px 6px 3px 0; }
+details summary { cursor: pointer; font-family: var(--font-title); font-size: 14px; font-weight: 700; color: var(--muted); }
+pre#src {
+  font-family: var(--font-code); font-size: 12px; background: var(--field); border: 1px solid var(--line);
+  border-radius: 6px; padding: 10px 12px; overflow-x: auto; white-space: pre; margin: 10px 0 0;
+}
+.titleblock { display: flex; flex-direction: column; align-items: stretch; gap: 4px; margin-right: 6px; }
+.titleblock h1 { margin: 0; }
+.titleblock a {
+  font-size: 14.5px;
+  text-align: center;              /* centers it under the pill */
+  color: var(--teal);
+  text-decoration: underline;
+  margin-top: -5px;
+}
+.titleblock a:hover { color: var(--ink); }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+</head>
+<body>
+<header class="bar">
+  <div class="titleblock">
+    <h1>Bézier curve explorer</h1>
+    <a href="rational-bezier.html">see rational Bezier</a>
+  </div>
+  <div class="group">
+    <span class="lbl" id="degLbl">Degree</span>
+    <div class="seg" role="group" aria-labelledby="degLbl" id="degBtns">
+      <button type="button" data-n="2">2</button><button type="button" data-n="3">3</button><button type="button" data-n="4">4</button><button type="button" data-n="5">5</button>
+    </div>
+  </div>
+  <label class="group"><span class="lbl">Level sets</span>
+    <select id="field">
+      <option value="off">None</option>
+      <option value="F" selected>F</option>
+      <option value="G">F / |∇F|</option>
+      <option value="D">Distance to arc</option>
+    </select>
+  </label>
+  <label class="chk"><input type="checkbox" id="optImp"> Show F(x, y) = 0</label>
+  <label class="chk"><input type="checkbox" id="optExt" checked> Extend beyond t ∈ [0, 1]</label>
+  <div class="group">
+    <label class="chk"><input type="checkbox" id="optCast"> de Casteljau at</label>
+    <input type="range" id="tSlider" min="0" max="1" step="0.01" value="0.4" disabled aria-label="Parameter t">
+    <span id="tVal">t = 0.40</span>
+  </div>
+  <label class="group"><span class="lbl">Snap to</span>
+    <select id="snap">
+      <option value="0.01" selected>0.01</option><option value="0.05">0.05</option>
+      <option value="0.1">0.1</option><option value="0.25">0.25</option>
+      <option value="0.5">0.5</option><option value="1">1</option>
+    </select>
+  </label>
+</header>
+
+<main class="layout">
+  <section class="stage" aria-label="Curve view">
+    <canvas id="cv"></canvas>
+    <div class="zoom">
+      <button type="button" id="zIn" aria-label="Zoom in">+</button>
+      <button type="button" id="zOut" aria-label="Zoom out">−</button>
+      <button type="button" id="zFit">Fit</button>
+    </div>
+    <p class="hint" id="fieldInfo"></p>
+    <p class="hint">Drag a control point to move it. Drag the background to pan, and scroll to zoom. Open circles are the endpoints, which lie on the curve.</p>
+  </section>
+
+  <section class="eqs" id="eqs" aria-label="Equations">
+    <p class="note" id="note" role="status"></p>
+    <div class="block">
+      <h2>Bernstein form</h2>
+      <div class="math" id="mBern"></div>
+    </div>
+    <div class="block">
+      <h2>Standard form</h2>
+      <div class="math" id="mPow"></div>
+      <label class="polyin"><span data-tex="x(t) =">x(t) =</span><input class="code" id="inX" spellcheck="false" autocomplete="off"></label>
+      <label class="polyin"><span data-tex="y(t) =">y(t) =</span><input class="code" id="inY" spellcheck="false" autocomplete="off"></label>
+      <p class="err" id="errPoly"></p>
+    </div>
+    <div class="block">
+      <h2>Implicit equation</h2>
+      <div class="math" id="mImp"></div>
+      <p class="meta" id="impMeta"></p>
+    </div>
+    <div class="block">
+      <h2>Control points</h2>
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">x</th><th scope="col">y</th></tr></thead>
+        <tbody id="ptsBody"></tbody>
+      </table>
+      <p class="err" id="errPts"></p>
+    </div>
+    <details class="block">
+      <summary>LaTeX and plain-text source</summary>
+      <pre id="src"></pre>
+    </details>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+
+<script>
+"use strict";
+// ==== MATH BEGIN =============================================================
+// Exact rationals over BigInt.
+const babs = a => (a < 0n ? -a : a);
+function bgcd(a, b) { a = babs(a); b = babs(b); while (b) { const r = a % b; a = b; b = r; } return a; }
+class Q {
+  constructor(n, d = 1n) {
+    if (d === 0n) throw new Error("Division by zero");
+    if (d < 0n) { n = -n; d = -d; }
+    const g = bgcd(n, d);
+    this.n = g > 1n ? n / g : n;
+    this.d = g > 1n ? d / g : d;
+  }
+  static int(k) { return new Q(BigInt(k)); }
+  add(o) { return new Q(this.n * o.d + o.n * this.d, this.d * o.d); }
+  sub(o) { return new Q(this.n * o.d - o.n * this.d, this.d * o.d); }
+  mul(o) { return new Q(this.n * o.n, this.d * o.d); }
+  div(o) { if (o.n === 0n) throw new Error("Division by zero"); return new Q(this.n * o.d, this.d * o.n); }
+  neg() { return new Q(-this.n, this.d); }
+  isZero() { return this.n === 0n; }
+  sign() { return this.n > 0n ? 1 : this.n < 0n ? -1 : 0; }
+  eq(o) { return this.n === o.n && this.d === o.d; }
+  num() { return Number(this.n) / Number(this.d); }
+}
+const Q0 = new Q(0n), Q1 = new Q(1n);
+function qFromDecimal(s) {
+  const parts = s.split(".");
+  const ip = parts[0] || "0", fp = parts[1] || "";
+  return new Q(BigInt(ip + fp), 10n ** BigInt(fp.length));
+}
+function qTex(q) {
+  if (q.d === 1n) return q.n.toString();
+  return (q.n < 0n ? "-" : "") + "\\frac{" + babs(q.n) + "}{" + q.d + "}";
+}
+function qText(q) { return q.d === 1n ? q.n.toString() : q.n + "/" + q.d; }
+function binom(n, k) {
+  if (k < 0 || k > n) return 0n;
+  let r = 1n;
+  for (let i = 1; i <= k; i++) r = r * BigInt(n - k + i) / BigInt(i);
+  return r;
+}
+function qpow(q, e) { let r = Q1; for (let i = 0; i < e; i++) r = r.mul(q); return r; }
+
+// Univariate polynomials: arrays of Q, index = power. Zero polynomial = [].
+function ptrim(p) { let k = p.length; while (k > 0 && p[k - 1].isZero()) k--; return p.slice(0, k); }
+function pdeg(p) { return ptrim(p).length - 1; }
+function padd(a, b) {
+  const n = Math.max(a.length, b.length), r = [];
+  for (let i = 0; i < n; i++) r.push((a[i] || Q0).add(b[i] || Q0));
+  return ptrim(r);
+}
+function pneg(a) { return a.map(c => c.neg()); }
+function psub(a, b) { return padd(a, pneg(b)); }
+function pscale(a, c) { return ptrim(a.map(x => x.mul(c))); }
+function pmul(a, b) {
+  if (!a.length || !b.length) return [];
+  const r = Array.from({ length: a.length + b.length - 1 }, () => Q0);
+  for (let i = 0; i < a.length; i++) {
+    if (a[i].isZero()) continue;
+    for (let j = 0; j < b.length; j++) r[i + j] = r[i + j].add(a[i].mul(b[j]));
+  }
+  return ptrim(r);
+}
+function ppow(a, e) { let r = [Q1]; for (let i = 0; i < e; i++) r = pmul(r, a); return r; }
+function pdivmod(a, b) {
+  b = ptrim(b);
+  const r = ptrim(a).slice(), db = b.length - 1, lb = b[db];
+  if (r.length - 1 < db) return [[], r];
+  const q = Array.from({ length: r.length - db }, () => Q0);
+  for (let k = r.length - 1 - db; k >= 0; k--) {
+    const c = r[k + db].div(lb);
+    q[k] = c;
+    if (!c.isZero()) for (let j = 0; j <= db; j++) r[k + j] = r[k + j].sub(c.mul(b[j]));
+  }
+  return [ptrim(q), ptrim(r.slice(0, db))];
+}
+function pevalQ(p, t) { let v = Q0; for (let i = p.length - 1; i >= 0; i--) v = v.mul(t).add(p[i]); return v; }
+
+// Basis change (one coordinate). a_k = sum_{i<=k} C(n,k) C(k,i) (-1)^{k-i} p_i ;
+// p_i = sum_{k<=i} C(i,k)/C(n,k) a_k.
+function bernToPow(p) {
+  const n = p.length - 1, a = [];
+  for (let k = 0; k <= n; k++) {
+    let s = Q0;
+    for (let i = 0; i <= k; i++) {
+      const c = binom(n, k) * binom(k, i) * ((k - i) % 2 ? -1n : 1n);
+      s = s.add(p[i].mul(new Q(c)));
+    }
+    a.push(s);
+  }
+  return a;
+}
+function powToBern(a, n) {
+  const p = [];
+  for (let i = 0; i <= n; i++) {
+    let s = Q0;
+    for (let k = 0; k <= i; k++) s = s.add((a[k] || Q0).mul(new Q(binom(i, k), binom(n, k))));
+    p.push(s);
+  }
+  return p;
+}
+function elevate(P) {
+  const n = P.length - 1, R = [];
+  for (let i = 0; i <= n + 1; i++) {
+    const w = new Q(BigInt(i), BigInt(n + 1)), v = Q1.sub(w);
+    const a = i > 0 ? P[i - 1] : { x: Q0, y: Q0 }, b = i <= n ? P[i] : { x: Q0, y: Q0 };
+    R.push({ x: w.mul(a.x).add(v.mul(b.x)), y: w.mul(a.y).add(v.mul(b.y)) });
+  }
+  return R;
+}
+function solveQ(A, b) {
+  const n = A.length, M = A.map((r, i) => [...r, b[i]]);
+  for (let c = 0; c < n; c++) {
+    let p = c; while (p < n && M[p][c].isZero()) p++;
+    if (p === n) throw new Error("Singular system");
+    [M[c], M[p]] = [M[p], M[c]];
+    for (let r = 0; r < n; r++) {
+      if (r === c || M[r][c].isZero()) continue;
+      const f = M[r][c].div(M[c][c]);
+      for (let j = c; j <= n; j++) M[r][j] = M[r][j].sub(f.mul(M[c][j]));
+    }
+  }
+  return M.map((r, i) => r[n].div(r[i]));
+}
+
+// Polynomial-in-t parser: numbers, t, + - * / ^ (or **), parentheses, implicit products.
+function parsePoly(src) {
+  src = src.trim();
+  const toks = [], re = /\s*(?:(\d+\.?\d*|\.\d+)|(t)|(\*\*|[-+*/^()]))/y;
+  let pos = 0;
+  while (pos < src.length) {
+    re.lastIndex = pos;
+    const m = re.exec(src);
+    if (!m) throw new Error('Unexpected character "' + src.slice(pos).trim()[0] + '"');
+    if (m[1] !== undefined) toks.push({ type: "num", v: qFromDecimal(m[1]), s: m[1] });
+    else if (m[2] !== undefined) toks.push({ type: "t", s: "t" });
+    else toks.push({ type: "op", v: m[3] === "**" ? "^" : m[3], s: m[3] });
+    pos = re.lastIndex;
+  }
+  if (!toks.length) throw new Error("Enter a polynomial in t");
+  let i = 0;
+  const peek = () => toks[i], next = () => toks[i++];
+  const isOp = (tk, ...ops) => tk && tk.type === "op" && ops.includes(tk.v);
+  const startsAtom = tk => tk && (tk.type === "num" || tk.type === "t" || isOp(tk, "("));
+  function expr() {
+    let v = term();
+    while (isOp(peek(), "+", "-")) { const o = next().v, w = term(); v = o === "+" ? padd(v, w) : psub(v, w); }
+    return v;
+  }
+  function term() {
+    let v = unary();
+    for (;;) {
+      const tk = peek();
+      if (isOp(tk, "*", "/")) {
+        next();
+        const w = unary();
+        if (tk.v === "*") v = pmul(v, w);
+        else {
+          if (pdeg(w) > 0) throw new Error("You can only divide by a constant");
+          if (pdeg(w) < 0) throw new Error("Division by zero");
+          v = pscale(v, Q1.div(w[0]));
+        }
+      } else if (startsAtom(tk)) v = pmul(v, power());
+      else break;
+    }
+    return v;
+  }
+  function unary() {
+    if (isOp(peek(), "+", "-")) { const o = next().v, v = unary(); return o === "-" ? pneg(v) : v; }
+    return power();
+  }
+  function power() {
+    const b = atom();
+    if (isOp(peek(), "^")) {
+      next();
+      const e = unary();
+      if (pdeg(e) > 0) throw new Error("Exponents must be constants");
+      const ev = e.length ? e[0] : Q0;
+      if (ev.d !== 1n || ev.n < 0n || ev.n > 30n) throw new Error("Exponents must be whole numbers from 0 to 30");
+      return ppow(b, Number(ev.n));
+    }
+    return b;
+  }
+  function atom() {
+    const tk = next();
+    if (!tk) throw new Error("The expression ends unexpectedly");
+    if (tk.type === "num") return ptrim([tk.v]);
+    if (tk.type === "t") return [Q0, Q1];
+    if (isOp(tk, "(")) {
+      const v = expr(), c = next();
+      if (!isOp(c, ")")) throw new Error('Missing ")"');
+      return v;
+    }
+    throw new Error('Unexpected "' + tk.s + '"');
+  }
+  const r = expr();
+  if (i < toks.length) throw new Error('Unexpected "' + toks[i].s + '"');
+  return r;
+}
+function parseConst(src) {
+  const p = parsePoly(src);
+  if (pdeg(p) > 0) throw new Error("Enter a number, not an expression in t");
+  return p.length ? p[0] : Q0;
+}
+
+// Exact determinant: clear denominators row by row, then fraction-free Bareiss elimination.
+function detQ(M) {
+  const n = M.length;
+  if (n === 0) return Q1;
+  let scale = 1n;
+  const A = M.map(row => {
+    let L = 1n;
+    for (const q of row) L = L / bgcd(L, q.d) * q.d;
+    scale *= L;
+    return row.map(q => q.n * (L / q.d));
+  });
+  let sign = 1n, prev = 1n;
+  for (let k = 0; k < n - 1; k++) {
+    if (A[k][k] === 0n) {
+      let p = -1;
+      for (let i = k + 1; i < n; i++) if (A[i][k] !== 0n) { p = i; break; }
+      if (p < 0) return Q0;
+      [A[k], A[p]] = [A[p], A[k]];
+      sign = -sign;
+    }
+    for (let i = k + 1; i < n; i++)
+      for (let j = k + 1; j < n; j++)
+        A[i][j] = (A[i][j] * A[k][k] - A[i][k] * A[k][j]) / prev;
+    prev = A[k][k];
+  }
+  return new Q(sign * A[n - 1][n - 1], scale);
+}
+// Res_t(X(t) - x0, Y(t) - y0) via the Sylvester matrix. X, Y trimmed, degree >= 1.
+function resultantAt(X, Y, x0, y0) {
+  const F = X.slice(), G = Y.slice();
+  F[0] = F[0].sub(x0); G[0] = G[0].sub(y0);
+  const m = F.length - 1, k = G.length - 1, N = m + k;
+  const M = Array.from({ length: N }, () => Array.from({ length: N }, () => Q0));
+  for (let i = 0; i < k; i++) for (let j = 0; j <= m; j++) M[i][i + j] = F[m - j];
+  for (let i = 0; i < m; i++) for (let j = 0; j <= k; j++) M[k + i][i + j] = G[k - j];
+  return detQ(M);
+}
+function interp(xs, ys) {                  // Newton divided differences -> monomial coefficients
+  const n = xs.length, c = ys.slice();
+  for (let j = 1; j < n; j++)
+    for (let i = n - 1; i >= j; i--) c[i] = c[i].sub(c[i - 1]).div(xs[i].sub(xs[i - j]));
+  let p = [c[n - 1]];
+  for (let i = n - 2; i >= 0; i--) p = padd(pmul(p, [xs[i].neg(), Q1]), [c[i]]);
+  return p;
+}
+// Implicit polynomial by tensor-product interpolation of the resultant:
+// deg_x Res <= deg Y and deg_y Res <= deg X, so (deg Y + 1)(deg X + 1) exact evaluations suffice.
+function implicitize(X, Y) {
+  const m = X.length - 1, k = Y.length - 1;
+  const xs = [], ys = [];
+  for (let i = 0; i <= k; i++) xs.push(Q.int(i));
+  for (let j = 0; j <= m; j++) ys.push(Q.int(j));
+  const rows = xs.map(x0 => interp(ys, ys.map(y0 => resultantAt(X, Y, x0, y0))));
+  const terms = [];
+  for (let b = 0; b <= m; b++) {
+    const col = interp(xs, rows.map(r => r[b] || Q0));
+    col.forEach((c, a) => { if (!c.isZero()) terms.push({ a, b, c }); });
+  }
+  return terms;
+}
+function normalizeTerms(terms) {           // primitive integer coefficients, graded-lex order, positive lead
+  let L = 1n;
+  for (const t of terms) L = L / bgcd(L, t.c.d) * t.c.d;
+  let out = terms.map(t => ({ a: t.a, b: t.b, c: t.c.n * (L / t.c.d) }));
+  let G = 0n;
+  for (const t of out) G = bgcd(G, t.c);
+  if (G > 1n) out = out.map(t => ({ a: t.a, b: t.b, c: t.c / G }));
+  out.sort((u, v) => (v.a + v.b) - (u.a + u.b) || v.a - u.a);
+  if (out.length && out[0].c < 0n) out = out.map(t => ({ a: t.a, b: t.b, c: -t.c }));
+  return out;
+}
+// Right composition factor: monic s of degree r, s(0) = 0, such that f = P(s) is possible.
+// Its coefficients are forced by the top r coefficients of f (Kozen–Landau).
+function rightComponent(f, r) {
+  const m = f.length - 1, q = m / r, lc = f[m];
+  const g = f.map(c => c.div(lc));
+  const s = Array.from({ length: r + 1 }, () => Q0);
+  s[r] = Q1;
+  for (let j = 1; j < r; j++) {
+    const idx = r - j;
+    s[idx] = Q0;
+    const cur = ppow(s, q)[m - j] || Q0;
+    s[idx] = g[m - j].sub(cur).div(Q.int(q));
+  }
+  return s;
+}
+function inTermsOf(h, s) {                 // P with h = P(s), or null
+  const res = [];
+  let cur = ptrim(h);
+  while (cur.length) {
+    const [qq, rr] = pdivmod(cur, s);
+    if (rr.length > 1) return null;
+    res.push(rr[0] || Q0);
+    cur = qq;
+  }
+  return ptrim(res);
+}
+// Reduce to a proper (generically injective) parametrization so the resultant is F^1, not F^k.
+function properParam(X, Y) {
+  let k = 1;
+  outer: for (;;) {
+    const m = Math.max(X.length, Y.length) - 1;
+    if (m < 2) break;
+    const f = X.length - 1 === m ? X : Y;
+    for (let r = 2; r <= m; r++) {
+      if (m % r) continue;
+      const s = rightComponent(f, r), PX = inTermsOf(X, s), PY = inTermsOf(Y, s);
+      if (PX && PY) { X = PX; Y = PY; k *= r; continue outer; }
+    }
+    break;
+  }
+  return { X, Y, k };
+}
+// Flux of grad F across the arc, to the left of travel:
+//   I = int_0^1 ( X'(t) F_y(B(t)) - Y'(t) F_x(B(t)) ) dt,
+// computed exactly (the integrand is a polynomial in t).
+function fluxLeft(terms, X, Y) {
+  let A = 0, B = 0;
+  for (const t of terms) { A = Math.max(A, t.a); B = Math.max(B, t.b); }
+  const XP = [[Q1]], YP = [[Q1]];
+  for (let a = 1; a <= A; a++) XP.push(pmul(XP[a - 1], X));
+  for (let b = 1; b <= B; b++) YP.push(pmul(YP[b - 1], Y));
+  let Fx = [], Fy = [];
+  for (const t of terms) {
+    const c = new Q(t.c);
+    if (t.a) Fx = padd(Fx, pscale(pmul(XP[t.a - 1], YP[t.b]), c.mul(Q.int(t.a))));
+    if (t.b) Fy = padd(Fy, pscale(pmul(XP[t.a], YP[t.b - 1]), c.mul(Q.int(t.b))));
+  }
+  const d = p => ptrim(p.slice(1).map((c, i) => c.mul(Q.int(i + 1))));
+  const integrand = psub(pmul(d(X), Fy), pmul(d(Y), Fx));
+  let I = Q0;
+  integrand.forEach((c, k) => { I = I.add(c.div(Q.int(k + 1))); });
+  return I;
+}
+// Orientation convention: F < 0 to the left of the direction of travel (P_0 -> P_n), as for a
+// signed distance that is negative inside a counterclockwise curve. Decided by the sign of the
+// flux integral, which depends continuously on the control points. If it is exactly zero, the
+// canonical sign (positive leading coefficient in graded-lex order) is kept.
+function orientTerms(terms, X, Y) {
+  const I = fluxLeft(terms, X, Y);
+  const flip = I.sign() > 0;
+  return { terms: flip ? terms.map(t => ({ a: t.a, b: t.b, c: -t.c })) : terms, flux: I.sign() };
+}
+function implicitEquation(X, Y) {
+  X = ptrim(X); Y = ptrim(Y);
+  const dx = X.length - 1, dy = Y.length - 1;
+  if (dx <= 0 && dy <= 0) return { kind: "point", x: X[0] || Q0, y: Y[0] || Q0 };
+  let terms, deg, k;
+  if (dx <= 0) { deg = 1; k = dy; terms = [{ a: 1, b: 0, c: Q1 }, { a: 0, b: 0, c: (X[0] || Q0).neg() }]; }
+  else if (dy <= 0) { deg = 1; k = dx; terms = [{ a: 0, b: 1, c: Q1 }, { a: 0, b: 0, c: (Y[0] || Q0).neg() }]; }
+  else {
+    const pp = properParam(X, Y);
+    const px = ptrim(pp.X), py = ptrim(pp.Y);
+    if (px.length <= 1) terms = [{ a: 1, b: 0, c: Q1 }, { a: 0, b: 0, c: (px[0] || Q0).neg() }];
+    else if (py.length <= 1) terms = [{ a: 0, b: 1, c: Q1 }, { a: 0, b: 0, c: (py[0] || Q0).neg() }];
+    else terms = implicitize(px, py);
+    deg = Math.max(px.length, py.length) - 1;
+    k = pp.k;
+  }
+  terms = normalizeTerms(terms.filter(t => !t.c.isZero()));
+  const o = orientTerms(terms, X, Y);          // orient with the ORIGINAL parametrization on [0, 1]
+  return { kind: "curve", deg, k, terms: o.terms, flux: o.flux };
+}
+
+// Formatting.
+function polyTex(p, v = "t") {
+  p = ptrim(p);
+  if (!p.length) return "0";
+  let s = "";
+  for (let i = p.length - 1; i >= 0; i--) {
+    const c = p[i];
+    if (c.isZero()) continue;
+    const neg = c.sign() < 0, ac = neg ? c.neg() : c;
+    const mono = i === 0 ? "" : i === 1 ? v : v + "^{" + i + "}";
+    const coef = ac.eq(Q1) && mono ? "" : qTex(ac);
+    s += (s ? (neg ? " - " : " + ") : (neg ? "-" : "")) + coef + mono;
+  }
+  return s;
+}
+function polyText(p, v = "t") {
+  p = ptrim(p);
+  if (!p.length) return "0";
+  let s = "";
+  for (let i = p.length - 1; i >= 0; i--) {
+    const c = p[i];
+    if (c.isZero()) continue;
+    const neg = c.sign() < 0, ac = neg ? c.neg() : c;
+    const mono = i === 0 ? "" : i === 1 ? v : v + "^" + i;
+    const coef = ac.eq(Q1) && mono ? "" : qText(ac) + (mono ? "*" : "");
+    s += (s ? (neg ? " - " : " + ") : (neg ? "-" : "")) + coef + mono;
+  }
+  return s;
+}
+function monoTex(a, b) { return (a === 0 ? "" : a === 1 ? "x" : "x^{" + a + "}") + (b === 0 ? "" : b === 1 ? "y" : "y^{" + b + "}"); }
+function monoText(a, b) {
+  const parts = [];
+  if (a) parts.push(a === 1 ? "x" : "x^" + a);
+  if (b) parts.push(b === 1 ? "y" : "y^" + b);
+  return parts.join("*");
+}
+function termsTex(terms, per) {
+  const lines = [];
+  let cur = "";
+  terms.forEach((t, i) => {
+    const neg = t.c < 0n, ac = neg ? -t.c : t.c, mono = monoTex(t.a, t.b);
+    const body = (ac === 1n && mono ? "" : ac.toString()) + mono;
+    if (i > 0 && i % per === 0) { lines.push(cur); cur = ""; }
+    cur += i === 0 ? (neg ? "-" : "") + body : (neg ? " - " : " + ") + body;
+  });
+  lines.push(cur);
+  return "\\begin{aligned}&" + lines.join(" \\\\ &\\quad ") + " = 0\\end{aligned}";
+}
+function termsText(terms) {
+  return terms.map((t, i) => {
+    const neg = t.c < 0n, ac = neg ? -t.c : t.c, mono = monoText(t.a, t.b);
+    const body = ac === 1n && mono ? mono : ac.toString() + (mono ? "*" + mono : "");
+    return i === 0 ? (neg ? "-" : "") + body : (neg ? " - " : " + ") + body;
+  }).join("") + " = 0";
+}
+function bernTex(P) {
+  const n = P.length - 1, per = n <= 3 ? 4 : 3;
+  const terms = P.map((p, i) => {
+    const c = binom(n, i);
+    const tp = i === 0 ? "" : i === 1 ? "t" : "t^{" + i + "}";
+    const sp = n - i === 0 ? "" : n - i === 1 ? "(1-t)" : "(1-t)^{" + (n - i) + "}";
+    return (c === 1n ? "" : c.toString()) + tp + sp + "\\begin{pmatrix}" + qTex(p.x) + "\\\\" + qTex(p.y) + "\\end{pmatrix}";
+  });
+  const lines = [];
+  for (let i = 0; i < terms.length; i += per) lines.push(terms.slice(i, i + per).join(" + "));
+  return "\\begin{aligned}B(t) &= " + lines.join(" \\\\ &\\quad + ") + "\\end{aligned}";
+}
+
+// ==== MATH END ===============================================================
+
+// Pieces for line-flowing long formulas: first piece unsigned, later pieces start with " + " / " - ".
+function termPieces(terms) {
+  return terms.map((t, i) => {
+    const neg = t.c < 0n, ac = neg ? -t.c : t.c, mono = monoTex(t.a, t.b);
+    const body = (ac === 1n && mono ? "" : ac.toString()) + mono;
+    return i === 0 ? (neg ? "-" : "") + body : (neg ? " - " : " + ") + body;
+  });
+}
+function bernPieces(P) {
+  const n = P.length - 1;
+  return P.map((p, i) => {
+    const c = binom(n, i);
+    const tp = i === 0 ? "" : i === 1 ? "t" : "t^{" + i + "}";
+    const sp = n - i === 0 ? "" : n - i === 1 ? "(1-t)" : "(1-t)^{" + (n - i) + "}";
+    const body = (c === 1n ? "" : c.toString()) + tp + sp + "\\begin{pmatrix}" + qTex(p.x) + "\\\\" + qTex(p.y) + "\\end{pmatrix}";
+    return i === 0 ? body : " + " + body;
+  });
+}
+function flowTex(head, pieces, tail, L) {
+  const n = pieces.length, per = Math.ceil(n / Math.max(1, L)), lines = [];
+  for (let i = 0; i < n; i += per) lines.push(pieces.slice(i, i + per).join(""));
+  return "\\begin{aligned}" + head + lines.join(" \\\\ &\\quad ") + tail + "\\end{aligned}";
+}
+
+// ==== APP ====================================================================
+const $ = id => document.getElementById(id);
+const cv = $("cv"), ctx = cv.getContext("2d");
+const inX = $("inX"), inY = $("inY"), errPoly = $("errPoly"), errPts = $("errPts"), noteEl = $("note");
+const ptsBody = $("ptsBody");
+
+const DEFAULTS = {
+  2: [["0", "0"], ["1", "3"], ["3", "0"]],
+  3: [["0", "0"], ["1", "3"], ["3", "-1"], ["4", "2"]],
+  4: [["0", "0"], ["0.5", "3"], ["2", "-1"], ["3.5", "3"], ["4", "0"]],
+  5: [["0", "0"], ["0.5", "3"], ["1.5", "-1"], ["2.5", "3"], ["3.5", "-1"], ["4", "2"]]
+};
+const defaultPoints = n => DEFAULTS[n].map(([x, y]) => ({ x: parseConst(x), y: parseConst(y) }));
+
+const st = {
+  P: defaultPoints(3),
+  view: { cx: 2, cy: 1, scale: 80 },
+  field: "F", showImp: false, showExt: true, showCast: false, t: 0.4,
+  snap: new Q(1n, 100n), hover: -1, drag: null
+};
+let D = null;
+let colors = {};
+
+function hexRGB(h) {
+  h = h.replace("#", "");
+  if (h.length === 3) h = h.split("").map(c => c + c).join("");
+  const v = parseInt(h, 16);
+  return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
+}
+function readColors() {
+  const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
+  colors = {
+    panel: g("--panel"), ink: g("--ink"), muted: g("--muted"), grid: g("--grid"), gridMajor: g("--grid-major"),
+    axis: g("--axis"), curve: g("--curve"), poly: g("--poly"), pointFill: g("--point-fill"),
+    contour: g("--contour"), cast: g("--cast"), font: g("--font-ui"),
+    mapZero: hexRGB(g("--map-zero")), mapPos: hexRGB(g("--map-pos")), mapNeg: hexRGB(g("--map-neg"))
+  };
+}
+
+function derive() {
+  const P = st.P;
+  const X = ptrim(bernToPow(P.map(p => p.x))), Y = ptrim(bernToPow(P.map(p => p.y)));
+  const key = X.map(qText).join(",") + "|" + Y.map(qText).join(",");
+  let imp;
+  if (D && D.key === key) imp = D.imp;
+  else {
+    try { imp = implicitEquation(X, Y); } catch (e) { imp = { kind: "error", msg: e.message }; }
+  }
+  let impF = null;
+  if (imp.kind === "curve") {
+    let mx = 0;
+    for (const t of imp.terms) mx = Math.max(mx, Math.abs(Number(t.c)));
+    impF = imp.terms.map(t => ({ a: t.a, b: t.b, c: Number(t.c) / mx }));
+  }
+  D = {
+    key, X, Y, imp, impF,
+    Xf: X.map(c => c.num()), Yf: Y.map(c => c.num()),
+    Pf: P.map(p => ({ x: p.x.num(), y: p.y.num() }))
+  };
+}
+const hornerF = (c, t) => { let v = 0; for (let i = c.length - 1; i >= 0; i--) v = v * t + c[i]; return v; };
+function niceStep(raw) {
+  if (!(raw > 0) || !isFinite(raw)) return 1;
+  const p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+  return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p;
+}
+function fmtNum(x) {
+  if (x === 0) return "0";
+  const a = Math.abs(x);
+  if (a >= 1e4 || a < 1e-3) return x.toExponential(1).replace("e", " × 10^");
+  return String(+x.toPrecision(3));
+}
+
+// ---- scalar fields on a coarse grid ----
+const CELL = 4;
+function gridF(nx, ny, wx, wy, withGrad) {
+  const T = D.impF;
+  let A = 0, B = 0;
+  for (const t of T) { A = Math.max(A, t.a); B = Math.max(B, t.b); }
+  const XP = [], YP = [];
+  for (let a = 0; a <= A; a++) XP.push(new Float64Array(nx));
+  for (let b = 0; b <= B; b++) YP.push(new Float64Array(ny));
+  for (let i = 0; i < nx; i++) { const x = wx(i * CELL); let p = 1; for (let a = 0; a <= A; a++) { XP[a][i] = p; p *= x; } }
+  for (let j = 0; j < ny; j++) { const y = wy(j * CELL); let p = 1; for (let b = 0; b <= B; b++) { YP[b][j] = p; p *= y; } }
+  const F = new Float64Array(nx * ny), G = withGrad ? new Float64Array(nx * ny) : null;
+  for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
+    let f = 0, fx = 0, fy = 0;
+    for (const t of T) {
+      const xa = XP[t.a][i], yb = YP[t.b][j];
+      f += t.c * xa * yb;
+      if (withGrad) {
+        if (t.a) fx += t.c * t.a * XP[t.a - 1][i] * yb;
+        if (t.b) fy += t.c * t.b * xa * YP[t.b - 1][j];
+      }
+    }
+    F[j * nx + i] = f;
+    if (withGrad) G[j * nx + i] = Math.hypot(fx, fy);
+  }
+  return { F, G };
+}
+function computeField(W, H, wx, wy) {
+  const nx = Math.ceil(W / CELL) + 2, ny = Math.ceil(H / CELL) + 2, mode = st.field;
+  const pxWorld = 1 / st.view.scale;
+  let val = null, spacing = 0, colorScale = 1, info = "";
+  const needF = D.impF && (mode === "F" || mode === "G" || mode === "D" || st.showImp);
+  const g = needF ? gridF(nx, ny, wx, wy, mode === "G") : null;
+  if (mode === "F" && g) {
+    val = g.F;
+    const sample = [];
+    for (let k = 0; k < val.length; k += 7) sample.push(Math.abs(val[k]));
+    sample.sort((a, b) => a - b);
+    const med = sample[Math.floor(sample.length / 2)] || 1;
+    spacing = niceStep(med / 4);
+    colorScale = med * 2.5;
+    info = "Contours of F every " + fmtNum(spacing) + ", with F scaled so its largest coefficient is ±1.";
+  } else if (mode === "G" && g) {
+    val = new Float64Array(g.F.length);
+    for (let k = 0; k < val.length; k++) val[k] = g.F[k] / Math.max(g.G[k], 1e-300);
+    spacing = niceStep(34 * pxWorld);
+    colorScale = 260 * pxWorld;
+    info = "Contours of F / |∇F| every " + fmtNum(spacing) + " units. Near the curve this approximates signed distance to F = 0.";
+  } else if (mode === "D") {
+    const N = 160, ax = new Float64Array(N + 1), ay = new Float64Array(N + 1);
+    for (let k = 0; k <= N; k++) { const t = k / N; ax[k] = hornerF(D.Xf, t); ay[k] = hornerF(D.Yf, t); }
+    val = new Float64Array(nx * ny);
+    for (let j = 0; j < ny; j++) {
+      const y = wy(j * CELL);
+      for (let i = 0; i < nx; i++) {
+        const x = wx(i * CELL);
+        let best = Infinity;
+        for (let k = 0; k < N; k++) {
+          const ex = ax[k + 1] - ax[k], ey = ay[k + 1] - ay[k], px = x - ax[k], py = y - ay[k];
+          const ee = ex * ex + ey * ey;
+          let s = ee > 0 ? (px * ex + py * ey) / ee : 0;
+          s = s < 0 ? 0 : s > 1 ? 1 : s;
+          const dx = px - s * ex, dy = py - s * ey, d = dx * dx + dy * dy;
+          if (d < best) best = d;
+        }
+        const sgn = g ? (g.F[j * nx + i] < 0 ? -1 : 1) : 1;
+        val[j * nx + i] = sgn * Math.sqrt(best);
+      }
+    }
+    spacing = niceStep(34 * pxWorld);
+    colorScale = 260 * pxWorld;
+    info = "Contours every " + fmtNum(spacing) + " units of distance to the arc t ∈ [0, 1]" + (g ? ", signed by F." : ".");
+  } else if (mode !== "off") {
+    info = "This field needs an implicit equation, and the current curve doesn't have one.";
+  }
+  return { nx, ny, val, spacing, colorScale, info, F: g ? g.F : null };
+}
+
+const off = document.createElement("canvas"), offCtx = off.getContext("2d");
+function paintField(fd) {
+  const { nx, ny, val, colorScale } = fd;
+  if (off.width !== nx || off.height !== ny) { off.width = nx; off.height = ny; }
+  const img = offCtx.createImageData(nx, ny), d = img.data;
+  const z = colors.mapZero, p = colors.mapPos, n = colors.mapNeg;
+  for (let k = 0; k < val.length; k++) {
+    let t = val[k] / colorScale;
+    t = t > 1 ? 1 : t < -1 ? -1 : t;
+    const c = t >= 0 ? p : n, s = Math.pow(Math.abs(t), 0.9);
+    d[4 * k] = z[0] + (c[0] - z[0]) * s;
+    d[4 * k + 1] = z[1] + (c[1] - z[1]) * s;
+    d[4 * k + 2] = z[2] + (c[2] - z[2]) * s;
+    d[4 * k + 3] = 255;
+  }
+  offCtx.putImageData(img, 0, 0);
+  ctx.save();
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(off, -CELL / 2, -CELL / 2, nx * CELL, ny * CELL);
+  ctx.restore();
+}
+// Marching squares for one level; appends segments to the current path.
+function contourLevel(val, nx, ny, L) {
+  const lerp = (p, q, vp, vq) => p + (q - p) * vp / (vp - vq);
+  for (let j = 0; j < ny - 1; j++) for (let i = 0; i < nx - 1; i++) {
+    const a = val[j * nx + i] - L, b = val[j * nx + i + 1] - L, c = val[(j + 1) * nx + i + 1] - L, d = val[(j + 1) * nx + i] - L;
+    const idx = (a > 0 ? 1 : 0) | (b > 0 ? 2 : 0) | (c > 0 ? 4 : 0) | (d > 0 ? 8 : 0);
+    if (idx === 0 || idx === 15) continue;
+    const X0 = i * CELL, Y0 = j * CELL, X1 = X0 + CELL, Y1 = Y0 + CELL;
+    const E = e => e === 0 ? [lerp(X0, X1, a, b), Y0] : e === 1 ? [X1, lerp(Y0, Y1, b, c)] : e === 2 ? [lerp(X0, X1, d, c), Y1] : [X0, lerp(Y0, Y1, a, d)];
+    const seg = (e1, e2) => { const p = E(e1), q = E(e2); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); };
+    const ctr = a + b + c + d;
+    switch (idx) {
+      case 1: case 14: seg(0, 3); break;
+      case 2: case 13: seg(0, 1); break;
+      case 3: case 12: seg(3, 1); break;
+      case 4: case 11: seg(1, 2); break;
+      case 6: case 9: seg(0, 2); break;
+      case 7: case 8: seg(3, 2); break;
+      case 5: if (ctr > 0) { seg(0, 1); seg(2, 3); } else { seg(0, 3); seg(1, 2); } break;
+      case 10: if (ctr > 0) { seg(0, 3); seg(1, 2); } else { seg(0, 1); seg(2, 3); } break;
+    }
+  }
+}
+function drawContours(fd) {
+  const { val, nx, ny, spacing } = fd;
+  let lo = Infinity, hi = -Infinity;
+  for (let k = 0; k < val.length; k++) { const v = val[k]; if (v < lo) lo = v; if (v > hi) hi = v; }
+  let k0 = Math.ceil(lo / spacing), k1 = Math.floor(hi / spacing);
+  if (k1 - k0 > 160) { const m = Math.round((k0 + k1) / 2); k0 = m - 80; k1 = m + 80; }
+  ctx.save();
+  ctx.strokeStyle = colors.contour; ctx.lineWidth = 1.8; ctx.lineJoin = "round";
+  ctx.beginPath();
+  for (let k = k0; k <= k1; k++) if (k !== 0) contourLevel(val, nx, ny, k * spacing);
+  ctx.stroke();
+  ctx.restore();
+}
+
+// ---- drawing ----
+let fieldInfo = "";
+function draw() {
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (!W || !H || !D) return;
+  const dpr = window.devicePixelRatio || 1, bw = Math.round(W * dpr), bh = Math.round(H * dpr);
+  if (cv.width !== bw || cv.height !== bh) { cv.width = bw; cv.height = bh; }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = colors.panel;
+  ctx.fillRect(0, 0, W, H);
+  const v = st.view;
+  const sx = x => W / 2 + (x - v.cx) * v.scale, sy = y => H / 2 - (y - v.cy) * v.scale;
+  const wx = px => v.cx + (px - W / 2) / v.scale, wy = py => v.cy - (py - H / 2) / v.scale;
+
+  const fd = computeField(W, H, wx, wy);
+  if (fd.val) paintField(fd);
+  drawGrid(W, H, sx, sy, wx, wy, !!fd.val);
+  if (fd.val) drawContours(fd);
+  if (fd.info !== fieldInfo) { fieldInfo = fd.info; $("fieldInfo").textContent = fieldInfo; }
+  if (st.showImp && fd.F) {
+    ctx.save();
+    ctx.strokeStyle = colors.curve; ctx.globalAlpha = 0.55; ctx.lineWidth = 1.6;
+    ctx.beginPath(); contourLevel(fd.F, fd.nx, fd.ny, 0); ctx.stroke();
+    ctx.restore();
+  }
+
+  const curveThrough = (t0, t1, N) => {
+    ctx.beginPath();
+    for (let i = 0; i <= N; i++) {
+      const t = t0 + (t1 - t0) * i / N, X = sx(hornerF(D.Xf, t)), Y = sy(hornerF(D.Yf, t));
+      i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+    }
+    ctx.stroke();
+  };
+  if (st.showExt) {
+    ctx.save();
+    ctx.strokeStyle = colors.curve; ctx.globalAlpha = 0.5; ctx.lineWidth = 1.6; ctx.setLineDash([6, 5]);
+    curveThrough(-2, 0, 300); curveThrough(1, 3, 300);
+    ctx.restore();
+  }
+  const Pf = D.Pf, n = Pf.length - 1;
+  ctx.save();
+  ctx.strokeStyle = colors.curve; ctx.lineWidth = 2; ctx.setLineDash([12, 8]);
+  ctx.beginPath();
+  Pf.forEach((p, i) => i ? ctx.lineTo(sx(p.x), sy(p.y)) : ctx.moveTo(sx(p.x), sy(p.y)));
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.strokeStyle = colors.curve; ctx.lineWidth = 4; ctx.lineJoin = "round"; ctx.lineCap = "round";
+  curveThrough(0, 1, 400);
+  ctx.restore();
+  if (st.showCast) drawCasteljau(sx, sy);
+  // Endpoints (on the curve): open circles. Interior control points: filled dots.
+  ctx.save();
+  Pf.forEach((p, i) => {
+    const X = sx(p.x), Y = sy(p.y), big = i === st.hover || (st.drag && st.drag.i === i);
+    ctx.beginPath();
+    if (i === 0 || i === n) {
+      ctx.arc(X, Y, big ? 9.5 : 8, 0, 2 * Math.PI);
+      ctx.fillStyle = colors.pointFill; ctx.fill();
+      ctx.lineWidth = 3.5; ctx.strokeStyle = colors.curve; ctx.stroke();
+    } else {
+      ctx.arc(X, Y, big ? 8.5 : 7, 0, 2 * Math.PI);
+      ctx.fillStyle = colors.curve; ctx.fill();
+    }
+    ctx.fillStyle = colors.ink;
+    ctx.font = "italic 15px 'Times New Roman', serif"; ctx.fillText("P", X + 11, Y - 10);
+    ctx.font = "11px 'Times New Roman', serif"; ctx.fillText(String(i), X + 20, Y - 6);
+  });
+  ctx.restore();
+}
+
+function drawGrid(W, H, sx, sy, wx, wy, subdued) {
+  const v = st.view, step = niceStep(90 / v.scale), minor = step / 5;
+  const x0 = wx(0), x1 = wx(W), y0 = wy(H), y1 = wy(0);
+  ctx.save();
+  if (subdued) ctx.globalAlpha = 0.35;
+  const lines = (s, color) => {
+    ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.beginPath();
+    for (let k = Math.ceil(x0 / s), c = 0; k * s <= x1 && c < 600; k++, c++) { const X = Math.round(sx(k * s)) + 0.5; ctx.moveTo(X, 0); ctx.lineTo(X, H); }
+    for (let k = Math.ceil(y0 / s), c = 0; k * s <= y1 && c < 600; k++, c++) { const Y = Math.round(sy(k * s)) + 0.5; ctx.moveTo(0, Y); ctx.lineTo(W, Y); }
+    ctx.stroke();
+  };
+  if (!subdued && minor * v.scale >= 9) lines(minor, colors.grid);
+  lines(step, colors.gridMajor);
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = colors.axis; ctx.lineWidth = 2.25; ctx.beginPath();
+  const ax = Math.round(sx(0)) + 0.5, ay = Math.round(sy(0)) + 0.5;
+  if (ax >= 0 && ax <= W) { ctx.moveTo(ax, 0); ctx.lineTo(ax, H); }
+  if (ay >= 0 && ay <= H) { ctx.moveTo(0, ay); ctx.lineTo(W, ay); }
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+  const dec = Math.max(0, -Math.floor(Math.log10(step) + 1e-9)) + (step / Math.pow(10, Math.floor(Math.log10(step))) === 2.5 ? 1 : 0);
+  const fmt = x => (Math.abs(x) < step * 1e-6 ? 0 : x).toFixed(dec);
+  ctx.fillStyle = colors.muted; ctx.font = "12px " + colors.font;
+  const ly = Math.min(Math.max(ay + 15, 15), H - 5), lx = Math.min(Math.max(ax - 6, 30), W - 4);
+  ctx.textAlign = "center";
+  for (let k = Math.ceil(x0 / step); k * step <= x1; k++) { if (k === 0) continue; ctx.fillText(fmt(k * step), sx(k * step), ly); }
+  ctx.textAlign = "right";
+  for (let k = Math.ceil(y0 / step); k * step <= y1; k++) { if (k === 0) continue; ctx.fillText(fmt(k * step), lx, sy(k * step) + 4); }
+  ctx.restore();
+}
+
+function drawCasteljau(sx, sy) {
+  const t = st.t;
+  let L = D.Pf.map(p => ({ x: p.x, y: p.y }));
+  const n = L.length - 1;
+  ctx.save();
+  ctx.strokeStyle = colors.cast; ctx.fillStyle = colors.cast; ctx.lineWidth = 1.5;
+  for (let k = 1; k <= n; k++) {
+    L = L.slice(0, -1).map((p, i) => ({ x: (1 - t) * p.x + t * L[i + 1].x, y: (1 - t) * p.y + t * L[i + 1].y }));
+    ctx.globalAlpha = 0.4 + 0.6 * k / n;
+    if (L.length > 1) {
+      ctx.beginPath();
+      L.forEach((p, i) => i ? ctx.lineTo(sx(p.x), sy(p.y)) : ctx.moveTo(sx(p.x), sy(p.y)));
+      ctx.stroke();
+    }
+    for (const p of L) { ctx.beginPath(); ctx.arc(sx(p.x), sy(p.y), k === n ? 8.5 : 5.5, 0, 2 * Math.PI); ctx.fill(); }
+  }
+  ctx.restore();
+}
+
+// ---- equations panel ----
+function setMath(el, tex) {
+  if (el._tex === tex) return;
+  el._tex = tex;
+  if (window.katex) {
+    try {
+      el.innerHTML = katex.renderToString(tex, { displayMode: true, throwOnError: false });
+      el.classList.remove("fallback");
+      return;
+    } catch (e) { /* fall through to plain text */ }
+  }
+  el.classList.add("fallback");
+  el.textContent = tex;
+}
+// Render a long sum on as few lines as fit the column, with terms spread evenly across lines.
+function flowMath(el, head, pieces, tail) {
+  const n = pieces.length;
+  const fits = () => el.scrollWidth <= el.clientWidth + 1;
+  let L = Math.min(Math.max(el._lines || 1, 1), n);
+  setMath(el, flowTex(head, pieces, tail, L));
+  if (!fits()) {
+    while (!fits() && L < n) { L++; setMath(el, flowTex(head, pieces, tail, L)); }
+  } else {
+    while (L > 1) {
+      setMath(el, flowTex(head, pieces, tail, L - 1));
+      if (fits()) L--;
+      else { setMath(el, flowTex(head, pieces, tail, L)); break; }
+    }
+  }
+  el._lines = L;
+  return flowTex(head, pieces, tail, L);
+}
+
+function updatePanels() {
+  const { X, Y, imp } = D;
+  const bern = flowMath($("mBern"), "B(t) &= ", bernPieces(st.P), "");
+  const pow = "\\begin{aligned}x(t) &= " + polyTex(X) + " \\\\ y(t) &= " + polyTex(Y) + "\\end{aligned}";
+  let impTex, impTxt, meta = "";
+  if (imp.kind === "curve") {
+    impTex = flowMath($("mImp"), "&", termPieces(imp.terms), " = 0");
+    impTxt = termsText(imp.terms);
+    meta = "The curve lies on this algebraic curve of degree " + imp.deg + ". F = 0 is the whole curve, including the parts traced for t outside [0, 1]";
+    const signNote = imp.flux === 0
+      ? " The arc has no preferred side here, so the sign of F is chosen by making its leading coefficient positive."
+      : " F is negative to the left of the arc as it runs from P₀ to P" + String.fromCharCode(0x2080 + st.P.length - 1) + " and positive to the right (orientation from the net flux of ∇F across the arc).";
+    meta += imp.deg < st.P.length - 1 && imp.k === 1 ? ", and its degree is lower because the parametrization has lower degree." : ".";
+    meta += signNote;
+    if (imp.k > 1) meta += " Here x(t) and y(t) are both polynomials in a single degree-" + imp.k + " polynomial s(t), so the parametrization is " + imp.k + "-to-1 over ℂ; F comes from the reduced parametrization, which is why it isn't a " + imp.k + "th power.";
+  } else {
+    impTex = imp.kind === "point"
+      ? "\\text{All control points coincide at } \\left(" + qTex(imp.x) + ",\\ " + qTex(imp.y) + "\\right)"
+      : "\\text{Couldn't compute the implicit equation}";
+    impTxt = imp.kind === "point" ? "point (" + qText(imp.x) + ", " + qText(imp.y) + ")" : imp.msg;
+    $("mImp")._lines = 1;
+    setMath($("mImp"), impTex);
+  }
+  setMath($("mPow"), pow);
+  // $("impMeta").textContent = meta;
+  if (document.activeElement !== inX) inX.value = polyText(X);
+  if (document.activeElement !== inY) inY.value = polyText(Y);
+  st.P.forEach((p, i) => {
+    const row = ptInputs[i];
+    if (!row) return;
+    if (document.activeElement !== row[0]) row[0].value = qText(p.x);
+    if (document.activeElement !== row[1]) row[1].value = qText(p.y);
+  });
+  $("src").textContent =
+    "% Bernstein form\n" + bern + "\n\n% Standard form\n" + pow + "\n\n% Implicit equation\n" + impTex +
+    "\n\nPlain text\nx(t) = " + polyText(X) + "\ny(t) = " + polyText(Y) + "\nF(x, y): " + impTxt + "\n";
+}
+
+// ---- scheduling ----
+let pendFull = false, pendDraw = false;
+function scheduleFull() {
+  if (pendFull) return;
+  pendFull = true;
+  requestAnimationFrame(() => { pendFull = false; pendDraw = false; derive(); draw(); updatePanels(); });
+}
+function scheduleDraw() {
+  if (pendDraw || pendFull) return;
+  pendDraw = true;
+  requestAnimationFrame(() => { pendDraw = false; draw(); });
+}
+function setPoints(P) { st.P = P; scheduleFull(); }
+function note(msg) { noteEl.textContent = msg || ""; }
+
+// ---- control point table ----
+let ptInputs = [];
+function buildTable() {
+  ptsBody.replaceChildren();
+  ptInputs = [];
+  st.P.forEach((_, i) => {
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.scope = "row";
+    th.innerHTML = "P<sub>" + i + "</sub>";
+    tr.append(th);
+    const pair = [];
+    ["x", "y"].forEach(c => {
+      const td = document.createElement("td"), inp = document.createElement("input");
+      inp.type = "text"; inp.spellcheck = false; inp.autocomplete = "off";
+      inp.setAttribute("aria-label", "P" + i + " " + c);
+      const apply = () => {
+        try {
+          const val = parseConst(inp.value);
+          if (st.P[i][c].eq(val)) { errPts.textContent = ""; return; }
+          const P = st.P.map(p => ({ x: p.x, y: p.y }));
+          P[i][c] = val;
+          errPts.textContent = "";
+          note("");
+          setPoints(P);
+        } catch (e) { errPts.textContent = "P" + i + " " + c + ": " + e.message + "."; }
+      };
+      inp.addEventListener("keydown", e => { if (e.key === "Enter") apply(); });
+      inp.addEventListener("change", apply);
+      inp.addEventListener("blur", scheduleFull);
+      td.append(inp); tr.append(td); pair.push(inp);
+    });
+    ptInputs.push(pair);
+    ptsBody.append(tr);
+  });
+}
+
+// ---- degree ----
+function syncDegreeButtons() {
+  const n = st.P.length - 1;
+  document.querySelectorAll("#degBtns button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.n === n)));
+}
+function setDegree(N) {
+  const n = st.P.length - 1;
+  if (N === n) return;
+  let P = st.P;
+  if (N > n) {
+    while (P.length - 1 < N) P = elevate(P);
+    note("Raised the degree to " + N + " by degree elevation. The curve is unchanged.");
+  } else {
+    const X = ptrim(bernToPow(P.map(p => p.x))), Y = ptrim(bernToPow(P.map(p => p.y)));
+    if (Math.max(X.length, Y.length) - 1 <= N) {
+      const px = powToBern(X, N), py = powToBern(Y, N);
+      P = px.map((x, i) => ({ x, y: py[i] }));
+      note("Lowered the degree to " + N + " exactly, because the curve already has degree at most " + N + ".");
+    } else {
+      const ts = []; for (let k = 0; k <= N; k++) ts.push(new Q(BigInt(k), BigInt(N)));
+      const A = ts.map(t => { const row = []; for (let i = 0; i <= N; i++) row.push(new Q(binom(N, i)).mul(qpow(t, i)).mul(qpow(Q1.sub(t), N - i))); return row; });
+      const cx = solveQ(A, ts.map(t => pevalQ(X, t))), cy = solveQ(A, ts.map(t => pevalQ(Y, t)));
+      const grid = new Q(1n, 100n);
+      const snapQ = q => Q.int(Math.round(q.num() / grid.num())).mul(grid);
+      P = cx.map((x, i) => (i === 0 || i === N) ? { x, y: cy[i] } : { x: snapQ(x), y: snapQ(cy[i]) });
+      note("Lowered the degree to " + N + " approximately: the new curve matches the old one at t = 0, 1/" + N + ", …, 1 (up to rounding to 0.01).");
+    }
+  }
+  st.P = P;
+  buildTable();
+  syncDegreeButtons();
+  errPoly.textContent = ""; errPts.textContent = "";
+  scheduleFull();
+}
+document.querySelectorAll("#degBtns button").forEach(b => b.addEventListener("click", () => setDegree(+b.dataset.n)));
+
+// ---- polynomial inputs ----
+function applyPoly() {
+  let X, Y;
+  try { X = parsePoly(inX.value); } catch (e) { errPoly.textContent = "x(t): " + e.message + "."; return; }
+  try { Y = parsePoly(inY.value); } catch (e) { errPoly.textContent = "y(t): " + e.message + "."; return; }
+  const d = Math.max(pdeg(X), pdeg(Y));
+  if (d > 5) { errPoly.textContent = "The degree is " + d + "; this tool supports degree 5 at most."; return; }
+  errPoly.textContent = "";
+  let n = st.P.length - 1;
+  if (d > n) { n = d; note("Raised the degree to " + d + " to fit the polynomials."); } else note("");
+  const px = powToBern(X, n), py = powToBern(Y, n);
+  const P = px.map((x, i) => ({ x, y: py[i] }));
+  const changedDegree = P.length !== st.P.length;
+  st.P = P;
+  if (changedDegree) { buildTable(); syncDegreeButtons(); }
+  scheduleFull();
+}
+[inX, inY].forEach(inp => {
+  inp.addEventListener("keydown", e => { if (e.key === "Enter") applyPoly(); });
+  inp.addEventListener("change", applyPoly);
+  inp.addEventListener("blur", scheduleFull);
+});
+
+// ---- options ----
+$("field").addEventListener("change", e => { st.field = e.target.value; scheduleDraw(); });
+$("optImp").addEventListener("change", e => { st.showImp = e.target.checked; scheduleDraw(); });
+$("optExt").addEventListener("change", e => { st.showExt = e.target.checked; scheduleDraw(); });
+$("optCast").addEventListener("change", e => { st.showCast = e.target.checked; $("tSlider").disabled = !st.showCast; scheduleDraw(); });
+$("tSlider").addEventListener("input", e => { st.t = +e.target.value; $("tVal").textContent = "t = " + st.t.toFixed(2); scheduleDraw(); });
+$("snap").addEventListener("change", e => { st.snap = qFromDecimal(e.target.value); });
+
+// ---- view ----
+function fitView() {
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (!W || !H || !D) return;
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (const p of D.Pf) { x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x); y0 = Math.min(y0, p.y); y1 = Math.max(y1, p.y); }
+  const w = Math.max(x1 - x0, 1), h = Math.max(y1 - y0, 1);
+  st.view = { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, scale: Math.min(W / (w * 1.35), H / (h * 1.35)) };
+  scheduleDraw();
+}
+function zoomAt(px, py, f) {
+  const W = cv.clientWidth, H = cv.clientHeight, v = st.view;
+  const x = v.cx + (px - W / 2) / v.scale, y = v.cy - (py - H / 2) / v.scale;
+  v.scale = Math.min(Math.max(v.scale * f, 2), 1e5);
+  v.cx = x - (px - W / 2) / v.scale;
+  v.cy = y + (py - H / 2) / v.scale;
+  scheduleDraw();
+}
+$("zIn").addEventListener("click", () => zoomAt(cv.clientWidth / 2, cv.clientHeight / 2, 1.25));
+$("zOut").addEventListener("click", () => zoomAt(cv.clientWidth / 2, cv.clientHeight / 2, 0.8));
+$("zFit").addEventListener("click", fitView);
+
+// ---- pointer interaction ----
+function localPos(e) { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+function hitPoint(x, y, rad) {
+  const W = cv.clientWidth, H = cv.clientHeight, v = st.view;
+  let best = -1, bd = rad * rad;
+  D.Pf.forEach((p, i) => {
+    const dx = W / 2 + (p.x - v.cx) * v.scale - x, dy = H / 2 - (p.y - v.cy) * v.scale - y, d = dx * dx + dy * dy;
+    if (d <= bd) { bd = d; best = i; }
+  });
+  return best;
+}
+cv.addEventListener("pointerdown", e => {
+  const { x, y } = localPos(e);
+  const i = hitPoint(x, y, e.pointerType === "touch" ? 20 : 12);
+  cv.setPointerCapture(e.pointerId);
+  if (i >= 0) { st.drag = { type: "point", i }; note(""); }
+  else st.drag = { type: "pan", x0: x, y0: y, cx: st.view.cx, cy: st.view.cy };
+  cv.style.cursor = "grabbing";
+  scheduleDraw();
+});
+cv.addEventListener("pointermove", e => {
+  const { x, y } = localPos(e);
+  const W = cv.clientWidth, H = cv.clientHeight, v = st.view;
+  if (st.drag && st.drag.type === "point") {
+    const wxv = v.cx + (x - W / 2) / v.scale, wyv = v.cy - (y - H / 2) / v.scale, s = st.snap.num();
+    const nx = Q.int(Math.round(wxv / s)).mul(st.snap), ny = Q.int(Math.round(wyv / s)).mul(st.snap);
+    const p = st.P[st.drag.i];
+    if (!p.x.eq(nx) || !p.y.eq(ny)) {
+      const P = st.P.slice();
+      P[st.drag.i] = { x: nx, y: ny };
+      setPoints(P);
+    }
+  } else if (st.drag && st.drag.type === "pan") {
+    v.cx = st.drag.cx - (x - st.drag.x0) / v.scale;
+    v.cy = st.drag.cy + (y - st.drag.y0) / v.scale;
+    scheduleDraw();
+  } else {
+    const h = hitPoint(x, y, 12);
+    if (h !== st.hover) { st.hover = h; cv.style.cursor = h >= 0 ? "pointer" : "grab"; scheduleDraw(); }
+  }
+});
+const endDrag = () => { st.drag = null; cv.style.cursor = st.hover >= 0 ? "pointer" : "grab"; scheduleDraw(); };
+cv.addEventListener("pointerup", endDrag);
+cv.addEventListener("pointercancel", endDrag);
+cv.addEventListener("pointerleave", () => { if (!st.drag && st.hover !== -1) { st.hover = -1; scheduleDraw(); } });
+cv.addEventListener("wheel", e => {
+  e.preventDefault();
+  const { x, y } = localPos(e);
+  zoomAt(x, y, Math.exp(-e.deltaY * (e.deltaMode === 1 ? 0.05 : 0.0015)));
+}, { passive: false });
+
+// ---- resize, fonts ----
+readColors();
+new ResizeObserver(() => scheduleDraw()).observe(cv);
+let lastEqW = 0;
+new ResizeObserver(entries => {
+  const w = Math.round(entries[0].contentRect.width);
+  if (w !== lastEqW) { lastEqW = w; scheduleFull(); }
+}).observe($("eqs"));
+
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => scheduleFull());
+
+// ---- start ----
+// Static LaTeX labels (e.g. the x(t) = and y(t) = in front of the input boxes).
+document.querySelectorAll("[data-tex]").forEach(el => {
+  if (window.katex) el.innerHTML = katex.renderToString(el.dataset.tex, { throwOnError: false });
+});
+buildTable();
+syncDegreeButtons();
+derive();
+requestAnimationFrame(() => { fitView(); scheduleFull(); });
+</script>
+</body>
+</html>

@@ -1,6 +1,13 @@
 <misc_data>
 <misc>
     <entry>
+        <title>Bezier curve demos</title>
+        <href>Misc/Bezier/bezier.html</href>
+        <details>Interactive demos of <a href="Misc/Bezier/bezier.html">standard Bezier curves</a> and of <a href="Misc/Bezier/rational-bezier.html">rational Bezier curves</a>.</details>
+        <img>Misc/Bezier/bezier.webp</img>
+    </entry>
+
+    <entry>
         <title>Geodesic Walker</title>
         <href>Demos/GeodesicWalker/html/</href>
         <details>Web demo which traces out geodesics on a mesh. The code is available <a href="https://github.com/MarkGillespie/GeodesicWalker">here</a>.</details>

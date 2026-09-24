@@ -1,0 +1,1280 @@
+<!-- Written by Claude Opus 5.5 --->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rational Bézier explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #E4D5B7;
+  --panel: #F3EBD7;
+  --ink: #231F20;
+  --muted: #2B2927;
+  --line: #CDBC9A;
+  --field: #FAF5E8;
+  --grid: #E7DDC6;
+  --grid-major: #D8C9A9;
+  --axis: #5E5446;
+  --curve: #231F20;
+  --point-fill: #FFFFFF;
+  --warm: #E0876A;
+  --on-warm: #F8F1DE;
+  --teal: #3F7677;
+  --teal-soft: #8FB2B0;
+  --error: #A8321C;
+  --font-ui: "Libertinus Serif", "Linux Libertine O", "Linux Libertine", Georgia, "Times New Roman", serif;
+  --font-title: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-ui); font-size: 16.5px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding: 16px 12px 14px; max-width: 1840px; margin: 0 auto; }
+.bar h1 {
+  font-family: var(--font-title); font-weight: 700; font-size: 21px; letter-spacing: -0.015em;
+  margin: 0 6px 0 0; padding: 7px 20px 8px; border-radius: 999px; background: var(--warm); color: var(--on-warm);
+}
+.group { display: flex; align-items: center; gap: 8px; }
+.lbl { color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--panel); }
+.seg button { border: 0; background: transparent; padding: 3px 14px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--warm); color: var(--on-warm); font-weight: 600; }
+.btn { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 3px 14px; cursor: pointer; }
+.chk { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+.chk input { accent-color: var(--teal); margin: 0; }
+select { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; }
+
+.weights { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; padding: 0 12px 12px; max-width: 1840px; margin: 0 auto; }
+.witem { display: flex; align-items: center; gap: 7px; }
+.witem .wlab { font-style: italic; white-space: nowrap; }
+.layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 24px; padding: 0 12px 28px; max-width: 1840px; margin: 0 auto; }
+@media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.views { display: flex; flex-direction: column; gap: 14px; align-self: start; }
+@media (min-width: 961px) { .views { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); } }
+figure { margin: 0; }
+figcaption { font-family: var(--font-ui); font-size: 13px; font-weight: 400; font-style: italic; color: var(--muted); margin-bottom: 5px;
+  min-height: 2.9em; display: flex; align-items: flex-end; }
+.cvwrap { position: relative; }
+canvas {
+  display: block; width: 100%; aspect-ratio: 4 / 3; max-height: 42vh;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px; touch-action: none; cursor: grab;
+}
+.zoom { position: absolute; top: 9px; right: 9px; display: flex; gap: 6px; }
+.zoom button { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; min-width: 32px; height: 30px; padding: 0 10px; cursor: pointer; }
+.hint { color: var(--muted); font-size: 14.5px; margin: 2px 2px 0; }
+/* Wide screens: the two views sit side by side and get taller. */
+@media (min-width: 1200px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .views { position: static; flex-direction: row; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 14px 18px; }
+  .views figure { flex: 1 1 0; min-width: 0; max-width: 78vh; }   /* square, capped by the viewport height */
+  .views .hint { flex: 1 0 100%; margin-top: 0; }
+  canvas { aspect-ratio: 1 / 1; max-height: none; }
+}
+
+.eqs { min-width: 0; }
+.block { padding: 14px 0 16px; border-bottom: 1px solid var(--line); }
+.block:first-child { padding-top: 2px; }
+.block h2 { font-family: var(--font-title); font-size: 14px; font-weight: 700; color: var(--muted); margin: 0 0 6px; }
+.math { overflow-x: auto; overflow-y: hidden; min-height: 2.2em; font-size: 16px; padding-bottom: 2px; }
+.math .katex-display { margin: 6px 0; text-align: left; }
+.math .katex-display > .katex { text-align: left; }
+.math .katex { font-size: 1.12em; }
+.math.fallback { font-family: var(--font-code); font-size: 12.5px; white-space: pre-wrap; color: var(--muted); }
+.meta { color: var(--muted); font-size: 15px; margin: 6px 0 0; }
+.note { color: var(--muted); font-size: 15px; min-height: 1.3em; margin: 0 0 4px; }
+.err { color: var(--error); font-size: 15px; margin: 6px 0 0; min-height: 1.2em; }
+
+.polyin { display: grid; grid-template-columns: 3.8em 1fr; align-items: center; gap: 8px; margin-top: 8px; }
+.polyin span { text-align: right; white-space: nowrap; }
+.polyin .katex { font-size: 1.12em; }
+input.code, table input[type="text"] { font-family: var(--font-code); font-size: 13.5px; background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; width: 100%; }
+table { border-collapse: collapse; width: 100%; }
+th { font-weight: 400; text-align: left; padding: 3px 10px 3px 0; white-space: nowrap; }
+thead th { font-family: var(--font-title); font-size: 13px; font-weight: 700; color: var(--muted); }
+td { padding: 4px 8px 4px 0; }
+td.wcell { display: flex; align-items: center; gap: 8px; min-width: 190px; }
+input[type="range"] { accent-color: var(--teal); width: 120px; }
+.wval { font-family: var(--font-code); font-size: 13px; background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 3px 6px; width: 5.2em; text-align: right; }
+details summary { cursor: pointer; font-family: var(--font-title); font-size: 14px; font-weight: 700; color: var(--muted); }
+pre#src { font-family: var(--font-code); font-size: 12px; background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; overflow-x: auto; white-space: pre; margin: 10px 0 0; }
+.titleblock { display: flex; flex-direction: column; align-items: stretch; gap: 4px; margin-right: 6px; }
+.titleblock h1 { margin: 0; }
+.titleblock a {
+  font-size: 14.5px;
+  text-align: center;              /* centers it under the pill */
+  color: var(--teal);
+  text-decoration: underline;
+  margin-top: -5px;
+}
+.titleblock a:hover { color: var(--ink); }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+</head>
+<body>
+<header class="bar">
+  <div class="titleblock">
+    <h1>Rational Bézier explorer</h1>
+    <a href="bezier.html">see standard Bezier</a>
+  </div>
+  <div class="group">
+    <span class="lbl" id="degLbl">Degree</span>
+    <div class="seg" role="group" aria-labelledby="degLbl" id="degBtns">
+      <button type="button" data-n="2">2</button><button type="button" data-n="3">3</button><button type="button" data-n="4">4</button><button type="button" data-n="5">5</button>
+    </div>
+  </div>
+  <label class="chk"><input type="checkbox" id="optNeg"> Allow negative weights</label>
+  <label class="chk"><input type="checkbox" id="optExt"> Show the whole curve (all t, including ∞)</label>
+  <label class="chk" id="coneLbl"><input type="checkbox" id="optCone"> Show the cone</label>
+  <button type="button" class="btn" id="circBtn">Snap to a circular arc</button>
+  <label class="chk"><input type="checkbox" id="optHull"> Show control polygons</label>
+  <label class="group"><span class="lbl">Snap to</span>
+    <select id="snap">
+      <option value="0.01" selected>0.01</option><option value="0.05">0.05</option>
+      <option value="0.1">0.1</option><option value="0.25">0.25</option>
+      <option value="0.5">0.5</option><option value="1">1</option>
+    </select>
+  </label>
+</header>
+
+<section class="weights" id="weights" aria-label="Weights"></section>
+
+<main class="layout">
+  <section class="views">
+    <figure>
+      <figcaption>Planar view — the rational curve in the 2D plane</figcaption>
+      <div class="cvwrap">
+        <canvas id="cv2"></canvas>
+        <div class="zoom">
+          <button type="button" id="z2in" aria-label="Zoom in">+</button>
+          <button type="button" id="z2out" aria-label="Zoom out">−</button>
+          <button type="button" id="z2fit">Fit</button>
+        </div>
+      </div>
+    </figure>
+    <figure>
+      <figcaption>Homogeneous view — the curve in homogeneous 3D coordinates, along with its projection onto the 2D plane</figcaption>
+      <div class="cvwrap">
+        <canvas id="cv3"></canvas>
+        <div class="zoom">
+          <button type="button" id="z3in" aria-label="Zoom in">+</button>
+          <button type="button" id="z3out" aria-label="Zoom out">−</button>
+          <button type="button" id="z3fit">Reset</button>
+        </div>
+      </div>
+    </figure>
+    <p class="hint"><em>Planar view:</em> drag control points to move them. <em>Homogeneous view:</em> drag a homogeneous control point along its dashed ray to change its weight, or drag the background to move the camera.</p>
+  </section>
+
+  <section class="eqs" id="eqs" aria-label="Equations">
+    <p class="note" id="note" role="status"></p>
+    <div class="block">
+      <h2>Rational Bernstein form</h2>
+      <div class="math" id="mRat"></div>
+      <div class="math" id="mNum"></div>
+      <div class="math" id="mDen"></div>
+    </div>
+    <div class="block">
+      <h2>Standard form</h2>
+      <div class="math" id="mStd"></div>
+      <label class="polyin"><span data-tex="X(t) =">X(t) =</span><input class="code" id="inX" spellcheck="false" autocomplete="off"></label>
+      <label class="polyin"><span data-tex="Y(t) =">Y(t) =</span><input class="code" id="inY" spellcheck="false" autocomplete="off"></label>
+      <label class="polyin"><span data-tex="W(t) =">W(t) =</span><input class="code" id="inW" spellcheck="false" autocomplete="off"></label>
+      <p class="err" id="errPoly"></p>
+    </div>
+    <div class="block">
+      <h2>Homogeneous control points</h2>
+      <div class="math" id="mHom"></div>
+      <p class="meta" id="homMeta"></p>
+    </div>
+    <div class="block">
+      <h2>Control points</h2>
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">x</th><th scope="col">y</th></tr></thead>
+        <tbody id="ptsBody"></tbody>
+      </table>
+      <p class="err" id="errPts"></p>
+    </div>
+    <details class="block">
+      <summary>LaTeX and plain-text source</summary>
+      <pre id="src"></pre>
+    </details>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+<script>
+"use strict";
+// ==== MATH BEGIN =============================================================
+// Exact rationals over BigInt.
+const babs = a => (a < 0n ? -a : a);
+function bgcd(a, b) { a = babs(a); b = babs(b); while (b) { const r = a % b; a = b; b = r; } return a; }
+class Q {
+  constructor(n, d = 1n) {
+    if (d === 0n) throw new Error("Division by zero");
+    if (d < 0n) { n = -n; d = -d; }
+    const g = bgcd(n, d);
+    this.n = g > 1n ? n / g : n;
+    this.d = g > 1n ? d / g : d;
+  }
+  static int(k) { return new Q(BigInt(k)); }
+  add(o) { return new Q(this.n * o.d + o.n * this.d, this.d * o.d); }
+  sub(o) { return new Q(this.n * o.d - o.n * this.d, this.d * o.d); }
+  mul(o) { return new Q(this.n * o.n, this.d * o.d); }
+  div(o) { if (o.n === 0n) throw new Error("Division by zero"); return new Q(this.n * o.d, this.d * o.n); }
+  neg() { return new Q(-this.n, this.d); }
+  isZero() { return this.n === 0n; }
+  sign() { return this.n > 0n ? 1 : this.n < 0n ? -1 : 0; }
+  eq(o) { return this.n === o.n && this.d === o.d; }
+  num() { return Number(this.n) / Number(this.d); }
+}
+const Q0 = new Q(0n), Q1 = new Q(1n);
+function qFromDecimal(s) {
+  const parts = s.split(".");
+  const ip = parts[0] || "0", fp = parts[1] || "";
+  return new Q(BigInt(ip + fp), 10n ** BigInt(fp.length));
+}
+function qTex(q) {
+  if (q.d === 1n) return q.n.toString();
+  return (q.n < 0n ? "-" : "") + "\\frac{" + babs(q.n) + "}{" + q.d + "}";
+}
+function qText(q) { return q.d === 1n ? q.n.toString() : q.n + "/" + q.d; }
+function binom(n, k) {
+  if (k < 0 || k > n) return 0n;
+  let r = 1n;
+  for (let i = 1; i <= k; i++) r = r * BigInt(n - k + i) / BigInt(i);
+  return r;
+}
+function qpow(q, e) { let r = Q1; for (let i = 0; i < e; i++) r = r.mul(q); return r; }
+
+// Univariate polynomials: arrays of Q, index = power. Zero polynomial = [].
+function ptrim(p) { let k = p.length; while (k > 0 && p[k - 1].isZero()) k--; return p.slice(0, k); }
+function pdeg(p) { return ptrim(p).length - 1; }
+function padd(a, b) {
+  const n = Math.max(a.length, b.length), r = [];
+  for (let i = 0; i < n; i++) r.push((a[i] || Q0).add(b[i] || Q0));
+  return ptrim(r);
+}
+function pneg(a) { return a.map(c => c.neg()); }
+function psub(a, b) { return padd(a, pneg(b)); }
+function pscale(a, c) { return ptrim(a.map(x => x.mul(c))); }
+function pmul(a, b) {
+  if (!a.length || !b.length) return [];
+  const r = Array.from({ length: a.length + b.length - 1 }, () => Q0);
+  for (let i = 0; i < a.length; i++) {
+    if (a[i].isZero()) continue;
+    for (let j = 0; j < b.length; j++) r[i + j] = r[i + j].add(a[i].mul(b[j]));
+  }
+  return ptrim(r);
+}
+function ppow(a, e) { let r = [Q1]; for (let i = 0; i < e; i++) r = pmul(r, a); return r; }
+function pdivmod(a, b) {
+  b = ptrim(b);
+  const r = ptrim(a).slice(), db = b.length - 1, lb = b[db];
+  if (r.length - 1 < db) return [[], r];
+  const q = Array.from({ length: r.length - db }, () => Q0);
+  for (let k = r.length - 1 - db; k >= 0; k--) {
+    const c = r[k + db].div(lb);
+    q[k] = c;
+    if (!c.isZero()) for (let j = 0; j <= db; j++) r[k + j] = r[k + j].sub(c.mul(b[j]));
+  }
+  return [ptrim(q), ptrim(r.slice(0, db))];
+}
+function pevalQ(p, t) { let v = Q0; for (let i = p.length - 1; i >= 0; i--) v = v.mul(t).add(p[i]); return v; }
+
+// Basis change (one coordinate). a_k = sum_{i<=k} C(n,k) C(k,i) (-1)^{k-i} p_i ;
+// p_i = sum_{k<=i} C(i,k)/C(n,k) a_k.
+function bernToPow(p) {
+  const n = p.length - 1, a = [];
+  for (let k = 0; k <= n; k++) {
+    let s = Q0;
+    for (let i = 0; i <= k; i++) {
+      const c = binom(n, k) * binom(k, i) * ((k - i) % 2 ? -1n : 1n);
+      s = s.add(p[i].mul(new Q(c)));
+    }
+    a.push(s);
+  }
+  return a;
+}
+function powToBern(a, n) {
+  const p = [];
+  for (let i = 0; i <= n; i++) {
+    let s = Q0;
+    for (let k = 0; k <= i; k++) s = s.add((a[k] || Q0).mul(new Q(binom(i, k), binom(n, k))));
+    p.push(s);
+  }
+  return p;
+}
+function solveQ(A, b) {
+  const n = A.length, M = A.map((r, i) => [...r, b[i]]);
+  for (let c = 0; c < n; c++) {
+    let p = c; while (p < n && M[p][c].isZero()) p++;
+    if (p === n) throw new Error("Singular system");
+    [M[c], M[p]] = [M[p], M[c]];
+    for (let r = 0; r < n; r++) {
+      if (r === c || M[r][c].isZero()) continue;
+      const f = M[r][c].div(M[c][c]);
+      for (let j = c; j <= n; j++) M[r][j] = M[r][j].sub(f.mul(M[c][j]));
+    }
+  }
+  return M.map((r, i) => r[n].div(r[i]));
+}
+
+// Polynomial-in-t parser: numbers, t, + - * / ^ (or **), parentheses, implicit products.
+function parsePoly(src) {
+  src = src.trim();
+  const toks = [], re = /\s*(?:(\d+\.?\d*|\.\d+)|(t)|(\*\*|[-+*/^()]))/y;
+  let pos = 0;
+  while (pos < src.length) {
+    re.lastIndex = pos;
+    const m = re.exec(src);
+    if (!m) throw new Error('Unexpected character "' + src.slice(pos).trim()[0] + '"');
+    if (m[1] !== undefined) toks.push({ type: "num", v: qFromDecimal(m[1]), s: m[1] });
+    else if (m[2] !== undefined) toks.push({ type: "t", s: "t" });
+    else toks.push({ type: "op", v: m[3] === "**" ? "^" : m[3], s: m[3] });
+    pos = re.lastIndex;
+  }
+  if (!toks.length) throw new Error("Enter a polynomial in t");
+  let i = 0;
+  const peek = () => toks[i], next = () => toks[i++];
+  const isOp = (tk, ...ops) => tk && tk.type === "op" && ops.includes(tk.v);
+  const startsAtom = tk => tk && (tk.type === "num" || tk.type === "t" || isOp(tk, "("));
+  function expr() {
+    let v = term();
+    while (isOp(peek(), "+", "-")) { const o = next().v, w = term(); v = o === "+" ? padd(v, w) : psub(v, w); }
+    return v;
+  }
+  function term() {
+    let v = unary();
+    for (;;) {
+      const tk = peek();
+      if (isOp(tk, "*", "/")) {
+        next();
+        const w = unary();
+        if (tk.v === "*") v = pmul(v, w);
+        else {
+          if (pdeg(w) > 0) throw new Error("You can only divide by a constant");
+          if (pdeg(w) < 0) throw new Error("Division by zero");
+          v = pscale(v, Q1.div(w[0]));
+        }
+      } else if (startsAtom(tk)) v = pmul(v, power());
+      else break;
+    }
+    return v;
+  }
+  function unary() {
+    if (isOp(peek(), "+", "-")) { const o = next().v, v = unary(); return o === "-" ? pneg(v) : v; }
+    return power();
+  }
+  function power() {
+    const b = atom();
+    if (isOp(peek(), "^")) {
+      next();
+      const e = unary();
+      if (pdeg(e) > 0) throw new Error("Exponents must be constants");
+      const ev = e.length ? e[0] : Q0;
+      if (ev.d !== 1n || ev.n < 0n || ev.n > 30n) throw new Error("Exponents must be whole numbers from 0 to 30");
+      return ppow(b, Number(ev.n));
+    }
+    return b;
+  }
+  function atom() {
+    const tk = next();
+    if (!tk) throw new Error("The expression ends unexpectedly");
+    if (tk.type === "num") return ptrim([tk.v]);
+    if (tk.type === "t") return [Q0, Q1];
+    if (isOp(tk, "(")) {
+      const v = expr(), c = next();
+      if (!isOp(c, ")")) throw new Error('Missing ")"');
+      return v;
+    }
+    throw new Error('Unexpected "' + tk.s + '"');
+  }
+  const r = expr();
+  if (i < toks.length) throw new Error('Unexpected "' + toks[i].s + '"');
+  return r;
+}
+function parseConst(src) {
+  const p = parsePoly(src);
+  if (pdeg(p) > 0) throw new Error("Enter a number, not an expression in t");
+  return p.length ? p[0] : Q0;
+}
+
+// Formatting.
+function polyTex(p, v = "t") {
+  p = ptrim(p);
+  if (!p.length) return "0";
+  let s = "";
+  for (let i = p.length - 1; i >= 0; i--) {
+    const c = p[i];
+    if (c.isZero()) continue;
+    const neg = c.sign() < 0, ac = neg ? c.neg() : c;
+    const mono = i === 0 ? "" : i === 1 ? v : v + "^{" + i + "}";
+    const coef = ac.eq(Q1) && mono ? "" : qTex(ac);
+    s += (s ? (neg ? " - " : " + ") : (neg ? "-" : "")) + coef + mono;
+  }
+  return s;
+}
+function polyText(p, v = "t") {
+  p = ptrim(p);
+  if (!p.length) return "0";
+  let s = "";
+  for (let i = p.length - 1; i >= 0; i--) {
+    const c = p[i];
+    if (c.isZero()) continue;
+    const neg = c.sign() < 0, ac = neg ? c.neg() : c;
+    const mono = i === 0 ? "" : i === 1 ? v : v + "^" + i;
+    const coef = ac.eq(Q1) && mono ? "" : qText(ac) + (mono ? "*" : "");
+    s += (s ? (neg ? " - " : " + ") : (neg ? "-" : "")) + coef + mono;
+  }
+  return s;
+}
+
+// ==== MATH END ===============================================================
+
+// ---- rational Bézier specifics ----------------------------------------------
+// A control point is { x, y, w } with w > 0; its homogeneous lift is w * (x, y, 1).
+const homOf = p => ({ x: p.x.mul(p.w), y: p.y.mul(p.w), z: p.w });
+function fromHom(H) {
+  if (H.some(h => h.z.isZero())) return null;         // a point at infinity has no affine image
+  return H.map(h => ({ x: h.x.div(h.z), y: h.y.div(h.z), w: h.z }));
+}
+function elevateH(P) {
+  const H = P.map(homOf), n = H.length - 1, R = [];
+  for (let i = 0; i <= n + 1; i++) {
+    const a = new Q(BigInt(i), BigInt(n + 1)), b = Q1.sub(a);
+    const u = i > 0 ? H[i - 1] : { x: Q0, y: Q0, z: Q0 }, v = i <= n ? H[i] : { x: Q0, y: Q0, z: Q0 };
+    R.push({ x: a.mul(u.x).add(b.mul(v.x)), y: a.mul(u.y).add(b.mul(v.y)), z: a.mul(u.z).add(b.mul(v.z)) });
+  }
+  return fromHom(R);
+}
+// Exact when the homogeneous curve already has degree <= N; otherwise interpolate it at t = k/N.
+function lowerH(P, N) {
+  const H = P.map(homOf);
+  const C = ["x", "y", "z"].map(c => ptrim(bernToPow(H.map(h => h[c]))));
+  const exact = Math.max(...C.map(p => p.length)) - 1 <= N;
+  let B;
+  if (exact) B = C.map(p => powToBern(p, N));
+  else {
+    const ts = []; for (let k = 0; k <= N; k++) ts.push(new Q(BigInt(k), BigInt(N)));
+    const M = ts.map(t => { const row = []; for (let i = 0; i <= N; i++) row.push(new Q(binom(N, i)).mul(qpow(t, i)).mul(qpow(Q1.sub(t), N - i))); return row; });
+    B = C.map(p => solveQ(M, ts.map(t => pevalQ(p, t))));
+  }
+  const grid = new Q(1n, 100n), snap = q => Q.int(Math.round(q.num() / grid.num())).mul(grid);
+  const out = [];
+  for (let i = 0; i <= N; i++) {
+    const h = { x: B[0][i], y: B[1][i], z: B[2][i] };
+    if (h.z.isZero()) return null;                      // a zero weight has no ray: refuse
+    const p = { x: h.x.div(h.z), y: h.y.div(h.z), w: h.z };
+    const k = Math.round(p.w.num() * 100);
+    out.push(exact ? p : { x: snap(p.x), y: snap(p.y), w: clampW(new Q(BigInt(k || (p.w.sign() < 0 ? -1 : 1)), 100n)) });
+  }
+  return { P: out, exact };
+}
+// TeX pieces (first piece unsigned, later ones start with a separator).
+const bernFactors = (i, n) => (i === 0 ? "" : i === 1 ? "t" : "t^{" + i + "}") + (n - i === 0 ? "" : n - i === 1 ? "(1-t)" : "(1-t)^{" + (n - i) + "}");
+function numPieces(P) {
+  const n = P.length - 1;
+  return P.map((p, i) => {
+    const c = p.w.mul(new Q(binom(n, i)));
+    const body = (c.eq(Q1) ? "" : qTex(c)) + bernFactors(i, n) + "\\begin{pmatrix}" + qTex(p.x) + "\\\\" + qTex(p.y) + "\\end{pmatrix}";
+    return i === 0 ? body : " + " + body;
+  });
+}
+function denPieces(P) {
+  const n = P.length - 1;
+  return P.map((p, i) => {
+    const c = p.w.mul(new Q(binom(n, i)));
+    const body = (c.eq(Q1) ? "" : qTex(c)) + bernFactors(i, n);
+    return i === 0 ? body : " + " + body;
+  });
+}
+function homPieces(P) {
+  return P.map((p, i) => {
+    const h = homOf(p);
+    const body = "\\tilde P_{" + i + "} = \\begin{pmatrix}" + qTex(h.x) + "\\\\" + qTex(h.y) + "\\\\" + qTex(h.z) + "\\end{pmatrix}";
+    return i === 0 ? body : "\\quad " + body;
+  });
+}
+function flowTex(head, pieces, tail, L) {
+  const n = pieces.length, per = Math.ceil(n / Math.max(1, L)), lines = [];
+  for (let i = 0; i < n; i += per) lines.push(pieces.slice(i, i + per).join(""));
+  return "\\begin{aligned}" + head + lines.join(" \\\\ &\\quad ") + tail + "\\end{aligned}";
+}
+
+// ==== APP ====================================================================
+const $ = id => document.getElementById(id);
+const cv2 = $("cv2"), ctx2 = cv2.getContext("2d");
+const cv3 = $("cv3"), ctx3 = cv3.getContext("2d");
+const inX = $("inX"), inY = $("inY"), inW = $("inW"), errPoly = $("errPoly"), errPts = $("errPts"), noteEl = $("note");
+
+const DEFAULTS = {
+  2: [["0", "0", "1"], ["2", "3", "2"], ["4", "0", "1"]],
+  3: [["0", "0", "1"], ["1", "3", "1"], ["3", "-1", "2"], ["4", "2", "1"]],
+  4: [["0", "0", "1"], ["0.5", "3", "1.5"], ["2", "-1", "1"], ["3.5", "3", "0.5"], ["4", "0", "1"]],
+  5: [["0", "0", "1"], ["0.5", "3", "1"], ["1.5", "-1", "2"], ["2.5", "3", "1"], ["3.5", "-1", "0.5"], ["4", "2", "1"]]
+};
+const defaultPoints = n => DEFAULTS[n].map(([x, y, w]) => ({ x: parseConst(x), y: parseConst(y), w: parseConst(w) }));
+const WSLIDER = 8;          // slider range; the text field accepts any nonzero value
+const WEPS = new Q(1n, 100n);   // the smallest positive weight, used when negatives are off
+
+const st = {
+  P: defaultPoints(2),
+  v2: { cx: 2, cy: 1, scale: 80 },
+  cam: { th: -2.25, ph: 0.5, r: 11, target: [2, 1, 0.6] },
+  ext: false, hull: true, neg: false, cone: false,
+  snap: new Q(1n, 100n),
+  hover2: -1, hover3: -1, drag2: null, drag3: null
+};
+let D = null, colors = {}, proj3 = [];
+
+function readColors() {
+  const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
+  colors = {
+    panel: g("--panel"), ink: g("--ink"), muted: g("--muted"), grid: g("--grid"), gridMajor: g("--grid-major"),
+    axis: g("--axis"), curve: g("--curve"), pointFill: g("--point-fill"), teal: g("--teal"),
+    tealSoft: g("--teal-soft"), warm: g("--warm"), line: g("--line"), font: g("--font-ui")
+  };
+}
+
+const clampW = wq => (st.neg ? (wq.isZero() ? WEPS : wq) : (wq.sign() > 0 ? wq : WEPS));
+
+function derive() {
+  const P = st.P;
+  const X = ptrim(bernToPow(P.map(p => p.x.mul(p.w))));
+  const Y = ptrim(bernToPow(P.map(p => p.y.mul(p.w))));
+  const W = ptrim(bernToPow(P.map(p => p.w)));
+  D = {
+    X, Y, W,
+    Xf: X.map(c => c.num()), Yf: Y.map(c => c.num()), Wf: W.map(c => c.num()),
+    Pf: P.map(p => ({ x: p.x.num(), y: p.y.num(), w: p.w.num() })),
+    Hf: P.map(p => [p.x.num() * p.w.num(), p.y.num() * p.w.num(), p.w.num()]),
+    Cf: P.map((_, i) => Number(binom(P.length - 1, i)))
+  };
+}
+const horner = (c, t) => { let v = 0; for (let i = c.length - 1; i >= 0; i--) v = v * t + c[i]; return v; };
+function niceStep(raw) {
+  if (!(raw > 0) || !isFinite(raw)) return 1;
+  const p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+  return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p;
+}
+// Affine curve samples, split into runs wherever W(t) crosses zero (only possible outside [0, 1]).
+function affineRuns(t0, t1, N) {
+  const runs = []; let cur = [], prevW = 0;
+  for (let i = 0; i <= N; i++) {
+    const t = t0 + (t1 - t0) * i / N, w = horner(D.Wf, t);
+    const bad = !isFinite(w) || Math.abs(w) < 1e-9 || (i && prevW * w < 0);
+    if (bad) { if (cur.length > 1) runs.push(cur); cur = []; prevW = w; continue; }
+    const x = horner(D.Xf, t) / w, y = horner(D.Yf, t) / w;
+    if (isFinite(x) && isFinite(y) && Math.abs(x) < 1e7 && Math.abs(y) < 1e7) cur.push([x, y]);
+    else { if (cur.length > 1) runs.push(cur); cur = []; }
+    prevW = w;
+  }
+  if (cur.length > 1) runs.push(cur);
+  return runs;
+}
+const hom3 = t => [horner(D.Xf, t), horner(D.Yf, t), horner(D.Wf, t)];
+// Bernstein form evaluated at a homogeneous parameter (a, b) ∝ (t, 1 - t).
+function homAB(a, b) {
+  const P = D.Pf, n = P.length - 1;
+  let X = 0, Y = 0, W = 0;
+  for (let i = 0; i <= n; i++) {
+    const w = D.Cf[i] * Math.pow(a, i) * Math.pow(b, n - i) * P[i].w;
+    X += w * P[i].x; Y += w * P[i].y; W += w;
+  }
+  return [X, Y, W];
+}
+// The parameter domain is really the projective line: sampling (a, b) = (cos θ, sin θ) for
+// θ ∈ [0, π) hits every t exactly once, with t = ∞ at θ = 3π/4 and t = 1 at both ends. So this
+// draws the entire real curve (for degree 2, the whole conic) instead of a truncated t-interval.
+// θ ∈ [0, π/2] is the arc t ∈ [0, 1]; θ ∈ (π/2, π) is everything else.
+function projectiveRuns(N, part) {
+  const lo = part === "unit" ? 0 : Math.PI / 2, hi = part === "unit" ? Math.PI / 2 : Math.PI;
+  const runs = []; let cur = [], prevW = 0;
+  for (let k = 0; k <= N; k++) {
+    const th = lo + (hi - lo) * k / N, a = Math.cos(th), b = Math.sin(th);
+    const v = homAB(a, b), W = v[2];
+    const bad = !isFinite(W) || W === 0 || (k && prevW * W < 0);
+    prevW = W;
+    if (bad) { if (cur.length > 1) runs.push(cur); cur = []; continue; }
+    const x = v[0] / W, y = v[1] / W;
+    if (isFinite(x) && isFinite(y) && Math.abs(x) < 1e7 && Math.abs(y) < 1e7) cur.push([x, y]);
+    else { if (cur.length > 1) runs.push(cur); cur = []; }
+  }
+  if (cur.length > 1) runs.push(cur);
+  return runs;
+}
+
+// ---- 2D view ----------------------------------------------------------------
+function draw2() {
+  const W = cv2.clientWidth, H = cv2.clientHeight;
+  if (!W || !H || !D) return;
+  const dpr = window.devicePixelRatio || 1;
+  if (cv2.width !== Math.round(W * dpr) || cv2.height !== Math.round(H * dpr)) { cv2.width = Math.round(W * dpr); cv2.height = Math.round(H * dpr); }
+  ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx2.fillStyle = colors.panel; ctx2.fillRect(0, 0, W, H);
+  const v = st.v2, sx = x => W / 2 + (x - v.cx) * v.scale, sy = y => H / 2 - (y - v.cy) * v.scale;
+  drawGrid2(W, H, sx, sy);
+  const poly = pts => { ctx2.beginPath(); pts.forEach((p, i) => i ? ctx2.lineTo(sx(p[0]), sy(p[1])) : ctx2.moveTo(sx(p[0]), sy(p[1]))); ctx2.stroke(); };
+  if (st.ext) {
+    ctx2.save(); ctx2.strokeStyle = colors.curve; ctx2.globalAlpha = 0.45; ctx2.lineWidth = 1.6; ctx2.setLineDash([6, 5]);
+    projectiveRuns(3000, "rest").forEach(poly);
+    ctx2.restore();
+  }
+  if (st.hull) {
+    ctx2.save(); ctx2.strokeStyle = colors.curve; ctx2.lineWidth = 2; ctx2.setLineDash([12, 8]);
+    poly(D.Pf.map(p => [p.x, p.y]));
+    ctx2.restore();
+  }
+  ctx2.save(); ctx2.strokeStyle = colors.curve; ctx2.lineWidth = 4; ctx2.lineJoin = "round"; ctx2.lineCap = "round";
+  affineRuns(0, 1, 400).forEach(poly);
+  ctx2.restore();
+  const n = D.Pf.length - 1;
+  ctx2.save();
+  D.Pf.forEach((p, i) => {
+    const X = sx(p.x), Y = sy(p.y), big = i === st.hover2 || (st.drag2 && st.drag2.i === i);
+    ctx2.beginPath();
+    if (i === 0 || i === n) {
+      ctx2.arc(X, Y, big ? 9.5 : 8, 0, 2 * Math.PI);
+      ctx2.fillStyle = colors.pointFill; ctx2.fill(); ctx2.lineWidth = 3.5; ctx2.strokeStyle = colors.curve; ctx2.stroke();
+    } else {
+      ctx2.arc(X, Y, big ? 8.5 : 7, 0, 2 * Math.PI); ctx2.fillStyle = colors.curve; ctx2.fill();
+    }
+    ctx2.fillStyle = colors.ink;
+    ctx2.font = "italic 15px " + colors.font; ctx2.fillText("P", X + 11, Y - 10);
+    ctx2.font = "11px " + colors.font; ctx2.fillText(String(i), X + 20, Y - 6);
+    ctx2.fillStyle = colors.muted; ctx2.font = "12px " + colors.font;
+    ctx2.fillText("w = " + (+p.w.toFixed(2)), X + 11, Y + 18);
+  });
+  ctx2.restore();
+}
+function drawGrid2(W, H, sx, sy) {
+  const v = st.v2, step = niceStep(90 / v.scale), minor = step / 5;
+  const wx = px => v.cx + (px - W / 2) / v.scale, wy = py => v.cy - (py - H / 2) / v.scale;
+  const x0 = wx(0), x1 = wx(W), y0 = wy(H), y1 = wy(0);
+  const lines = (s, color) => {
+    ctx2.strokeStyle = color; ctx2.lineWidth = 1; ctx2.beginPath();
+    for (let k = Math.ceil(x0 / s), c = 0; k * s <= x1 && c < 600; k++, c++) { const X = Math.round(sx(k * s)) + 0.5; ctx2.moveTo(X, 0); ctx2.lineTo(X, H); }
+    for (let k = Math.ceil(y0 / s), c = 0; k * s <= y1 && c < 600; k++, c++) { const Y = Math.round(sy(k * s)) + 0.5; ctx2.moveTo(0, Y); ctx2.lineTo(W, Y); }
+    ctx2.stroke();
+  };
+  if (minor * v.scale >= 9) lines(minor, colors.grid);
+  lines(step, colors.gridMajor);
+  ctx2.strokeStyle = colors.axis; ctx2.lineWidth = 2.25; ctx2.beginPath();
+  const ax = Math.round(sx(0)) + 0.5, ay = Math.round(sy(0)) + 0.5;
+  if (ax >= 0 && ax <= W) { ctx2.moveTo(ax, 0); ctx2.lineTo(ax, H); }
+  if (ay >= 0 && ay <= H) { ctx2.moveTo(0, ay); ctx2.lineTo(W, ay); }
+  ctx2.stroke();
+  const dec = Math.max(0, -Math.floor(Math.log10(step) + 1e-9)) + (step / Math.pow(10, Math.floor(Math.log10(step))) === 2.5 ? 1 : 0);
+  ctx2.fillStyle = colors.muted; ctx2.font = "12px " + colors.font;
+  const ly = Math.min(Math.max(ay + 15, 15), H - 5), lx = Math.min(Math.max(ax - 6, 30), W - 4);
+  ctx2.textAlign = "center";
+  for (let k = Math.ceil(x0 / step); k * step <= x1; k++) if (k) ctx2.fillText((k * step).toFixed(dec), sx(k * step), ly);
+  ctx2.textAlign = "right";
+  for (let k = Math.ceil(y0 / step); k * step <= y1; k++) if (k) ctx2.fillText((k * step).toFixed(dec), lx, sy(k * step) + 4);
+  ctx2.textAlign = "left";
+}
+
+// ---- 3D view ----------------------------------------------------------------
+const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+const scl = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const nrm = a => { const L = Math.hypot(a[0], a[1], a[2]) || 1; return scl(a, 1 / L); };
+const NEAR = 0.05;
+const RZ = 2.5;                       // z is stretched for display only
+const PLANE = 6;                      // fixed half-extent of the drawn z = 1 plane
+const toView = p => [p[0], p[1], p[2] * RZ];
+
+function camera() {
+  const W = cv3.clientWidth, H = cv3.clientHeight, c = st.cam;
+  const T = toView(c.target);
+  const C = [
+    T[0] + c.r * Math.cos(c.ph) * Math.cos(c.th),
+    T[1] + c.r * Math.cos(c.ph) * Math.sin(c.th),
+    T[2] + c.r * Math.sin(c.ph)
+  ];
+  const f = nrm(sub(T, C));
+  const up = Math.abs(f[2]) > 0.995 ? [0, 1, 0] : [0, 0, 1];
+  const rt = nrm(cross(f, up)), u = cross(rt, f);
+  return { C, f, rt, u, W, H, focal: (H / 2) / Math.tan(26 * Math.PI / 180) };
+}
+function proj(cm, p) {
+  const v = sub(toView(p), cm.C), z = dot(v, cm.f);
+  return { x: cm.W / 2 + cm.focal * dot(v, cm.rt) / z, y: cm.H / 2 - cm.focal * dot(v, cm.u) / z, z };
+}
+function clipSeg(cm, p, q) {                       // clip against the near plane (in view space)
+  let a = toView(p), b = toView(q);
+  const zp = dot(sub(a, cm.C), cm.f), zq = dot(sub(b, cm.C), cm.f);
+  if (zp < NEAR && zq < NEAR) return null;
+  if (zp < NEAR) a = add(a, scl(sub(b, a), (NEAR - zp) / (zq - zp)));
+  else if (zq < NEAR) b = add(b, scl(sub(a, b), (NEAR - zq) / (zp - zq)));
+  const pv = v => { const d = sub(v, cm.C), z = dot(d, cm.f); return { x: cm.W / 2 + cm.focal * dot(d, cm.rt) / z, y: cm.H / 2 - cm.focal * dot(d, cm.u) / z, z }; };
+  return [pv(a), pv(b)];
+}
+function stroke3(cm, pts, closed) {
+  ctx3.beginPath();
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const s = clipSeg(cm, pts[i], pts[i + 1]);
+    if (s) { ctx3.moveTo(s[0].x, s[0].y); ctx3.lineTo(s[1].x, s[1].y); }
+  }
+  if (closed && pts.length > 2) { const s = clipSeg(cm, pts[pts.length - 1], pts[0]); if (s) { ctx3.moveTo(s[0].x, s[0].y); ctx3.lineTo(s[1].x, s[1].y); } }
+  ctx3.stroke();
+}
+// Degree 2 only: the lifted curve is a plane conic, so the rays from the origin through it
+// sweep out a quadric cone, whose section by z = 1 is the rational curve.
+function coneDirection(a, b) {
+  const v = homAB(a, b), L = Math.hypot(v[0], v[1], v[2]);
+  return L > 1e-12 ? [v[0] / L, v[1] / L, v[2] / L] : null;
+}
+function clipScale(d, m, zmax) {
+  return Math.min(m / Math.max(Math.abs(d[0]), 1e-9), m / Math.max(Math.abs(d[1]), 1e-9), zmax / Math.max(Math.abs(d[2]), 1e-9));
+}
+function drawCone(cm) {
+  const m = PLANE, zmax = 3.2, N = 96;
+  ctx3.save();
+  ctx3.strokeStyle = colors.teal; ctx3.globalAlpha = 0.3; ctx3.lineWidth = 1;
+  for (let k = 0; k < N; k++) {
+    const th = Math.PI * k / N, d = coneDirection(Math.cos(th), Math.sin(th));
+    if (!d) continue;
+    const s = clipScale(d, m, zmax);
+    stroke3(cm, [scl(d, -s), scl(d, s)]);       // both nappes
+  }
+  ctx3.restore();
+}
+function draw3() {
+  const W = cv3.clientWidth, H = cv3.clientHeight;
+  if (!W || !H || !D) return;
+  const dpr = window.devicePixelRatio || 1;
+  if (cv3.width !== Math.round(W * dpr) || cv3.height !== Math.round(H * dpr)) { cv3.width = Math.round(W * dpr); cv3.height = Math.round(H * dpr); }
+  ctx3.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx3.fillStyle = colors.panel; ctx3.fillRect(0, 0, W, H);
+  const cm = camera(), m = PLANE;
+
+  // the plane z = 1, its grid, and the coordinate axes
+  const corners = [[-m, -m, 1], [m, -m, 1], [m, m, 1], [-m, m, 1]].map(p => proj(cm, p));
+  if (corners.every(c => c.z > NEAR)) {
+    ctx3.save(); ctx3.globalAlpha = 0.45; ctx3.fillStyle = colors.grid;
+    ctx3.beginPath(); corners.forEach((c, i) => i ? ctx3.lineTo(c.x, c.y) : ctx3.moveTo(c.x, c.y)); ctx3.closePath(); ctx3.fill();
+    ctx3.restore();
+  }
+  ctx3.save();
+  ctx3.strokeStyle = colors.gridMajor; ctx3.lineWidth = 1;
+  for (let k = -m; k <= m; k++) { stroke3(cm, [[k, -m, 1], [k, m, 1]]); stroke3(cm, [[-m, k, 1], [m, k, 1]]); }
+  ctx3.restore();
+  ctx3.save();
+  ctx3.strokeStyle = colors.axis; ctx3.lineWidth = 2;
+  stroke3(cm, [[-m, 0, 0], [m, 0, 0]]); stroke3(cm, [[0, -m, 0], [0, m, 0]]); stroke3(cm, [[0, 0, -0.5], [0, 0, 3.2]]);
+  ctx3.fillStyle = colors.muted; ctx3.font = "italic 15px " + colors.font;
+  [[[m * 1.04, 0, 0], "x"], [[0, m * 1.04, 0], "y"], [[0, 0, 3.35], "z"]].forEach(([p, s]) => {
+    const q = proj(cm, p); if (q.z > NEAR) ctx3.fillText(s, q.x + 3, q.y - 3);
+  });
+  const o = proj(cm, [0, 0, 0]);
+  if (o.z > NEAR) { ctx3.beginPath(); ctx3.arc(o.x, o.y, 3.5, 0, 2 * Math.PI); ctx3.fillStyle = colors.axis; ctx3.fill(); }
+  ctx3.restore();
+
+  if (st.cone && D.Pf.length === 3) drawCone(cm);
+
+  // dashed rays through the homogeneous control points
+  ctx3.save();
+  ctx3.strokeStyle = colors.curve; ctx3.globalAlpha = 0.65; ctx3.lineWidth = 1.5; ctx3.setLineDash([9, 7]);
+  D.Pf.forEach(p => {
+    const V = [p.x, p.y, 1];
+    const hi = Math.max(p.w, 1) * 1.25, lo = Math.min(p.w, 0) * 1.25 - 0.15;
+    stroke3(cm, [scl(V, lo), scl(V, hi)]);       // the whole line through the origin, so w < 0 is covered
+  });
+  ctx3.restore();
+
+  // projection in the plane z = 1: control polygon, points, and the rational curve
+  const lift = pts => pts.map(p => [p[0], p[1], 1]);
+  if (st.hull) {
+    ctx3.save(); ctx3.strokeStyle = colors.curve; ctx3.globalAlpha = 0.5; ctx3.lineWidth = 1.5; ctx3.setLineDash([10, 7]);
+    stroke3(cm, lift(D.Pf.map(p => [p.x, p.y])));
+    ctx3.restore();
+  }
+  ctx3.save();
+  ctx3.strokeStyle = colors.curve; ctx3.lineWidth = 3; ctx3.lineJoin = "round";
+  affineRuns(0, 1, 260).forEach(r => stroke3(cm, lift(r)));
+  if (st.ext) { ctx3.globalAlpha = 0.45; ctx3.setLineDash([6, 5]); ctx3.lineWidth = 1.6; projectiveRuns(1500, "rest").forEach(r => stroke3(cm, lift(r))); }
+  ctx3.restore();
+
+  // the homogeneous (polynomial) curve and its control polygon
+  const curve3 = []; for (let i = 0; i <= 260; i++) curve3.push(hom3(i / 260));
+  if (st.hull) {
+    ctx3.save(); ctx3.strokeStyle = colors.teal; ctx3.globalAlpha = 0.75; ctx3.lineWidth = 1.5; ctx3.setLineDash([10, 7]);
+    stroke3(cm, D.Hf);
+    ctx3.restore();
+  }
+  ctx3.save(); ctx3.strokeStyle = colors.teal; ctx3.lineWidth = 3.5; ctx3.lineJoin = "round";
+  stroke3(cm, curve3);
+  if (st.ext) {
+    ctx3.globalAlpha = 0.45; ctx3.setLineDash([6, 5]); ctx3.lineWidth = 1.8;
+    const e1 = [], e2 = [];
+    for (let i = 0; i <= 120; i++) { e1.push(hom3(-1.6 + 1.6 * i / 120)); e2.push(hom3(1 + 1.6 * i / 120)); }
+    stroke3(cm, e1); stroke3(cm, e2);
+  }
+  ctx3.restore();
+
+  // points: projected control points on z = 1, then the homogeneous ones
+  const n = D.Pf.length - 1;
+  ctx3.save();
+  D.Pf.forEach((p, i) => {
+    const q = proj(cm, [p.x, p.y, 1]);
+    if (q.z <= NEAR) return;
+    ctx3.beginPath(); ctx3.arc(q.x, q.y, i === 0 || i === n ? 7 : 6, 0, 2 * Math.PI);
+    if (i === 0 || i === n) { ctx3.fillStyle = colors.pointFill; ctx3.fill(); ctx3.lineWidth = 3; ctx3.strokeStyle = colors.curve; ctx3.stroke(); }
+    else { ctx3.fillStyle = colors.curve; ctx3.fill(); }
+    ctx3.fillStyle = colors.muted; ctx3.font = "italic 13px " + colors.font;
+    ctx3.fillText("P", q.x + 9, q.y + 15); ctx3.font = "10px " + colors.font; ctx3.fillText(String(i), q.x + 16, q.y + 18);
+  });
+  proj3 = D.Hf.map(h => proj(cm, h));
+  proj3.forEach((q, i) => {
+    if (q.z <= NEAR) return;
+    const big = i === st.hover3 || (st.drag3 && st.drag3.i === i);
+    ctx3.beginPath(); ctx3.arc(q.x, q.y, big ? 9 : 7.5, 0, 2 * Math.PI);
+    ctx3.fillStyle = D.Pf[i].w < 0 ? colors.warm : colors.teal; ctx3.fill();
+    ctx3.lineWidth = 2; ctx3.strokeStyle = colors.panel; ctx3.stroke();
+    ctx3.fillStyle = colors.teal; ctx3.font = "italic 15px " + colors.font;
+    ctx3.fillText("P\u0303", q.x + 11, q.y - 9);
+    ctx3.font = "10px " + colors.font; ctx3.fillText(String(i), q.x + 21, q.y - 5);
+  });
+  ctx3.restore();
+}
+
+// ---- equations --------------------------------------------------------------
+function setMath(el, tex) {
+  if (el._tex === tex) return;
+  el._tex = tex;
+  if (window.katex) {
+    try { el.innerHTML = katex.renderToString(tex, { displayMode: true, throwOnError: false }); el.classList.remove("fallback"); return; } catch (e) { /* fall through */ }
+  }
+  el.classList.add("fallback"); el.textContent = tex;
+}
+function flowMath(el, head, pieces, tail) {
+  const n = pieces.length, fits = () => el.scrollWidth <= el.clientWidth + 1;
+  let L = Math.min(Math.max(el._lines || 1, 1), n);
+  setMath(el, flowTex(head, pieces, tail, L));
+  if (!fits()) { while (!fits() && L < n) { L++; setMath(el, flowTex(head, pieces, tail, L)); } }
+  else {
+    while (L > 1) {
+      setMath(el, flowTex(head, pieces, tail, L - 1));
+      if (fits()) L--; else { setMath(el, flowTex(head, pieces, tail, L)); break; }
+    }
+  }
+  el._lines = L;
+  return flowTex(head, pieces, tail, L);
+}
+function poles(lo, hi) {
+  const out = [], N = 2000;
+  let prev = horner(D.Wf, lo), pt = lo;
+  for (let i = 1; i <= N; i++) {
+    const t = lo + (hi - lo) * i / N, w = horner(D.Wf, t);
+    if (prev === 0) out.push(pt);
+    else if (prev * w < 0) {
+      let a = pt, b = t, fa = prev;
+      for (let k = 0; k < 60; k++) { const m = (a + b) / 2, fm = horner(D.Wf, m); if (fa * fm <= 0) b = m; else { a = m; fa = fm; } }
+      out.push((a + b) / 2);
+    }
+    prev = w; pt = t;
+  }
+  return out;
+}
+function poleNote() {
+  const ps = poles(0, 1);
+  if (!ps.length) return "";
+  return " W(t) vanishes at t ≈ " + ps.slice(0, 3).map(t => t.toFixed(4)).join(", ")
+    + (ps.length > 3 ? ", …" : "") + ", so the drawn arc runs off to infinity there: the homogeneous curve crosses the plane z = 0, which the projection sends to the line at infinity.";
+}
+function conicNote(P) {
+  if (P.length !== 3) return "";
+  const w0 = P[0].w.num(), w1 = P[1].w.num(), w2 = P[2].w.num();
+  if (w0 * w2 <= 0) return " With three control points the curve still lies on a conic, but w\u2080 and w\u2082 have opposite signs, so the shape invariant w\u0302\u00B2 = w\u2081\u00B2/(w\u2080w\u2082) is negative and the usual ellipse/parabola/hyperbola test by |w\u0302| doesn't apply.";
+  const w = w1 / Math.sqrt(w0 * w2), a = Math.abs(w);
+  const kind = Math.abs(a - 1) < 1e-9 ? "a parabola" : a < 1 ? "an ellipse" : "a hyperbola";
+  return " With three control points the curve is a conic arc: the shape invariant w\u0302 = w\u2081/\u221A(w\u2080w\u2082) = "
+    + (+w.toFixed(4)) + ", so the curve lies on " + kind + " (assuming the control points aren't collinear).";
+}
+function updatePanels() {
+  const { X, Y, W } = D, P = st.P, n = P.length - 1;
+  const rat = "C(t) = \\frac{\\sum_{i=0}^{" + n + "} w_i B_i^{" + n + "}(t)\\, P_i}{\\sum_{i=0}^{" + n + "} w_i B_i^{" + n + "}(t)} = \\frac{N(t)}{W(t)}";
+  setMath($("mRat"), rat);
+  const num = flowMath($("mNum"), "N(t) &= ", numPieces(P), "");
+  const den = flowMath($("mDen"), "W(t) &= ", denPieces(P), "");
+  const std = "\\begin{aligned}x(t) &= \\frac{" + polyTex(X) + "}{" + polyTex(W) + "} \\\\[4pt] y(t) &= \\frac{" + polyTex(Y) + "}{" + polyTex(W) + "}\\end{aligned}";
+  setMath($("mStd"), std);
+  const hom = flowMath($("mHom"), "&", homPieces(P), "");
+  $("homMeta").textContent =
+    "The curve in the homogeneous view is the ordinary Bézier curve with control points P̃ᵢ = wᵢ(xᵢ, yᵢ, 1). "
+    + "Dividing by its third coordinate, which is the central projection from the origin onto z = 1, gives the rational curve."
+    + conicNote(P) + poleNote();
+  if (document.activeElement !== inX) inX.value = polyText(X);
+  if (document.activeElement !== inY) inY.value = polyText(Y);
+  if (document.activeElement !== inW) inW.value = polyText(W);
+  P.forEach((p, i) => {
+    const row = rows[i];
+    if (!row) return;
+    if (document.activeElement !== row.x) row.x.value = qText(p.x);
+    if (document.activeElement !== row.y) row.y.value = qText(p.y);
+    if (document.activeElement !== row.w) row.w.value = String(Math.min(Math.max(p.w.num(), -WSLIDER), WSLIDER));
+    if (document.activeElement !== row.readout) row.readout.value = qText(p.w);
+  });
+  $("src").textContent =
+    "% Rational Bernstein form\n" + rat + "\n" + num + "\n" + den +
+    "\n\n% Standard form\n" + std + "\n\n% Homogeneous control points\n" + hom +
+    "\n\nPlain text\nX(t) = " + polyText(X) + "\nY(t) = " + polyText(Y) + "\nW(t) = " + polyText(W) +
+    "\nweights = [" + P.map(p => qText(p.w)).join(", ") + "]\n";
+}
+
+// ---- scheduling -------------------------------------------------------------
+let pendFull = false, pend2 = false, pend3 = false;
+function scheduleFull() {
+  if (pendFull) return;
+  pendFull = true;
+  requestAnimationFrame(() => { pendFull = pend2 = pend3 = false; derive(); draw2(); draw3(); updatePanels(); });
+}
+function schedule2() { if (pend2 || pendFull) return; pend2 = true; requestAnimationFrame(() => { pend2 = false; draw2(); }); }
+function schedule3() { if (pend3 || pendFull) return; pend3 = true; requestAnimationFrame(() => { pend3 = false; draw3(); }); }
+function setPoints(P) { st.P = P; scheduleFull(); }
+function note(msg) { noteEl.textContent = msg || ""; }
+
+// ---- table ------------------------------------------------------------------
+let rows = [];
+function buildTable() {
+  const body = $("ptsBody");
+  body.replaceChildren();
+  $("weights").replaceChildren();
+  rows = [];
+  st.P.forEach((_, i) => {
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.scope = "row"; th.innerHTML = "<i>P</i><sub>" + i + "</sub>";
+    tr.append(th);
+    const mk = key => {
+      const td = document.createElement("td"), inp = document.createElement("input");
+      inp.type = "text"; inp.spellcheck = false; inp.autocomplete = "off";
+      inp.setAttribute("aria-label", "P" + i + " " + key);
+      const apply = () => {
+        try {
+          const val = parseConst(inp.value);
+          if (st.P[i][key].eq(val)) { errPts.textContent = ""; return; }
+          const P = st.P.map(p => ({ x: p.x, y: p.y, w: p.w }));
+          P[i][key] = val; errPts.textContent = ""; note(""); setPoints(P);
+        } catch (e) { errPts.textContent = "P" + i + " " + key + ": " + e.message + "."; }
+      };
+      inp.addEventListener("keydown", e => { if (e.key === "Enter") apply(); });
+      inp.addEventListener("change", apply);
+      inp.addEventListener("blur", scheduleFull);
+      td.append(inp); tr.append(td);
+      return inp;
+    };
+    const xi = mk("x"), yi = mk("y");
+    body.append(tr);
+
+    // the weight slider lives in the row above the plots
+    const item = document.createElement("div");
+    item.className = "witem";
+    const lab = document.createElement("span");
+    lab.className = "wlab";
+    lab.innerHTML = "w<sub>" + i + "</sub>";
+    const sl = document.createElement("input");
+    sl.type = "range"; sl.min = String(st.neg ? -WSLIDER : WEPS.num()); sl.max = String(WSLIDER); sl.step = "0.01";
+    sl.setAttribute("aria-label", "weight of P" + i);
+    const out = document.createElement("input");
+    out.type = "text"; out.className = "wval"; out.spellcheck = false; out.autocomplete = "off";
+    out.setAttribute("aria-label", "weight of P" + i + " (exact)");
+    const setW = wq => {
+      if (wq.isZero()) { errPts.textContent = "w" + i + " must not be zero: a weight of zero sends the control point to the origin in homogeneous coordinates."; return; }
+      if (!st.neg && wq.sign() < 0) { errPts.textContent = "w" + i + " is negative; turn on \u201CAllow negative weights\u201D first."; return; }
+      errPts.textContent = "";
+      const P = st.P.map(p => ({ x: p.x, y: p.y, w: p.w }));
+      P[i].w = wq; note(""); setPoints(P);
+    };
+    sl.addEventListener("input", () => {
+      const w = Math.round(+sl.value * 100);
+      setW(new Q(BigInt(w || (+sl.value < 0 ? -1 : 1)), 100n));
+    });
+    const applyW = () => {
+      try { setW(parseConst(out.value)); }
+      catch (e) { errPts.textContent = "w" + i + ": " + e.message + "."; }
+    };
+    out.addEventListener("keydown", e => { if (e.key === "Enter") applyW(); });
+    out.addEventListener("change", applyW);
+    out.addEventListener("blur", scheduleFull);
+    item.append(lab, sl, out);
+    $("weights").append(item);
+    rows.push({ x: xi, y: yi, w: sl, readout: out });
+  });
+}
+
+// ---- degree -----------------------------------------------------------------
+function syncDegreeButtons() {
+  const n = st.P.length - 1;
+  document.querySelectorAll("#degBtns button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.n === n)));
+  // the cone is a quadric only in the quadratic case, so the option exists only there
+  $("coneLbl").style.display = $("circBtn").style.display = n === 2 ? "" : "none";
+}
+function setDegree(N) {
+  const n = st.P.length - 1;
+  if (N === n) return;
+  if (N > n) {
+    let P = st.P, ok = true;
+    while (ok && P.length - 1 < N) { const E = elevateH(P); if (E) P = E; else ok = false; }
+    if (!ok) { note("Couldn't elevate: degree elevation would give a control point a zero weight."); return; }
+    st.P = P;
+    note("Raised the degree to " + N + " by degree elevation in homogeneous coordinates. The curve is unchanged.");
+  } else {
+    const r = lowerH(st.P, N);
+    if (!r) { st.P = defaultPoints(N); note("Couldn't lower the degree without a zero weight, so the degree-" + N + " default was loaded."); }
+    else {
+      st.P = r.P;
+      note(r.exact
+        ? "Lowered the degree to " + N + " exactly, because the homogeneous curve already has degree at most " + N + "."
+        : "Lowered the degree to " + N + " approximately: the new homogeneous curve matches the old one at t = 0, 1/" + N + ", …, 1 (up to rounding to 0.01).");
+    }
+  }
+  buildTable(); syncDegreeButtons();
+  errPoly.textContent = ""; errPts.textContent = "";
+  scheduleFull();
+}
+document.querySelectorAll("#degBtns button").forEach(b => b.addEventListener("click", () => setDegree(+b.dataset.n)));
+
+// ---- polynomial inputs ------------------------------------------------------
+function applyPolys() {
+  let X, Y, W;
+  try { X = parsePoly(inX.value); } catch (e) { errPoly.textContent = "X(t): " + e.message + "."; return; }
+  try { Y = parsePoly(inY.value); } catch (e) { errPoly.textContent = "Y(t): " + e.message + "."; return; }
+  try { W = parsePoly(inW.value); } catch (e) { errPoly.textContent = "W(t): " + e.message + "."; return; }
+  const d = Math.max(pdeg(X), pdeg(Y), pdeg(W));
+  if (d > 5) { errPoly.textContent = "The degree is " + d + "; this tool supports degree 5 at most."; return; }
+  const n = Math.max(d, st.P.length - 1);
+  const wb = powToBern(W, n), xb = powToBern(X, n), yb = powToBern(Y, n);
+  const bad = wb.findIndex(w => w.isZero());
+  if (bad >= 0) { errPoly.textContent = "W(t) has Bernstein coefficient w" + bad + " = 0; weights must be nonzero."; return; }
+  const negIdx = st.neg ? -1 : wb.findIndex(w => w.sign() < 0);
+  if (negIdx >= 0) { errPoly.textContent = "W(t) has Bernstein coefficient w" + negIdx + " = " + qText(wb[negIdx]) + "; turn on \u201CAllow negative weights\u201D to use it."; return; }
+  errPoly.textContent = "";
+  note(n > st.P.length - 1 ? "Raised the degree to " + n + " to fit the polynomials." : "");
+  const P = wb.map((w, i) => ({ x: xb[i].div(w), y: yb[i].div(w), w }));
+  const changed = P.length !== st.P.length;
+  st.P = P;
+  if (changed) { buildTable(); syncDegreeButtons(); }
+  scheduleFull();
+}
+[inX, inY, inW].forEach(inp => {
+  inp.addEventListener("keydown", e => { if (e.key === "Enter") applyPolys(); });
+  inp.addEventListener("change", applyPolys);
+  inp.addEventListener("blur", scheduleFull);
+});
+
+// ---- options ----------------------------------------------------------------
+$("optNeg").addEventListener("change", e => {
+  st.neg = e.target.checked;
+  rows.forEach(r => { r.w.min = String(st.neg ? -WSLIDER : WEPS.num()); });
+  errPts.textContent = "";
+  const snapped = st.P.filter(p => p.w.sign() <= 0).length;
+  if (!st.neg && snapped) {
+    st.P = st.P.map(p => ({ x: p.x, y: p.y, w: clampW(p.w) }));
+    note("Negative weights are off, so " + snapped + (snapped === 1 ? " weight was" : " weights were") + " snapped up to " + qText(WEPS) + ".");
+  } else note("");
+  scheduleFull();
+});
+$("optCone").addEventListener("change", e => { st.cone = e.target.checked; schedule3(); });
+// An exact circular arc with w0 = w2 = 1. The symmetric form needs w1 = cos α for a central
+// angle 2α, so a quarter circle would want the irrational √2/2. Using a Pythagorean triple
+// keeps everything rational: cos α = 3/5 gives a 106.26° arc with
+//   P0 = r(3/5, -4/5),  P1 = (5r/3, 0),  P2 = r(3/5, 4/5),  w = (1, 3/5, 1),
+// where P1 is the intersection of the tangents. Then x² + y² = r² exactly, and since the
+// circle is centred at the origin the lift sits on the round cone x² + y² = r²z².
+$("circBtn").addEventListener("click", () => {
+  const p0 = st.P[0], pn = st.P[st.P.length - 1];
+  const r0 = Math.hypot(p0.x.num(), p0.y.num()), rn = Math.hypot(pn.x.num(), pn.y.num());
+  let r = (r0 + rn) / 2;
+  r = Math.max(0.5, Math.round(r * 4) / 4);
+  const R = Q.int(Math.round(r * 100)).mul(new Q(1n, 100n));
+  const c = new Q(3n, 5n), s = new Q(4n, 5n), w1 = c;
+  st.P = [
+    { x: R.mul(c), y: R.mul(s).neg(), w: Q1 },
+    { x: R.mul(new Q(5n, 3n)), y: Q0, w: w1 },
+    { x: R.mul(c), y: R.mul(s), w: Q1 }
+  ];
+  buildTable(); syncDegreeButtons();
+  errPts.textContent = ""; errPoly.textContent = "";
+  note("Snapped to an exact circular arc of radius " + qText(R) + " and central angle 2\u03B1 \u2248 106.26\u00B0, with w\u2080 = w\u2082 = 1 and w\u2081 = cos \u03B1 = 3/5. P\u2081 is the intersection of the tangents, and the cone is the right circular cone x\u00B2 + y\u00B2 = " + qText(R.mul(R)) + "z\u00B2. (A 90\u00B0 arc in this symmetric form would need the irrational weight \u221A2/2.)");
+  scheduleFull();
+  requestAnimationFrame(() => { fit2(); reset3(); });
+});
+$("optExt").addEventListener("change", e => { st.ext = e.target.checked; schedule2(); schedule3(); });
+$("optHull").addEventListener("change", e => { st.hull = e.target.checked; schedule2(); schedule3(); });
+$("snap").addEventListener("change", e => { st.snap = qFromDecimal(e.target.value); });
+$("optHull").checked = st.hull;
+$("optNeg").checked = st.neg;
+$("optCone").checked = st.cone;
+
+// ---- 2D interaction ---------------------------------------------------------
+function fit2() {
+  const W = cv2.clientWidth, H = cv2.clientHeight;
+  if (!W || !H || !D) return;
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (const p of D.Pf) { x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x); y0 = Math.min(y0, p.y); y1 = Math.max(y1, p.y); }
+  const w = Math.max(x1 - x0, 1), h = Math.max(y1 - y0, 1);
+  st.v2 = { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, scale: Math.min(W / (w * 1.35), H / (h * 1.35)) };
+  schedule2();
+}
+function zoom2(px, py, f) {
+  const W = cv2.clientWidth, H = cv2.clientHeight, v = st.v2;
+  const x = v.cx + (px - W / 2) / v.scale, y = v.cy - (py - H / 2) / v.scale;
+  v.scale = Math.min(Math.max(v.scale * f, 2), 1e5);
+  v.cx = x - (px - W / 2) / v.scale; v.cy = y + (py - H / 2) / v.scale;
+  schedule2();
+}
+const localPos = (cv, e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+function hit2(x, y, rad) {
+  const W = cv2.clientWidth, H = cv2.clientHeight, v = st.v2;
+  let best = -1, bd = rad * rad;
+  D.Pf.forEach((p, i) => {
+    const dx = W / 2 + (p.x - v.cx) * v.scale - x, dy = H / 2 - (p.y - v.cy) * v.scale - y, d = dx * dx + dy * dy;
+    if (d <= bd) { bd = d; best = i; }
+  });
+  return best;
+}
+cv2.addEventListener("pointerdown", e => {
+  const { x, y } = localPos(cv2, e), i = hit2(x, y, e.pointerType === "touch" ? 20 : 12);
+  cv2.setPointerCapture(e.pointerId);
+  st.drag2 = i >= 0 ? { type: "point", i } : { type: "pan", x0: x, y0: y, cx: st.v2.cx, cy: st.v2.cy };
+  cv2.style.cursor = "grabbing";
+  note(""); schedule2();
+});
+cv2.addEventListener("pointermove", e => {
+  const { x, y } = localPos(cv2, e), W = cv2.clientWidth, H = cv2.clientHeight, v = st.v2;
+  if (st.drag2 && st.drag2.type === "point") {
+    const wx = v.cx + (x - W / 2) / v.scale, wy = v.cy - (y - H / 2) / v.scale, s = st.snap.num();
+    const nx = Q.int(Math.round(wx / s)).mul(st.snap), ny = Q.int(Math.round(wy / s)).mul(st.snap);
+    const p = st.P[st.drag2.i];
+    if (!p.x.eq(nx) || !p.y.eq(ny)) {
+      const P = st.P.slice();
+      P[st.drag2.i] = { x: nx, y: ny, w: p.w };
+      setPoints(P);
+    }
+  } else if (st.drag2 && st.drag2.type === "pan") {
+    v.cx = st.drag2.cx - (x - st.drag2.x0) / v.scale;
+    v.cy = st.drag2.cy + (y - st.drag2.y0) / v.scale;
+    schedule2();
+  } else {
+    const h = hit2(x, y, 12);
+    if (h !== st.hover2) { st.hover2 = h; cv2.style.cursor = h >= 0 ? "pointer" : "grab"; schedule2(); }
+  }
+});
+const end2 = () => { st.drag2 = null; cv2.style.cursor = st.hover2 >= 0 ? "pointer" : "grab"; schedule2(); };
+cv2.addEventListener("pointerup", end2);
+cv2.addEventListener("pointercancel", end2);
+cv2.addEventListener("pointerleave", () => { if (!st.drag2 && st.hover2 !== -1) { st.hover2 = -1; schedule2(); } });
+cv2.addEventListener("wheel", e => { e.preventDefault(); const { x, y } = localPos(cv2, e); zoom2(x, y, Math.exp(-e.deltaY * (e.deltaMode === 1 ? 0.05 : 0.0015))); }, { passive: false });
+$("z2in").addEventListener("click", () => zoom2(cv2.clientWidth / 2, cv2.clientHeight / 2, 1.25));
+$("z2out").addEventListener("click", () => zoom2(cv2.clientWidth / 2, cv2.clientHeight / 2, 0.8));
+$("z2fit").addEventListener("click", fit2);
+
+// ---- 3D interaction ---------------------------------------------------------
+function hit3(x, y, rad) {
+  let best = -1, bd = rad * rad;
+  proj3.forEach((q, i) => {
+    if (q.z <= NEAR) return;
+    const d = (q.x - x) * (q.x - x) + (q.y - y) * (q.y - y);
+    if (d <= bd) { bd = d; best = i; }
+  });
+  return best;
+}
+// Weight from dragging: the closest approach between the mouse ray C + u d and the
+// control point's ray s * V, V = (x, y, 1). The homogeneous point is w * V, so s is the weight.
+function weightFromDrag(i, mx, my) {
+  const cm = camera();
+  const d = nrm(add(add(scl(cm.rt, (mx - cm.W / 2) / cm.focal), scl(cm.u, -(my - cm.H / 2) / cm.focal)), cm.f));
+  const p = D.Pf[i], V = toView([p.x, p.y, 1]);   // w * V in view space, so s is still the weight
+  const a = dot(V, V), b = dot(V, d), dd = -dot(V, cm.C), e = -dot(d, cm.C);
+  const den = a - b * b;                                  // d is a unit vector, so c = 1
+  if (Math.abs(den) < 1e-9) return null;
+  const s = (b * e - dd) / den;
+  return Math.min(Math.max(s, st.neg ? -WSLIDER * 6 : WEPS.num()), WSLIDER * 6);
+}
+cv3.addEventListener("pointerdown", e => {
+  const { x, y } = localPos(cv3, e), i = hit3(x, y, e.pointerType === "touch" ? 22 : 14);
+  cv3.setPointerCapture(e.pointerId);
+  st.drag3 = i >= 0 ? { type: "weight", i } : { type: "orbit", x0: x, y0: y, th: st.cam.th, ph: st.cam.ph };
+  cv3.style.cursor = "grabbing";
+  note(""); schedule3();
+});
+cv3.addEventListener("pointermove", e => {
+  const { x, y } = localPos(cv3, e);
+  if (st.drag3 && st.drag3.type === "weight") {
+    const w = weightFromDrag(st.drag3.i, x, y);
+    if (w == null) return;
+    const k = Math.round(w * 100);
+    const wq = clampW(new Q(BigInt(k || (w < 0 ? -1 : 1)), 100n));
+    if (!st.P[st.drag3.i].w.eq(wq)) {
+      const P = st.P.map(p => ({ x: p.x, y: p.y, w: p.w }));
+      P[st.drag3.i].w = wq;
+      setPoints(P);
+    }
+  } else if (st.drag3 && st.drag3.type === "orbit") {
+    st.cam.th = st.drag3.th - (x - st.drag3.x0) * 0.008;
+    st.cam.ph = Math.min(Math.max(st.drag3.ph + (y - st.drag3.y0) * 0.008, -1.45), 1.45);
+    schedule3();
+  } else {
+    const h = hit3(x, y, 14);
+    if (h !== st.hover3) { st.hover3 = h; cv3.style.cursor = h >= 0 ? "pointer" : "grab"; schedule3(); }
+  }
+});
+const end3 = () => { st.drag3 = null; cv3.style.cursor = st.hover3 >= 0 ? "pointer" : "grab"; schedule3(); };
+cv3.addEventListener("pointerup", end3);
+cv3.addEventListener("pointercancel", end3);
+cv3.addEventListener("pointerleave", () => { if (!st.drag3 && st.hover3 !== -1) { st.hover3 = -1; schedule3(); } });
+cv3.addEventListener("wheel", e => { e.preventDefault(); st.cam.r = Math.min(Math.max(st.cam.r * Math.exp(e.deltaY * (e.deltaMode === 1 ? 0.05 : 0.0012)), 1.5), 80); schedule3(); }, { passive: false });
+function reset3() {
+  let cx = 0, cy = 0, cz = 0.6, m = 2;
+  for (const p of D.Pf) { cx += p.x; cy += p.y; }
+  cx /= D.Pf.length; cy /= D.Pf.length;
+  for (const h of D.Hf) m = Math.max(m, Math.abs(h[0] - cx), Math.abs(h[1] - cy), Math.abs(h[2]) * RZ);
+  st.cam = { th: -2.25, ph: 0.5, r: 3.2 * m, target: [cx, cy, cz] };
+  schedule3();
+}
+$("z3in").addEventListener("click", () => { st.cam.r = Math.max(st.cam.r * 0.8, 1.5); schedule3(); });
+$("z3out").addEventListener("click", () => { st.cam.r = Math.min(st.cam.r * 1.25, 80); schedule3(); });
+$("z3fit").addEventListener("click", reset3);
+
+// ---- resize, fonts, start ---------------------------------------------------
+readColors();
+new ResizeObserver(() => schedule2()).observe(cv2);
+new ResizeObserver(() => schedule3()).observe(cv3);
+let lastEqW = 0;
+new ResizeObserver(entries => {
+  const w = Math.round(entries[0].contentRect.width);
+  if (w !== lastEqW) { lastEqW = w; scheduleFull(); }
+}).observe($("eqs"));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => scheduleFull());
+
+document.querySelectorAll("[data-tex]").forEach(el => {
+  if (window.katex) el.innerHTML = katex.renderToString(el.dataset.tex, { throwOnError: false });
+});
+buildTable();
+syncDegreeButtons();
+derive();
+requestAnimationFrame(() => { fit2(); reset3(); scheduleFull(); });
+</script>
+</body>
+</html>
