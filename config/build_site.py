@@ -254,11 +254,20 @@ news_str += "</div><summary></summary></details></ul>"
 course_str = ""
 course_template = xml_child_string(course_data.find('template'))
 for course in course_data.find('courses'):
-	course_str += (course_template.replace('$NAME',  xml_child_string(course.find('name')))
+	course_info = (course_template.replace('$NAME',  xml_child_string(course.find('name')))
 		                          .replace('$NUMBER', xml_child_string(course.find('number')))
 		                          .replace('$SEMESTER', xml_child_string(course.find('semester')))
-		                          .replace('$URL', xml_child_string(course.find('url')))
                   )
+	url = xml_child_string(course.find('url')) # link to url if present
+	if url:
+		course_info = (course_info.replace('$URL_START', f'<a href="{url}">')
+								  .replace('$URL_END', '</a>')
+		  			  )
+	else:
+		course_info = (course_info.replace('$URL_START', '')
+								  .replace('$URL_END', '')
+					  )
+	course_str += course_info
 
 # == $NAVBAR
 navbar_str_home = '<div class="navbar"><div class="navbar_buttons">\n'
