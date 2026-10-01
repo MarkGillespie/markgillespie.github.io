@@ -1,9 +1,9 @@
 <misc_data>
 <misc>
     <entry>
-        <title>Bezier curve demos</title>
+        <title>Curve and surface demos</title>
         <href>Misc/Bezier/bezier.html</href>
-        <details>Interactive demos of <a href="Misc/Bezier/bezier.html">standard Bezier curves</a> and of <a href="Misc/Bezier/rational-bezier.html">rational Bezier curves</a>.</details>
+        <details>Interactive demos of <a href="Misc/Bezier/bezier.html">standard Bezier curves</a>, of <a href="Misc/Bezier/rational-bezier.html">rational Bezier curves</a>, and of the different levels of <a href="Misc/Bezier/continuity.html">geometric continuity of curves and surfaces</a>.</details>
         <img>Misc/Bezier/bezier.webp</img>
     </entry>
 
