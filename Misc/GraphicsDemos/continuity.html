@@ -1,0 +1,1611 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!-- Written by Claude Opus 5.5 -->
+<title>Geometric Continuity Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: textbook page. Coral title pill and tabs in a wrapping header bar; a cream control card on the left
+   (collapsible); a 2×2 bench of cream specimen cards, one per continuity class; one hint line; notes below. */
+:root {
+  color-scheme: light;
+  --bg: #E4D5B7;          /* page */
+  --panel: #F3EBD7;       /* cards, canvas background, buttons */
+  --ink: #231F20;         /* text */
+  --muted: #66594A;       /* labels, hints, secondary text */
+  --line: #CDBC9A;        /* all 1px borders and dividers */
+  --field: #FAF5E8;       /* text inputs, code blocks */
+  --grid: #E7DDC6;        /* minor grid, 3D floor fill */
+  --grid-major: #D8C9A9;  /* major grid, 3D floor outline */
+  --axis: #5E5446;        /* axes, plot frames */
+  --curve: #231F20;       /* primary geometry */
+  --poly: #8C8273;        /* secondary geometry: guides, posts */
+  --point-fill: #FFFFFF;  /* inside of open point markers only */
+  --warm: #E0876A;        /* coral: identity + selected state */
+  --on-warm: #F8F1DE;     /* text on coral */
+  --teal: #3F7677;        /* interaction accent */
+  --map-zero: #F3EBD7;    /* scalar field = 0 */
+  --map-pos: #DE9A7E;     /* scalar field > 0 */
+  --map-neg: #4A7E80;     /* scalar field < 0 */
+  --contour: rgba(70, 60, 50, 0.30);
+  --zero-set: rgba(35, 31, 32, 0.85);
+  --error: #A8321C;
+  --orange: #D9731F;      /* curvature overlays: osculating circle, comb */
+  --font-ui: "Libertinus Serif", "Linux Libertine O", "Linux Libertine", Georgia, "Times New Roman", serif;
+  --font-title: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-math: "Times New Roman", Times, serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.5 var(--font-ui);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+input[type=checkbox],input[type=range]{accent-color:var(--teal)}
+.app{max-width:1500px;margin:0 auto;padding-inline:20px;padding-block:0 48px}
+
+/* header bar */
+.bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px 22px;padding-block:16px 14px}
+.bar h1{font-family:var(--font-title);font-weight:700;font-size:21px;letter-spacing:-0.015em;line-height:1.2;
+  margin:0 6px 0 0;padding:7px 20px 8px;border-radius:999px;background:var(--warm);color:var(--on-warm);text-wrap:balance}
+.bar .sub{margin:0;color:var(--muted);font-size:15px;flex:1 1 240px;min-width:0}
+.group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lbl{color:var(--muted)}
+
+/* segmented toggles, pills, checkboxes, selects */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--panel)}
+.seg button{border:0;background:transparent;padding:3px 14px;cursor:pointer;font-weight:500;white-space:nowrap}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"],.seg button[aria-selected="true"]{background:var(--warm);color:var(--on-warm);font-weight:600}
+.seg button:disabled{cursor:not-allowed}
+.seg sup{font-size:11px;line-height:0}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;height:30px;padding:0 12px;cursor:pointer;user-select:none;white-space:nowrap}
+.pill:hover{border-color:var(--poly)}
+.pill[aria-pressed="true"]{background:var(--warm);border-color:var(--warm);color:var(--on-warm);font-weight:600}
+label.pill:focus-within{outline:2px solid var(--teal);outline-offset:2px}
+.chk{display:inline-flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
+.chk input{margin:0}
+select{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:2px 6px;min-width:0}
+
+/* workspace: control card + bench */
+.ws{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;height:max(640px,calc(100vh - var(--bar-h, 84px) - 8px))}
+.app.rail-off .ws{grid-template-columns:minmax(0,1fr)}
+.app.rail-off .rail{display:none}
+.rail{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px 18px;overflow:auto;display:flex;flex-direction:column;gap:18px;min-height:0}
+.rail h2{font-family:var(--font-title);font-weight:700;font-size:14px;color:var(--muted);margin:0 0 2px}
+.sect{display:flex;flex-direction:column;gap:9px}
+.row{display:grid;grid-template-columns:92px minmax(0,1fr) 52px;align-items:center;gap:8px}
+.row input[type=range]{width:100%;margin:0}
+.row select{grid-column:2 / 4}
+.row .seg{grid-column:2 / 4;justify-self:start}
+.val{text-align:right;font-variant-numeric:tabular-nums}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.hint{margin:0;color:var(--muted);font-size:14.5px;line-height:1.45}
+.status{margin:0;color:var(--muted);font-size:14.5px;overflow-wrap:anywhere}
+.status.err{color:var(--error);font-size:15px}
+.legend{display:grid;grid-template-columns:auto 160px auto;gap:4px 8px;align-items:center;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;justify-content:start}
+.legend .cbar{width:160px;height:10px;border:1px solid var(--line);background:linear-gradient(90deg,var(--map-neg),var(--map-zero),var(--map-pos))}
+.legend .cap{grid-column:1 / -1;font-size:14.5px;line-height:1.4}
+
+.main{display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0}
+.bench{position:relative;flex:1 1 auto;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;min-width:0;min-height:0}
+.bench[data-n="1"]{grid-template-columns:1fr;grid-template-rows:1fr}
+.bench[data-n="2"]{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
+.bench[data-n="3"]{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr}
+.below{margin:0;color:var(--muted);font-size:15px;max-width:100ch}
+
+/* specimen cards */
+.spec{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.spec-h{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:0;padding:10px 14px 4px}
+.ct{font-family:var(--font-title);font-weight:700;font-size:15px;margin:0;white-space:nowrap}
+.ct sup{font-size:10px;line-height:0}
+.cs{margin:0;color:var(--muted);font-size:14.5px;min-width:0}
+.view{position:relative;flex:1 1 auto;min-height:140px}
+.view canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.plot{position:relative;height:66px;flex:none;border-top:1px solid var(--line)}
+.plot canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.readout{padding:7px 14px 9px;border-top:1px solid var(--line);font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
+.readout b{color:var(--ink);font-weight:600}
+.readout .sep{padding-inline:6px}
+.readout .rd{display:inline-block;margin-right:8px;padding:1px 9px;color:var(--error);font-weight:600;background:rgba(168,50,28,.10);border:1.5px solid var(--error);border-radius:6px}
+.readout{min-height:1.5em;box-sizing:content-box}
+
+#p-surfaces .view{cursor:grab;touch-action:none}
+#p-surfaces .view:active{cursor:grabbing}
+.glc,.ovc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.glc{z-index:1}
+.ovc{z-index:2}
+.bench.drop::after{content:"Drop an .exr, .hdr or image to use it as the environment";position:absolute;inset:0;z-index:3;display:grid;place-items:center;
+  font:700 16px var(--font-title);color:var(--on-warm);background:color-mix(in srgb,var(--teal) 70%,transparent);border:2px dashed var(--on-warm);border-radius:14px}
+.glfail{position:absolute;inset:0;z-index:4;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:14px}
+
+/* math */
+.m{font-family:var(--font-math);font-size:1.02em;white-space:nowrap}
+.m i,i.mv{font-family:var(--font-math);font-style:italic}
+.m sub,.mv + sub{font-size:11px;font-style:normal}
+.m sup{font-size:11px;font-style:normal;line-height:0}
+
+/* notes */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:0 40px;margin-top:28px;padding-top:6px;border-top:1px solid var(--line)}
+.notes h3{font-family:var(--font-title);font-weight:700;font-size:14px;color:var(--muted);margin:18px 0 6px}
+.notes p,.notes li{max-width:80ch;margin:0 0 9px}
+.notes ul{margin:0 0 9px;padding-left:1.2em}
+.cite{color:var(--muted);font-size:14.5px}
+
+@media (max-width:920px){
+  .ws{grid-template-columns:1fr;height:auto}
+  .bench,.bench[data-n]{grid-template-columns:1fr;grid-template-rows:none}
+  .view{flex:none;aspect-ratio:3/2;min-height:0;max-width:100%}
+  #p-surfaces .view{aspect-ratio:1/1}
+  .rail{overflow:visible}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
+.bar:has(> .brand) { flex-wrap: nowrap; align-items: flex-start; }
+.bar-items { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; flex: 1; min-width: 0; }
+.brand {
+  margin: -11px 6px 0 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  text-decoration: none;
+}
+.brand img { display: block; height: 114px; width: auto; transition: filter 0.2s; }
+.brand-uni {
+  font-family: var(--font-ui); font-variant: small-caps; font-weight: 700; color: #861025;
+  white-space: nowrap; line-height: 1; font-size: 14px; /* refit to the logo width by script */
+  position: relative; z-index: 1; /* keep text above the logo's shadow */
+  transition: color 0.2s;
+}
+.brand:hover img, .brand:focus-visible img { filter: drop-shadow(0 3px 6px rgba(35, 31, 32, 0.45)); }
+.brand:hover .brand-uni, .brand:focus-visible .brand-uni { color: #C8102E; }
+</style>
+
+<div class="app">
+  <header class="bar" id="bar">
+    <a class="brand" href="https://geometry.cs.utah.edu">
+      <span class="brand-uni">The University of Utah</span>
+      <img src="https://discrete-geometry-lab.cs.utah.edu/images/dgl.svg" alt="Discrete Geometry Lab">
+    </a>
+    <script>
+    // Scale the university name so its width matches the logo's.
+    (() => {
+      const img = document.querySelector('.brand img'), uni = document.querySelector('.brand-uni');
+      const fit = () => {
+        if (!img.offsetWidth) return;
+        uni.style.fontSize = '100px';
+        uni.style.fontSize = (100 * img.offsetWidth / uni.scrollWidth) + 'px';
+      };
+      img.complete ? fit() : img.addEventListener('load', fit);
+      document.fonts && document.fonts.ready.then(fit);
+    })();
+    </script>
+    <div class="bar-items">
+      <h1>Geometric continuity</h1>
+      <div class="group"><span class="lbl" id="demo-lbl" hidden>Demo</span>
+        <div class="seg" role="tablist" aria-labelledby="demo-lbl">
+          <button role="tab" id="tab-curves" data-tab="curves" aria-selected="true" aria-controls="p-curves" type="button">Curves</button>
+          <button role="tab" id="tab-surfaces" data-tab="surfaces" aria-selected="false" aria-controls="p-surfaces" type="button">Surfaces</button>
+        </div>
+      </div>
+      <button class="pill" id="rail-toggle" type="button" aria-expanded="true" title="Hide or show the controls (H)"><span>Hide controls</span></button>
+    </div>
+  </header>
+
+  <!-- ============================ CURVES ============================ -->
+  <section id="p-curves" role="tabpanel" aria-labelledby="tab-curves">
+    <div class="ws">
+      <aside class="rail" aria-label="Curve controls">
+        <div class="sect">
+          <h2>Sweep</h2>
+          <div class="pills"><button class="pill" id="c-play" type="button" aria-pressed="false">Play sweep</button></div>
+          <div class="row"><label class="lbl" for="c-s">Parameter <i class="mv">s</i></label><input type="range" id="c-s" min="0" max="2" step="0.001" value="0.9"><output class="val" id="o-s" for="c-s">0.90</output></div>
+          <div class="row"><span class="lbl" id="speed-lbl">Speed</span>
+            <div class="seg" id="c-speed" role="group" aria-labelledby="speed-lbl">
+              <button type="button" data-v="0.3" aria-pressed="false">Slow</button><button type="button" data-v="1" aria-pressed="true">1×</button><button type="button" data-v="2" aria-pressed="false">2×</button>
+            </div></div>
+          <p class="hint">The join is at <span class="m"><i>s</i> = 1</span> on every curve. Click or drag along a curve to place the point. Arrow keys step, space plays.</p>
+        </div>
+        <div class="sect">
+          <h2>Show</h2>
+          <label class="chk"><input type="checkbox" id="sh-tan">Tangent line</label>
+          <label class="chk"><input type="checkbox" id="sh-nrm">Normal</label>
+          <label class="chk"><input type="checkbox" id="sh-osc">Osculating circle</label>
+          <label class="chk"><input type="checkbox" id="sh-comb">Curvature comb</label>
+          <label class="chk"><input type="checkbox" id="sh-lim">One-sided limits at the join</label>
+          <label class="chk"><input type="checkbox" id="sh-poly" checked>Control polygons</label>
+          <label class="chk"><input type="checkbox" id="sh-guides">Constraint guides (G<sup>1</sup>, G<sup>2</sup>)</label>
+          <label class="chk"><input type="checkbox" id="sh-plot">Curvature plots</label>
+        </div>
+        <div class="sect">
+          <h2>Panels</h2>
+          <div><div class="seg" id="c-panels" role="group" aria-label="Visible panels">
+            <button type="button" aria-pressed="true" title="Discontinuous (key 1)">G<sup>−1</sup></button><button type="button" aria-pressed="true" title="G⁰ (key 2)">G<sup>0</sup></button><button type="button" aria-pressed="true" title="G¹ (key 3)">G<sup>1</sup></button><button type="button" aria-pressed="true" title="G² (key 4)">G<sup>2</sup></button>
+          </div></div>
+          <p class="hint">Show or hide panels; keys 1–4 do the same. The remaining panels grow to fill the space.</p>
+        </div>
+        <div class="sect">
+          <h2>Shape</h2>
+          <p class="hint">Drag any control point. The matching point moves by the same amount in every panel, and each curve then corrects its other segment to keep its continuity class. Constraint guides show the lines the constrained points stay on.</p>
+          <label class="chk"><input type="checkbox" id="c-link" checked>Move points in all panels</label>
+          <div class="pills"><button class="pill" id="c-reset" type="button">Reset shapes</button></div>
+        </div>
+      </aside>
+      <div class="main">
+        <div class="bench" id="c-bench">
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct" title="Discontinuous: not even G⁰">G<sup>−1</sup> Discontinuous</h2></header>
+            <div class="view"><canvas aria-label="Discontinuous curve"></canvas></div>
+            <div class="plot" hidden><canvas aria-label="Curvature plot"></canvas></div>
+            <div class="readout"></div>
+          </article>
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct">G<sup>0</sup> Positional</h2></header>
+            <div class="view"><canvas aria-label="G0 curve"></canvas></div>
+            <div class="plot" hidden><canvas aria-label="Curvature plot"></canvas></div>
+            <div class="readout"></div>
+          </article>
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct">G<sup>1</sup> Tangent</h2></header>
+            <div class="view"><canvas aria-label="G1 curve"></canvas></div>
+            <div class="plot" hidden><canvas aria-label="Curvature plot"></canvas></div>
+            <div class="readout"></div>
+          </article>
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct">G<sup>2</sup> Curvature</h2></header>
+            <div class="view"><canvas aria-label="G2 curve"></canvas></div>
+            <div class="plot" hidden><canvas aria-label="Curvature plot"></canvas></div>
+            <div class="readout"></div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+  <!-- ============================ SURFACES ============================ -->
+  <section id="p-surfaces" role="tabpanel" aria-labelledby="tab-surfaces" hidden>
+    <div class="ws">
+      <aside class="rail" aria-label="Surface controls">
+        <div class="sect">
+          <h2>Environment</h2>
+          <div class="group"><span class="lbl" id="src-lbl">Source</span>
+            <div class="seg" id="env-mode" role="group" aria-labelledby="src-lbl">
+              <button type="button" data-v="0" aria-pressed="true">Strip light</button><button type="button" data-v="1" aria-pressed="false">HDRI</button>
+            </div></div>
+          <div class="sect" id="strip-ctl">
+            <div class="row"><label class="lbl" for="l-elev">Elevation</label><input type="range" id="l-elev" min="4" max="70" step="0.1" value="26"><output class="val" id="o-elev">26°</output></div>
+            <div class="row"><label class="lbl" for="l-azim">Azimuth</label><input type="range" id="l-azim" min="-120" max="120" step="0.5" value="-40"><output class="val" id="o-azim">−40°</output></div>
+            <div class="row"><label class="lbl" for="l-tilt">Tilt</label><input type="range" id="l-tilt" min="-60" max="60" step="0.5" value="0"><output class="val" id="o-tilt">0°</output></div>
+            <div class="row"><label class="lbl" for="l-count">Strips</label><input type="range" id="l-count" min="1" max="9" step="1" value="1"><output class="val" id="o-count">1</output></div>
+            <div class="row"><label class="lbl" for="l-h">Strip height</label><input type="range" id="l-h" min="0.04" max="1" step="0.01" value="0.4"><output class="val" id="o-h">0.40</output></div>
+            <div class="pills"><button class="pill" id="l-play" type="button" aria-pressed="false">Sweep the light</button></div>
+          </div>
+          <div class="sect" id="map-ctl" hidden>
+            <div class="pills">
+              <label class="pill" for="env-file">Upload HDRI…</label>
+              <button class="pill" id="env-sample" type="button">Use built-in sample</button>
+            </div>
+            <input type="file" id="env-file" accept=".exr,.hdr,.rgbe,.pic,image/png,image/jpeg,image/webp" hidden>
+            <p class="status" id="env-status">Showing the built-in sample. Upload an .exr or .hdr, or drop one onto the views.</p>
+            <div class="row"><label class="lbl" for="env-map">Mapping</label>
+              <select id="env-map"><option value="auto">Auto</option><option value="0">Equirectangular</option><option value="1">Mirror ball</option><option value="2">Angular map</option></select></div>
+            <div class="row"><label class="lbl" for="env-rot">Rotation</label><input type="range" id="env-rot" min="-180" max="180" step="0.5" value="0"><output class="val" id="o-rot">0°</output></div>
+          </div>
+          <div class="row"><label class="lbl" for="exposure">Exposure</label><input type="range" id="exposure" min="-5" max="5" step="0.05" value="0"><output class="val" id="o-exp">0.00</output></div>
+        </div>
+        <div class="sect">
+          <h2>Surfaces</h2>
+          <div class="row"><label class="lbl" for="defect">Defect size</label><input type="range" id="defect" min="0" max="1.5" step="0.01" value="1"><output class="val" id="o-defect">1.00</output></div>
+          <div class="row"><label class="lbl" for="shade">Shading</label>
+            <select id="shade"><option value="0">Mirror</option><option value="1">Mean curvature H</option><option value="2">Gaussian curvature K</option></select></div>
+          <div class="sect" id="curv-ctl" hidden>
+            <div class="row"><label class="lbl" for="curv-range">Scale ±</label><input type="range" id="curv-range" min="0.2" max="4" step="0.05" value="1.5"><output class="val" id="o-cr">1.50</output></div>
+            <div class="legend"><span id="lg-lo">−1.50</span><span class="cbar"></span><span id="lg-hi">1.50</span><span class="cap" id="lg-cap"></span></div>
+          </div>
+          <label class="chk"><input type="checkbox" id="s-net">Control nets</label>
+          <label class="chk"><input type="checkbox" id="s-joint">Mark the join</label>
+          <label class="chk"><input type="checkbox" id="s-bg" checked>Environment behind surfaces</label>
+        </div>
+        <div class="sect">
+          <h2>Panels</h2>
+          <div><div class="seg" id="s-panels" role="group" aria-label="Visible panels">
+            <button type="button" aria-pressed="true" title="Discontinuous (key 1)">G<sup>−1</sup></button><button type="button" aria-pressed="true" title="G⁰ (key 2)">G<sup>0</sup></button><button type="button" aria-pressed="true" title="G¹ (key 3)">G<sup>1</sup></button><button type="button" aria-pressed="true" title="G² (key 4)">G<sup>2</sup></button>
+          </div></div>
+          <p class="hint">Show or hide panels; keys 1–4 do the same. The remaining panels grow to fill the space.</p>
+        </div>
+        <div class="sect">
+          <h2>View</h2>
+          <div class="pills">
+            <button class="pill" id="cam-out" type="button" aria-label="Zoom out">−</button>
+            <button class="pill" id="cam-in" type="button" aria-label="Zoom in">+</button>
+            <button class="pill" id="cam-reset" type="button">Reset view</button>
+          </div>
+        </div>
+      </aside>
+      <div class="main">
+        <div class="bench" id="s-bench">
+          <canvas class="glc" id="glc"></canvas>
+          <canvas class="ovc" id="ovc"></canvas>
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct" title="Discontinuous: not even G⁰">G<sup>−1</sup> Jump</h2></header>
+            <div class="view" aria-label="Surface with a jump"></div>
+            <div class="readout"></div>
+          </article>
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct">G<sup>0</sup> Crease</h2></header>
+            <div class="view" aria-label="G0 surface"></div>
+            <div class="readout"></div>
+          </article>
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct">G<sup>1</sup> Tangent plane</h2></header>
+            <div class="view" aria-label="G1 surface"></div>
+            <div class="readout"></div>
+          </article>
+          <article class="spec">
+            <header class="spec-h"><h2 class="ct">G<sup>2</sup> Curvature</h2></header>
+            <div class="view" aria-label="G2 surface"></div>
+            <div class="readout"></div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const DPR = () => Math.min(window.devicePixelRatio || 1, 2);
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+
+/* ---------------- tokens for canvases and shaders ---------------- */
+const TC = {};
+function parseColor(s) {
+  s = s.trim();
+  let m = s.match(/^#([0-9a-f]{6})$/i);
+  if (m) { const n = parseInt(m[1], 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255, 1]; }
+  m = s.match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i);
+  if (m) return [m[1] / 255, m[2] / 255, m[3] / 255, m[4] === undefined ? 1 : +m[4]];
+  return [0, 0, 0, 1];
+}
+function readTheme() {
+  const cs = getComputedStyle(document.documentElement), g = k => cs.getPropertyValue('--' + k).trim();
+  for (const k of ['panel', 'ink', 'muted', 'line', 'field', 'grid', 'grid-major', 'axis', 'curve', 'poly', 'point-fill', 'warm', 'teal',
+                   'map-zero', 'map-pos', 'map-neg', 'contour', 'zero-set', 'orange']) {
+    TC[k] = g(k); TC['v:' + k] = parseColor(TC[k]);
+  }
+  TC.fUI = g('font-ui') || 'Georgia, serif';
+  TC.fMath = g('font-math') || '"Times New Roman", serif';
+}
+readTheme();
+
+/* ---------------- main loop ---------------- */
+let active = 'curves', rafId = 0, last = performance.now();
+function kick() { if (!rafId) rafId = requestAnimationFrame(loop); }
+function loop(now) {
+  rafId = 0;
+  const dt = Math.min(0.05, Math.max(0, (now - last) / 1000)); last = now;
+  const more = active === 'curves' ? Curves.frame(dt) : Surf.frame(dt);
+  if (more) kick();
+}
+
+/* canvas text with italic names and 11px upright subscripts */
+function textRuns(ctx, runs, x, y, align, halo) {
+  let w = 0;
+  for (const r of runs) { ctx.font = r.font; r.w = ctx.measureText(r.t).width; w += r.w; }
+  let cx = align === 'center' ? x - w / 2 : align === 'right' ? x - w : x;
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  for (const r of runs) {
+    ctx.font = r.font;
+    if (halo) { ctx.lineJoin = 'round'; ctx.strokeStyle = halo; ctx.lineWidth = 4; ctx.strokeText(r.t, cx, y + (r.dy || 0)); }
+    ctx.fillText(r.t, cx, y + (r.dy || 0)); cx += r.w;
+  }
+  return w;
+}
+const FNT = {
+  name: () => `italic 15px ${TC.fMath}`, sub: () => `11px ${TC.fMath}`,
+  ui: px => `${px}px ${TC.fUI}`, math: px => `italic ${px}px ${TC.fMath}`
+};
+
+/* =====================================================================
+   CURVES
+   ===================================================================== */
+const v2 = (x, y) => ({ x, y });
+const add = (a, b) => v2(a.x + b.x, a.y + b.y), sub = (a, b) => v2(a.x - b.x, a.y - b.y);
+const mul = (a, s) => v2(a.x * s, a.y * s), dot = (a, b) => a.x * b.x + a.y * b.y;
+const crs = (a, b) => a.x * b.y - a.y * b.x, len = a => Math.hypot(a.x, a.y), perp = a => v2(-a.y, a.x);
+const cl = p => v2(p.x, p.y);
+
+function bz(P, t) {
+  const s = 1 - t, b0 = s*s*s, b1 = 3*s*s*t, b2 = 3*s*t*t, b3 = t*t*t;
+  return v2(b0*P[0].x + b1*P[1].x + b2*P[2].x + b3*P[3].x, b0*P[0].y + b1*P[1].y + b2*P[2].y + b3*P[3].y);
+}
+function bz1(P, t) {
+  const s = 1 - t, a = sub(P[1], P[0]), b = sub(P[2], P[1]), c = sub(P[3], P[2]);
+  return v2(3*(s*s*a.x + 2*s*t*b.x + t*t*c.x), 3*(s*s*a.y + 2*s*t*b.y + t*t*c.y));
+}
+function bz2(P, t) {
+  const s = 1 - t;
+  const a = v2(P[2].x - 2*P[1].x + P[0].x, P[2].y - 2*P[1].y + P[0].y);
+  const b = v2(P[3].x - 2*P[2].x + P[1].x, P[3].y - 2*P[2].y + P[1].y);
+  return v2(6*(s*a.x + t*b.x), 6*(s*a.y + t*b.y));
+}
+/* point, unit tangent, signed normal n = J T, signed curvature */
+function frame(P, t) {
+  const p = bz(P, t), d1 = bz1(P, t), d2 = bz2(P, t), sp = len(d1);
+  const T = sp > 1e-12 ? mul(d1, 1 / sp) : v2(1, 0);
+  return { p, T, n: perp(T), k: sp > 1e-12 ? crs(d1, d2) / (sp*sp*sp) : 0 };
+}
+const NS = 256, NK = 120;
+function arcTable(P) {
+  const L = new Float64Array(NS + 1); let prev = bz(P, 0);
+  for (let i = 1; i <= NS; i++) { const q = bz(P, i / NS); L[i] = L[i-1] + len(sub(q, prev)); prev = q; }
+  return L;
+}
+function tAtFrac(L, f) {
+  const target = f * L[NS]; let lo = 0, hi = NS;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (L[m] < target) lo = m; else hi = m; }
+  const seg = L[hi] - L[lo];
+  return (lo + (seg > 0 ? (target - L[lo]) / seg : 0)) / NS;
+}
+function fmt(x, d = 2) { return (Math.abs(x) < 5e-4 ? 0 : x).toFixed(d).replace('-', '−'); }
+/* readout line: state 'ok' (muted), 'jump' (bold ink), 'na' (muted dash) */
+function readout(items) {
+  return items.filter(it => it[1] === 'jump').map(([label]) =>
+    `<span class="rd">${label} discontinuous</span>`).join('');
+}
+
+const Curves = (() => {
+  const st = { s: 0.9, dir: 1, playing: false, speed: 1, dirty: true, link: true,
+               show: { tan: false, nrm: false, osc: false, comb: false, lim: false, poly: true, guides: false, plot: false } };
+  const BOX = { x0: -1.8, x1: 1.8, y0: -1.3, y1: 1.15 };
+  let curves = [], views = [], kMax = 1, combScale = 0.2, drag = null;
+
+  /* One G² curve; the weaker ones displace a single control point of the second segment. */
+  function baseCurve() {
+    const A = [v2(-1.6, -0.75), v2(-1.32, 0.42), v2(-0.62, 0.84), v2(0, 0.55)];
+    const d = sub(A[3], A[2]), L = len(d), u = mul(d, 1 / L), n = perp(u), beta = 1.05;
+    const off = dot(sub(A[1], A[3]), n);
+    const B = [cl(A[3]), add(A[3], mul(d, beta)), add(A[3], add(mul(u, 1.28), mul(n, beta*beta*off))), v2(1.55, -0.95)];
+    return { A, B, n };
+  }
+  function build() {
+    const base = baseCurve();
+    curves = [-1, 0, 1, 2].map(level => {
+      const A = base.A.map(cl), B = base.B.map(cl);
+      if (level === -1) { const dl = v2(0.1, -0.36); B[0] = add(B[0], dl); B[1] = add(B[1], dl); }
+      if (level === 0)  B[1] = add(B[1], mul(base.n, -0.4));
+      if (level === 1) { const off = dot(sub(B[2], B[0]), base.n); B[2] = add(B[2], mul(base.n, -0.78 * off)); }
+      const c = { level, A, B };
+      refresh(c);
+      return c;
+    });
+    let m = 0; for (const f of curves[3].fA.concat(curves[3].fB)) m = Math.max(m, Math.abs(f.k));
+    combScale = 0.34 / Math.max(m, 0.2);
+    rescale(); updateReadouts();
+  }
+  function refresh(c) {
+    c.LA = arcTable(c.A); c.LB = arcTable(c.B); c.fA = []; c.fB = [];
+    for (let i = 0; i <= NK; i++) {
+      const f = i / NK;
+      c.fA.push(frame(c.A, tAtFrac(c.LA, f))); c.fB.push(frame(c.B, tAtFrac(c.LB, f)));
+    }
+  }
+  function rescale() {
+    let m = 0;
+    for (const c of curves) for (const f of c.fA.concat(c.fB)) m = Math.max(m, Math.abs(f.k));
+    const nice = [0.5, 1, 2, 2.5, 5, 10];
+    kMax = nice.find(v => v >= m * 1.08) || 10;
+  }
+  function frameAt(c, s) {
+    return s < 1 ? frame(c.A, tAtFrac(c.LA, Math.max(0, s))) : frame(c.B, tAtFrac(c.LB, Math.min(1, s - 1)));
+  }
+
+  /* ----- constraint maintenance while dragging ----- */
+  function enforce(c, master) {
+    const A = c.A, B = c.B, lvl = c.level;
+    if (lvl < 0) return;
+    if (master === 'A') B[0] = cl(A[3]); else A[3] = cl(B[0]);
+    if (lvl < 1) return;
+    const J = A[3];
+    if (master === 'A') {
+      const d = sub(J, A[2]), L = len(d); if (L < 1e-9) return;
+      const u = mul(d, 1 / L), Lb = Math.max(len(sub(B[1], J)), 1e-3);
+      B[1] = add(J, mul(u, Lb));
+      if (lvl >= 2) {
+        const n = perp(u), beta = Lb / L, off = dot(sub(A[1], J), n), t2 = dot(sub(B[2], J), u);
+        B[2] = add(J, add(mul(u, t2), mul(n, beta * beta * off)));
+      }
+    } else {
+      const d = sub(B[1], J), Lb = len(d); if (Lb < 1e-9) return;
+      const u = mul(d, 1 / Lb), L = Math.max(len(sub(J, A[2])), 1e-3);
+      A[2] = sub(J, mul(u, L));
+      if (lvl >= 2) {
+        const n = perp(u), beta = Lb / L, off2 = dot(sub(B[2], J), n), t1 = dot(sub(A[1], J), u);
+        A[1] = add(J, add(mul(u, t1), mul(n, off2 / (beta * beta))));
+      }
+    }
+  }
+  function handlesOf(c) {
+    const h = [{ id: 'A0', p: c.A[0], on: true }, { id: 'A1', p: c.A[1] }, { id: 'A2', p: c.A[2] }];
+    if (c.level < 0) h.push({ id: 'A3', p: c.A[3], on: true }, { id: 'B0', p: c.B[0], on: true });
+    else h.push({ id: 'J', p: c.A[3], on: true, joint: true });
+    h.push({ id: 'B1', p: c.B[1] }, { id: 'B2', p: c.B[2] }, { id: 'B3', p: c.B[3], on: true });
+    return h;
+  }
+  /* Move handle `id` of curve c by displacement dl, then restore c's continuity class.
+     The join (J on G⁰–G², A3 or B0 on G⁻¹) carries its adjacent tangent handle(s) along. */
+  function translate(c, keys, dl) { for (const k of keys) c[k[0]][+k[1]] = add(c[k[0]][+k[1]], dl); }
+  function applyDrag(c, id, dl) {
+    if (id === 'J' || id === 'A3' || id === 'B0') {
+      if (c.level < 0) translate(c, id === 'J' ? ['A2', 'A3', 'B0', 'B1'] : id === 'A3' ? ['A2', 'A3'] : ['B0', 'B1'], dl);
+      else { translate(c, ['A2', 'A3', 'B1'], dl); c.B[0] = cl(c.A[3]); enforce(c, id === 'B0' ? 'B' : 'A'); }
+    } else {
+      translate(c, [id], dl);
+      enforce(c, id[0]);
+    }
+  }
+  /* Drag handle `id` of curve src to pos; with linking on, the same displacement is applied to the
+     matching handle in every panel, and each curve corrects its other segment independently. */
+  function dragTo(src, id, pos) {
+    const cur = id === 'J' ? src.A[3] : src[id[0]][+id[1]], dl = sub(pos, cur);
+    for (const c of st.link ? curves : [src]) { applyDrag(c, id, dl); refresh(c); }
+    rescale(); updateReadouts();
+  }
+
+  /* ----- readouts at the join ----- */
+  function updateReadouts() {
+    curves.forEach((c, i) => {
+      const gap = len(sub(c.B[0], c.A[3])), fa = frame(c.A, 1), fb = frame(c.B, 0);
+      const ang = Math.atan2(crs(fa.T, fb.T), dot(fa.T, fb.T)) * 180 / Math.PI;
+      const posOK = gap < 1e-9, tanOK = posOK && Math.abs(ang) < 1e-6;
+      const curOK = tanOK && Math.abs(fb.k - fa.k) < 1e-6 * (1 + Math.abs(fa.k));
+      const na = 'Only defined once the lower order matches';
+      const k = '<i class="mv">κ</i>';
+      views[i].readout.innerHTML = readout([
+        ['Position', posOK ? 'ok' : 'jump', posOK ? 'continuous' : 'gap ' + fmt(gap)],
+        ['Tangent', !posOK ? 'na' : tanOK ? 'ok' : 'jump', !posOK ? '—' : tanOK ? 'continuous' : 'turns ' + fmt(ang, 1) + '°', !posOK ? na : ''],
+        ['Curvature', !tanOK ? 'na' : curOK ? 'ok' : 'jump', !tanOK ? '—' : curOK ? `continuous, ${k} = ${fmt(fa.k)}` : `${k} ${fmt(fa.k)} → ${fmt(fb.k)}`, !tanOK ? na : '']
+      ]);
+    });
+  }
+
+  /* ----- drawing ----- */
+  function fit(cv) {
+    const r = cv.getBoundingClientRect(), d = DPR();
+    const w = Math.max(1, Math.round(r.width * d)), h = Math.max(1, Math.round(r.height * d));
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+    return { w: r.width, h: r.height, d };
+  }
+  function xform(W, H) {
+    const pad = 16, s = Math.min((W - 2*pad) / (BOX.x1 - BOX.x0), (H - 2*pad) / (BOX.y1 - BOX.y0));
+    const cx = W / 2 - s * (BOX.x0 + BOX.x1) / 2, cy = H / 2 + s * (BOX.y0 + BOX.y1) / 2;
+    return { s, X: p => cx + s * p.x, Y: p => cy - s * p.y, inv: (x, y) => v2((x - cx) / s, (cy - y) / s) };
+  }
+  function arrow(ctx, T, p, dir, L, color, width, label) {
+    const a = v2(T.X(p), T.Y(p)), q = add(p, mul(dir, L)), b = v2(T.X(q), T.Y(q));
+    const dx = b.x - a.x, dy = b.y - a.y, dl = Math.hypot(dx, dy) || 1, ux = dx / dl, uy = dy / dl, hs = 13;
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = width; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x - ux * hs * 0.7, b.y - uy * hs * 0.7); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(b.x, b.y); ctx.lineTo(b.x - ux*hs - uy*hs*0.42, b.y - uy*hs + ux*hs*0.42);
+    ctx.lineTo(b.x - ux*hs + uy*hs*0.42, b.y - uy*hs - ux*hs*0.42); ctx.closePath(); ctx.fill();
+    if (label) { ctx.fillStyle = color; textRuns(ctx, [{ t: label, font: FNT.math(16) }], b.x + ux * 12, b.y + uy * 12, 'center', TC.panel); }
+  }
+  function oscCircle(ctx, T, f, color, width, dash, alpha) {
+    if (Math.abs(f.k) < 1e-4) return;
+    const r = 1 / Math.abs(f.k); if (r > 80) return;
+    const c = add(f.p, mul(f.n, 1 / f.k));
+    ctx.globalAlpha = alpha; ctx.strokeStyle = color; ctx.lineWidth = width; ctx.setLineDash(dash);
+    ctx.beginPath(); ctx.arc(T.X(c), T.Y(c), r * T.s, 0, 2 * Math.PI); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha = 1;
+    return c;
+  }
+  function probe(ctx, x, y) {
+    ctx.fillStyle = TC.teal; ctx.strokeStyle = TC['point-fill']; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(x, y, 5.5, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+  }
+  function drawView(i) {
+    const c = curves[i], v = views[i], ctx = v.ctx, { w, h, d } = fit(v.cv), T = xform(w, h), sh = st.show;
+    ctx.setTransform(d, 0, 0, d, 0, 0); ctx.clearRect(0, 0, w, h);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const X = p => T.X(p), Y = p => T.Y(p);
+    const seg = (a, b) => { ctx.beginPath(); ctx.moveTo(X(a), Y(a)); ctx.lineTo(X(b), Y(b)); ctx.stroke(); };
+
+    // grid: minor every 0.25, major every 1, pixel-snapped
+    const lo = T.inv(0, h), hi = T.inv(w, 0), snap = z => Math.round(z) + 0.5;
+    for (const [step, col, major] of [[0.25, TC.grid, false], [1, TC['grid-major'], true]]) {
+      ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.beginPath();
+      for (let x = Math.ceil(lo.x / step) * step; x <= hi.x; x += step) {
+        if (!major && Math.abs(x - Math.round(x)) < 1e-9) continue;
+        const sx = snap(T.X(v2(x, 0))); ctx.moveTo(sx, 0); ctx.lineTo(sx, h);
+      }
+      for (let y = Math.ceil(lo.y / step) * step; y <= hi.y; y += step) {
+        if (!major && Math.abs(y - Math.round(y)) < 1e-9) continue;
+        const sy = snap(T.Y(v2(0, y))); ctx.moveTo(0, sy); ctx.lineTo(w, sy);
+      }
+      ctx.stroke();
+    }
+
+    // constraint guides (secondary geometry): the tangent line at the join, and for G² the two
+    // parallel lines through P1 and Q2 whose offsets satisfy δ(Q2) = β² δ(P1)
+    if (sh.guides && c.level >= 1) {
+      const J = c.A[3], dd = sub(J, c.A[2]), L = len(dd);
+      if (L > 1e-9) {
+        const u = mul(dd, 1 / L), n = perp(u);
+        ctx.strokeStyle = TC.poly; ctx.lineWidth = 1.2; ctx.setLineDash([4, 4]);
+        seg(add(J, mul(u, -8)), add(J, mul(u, 8)));
+        if (c.level >= 2) for (const P of [c.A[1], c.B[2]]) {
+          const o = add(J, mul(n, dot(sub(P, J), n)));
+          seg(add(o, mul(u, -8)), add(o, mul(u, 8)));
+        }
+        ctx.setLineDash([]);
+      }
+    }
+
+    // curvature comb
+    if (sh.comb) {
+      for (const F of [c.fA, c.fB]) {
+        const tip = f => add(f.p, mul(f.n, -f.k * combScale));
+        ctx.strokeStyle = TC.orange; ctx.lineWidth = 1.8; ctx.globalAlpha = 0.55;
+        for (let j = 0; j < F.length; j += 3) seg(F[j].p, tip(F[j]));
+        ctx.globalAlpha = 1; ctx.lineWidth = 3; ctx.setLineDash([6, 5]); ctx.beginPath();
+        F.forEach((f, j) => { const q = tip(f); j ? ctx.lineTo(X(q), Y(q)) : ctx.moveTo(X(q), Y(q)); });
+        ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+      }
+    }
+
+    // one-sided limits at the join
+    const fa = frame(c.A, 1), fb = frame(c.B, 0);
+    if (sh.lim) {
+      for (const f of [fa, fb]) {
+        if (sh.osc) oscCircle(ctx, T, f, TC.orange, 2.2, [4, 4], 0.6);
+        ctx.strokeStyle = TC.teal; ctx.lineWidth = 2.5; ctx.globalAlpha = 0.75; ctx.setLineDash([6, 5]);
+        if (sh.tan) seg(add(f.p, mul(f.T, -0.7)), add(f.p, mul(f.T, 0.7)));
+        if (sh.nrm) seg(f.p, add(f.p, mul(f.n, 0.42)));
+        ctx.setLineDash([]); ctx.globalAlpha = 1;
+      }
+    }
+
+    // osculating circle at the sweep point
+    const f = frameAt(c, st.s);
+    if (sh.osc) {
+      const cc = oscCircle(ctx, T, f, TC.orange, 3, [6, 5], 1);
+      if (cc && 1 / Math.abs(f.k) < 6) {
+        ctx.strokeStyle = TC.orange; ctx.globalAlpha = 0.7; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]); seg(f.p, cc); ctx.setLineDash([]); ctx.globalAlpha = 1;
+        ctx.fillStyle = TC.orange; ctx.beginPath(); ctx.arc(X(cc), Y(cc), 3.6, 0, 2 * Math.PI); ctx.fill();
+      }
+    }
+
+    // control polygons
+    if (sh.poly) {
+      ctx.strokeStyle = TC.curve; ctx.lineWidth = 2; ctx.setLineDash([12, 8]); ctx.lineCap = 'butt';
+      for (const P of [c.A, c.B]) {
+        ctx.beginPath(); ctx.moveTo(X(P[0]), Y(P[0])); for (let j = 1; j < 4; j++) ctx.lineTo(X(P[j]), Y(P[j])); ctx.stroke();
+      }
+      ctx.setLineDash([]); ctx.lineCap = 'round';
+    }
+
+    // the curve itself (exact cubic Béziers)
+    ctx.strokeStyle = TC.curve; ctx.lineWidth = 4;
+    for (const P of [c.A, c.B]) {
+      ctx.beginPath(); ctx.moveTo(X(P[0]), Y(P[0]));
+      ctx.bezierCurveTo(X(P[1]), Y(P[1]), X(P[2]), Y(P[2]), X(P[3]), Y(P[3])); ctx.stroke();
+    }
+
+    // tangent line and frame (construction, teal)
+    if (sh.tan) {
+      ctx.strokeStyle = TC.teal; ctx.lineWidth = 2.5; ctx.globalAlpha = 0.7;
+      seg(add(f.p, mul(f.T, -8)), add(f.p, mul(f.T, 8))); ctx.globalAlpha = 1;
+      arrow(ctx, T, f.p, f.T, 0.5, TC.teal, 3);
+    }
+    if (sh.nrm) arrow(ctx, T, f.p, f.n, 0.44, TC.teal, 3);
+
+    // control points: filled black dots at the ends of each cubic, open white circles for the inner handles
+    if (sh.poly) {
+      for (const hd of handlesOf(c)) {
+        const x = X(hd.p), y = Y(hd.p), hot = v.hover === hd.id || (drag && drag.kind === 'handle' && drag.id === hd.id);
+        const r = (hd.joint ? 8 : 7) + (hot ? 1.5 : 0);
+        ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI);
+        if (hd.on) { ctx.fillStyle = TC.curve; ctx.fill(); }
+        else { ctx.fillStyle = TC['point-fill']; ctx.fill(); ctx.strokeStyle = TC.curve; ctx.lineWidth = 3; ctx.stroke(); }
+      }
+    } else {
+      for (const p of c.level < 0 ? [c.A[3], c.B[0]] : [c.A[3]]) {
+        ctx.beginPath(); ctx.arc(X(p), Y(p), 6.5, 0, 2 * Math.PI);
+        ctx.fillStyle = TC.curve; ctx.fill();
+      }
+    }
+
+    // sweep point
+    probe(ctx, X(f.p), Y(f.p));
+    v.T = T;
+  }
+  function drawPlot(i) {
+    const c = curves[i], v = views[i], ctx = v.pctx, { w, h, d } = fit(v.pcv);
+    ctx.setTransform(d, 0, 0, d, 0, 0); ctx.clearRect(0, 0, w, h);
+    const x0 = 46, x1 = w - 14, xm = (x0 + x1) / 2, ym = Math.round(h / 2) + 0.5, sy = (h / 2 - 9) / kMax;
+    const Yk = k => ym - clamp(k, -kMax * 1.05, kMax * 1.05) * sy;
+    ctx.fillStyle = TC.muted;
+    textRuns(ctx, [{ t: fmt(kMax, kMax % 1 ? 1 : 0), font: FNT.ui(12) }], x0 - 6, ym - kMax * sy, 'right');
+    textRuns(ctx, [{ t: '0', font: FNT.ui(12) }], x0 - 6, ym, 'right');
+    textRuns(ctx, [{ t: fmt(-kMax, kMax % 1 ? 1 : 0), font: FNT.ui(12) }], x0 - 6, ym + kMax * sy, 'right');
+    ctx.fillStyle = TC.ink; textRuns(ctx, [{ t: 'κ', font: FNT.math(15) }], 12, ym, 'left');
+    ctx.strokeStyle = TC.axis; ctx.lineWidth = 1.5; ctx.lineCap = 'butt';
+    ctx.beginPath(); ctx.moveTo(x0, ym); ctx.lineTo(x1, ym); ctx.stroke();
+    ctx.strokeStyle = TC.curve; ctx.globalAlpha = 0.5; ctx.lineWidth = 1.6; ctx.setLineDash([6, 5]);
+    ctx.beginPath(); ctx.moveTo(xm, 4); ctx.lineTo(xm, h - 4); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+    ctx.strokeStyle = TC.curve; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    [[c.fA, x0, xm], [c.fB, xm, x1]].forEach(([F, a, b]) => {
+      ctx.beginPath(); F.forEach((f, j) => { const x = a + (b - a) * j / NK, y = Yk(f.k); j ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();
+    });
+    // one-sided values at the join
+    ctx.fillStyle = TC['point-fill']; ctx.strokeStyle = TC.curve; ctx.lineWidth = 2.25;
+    for (const y of [Yk(c.fA[NK].k), Yk(c.fB[0].k)]) { ctx.beginPath(); ctx.arc(xm, y, 4.5, 0, 2*Math.PI); ctx.fill(); ctx.stroke(); }
+    // current position
+    const s = st.s, x = s < 1 ? x0 + (xm - x0) * s : xm + (x1 - xm) * (s - 1), f = frameAt(c, s);
+    ctx.strokeStyle = TC.teal; ctx.globalAlpha = 0.6; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(x, 3); ctx.lineTo(x, h - 3); ctx.stroke(); ctx.globalAlpha = 1;
+    probe(ctx, x, Yk(f.k));
+    ctx.fillStyle = TC.muted;
+    const runs = [{ t: 'κ', font: FNT.math(15) }, { t: ' = ' + fmt(f.k), font: FNT.ui(14) }];
+    if (Math.abs(f.k) > 1e-3) runs.push({ t: ',  ', font: FNT.ui(14) }, { t: 'R', font: FNT.math(15) }, { t: ' = ' + (1 / Math.abs(f.k)).toFixed(2), font: FNT.ui(14) });
+    textRuns(ctx, runs, x1, 12, 'right', TC.panel);
+  }
+  function syncPlots() { for (const v of views) v.plotEl.hidden = !st.show.plot; }
+  function drawAll() { for (let i = 0; i < 4; i++) { if (views[i].spec.hidden) continue; drawView(i); if (st.show.plot) drawPlot(i); } }
+
+  /* ----- UI ----- */
+  const sIn = $('#c-s'), sOut = $('#o-s'), playBtn = $('#c-play');
+  function syncS() { sIn.value = st.s.toFixed(3); sOut.textContent = st.s.toFixed(2); }
+  function syncPlay() { playBtn.setAttribute('aria-pressed', String(st.playing)); playBtn.textContent = st.playing ? 'Pause sweep' : 'Play sweep'; }
+  function setS(s) { st.s = clamp(s, 0, 2); st.dirty = true; syncS(); kick(); }
+  function setPlaying(p) { if (st.playing !== p) { st.playing = p; syncPlay(); } kick(); }
+
+  function init() {
+    document.querySelectorAll('#c-bench .spec').forEach((el, i) => {
+      const cv = el.querySelector('.view canvas'), pcv = el.querySelector('.plot canvas');
+      const v = { cv, pcv, spec: el, plotEl: el.querySelector('.plot'), ctx: cv.getContext('2d'), pctx: pcv.getContext('2d'),
+                  readout: el.querySelector('.readout'), T: null, hover: null };
+      views.push(v);
+      const local = e => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+      const nearHandle = (x, y, rad) => {
+        if (!st.show.poly || !v.T) return null;
+        let best = null, bd = rad;
+        for (const hd of handlesOf(curves[i])) { const dd = Math.hypot(v.T.X(hd.p) - x, v.T.Y(hd.p) - y); if (dd < bd) { bd = dd; best = hd; } }
+        return best;
+      };
+      const nearCurve = (x, y, rad) => {
+        if (!v.T) return null;
+        let best = null, bd = rad; const c = curves[i];
+        [[c.fA, 0], [c.fB, 1]].forEach(([F, o]) => F.forEach((f, j) => {
+          const dd = Math.hypot(v.T.X(f.p) - x, v.T.Y(f.p) - y); if (dd < bd) { bd = dd; best = o + Math.min(j / NK, o ? 1 : 0.9999); }
+        }));
+        return best;
+      };
+      cv.addEventListener('pointerdown', e => {
+        const { x, y } = local(e), rad = e.pointerType === 'touch' ? 22 : 13;
+        const hd = nearHandle(x, y, rad);
+        if (hd) { drag = { i, id: hd.id, kind: 'handle' }; st.dirty = true; }
+        else { const s = nearCurve(x, y, rad * 1.6); if (s === null) return; drag = { i, kind: 'scrub' }; setPlaying(false); setS(s); }
+        cv.setPointerCapture(e.pointerId); e.preventDefault(); kick();
+      });
+      cv.addEventListener('pointermove', e => {
+        const { x, y } = local(e);
+        if (drag && drag.i === i) {
+          if (drag.kind === 'handle') { dragTo(curves[i], drag.id, v.T.inv(x, y)); st.dirty = true; kick(); }
+          else { const s = nearCurve(x, y, 1e9); if (s !== null) setS(s); }
+          return;
+        }
+        const hd = nearHandle(x, y, 13), id = hd ? hd.id : null;
+        if (id !== v.hover) { v.hover = id; st.dirty = true; kick(); }
+        cv.style.cursor = hd ? 'grab' : (nearCurve(x, y, 20) !== null ? 'pointer' : 'default');
+      });
+      cv.addEventListener('pointerleave', () => { if (v.hover) { v.hover = null; st.dirty = true; kick(); } });
+      const end = () => { if (drag && drag.i === i) { drag = null; st.dirty = true; kick(); } };
+      cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+      new ResizeObserver(() => { st.dirty = true; kick(); }).observe(el);
+    });
+    build();
+    sIn.addEventListener('input', () => { setPlaying(false); setS(+sIn.value); });
+    playBtn.addEventListener('click', () => setPlaying(!st.playing));
+    document.querySelectorAll('#c-speed button').forEach(b => b.addEventListener('click', () => {
+      st.speed = +b.dataset.v;
+      document.querySelectorAll('#c-speed button').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+    }));
+    for (const k of Object.keys(st.show)) {
+      const el = $('#sh-' + k); el.checked = st.show[k];
+      el.addEventListener('change', () => { st.show[k] = el.checked; syncPlots(); st.dirty = true; kick(); });
+    }
+    syncPlots();
+    $('#c-reset').addEventListener('click', () => { build(); st.dirty = true; kick(); });
+    const linkEl = $('#c-link'); linkEl.checked = st.link;
+    linkEl.addEventListener('change', () => { st.link = linkEl.checked; });
+    document.addEventListener('keydown', e => {
+      if (active !== 'curves') return;
+      const tag = (e.target.tagName || '').toLowerCase();
+      if (['input', 'select', 'textarea', 'button'].includes(tag)) return;
+      if (e.key === ' ') { e.preventDefault(); setPlaying(!st.playing); }
+      else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); setPlaying(false); setS(st.s + (e.key === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? 0.1 : 0.01)); }
+    });
+    syncS(); syncPlay();
+  }
+  function step(dt) {
+    if (st.playing) {
+      st.s += st.dir * st.speed * dt / 3;
+      if (st.s > 2) { st.s = 4 - st.s; st.dir = -1; }
+      if (st.s < 0) { st.s = -st.s; st.dir = 1; }
+      syncS(); st.dirty = true;
+    }
+    if (st.dirty) { drawAll(); st.dirty = false; }
+    return st.playing;
+  }
+  return { init, frame: step, markDirty: () => { st.dirty = true; kick(); } };
+})();
+
+/* =====================================================================
+   SURFACES
+   ===================================================================== */
+const bern = t => { const s = 1 - t; return [s*s*s, 3*s*s*t, 3*s*t*t, t*t*t]; };
+const dbern = t => { const s = 1 - t; return [-3*s*s, 3*(s*s - 2*s*t), 3*(2*s*t - t*t), 3*t*t]; };
+const ddbern = t => { const s = 1 - t; return [6*s, 6*(t - 2*s), 6*(s - 2*t), 6*t]; };
+function evalPatch(M, u, v) {
+  const bu = bern(u), bv = bern(v), du = dbern(u), dv = dbern(v), ddu = ddbern(u), ddv = ddbern(v);
+  let h = 0, hu = 0, hv = 0, huu = 0, huv = 0, hvv = 0;
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+    const m = M[i*4 + j];
+    h += bu[i]*bv[j]*m; hu += du[i]*bv[j]*m; hv += bu[i]*dv[j]*m;
+    huu += ddu[i]*bv[j]*m; huv += du[i]*dv[j]*m; hvv += bu[i]*ddv[j]*m;
+  }
+  return { h, hx: hu, hz: hv / 2, hxx: huu, hxz: huv / 2, hzz: hvv / 4 };
+}
+function meanH(e) { const w2 = 1 + e.hx*e.hx + e.hz*e.hz; return ((1 + e.hz*e.hz)*e.hxx - 2*e.hx*e.hz*e.hxz + (1 + e.hx*e.hx)*e.hzz) / (2*Math.pow(w2, 1.5)); }
+function unitN(e) { const l = Math.hypot(e.hx, 1, e.hz); return [-e.hx / l, 1 / l, -e.hz / l]; }
+
+/* left x-profile: 0.45u − 0.175u² (slope 0.1, h_xx = −0.35 at the join); z-profile: 0.7 v(1−v) (h_zz = −0.35);
+   right G² profile from the C² row conditions; a small global twist. */
+const FL = [0.0, 0.15, 0.3 - 0.35 / 6, 0.275], GZ = [0, 0.7 / 3, 0.7 / 3, 0], TWIST = 0.06, C3R = 0.14;
+/* Offsets added to rows 0–3 of the right patch (scaled by the defect size).
+   Jump: lower row 0. G⁰: add the linear ramp 0.3·u, so only the slope jumps (concave crease; both patches
+   keep the G² curvatures and stay convex). G¹: lift row 2, so ∂²h/∂x² jumps. */
+const DEFECTS = [[-0.12, 0, 0, 0], [0, 0.1, 0.2, 0.3], [0, 0, 0.07, 0], null];
+function surfaceNets(defect) {
+  const [a0, a1, a2, a3] = FL;
+  const FR = [a3, 2*a3 - a2, a1 - 4*a2 + 4*a3, C3R];
+  return DEFECTS.map(dr => {
+    const L = new Float64Array(16), R = new Float64Array(16);
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+      const z = -1 + 2*j/3;
+      L[i*4 + j] = FL[i] + GZ[j] + TWIST * (-1 + i/3) * z;
+      R[i*4 + j] = FR[i] + GZ[j] + TWIST * (i/3) * z;
+    }
+    if (dr) for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) R[i*4 + j] += dr[i] * defect;
+    return { L, R, L32: Float32Array.from(L), R32: Float32Array.from(R) };
+  });
+}
+const FLOOR_Y = -0.22, FLOOR_EXT = 1.35;
+/* round contour spacing: 1, 2, 2.5 or 5 × 10ⁿ, about ten levels over [−range, range] */
+function niceStep(t) {
+  const e = Math.floor(Math.log10(t)), b = Math.pow(10, e), m = t / b;
+  const opts = [1, 2, 2.5, 5, 10]; let best = 1;
+  for (const o of opts) if (Math.abs(Math.log(o / m)) < Math.abs(Math.log(best / m))) best = o;
+  return best * b;
+}
+
+const GLSL_ENV = `
+const float PI = 3.141592653589793;
+uniform int uEnvMode;
+uniform sampler2D uEnv;
+uniform int uMap;
+uniform float uEnvRot;
+uniform vec3 uLC; uniform vec3 uLN; uniform vec3 uLA; uniform vec3 uLB;
+uniform float uLW; uniform float uLH; uniform float uLGap; uniform float uLI; uniform int uLCount;
+uniform float uExposure;
+
+vec3 studio(vec3 d){
+  vec3 floorC = vec3(0.022, 0.016, 0.032);
+  vec3 hor = vec3(0.110, 0.085, 0.145);
+  vec3 top = vec3(0.045, 0.033, 0.065);
+  return d.y < 0.0 ? mix(hor, floorC, smoothstep(0.0, 0.3, -d.y)) : mix(hor, top, smoothstep(0.0, 0.75, d.y));
+}
+float stripMask(vec3 p, vec3 d){
+  float den = dot(d, uLN);
+  float t = dot(uLC - p, uLN) / min(den, -1e-4);
+  vec3 q = p + t * d - uLC;
+  float a = dot(q, uLA), b = dot(q, uLB);
+  float fa = clamp(fwidth(a), 1e-4, 0.5), fb = clamp(fwidth(b), 1e-4, 0.5);
+  float ma = 1.0 - smoothstep(uLW - fa, uLW + fa, abs(a));
+  float n = float(uLCount);
+  float pitch = 2.0 * uLH + uLGap;
+  float off = (n - 1.0) * 0.5 * pitch;
+  float k = clamp(floor((b + off) / pitch + 0.5), 0.0, n - 1.0);
+  float bl = b + off - k * pitch;
+  float mb = 1.0 - smoothstep(uLH - fb, uLH + fb, abs(bl));
+  return ma * mb * step(den, -1e-4) * step(0.0, t);
+}
+vec3 rotY(vec3 d){ float c = cos(uEnvRot), s = sin(uEnvRot); return vec3(c*d.x + s*d.z, d.y, -s*d.x + c*d.z); }
+vec2 envUV(vec3 d){
+  d = rotY(d);
+  if (uMap == 0) return vec2(0.5 + atan(d.x, -d.z) / (2.0 * PI), acos(clamp(d.y, -1.0, 1.0)) / PI);
+  if (uMap == 1) { vec3 m = normalize(d + vec3(0.0, 0.0, 1.00001)); return vec2(0.5 + 0.5 * m.x, 0.5 - 0.5 * m.y); }
+  float r = acos(clamp(-d.z, -1.0, 1.0)) / PI / max(length(d.xy), 1e-6);
+  return vec2(0.5 + 0.5 * d.x * r, 0.5 - 0.5 * d.y * r);
+}
+vec3 envMap(vec3 d){
+  vec2 uv = envUV(d);
+  vec2 dx = dFdx(uv), dy = dFdy(uv);
+  vec2 uv2 = vec2(fract(uv.x + 0.5), uv.y);
+  vec2 dx2 = dFdx(uv2), dy2 = dFdy(uv2);
+  if (uMap == 0 && dot(dx2, dx2) + dot(dy2, dy2) < dot(dx, dx) + dot(dy, dy)) { dx = dx2; dy = dy2; }
+  return textureGrad(uEnv, uv, dx, dy).rgb;
+}
+vec3 environment(vec3 p, vec3 d){
+  vec3 s = studio(d) + uLI * vec3(1.0, 0.97, 0.92) * stripMask(p, d);
+  vec3 e = envMap(d);
+  return uEnvMode == 0 ? s : e;
+}
+vec3 aces(vec3 x){ return clamp((x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14), 0.0, 1.0); }
+vec3 toDisplay(vec3 c){ c = aces(c * exp2(uExposure)); return pow(c, vec3(1.0 / 2.2)); }
+`;
+const GLSL_BERN = `
+vec4 Bf(float t){ float s = 1.0 - t; return vec4(s*s*s, 3.0*s*s*t, 3.0*s*t*t, t*t*t); }
+vec4 dBf(float t){ float s = 1.0 - t; return 3.0 * vec4(-s*s, s*s - 2.0*s*t, 2.0*s*t - t*t, t*t); }
+vec4 ddBf(float t){ float s = 1.0 - t; return 6.0 * vec4(s, t - 2.0*s, s - 2.0*t, t); }
+`;
+const VS_SURF = `#version 300 es
+layout(location = 0) in vec2 aUV;
+uniform mat4 uM; uniform float uX0; uniform mat4 uVP;
+out vec2 vUV;
+${GLSL_BERN}
+void main(){
+  vUV = aUV;
+  float h = dot(uM * Bf(aUV.x), Bf(aUV.y));
+  gl_Position = uVP * vec4(uX0 + aUV.x, h, -1.0 + 2.0 * aUV.y, 1.0);
+}`;
+const FS_SURF = `#version 300 es
+precision highp float;
+in vec2 vUV;
+uniform mat4 uM; uniform float uX0; uniform vec3 uCam; uniform int uShade; uniform float uCurvRange;
+uniform bool uMarkJoint; uniform int uSide; uniform float uDpr; uniform float uStep;
+uniform vec3 uMapNeg; uniform vec3 uMapZero; uniform vec3 uMapPos; uniform vec3 uInk; uniform vec3 uTeal;
+uniform vec4 uContour; uniform vec4 uZeroSet;
+out vec4 o;
+${GLSL_ENV}
+${GLSL_BERN}
+vec3 diverge(float s){
+  s = clamp(s, -1.0, 1.0);
+  float a = pow(abs(s), 0.9);
+  return s < 0.0 ? mix(uMapZero, uMapNeg, a) : mix(uMapZero, uMapPos, a);
+}
+float lineMask(float distPx, float widthPx){ return 1.0 - smoothstep(0.5 * widthPx - 0.5, 0.5 * widthPx + 0.5, distPx); }
+void main(){
+  float u = vUV.x, v = vUV.y;
+  vec4 bu = Bf(u), bv = Bf(v), du = dBf(u), dv = dBf(v), ddu = ddBf(u), ddv = ddBf(v);
+  float h   = dot(uM * bu, bv);
+  float hx  = dot(uM * du, bv);
+  float hz  = dot(uM * bu, dv) * 0.5;
+  float hxx = dot(uM * ddu, bv);
+  float hxz = dot(uM * du, dv) * 0.5;
+  float hzz = dot(uM * bu, ddv) * 0.25;
+  vec3 P = vec3(uX0 + u, h, -1.0 + 2.0 * v);
+  vec3 N = normalize(vec3(-hx, 1.0, -hz));
+  vec3 V = normalize(P - uCam);
+  float facing = dot(N, V) > 0.0 ? -1.0 : 1.0;
+  vec3 Nf = N * facing;
+  vec3 R = reflect(V, Nf);
+  vec3 env = environment(P, R);
+  vec3 col;
+  if (uShade == 0) {
+    col = toDisplay(0.95 * env);
+  } else {
+    float w2 = 1.0 + hx*hx + hz*hz;
+    float val = uShade == 1
+      ? ((1.0 + hz*hz)*hxx - 2.0*hx*hz*hxz + (1.0 + hx*hx)*hzz) / (2.0 * pow(w2, 1.5))
+      : (hxx*hzz - hxz*hxz) / (w2*w2);
+    col = diverge(val / uCurvRange);
+    col *= 0.82 + 0.18 * max(dot(Nf, normalize(vec3(0.4, 1.0, 0.6))), 0.0);
+    // faint 10 x 10 parameter grid per patch, ink at 10 %
+    vec2 gq = vUV * 10.0;
+    vec2 gd = abs(fract(gq + 0.5) - 0.5) / max(fwidth(gq), vec2(1e-6));
+    col = mix(col, uInk, 0.10 * lineMask(min(gd.x, gd.y), uDpr));
+    // contours at round spacing (1.8 px) and the zero set (3.2 px)
+    float fw = max(fwidth(val), 1e-6);
+    float dc = abs(fract(val / uStep + 0.5) - 0.5) * uStep / fw;
+    col = mix(col, uContour.rgb, uContour.a * lineMask(dc, 1.8 * uDpr));
+    col = mix(col, uZeroSet.rgb, uZeroSet.a * lineMask(abs(val) / fw, 3.2 * uDpr));
+  }
+  if (uMarkJoint) {
+    float ju = uSide == 0 ? 1.0 - u : u;
+    col = mix(col, uTeal, lineMask(ju / max(fwidth(u), 1e-6), 4.0 * uDpr));
+  }
+  o = vec4(col, 1.0);
+}`;
+const VS_BG = `#version 300 es
+out vec2 vNDC;
+void main(){
+  vec2 p = vec2(float((gl_VertexID & 1) << 2) - 1.0, float((gl_VertexID & 2) << 1) - 1.0);
+  vNDC = p; gl_Position = vec4(p, 0.9999, 1.0);
+}`;
+const FS_BG = `#version 300 es
+precision highp float;
+in vec2 vNDC;
+uniform vec3 uCam; uniform vec3 uCX; uniform vec3 uCY; uniform vec3 uCZ;
+uniform float uTanH; uniform float uAspect; uniform bool uShowBg; uniform int uShade; uniform vec3 uPlain;
+out vec4 o;
+${GLSL_ENV}
+void main(){
+  vec3 d = normalize(-uCZ + uCX * vNDC.x * uTanH * uAspect + uCY * vNDC.y * uTanH);
+  vec3 c = toDisplay(environment(uCam, d));
+  o = vec4((uShowBg && uShade == 0) ? c : uPlain, 1.0);
+}`;
+const VS_FLOOR = `#version 300 es
+layout(location = 0) in vec2 aQ;
+uniform mat4 uVP; uniform float uY; uniform float uExt;
+out vec2 vQ;
+void main(){ vQ = aQ * uExt; gl_Position = uVP * vec4(vQ.x, uY, vQ.y, 1.0); }`;
+const FS_FLOOR = `#version 300 es
+precision highp float;
+in vec2 vQ;
+uniform float uExt; uniform float uDpr; uniform vec3 uFill; uniform vec3 uEdge;
+out vec4 o;
+void main(){
+  vec2 e = (uExt - abs(vQ)) / max(fwidth(vQ), vec2(1e-6));
+  float d = min(e.x, e.y), w = 1.5 * uDpr;
+  o = vec4(mix(uFill, uEdge, 1.0 - smoothstep(w - 0.5, w + 0.5, d)), 1.0);
+}`;
+
+/* ---- small 3D math ---- */
+const v3sub = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]];
+const v3cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+const v3dot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+const v3norm = a => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0]/l, a[1]/l, a[2]/l]; };
+function mmul(a, b) { const o = new Float32Array(16); for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k*4 + r] * b[c*4 + k]; o[c*4 + r] = s; } return o; }
+
+/* ---- environment maps: sample, Radiance .hdr, LDR images ---- */
+const MAXW = 2048;
+function genSampleEnv(W, H) {
+  const out = new Float32Array(W * H * 4);
+  const sun = v3norm([Math.sin(0.9) * Math.cos(0.55), Math.sin(0.55), -Math.cos(0.9) * Math.cos(0.55)]);
+  for (let y = 0; y < H; y++) {
+    const th = (y + 0.5) / H * Math.PI, dy = Math.cos(th), sy = Math.sin(th);
+    for (let x = 0; x < W; x++) {
+      const ph = ((x + 0.5) / W - 0.5) * 2 * Math.PI, dx = sy * Math.sin(ph), dz = -sy * Math.cos(ph);
+      let r, g, b;
+      if (dy < 0) {
+        const t = -4 / dy, px = dx * t, pz = dz * t;
+        const chk = ((Math.floor(px) + Math.floor(pz)) & 1) ? 0.3 : 0.1;
+        const fog = 1 - Math.exp(-t / 40);
+        r = chk * (1 - fog) + 0.2 * fog; g = chk * (1 - fog) + 0.19 * fog; b = chk * (1 - fog) + 0.18 * fog;
+      } else {
+        const k = Math.pow(dy, 0.45);
+        r = 0.95 * (1 - k) + 0.16 * k; g = 0.9 * (1 - k) + 0.3 * k; b = 0.86 * (1 - k) + 0.62 * k;
+        const e = Math.asin(dy), n = 7, pane = 0.12, gap = 0.1, pitch = pane + gap, wtot = n * pitch - gap;
+        if (e > 0.04 && e < 0.62 && Math.abs(ph) < 1.2) {
+          r *= 0.08; g *= 0.08; b *= 0.08;
+          const a = ph + wtot / 2;
+          if (a > 0 && a < wtot && (a % pitch) < pane && e > 0.1 && e < 0.56) { r = 5.0; g = 4.7; b = 4.2; }
+        }
+        const sd = Math.acos(clamp(dx*sun[0] + dy*sun[1] + dz*sun[2], -1, 1));
+        if (sd < 0.03) { r = g = b = 120; } else { const gl = 2.0 * Math.exp(-sd * 9); r += gl; g += gl * 0.9; b += gl * 0.75; }
+      }
+      const i = (y * W + x) * 4; out[i] = r; out[i+1] = g; out[i+2] = b; out[i+3] = 1;
+    }
+  }
+  return { data: out, w: W, h: H };
+}
+function parseHDR(buf) {
+  const bytes = new Uint8Array(buf); let pos = 0;
+  const readLine = () => { let s = ''; while (pos < bytes.length) { const c = bytes[pos++]; if (c === 10) break; s += String.fromCharCode(c); } return s; };
+  const first = readLine();
+  if (!first.startsWith('#?')) throw new Error('This is not a Radiance .hdr file (it has no “#?” header).');
+  let format = '';
+  for (;;) {
+    if (pos >= bytes.length) throw new Error('The .hdr header never ends. The file may be truncated.');
+    const line = readLine().trim();
+    if (line === '') break;
+    if (line.startsWith('FORMAT=')) format = line.slice(7);
+  }
+  if (format && format !== '32-bit_rle_rgbe') throw new Error(`Only RGBE .hdr files are supported; this one is ${format}.`);
+  const m = readLine().trim().match(/^([+-])Y\s+(\d+)\s+([+-])X\s+(\d+)$/);
+  if (!m) throw new Error('Unsupported .hdr orientation line. Expected “-Y H +X W”.');
+  const H = +m[2], W = +m[4], flipY = m[1] === '+', flipX = m[3] === '-';
+  const f = Math.max(1, Math.ceil(W / MAXW)), tw = Math.ceil(W / f), th = Math.ceil(H / f);
+  const acc = new Float32Array(tw * th * 4), cnt = new Float32Array(tw * th);
+  const scale = new Float32Array(256); for (let e = 1; e < 256; e++) scale[e] = Math.pow(2, e - 136);
+  const scan = new Uint8Array(W * 4);
+  for (let y = 0; y < H; y++) {
+    if (pos + 4 > bytes.length) throw new Error('The .hdr pixel data ends early. The file may be truncated.');
+    if (W >= 8 && W < 32768 && bytes[pos] === 2 && bytes[pos+1] === 2 && !(bytes[pos+2] & 0x80)) {
+      if (((bytes[pos+2] << 8) | bytes[pos+3]) !== W) throw new Error('Corrupt .hdr scanline width.');
+      pos += 4;
+      for (let c = 0; c < 4; c++) {
+        let x = 0;
+        while (x < W) {
+          let count = bytes[pos++];
+          if (count > 128) { count -= 128; if (x + count > W) throw new Error('Corrupt .hdr run length.'); const val = bytes[pos++]; for (let k = 0; k < count; k++) scan[(x++)*4 + c] = val; }
+          else { if (count === 0 || x + count > W) throw new Error('Corrupt .hdr run length.'); for (let k = 0; k < count; k++) scan[(x++)*4 + c] = bytes[pos++]; }
+        }
+      }
+    } else {
+      for (let k = 0; k < W * 4; k++) scan[k] = bytes[pos++];
+    }
+    const yy = flipY ? H - 1 - y : y, ty = Math.floor(yy / f);
+    for (let x = 0; x < W; x++) {
+      const e = scan[x*4 + 3]; if (!e) { cnt[ty*tw + Math.floor((flipX ? W - 1 - x : x) / f)]++; continue; }
+      const sc = scale[e], tx = Math.floor((flipX ? W - 1 - x : x) / f), o = (ty*tw + tx) * 4;
+      acc[o] += (scan[x*4] + 0.5) * sc; acc[o+1] += (scan[x*4+1] + 0.5) * sc; acc[o+2] += (scan[x*4+2] + 0.5) * sc; cnt[ty*tw + tx]++;
+    }
+  }
+  for (let i = 0; i < tw * th; i++) { const c = cnt[i] || 1; for (let k = 0; k < 3; k++) acc[i*4+k] = Math.min(acc[i*4+k] / c, 65504); acc[i*4+3] = 1; }
+  return { data: acc, w: tw, h: th, srcW: W, srcH: H };
+}
+async function decodeLDR(file) {
+  let bmp;
+  try { bmp = await createImageBitmap(file); }
+  catch (e) { throw new Error('The browser could not decode this image. Use .exr, .hdr, .jpg, .png or .webp.'); }
+  const f = Math.max(1, bmp.width / MAXW), w = Math.round(bmp.width / f), h = Math.round(bmp.height / f);
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const ctx = cv.getContext('2d'); ctx.drawImage(bmp, 0, 0, w, h);
+  const px = ctx.getImageData(0, 0, w, h).data, lut = new Float32Array(256);
+  for (let i = 0; i < 256; i++) { const c = i / 255; lut[i] = c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+  const out = new Float32Array(w * h * 4);
+  for (let i = 0; i < w * h; i++) { out[i*4] = lut[px[i*4]]; out[i*4+1] = lut[px[i*4+1]]; out[i*4+2] = lut[px[i*4+2]]; out[i*4+3] = 1; }
+  return { data: out, w, h, srcW: bmp.width, srcH: bmp.height, ldr: true };
+}
+
+/* ---- OpenEXR: three.js EXRLoader, fetched from jsDelivr on first use ----
+   Primary route: the current ES-module build (all compressions, tiled images).
+   Fallback route: three r147 classic scripts (all but B44 and tiled), in case the module route is blocked. */
+const EXR_ESM = 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/loaders/EXRLoader.js/+esm';
+const EXR_CLASSIC = ['https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js',
+                     'https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/libs/fflate.min.js',
+                     'https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/EXRLoader.js'];
+const HALF_FLOAT_TYPE = 1016; // THREE.HalfFloatType
+let exrDecoder = null, halfTable = null;
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const el = document.createElement('script'); el.src = src; el.async = false;
+    el.onload = res; el.onerror = () => rej(new Error('Could not load ' + src));
+    document.head.appendChild(el);
+  });
+}
+function getEXRDecoder() {
+  if (!exrDecoder) exrDecoder = (async () => {
+    try { const m = await import(EXR_ESM); if (m.EXRLoader) return m.EXRLoader; throw new Error('no export'); }
+    catch (e) {
+      console.warn('EXR module route failed, trying classic scripts', e);
+      for (const src of EXR_CLASSIC) await loadScript(src);
+      if (!window.THREE || !window.THREE.EXRLoader) throw new Error('EXRLoader missing');
+      return window.THREE.EXRLoader;
+    }
+  })().catch(e => {
+    exrDecoder = null; console.error(e);
+    throw new Error('The OpenEXR decoder could not be loaded from cdn.jsdelivr.net. Check the network connection and try again, or use a .hdr file.');
+  });
+  return exrDecoder;
+}
+function halfLUT() {
+  if (halfTable) return halfTable;
+  halfTable = new Float32Array(65536);
+  for (let h = 0; h < 65536; h++) {
+    const sg = h & 0x8000 ? -1 : 1, e = (h >> 10) & 0x1f, m = h & 0x3ff;
+    halfTable[h] = e === 0 ? sg * m * Math.pow(2, -24) : e === 31 ? (m ? NaN : sg * Infinity) : sg * (1 + m / 1024) * Math.pow(2, e - 15);
+  }
+  return halfTable;
+}
+/* Box-filter an interleaved image (ch channels, optional lookup table) to at most MAXW wide RGBA floats,
+   clamping every sample to [0, 65504] (NaN → 0). flipY turns a bottom-up buffer top-down. */
+function boxDownsample(src, w, h, ch, lut, flipY) {
+  const f = Math.max(1, Math.ceil(w / MAXW)), tw = Math.ceil(w / f), th = Math.ceil(h / f);
+  const acc = new Float32Array(tw * th * 4), cnt = new Uint32Array(tw * th);
+  for (let y = 0; y < h; y++) {
+    const ty = Math.floor((flipY ? h - 1 - y : y) / f);
+    for (let x = 0; x < w; x++) {
+      const si = (y * w + x) * ch, ti = ty * tw + Math.floor(x / f), o = ti * 4;
+      for (let c = 0; c < 3; c++) {
+        let v = src[si + (ch >= 3 ? c : 0)];
+        if (lut) v = lut[v];
+        acc[o + c] += v > 0 ? (v < 65504 ? v : 65504) : 0;
+      }
+      cnt[ti]++;
+    }
+  }
+  for (let i = 0; i < tw * th; i++) { const n = cnt[i] || 1; acc[i*4] /= n; acc[i*4+1] /= n; acc[i*4+2] /= n; acc[i*4+3] = 1; }
+  return { data: acc, w: tw, h: th };
+}
+async function parseEXR(buf) {
+  const Loader = await getEXRDecoder();
+  let r;
+  try { r = new Loader().setDataType(HALF_FLOAT_TYPE).parse(buf); }
+  catch (e) { throw new Error('This OpenEXR file could not be decoded (' + String((e && e.message) || e).replace(/^(THREE\.)?EXRLoader(\.parse)?:\s*/, '') + ').'); }
+  if (r.header && r.header.envmap === 1) throw new Error('This OpenEXR file is a cube map. Use a latitude-longitude (equirectangular) map instead.');
+  const ch = Math.round(r.data.length / (r.width * r.height));
+  const img = boxDownsample(r.data, r.width, r.height, ch, r.data.BYTES_PER_ELEMENT === 2 ? halfLUT() : null, true);
+  img.srcW = r.width; img.srcH = r.height;
+  return img;
+}
+
+const Surf = (() => {
+  const S = { env: 0, elev: 26, azim: -40, tilt: 0, strips: 1, stripH: 0.4, exposure: 0, envRot: 0, map: 'auto',
+              defect: 1, shade: 0, curvRange: 1.5, net: false, joint: false, bg: true, sweeping: false, sweepDir: 1 };
+  const PITCH_MIN = 5 * Math.PI / 180, PITCH_MAX = 89.5 * Math.PI / 180;
+  const CAM0 = { yaw: 0.7, pitch: 0.55, dist: 4.3 }, cam = { ...CAM0 }, TARGET = [0, 0.15, 0], FOVY = 32 * Math.PI / 180;
+  let gl = null, ok = false, inited = false, dirty = true, canvas, ovc, octx, bench, specs = [];
+  let pSurf, pBg, pFloor, vaoSurf, vaoBg, vaoFloor, nIdx = 0, envTex, hasMips = false;
+  let env = { w: 1, h: 1, autoMap: 0 }, nets = null;
+  const mark = () => { dirty = true; kick(); };
+
+  function compile(type, src) {
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+    return s;
+  }
+  function program(vs, fs) {
+    const p = gl.createProgram();
+    gl.attachShader(p, compile(gl.VERTEX_SHADER, vs)); gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    p.loc = {}; return p;
+  }
+  const U = (p, n) => (n in p.loc) ? p.loc[n] : (p.loc[n] = gl.getUniformLocation(p, n));
+  const rgb = k => TC['v:' + k].slice(0, 3);
+
+  function uploadEnv(img) {
+    gl.bindTexture(gl.TEXTURE_2D, envTex);
+    gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, img.w, img.h, 0, gl.RGBA, gl.FLOAT, img.data);
+    if (hasMips) { gl.generateMipmap(gl.TEXTURE_2D); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); }
+    else gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    env = { w: img.w, h: img.h, autoMap: img.w / img.h > 1.6 ? 0 : 1 };
+  }
+  function mapIndex() { return S.map === 'auto' ? env.autoMap : +S.map; }
+
+  function rebuildNets() { nets = surfaceNets(S.defect); updateReadouts(); }
+  function updateReadouts() {
+    nets.forEach((n, k) => {
+      let gap = 0, ang = 0, dH = 0;
+      for (let s = 0; s <= 32; s++) {
+        const v = s / 32, eL = evalPatch(n.L, 1, v), eR = evalPatch(n.R, 0, v);
+        gap = Math.max(gap, Math.abs(eL.h - eR.h));
+        ang = Math.max(ang, Math.acos(clamp(v3dot(unitN(eL), unitN(eR)), -1, 1)) * 180 / Math.PI);
+        dH = Math.max(dH, Math.abs(meanH(eR) - meanH(eL)));
+      }
+      const pOK = gap < 1e-6, nOK = pOK && ang < 1e-3, hOK = nOK && dH < 1e-5, na = 'Only defined once the lower order matches';
+      specs[k].readout.innerHTML = readout([
+        ['Position', pOK ? 'ok' : 'jump', pOK ? 'continuous' : 'step ≤ ' + fmt(gap)],
+        ['Normal', !pOK ? 'na' : nOK ? 'ok' : 'jump', !pOK ? '—' : nOK ? 'continuous' : 'turns ≤ ' + fmt(ang, 1) + '°', !pOK ? na : ''],
+        ['Curvature', !nOK ? 'na' : hOK ? 'ok' : 'jump', !nOK ? '—' : hOK ? 'continuous' : 'jumps ≤ ' + fmt(dH), !nOK ? na : '']
+      ]);
+    });
+  }
+  function contourStep() { return niceStep(2 * S.curvRange / 10); }
+  function syncLegend() {
+    const r = S.curvRange, stp = contourStep(), sym = S.shade === 1 ? 'H' : 'K';
+    $('#lg-lo').textContent = fmt(-r); $('#lg-hi').textContent = fmt(r);
+    const fmtStep = String(+stp.toFixed(3));
+    $('#lg-cap').innerHTML = (S.shade === 1
+      ? `Mean curvature <i class="mv">H</i>, positive where the surface bends toward its upward normal.`
+      : `Gaussian curvature <i class="mv">K</i>, positive where the surface is elliptic and negative where it is hyperbolic.`)
+      + ` Contours every ${fmtStep}; the heavy line is <i class="mv">${sym}</i> = 0.`;
+  }
+
+  function init() {
+    if (inited) return; inited = true;
+    canvas = $('#glc'); ovc = $('#ovc'); octx = ovc.getContext('2d'); bench = $('#s-bench');
+    document.querySelectorAll('#s-bench .spec').forEach(el => specs.push({ el, view: el.querySelector('.view'), readout: el.querySelector('.readout') }));
+    try {
+      gl = canvas.getContext('webgl2', { antialias: true, alpha: true, premultipliedAlpha: true });
+      if (!gl) throw new Error('WebGL 2 is not available in this browser.');
+      hasMips = !!(gl.getExtension('EXT_color_buffer_float') || gl.getExtension('EXT_color_buffer_half_float'));
+      pSurf = program(VS_SURF, FS_SURF); pBg = program(VS_BG, FS_BG); pFloor = program(VS_FLOOR, FS_FLOOR);
+      // surface grid
+      const N = 64, uv = new Float32Array((N + 1) * (N + 1) * 2), idx = new Uint16Array(N * N * 6);
+      for (let j = 0; j <= N; j++) for (let i = 0; i <= N; i++) { const q = (j * (N + 1) + i) * 2; uv[q] = i / N; uv[q + 1] = j / N; }
+      let o = 0;
+      for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) { const a = j*(N + 1) + i, b = a + 1, c = a + N + 1, d = c + 1; idx.set([a, b, d, a, d, c], o); o += 6; }
+      nIdx = idx.length;
+      vaoSurf = gl.createVertexArray(); gl.bindVertexArray(vaoSurf);
+      const vb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vb); gl.bufferData(gl.ARRAY_BUFFER, uv, gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+      const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, idx, gl.STATIC_DRAW);
+      vaoBg = gl.createVertexArray();
+      vaoFloor = gl.createVertexArray(); gl.bindVertexArray(vaoFloor);
+      const fb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, fb);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+      gl.bindVertexArray(null);
+      envTex = gl.createTexture();
+      uploadEnv(genSampleEnv(1024, 512));
+      ok = true;
+    } catch (err) {
+      const d = document.createElement('div'); d.className = 'glfail';
+      d.textContent = 'The surface views need WebGL 2, which failed to start here: ' + err.message;
+      bench.appendChild(d); console.error(err);
+    }
+    rebuildNets(); syncLegend();
+    bindUI();
+    new ResizeObserver(mark).observe(bench);
+    mark();
+  }
+
+  function setStatus(msg, err) { const el = $('#env-status'); el.textContent = msg; el.classList.toggle('err', !!err); }
+  async function loadFile(file) {
+    if (!file || !ok) return;
+    setStatus('Reading ' + file.name + '…');
+    try {
+      const buf = await file.arrayBuffer(), b = new Uint8Array(buf, 0, Math.min(8, buf.byteLength));
+      let img;
+      if (b[0] === 0x76 && b[1] === 0x2f && b[2] === 0x31 && b[3] === 0x01) {
+        if (!exrDecoder) setStatus('Loading the OpenEXR decoder…');
+        await getEXRDecoder();
+        setStatus('Decoding ' + file.name + '…');
+        await new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
+        img = await parseEXR(buf);
+      } else if (b[0] === 0x23 && b[1] === 0x3f) img = parseHDR(buf);
+      else img = await decodeLDR(file);
+      uploadEnv(img);
+      setEnvMode(1);
+      const names = ['equirectangular', 'mirror ball', 'angular map'];
+      setStatus(`${file.name}, ${img.srcW} × ${img.srcH}${img.w !== img.srcW ? ` (shown at ${img.w} × ${img.h})` : ''}, ${names[mapIndex()]}${img.ldr ? ', 8-bit with no HDR range' : ''}.`);
+      mark();
+    } catch (e) { setStatus(e.message, true); }
+  }
+  function setEnvMode(m) {
+    S.env = m;
+    document.querySelectorAll('#env-mode button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.v === m)));
+    $('#strip-ctl').hidden = m !== 0; $('#map-ctl').hidden = m !== 1;
+    if (m === 1 && S.sweeping) setSweeping(false);
+    mark();
+  }
+  function setSweeping(on) {
+    S.sweeping = on;
+    const b = $('#l-play'); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? 'Stop the sweep' : 'Sweep the light';
+    kick();
+  }
+  function bindRange(id, outId, key, fmtFn, after) {
+    const el = $(id), out = $(outId);
+    const upd = () => { S[key] = +el.value; out.textContent = fmtFn(S[key]); if (after) after(); mark(); };
+    el.addEventListener('input', upd); out.textContent = fmtFn(+el.value);
+    return el;
+  }
+  const deg = v => v.toFixed(0).replace('-', '−') + '°';
+  function bindUI() {
+    const elevIn = bindRange('#l-elev', '#o-elev', 'elev', deg);
+    elevIn.addEventListener('pointerdown', () => setSweeping(false));
+    bindRange('#l-azim', '#o-azim', 'azim', deg);
+    bindRange('#l-tilt', '#o-tilt', 'tilt', deg);
+    bindRange('#l-count', '#o-count', 'strips', v => String(v));
+    bindRange('#l-h', '#o-h', 'stripH', v => v.toFixed(2));
+    bindRange('#env-rot', '#o-rot', 'envRot', deg);
+    bindRange('#exposure', '#o-exp', 'exposure', v => (v > 0 ? '+' : '') + fmt(v));
+    bindRange('#defect', '#o-defect', 'defect', v => v.toFixed(2), rebuildNets);
+    bindRange('#curv-range', '#o-cr', 'curvRange', v => v.toFixed(2), syncLegend);
+    $('#l-play').addEventListener('click', () => setSweeping(!S.sweeping));
+    setSweeping(false);
+    document.querySelectorAll('#env-mode button').forEach(b => b.addEventListener('click', () => setEnvMode(+b.dataset.v)));
+    $('#env-map').addEventListener('change', e => { S.map = e.target.value; mark(); });
+    $('#env-file').addEventListener('change', e => { loadFile(e.target.files[0]); e.target.value = ''; });
+    $('#env-sample').addEventListener('click', () => { if (!ok) return; uploadEnv(genSampleEnv(1024, 512)); setStatus('Showing the built-in sample. Upload an .exr or .hdr, or drop one onto the views.'); setEnvMode(1); mark(); });
+    $('#shade').addEventListener('change', e => { S.shade = +e.target.value; $('#curv-ctl').hidden = S.shade === 0; syncLegend(); mark(); });
+    for (const [id, key] of [['#s-net', 'net'], ['#s-joint', 'joint'], ['#s-bg', 'bg']]) {
+      const el = $(id); el.checked = S[key]; el.addEventListener('change', () => { S[key] = el.checked; mark(); });
+    }
+    $('#cam-reset').addEventListener('click', () => { Object.assign(cam, CAM0); mark(); });
+    $('#cam-in').addEventListener('click', () => { cam.dist = clamp(cam.dist / 1.15, 2.4, 16); mark(); });
+    $('#cam-out').addEventListener('click', () => { cam.dist = clamp(cam.dist * 1.15, 2.4, 16); mark(); });
+    // orbit / zoom on every view: horizontal drag spins in the drag direction, vertical drag tilts (5°–90°)
+    const ptrs = new Map();
+    for (const sp of specs) {
+      const v = sp.view;
+      v.addEventListener('pointerdown', e => { v.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); });
+      v.addEventListener('pointermove', e => {
+        const p = ptrs.get(e.pointerId); if (!p) return;
+        if (ptrs.size === 1) {
+          cam.yaw -= (e.clientX - p.x) * 0.008;
+          cam.pitch = clamp(cam.pitch + (e.clientY - p.y) * 0.008, PITCH_MIN, PITCH_MAX);
+        } else {
+          for (const [id, q] of ptrs) if (id !== e.pointerId) {
+            const d0 = Math.hypot(p.x - q.x, p.y - q.y), d1 = Math.hypot(e.clientX - q.x, e.clientY - q.y);
+            if (d0 > 0 && d1 > 0) cam.dist = clamp(cam.dist * d0 / d1, 2.4, 16);
+            break;
+          }
+        }
+        p.x = e.clientX; p.y = e.clientY; mark();
+      });
+      const up = e => ptrs.delete(e.pointerId);
+      v.addEventListener('pointerup', up); v.addEventListener('pointercancel', up);
+      v.addEventListener('wheel', e => { e.preventDefault(); cam.dist = clamp(cam.dist * Math.exp(e.deltaY * 0.0012), 2.4, 16); mark(); }, { passive: false });
+      v.addEventListener('dblclick', () => { Object.assign(cam, CAM0); mark(); });
+    }
+    // drag and drop an environment map
+    bench.addEventListener('dragover', e => { e.preventDefault(); bench.classList.add('drop'); });
+    bench.addEventListener('dragleave', e => { if (e.target === bench || !bench.contains(e.relatedTarget)) bench.classList.remove('drop'); });
+    bench.addEventListener('drop', e => { e.preventDefault(); bench.classList.remove('drop'); const f = e.dataTransfer.files[0]; if (f) loadFile(f); });
+    document.addEventListener('keydown', e => {
+      if (active !== 'surfaces') return;
+      const tag = (e.target.tagName || '').toLowerCase();
+      if (['input', 'select', 'textarea', 'button'].includes(tag)) return;
+      if (e.key === ' ' && S.env === 0) { e.preventDefault(); setSweeping(!S.sweeping); }
+    });
+  }
+
+  function lightUniforms(p) {
+    const th = S.elev * Math.PI / 180, ph = S.azim * Math.PI / 180, ps = S.tilt * Math.PI / 180;
+    const Lh = [Math.sin(ph) * Math.cos(th), Math.sin(th), -Math.cos(ph) * Math.cos(th)], D = 4.2;
+    const C = [TARGET[0] + D * Lh[0], TARGET[1] + D * Lh[1], TARGET[2] + D * Lh[2]];
+    const A0 = [Math.cos(ph), 0, Math.sin(ph)], B0 = v3cross(A0, Lh);
+    const A = A0.map((a, i) => Math.cos(ps) * a + Math.sin(ps) * B0[i]), B = B0.map((b, i) => -Math.sin(ps) * A0[i] + Math.cos(ps) * b);
+    gl.uniform3fv(U(p, 'uLC'), C); gl.uniform3fv(U(p, 'uLN'), [-Lh[0], -Lh[1], -Lh[2]]);
+    gl.uniform3fv(U(p, 'uLA'), A); gl.uniform3fv(U(p, 'uLB'), B);
+    gl.uniform1f(U(p, 'uLW'), 3.4); gl.uniform1f(U(p, 'uLH'), S.stripH); gl.uniform1f(U(p, 'uLGap'), Math.max(0.12, S.stripH * 1.1));
+    gl.uniform1f(U(p, 'uLI'), 5.0); gl.uniform1i(U(p, 'uLCount'), S.strips);
+    gl.uniform1i(U(p, 'uEnvMode'), S.env); gl.uniform1i(U(p, 'uMap'), mapIndex());
+    gl.uniform1f(U(p, 'uEnvRot'), S.envRot * Math.PI / 180); gl.uniform1f(U(p, 'uExposure'), S.exposure);
+    gl.uniform1i(U(p, 'uEnv'), 0);
+  }
+
+  /* control nets on the 2D overlay: cream casing under dashed ink, filled dots for the four corner
+     points (they lie on the surface), open circles for the others */
+  function drawNet(ctx, n, VP, r) {
+    const paper = !S.bg || S.shade !== 0, netCol = paper ? TC.curve : '#fff', netOut = paper ? '#fff' : 'rgba(0,0,0,.55)';
+    const proj = (x, y, z) => {
+      const cx = VP[0]*x + VP[4]*y + VP[8]*z + VP[12], cy = VP[1]*x + VP[5]*y + VP[9]*z + VP[13], cw = VP[3]*x + VP[7]*y + VP[11]*z + VP[15];
+      return cw <= 1e-6 ? null : [r.x + (cx / cw * 0.5 + 0.5) * r.w, r.y + (0.5 - cy / cw * 0.5) * r.h];
+    };
+    ctx.save(); ctx.beginPath(); ctx.rect(r.x, r.y, r.w, r.h); ctx.clip();
+    for (const [M, x0] of [[n.L, -1], [n.R, 0]]) {
+      const P = []; for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) P.push(proj(x0 + i / 3, M[i*4 + j], -1 + 2*j/3));
+      const path = () => {
+        ctx.beginPath();
+        for (let a = 0; a < 4; a++) for (let b = 0; b < 3; b++) {
+          for (const [p, q] of [[P[a*4 + b], P[a*4 + b + 1]], [P[b*4 + a], P[(b + 1)*4 + a]]]) if (p && q) { ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); }
+        }
+      };
+      ctx.lineCap = 'butt'; ctx.setLineDash([]); ctx.strokeStyle = netCol; ctx.lineWidth = 2; path(); ctx.stroke();
+      for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+        const p = P[i*4 + j]; if (!p) continue;
+        const corner = (i === 0 || i === 3) && (j === 0 || j === 3);
+        ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, 2 * Math.PI);
+        if (corner) { ctx.fillStyle = netCol; ctx.fill(); ctx.strokeStyle = netOut; ctx.lineWidth = 1.5; ctx.stroke(); }
+        else { ctx.fillStyle = netCol; ctx.fill(); ctx.strokeStyle = netOut; ctx.lineWidth = 1.5; ctx.stroke(); }
+      }
+    }
+    ctx.restore();
+  }
+
+  function render() {
+    const d = DPR(), br = bench.getBoundingClientRect();
+    const W = Math.max(1, Math.round(br.width * d)), H = Math.max(1, Math.round(br.height * d));
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+    if (ovc.width !== W || ovc.height !== H) { ovc.width = W; ovc.height = H; }
+    octx.setTransform(d, 0, 0, d, 0, 0); octx.clearRect(0, 0, br.width, br.height);
+    gl.disable(gl.SCISSOR_TEST); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.SCISSOR_TEST);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, envTex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, mapIndex() === 0 ? gl.REPEAT : gl.CLAMP_TO_EDGE);
+    const eye = [TARGET[0] + cam.dist * Math.cos(cam.pitch) * Math.sin(cam.yaw), TARGET[1] + cam.dist * Math.sin(cam.pitch), TARGET[2] + cam.dist * Math.cos(cam.pitch) * Math.cos(cam.yaw)];
+    const cz = v3norm(v3sub(eye, TARGET)), cx = v3norm(v3cross([0, 1, 0], cz)), cy = v3cross(cz, cx);
+    const view = new Float32Array([cx[0], cy[0], cz[0], 0, cx[1], cy[1], cz[1], 0, cx[2], cy[2], cz[2], 0, -v3dot(cx, eye), -v3dot(cy, eye), -v3dot(cz, eye), 1]);
+    const tanH = Math.tan(FOVY / 2), paper = !S.bg || S.shade !== 0;
+    specs.forEach((sp, k) => {
+      if (sp.el.hidden) return;
+      const r = sp.view.getBoundingClientRect();
+      const x = Math.round((r.left - br.left) * d), y = Math.round((br.bottom - r.bottom) * d), w = Math.round(r.width * d), h = Math.round(r.height * d);
+      if (w < 2 || h < 2 || r.bottom < 0 || r.top > innerHeight) return;
+      gl.viewport(x, y, w, h); gl.scissor(x, y, w, h);
+      const aspect = w / h, n = 0.1, f = 60;
+      const proj = new Float32Array(16); proj[0] = 1 / (tanH * aspect); proj[5] = 1 / tanH; proj[10] = (f + n) / (n - f); proj[11] = -1; proj[14] = 2 * f * n / (n - f);
+      const VP = mmul(proj, view);
+      // background: cream paper, or the environment itself
+      gl.disable(gl.DEPTH_TEST); gl.depthMask(false);
+      gl.useProgram(pBg); lightUniforms(pBg);
+      gl.uniform3fv(U(pBg, 'uCam'), eye); gl.uniform3fv(U(pBg, 'uCX'), cx); gl.uniform3fv(U(pBg, 'uCY'), cy); gl.uniform3fv(U(pBg, 'uCZ'), cz);
+      gl.uniform1f(U(pBg, 'uTanH'), tanH); gl.uniform1f(U(pBg, 'uAspect'), aspect);
+      gl.uniform1i(U(pBg, 'uShowBg'), S.bg ? 1 : 0); gl.uniform1i(U(pBg, 'uShade'), S.shade); gl.uniform3fv(U(pBg, 'uPlain'), rgb('panel'));
+      gl.bindVertexArray(vaoBg); gl.drawArrays(gl.TRIANGLES, 0, 3);
+      gl.enable(gl.DEPTH_TEST); gl.depthMask(true); gl.depthFunc(gl.LEQUAL);
+      // floor quad on paper
+      if (paper) {
+        gl.useProgram(pFloor);
+        gl.uniformMatrix4fv(U(pFloor, 'uVP'), false, VP); gl.uniform1f(U(pFloor, 'uY'), FLOOR_Y); gl.uniform1f(U(pFloor, 'uExt'), FLOOR_EXT);
+        gl.uniform1f(U(pFloor, 'uDpr'), d); gl.uniform3fv(U(pFloor, 'uFill'), rgb('grid')); gl.uniform3fv(U(pFloor, 'uEdge'), rgb('grid-major'));
+        gl.bindVertexArray(vaoFloor); gl.drawArrays(gl.TRIANGLES, 0, 6);
+      }
+      // surfaces
+      gl.useProgram(pSurf); lightUniforms(pSurf);
+      gl.uniformMatrix4fv(U(pSurf, 'uVP'), false, VP); gl.uniform3fv(U(pSurf, 'uCam'), eye);
+      gl.uniform1i(U(pSurf, 'uShade'), S.shade); gl.uniform1f(U(pSurf, 'uCurvRange'), S.curvRange);
+      gl.uniform1i(U(pSurf, 'uMarkJoint'), S.joint ? 1 : 0); gl.uniform1f(U(pSurf, 'uDpr'), d); gl.uniform1f(U(pSurf, 'uStep'), contourStep());
+      gl.uniform3fv(U(pSurf, 'uMapNeg'), rgb('map-neg')); gl.uniform3fv(U(pSurf, 'uMapZero'), rgb('map-zero')); gl.uniform3fv(U(pSurf, 'uMapPos'), rgb('map-pos'));
+      gl.uniform3fv(U(pSurf, 'uInk'), rgb('ink')); gl.uniform3fv(U(pSurf, 'uTeal'), rgb('teal'));
+      gl.uniform4fv(U(pSurf, 'uContour'), TC['v:contour']); gl.uniform4fv(U(pSurf, 'uZeroSet'), TC['v:zero-set']);
+      gl.bindVertexArray(vaoSurf);
+      [[nets[k].L32, -1, 0], [nets[k].R32, 0, 1]].forEach(([M, x0, side]) => {
+        gl.uniformMatrix4fv(U(pSurf, 'uM'), false, M); gl.uniform1f(U(pSurf, 'uX0'), x0); gl.uniform1i(U(pSurf, 'uSide'), side);
+        gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
+      });
+      if (S.net) drawNet(octx, nets[k], VP, { x: r.left - br.left, y: r.top - br.top, w: r.width, h: r.height });
+    });
+    gl.bindVertexArray(null);
+  }
+
+  function frame(dt) {
+    if (!ok) return false;
+    if (S.sweeping) {
+      S.elev += S.sweepDir * 8 * dt;
+      if (S.elev > 62) { S.elev = 124 - S.elev; S.sweepDir = -1; }
+      if (S.elev < 6) { S.elev = 12 - S.elev; S.sweepDir = 1; }
+      $('#l-elev').value = S.elev; $('#o-elev').textContent = deg(S.elev);
+      dirty = true;
+    }
+    if (dirty) { render(); dirty = false; }
+    return S.sweeping;
+  }
+  return { init, frame, markDirty: mark };
+})();
+
+/* ---------------- tabs ---------------- */
+function setTab(t) {
+  active = t;
+  document.querySelectorAll('[role=tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
+  $('#p-curves').hidden = t !== 'curves'; $('#p-surfaces').hidden = t !== 'surfaces';
+  if (t === 'surfaces') Surf.init();
+  try { history.replaceState(null, '', '#' + t); } catch (e) {}
+  if (t === 'curves') Curves.markDirty(); else Surf.markDirty();
+}
+document.querySelectorAll('[role=tab]').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+
+/* ---------------- panel visibility ---------------- */
+function panelToggles(groupSel, benchSel, onChange) {
+  const bench = $(benchSel), specs = [...bench.querySelectorAll('.spec')];
+  const btns = [...document.querySelectorAll(groupSel + ' button')], vis = [true, true, true, true];
+  const apply = () => {
+    const n = vis.filter(Boolean).length;
+    specs.forEach((sp, i) => { sp.hidden = !vis[i]; });
+    btns.forEach((b, i) => { b.setAttribute('aria-pressed', String(vis[i])); b.disabled = vis[i] && n === 1; });
+    bench.dataset.n = String(n);
+    onChange();
+  };
+  const toggle = i => { if (vis[i] && vis.filter(Boolean).length === 1) return; vis[i] = !vis[i]; apply(); };
+  btns.forEach((b, i) => b.addEventListener('click', () => toggle(i)));
+  apply();
+  return { toggle };
+}
+const curvePanels = panelToggles('#c-panels', '#c-bench', () => Curves.markDirty());
+const surfPanels = panelToggles('#s-panels', '#s-bench', () => Surf.markDirty());
+
+/* ---------------- collapsible controls ---------------- */
+const railBtn = $('#rail-toggle');
+function setRail(open) {
+  $('.app').classList.toggle('rail-off', !open);
+  railBtn.setAttribute('aria-expanded', String(open));
+  railBtn.querySelector('span').textContent = open ? 'Hide controls' : 'Show controls';
+  try { localStorage.setItem('gc-lab-rail', open ? '1' : '0'); } catch (e) {}
+  Curves.markDirty(); Surf.markDirty();
+}
+railBtn.addEventListener('click', () => setRail($('.app').classList.contains('rail-off')));
+try { if (localStorage.getItem('gc-lab-rail') === '0') setRail(false); } catch (e) {}
+document.addEventListener('keydown', e => {
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (['input', 'select', 'textarea'].includes(tag) || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key >= '1' && e.key <= '4') (active === 'curves' ? curvePanels : surfPanels).toggle(+e.key - 1);
+  else if (e.key === 'h' || e.key === 'H') setRail($('.app').classList.contains('rail-off'));
+});
+
+/* keep the workspace one screen tall below the header bar */
+const barEl = $('#bar');
+new ResizeObserver(() => document.documentElement.style.setProperty('--bar-h', barEl.getBoundingClientRect().height + 'px')).observe(barEl);
+
+/* canvas text drawn before the web fonts load falls back to Georgia: redraw once they are ready */
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { readTheme(); Curves.markDirty(); Surf.markDirty(); });
+
+Curves.init();
+setTab(location.hash === '#surfaces' ? 'surfaces' : 'curves');
+kick();
+})();
+</script>
+
+</body></html>

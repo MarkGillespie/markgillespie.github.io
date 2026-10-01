@@ -133,43 +133,77 @@ pre#src {
   margin-top: -5px;
 }
 .titleblock a:hover { color: var(--ink); }
+.bar:has(> .brand) { flex-wrap: nowrap; align-items: flex-start; }
+.bar-items { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; flex: 1; min-width: 0; }
+.brand {
+  margin: -11px 6px 0 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  text-decoration: none;
+}
+.brand img { display: block; height: 114px; width: auto; transition: filter 0.2s; }
+.brand-uni {
+  font-family: var(--font-ui); font-variant: small-caps; font-weight: 700; color: #861025;
+  white-space: nowrap; line-height: 1; font-size: 14px; /* refit to the logo width by script */
+  position: relative; z-index: 1; /* keep text above the logo's shadow */
+  transition: color 0.2s;
+}
+.brand:hover img, .brand:focus-visible img { filter: drop-shadow(0 3px 6px rgba(35, 31, 32, 0.45)); }
+.brand:hover .brand-uni, .brand:focus-visible .brand-uni { color: #C8102E; }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
 </head>
 <body>
 <header class="bar">
-  <div class="titleblock">
-    <h1>Bézier curve explorer</h1>
-    <a href="rational-bezier.html">see rational Bezier</a>
-  </div>
-  <div class="group">
-    <span class="lbl" id="degLbl">Degree</span>
-    <div class="seg" role="group" aria-labelledby="degLbl" id="degBtns">
-      <button type="button" data-n="2">2</button><button type="button" data-n="3">3</button><button type="button" data-n="4">4</button><button type="button" data-n="5">5</button>
+  <a class="brand" href="https://geometry.cs.utah.edu">
+    <span class="brand-uni">The University of Utah</span>
+    <img src="https://discrete-geometry-lab.cs.utah.edu/images/dgl.svg" alt="Discrete Geometry Lab">
+  </a>
+  <script>
+  // Scale the university name so its width matches the logo's.
+  (() => {
+    const img = document.querySelector('.brand img'), uni = document.querySelector('.brand-uni');
+    const fit = () => {
+      if (!img.offsetWidth) return;
+      uni.style.fontSize = '100px';
+      uni.style.fontSize = (100 * img.offsetWidth / uni.scrollWidth) + 'px';
+    };
+    img.complete ? fit() : img.addEventListener('load', fit);
+    document.fonts && document.fonts.ready.then(fit);
+  })();
+  </script>
+  <div class="bar-items">
+    <div class="titleblock">
+      <h1>Bézier curve explorer</h1>
+      <a href="rational-bezier.html">see rational Bezier</a>
     </div>
+    <div class="group">
+      <span class="lbl" id="degLbl">Degree</span>
+      <div class="seg" role="group" aria-labelledby="degLbl" id="degBtns">
+        <button type="button" data-n="2">2</button><button type="button" data-n="3">3</button><button type="button" data-n="4">4</button><button type="button" data-n="5">5</button>
+      </div>
+    </div>
+    <label class="group"><span class="lbl">Level sets</span>
+      <select id="field">
+        <option value="off">None</option>
+        <option value="F" selected>F</option>
+        <option value="G">F / |∇F|</option>
+        <option value="D">Distance to arc</option>
+      </select>
+    </label>
+    <label class="chk"><input type="checkbox" id="optImp"> Show F(x, y) = 0</label>
+    <label class="chk"><input type="checkbox" id="optExt" checked> Extend beyond t ∈ [0, 1]</label>
+    <div class="group">
+      <label class="chk"><input type="checkbox" id="optCast"> de Casteljau at</label>
+      <input type="range" id="tSlider" min="0" max="1" step="0.01" value="0.4" disabled aria-label="Parameter t">
+      <span id="tVal">t = 0.40</span>
+    </div>
+    <label class="group"><span class="lbl">Snap to</span>
+      <select id="snap">
+        <option value="0.01" selected>0.01</option><option value="0.05">0.05</option>
+        <option value="0.1">0.1</option><option value="0.25">0.25</option>
+        <option value="0.5">0.5</option><option value="1">1</option>
+      </select>
+    </label>
   </div>
-  <label class="group"><span class="lbl">Level sets</span>
-    <select id="field">
-      <option value="off">None</option>
-      <option value="F" selected>F</option>
-      <option value="G">F / |∇F|</option>
-      <option value="D">Distance to arc</option>
-    </select>
-  </label>
-  <label class="chk"><input type="checkbox" id="optImp"> Show F(x, y) = 0</label>
-  <label class="chk"><input type="checkbox" id="optExt" checked> Extend beyond t ∈ [0, 1]</label>
-  <div class="group">
-    <label class="chk"><input type="checkbox" id="optCast"> de Casteljau at</label>
-    <input type="range" id="tSlider" min="0" max="1" step="0.01" value="0.4" disabled aria-label="Parameter t">
-    <span id="tVal">t = 0.40</span>
-  </div>
-  <label class="group"><span class="lbl">Snap to</span>
-    <select id="snap">
-      <option value="0.01" selected>0.01</option><option value="0.05">0.05</option>
-      <option value="0.1">0.1</option><option value="0.25">0.25</option>
-      <option value="0.5">0.5</option><option value="1">1</option>
-    </select>
-  </label>
 </header>
 
 <main class="layout">
