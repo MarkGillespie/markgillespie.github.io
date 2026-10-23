@@ -1,6 +1,15 @@
 <talk_data>
 <talks>
   <talk>
+    <when>Oct. 2026</when>
+    <title>Intrinsic Triangulations in Geometry Processing</title>
+    <venue_name>University of Utah Theory Seminar</venue_name>
+    <venue_link>https://utahtheory.github.io/</venue_link>
+    <links>
+        <link><name>pdf (17.5 mb)</name><href>Talks/UtahTheoryTalk.pdf</href></link>
+    </links>
+  </talk>
+  <talk>
     <when>Sep. 2026</when>
     <title>A Brief Introduction to Geometry Processing</title>
     <venue_name>CS 3020: Research Forum</venue_name>
